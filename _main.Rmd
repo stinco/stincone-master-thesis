@@ -109,3 +109,6 @@ If you need to create your own additional chunk options, edit the file scripts/c
 
 ```{r introduction, child = '_00-introduction.Rmd'}
 ```
+
+<!--chapter:end:Index.Rmd-->
+

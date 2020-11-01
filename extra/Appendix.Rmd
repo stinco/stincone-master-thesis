@@ -1,0 +1,74 @@
+`r if(knitr:::is_latex_output()) '\\startappendices'`
+
+`r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'` 
+
+# Linguistic Features {#app:ling-feats}
+
+Table containing all the features used in the study with relative description
+
+# Additional Precisions on Eye-tracking Metrics and Preprocessing {#app:et-metrics}
+
+Conversion table in a shared format for all datasets
+
+Computations in Table \@ref(tab:et-corpora):
+
+- mean sent length is in # of tokens
+
+- number of tokens with whitespace tokenization
+
+- unique types by removing punctuation from whitespace-tokenized tokens
+
+Once again, gaze metrics are averaged across participants. Let $A = A_1, \dots, A_{n_i}$ be the participants annotating a sentence $s = x_1,\dots,x_m$ with gaze metrics (e.g. $G^1_{A_1}(x_1)$ is the value of the first gaze metric, for example first fixation duration, for the first annotator over the first token of sentence $s$) missing durations due to skipping are replaced with the minimum available value across all annotators
+
+# Intra-model Similarity for All Models {#app:intra-sim}
+
+\vspace{-5em}
+
+(ref:intra-pc-caption-latex) Test caption PC
+
+(ref:intra-pc-caption-gitbook) Test caption, RSA (left), PWCCA (right).
+
+```{r out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:intra-pc-caption-gitbook)", "(ref:intra-pc-caption-latex)"), label="intra-pc", echo=FALSE, fig.ncol=2, fig.subcap=c('RSA score, CLS token', 'PWCCA distance, CLS token', "RSA score, tokens' average", "PWCCA distance, tokens' average", 'RSA score, all tokens', 'PWCCA distance, all tokens'), fig.pos="H"}
+include_graphics('figures/appendix/A3_rsa_intra_cls_pc.png')
+include_graphics('figures/appendix/A3_pwcca_intra_cls_pc.png')
+include_graphics('figures/appendix/A3_rsa_intra_mean_pc.png')
+include_graphics('figures/appendix/A3_pwcca_intra_mean_pc.png')
+include_graphics('figures/appendix/A3_rsa_intra_tokens_pc.png')
+include_graphics('figures/appendix/A3_pwcca_intra_tokens_pc.png')
+```
+
+(ref:intra-et-caption-latex) Test caption ET
+
+(ref:intra-et-caption-gitbook) Test caption, RSA (left), PWCCA (right).
+
+```{r out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:intra-et-caption-gitbook)", "(ref:intra-et-caption-latex)"), label="intra-et", echo=FALSE, fig.ncol=2, fig.subcap=c('RSA score, CLS token', 'PWCCA distance, CLS token', "RSA score, tokens' average", "PWCCA distance, tokens' average", 'RSA score, all tokens', 'PWCCA distance, all tokens')}
+include_graphics('figures/appendix/A3_rsa_intra_cls_et.png')
+include_graphics('figures/appendix/A3_pwcca_intra_cls_et.png')
+include_graphics('figures/appendix/A3_rsa_intra_mean_et.png')
+include_graphics('figures/appendix/A3_pwcca_intra_mean_et.png')
+include_graphics('figures/appendix/A3_rsa_intra_tokens_et.png')
+include_graphics('figures/appendix/A3_pwcca_intra_tokens_et.png')
+```
+
+(ref:intra-ra-caption-latex) Test caption RA
+
+(ref:intra-ra-caption-gitbook) Test caption, RSA (left), PWCCA (right).
+
+```{r out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:intra-ra-caption-gitbook)", "(ref:intra-ra-caption-latex)"), label="intra-ra", echo=FALSE, fig.ncol=2, fig.subcap=c('RSA score, CLS token', 'PWCCA distance, CLS token', "RSA score, tokens' average", "PWCCA distance, tokens' average", 'RSA score, all tokens', 'PWCCA distance, all tokens')}
+include_graphics('figures/appendix/A3_rsa_intra_cls_ra.png')
+include_graphics('figures/appendix/A3_pwcca_intra_cls_ra.png')
+include_graphics('figures/appendix/A3_rsa_intra_mean_ra.png')
+include_graphics('figures/appendix/A3_pwcca_intra_mean_ra.png')
+include_graphics('figures/appendix/A3_rsa_intra_tokens_ra.png')
+include_graphics('figures/appendix/A3_pwcca_intra_tokens_ra.png')
+```
+
+# Model parametrization {#app:params}
+
+Parameters for all the models used in all studies
+
+# CO2 Emissions Related to Experiments {#app:co2}
+
+Use both ML CO2 calculator and Tim Dettmers tool to estimate.
+
+
