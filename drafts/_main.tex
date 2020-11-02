@@ -89,7 +89,7 @@
 
 %UL 3 Dec 2018: set this from YAML in index.Rmd
 \usepackage[style=authoryear, sorting=nyt, backend=biber, maxcitenames=1, mincitenames=1, maxbibnames=100, minbibnames=100, useprefix, doi=false, url=false, isbn=false, uniquename=false]{biblatex}
-\newcommand*{\bibtitle}{\textbf{Works Cited}}
+\newcommand*{\bibtitle}{\textbf{Bibliography}}
 
 % Embed reference URL under the title inside bibliography
 \newbibmacro{string+url}[1]{%
@@ -114,10 +114,11 @@
 
 %%%%% THESIS / TITLE PAGE INFORMATION
 % Everybody needs to complete the following:
-\title{Application of GLM improvement on Non Life Insurance Pricing}
+\title{Application of GLM improvements\\
+on Non Life Insurance Pricing}
 \author{Leonardo Stincone}
 \universityname{Università degli Studi di Trieste}
-\departmentname{Dipartimento di Scienze Economiche, Aziendali, Matematiche e Statistiche}
+\departmentname{Dipartimento di Scienze Economiche, Aziendali,\textbackslash\textbackslash{} Matematiche e Statistiche}
 \degreedef{Tesi di Laurea Magistrale}
 \degreename{Laurea Magistrale in Scienze Statistiche e Attuariali}
 \degreeclass{LM-83}
@@ -177,7 +178,7 @@
 % This is used to create the separate, one-page abstract that you are required to hand into the Exam
 % Schools.  You can comment it out to generate a PDF for printing or whatnot.
 \begin{abstractseparate}
-  This thesis investigates the connection between three well-known human-centric perspectives of linguistic complexity -- perception of complexity, readability, and cognitive processing -- both from a linguistically-motivated and a computational learning standpoint, at various levels of granularity. After a first section highlighting the effectiveness of state-of-the-art neural language models in learning complexity metrics from textual inputs, learned representations produced by those models are analyzed using multiple interpretability techniques stemming from the natural language processing literature. The three perspectives are studied on multiple English corpora spanning three complexity-related tasks: perceived complexity prediction, automatic readability assessment, and gaze metrics prediction. \emph{Add findings}
+  This is my abstract \dots
 \end{abstractseparate}
 
 % JEM: Pages are roman numbered from here, though page numbers are invisible until ToC.  This is in
@@ -199,27 +200,19 @@
 
 %%%%% ACKNOWLEDGEMENTS -- Nothing to do here except comment out if you don't want it.
 \begin{acknowledgements}
- 	\begin{itemize}
+ 	Qua potrei ringraziare:
+
+  \begin{itemize}
   \item
-    The entirety of this work has been done in partial/total quarantine.
+    Genertel per avermi dato i dati e supportato in questa ricerca
   \item
-    Davide and Felice for being incredibly supportive despite the distance and circumstances, and who always made me feel part of their labs and their initiatives.
-  \item
-    All the members of the ItaliaNLP Lab in Pisa, who welcomed me in their group for four months and introduced me to the world of scientific research.
-  \item
-    Prof.~Elizabeth Schotter, for the amazing introductory course to eye-tracking practices in cognitive science, who greatly helped the development of my intuitions regarding gaze movements during reading and ultimately allowed me to carry out a better and more informed work.
-  \item
-    Fellow students and professors from the DSSC master degree, who consistently provided me with an incredible environment which was both pleasantly familiar and {[}adj{]} stimulating. I couldn't have asked for better company during those two years.
-  \item
-    Friends who helped me by reviewing some of the contents of this thesis work. Mattia, who always stood by my side!
-  \item
-    My parents and my family, who are a perfect example of how it is possible to conciliate hard work and kindness, and always supported me in good and bad days, motivating and inspiring me to succeed. I aspire to be like you one day.
+    DEAMS per la formazione e l'apertura alla collaborazione col mondo aziendale
   \end{itemize}
 \end{acknowledgements}
 
 %%%%% ABSTRACT -- Nothing to do here except comment out if you don't want it.
 \begin{abstract}
-  This thesis investigates the connection between three well-known human-centric perspectives of linguistic complexity -- perception of complexity, readability, and cognitive processing -- both from a linguistically-motivated and a computational learning standpoint, at various levels of granularity. After a first section highlighting the effectiveness of state-of-the-art neural language models in learning complexity metrics from textual inputs, learned representations produced by those models are analyzed using multiple interpretability techniques stemming from the natural language processing literature. The three perspectives are studied on multiple English corpora spanning three complexity-related tasks: perceived complexity prediction, automatic readability assessment, and gaze metrics prediction. \emph{Add findings}
+  This is my abstract \dots
 \end{abstract}
 
 %%%%% MINI TABLES

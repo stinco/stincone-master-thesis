@@ -12,14 +12,12 @@
 #rmd_files: ["index.Rmd", "01-rmd-basics-markdown.Rmd", "02-rmd-basics-code.Rmd", "03-rmd-basics-cites-and-refs.Rmd", "04-oxthesis.Rmd", "05-conclusion.Rmd", "front-and-back-matter/98-appendices.Rmd", "front-and-back-matter/99-references.Rmd"]
 rmd_files: [
   "Index.Rmd", 
-  "_00-introduction.Rmd"
-  #"01-Linguistic-Complexity.Rmd", 
-  #"02-Models.Rmd",
-  #"03-Linguistic-Phenomena.Rmd",
-  #"04-Representation-Similarity.Rmd",
-  #"05-Cognitive-Phenomena.Rmd",
-  #"06-Conclusion.Rmd",
-  #"extra/Appendix.Rmd", "extra/References.Rmd"
+  "_00-introduction.Rmd",
+  "01-Non-Life-Insurance-Pricing-in-the-Italian-market.Rmd",
+  "02-Statistical-models-used-in-Non-Life-Insurance-Pricing.Rmd",
+  "03-Practical-application.Rmd",
+  #"extra/Appendix.Rmd",
+  "extra/References.Rmd"
 ]
 
 output_dir: "docs"

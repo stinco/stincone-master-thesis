@@ -1,15 +1,5 @@
-- The entirety of this work has been done in partial/total quarantine.
+Qua potrei ringraziare:
 
-- Davide and Felice for being incredibly supportive despite the distance and circumstances, and who always made me feel part of their labs and their initiatives.
+- Genertel per avermi dato i dati e supportato in questa ricerca
 
-- All the members of the ItaliaNLP Lab in Pisa, who welcomed me in their group for four months and introduced me to the world of scientific research.
-
-- Prof. Elizabeth Schotter, for the amazing introductory course to eye-tracking practices in cognitive science, who greatly helped the development of my intuitions regarding gaze movements during reading and ultimately allowed me to carry out a better and more informed work.
-
-- Fellow students and professors from the DSSC master degree, who consistently provided me with an incredible environment which was both pleasantly familiar and [adj] stimulating. I couldn't have asked for better company during those two years.
-
-- Friends who helped me by reviewing some of the contents of this thesis work. Mattia, who always stood by my side!
-
-- My parents and my family, who are a perfect example of how it is possible to conciliate hard work and kindness, and always supported me in good and bad days, motivating and inspiring me to succeed. I aspire to be like you one day.
-
-
+- DEAMS per la formazione e l'apertura alla collaborazione col mondo aziendale
