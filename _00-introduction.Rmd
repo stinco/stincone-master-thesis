@@ -17,3 +17,26 @@ documentclass: book
 <!-- For PDF output, we must include this LaTeX command after unnumbered headings, otherwise the numbers in the mini table of contents will be incorrect -->
 
 La mia introduzione ...
+
+
+## Thesis aim {-}
+
+Lorem ipsum ...
+
+
+## Actuary and datascientist figure {-}
+
+Lorem ipsum ...
+
+
+## Thesis structure {-}
+
+Lorem ipsum ...
+
+
+
+
+
+
+
+

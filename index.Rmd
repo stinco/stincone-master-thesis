@@ -3,7 +3,7 @@
 ## thesis metadata ##
 #####################
 title: |
-  Application of GLM improvements \
+  Application of GLM Advancements \
   on Non Life Insurance Pricing
 author: Leonardo Stincone
 college: |
@@ -39,6 +39,11 @@ abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 #apple-touch-icon: "figures/icons/apple-icon.png"
 #favicon: "figures/icons/favicon.ico"
 
+quote: |
+  The data scientist is a person who is better at statistics than any software engineer \
+  and better at software engineering than any statistician
+quote-author: Josh Wills
+
 
 #######################
 ## bibliography path ##
@@ -50,7 +55,7 @@ bibliography-heading-in-pdf: Bibliography
 ## PDF formatting  ##
 #####################
 do-abstract: true
-abstractseparate: true  # include front page w/ abstract for examination schools?
+abstractseparate: false  # include front page w/ abstract for examination schools?
 bib-humanities: true   #set to true if you want in-text references formatted as author-year
 doi-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography
 url-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography. By default, it is linked under the publication name.

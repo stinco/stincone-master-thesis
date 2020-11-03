@@ -218,8 +218,23 @@ $endif$
 % Title page is created here
 \maketitle
 
-% Comment if you don't need a white page between title page and next pages
-\null\newpage
+%% Comment if you don't need a white page between title page and next pages
+%\null\newpage
+
+
+%%%%%% Quote in the page after the title page
+$if(quote)$
+  \begin{quote}
+    \begin{flushright}
+      \textit{$quote$}
+    
+      $quote-author$
+    \end{flushright}
+  \end{quote}
+$else$
+  \newpage
+$endif$
+
 
 % Default spacing for non-quote chapters and sections:
 % 0 space before, 40pt space after title
@@ -228,9 +243,9 @@ $endif$
 
 %%%%% DEDICATION -- If you'd like one, un-comment the following.
 $if(dedication)$
-\begin{dedication}
-  $dedication$
-\end{dedication}
+  \begin{dedication}
+    $dedication$
+  \end{dedication}
 $endif$
 
 %%%%% ACKNOWLEDGEMENTS -- Nothing to do here except comment out if you don't want it.

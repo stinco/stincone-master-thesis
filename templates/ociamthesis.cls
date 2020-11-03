@@ -4,8 +4,9 @@
 % Modified by Sam Evans (sam@samuelevansresearch.org), 2007
 % Modified by John McManigle (john@oxfordechoes.com), 2015
 % Modified by Gabriele Sarti (gabriele.sarti996@gmail.com), 2020
+% Modified by Leonardo Stincone (stinconeleonardo@gmail.com), 2020
 %
-% This version Copyright (c) 2020 Gabriele Sarti
+% This version Copyright (c) 2020 Gabriele Sarti, Leonardo Stincone
 %
 % Broad permissions are granted to use, modify, and distribute this software
 % as specified in the MIT License included in this distribution's LICENSE file.
@@ -108,9 +109,11 @@
 \renewcommand{\chaptermark}[1]{\markboth{\thechapter. #1}{\thechapter. #1}}
 \renewcommand{\sectionmark}[1]{\markright{\thesection. #1}} 
 \renewcommand{\headrulewidth}{0pt}
-\fancyhead[LO]{\emph{\leftmark}} 
-\fancyhead[RE]{\emph{\rightmark}} 
-\fancyhead[RO,LE]{\thepage}
+%\fancyhead[LO]{\emph{\leftmark}} 
+%\fancyhead[RE]{\emph{\rightmark}} 
+%\fancyhead[RO,LE]{\thepage}
+\fancyhead[L]{\emph{\leftmark}}
+\fancyhead[R]{\thepage}
 
 \fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}}
 
@@ -225,32 +228,67 @@
 
 %define title page layout
 
-\renewcommand{\maketitle}{%
-\begin{alwayssingle}\newgeometry{top=2.0cm, bottom=2.0cm}
-    \renewcommand{\footnotesize}{\small}
-    \renewcommand{\footnoterule}{\relax}
-    \thispagestyle{empty}
-\begin{center}
-    {\logo \par \vspace*{2.5mm}}
-{ \large \textbf{\upc{\@universityname}} \vspace*{2.5mm} \par}
-  \hrule
-    {\vspace*{1ex}}
-{ \upc{\@departmentname} \par}
-    {\vspace*{0.5ex}}
-{ \@degreename \par}
-    { \vspace*{40mm} \LARGE {\bfseries {\@title}} \vspace*{40mm} \par}
-{\@degreedef \par}
-    {\vspace*{25mm}}
-{\centering
-\begin{tabularx}{\textwidth}{lll}
-\specialcell[l]{\footnotesize \advisor \\ \textbf{\@advisorname} \vspace{3mm}} & \hspace{32mm} & \specialcell[l]{\footnotesize \candidate \\ \textbf{\@author} \vspace{3mm}} \\
-%\specialcell[l]{\footnotesize \coadvisor \\ \textbf{\@coadvisorname}} &  &  \\
-\end{tabularx} \par}
-    {\vspace*{30mm}}
-\hrule
-{\vspace*{2mm} \textbf{\@academicyear} \par}
-  \end{center}
-\end{alwayssingle}\restoregeometry}
+% \renewcommand{\maketitle}{%
+%   \begin{alwayssingle}\newgeometry{top=2.0cm, bottom=2.0cm}
+%     \renewcommand{\footnotesize}{\small}
+%     \renewcommand{\footnoterule}{\relax}
+%     \thispagestyle{empty}
+%     \begin{center}
+%       {\logo \par \vspace*{2.5mm}}
+%       { \large \textbf{\upc{\@universityname}} \vspace*{2.5mm} \par}
+%       \hrule
+%       {\vspace*{1ex}}
+%       { \upc{\@departmentname} \par}
+%       {\vspace*{0.5ex}}
+%       { \@degreename \par}
+%       { \vspace*{40mm} \LARGE {\bfseries {\@title}} \vspace*{40mm} \par}
+%       {\@degreedef \par}
+%       {\vspace*{25mm}}
+%       {\centering
+%         \begin{tabularx}{\textwidth}{lll}
+%           \specialcell[l]{\footnotesize \advisor \\ \textbf{\@advisorname} \vspace{3mm}} & \hspace{\fill} & \specialcell[l]{\footnotesize \candidate \\ \textbf{\@author} \vspace{3mm}} \\
+%           %\specialcell[l]{\footnotesize \coadvisor \\ \textbf{\@coadvisorname}} &  &  \\
+%         \end{tabularx}
+%       \par}
+%       {\vspace*{30mm}}
+%       \hrule
+%       {\vspace*{2mm} \textbf{\@academicyear} \par}
+%     \end{center}
+%   \end{alwayssingle}
+%   \restoregeometry
+% }
+
+
+\usepackage[nouppercase]{frontespizio}
+
+\renewcommand{\maketitle}{%  
+  \begin{frontespizio}
+  \begin{Preambolo*}
+  \renewcommand {\frontinstitutionfont } {\fontsize {20}{21}\bfseries }
+  \renewcommand {\frontdivisionfont } {\fontsize {16}{23}\normalfont }
+  \renewcommand {\frontpretitlefont } {\fontsize {16}{23}\scshape }
+  \renewcommand {\fronttitlefont } {\fontsize {24}{27}\bfseries }
+  \renewcommand {\frontfixednamesfont} {\fontsize {16}{23}\normalfont }
+  \renewcommand {\frontnamesfont} {\fontsize {16}{23}\bfseries }
+  \renewcommand {\frontfootfont} {\fontsize {14}{20}\bfseries }
+  \end{Preambolo*}
+  
+  \Universita{Trieste}
+  %\Logo{logounits200dpi.png}
+  %\Logo[4cm]{logo-units_0.png}
+  \Logo[4cm]{figures/university-logo.png}
+  \Dipartimento{\@departmentname}
+  \Corso[Laurea]{\@degreename}
+  \Titoletto{Tesi di laurea}
+  \Titolo{\@title}
+  \NCandidato{Laureando}
+  \Candidato{\@author}
+  \Relatore{Prof. Francesco Pauli}
+  \Annoaccademico{2019-2020}
+  \end{frontespizio}
+}
+
+
 
 % DEDICATION
 %
