@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>1 Non-Life Insurance Pricing | Application of GLM Advancements to Non Life Insurance Pricing</title>
+  <meta name="description" content="Application of GLM Advancements<br />
+to Non Life Insurance Pricing</p>" />
+  <meta name="generator" content="bookdown 0.21 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="1 Non-Life Insurance Pricing | Application of GLM Advancements to Non Life Insurance Pricing" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="1 Non-Life Insurance Pricing | Application of GLM Advancements to Non Life Insurance Pricing" />
+  
+  
+  
+
+<meta name="author" content="Leonardo Stincone" />
+
+
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="index.html"/>
+<link rel="next" href="chap-models.html"/>
+<style type="text/css">
+p.abstract{
+  text-align: center;
+  font-weight: bold;
+}
+div.abstract{
+  margin: auto;
+  width: 90%;
+}
+</style>
+<script src="libs/header-attrs-2.5/header-attrs.js"></script>
+<script src="libs/jquery-2.2.3/jquery.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+
+<script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
+<link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+
+
+
+<link rel="stylesheet" href="templates/style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i>Introduction</a>
+<ul>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#thesis-aim"><i class="fa fa-check"></i>Thesis aim</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#actuary-and-datascientist-figure"><i class="fa fa-check"></i>Actuary and datascientist figure</a></li>
+<li class="chapter" data-level="" data-path="index.html"><a href="index.html#thesis-structure"><i class="fa fa-check"></i>Thesis structure</a></li>
+</ul></li>
+<li class="chapter" data-level="1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html"><i class="fa fa-check"></i><b>1</b> <strong>Non-Life Insurance Pricing</strong></a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#what-a-non-life-insurance-is"><i class="fa fa-check"></i><b>1.1</b> What a Non Life Insurance is</a></li>
+<li class="chapter" data-level="1.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#non-life-insurance-pricing"><i class="fa fa-check"></i><b>1.2</b> Non Life insurance pricing</a></li>
+<li class="chapter" data-level="1.3" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#non-life-insurance-in-italy"><i class="fa fa-check"></i><b>1.3</b> Non-Life Insurance in Italy</a></li>
+<li class="chapter" data-level="1.4" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#the-actuary-role"><i class="fa fa-check"></i><b>1.4</b> The actuary role</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="chap-models.html"><a href="chap-models.html"><i class="fa fa-check"></i><b>2</b> <strong>Statistical models for Non Life Insurance Pricing</strong></a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="chap-models.html"><a href="chap-models.html#statistical-models"><i class="fa fa-check"></i><b>2.1</b> Statistical Models</a>
+<ul>
+<li class="chapter" data-level="2.1.1" data-path="chap-models.html"><a href="chap-models.html#glm"><i class="fa fa-check"></i><b>2.1.1</b> GLM</a></li>
+<li class="chapter" data-level="2.1.2" data-path="chap-models.html"><a href="chap-models.html#elastic-net"><i class="fa fa-check"></i><b>2.1.2</b> Elastic Net</a></li>
+<li class="chapter" data-level="2.1.3" data-path="chap-models.html"><a href="chap-models.html#gam"><i class="fa fa-check"></i><b>2.1.3</b> GAM</a></li>
+<li class="chapter" data-level="2.1.4" data-path="chap-models.html"><a href="chap-models.html#gbm"><i class="fa fa-check"></i><b>2.1.4</b> GBM</a></li>
+</ul></li>
+<li class="chapter" data-level="2.2" data-path="chap-models.html"><a href="chap-models.html#model-comparison"><i class="fa fa-check"></i><b>2.2</b> Model comparison</a></li>
+<li class="chapter" data-level="2.3" data-path="chap-models.html"><a href="chap-models.html#the-actuary-importance"><i class="fa fa-check"></i><b>2.3</b> The actuary importance</a></li>
+<li class="chapter" data-level="2.4" data-path="chap-models.html"><a href="chap-models.html#implementation"><i class="fa fa-check"></i><b>2.4</b> Implementation</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="chap-practical-app.html"><a href="chap-practical-app.html"><i class="fa fa-check"></i><b>3</b> <strong>Practical application</strong></a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="chap-practical-app.html"><a href="chap-practical-app.html#data-description"><i class="fa fa-check"></i><b>3.1</b> Data description</a></li>
+<li class="chapter" data-level="3.2" data-path="chap-practical-app.html"><a href="chap-practical-app.html#model-used"><i class="fa fa-check"></i><b>3.2</b> Model used</a></li>
+<li class="chapter" data-level="3.3" data-path="chap-practical-app.html"><a href="chap-practical-app.html#model-assessment"><i class="fa fa-check"></i><b>3.3</b> Model assessment</a></li>
+<li class="chapter" data-level="3.4" data-path="chap-practical-app.html"><a href="chap-practical-app.html#results"><i class="fa fa-check"></i><b>3.4</b> Results</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="bibliography.html"><a href="bibliography.html"><i class="fa fa-check"></i>Bibliography</a></li>
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./"><p>Application of GLM Advancements<br />
+to Non Life Insurance Pricing</p></a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="chap:nlip-ita-market" class="section level1" number="1">
+<h1><span class="header-section-number">1</span> <strong>Non-Life Insurance Pricing</strong></h1>
+<p><!--this will include a mini table of contents--></p>
+<p>In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing needs.</p>
+<div id="what-a-non-life-insurance-is" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> What a Non Life Insurance is</h2>
+<p>The Italian Civil Code provide the following definition of insurance contract:</p>
+
+<div class="definition">
+<span id="def:ins-contr" class="definition"><strong>Definition 1.1  (Insurance Contract, Art. 1882, Italian Civil Code)  </strong></span>The insurance is the contract with which an insurer, in exchange of the payment of a certain premium, obliged himself, within the agreed limits:
+
+</div>
+<p>This definition identifies two parties: the <em>Insurer</em> and the <em>Policyholder</em>. The policyholder pays to the Insurer a certain <em>Premium</em> at the beginning of the insurance coverage and the Insurer will pay a benefit if a certain event (Claim) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.</p>
+<p>Usually, in non-life insurance, the benefit is a capital that could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claims (e.g. in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the “agreed limits”, another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.</p>
+<p>Starting from this legal definition, we can formalize a non-life insurance contract as follows.</p>
+<p>Let’s:</p>
+<ul>
+<li><span class="math inline">\(\left]t_1, t_2\right]\)</span>,with <span class="math inline">\(t_1&lt;t_2\)</span>, be the coverage period;</li>
+<li><span class="math inline">\(P&gt;0\)</span> be the premium payed by the policyholder to the insurer;</li>
+<li><span class="math inline">\(N\in\mathbb{N}\)</span> be the number of claims occurred during the coverage period (<em>claims count</em>);</li>
+<li><span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span>, with <span class="math inline">\(t_1&lt;\tau_1&lt; \tau_2 &lt; \dots &lt; \tau_N&lt;t_2\)</span>, be the timing of each claim;</li>
+<li><span class="math inline">\(Z_1, Z_2, \dots, Z_N &gt; 0\)</span> be the amount of each claim (<em>claims severities</em> or <em>claims sizes</em>).</li>
+</ul>
+<p>The total cost of claims for the insurance is:
+<span class="math display">\[
+S = 
+\begin{cases}
+  0                    &amp; \text{if } N=0 \\
+  \sum_{i=1}^{N}{Z_i}  &amp; \text{if } N&gt;0
+\end{cases}
+\]</span></p>
+<p>Figure <a href="chap-nlip-ita-market.html#fig:ins-cashflow">1.1</a> shows the cash flows corresponding to the insurance contract. From this representation we can interpret the entering into an insurance contract by the policyholder as a way to exchange the negative cash flows <span class="math inline">\(-Z_1, -Z_2, \dots, -Z_N\)</span> with one single negative cash flow <span class="math inline">\(-P\)</span>. On the other hand, the insurer undertakes the negative cash flows <span class="math inline">\(-Z_1, -Z_2, \dots, -Z_N\)</span> in exchange for a positive cash flow <span class="math inline">\(+P\)</span>.</p>
+<p>The major difference between these cash flows is that <span class="math inline">\(P\)</span> is a certain amount, while <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span>, at the time <span class="math inline">\(t_1\)</span>, are uncertain in the amount, in the count (<span class="math inline">\(N\)</span>) and in the timing (<span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span>). So the policyholder paying a premium <span class="math inline">\(P\)</span> is giving his risk to the insurer.</p>
+<p>From a statistical point of view, we can translate this uncertainty saying that <span class="math inline">\(N\)</span> and <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are random variables. Therefore, we can say that <span class="math inline">\(\left\{N, Z_1, Z_2, \dots \right\}\)</span> is a stochastic process.</p>
+<p>Previously we said that <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are all <span class="math inline">\(&gt;0\)</span>. This assumption corresponds to the fact that we are excluding the claims without following. For the values of <span class="math inline">\(Z_i\)</span> with <span class="math inline">\(N&lt;i\)</span> we can use the rule that <span class="math inline">\(N&lt;i \Rightarrow Z_i = 0\)</span>. Therefore we can say that <span class="math inline">\(N&lt;i \Leftrightarrow Z_i = 0\)</span>.</p>
+<div class="figure"><span id="fig:ins-cashflow"></span>
+<img src="_main_files/figure-html/ins-cashflow-1.pdf" alt="Insurance Contract cash flows" width="672" />
+<p class="caption">
+Figure 1.1: Insurance Contract cash flows
+</p>
+</div>
+</div>
+<div id="non-life-insurance-pricing" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Non Life insurance pricing</h2>
+<p>The process of pricing corresponds in defining the set of rules for determining the “proper” premium <span class="math inline">\(P\)</span>, given the known information on the policyholder. Lately we are going to better explain what “proper” means.</p>
+<p>The first step for evaluating the stochastic process <span class="math inline">\(\left\{N, Z_1, Z_2, \dots \right\}\)</span> is to introduce some probabilistic hypotesis. The usual hypotesis assumed are the following:</p>
+
+<div class="definition">
+<p><span id="def:comp-dist" class="definition"><strong>Definition 1.2  (Compound distribution)  </strong></span>
+Let’s assume that:</p>
+<ol style="list-style-type: decimal">
+<li>for each <span class="math inline">\(n&gt;0, \quad Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n\)</span> are stochastically independent and identically distributed;</li>
+<li>the probability distribution of <span class="math inline">\(Z_i|N=n, \ i\le n\)</span> does not depend on <span class="math inline">\(n\)</span>.</li>
+</ol>
+Under these hypothesis we say that:
+<span class="math display">\[
+S = 
+\begin{cases}
+  0                    &amp; \text{if } N=0 \\
+  \sum_{i=1}^{N}{Z_i}  &amp; \text{if } N&gt;0
+\end{cases}
+\]</span>
+has a compound distribution.
+</div>
+<p>The variables <span class="math inline">\(Z_i|N=n\)</span> used in this definition can be interpreted as the <em>claim severity for the <span class="math inline">\(i\)</span>th claim under the hypotesis that <span class="math inline">\(n\)</span> claims occurred</em>. The two hypotesis provided in definition @ref{def:comp-dist} imply that the distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> does not depend from <span class="math inline">\(i\)</span> nor from <span class="math inline">\(n\)</span>. In the following, we are going to use the notation <span class="math inline">\(Z\)</span> to represent a random variable with the <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> distribution.</p>
+<div style="page-break-after: always;"></div>
+</div>
+<div id="non-life-insurance-in-italy" class="section level2" number="1.3">
+<h2><span class="header-section-number">1.3</span> Non-Life Insurance in Italy</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.</p>
+<p>Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.</p>
+<p>Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.</p>
+</div>
+<div id="the-actuary-role" class="section level2" number="1.4">
+<h2><span class="header-section-number">1.4</span> The actuary role</h2>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.</p>
+<p>Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.</p>
+<p>Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.</p>
+<p>Questa è una citazione <span class="citation">(Shea et al. <a href="#ref-Shea2014" role="doc-biblioref">2014</a>; Lottridge et al. <a href="#ref-Lottridge2012" role="doc-biblioref">2012</a>)</span></p>
+<!-- \nocite{*} -->
+<!-- \titlespacing{\chapter}{0pt}{0pt}{35pt} -->
+
+<!-- <!-- Needed for leaving space to the quote, * is for no indentation after title -->
+<p>–&gt;</p>
+<!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references">
+<div id="ref-Lottridge2012">
+<p>Lottridge, Danielle, Eli Marschner, Ellen Wang, Maria Romanovsky, and Clifford Nass. 2012. “Browser design impacts multitasking.” In <em>Proceedings of the Human Factors and Ergonomics Society 56th Annual Meeting</em>. <a href="https://doi.org/10.1177/1071181312561289">https://doi.org/10.1177/1071181312561289</a>.</p>
+</div>
+<div id="ref-Shea2014">
+<p>Shea, Nicholas, Annika Boldt, Dan Bang, Nick Yeung, Cecilia Heyes, and Chris D Frith. 2014. “Supra-personal cognitive control and metacognition.” <em>Trends in Cognitive Sciences</em> 18 (4): 186–93. <a href="https://doi.org/10.1016/j.tics.2014.01.006">https://doi.org/10.1016/j.tics.2014.01.006</a>.</p>
+</div>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="index.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="chap-models.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/lunr.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": true,
+"facebook": true,
+"twitter": true,
+"linkedin": true,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"all": false
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/stinco/stincone-master-thesis/tree/master/01-Non-Life-Insurance-Pricing-in-the-Italian-market.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf"],
+"toc": {
+"collapse": "subsection",
+"scroll_highlight": true
+},
+"info": false
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

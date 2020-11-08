@@ -165,7 +165,14 @@ $endfor$
 	\renewcommand{\st}{\textsuperscript{st}}
 	\newcommand{\rd}{\textsuperscript{rd}}
 
-%%%%% THE ACTUAL DOCUMENT STARTS HERE
+
+% For the Title Page with Italian style (frontespizio)
+\usepackage[nouppercase]{frontespizio}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% THE ACTUAL DOCUMENT STARTS HERE %%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %%%%% CHOOSE YOUR LINE SPACING HERE
@@ -215,8 +222,38 @@ $endif$
 % keeping with most typesetting conventions.
 \begin{romanpages}
 
-% Title page is created here
-\maketitle
+% % Title page is created here
+% \maketitle
+
+
+% Title Page with Italian style (frontespizio
+\begin{frontespizio}
+  \begin{Preambolo*}
+    \renewcommand {\frontinstitutionfont } {\fontsize {20}{21}\bfseries }
+    \renewcommand {\frontdivisionfont } {\fontsize {16}{23}\normalfont }
+    \renewcommand {\frontpretitlefont } {\fontsize {16}{23}\scshape }
+    \renewcommand {\fronttitlefont } {\fontsize {24}{27}\bfseries }
+    \renewcommand {\frontfixednamesfont} {\fontsize {16}{23}\normalfont }
+    \renewcommand {\frontnamesfont} {\fontsize {16}{23}\bfseries }
+    \renewcommand {\frontfootfont} {\fontsize {14}{20}\bfseries }
+  \end{Preambolo*}
+  
+  \Universita{Trieste}
+  %\Logo{logounits200dpi.png}
+  %\Logo[4cm]{logo-units_0.png}
+  \Logo[4cm]{$university-logo$}
+  \Dipartimento{$departmentname$}
+  \Corso[Laurea]{$degreename$}
+  \Titoletto{$degreedef$}
+  \Titolo{$title$}
+  \NCandidato{$author-title$}
+  \Candidato{$author$}
+  \Relatore{$advisorname$}
+  \Annoaccademico{$academicyear$}
+\end{frontespizio}
+
+
+
 
 %% Comment if you don't need a white page between title page and next pages
 %\null\newpage

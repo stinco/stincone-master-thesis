@@ -259,34 +259,34 @@
 % }
 
 
-\usepackage[nouppercase]{frontespizio}
+% \usepackage[nouppercase]{frontespizio}
 
-\renewcommand{\maketitle}{%  
-  \begin{frontespizio}
-  \begin{Preambolo*}
-  \renewcommand {\frontinstitutionfont } {\fontsize {20}{21}\bfseries }
-  \renewcommand {\frontdivisionfont } {\fontsize {16}{23}\normalfont }
-  \renewcommand {\frontpretitlefont } {\fontsize {16}{23}\scshape }
-  \renewcommand {\fronttitlefont } {\fontsize {24}{27}\bfseries }
-  \renewcommand {\frontfixednamesfont} {\fontsize {16}{23}\normalfont }
-  \renewcommand {\frontnamesfont} {\fontsize {16}{23}\bfseries }
-  \renewcommand {\frontfootfont} {\fontsize {14}{20}\bfseries }
-  \end{Preambolo*}
+% \renewcommand{\maketitle}{%  
+%   \begin{frontespizio}
+%   \begin{Preambolo*}
+%   \renewcommand {\frontinstitutionfont } {\fontsize {20}{21}\bfseries }
+%   \renewcommand {\frontdivisionfont } {\fontsize {16}{23}\normalfont }
+%   \renewcommand {\frontpretitlefont } {\fontsize {16}{23}\scshape }
+%   \renewcommand {\fronttitlefont } {\fontsize {24}{27}\bfseries }
+%   \renewcommand {\frontfixednamesfont} {\fontsize {16}{23}\normalfont }
+%   \renewcommand {\frontnamesfont} {\fontsize {16}{23}\bfseries }
+%   \renewcommand {\frontfootfont} {\fontsize {14}{20}\bfseries }
+%   \end{Preambolo*}
   
-  \Universita{Trieste}
-  %\Logo{logounits200dpi.png}
-  %\Logo[4cm]{logo-units_0.png}
-  \Logo[4cm]{figures/university-logo.png}
-  \Dipartimento{\@departmentname}
-  \Corso[Laurea]{\@degreename}
-  \Titoletto{Tesi di laurea}
-  \Titolo{\@title}
-  \NCandidato{Laureando}
-  \Candidato{\@author}
-  \Relatore{Prof. Francesco Pauli}
-  \Annoaccademico{2019-2020}
-  \end{frontespizio}
-}
+%   \Universita{Trieste}
+%   %\Logo{logounits200dpi.png}
+%   %\Logo[4cm]{logo-units_0.png}
+%   \Logo[4cm]{figures/university-logo.png}
+%   \Dipartimento{\@departmentname}
+%   \Corso[Laurea]{\@degreename}
+%   \Titoletto{Tesi di laurea}
+%   \Titolo{\@title}
+%   \NCandidato{Laureando}
+%   \Candidato{\@author}
+%   \Relatore{Prof. Francesco Pauli}
+%   \Annoaccademico{2019-2020}
+%   \end{frontespizio}
+% }
 
 
 
@@ -458,6 +458,9 @@
 \usepackage{csquotes}
 \hyphenpenalty=500
 \def\longs{{\fontencoding{TS1}\selectfont s}}
+
+%\usepackage{cbfonts}
+
 
 %% GS: Chapter title styling
 \usepackage{titlesec}

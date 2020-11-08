@@ -4,21 +4,23 @@
 #####################
 title: |
   Application of GLM Advancements \
-  on Non Life Insurance Pricing
+  to Non Life Insurance Pricing
 author: Leonardo Stincone
+author-title: Candidato
 college: |
-  Dipartimento di Scienze Economiche, Aziendali, \
-  Matematiche e Statistiche
+  Dipartimento di Scienze Economiche, \
+  Aziendali, Matematiche e Statistiche
 degree: Laurea Magistrale in Scienze Statistiche e Attuariali
 degreedate: March 2021
 universityname: Università degli Studi di Trieste
 departmentname: |
-  Dipartimento di Scienze Economiche, Aziendali, \
-  Matematiche e Statistiche
+  Dipartimento di Scienze Economiche, \
+  Aziendali, Matematiche e Statistiche
+university-logo: figures/university-logo.png
 degreedef: Tesi di Laurea Magistrale
 degreename: Laurea Magistrale in Scienze Statistiche e Attuariali
 degreeclass: LM-83
-academicyear: Anno Accademico 2019 - 2020
+academicyear: 2019 - 2020
 advisorname: Prof. Francesco Pauli
 # coadvisorname: Dott. Andrea Limoncelli
 abstract: |
@@ -41,7 +43,7 @@ abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 
 quote: |
   The data scientist is a person who is better at statistics than any software engineer \
-  and better at software engineering than any statistician
+  and better at software engineering than any statistician.
 quote-author: Josh Wills
 
 
@@ -102,8 +104,26 @@ output:
 link-citations: true
 documentclass: book
 always_allow_html: true
+
+
+######################################
+## Packages loaded on LaTeX header  ##
+## Thiese are needed for TikZ plots ##
+######################################
+# header-includes: 
+#   - \usepackage{pdftools}
+#   - \usepackage{tikz}
+#   - \usepackage{pgfplots}
+#   - \usepackage{pgf,tikz,pgfplots}
+#   - \pgfplotsset{compat=1.15}
+#   - \usepackage{mathrsfs}
+#   - \usetikzlibrary{arrows}
+#   - \usetikzlibrary{patterns}
 ---
 
+```{r global_options, include=FALSE}
+knitr::opts_chunk$set(fig.pos = 'hbtp')
+```
 
 ```{r create_chunk_options, include=FALSE, eval=knitr::is_latex_output()}
 source('scripts_and_filters/create_chunk_options.R')
