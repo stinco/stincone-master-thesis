@@ -8,17 +8,15 @@ title: |
 author: Leonardo Stincone
 author-title: Candidato
 college: |
-  Dipartimento di Scienze Economiche, \
-  Aziendali, Matematiche e Statistiche
-degree: Laurea Magistrale in Scienze Statistiche e Attuariali
+  Scienze Economiche, Aziendali, Matematiche e Statistiche
+degree: Scienze Statistiche e Attuariali
 degreedate: March 2021
 universityname: Università degli Studi di Trieste
 departmentname: |
-  Dipartimento di Scienze Economiche, \
-  Aziendali, Matematiche e Statistiche
+  Scienze Economiche, Aziendali, Matematiche e Statistiche
 university-logo: figures/university-logo.png
-degreedef: Tesi di Laurea Magistrale
-degreename: Laurea Magistrale in Scienze Statistiche e Attuariali
+degreedef: Tesi di Laurea
+degreename: Scienze Statistiche e Attuariali
 degreeclass: LM-83
 academicyear: 2019 - 2020
 advisorname: Prof. Francesco Pauli

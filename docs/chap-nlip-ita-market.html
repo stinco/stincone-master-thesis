@@ -64,6 +64,8 @@ div.abstract{
 <script src="libs/accessible-code-block-0.0.1/empty-anchor.js"></script>
 <link href="libs/anchor-sections-1.0/anchor-sections.css" rel="stylesheet" />
 <script src="libs/anchor-sections-1.0/anchor-sections.js"></script>
+<script src="libs/kePrint-0.0.1/kePrint.js"></script>
+<link href="libs/lightable-0.0.1/lightable.css" rel="stylesheet" />
 
 
 
@@ -341,7 +343,86 @@ The variables <span class="math inline">\(z_1\)</span>, <span class="math inline
 <p><span class="math display">\[
 \text{make } = \text{`Ferrari&#39;} \ \Longleftrightarrow \ z_1=z_2=z_3=0
 \]</span>
-In table <a href="#tab:dummy-variables"><strong>??</strong></a> the dummy variable encoding is illustrated.</p>
+In table <a href="chap-nlip-ita-market.html#tab:dummy-variables">1.1</a> the dummy variable encoding is illustrated.</p>
+<table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
+<caption>
+<span id="tab:dummy-variables">Table 1.1: </span>Dummy variable encoding.
+</caption>
+<thead>
+<tr>
+<th style="text-align:left;">
+make
+</th>
+<th style="text-align:right;">
+z1
+</th>
+<th style="text-align:right;">
+z2
+</th>
+<th style="text-align:right;">
+z3
+</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left;">
+Fiat
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Alfa-Romeo
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Lancia
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+1
+</td>
+</tr>
+<tr>
+<td style="text-align:left;">
+Ferrari
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+<td style="text-align:right;">
+0
+</td>
+</tr>
+</tbody>
+</table>
 <p>For some models it is suggested to use also the dummy variable that indicates the <span class="math inline">\(K\)</span><sup>th</sup> modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the <span class="math inline">\(K-1\)</span> dummy variables encoding, so I am always considering it.</p>
 <p>In the following, when I use the notation <span class="math inline">\(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\)</span>, I’ll always consider that the qualitative variables have been already encoded as dummy variables, so <span class="math inline">\((x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\)</span></p>
 </div>

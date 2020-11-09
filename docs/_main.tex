@@ -118,10 +118,9 @@
 to Non Life Insurance Pricing}
 \author{Leonardo Stincone}
 \universityname{Università degli Studi di Trieste}
-\departmentname{Dipartimento di Scienze Economiche,\\
-Aziendali, Matematiche e Statistiche}
-\degreedef{Tesi di Laurea Magistrale}
-\degreename{Laurea Magistrale in Scienze Statistiche e Attuariali}
+\departmentname{Scienze Economiche, Aziendali, Matematiche e Statistiche}
+\degreedef{Tesi di Laurea}
+\degreename{Scienze Statistiche e Attuariali}
 \degreeclass{LM-83}
 \academicyear{2019 - 2020}
 \degreedate{March 2021}
@@ -225,10 +224,9 @@ Aziendali, Matematiche e Statistiche}
   %\Logo{logounits200dpi.png}
   %\Logo[4cm]{logo-units_0.png}
   \Logo[4cm]{figures/university-logo.png}
-  \Dipartimento{Dipartimento di Scienze Economiche,\\
-Aziendali, Matematiche e Statistiche}
-  \Corso[Laurea]{Laurea Magistrale in Scienze Statistiche e Attuariali}
-  \Titoletto{Tesi di Laurea Magistrale}
+  \Dipartimento{Scienze Economiche, Aziendali, Matematiche e Statistiche}
+  \Corso[Laurea Magistrale]{Scienze Statistiche e Attuariali}
+  \Titoletto{Tesi di Laurea}
   \Titolo{Application of GLM Advancements\\
 to Non Life Insurance Pricing}
   \NCandidato{Candidato}
@@ -551,11 +549,11 @@ The result of the Technical Price with these loadings can be further modified ba
 \hypertarget{chap:personalization}{%
 \subsection{Personalization}\label{chap:personalization}}
 
-In this section I am going to better explin how pricing based on policyholder information works.
+In this section I am going to better explain how pricing based on policyholder information works.
 
-Usually for every policyholder we have a set of pices of information on him that are considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
+Usually for every policyholder we have a set of pieces of information on him that are considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
 
-In motor insurances these pices of information could be:
+In motor insurances these pieces of information could be:
 
 \begin{itemize}
 \tightlist
@@ -582,7 +580,7 @@ f: & \mathcal{X}      & \longrightarrow  & R_+ \\
 \]
 \end{definition}
 
-The process of pricing consist in defining a Pricing Rule based on observed data from the past and assumptions on the future.
+The process of pricing consists in defining a Pricing Rule based on observed data from the past and assumptions on the future.
 
 \hypertarget{pricing-variables-encoding}{%
 \subsubsection{Pricing variables encoding}\label{pricing-variables-encoding}}
@@ -602,7 +600,7 @@ The quantitative variables, except for possible transformation, are already suit
 
 To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
 
-If a variable \(x\) has only 2 possible modality, it can easily encoded in a binary variable \(z\) that assigns \(0\) to one modality and \(1\) to the other. For example, if \(x = \text{sex}\), it can be encoded this way:
+If a variable \(x\) has only 2 possible modalities, it can easily encoded in a binary variable \(z\) that assigns \(0\) to one modality and \(1\) to the other. For example, if \(x = \text{sex}\), it can be encoded this way:
 \[
 z = \begin{cases}
 1 & \text{if } \text{sex } = \text{ `Male'} \\
@@ -610,24 +608,26 @@ z = \begin{cases}
 \end{cases}
 \]
 
-In general, if a variable \(x\) has \(K\) modality, it can be encoded in \(K-1\) binary variables \(z_1, z_2, \dots, z_{K-1}\). For example, if \(x = \text{make}\), and it could have 4 possible modality (`Fiat', `Alfa-Romeo', `Lancia', `Ferrari') it can be encoded this way:
+In general, if a variable \(x\) has \(K\) modalities, it can be encoded in \(K-1\) binary variables \(z_1, z_2, \dots, z_{K-1}\). For example, if \(x = \text{make}\), and it can have 4 possible modalities (`Fiat', `Alfa-Romeo', `Lancia', `Ferrari') it can be encoded this way:
 
-\[
-z_1 = \begin{cases}
+\begin{align*}
+z_1 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Fiat'} \\
 0 & \text{otherwise} \\
 \end{cases}
-\quad
-z_2 = \begin{cases}
+\\
+z_2 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Alfa-Romeo'} \\
 0 & \text{otherwise} \\
 \end{cases}
-\quad
-z_3 = \begin{cases}
+\\
+z_3 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Lancia'} \\
 0 & \text{otherwise} \\
 \end{cases}
-\]
+\\
+\end{align*}
+
 The variables \(z_1\), \(z_2\), \(z_3\) are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality `Ferrari' is not needed. Indeed:
 
 \[
@@ -637,7 +637,7 @@ In table \ref{tab:dummy-variables} the dummy variable encoding is illustrated.
 
 \begin{table}[!h]
 
-\caption{\label{tab:dummy-variables}Dummy variable encoding.}
+\caption{\label{tab:dummy-variables}Dummy variables encoding.}
 \centering
 \begin{tabular}[t]{lrrr}
 
@@ -658,19 +658,19 @@ In the following, when I use the notation \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \d
 \hypertarget{response-variables-and-models}{%
 \subsubsection{Response variables and models}\label{response-variables-and-models}}
 
-As we observed in section \ref{tcc-dist}, under the compound distribution hypotesis, it is not needed to model directly the total cost of claims \(S\), but we can separately model \(N\) and \(Z\).
+As we observed in section \ref{tcc-dist}, under the compound distribution hypothesis, it is not needed to model directly the total cost of claims \(S\), but we can separately model \(N\) and \(Z\).
 
 Modeling the claims count \(N\) and the claims severity \(Z\) means find respectively:
 
 \begin{itemize}
 \tightlist
 \item
-  find a function \(r_N:\mathcal{X}\rightarrow R_+\) that given a set of explanatory variables \(\boldsymbol{x}_i\) will return the expected claims count for that risk \(E(N_i)\);
+  find a function \(r_N:\mathcal{X}\rightarrow R_+\) that, given a set of explanatory variables \(\boldsymbol{x}_i\), will return the expected claims count for that risk \(E(N_i)\) and eventually other moments of \(N_i\) or even the full distribution of \(N_i\);
 \item
-  find a function \(r_Z:\mathcal{X}\rightarrow R_+\) that given a set of explanatory variables \(\boldsymbol{x}_i\) will return the expected severty for that risk \(E(Z_i)\).
+  find a function \(r_Z:\mathcal{X}\rightarrow R_+\) that, given a set of explanatory variables \(\boldsymbol{x}_i\), will return the expected severity for that risk \(E(Z_i)\) and eventually other moments of \(N_i\) or even the full distribution of \(Z_i\).
 \end{itemize}
 
-In this context the variables \(N\) and \(Z\) are called \emph{response varables}.
+In this context the variables \(N\) and \(Z\) are called \emph{response variables}.
 
 \newpage
 
