@@ -118,9 +118,9 @@ Previously we said that $Z_1, Z_2, \dots, Z_N$ are all $>0$. This assumption cor
 
 
 
-## Non Life insurance pricing
+## Non-Life insurance pricing
 
-The process of pricing corresponds in defining the set of rules for determining the "proper" premium $P$, given the known information on the policyholder. In the next sections I am going to better explain what "proper" means.
+In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluate the risk related to that policy and determine a "proper" premium taking into account risk related factors and commercial related factor. The process of _pricing_ corresponds in defining the set of rules for determining this "proper" premium $P_i$ for a specific policyholder $i$, given the known information on him. In the next sections I am going to better explain what "proper" means.
 
 
 ### Compound distribution hypotesis
@@ -170,11 +170,11 @@ Where:
 Therefore, $Z$ can be considered as the _claim severity for a claim under the hypotesis that that claim occurred_.
 
 
-### Distribution of the total cost of claims
+### Distribution of the total cost of claims {#tcc-dist}
 
 Under the hypotesis defined in definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same aproach one can obtain all the moments.
 
-The expected values of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
+The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
 
 ```{=latex}
 \begin{eqnarray}
@@ -195,47 +195,167 @@ E(N)E(Z)
 
 Where:
 
-* the step \@ref(eq:s1) is given by the fact that the events $\{N=0\}, \{N=1\}, \{N=2\}, \dots$ constitute a partition of the certain event $\Omega$, that allows us to use the disintegrability proprierty of the expected value;
+* the step \@ref(eq:s1) is given by the fact that the events $\{N=0\}, \{N=1\}, \{N=2\}, \dots$ constitute a partition of the certain event $\Omega$, that allows us to use the disintegrability property of the expected value;
 * the step \@ref(eq:s2) is due to the definition of $S$;
 * the step \@ref(eq:s3) is due to the linearity of the expected value;
 * the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypothesis, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
-* the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$
+* the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
-This result tells us that, under the hypotesis of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims $E(S_i) = E(N_i) E(Z_i)$.
+This result tells us that, under the hypothesis of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$.
+
+
+
+### Risk premium and Technical Price
 
 The expected cost of claims $E(S)$ is important because it gives us a first interpretation of what "proper" premium means.
 
-```{definition, risk-premium, name = "Risk premium"}
-Said $S$, the total cost of claims of a policyholder, his risk premium is given by:
+```{definition, risk-premium, name = "Risk Premium"}
+Said $S$ the total cost of claims of a policyholder, his _Risk Premium_ is given by:
 $$
-P^{(r)} = E(S)
+P^{(risk)} = E(S)
 $$
 ```
 
-The risk premium is the premium that on average covers the total cost of claims. As mentioned above, as the coverages spans are usually short, we are not taking into account the timing of the claims and we don't discount the fact that the claim occurs later than the premium payment.
+The _Risk Premium_ is the premium that on average covers the total cost of claims. As mentioned above, as the coverage spans are usually short, we are not taking into account the timing of the claims and we don't discount the fact that the claims occur later than the premium payment.
 
+It is clear that this premium, that only cover the cost of claims, is not "proper" in the practice. 
 
+First of all the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses we obtain what is called _Technical Price_.
 
+```{definition, technical-price, name = "Technical Price"}
+Said $S$ the total cost of claims of a policyholder and $E$ the expenses related to his policy, his _Technical Price_ is given by:
+$$
+P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
+$$
+```
 
+Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, it would not make sense for the insurer undertaking that risk with nothing in return. So, to the Technical Price, a loading must be added. This loading can be justified as a loading for the risk or as a profit loading.
 
-
-<!--
-Qua aggiungo:
-- Il discorso del timing
-- caricamenti
--->
-
-
-
-
-
-
-
+The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
 
 
 ### Personalization {#chap:personalization}
 
+<!--
+Often the insurance premium for a specific policyholder $i$ is represented as the product of a reference premium $P$ and a relative coefficient $\alpha_i$ as follows:
+$$
+P_i = \alpha_i P
+$$
+The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separately. The proces of defining the function for obtaining $\alpha_i$ is called personalization.
+-->
 
+In this section I am going to better explin how pricing based on policyholder information works.
+
+Usually for every policyholder we have a set of pices of information on him that are considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
+
+In motor insurances these pices of information could be:
+
+* Information on the insured vehicle: make, model, engine power, vehicle mass, age of the vehicle;
+* General information of the policyholder: age, sex, address (region, city, postcode);
+* Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;
+* Policy options: amount of the maximum coverage, presence and amount of the deductible, presence of other insurance guarantees.
+
+Formally this information can be represented as a set of variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$. These variables could be called pricing variables, explanatory variables, covariates, predictors or features.
+
+
+```{definition, pricing-rule, name = "Pricing Rule"}
+A _Pricing Rule_ is a function $f(\cdot)$ that from an istance of a set of pricing variables $\boldsymbol{x}_i\in\mathcal{X}$ returns a price:
+
+$$  
+\begin{array}{rccl}
+f: & \mathcal{X}      & \longrightarrow  & R_+ \\
+   & \boldsymbol{x}_i & \longmapsto      & P_i \\
+\end{array}
+$$
+```
+
+
+The process of pricing consist in defining a Pricing Rule based on observed data from the past and assumptions on the future.
+
+
+#### Pricing variables encoding
+
+The pricing variables can be of two types:
+
+1. _Quantitative variables_: variables like vehicle mass or policyholder age that can be easily represented as a number;
+2. _Qualitative variables_: variables like sex or address that represent a category and are usually represented with strings.
+
+The quantitative variables, except for possible transformation, are already suitable to be used.
+
+To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
+
+If a variable $x$ has only 2 possible modality, it can easily encoded in a binary variable $z$ that assigns $0$ to one modality and $1$ to the other. For example, if $x = \text{sex}$, it can be encoded this way:
+$$
+z = \begin{cases}
+1 & \text{if } \text{sex } = \text{ `Male'} \\
+0 & \text{if } \text{sex } = \text{ `Female'}
+\end{cases}
+$$
+
+In general, if a variable $x$ has $K$ modality, it can be encoded in $K-1$ binary variables $z_1, z_2, \dots, z_{K-1}$. For example, if $x = \text{make}$, and it could have 4 possible modality ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
+
+$$
+z_1 = \begin{cases}
+1 & \text{if } \text{make } = \text{ `Fiat'} \\
+0 & \text{otherwise} \\
+\end{cases}
+\quad
+z_2 = \begin{cases}
+1 & \text{if } \text{make } = \text{ `Alfa-Romeo'} \\
+0 & \text{otherwise} \\
+\end{cases}
+\quad
+z_3 = \begin{cases}
+1 & \text{if } \text{make } = \text{ `Lancia'} \\
+0 & \text{otherwise} \\
+\end{cases}
+$$
+The variables $z_1$, $z_2$, $z_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
+
+$$
+\text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ z_1=z_2=z_3=0
+$$
+In table \@ref(tab:dummy-variables) the dummy variable encoding is illustrated.
+
+```{r, dummy-variables-table, echo = FALSE}
+table <- tibble(
+  make = c("Fiat", "Alfa-Romeo", "Lancia", "Ferrari"),
+  z1 = c(1, 0, 0, 0),
+  z2 = c(0, 1, 0, 0),
+  z3 = c(0, 0, 1, 0)
+)
+
+table %>% 
+  kable(
+    format = "latex",
+    align = "lrrr",
+    vline = "",
+    toprule = "", midrule = "\\hline",
+    linesep = "", bottomrule = "",
+    caption = "Dummy variable encoding.",
+    label = "dummy-variables"
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position"
+  )
+```
+
+For some models it is suggested to use also the dummy variable that indicates the $K$^th^ modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the $K-1$ dummy variables encoding, so I am always considering it.
+
+In the following, when I use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
+
+
+#### Response variables and models
+
+As we observed in section \@ref(tcc-dist), under the compound distribution hypotesis, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
+
+Modeling the claims count $N$ and the claims severity $Z$ means find respectively:
+
+* find a function $r_N:\mathcal{X}\rightarrow R_+$ that given a set of explanatory variables $\boldsymbol{x}_i$ will return the expected claims count for that risk $E(N_i)$;
+* find a function $r_Z:\mathcal{X}\rightarrow R_+$ that given a set of explanatory variables $\boldsymbol{x}_i$ will return the expected severty for that risk $E(Z_i)$.
+
+In this context the variables $N$ and $Z$ are called _response varables_.
 
 
 

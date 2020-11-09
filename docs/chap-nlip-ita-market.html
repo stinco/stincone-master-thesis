@@ -89,7 +89,13 @@ div.abstract{
 <li class="chapter" data-level="1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html"><i class="fa fa-check"></i><b>1</b> <strong>Non-Life Insurance Pricing</strong></a>
 <ul>
 <li class="chapter" data-level="1.1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#what-a-non-life-insurance-is"><i class="fa fa-check"></i><b>1.1</b> What a Non Life Insurance is</a></li>
-<li class="chapter" data-level="1.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#non-life-insurance-pricing"><i class="fa fa-check"></i><b>1.2</b> Non Life insurance pricing</a></li>
+<li class="chapter" data-level="1.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#non-life-insurance-pricing"><i class="fa fa-check"></i><b>1.2</b> Non-Life insurance pricing</a>
+<ul>
+<li class="chapter" data-level="1.2.1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#compound-distribution-hypotesis"><i class="fa fa-check"></i><b>1.2.1</b> Compound distribution hypotesis</a></li>
+<li class="chapter" data-level="1.2.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#tcc-dist"><i class="fa fa-check"></i><b>1.2.2</b> Distribution of the total cost of claims</a></li>
+<li class="chapter" data-level="1.2.3" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#risk-premium-and-technical-price"><i class="fa fa-check"></i><b>1.2.3</b> Risk premium and Technical Price</a></li>
+<li class="chapter" data-level="1.2.4" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#chap:personalization"><i class="fa fa-check"></i><b>1.2.4</b> Personalization</a></li>
+</ul></li>
 <li class="chapter" data-level="1.3" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#non-life-insurance-in-italy"><i class="fa fa-check"></i><b>1.3</b> Non-Life Insurance in Italy</a></li>
 <li class="chapter" data-level="1.4" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#the-actuary-role"><i class="fa fa-check"></i><b>1.4</b> The actuary role</a></li>
 </ul></li>
@@ -138,18 +144,18 @@ to Non Life Insurance Pricing</p></a>
 <p>In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing needs.</p>
 <div id="what-a-non-life-insurance-is" class="section level2" number="1.1">
 <h2><span class="header-section-number">1.1</span> What a Non Life Insurance is</h2>
-<p>The Italian Civil Code provide the following definition of insurance contract:</p>
+<p>The Italian Civil Code provides the following definition of insurance contract:</p>
 
 <div class="definition">
 <span id="def:ins-contr" class="definition"><strong>Definition 1.1  (Insurance Contract, Art. 1882, Italian Civil Code)  </strong></span>The insurance is the contract with which an insurer, in exchange of the payment of a certain premium, obliged himself, within the agreed limits:
 
 </div>
-<p>This definition identifies two parties: the <em>Insurer</em> and the <em>Policyholder</em>. The policyholder pays to the Insurer a certain <em>Premium</em> at the beginning of the insurance coverage and the Insurer will pay a benefit if a certain event (Claim) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.</p>
+<p>This definition identifies two parties: the <em>Insurer</em> and the <em>Policyholder</em>. The policyholder pays to the Insurer a certain <em>Premium</em> at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (<em>Claim</em>) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.</p>
 <p>Usually, in non-life insurance, the benefit is a capital that could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claims (e.g. in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the “agreed limits”, another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.</p>
 <p>Starting from this legal definition, we can formalize a non-life insurance contract as follows.</p>
 <p>Let’s:</p>
 <ul>
-<li><span class="math inline">\(\left]t_1, t_2\right]\)</span>,with <span class="math inline">\(t_1&lt;t_2\)</span>, be the coverage period;</li>
+<li><span class="math inline">\(\left]t_1, t_2\right]\)</span>, with <span class="math inline">\(t_1&lt;t_2\)</span>, be the coverage period;</li>
 <li><span class="math inline">\(P&gt;0\)</span> be the premium payed by the policyholder to the insurer;</li>
 <li><span class="math inline">\(N\in\mathbb{N}\)</span> be the number of claims occurred during the coverage period (<em>claims count</em>);</li>
 <li><span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span>, with <span class="math inline">\(t_1&lt;\tau_1&lt; \tau_2 &lt; \dots &lt; \tau_N&lt;t_2\)</span>, be the timing of each claim;</li>
@@ -162,42 +168,195 @@ S =
   0                    &amp; \text{if } N=0 \\
   \sum_{i=1}^{N}{Z_i}  &amp; \text{if } N&gt;0
 \end{cases}
-\]</span></p>
+\]</span>
+For semplicity, in the following we are going to just use the notation <span class="math inline">\(S = \sum_{i=1}^{N}{Z_i}\)</span> with the meaning of <span class="math inline">\(0\)</span> if <span class="math inline">\(N=0\)</span>.</p>
 <p>Figure <a href="chap-nlip-ita-market.html#fig:ins-cashflow">1.1</a> shows the cash flows corresponding to the insurance contract. From this representation we can interpret the entering into an insurance contract by the policyholder as a way to exchange the negative cash flows <span class="math inline">\(-Z_1, -Z_2, \dots, -Z_N\)</span> with one single negative cash flow <span class="math inline">\(-P\)</span>. On the other hand, the insurer undertakes the negative cash flows <span class="math inline">\(-Z_1, -Z_2, \dots, -Z_N\)</span> in exchange for a positive cash flow <span class="math inline">\(+P\)</span>.</p>
-<p>The major difference between these cash flows is that <span class="math inline">\(P\)</span> is a certain amount, while <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span>, at the time <span class="math inline">\(t_1\)</span>, are uncertain in the amount, in the count (<span class="math inline">\(N\)</span>) and in the timing (<span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span>). So the policyholder paying a premium <span class="math inline">\(P\)</span> is giving his risk to the insurer.</p>
-<p>From a statistical point of view, we can translate this uncertainty saying that <span class="math inline">\(N\)</span> and <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are random variables. Therefore, we can say that <span class="math inline">\(\left\{N, Z_1, Z_2, \dots \right\}\)</span> is a stochastic process.</p>
-<p>Previously we said that <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are all <span class="math inline">\(&gt;0\)</span>. This assumption corresponds to the fact that we are excluding the claims without following. For the values of <span class="math inline">\(Z_i\)</span> with <span class="math inline">\(N&lt;i\)</span> we can use the rule that <span class="math inline">\(N&lt;i \Rightarrow Z_i = 0\)</span>. Therefore we can say that <span class="math inline">\(N&lt;i \Leftrightarrow Z_i = 0\)</span>.</p>
+<p>The major difference between these cash flows is that <span class="math inline">\(P\)</span> is a certain amount, while <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span>, at the time <span class="math inline">\(t_1\)</span>, are uncertain in the amount, in the count (<span class="math inline">\(N\)</span>) and in the timing (<span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span>). So the policyholder, paying a premium <span class="math inline">\(P\)</span>, is giving his risk to the insurer.</p>
+<p>From a statistical point of view, we can translate this uncertainty saying that <span class="math inline">\(N\)</span> and <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are random variables. Therefore, we can say that <span class="math inline">\(\left\{N, Z_1, Z_2, \dots \right\}\)</span> is a stochastic process. Usually, in non-file insurance pricing, the variables <span class="math inline">\(\tau_1, \tau_2, \dots, \tau_N\)</span> are not taken into account because the coverage span short and from a financial point of view the timing of the claims occurences is negligible.</p>
+<p>Previously we said that <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span> are all <span class="math inline">\(&gt;0\)</span>. This assumption corresponds to the fact that we are excluding the null claims, i.e. the claims that have been opened, but result in no payment due by the insurer. For the values of <span class="math inline">\(Z_i\)</span> with <span class="math inline">\(N&lt;i\)</span> we can use the rule that <span class="math inline">\(N&lt;i \Rightarrow Z_i = 0\)</span>. Therefore we can say that <span class="math inline">\(N&lt;i \Leftrightarrow Z_i = 0\)</span>.</p>
 <div class="figure"><span id="fig:ins-cashflow"></span>
-<img src="_main_files/figure-html/ins-cashflow-1.pdf" alt="Insurance Contract cash flows" width="672" />
+<img src="_main_files/figure-html/ins-cashflow-1.pdf" alt="Insurance Contract cash flows." width="672" />
 <p class="caption">
-Figure 1.1: Insurance Contract cash flows
+Figure 1.1: Insurance Contract cash flows.
 </p>
 </div>
 </div>
 <div id="non-life-insurance-pricing" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Non Life insurance pricing</h2>
-<p>The process of pricing corresponds in defining the set of rules for determining the “proper” premium <span class="math inline">\(P\)</span>, given the known information on the policyholder. Lately we are going to better explain what “proper” means.</p>
+<h2><span class="header-section-number">1.2</span> Non-Life insurance pricing</h2>
+<p>In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluate the risk related to that policy and determine a “proper” premium taking into account risk related factors and commercial related factor. The process of <em>pricing</em> corresponds in defining the set of rules for determining this “proper” premium <span class="math inline">\(P_i\)</span> for a specific policyholder <span class="math inline">\(i\)</span>, given the known information on him. In the next sections I am going to better explain what “proper” means.</p>
+<div id="compound-distribution-hypotesis" class="section level3" number="1.2.1">
+<h3><span class="header-section-number">1.2.1</span> Compound distribution hypotesis</h3>
 <p>The first step for evaluating the stochastic process <span class="math inline">\(\left\{N, Z_1, Z_2, \dots \right\}\)</span> is to introduce some probabilistic hypotesis. The usual hypotesis assumed are the following:</p>
 
 <div class="definition">
 <p><span id="def:comp-dist" class="definition"><strong>Definition 1.2  (Compound distribution)  </strong></span>
 Let’s assume that:</p>
 <ol style="list-style-type: decimal">
-<li>for each <span class="math inline">\(n&gt;0, \quad Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n\)</span> are stochastically independent and identically distributed;</li>
+<li>for each <span class="math inline">\(n&gt;0\)</span>, the variables <span class="math inline">\(Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n\)</span> are stochastically independent and identically distributed;</li>
 <li>the probability distribution of <span class="math inline">\(Z_i|N=n, \ i\le n\)</span> does not depend on <span class="math inline">\(n\)</span>.</li>
 </ol>
 Under these hypothesis we say that:
 <span class="math display">\[
-S = 
-\begin{cases}
-  0                    &amp; \text{if } N=0 \\
-  \sum_{i=1}^{N}{Z_i}  &amp; \text{if } N&gt;0
-\end{cases}
+S = \sum_{i=1}^{N}{Z_i}
 \]</span>
 has a compound distribution.
 </div>
-<p>The variables <span class="math inline">\(Z_i|N=n\)</span> used in this definition can be interpreted as the <em>claim severity for the <span class="math inline">\(i\)</span>th claim under the hypotesis that <span class="math inline">\(n\)</span> claims occurred</em>. The two hypotesis provided in definition @ref{def:comp-dist} imply that the distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> does not depend from <span class="math inline">\(i\)</span> nor from <span class="math inline">\(n\)</span>. In the following, we are going to use the notation <span class="math inline">\(Z\)</span> to represent a random variable with the <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> distribution.</p>
+<p>The variables <span class="math inline">\(Z_i|N=n\)</span> used in this definition can be interpreted as the <em>claim severity for the <span class="math inline">\(i\)</span><sup>th</sup> claim under the hypotesis that <span class="math inline">\(n\)</span> claims occurred</em>. The two hypotesis provided in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a> imply that the distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> does not depend from <span class="math inline">\(i\)</span> nor from <span class="math inline">\(n\)</span>. In the following, we are going to use the notation <span class="math inline">\(Z\)</span> to represent a random variable with the <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> distribution and <span class="math inline">\(F_Z(\cdot)\)</span> for its cumulative distribution function (i.e. <span class="math inline">\(F_Z(z) = P(Z\le z)\)</span>).</p>
+<p>Let’s consider the variabile <span class="math inline">\(Z_i|N&gt;i\)</span>. We can interpret it as the <em>claim severity for the <span class="math inline">\(i\)</span><sup>th</sup> claim under the hypotesis that the <span class="math inline">\(i\)</span><sup>th</sup> claim occurred</em>. From the hypotesis provided in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a> we can obtain that also <span class="math inline">\(Z_i|N&gt;i\)</span> has the same distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span>. This can be easily obtained as follows:</p>
+<span class="math display">\[\begin{eqnarray}
+\label{eq:z1}
+P\left(Z_i \middle| N\ge i \right) &amp; = &amp; P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
+\ = \\ \label{eq:z2} &amp; = &amp;
+\sum_{n=i}^{+\infty}{ \underbrace{P\left(Z_i\le z \middle| N=n\right)}_{=F_Z(z)} P\left( N = n \middle| N\ge i \right)}
+\ = \\ \label{eq:z3} &amp; = &amp;
+\sum_{n=i}^{+\infty}{ F_Z(z) P\left( N = n \middle| N\ge i \right)}
+\ = \\ \label{eq:z4} &amp; = &amp;
+F_Z(z) \underbrace{\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)}}_{=1}
+\ = \\ \nonumber &amp; = &amp;
+F_Z(z)
+\end{eqnarray}\]</span>
+<p>Where:</p>
+<ul>
+<li>the step <a href="#eq:z1">(<strong>??</strong>)</a> and the step <a href="#eq:z2">(<strong>??</strong>)</a> are given by the fact that the event <span class="math inline">\(\{N\ge i\}\)</span> can be decomposed as <span class="math inline">\(\{N\ge i\} = \left\{ \bigvee_{n = i}^{+\infty}{(N=n)} \right\}\)</span> and that the events <span class="math inline">\(\{N=n\}, n\in\{i, i+1, i+2, \dots\}\)</span> are two-by-two disjoint, so they constitute a partition of <span class="math inline">\(\{N\ge i\}\)</span>, that allows us to use the disintegrability proprierty of the probability;</li>
+<li>the step <a href="#eq:z3">(<strong>??</strong>)</a> is due to the fact that the distribution of <span class="math inline">\(Z_i\le z | N=n\)</span> depends neither on <span class="math inline">\(i\)</span> nor on <span class="math inline">\(n\)</span>;</li>
+<li>the equivalence <span class="math inline">\(\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)} = 1\)</span> at step <a href="#eq:z4">(<strong>??</strong>)</a> is due to the fact that the events <span class="math inline">\(\{N=n\}, n\in\{i, i+1, i+2, \dots\}\)</span> are a partition of <span class="math inline">\(\{N\ge i\}\)</span>.</li>
+</ul>
+<p>Therefore, <span class="math inline">\(Z\)</span> can be considered as the <em>claim severity for a claim under the hypotesis that that claim occurred</em>.</p>
+</div>
+<div id="tcc-dist" class="section level3" number="1.2.2">
+<h3><span class="header-section-number">1.2.2</span> Distribution of the total cost of claims</h3>
+<p>Under the hypotesis defined in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a>, it is possible to obtain the full distribution of <span class="math inline">\(S\)</span> given the distribution of <span class="math inline">\(N\)</span> and <span class="math inline">\(Z\)</span>. In this chapter we are going to provide only the formula of the expected value <span class="math inline">\(E(S)\)</span>, but, with the same aproach one can obtain all the moments.</p>
+<p>The expected value of the total cost of claims <span class="math inline">\(E(S)\)</span> can be obtained from the expected value of the claims count <span class="math inline">\(E(N)\)</span> and the expected value of the claim severity <span class="math inline">\(E(Z)\)</span> as follows:</p>
+<span class="math display">\[\begin{eqnarray}
+\label{eq:s1}
+E(S) &amp; = &amp; \sum_{n=0}^{+\infty}{P(N=n) E\left(S \middle| N = n \right)}
+\ = \\ \label{eq:s2} &amp; = &amp;
+\sum_{n=0}^{+\infty}{P(N=n) E\left(\sum_{i=1}^{n}{Z_i} \middle| N = n \right)}
+\ = \\ \label{eq:s3} &amp; = &amp;
+\sum_{n=0}^{+\infty}{P(N=n) \sum_{i=1}^{n}{\underbrace{E\left( Z_i \middle| N = n \right)}_{=E(Z)}}}
+\ = \\ \label{eq:s4} &amp; = &amp;
+\sum_{n=0}^{+\infty}{P(N=n) n E(Z)}
+\ = \\ \label{eq:s5} &amp; = &amp;
+E(Z) \underbrace{\sum_{n=0}^{+\infty}{n P(N=n)}}_{=E(N)}
+\ = \\ \label{eq:s6} &amp; = &amp;
+E(N)E(Z)
+\end{eqnarray}\]</span>
+<p>Where:</p>
+<ul>
+<li>the step <a href="#eq:s1">(<strong>??</strong>)</a> is given by the fact that the events <span class="math inline">\(\{N=0\}, \{N=1\}, \{N=2\}, \dots\)</span> constitute a partition of the certain event <span class="math inline">\(\Omega\)</span>, that allows us to use the disintegrability property of the expected value;</li>
+<li>the step <a href="#eq:s2">(<strong>??</strong>)</a> is due to the definition of <span class="math inline">\(S\)</span>;</li>
+<li>the step <a href="#eq:s3">(<strong>??</strong>)</a> is due to the linearity of the expected value;</li>
+<li>the steps <a href="#eq:s4">(<strong>??</strong>)</a> and <a href="#eq:s5">(<strong>??</strong>)</a> are due to the fact that, as assumed by the compound distribution hypothesis, <span class="math inline">\(E\left( Z_i \middle| N = n \right)\)</span> does not depends on <span class="math inline">\(i\)</span> and <span class="math inline">\(n\)</span>;</li>
+<li>the step <a href="#eq:s6">(<strong>??</strong>)</a> is due to the definition of the expected value <span class="math inline">\(E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}\)</span>.</li>
+</ul>
+<p>This result tells us that, under the hypothesis of the compound distribution, it is possible to easily obtain <span class="math inline">\(E(S)\)</span> from <span class="math inline">\(E(N)\)</span> and <span class="math inline">\(E(Z)\)</span>. That means that we can model separately <span class="math inline">\(E(N)\)</span> and <span class="math inline">\(E(Z)\)</span> and, from them, obtain <span class="math inline">\(E(S)\)</span>. That result is particularly useful in personalization (paragraph <a href="chap-nlip-ita-market.html#chap:personalization">1.2.4</a>), because, for each individual <span class="math inline">\(i\)</span>, given the information we have on him <span class="math inline">\(x_i=(x_{i1}, x_{i2}, \dots, x_{ip})\)</span>, we can estimate his expected claim size <span class="math inline">\(E(N_i)\)</span> and his expected claim severity <span class="math inline">\(E(Z_i)\)</span> and obtain his expected total cost of claims as <span class="math inline">\(E(S_i) = E(N_i) E(Z_i)\)</span>.</p>
+</div>
+<div id="risk-premium-and-technical-price" class="section level3" number="1.2.3">
+<h3><span class="header-section-number">1.2.3</span> Risk premium and Technical Price</h3>
+<p>The expected cost of claims <span class="math inline">\(E(S)\)</span> is important because it gives us a first interpretation of what “proper” premium means.</p>
+
+<div class="definition">
+<span id="def:risk-premium" class="definition"><strong>Definition 1.3  (Risk Premium)  </strong></span>Said <span class="math inline">\(S\)</span> the total cost of claims of a policyholder, his <em>Risk Premium</em> is given by:
+<span class="math display">\[
+P^{(risk)} = E(S)
+\]</span>
+</div>
+<p>The <em>Risk Premium</em> is the premium that on average covers the total cost of claims. As mentioned above, as the coverage spans are usually short, we are not taking into account the timing of the claims and we don’t discount the fact that the claims occur later than the premium payment.</p>
+<p>It is clear that this premium, that only cover the cost of claims, is not “proper” in the practice.</p>
+<p>First of all the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses we obtain what is called <em>Technical Price</em>.</p>
+
+<div class="definition">
+<span id="def:technical-price" class="definition"><strong>Definition 1.4  (Technical Price)  </strong></span>Said <span class="math inline">\(S\)</span> the total cost of claims of a policyholder and <span class="math inline">\(E\)</span> the expenses related to his policy, his <em>Technical Price</em> is given by:
+<span class="math display">\[
+P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
+\]</span>
+</div>
+<p>Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, it would not make sense for the insurer undertaking that risk with nothing in return. So, to the Technical Price, a loading must be added. This loading can be justified as a loading for the risk or as a profit loading.</p>
+<p>The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.</p>
+</div>
+<div id="chap:personalization" class="section level3" number="1.2.4">
+<h3><span class="header-section-number">1.2.4</span> Personalization</h3>
+<!--
+Often the insurance premium for a specific policyholder $i$ is represented as the product of a reference premium $P$ and a relative coefficient $\alpha_i$ as follows:
+$$
+P_i = \alpha_i P
+$$
+The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separately. The proces of defining the function for obtaining $\alpha_i$ is called personalization.
+-->
+<p>In this section I am going to better explin how pricing based on policyholder information works.</p>
+<p>Usually for every policyholder we have a set of pices of information on him that are considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.</p>
+<p>In motor insurances these pices of information could be:</p>
+<ul>
+<li>Information on the insured vehicle: make, model, engine power, vehicle mass, age of the vehicle;</li>
+<li>General information of the policyholder: age, sex, address (region, city, postcode);</li>
+<li>Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;</li>
+<li>Policy options: amount of the maximum coverage, presence and amount of the deductible, presence of other insurance guarantees.</li>
+</ul>
+<p>Formally this information can be represented as a set of variables <span class="math inline">\(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\)</span>. These variables could be called pricing variables, explanatory variables, covariates, predictors or features.</p>
+
+<div class="definition">
+<p><span id="def:pricing-rule" class="definition"><strong>Definition 1.5  (Pricing Rule)  </strong></span>A <em>Pricing Rule</em> is a function <span class="math inline">\(f(\cdot)\)</span> that from an istance of a set of pricing variables <span class="math inline">\(\boldsymbol{x}_i\in\mathcal{X}\)</span> returns a price:</p>
+<span class="math display">\[  
+\begin{array}{rccl}
+f: &amp; \mathcal{X}      &amp; \longrightarrow  &amp; R_+ \\
+   &amp; \boldsymbol{x}_i &amp; \longmapsto      &amp; P_i \\
+\end{array}
+\]</span>
+</div>
+<p>The process of pricing consist in defining a Pricing Rule based on observed data from the past and assumptions on the future.</p>
+<div id="pricing-variables-encoding" class="section level4" number="1.2.4.1">
+<h4><span class="header-section-number">1.2.4.1</span> Pricing variables encoding</h4>
+<p>The pricing variables can be of two types:</p>
+<ol style="list-style-type: decimal">
+<li><em>Quantitative variables</em>: variables like vehicle mass or policyholder age that can be easily represented as a number;</li>
+<li><em>Qualitative variables</em>: variables like sex or address that represent a category and are usually represented with strings.</li>
+</ol>
+<p>The quantitative variables, except for possible transformation, are already suitable to be used.</p>
+<p>To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.</p>
+<p>If a variable <span class="math inline">\(x\)</span> has only 2 possible modality, it can easily encoded in a binary variable <span class="math inline">\(z\)</span> that assigns <span class="math inline">\(0\)</span> to one modality and <span class="math inline">\(1\)</span> to the other. For example, if <span class="math inline">\(x = \text{sex}\)</span>, it can be encoded this way:
+<span class="math display">\[
+z = \begin{cases}
+1 &amp; \text{if } \text{sex } = \text{ `Male&#39;} \\
+0 &amp; \text{if } \text{sex } = \text{ `Female&#39;}
+\end{cases}
+\]</span></p>
+<p>In general, if a variable <span class="math inline">\(x\)</span> has <span class="math inline">\(K\)</span> modality, it can be encoded in <span class="math inline">\(K-1\)</span> binary variables <span class="math inline">\(z_1, z_2, \dots, z_{K-1}\)</span>. For example, if <span class="math inline">\(x = \text{make}\)</span>, and it could have 4 possible modality (‘Fiat’, ‘Alfa-Romeo’, ‘Lancia’, ‘Ferrari’) it can be encoded this way:</p>
+<p><span class="math display">\[
+z_1 = \begin{cases}
+1 &amp; \text{if } \text{make } = \text{ `Fiat&#39;} \\
+0 &amp; \text{otherwise} \\
+\end{cases}
+\quad
+z_2 = \begin{cases}
+1 &amp; \text{if } \text{make } = \text{ `Alfa-Romeo&#39;} \\
+0 &amp; \text{otherwise} \\
+\end{cases}
+\quad
+z_3 = \begin{cases}
+1 &amp; \text{if } \text{make } = \text{ `Lancia&#39;} \\
+0 &amp; \text{otherwise} \\
+\end{cases}
+\]</span>
+The variables <span class="math inline">\(z_1\)</span>, <span class="math inline">\(z_2\)</span>, <span class="math inline">\(z_3\)</span> are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality ‘Ferrari’ is not needed. Indeed:</p>
+<p><span class="math display">\[
+\text{make } = \text{`Ferrari&#39;} \ \Longleftrightarrow \ z_1=z_2=z_3=0
+\]</span>
+In table <a href="#tab:dummy-variables"><strong>??</strong></a> the dummy variable encoding is illustrated.</p>
+<p>For some models it is suggested to use also the dummy variable that indicates the <span class="math inline">\(K\)</span><sup>th</sup> modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the <span class="math inline">\(K-1\)</span> dummy variables encoding, so I am always considering it.</p>
+<p>In the following, when I use the notation <span class="math inline">\(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\)</span>, I’ll always consider that the qualitative variables have been already encoded as dummy variables, so <span class="math inline">\((x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\)</span></p>
+</div>
+<div id="response-variables-and-models" class="section level4" number="1.2.4.2">
+<h4><span class="header-section-number">1.2.4.2</span> Response variables and models</h4>
+<p>As we observed in section <a href="chap-nlip-ita-market.html#tcc-dist">1.2.2</a>, under the compound distribution hypotesis, it is not needed to model directly the total cost of claims <span class="math inline">\(S\)</span>, but we can separately model <span class="math inline">\(N\)</span> and <span class="math inline">\(Z\)</span>.</p>
+<p>Modeling the claims count <span class="math inline">\(N\)</span> and the claims severity <span class="math inline">\(Z\)</span> means find respectively:</p>
+<ul>
+<li>find a function <span class="math inline">\(r_N:\mathcal{X}\rightarrow R_+\)</span> that given a set of explanatory variables <span class="math inline">\(\boldsymbol{x}_i\)</span> will return the expected claims count for that risk <span class="math inline">\(E(N_i)\)</span>;</li>
+<li>find a function <span class="math inline">\(r_Z:\mathcal{X}\rightarrow R_+\)</span> that given a set of explanatory variables <span class="math inline">\(\boldsymbol{x}_i\)</span> will return the expected severty for that risk <span class="math inline">\(E(Z_i)\)</span>.</li>
+</ul>
+<p>In this context the variables <span class="math inline">\(N\)</span> and <span class="math inline">\(Z\)</span> are called <em>response varables</em>.</p>
 <div style="page-break-after: always;"></div>
+</div>
+</div>
 </div>
 <div id="non-life-insurance-in-italy" class="section level2" number="1.3">
 <h2><span class="header-section-number">1.3</span> Non-Life Insurance in Italy</h2>

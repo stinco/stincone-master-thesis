@@ -119,9 +119,28 @@ always_allow_html: true
 #   - \usepackage{mathrsfs}
 #   - \usetikzlibrary{arrows}
 #   - \usetikzlibrary{patterns}
+
+
+
+###############################################
+## Packages loaded on LaTeX header           ##
+## Thiese are needed for caption positioning ##
+###############################################
+# header-includes: 
+#   - \usepackage{floatrow}
+#   - \floatsetup[figure]{capposition=top}
+#   - \floatsetup[table]{capposition=top}
+#   - \floatplacement{figure}{H}
+#   - \floatplacement{table}{H}
+
 ---
 
+
 ```{r global_options, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
 knitr::opts_chunk$set(fig.pos = 'hbtp')
 ```
 
