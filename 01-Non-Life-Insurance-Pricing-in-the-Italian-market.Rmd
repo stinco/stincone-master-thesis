@@ -234,7 +234,7 @@ Secondly, even if the policyholder would pay a premium that on average covers cl
 The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
 
 
-### Personalization {#chap:personalization}
+## Modeling and Personalization {#chap:personalization}
 
 <!--
 Often the insurance premium for a specific policyholder $i$ is represented as the product of a reference premium $P$ and a relative coefficient $\alpha_i$ as follows:
@@ -246,34 +246,35 @@ The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separa
 
 In this section I am going to better explain how pricing based on policyholder information works.
 
-Usually for every policyholder we have a set of pieces of information on him that are considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
+### Pricing variables
+
+Usually for every policyholder we have a certain amount of information on him that is considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
 
 In motor insurances these pieces of information could be:
 
 * Information on the insured vehicle: make, model, engine power, vehicle mass, age of the vehicle;
 * General information of the policyholder: age, sex, address (region, city, postcode);
-* Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;
-* Policy options: amount of the maximum coverage, presence and amount of the deductible, presence of other insurance guarantees.
+* Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class, ownership of a private box where he parks the car;
+* Policy options: amount of the maximum coverage, presence and amount of the deductible, presence of other insurance guarantees, how many drivers will drive the vehicle;
+* Customer information on the policyholder: how many years has he been a customer of the insurer, how many other policies he owns.
+* Telematics data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and deceleration per kilometer the policyholder performed in the previous years.
 
-Formally this information can be represented as a set of variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$. These variables could be called pricing variables, explanatory variables, covariates, predictors or features.
+These pieces of informations are usually called _pricing variables_.
 
+We must observe that some of these variables are available for every potential customer (as his age and address), while others are only available for policyholders that are already customers (as telematics data that is available only if the policyholder agreed on installing on their car the device that collect this data).
 
-```{definition, pricing-rule, name = "Pricing Rule"}
-A _Pricing Rule_ is a function $f(\cdot)$ that from an istance of a set of pricing variables $\boldsymbol{x}_i\in\mathcal{X}$ returns a price:
+Even considering the variables that are available for every customer, it is important to be aware on how reliable they are. Some of them comes from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
 
-$$  
-\begin{array}{rccl}
-f: & \mathcal{X}      & \longrightarrow  & R_+ \\
-   & \boldsymbol{x}_i & \longmapsto      & P_i \\
-\end{array}
-$$
-```
+This topic of variables reliability fits in the wider framework of fraud detection. Usually insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with fraud detections models. Usually frauds are divided into underwriting fraud (such as false declaration on insurance related data) and settlement fraud (such as fake an accident). The customer information on the policyholder are usually important to predict both underwriting fraud and settlement fraud. Usually clients that have a longer relationship with the company and own many policies are less likely to commit frauds.
 
+Regarding the topic of variables reliability, the Italian Insurance Associations ([ANIA](https://www.ania.it/) in the last years made some big step forwards by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request by any policyholder, to retrieve a lot of insurance specific information as the number of claims caused by the policyholder in the previous years or how long he has been covered and a lot of information on his vehicle as when it has been registered or how many change of ownership did he experienced.
 
-The process of pricing consists in defining a Pricing Rule based on observed data from the past and assumptions on the future.
+One of the roles of the acutary is to understand how reliable the information on the policyholder is and to decide how to use that information.
 
 
-#### Pricing variables encoding
+### Pricing variables encoding
+
+Formally the pricing variables can be encoded as a vector of real numbers. $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$. The the modeling framework they can be also called explanatory variables, covariates, predictors or features.
 
 The pricing variables can be of two types:
 
@@ -351,18 +352,47 @@ For some models it is suggested to use also the dummy variable that indicates th
 In the following, when I use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
 
 
-#### Response variables and models
+### Response variables
+
+The pricing variables are used as input of a _Pricing Rule_.
+
+```{definition, pricing-rule, name = "Pricing Rule"}
+A _Pricing Rule_ is a function $f(\cdot)$ that from an istance of a set of pricing variables $\boldsymbol{x}_i\in\mathcal{X}$ returns a price:
+
+$$  
+\begin{array}{rccl}
+f: & \mathcal{X}      & \longrightarrow  & R_+ \\
+   & \boldsymbol{x}_i & \longmapsto      & P_i \\
+\end{array}
+$$
+```
+
+The process of pricing consists in defining a Pricing Rule based on observed data from the past and assumptions on the future.
+
+The first step for defining a Pricing Rule is to model the total cost of claims $S$ and obtain a pricing rule for the Risk Premium $P^{(risk)}$.
+
+In general, in this context, modeling a _response variabile_ $Y$ means finding a function $r:\mathcal{X}\rightarrow \dots$ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$, returns the expected value of the response variable $E(Y)$ and eventually other moments of $Y$ or even the full distribution of $Y$.
 
 As we observed in section \@ref(tcc-dist), under the compound distribution hypothesis, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
 
-Modeling the claims count $N$ and the claims severity $Z$ means find respectively:
-
-* find a function $r_N:\mathcal{X}\rightarrow R_+$ that, given a set of explanatory variables $\boldsymbol{x}_i$, will return the expected claims count for that risk $E(N_i)$ and eventually other moments of $N_i$ or even the full distribution of $N_i$;
-* find a function $r_Z:\mathcal{X}\rightarrow R_+$ that, given a set of explanatory variables $\boldsymbol{x}_i$, will return the expected severity for that risk $E(Z_i)$ and eventually other moments of $N_i$ or even the full distribution of $Z_i$.
-
-In this context, the variables $N$ and $Z$ are called _response variables_.
+<!-- In this context, the variables $N$ and $Z$ are called _response variables_. -->
 
 We will discuss some of the most widespread models for claims count and claims severity in chapter \@ref(chap:models).
+
+
+
+
+
+
+### Model fitting
+
+
+
+
+### Data available
+
+
+
 
 
 <!--
