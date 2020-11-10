@@ -256,7 +256,7 @@ $endif$
 
 
 %% Comment if you don't need a white page between title page and next pages
-%\null\newpage
+\null\newpage
 
 
 %%%%%% Quote in the page after the title page
@@ -285,6 +285,13 @@ $if(dedication)$
   \end{dedication}
 $endif$
 
+%% Comment if you don't need a white page
+\null\newpage
+
+%% Comment if you don't need a white page
+\null\newpage
+
+
 %%%%% ACKNOWLEDGEMENTS -- Nothing to do here except comment out if you don't want it.
 $if(acknowledgements)$
 \begin{acknowledgements}
@@ -292,12 +299,19 @@ $if(acknowledgements)$
 \end{acknowledgements}
 $endif$
 
+% %% Comment if you don't need a white page
+% \null\newpage
+
 %%%%% ABSTRACT -- Nothing to do here except comment out if you don't want it.
 $if(do-abstract)$
 \begin{abstract}
   $abstract$
 \end{abstract}
 $endif$
+
+% %% Comment if you don't need a white page
+% \null\newpage
+
 
 %%%%% MINI TABLES
 % This lays the groundwork for per-chapter, mini tables of contents.  Comment the following line

@@ -21,10 +21,10 @@ library(knitr)
 
 \chaptermark{Non-Life Insurance Pricing}
 
-In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing needs.
+In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing process.
 
 
-## What a Non Life Insurance is
+## What a Non-Life Insurance is
 
 The Italian Civil Code provides the following definition of insurance contract:
 
@@ -39,7 +39,7 @@ The insurance is the contract with which an insurer, in exchange of the payment 
 
 This definition identifies two parties: the _Insurer_ and the _Policyholder_. The policyholder pays to the Insurer a certain _Premium_ at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (_Claim_) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is a capital that could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claims (e.g. in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the "agreed limits", another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claims (e.g. in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the "agreed limits", another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
@@ -63,11 +63,13 @@ For semplicity, in the following we are going to just use the notation $S = \sum
 
 Figure \@ref(fig:ins-cashflow) shows the cash flows corresponding to the insurance contract. From this representation we can interpret the entering into an insurance contract by the policyholder as a way to exchange the negative cash flows $-Z_1, -Z_2, \dots, -Z_N$ with one single negative cash flow $-P$. On the other hand, the insurer undertakes the negative cash flows $-Z_1, -Z_2, \dots, -Z_N$ in exchange for a positive cash flow $+P$.
 
-The major difference between these cash flows is that $P$ is a certain amount, while $Z_1, Z_2, \dots, Z_N$, at the time $t_1$, are uncertain in the amount, in the count ($N$) and in the timing ($\tau_1, \tau_2, \dots, \tau_N$). So the policyholder, paying a premium $P$, is giving his risk to the insurer.
+The major difference between these cash flows is that $P$ is a certain amount, while $Z_1, Z_2, \dots, Z_N$, at the time $t_1$, are uncertain in the amount, in the count ($N$) and in the timing ($\tau_1, \tau_2, \dots, \tau_N$). So, the policyholder, paying a premium $P$, is giving his risk to the insurer.
 
-From a statistical point of view, we can translate this uncertainty saying that $N$ and $Z_1, Z_2, \dots, Z_N$ are random variables. Therefore, we can say that $\left\{N, Z_1, Z_2, \dots \right\}$ is a stochastic process. Usually, in non-file insurance pricing, the variables $\tau_1, \tau_2, \dots, \tau_N$ are not taken into account because the coverage span short and from a financial point of view the timing of the claims occurences is negligible.
+This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in $t_1$, while the costs will emerge later. In most of other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage) doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly estimate the future costs and determine an adequate premium.
 
-Previously we said that $Z_1, Z_2, \dots, Z_N$ are all $>0$. This assumption corresponds to the fact that we are excluding the null claims, i.e. the claims that have been opened, but result in no payment due by the insurer. For the values of $Z_i$ with $N<i$ we can use the rule that $N<i \Rightarrow Z_i = 0$. Therefore we can say that $N<i \Leftrightarrow Z_i = 0$.
+From a statistical point of view, we can translate this uncertainty saying that $N$ and $Z_1, Z_2, \dots, Z_N$ are random variables. Therefore, we can say that $\left\{N, Z_1, Z_2, \dots \right\}$ is a stochastic process. Usually, in non-file insurance pricing, the variables $\tau_1, \tau_2, \dots, \tau_N$ are not taken into account because the coverage span is short and from a financial point of view the timing of the claims occurrences is negligible.
+
+Previously we said that $Z_1, Z_2, \dots, Z_N$ are all $>0$. This assumption corresponds to the fact that we are excluding the null claims, i.e. the claims that have been opened, but result in no payment due by the insurer. For the values of $Z_i$ with $N<i$ we can use the rule that $N<i \Rightarrow Z_i = 0$, so $Z_{N+1}=0, Z_{N+2}=0, \dots$. Therefore, we can say that $N<i \Leftrightarrow Z_i = 0$.
 
 ```{tikz, ins-cashflow, fig.cap = "Insurance Contract cash flows.", fig.ext = 'pdf', cache = TRUE, echo = FALSE}
 \newcommand{\ImageWidth}{11cm}
@@ -120,12 +122,12 @@ Previously we said that $Z_1, Z_2, \dots, Z_N$ are all $>0$. This assumption cor
 
 ## Non-Life insurance pricing
 
-In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluate the risk related to that policy and determine a "proper" premium taking into account risk related factors and commercial related factor. The process of _pricing_ corresponds in defining the set of rules for determining this "proper" premium $P_i$ for a specific policyholder $i$, given the known information on him. In the next sections I am going to better explain what "proper" means.
+In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a "proper" premium taking into account risk related factors and commercial related factor. The process of _pricing_ corresponds in defining the set of rules for determining this "proper" premium $P_i$ for a specific policyholder $i$, given the known information on him. In the next sections I am going to better explain what "proper" means.
 
 
-### Compound distribution hypotesis
+### Compound distribution hypotheses
 
-The first step for evaluating the stochastic process $\left\{N, Z_1, Z_2, \dots \right\}$ is to introduce some probabilistic hypotesis. The usual hypotesis assumed are the following:
+The first step for evaluating the stochastic process $\left\{N, Z_1, Z_2, \dots \right\}$ is to introduce some probabilistic hypotheses. The usual hypotheses assumed are the following:
 
 ```{definition, comp-dist, name = "Compound distribution"}
 
@@ -134,16 +136,16 @@ Let's assume that:
 1. for each $n>0$, the variables $Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n$ are stochastically independent and identically distributed;
 2. the probability distribution of $Z_i|N=n, \ i\le n$ does not depend on $n$.
 
-Under these hypothesis we say that:
+Under these hypotheses we say that:
 $$
 S = \sum_{i=1}^{N}{Z_i}
 $$
 has a compound distribution.
 ```
 
-The variables $Z_i|N=n$ used in this definition can be interpreted as the _claim severity for the $i$^th^ claim under the hypotesis that $n$ claims occurred_. The two hypotesis provided in definition \@ref(def:comp-dist) imply that the distribution of $Z_i|N=n, \ i<n$ does not depend from $i$ nor from $n$. In the following, we are going to use the notation $Z$ to represent a random variable with the $Z_i|N=n, \ i<n$ distribution and $F_Z(\cdot)$ for its cumulative distribution function (i.e. $F_Z(z) = P(Z\le z)$).
+The variables $Z_i|N=n$ used in this definition can be interpreted as the _claim severity for the $i$^th^ claim under the hypothesis that $n$ claims occurred_. The two hypotheses provided in definition \@ref(def:comp-dist) imply that the distribution of $Z_i|N=n, \ i<n$ does not depend from $i$ nor from $n$. In the following, we are going to use the notation $Z$ to represent a random variable with the $Z_i|N=n, \ i<n$ distribution and $F_Z(\cdot)$ for its cumulative distribution function (i.e. $F_Z(z) = P(Z\le z)$).
 
-Let's consider the variabile $Z_i|N>i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypotesis that the $i$^th^ claim occurred_. From the hypotesis provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N>i$ has the same distribution of $Z_i|N=n, \ i<n$. This can be easily obtained as follows:
+Let's consider the variabile $Z_i|N>i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N>i$ has the same distribution of $Z_i|N=n, \ i<n$. This can be easily obtained as follows:
 
 
 ```{=latex}
@@ -163,16 +165,16 @@ F_Z(z)
 
 Where:
 
-* the step \@ref(eq:z1) and the step \@ref(eq:z2) are given by the fact that the event $\{N\ge i\}$ can be decomposed as $\{N\ge i\} = \left\{ \bigvee_{n = i}^{+\infty}{(N=n)} \right\}$ and that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are two-by-two disjoint, so they constitute a partition of $\{N\ge i\}$, that allows us to use the disintegrability proprierty of the probability;
+* the step \@ref(eq:z1) and the step \@ref(eq:z2) are given by the fact that the event $\{N\ge i\}$ can be decomposed as $\{N\ge i\} = \left\{ \bigvee_{n = i}^{+\infty}{(N=n)} \right\}$ and that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are two-by-two disjoint, so they constitute a partition of $\{N\ge i\}$, that allows us to use the disintegrability property of the probability;
 * the step \@ref(eq:z3) is due to the fact that the distribution of $Z_i\le z | N=n$ depends neither on $i$ nor on $n$;
 * the equivalence $\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)} = 1$ at step \@ref(eq:z4) is due to the fact that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are a partition of $\{N\ge i\}$.
 
-Therefore, $Z$ can be considered as the _claim severity for a claim under the hypotesis that that claim occurred_.
+Therefore, $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_.
 
 
 ### Distribution of the total cost of claims {#tcc-dist}
 
-Under the hypotesis defined in definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same aproach one can obtain all the moments.
+Under the hypotheses defined in definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same approach one can obtain all the moments.
 
 The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
 
@@ -198,10 +200,10 @@ Where:
 * the step \@ref(eq:s1) is given by the fact that the events $\{N=0\}, \{N=1\}, \{N=2\}, \dots$ constitute a partition of the certain event $\Omega$, that allows us to use the disintegrability property of the expected value;
 * the step \@ref(eq:s2) is due to the definition of $S$;
 * the step \@ref(eq:s3) is due to the linearity of the expected value;
-* the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypothesis, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
+* the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
 * the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
-This result tells us that, under the hypothesis of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$.
+This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$.
 
 
 
@@ -220,7 +222,7 @@ The _Risk Premium_ is the premium that on average covers the total cost of claim
 
 It is clear that this premium, that only cover the cost of claims, is not "proper" in the practice. 
 
-First of all the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses we obtain what is called _Technical Price_.
+First of all, the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses, we obtain what is called _Technical Price_.
 
 ```{definition, technical-price, name = "Technical Price"}
 Said $S$ the total cost of claims of a policyholder and $E$ the expenses related to his policy, his _Technical Price_ is given by:
@@ -241,51 +243,51 @@ Often the insurance premium for a specific policyholder $i$ is represented as th
 $$
 P_i = \alpha_i P
 $$
-The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separately. The proces of defining the function for obtaining $\alpha_i$ is called personalization.
+The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separately. The process of defining the function for obtaining $\alpha_i$ is called personalization.
 -->
 
-In this section I am going to better explain how pricing based on policyholder information works.
+In this section We are going to better explain how pricing based on policyholder information works.
 
 ### Pricing variables
 
 Usually for every policyholder we have a certain amount of information on him that is considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
 
-In motor insurances these pieces of information could be:
+In motor insurances, this information could be:
 
 * Information on the insured vehicle: make, model, engine power, vehicle mass, age of the vehicle;
-* General information of the policyholder: age, sex, address (region, city, postcode);
-* Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class, ownership of a private box where he parks the car;
-* Policy options: amount of the maximum coverage, presence and amount of the deductible, presence of other insurance guarantees, how many drivers will drive the vehicle;
-* Customer information on the policyholder: how many years has he been a customer of the insurer, how many other policies he owns.
-* Telematics data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and deceleration per kilometer the policyholder performed in the previous years.
+* General information of the policyholder: age, sex, address (region, city, postcode), ownership of a private box where he parks the car;
+* Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;
+* Policy options: amount of the maximum coverage, presence and amount of a deductible, presence of other insurance guarantees, how many drivers will drive the vehicle;
+* Customer information on the policyholder: how many years he has been a customer of the insurer, how many other policies he owns.
+* Telematics data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and decelerations per kilometer the policyholder performed in the previous years.
 
-These pieces of informations are usually called _pricing variables_.
+These pieces of information are usually called _pricing variables_.
 
-We must observe that some of these variables are available for every potential customer (as his age and address), while others are only available for policyholders that are already customers (as telematics data that is available only if the policyholder agreed on installing on their car the device that collect this data).
+We must observe that some of these variables are available for every potential customer (such as his age and address), while others are only available for policyholder that are already customers (such as telematics data that is available only if the policyholder agreed on installing on their car the device that collects this data).
 
-Even considering the variables that are available for every customer, it is important to be aware on how reliable they are. Some of them comes from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
+Moreover, even considering the variables that are available for every customer, it is important to be aware on how reliable they are. Some of them comes from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
 
-This topic of variables reliability fits in the wider framework of fraud detection. Usually insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with fraud detections models. Usually frauds are divided into underwriting fraud (such as false declaration on insurance related data) and settlement fraud (such as fake an accident). The customer information on the policyholder are usually important to predict both underwriting fraud and settlement fraud. Usually clients that have a longer relationship with the company and own many policies are less likely to commit frauds.
+This topic of variables reliability fits in the wider framework of fraud detection. Usually insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder are usually important to predict both underwriting fraud and settlement fraud. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
 
-Regarding the topic of variables reliability, the Italian Insurance Associations ([ANIA](https://www.ania.it/) in the last years made some big step forwards by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request by any policyholder, to retrieve a lot of insurance specific information as the number of claims caused by the policyholder in the previous years or how long he has been covered and a lot of information on his vehicle as when it has been registered or how many change of ownership did he experienced.
+Regarding the topic of variables reliability, the Italian Insurance Associations ([ANIA](https://www.ania.it/)) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle as when it has been registered or how many changes of ownership did it experienced.
 
-One of the roles of the acutary is to understand how reliable the information on the policyholder is and to decide how to use that information.
+One of the roles of the actuary is to understand how reliable the information on the policyholder is and to decide how to use that information.
 
 
 ### Pricing variables encoding
 
-Formally the pricing variables can be encoded as a vector of real numbers. $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$. The the modeling framework they can be also called explanatory variables, covariates, predictors or features.
+Formally the pricing variables can be encoded as a vector of real numbers. $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$. In the modeling framework they can be also called explanatory variables, covariates, predictors or features.
 
 The pricing variables can be of two types:
 
-1. _Quantitative variables_: variables like vehicle mass or policyholder age that can be easily represented as a number;
-2. _Qualitative variables_: variables like sex or address that represent a category and are usually represented with strings.
+1. _Quantitative variables_: variables, like policyholder age or vehicle mass, that can be easily represented as a number;
+2. _Qualitative variables_: variables, like policyholder sex or vehicle make, that represent a category and are usually represented with strings.
 
-The quantitative variables, except for possible transformation, are already suitable to be used.
+The quantitative variables, with eventual transformations, are already suitable to be used.
 
 To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
 
-If a variable $x$ has only 2 possible modalities, it can easily encoded in a binary variable $z$ that assigns $0$ to one modality and $1$ to the other. For example, if $x = \text{sex}$, it can be encoded this way:
+If a variable $x$ has only 2 possible modalities, it can be easily encoded in a binary variable $z$ that assigns $0$ to one modality and $1$ to the other. For example, if $x = \text{sex}$, it can be encoded this way:
 $$
 z = \begin{cases}
 1 & \text{if } \text{sex } = \text{ `Male'} \\
@@ -293,7 +295,7 @@ z = \begin{cases}
 \end{cases}
 $$
 
-In general, if a variable $x$ has $K$ modalities, it can be encoded in $K-1$ binary variables $z_1, z_2, \dots, z_{K-1}$. For example, if $x = \text{make}$, and it can have 4 possible modalities ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
+In general, if a variable $x$ has $K$ modalities, it can be encoded in $K-1$ binary variables $z_1, z_2, \dots, z_{K-1}$. For example, if $x = \text{make}$ and it can have 4 possible modalities ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
 
 ```{=latex}
 \begin{align*}
@@ -333,6 +335,7 @@ table <- tibble(
 table %>% 
   kable(
     # format = "latex",
+    booktabs = T,
     align = "lrrr",
     vline = "",
     toprule = "", midrule = "\\hline",
@@ -347,17 +350,17 @@ table %>%
   )
 ```
 
-For some models it is suggested to use also the dummy variable that indicates the $K$^th^ modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the $K-1$ dummy variables encoding, so we will always considering it.
+For some models it is suggested to use also the dummy variable that indicates the $K$^th^ modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the $K-1$ dummy variables encoding, so we will always consider it.
 
 In the following, when I use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
 
 
-### Response variables
+### Pricing Rule and Modeling
 
 The pricing variables are used as input of a _Pricing Rule_.
 
 ```{definition, pricing-rule, name = "Pricing Rule"}
-A _Pricing Rule_ is a function $f(\cdot)$ that from an istance of a set of pricing variables $\boldsymbol{x}_i\in\mathcal{X}$ returns a price:
+A _Pricing Rule_ is a function $f(\cdot)$ that from an instance of a set of pricing variables $\boldsymbol{x}_i\in\mathcal{X}$ returns a price:
 
 $$  
 \begin{array}{rccl}
@@ -371,9 +374,26 @@ The process of pricing consists in defining a Pricing Rule based on observed dat
 
 The first step for defining a Pricing Rule is to model the total cost of claims $S$ and obtain a pricing rule for the Risk Premium $P^{(risk)}$.
 
-In general, in this context, modeling a _response variabile_ $Y$ means finding a function $r:\mathcal{X}\rightarrow \dots$ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$, returns the expected value of the response variable $E(Y)$ and eventually other moments of $Y$ or even the full distribution of $Y$.
+In general, in this context, modeling a _response variable_ $Y$ means finding a function $r:\mathcal{X}\rightarrow \mathcal{C}$ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$, returns the expected value of the response variable $E(Y)$ and eventually other moments of $Y$ or even the full distribution of $Y$. I used a generic $\mathcal{C}$ as codomain of the function $r(\cdot)$ to not specify whether in the model describe just $E(Y)$ (and so $\mathcal{C}=\mathbb{R}$) or something more.
 
-As we observed in section \@ref(tcc-dist), under the compound distribution hypothesis, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
+As we observed in section \@ref(tcc-dist), under the compound distribution hypotheses, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
+
+
+### Response variables and distribution
+
+Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a certain family.
+
+
+
+
+
+
+### Model fitting and data available
+
+
+
+
+
 
 <!-- In this context, the variables $N$ and $Z$ are called _response variables_. -->
 
@@ -384,7 +404,7 @@ We will discuss some of the most widespread models for claims count and claims s
 
 
 
-### Model fitting
+
 
 
 

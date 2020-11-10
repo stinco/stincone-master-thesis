@@ -12,6 +12,7 @@ table <- tibble(
 table %>% 
   kable(
     # format = "latex",
+    booktabs = T,
     align = "lrrr",
     vline = "",
     toprule = "", midrule = "\\hline",

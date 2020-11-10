@@ -102,31 +102,48 @@
 \usepackage{emptypage}
 \usepackage{latexsym}
 
+% \usepackage{fancyhdr}
+% \setlength{\headheight}{14.5pt}
+% \fancyhf{} % clear the header and footers
+% \pagestyle{fancy}
+% \renewcommand{\chaptermark}[1]{\markboth{\thechapter. #1}{\thechapter. #1}}
+% \renewcommand{\sectionmark}[1]{\markright{\thesection. #1}}
+% \renewcommand{\headrulewidth}{0pt}
+% %\fancyhead[LO]{\emph{\leftmark}}
+% %\fancyhead[RE]{\emph{\rightmark}}
+% %\fancyhead[RO,LE]{\thepage}
+% \fancyhead[L]{\emph{\leftmark}}
+% \fancyhead[R]{\thepage}
+% 
+% \fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}}
+% 
+% % JEM fix header on cleared pages for openright
+% \def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
+%    \hbox{}
+%    \fancyhead[RE,LO]{}
+%    \newpage
+%    \if@twocolumn\hbox{}\newpage
+%    \fi
+%    \fancyhead[LO]{\emph{\leftmark}}
+%    \fancyhead[RE]{\emph{\rightmark}}
+%    \fi\fi}
+   
+
 \usepackage{fancyhdr}
 \setlength{\headheight}{14.5pt}
-\fancyhf{} % clear the header and footers
 \pagestyle{fancy}
-\renewcommand{\chaptermark}[1]{\markboth{\thechapter. #1}{\thechapter. #1}}
-\renewcommand{\sectionmark}[1]{\markright{\thesection. #1}} 
+\fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
-%\fancyhead[LO]{\emph{\leftmark}} 
-%\fancyhead[RE]{\emph{\rightmark}} 
-%\fancyhead[RO,LE]{\thepage}
-\fancyhead[L]{\emph{\leftmark}}
-\fancyhead[R]{\thepage}
+% \fancyheadoffset{\textwidth}
+%\fancyhead[R]{\sc \nouppercase \rightmark}
+% \fancyhead[R]{\rightmark}
+% \fancyhead[LE,RO]{\sc \nouppercase \leftmark}
+\fancyhead[RE,LO]{\sc \nouppercase \leftmark}
+% \fancyhead[LE,RO]{\thepage}
+\cfoot{\thepage}
+%\renewcommand{\headrulewidth}{0pt}	%Elimina la riga che separa l'intestazione
 
-\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}}
 
-% JEM fix header on cleared pages for openright
-\def\cleardoublepage{\clearpage\if@twoside \ifodd\c@page\else
-   \hbox{}
-   \fancyhead[RE,LO]{}
-   \newpage
-   \if@twocolumn\hbox{}\newpage
-   \fi
-   \fancyhead[LO]{\emph{\leftmark}} 
-   \fancyhead[RE]{\emph{\rightmark}} 
-   \fi\fi}
 
 \usepackage{microtype}
 \usepackage{nicefrac}
@@ -135,11 +152,13 @@
 \usepackage{textcomp}
 \usepackage[cal=cm]{mathalfa}
 
-\usepackage{longtable} 
+%\usepackage{longtable} 
 	% Allows tables to span multiple pages (this package must be called before hyperref)
 
 \usepackage[font=small,labelfont=bf]{caption} 
 	% Nicer captions
+%\captionsetup[table]{position=below}
+  % To put the table caption below the tables
 
 \usepackage{multicol,multirow,array} 
 	% Used to make multiple columns for the indices and for creating columns that span multiple rows in tables

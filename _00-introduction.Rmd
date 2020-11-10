@@ -12,6 +12,7 @@ documentclass: book
 ---
 
 # Introduction {-}
+<!-- # Introduction -->
 
 \adjustmtc 
 <!-- For PDF output, we must include this LaTeX command after unnumbered headings, otherwise the numbers in the mini table of contents will be incorrect -->
