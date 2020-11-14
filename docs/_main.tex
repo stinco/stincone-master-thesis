@@ -27,7 +27,7 @@
 % This one will format for PDF output (ie equal margins, no extra blank pages):
 %\documentclass[a4paper,nobind]{templates/ociamthesis}
 %UL 2 Dec 2018: pass this in from YAML
-\documentclass[a4paper, twoside, openright]{templates/ociamthesis}
+\documentclass[a4paper, nobind]{templates/ociamthesis}
 \usepackage{mathptmx}
 
 % UL 30 Nov 2018 pandoc puts lists in 'tightlist' command when no space between bullet points in Rmd file
@@ -386,7 +386,7 @@ The Italian Civil Code provides the following definition of insurance contract:
 
 This definition identifies two parties: the \emph{Insurer} and the \emph{Policyholder}. The policyholder pays to the Insurer a certain \emph{Premium} at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (\emph{Claim}) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claims (e.g.~in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
@@ -420,11 +420,14 @@ Figure \ref{fig:ins-cashflow} shows the cash flows corresponding to the insuranc
 
 The major difference between these cash flows is that \(P\) is a certain amount, while \(Z_1, Z_2, \dots, Z_N\), at the time \(t_1\), are uncertain in the amount, in the count (\(N\)) and in the timing (\(\tau_1, \tau_2, \dots, \tau_N\)). So, the policyholder, paying a premium \(P\), is giving his risk to the insurer.
 
-This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in \(t_1\), while the costs will emerge later. In most of other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage) doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly estimate the future costs and determine an adequate premium.
+This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in \(t_1\), while the costs will emerge later. In most of other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage), doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly estimate the future costs and determine an adequate premium.
 
 From a statistical point of view, we can translate this uncertainty saying that \(N\) and \(Z_1, Z_2, \dots, Z_N\) are random variables. Therefore, we can say that \(\left\{N, Z_1, Z_2, \dots \right\}\) is a stochastic process. Usually, in non-file insurance pricing, the variables \(\tau_1, \tau_2, \dots, \tau_N\) are not taken into account because the coverage span is short and from a financial point of view the timing of the claims occurrences is negligible.
 
-Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all \(>0\). This assumption corresponds to the fact that we are excluding the null claims, i.e.~the claims that have been opened, but result in no payment due by the insurer. For the values of \(Z_i\) with \(N<i\) we can use the rule that \(N<i \Rightarrow Z_i = 0\), so \(Z_{N+1}=0, Z_{N+2}=0, \dots\). Therefore, we can say that \(N<i \Leftrightarrow Z_i = 0\).
+Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all \(>0\). This assumption corresponds to the fact that we are excluding the null claims, i.e.~the claims that have been opened, but result in no payment due by the insurer. For the values of \(Z_i\) with \(N<i\) we can use the rule that \(\{N<i\} \Rightarrow \{Z_i = 0\}\), so \(Z_{N+1}=0, \, Z_{N+2}=0, \, \dots\). Therefore, we can say that:
+\[
+\{N<i \} \Longleftrightarrow \{Z_i = 0\}
+\]
 
 \begin{figure}
 \centering
@@ -435,7 +438,7 @@ Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all \(>0\). This assumption
 \hypertarget{non-life-insurance-pricing}{%
 \section{Non-Life insurance pricing}\label{non-life-insurance-pricing}}
 
-In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a ``proper'' premium taking into account risk related factors and commercial related factor. The process of \emph{pricing} corresponds in defining the set of rules for determining this ``proper'' premium \(P_i\) for a specific policyholder \(i\), given the known information on him. In the next sections I am going to better explain what ``proper'' means.
+In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a ``proper'' premium taking into account risk related factors and commercial related factors. The process of \emph{pricing} corresponds in defining the set of rules for determining this ``proper'' premium \(P_i\) for a specific policyholder \(i\), given the known information on him. In the next sections I am going to better explain what ``proper'' means.
 
 \hypertarget{compound-distribution-hypotheses}{%
 \subsection{Compound distribution hypotheses}\label{compound-distribution-hypotheses}}
@@ -462,7 +465,7 @@ S = \sum_{i=1}^{N}{Z_i}
 has a compound distribution.
 \end{definition}
 
-The variables \(Z_i|N=n\) used in this definition can be interpreted as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that \(n\) claims occurred}. The two hypotheses provided in definition \ref{def:comp-dist} imply that the distribution of \(Z_i|N=n, \ i<n\) does not depend from \(i\) nor from \(n\). In the following, we are going to use the notation \(Z\) to represent a random variable with the \(Z_i|N=n, \ i<n\) distribution and \(F_Z(\cdot)\) for its cumulative distribution function (i.e.~\(F_Z(z) = P(Z\le z)\)).
+The variable \(Z_i|N=n\) used in this definition can be interpreted as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that \(n\) claims occurred}. The two hypotheses provided in definition \ref{def:comp-dist} imply that the distribution of \(Z_i|N=n, \ i<n\) does not depend from \(i\) nor from \(n\). For this reason, in the following, we are going to use the notation \(Z\) to represent a random variable with the \(Z_i|N=n, \ i<n\) distribution and \(F_Z(\cdot)\) for its cumulative distribution function (i.e.~\(F_Z(z) = P(Z\le z)\)).
 
 Let's consider the variabile \(Z_i|N>i\). We can interpret it as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that the \(i\)\textsuperscript{th} claim occurred}. From the hypotheses provided in definition \ref{def:comp-dist} we can obtain that also \(Z_i|N>i\) has the same distribution of \(Z_i|N=n, \ i<n\). This can be easily obtained as follows:
 
@@ -502,9 +505,9 @@ The expected value of the total cost of claims \(E(S)\) can be obtained from the
 
 \begin{eqnarray}
 \label{eq:s1}
-E(S) & = & \sum_{n=0}^{+\infty}{P(N=n) E\left(S \middle| N = n \right)}
+E(S) & = & \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
 \ = \\ \label{eq:s2} & = &
-\sum_{n=0}^{+\infty}{P(N=n) E\left(\sum_{i=1}^{n}{Z_i} \middle| N = n \right)}
+\sum_{n=0}^{+\infty}{P(N=n) \, E\left(\sum_{i=1}^{n}{Z_i} \middle| N = n \right)}
 \ = \\ \label{eq:s3} & = &
 \sum_{n=0}^{+\infty}{P(N=n) \sum_{i=1}^{n}{\underbrace{E\left( Z_i \middle| N = n \right)}_{=E(Z)}}}
 \ = \\ \label{eq:s4} & = &
@@ -547,9 +550,9 @@ P^{(risk)} = E(S)
 
 The \emph{Risk Premium} is the premium that on average covers the total cost of claims. As mentioned above, as the coverage spans are usually short, we are not taking into account the timing of the claims and we don't discount the fact that the claims occur later than the premium payment.
 
-It is clear that this premium, that only cover the cost of claims, is not ``proper'' in the practice.
+It is clear that this premium, that only covers the cost of claims, is not ``proper'' in the practice.
 
-First of all, the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses, we obtain what is called \emph{Technical Price}.
+First of all, the insurer has to cover also the expenses related to the policy (commission on sales and expenses related to the claim settlement) and the general expenses of the company. Adding the expenses, we obtain the \emph{Technical Price}.
 
 \begin{definition}[Technical Price]
 \label{def:technical-price} \iffalse (Technical Price) \fi{} Said \(S\) the total cost of claims of a policyholder and \(E\) the expenses related to his policy, his \emph{Technical Price} is given by:
@@ -558,7 +561,7 @@ P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
 \]
 \end{definition}
 
-Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, it would not make sense for the insurer undertaking that risk with nothing in return. So, to the Technical Price, a loading must be added. This loading can be justified as a loading for the risk or as a profit loading.
+Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, a loading must be added. This loading can be justified as a loading for the risk or as a profit loading.
 
 The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
 
@@ -587,18 +590,18 @@ In motor insurances, this information could be:
 \item
   Customer information on the policyholder: how many years he has been a customer of the insurer, how many other policies he owns.
 \item
-  Telematics data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and decelerations per kilometer the policyholder performed in the previous years.
+  Telematic data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and decelerations per kilometer the policyholder performed in the previous years.
 \end{itemize}
 
 These pieces of information are usually called \emph{pricing variables}.
 
-We must observe that some of these variables are available for every potential customer (such as his age and address), while others are only available for policyholder that are already customers (such as telematics data that is available only if the policyholder agreed on installing on their car the device that collects this data).
+We must observe that some of these variables are available for every potential customer (such as his age and address), while others are only available for policyholder that are already customers (such as telematic data that is available only if the policyholder agreed on installing on their car the device that collects this data).
 
 Moreover, even considering the variables that are available for every customer, it is important to be aware on how reliable they are. Some of them comes from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
 
-This topic of variables reliability fits in the wider framework of fraud detection. Usually insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder are usually important to predict both underwriting fraud and settlement fraud. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
+This topic of variables reliability fits in the wider framework of fraud detection. Insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder is usually important to predict both underwriting frauds and settlement frauds. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
 
-Regarding the topic of variables reliability, the Italian Insurance Associations (\href{https://www.ania.it/}{ANIA}) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle as when it has been registered or how many changes of ownership did it experienced.
+Regarding the topic of variables reliability, the Italian Insurance Associations (\href{https://www.ania.it/}{ANIA}) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle such as when it has been registered or how many changes of ownership did it experienced.
 
 One of the roles of the actuary is to understand how reliable the information on the policyholder is and to decide how to use that information.
 
@@ -695,16 +698,16 @@ f: & \mathcal{X}      & \longrightarrow  & R_+ \\
 
 The process of pricing consists in defining a Pricing Rule based on observed data from the past and assumptions on the future.
 
-The first step for defining a Pricing Rule is to model the total cost of claims \(S\) and obtain a pricing rule for the Risk Premium \(P^{(risk)}\).
+The first step for defining a Pricing Rule is to model the total cost of claims \(S\) and obtain a pricing rule for the risk premium \(P^{(risk)}\).
 
-In general, in this context, modeling a \emph{response variable} \(Y\) means finding a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and eventually other moments of \(Y\) or even the full distribution of \(Y\). I used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether in the model describe just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more.
+In general, in this context, modeling a \emph{response variable} \(Y\) means finding a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and eventually other moments of \(Y\) or even the full distribution of \(Y\). I used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether in the model describe just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more, such as the couple \(\left( E(S), Var(S) \right)\) or the full distribution of \(S\).
 
 As we observed in section \ref{tcc-dist}, under the compound distribution hypotheses, it is not needed to model directly the total cost of claims \(S\), but we can separately model \(N\) and \(Z\).
 
 \hypertarget{response-variables-and-distribution}{%
 \subsection{Response variables and distribution}\label{response-variables-and-distribution}}
 
-Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a certain family.
+Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a specified family.
 
 \hypertarget{model-fitting-and-data-available}{%
 \subsection{Model fitting and data available}\label{model-fitting-and-data-available}}

@@ -60,8 +60,8 @@ bib-humanities: true   #set to true if you want in-text references formatted as 
 doi-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography
 url-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography. By default, it is linked under the publication name.
 draft: false # add as DRAFT mark in the footer?
-# page-layout: 'nobind' #'nobind' for PDF output (equal margins), 'twoside' for two-sided binding (mirror margins and blank pages), leave blank for one-sided binding (left margin > right margin)
-page-layout: 'twoside, openright'
+page-layout: 'nobind' #'nobind' for PDF output (equal margins), 'twoside' for two-sided binding (mirror margins and blank pages), leave blank for one-sided binding (left margin > right margin)
+#page-layout: 'twoside, openright'
 hidelinks: false #if false, the PDF output highlights colored links - you will probably want to set this to true for PDF version you wish to physically print
 toc-depth: 3 # depth of heading to include in table of contents
 lof: true # list of figures in back matter?

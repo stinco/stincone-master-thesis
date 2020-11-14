@@ -19,7 +19,8 @@
 %-------------------------- initial code -----------------------
 
 % JEM: Defaults to one-side, but passing 'twoside' should set everything up for that
-\LoadClass[openright,12pt]{report}
+%\LoadClass[openright,12pt]{report}
+\LoadClass[a4paper, titlepage, 12pt]{report}
 
 \newif\ifmc@nobind
 \mc@nobindfalse
@@ -90,11 +91,13 @@
 % Define text area of page and margin offsets
 %
 
-\ifmc@nobind
-\usepackage[includehead,hmargin={2.5cm, 2.5cm}, vmargin={2.5cm,2.7cm}, headsep=.8cm,footskip=1.2cm]{geometry}
-\else
-\usepackage[includehead,hmargin={2.9cm, 2.1cm}, vmargin={2.5cm,2.7cm}, headsep=.8cm,footskip=1.2cm]{geometry}
-\fi
+%% Leonardo Stincone, 14/11/2020
+%% Removed possibility to specify nobind in YAML
+% \ifmc@nobind
+% \usepackage[includehead,hmargin={2.5cm, 2.5cm}, vmargin={2.5cm,2.7cm}, headsep=.8cm,footskip=1.2cm]{geometry}
+% \else
+% \usepackage[includehead,hmargin={2.9cm, 2.1cm}, vmargin={2.5cm,2.7cm}, headsep=.8cm,footskip=1.2cm]{geometry}
+% \fi
 
 \usepackage{xcolor}
 \usepackage{graphicx}
@@ -133,12 +136,13 @@
 \setlength{\headheight}{14.5pt}
 \pagestyle{fancy}
 \fancyhf{}
-\renewcommand{\headrulewidth}{0pt}
+%\renewcommand{\headrulewidth}{0pt}
 % \fancyheadoffset{\textwidth}
 %\fancyhead[R]{\sc \nouppercase \rightmark}
 % \fancyhead[R]{\rightmark}
 % \fancyhead[LE,RO]{\sc \nouppercase \leftmark}
-\fancyhead[RE,LO]{\sc \nouppercase \leftmark}
+% \fancyhead[RE,LO]{\sc \nouppercase \leftmark}
+\fancyhead[L]{\sc \nouppercase \leftmark}
 % \fancyhead[LE,RO]{\thepage}
 \cfoot{\thepage}
 %\renewcommand{\headrulewidth}{0pt}	%Elimina la riga che separa l'intestazione
