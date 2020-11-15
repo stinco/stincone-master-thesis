@@ -369,8 +369,8 @@ Lorem ipsum \ldots{}
 
 In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing process.
 
-\hypertarget{what-a-non-life-insurance-is}{%
-\section{What a Non-Life Insurance is}\label{what-a-non-life-insurance-is}}
+\hypertarget{chap:non-life-ins}{%
+\section{What a Non-Life Insurance is}\label{chap:non-life-ins}}
 
 The Italian Civil Code provides the following definition of insurance contract:
 
@@ -708,6 +708,88 @@ As we observed in section \ref{tcc-dist}, under the compound distribution hypoth
 \subsection{Response variables and distribution}\label{response-variables-and-distribution}}
 
 Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a specified family.
+
+\hypertarget{distribution-for-the-claims-count-n}{%
+\subsubsection{\texorpdfstring{Distribution for the claims count \(N\)}{Distribution for the claims count N}}\label{distribution-for-the-claims-count-n}}
+
+The claim count \(N\) is a discrete variable with determination in \(\{0, 1, 2, 3,\dots\}\). Even if in practice the number of claims can't be arbitrarily high, the claim count is usually modeled with distributions that give a positive probability to all the numbers in its support. One of the most common distribution used for \(N\) is the Poisson distribution.
+
+\begin{definition}[Poisson Distribution]
+\label{def:def-poisson} \iffalse (Poisson Distribution) \fi{} A random variable \(N\) with support \(\{0,1,2,3,\dots \}\) has a Poisson distribution, if its probability function is:
+\[
+p_N(n) = P\left( N = n \right) = e^{-\lambda}\frac{\lambda^n}{n!}, \quad \lambda>0
+\]
+We will indicate it with the notation \(N \sim Poisson(\lambda)\).
+\end{definition}
+
+\begin{figure}[hbtp]
+
+{\centering \includegraphics{_main_files/figure-latex/plot-poisson-1} 
+
+}
+
+\caption{Poisson distribution for some values of $\lambda$.}\label{fig:plot-poisson}
+\end{figure}
+
+The Poisson distribution is a parametric distribution that depends on only the parameter \(\lambda\). In figure \ref{fig:plot-poisson}, for different levels of \(\lambda\) the distribution is represented. These plots show how increasing for larger values of \(\lambda\), the distribution is shifted to larger values and it is wider.
+
+Indeed, the first two moments are:
+
+\begin{align*}
+E(N)   & = \lambda \\
+Var(N) & = \lambda
+\end{align*}
+
+Thus, increasing \(\lambda\), both \(E(N)\) and \(Var(N)\) increase.
+
+Looking to the distribution shape, we can see that:
+
+\begin{itemize}
+\tightlist
+\item
+  if \(\lambda<1\), the mode is in \(n=0\);
+\item
+  if \(\lambda=1\), \(p(0)=p(1)=\frac{1}{e}\);
+\item
+  if \(\lambda>1\), the mode is in a value greater than \(0\) and, as \(\lambda\) increases, the distribution assume a bell shape similar to the Normal distribution one.
+\end{itemize}
+
+In non-life insurance we usually are in the case with \(\lambda<1\). E.g. the average number of claims for motor third party liability insurances in Italy, in 2018 has been 5.68\%\footnote{\href{https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283}{ANIA yearly statistical report for motor third party liability}}.
+
+The property \(Var(N) = E(N)\) is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where \(Var(N) > E(N)\). This phenomenon is called overdispesion.
+
+To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \ref{chap:models}.
+
+\hypertarget{exposure}{%
+\subsubsection{Exposure}\label{exposure}}
+
+In section \ref{chap:non-life-ins} we said that non-life insurances usually have a fixed coverage period the usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage \(c\) spans in two consecutive years \(a\) and \(a+1\), it is collected as two records: the couple \((c, a)\) and the couple \((c, a+1)\). This situation is quite common, as usually coverages start in the middle of the year and not at the first of the year.
+
+The coverage span for an insurance coverage is called \emph{exposure} and it is usually measured in years-at-risk. For instance, if an insurance coverage spans for 3 months, it corresponds to a quarter of year, so the exposure, measured in years-at-risk, is \(v=\frac{1}{4}\). The term year-at-risk comes from the fact that the policyholder exposure is a risk for the insurer, so the exposure is the period in which the insurer is exposed to the risk of paying claims.
+
+It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considered that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said \(M\) the number of claims the policyholder will experience during his period of exposure \(v\) and \(N\) the number of claims the policyholder would experience during one year, we assume \(E(M) = v E(N)\).
+
+This assumption can be further extended if we assume that the claims come from a \emph{Poisson process}.
+
+\hypertarget{distribution-for-the-claims-size-z}{%
+\subsubsection{\texorpdfstring{Distribution for the claims size \(Z\)}{Distribution for the claims size Z}}\label{distribution-for-the-claims-size-z}}
+
+\begin{definition}[Gamma Distribution]
+\label{def:def-gamma} \iffalse (Gamma Distribution) \fi{} A random variable \(Z\) with support \([0, +\infty[\) has a Gamma distribution, if its probability density function is:
+\[
+f_Z(z) = \frac{\rho^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\rho z}, \quad \alpha > 0, \ \rho > 0
+\]
+We will indicate it with the notation \(Z \sim Gamma(\alpha, \rho)\).
+\end{definition}
+
+\begin{figure}[hbtp]
+
+{\centering \includegraphics{_main_files/figure-latex/plot-gamma-1} 
+
+}
+
+\caption{Gamma distribution for some values of $\alpha$ and $\rho$.}\label{fig:plot-gamma}
+\end{figure}
 
 \hypertarget{model-fitting-and-data-available}{%
 \subsection{Model fitting and data available}\label{model-fitting-and-data-available}}
