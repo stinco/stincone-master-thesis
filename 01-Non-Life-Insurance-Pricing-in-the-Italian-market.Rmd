@@ -444,7 +444,7 @@ Looking to the distribution shape, we can see that:
 
 * if $\lambda<1$, the mode is in $n=0$;
 * if $\lambda=1$, $p(0)=p(1)=\frac{1}{e}$;
-* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assume a bell shape similar to the Normal distribution one. This can be obtained with the _Central Limit Theorem_.
+* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assume a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
 
 In non-life insurance we usually are in the case with $\lambda<1$. E.g. the average number of claims for motor third party liability insurances in Italy, in 2018 has been 5.68%^[[ANIA yearly statistical report for motor third party liability](https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283)].
 
@@ -548,6 +548,8 @@ A random variable $Z$ with support $[0, +\infty[$ has a Gamma distribution, if i
 $$
 f_Z(z) = \frac{\rho^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\rho z}, \quad \alpha > 0, \ \rho > 0
 $$
+where $\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}$
+
 We will indicate it with the notation $Z \sim Gamma(\alpha, \rho)$.
 ```
 
@@ -578,6 +580,95 @@ tibble(x = seq(from = 0, to = 25, by = .01)) %>%
 
 ```
 
+
+The Gamma distribution is a parametric distribution that depends on two parameters:
+
+* $\alpha > 0$, called shape parameter
+* $\rho > 0$, called scale parameter
+
+The first two moments of the Gamma distribution are:
+
+```{=latex}
+\begin{align*}
+E(Z)   & = \frac{\alpha}{\rho} \\
+Var(Z) & = \frac{\alpha}{\rho^2}
+\end{align*}
+```
+
+In figure \@ref(fig:plot-gamma), for different levels of $\alpha$ and $\gamma$ the distribution is represented. These plots show how changing the values of $\alpha$ and $\gamma$, the shape changes. We can see that:
+
+* if $\alpha < 1$, $f_z(\cdot)$ is not defined in $0$ and it has a vertical asymptote in $z = 0$. In $]0, +\infty]$ it is monotonically decreasing.
+* if $\alpha = 1$, $f_z(\cdot)$ starts from $f(0) = \rho$ and then decreases monotonically. In this case, the density function becomes $f_z(z) = \rho e^{-\rho z}$ and the distribution is also called exponential distribution.
+* if $\alpha > 0$, $f_z(\cdot)$ starts from $f(0) = 0$, increases until the mode and then decreases.
+
+In figure \@ref(fig:plot-gamma) the first three distributions represented have the same expected value $E(Z)=\frac{\alpha}{\rho} = 4$, but different shapes. The third and the fourth have the same variance $Var(Z) = \frac{\alpha}{\rho^2} = 8$, but different expected values. As the shape parameter $\alpha$ increases, the distribution assume a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
+
+From the parametrical form of the moments, we get that $Var(Z)$ and $E(Z)$ are linked as follows:
+
+$$Var(Z) = \frac{\alpha}{\rho^2} = \frac{1}{\alpha} \left(E(Z) \right)^ 2$$
+
+From this relation we find that the coefficient of variation is:
+$$CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}$$
+
+This result means that, given the shape parameter $\alpha$, the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern.
+
+Another characteristic of Gamma distribution that could be problematic in modeling claims size is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ aproaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with havier tails are for example the _log-Normal_ and the _Pareto_.
+
+
+#### Large claims
+
+Modeling the large claims in quite difficult in practice becuse usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance.
+
+
+
+
+
+#### Binomial distribution
+
+
+```{definition, def-binomial, name = "Binomial Distribution"}
+A random variable $Y$ with support $\{0,1,2, \dots, n \}$ has a Binomial distribution, if its probability function is:
+
+$$
+p_Y(y) = P\left( Y = y \right) = {n \choose y} p^y (1-p)^{n-y}, \quad p \in [0, 1]
+$$
+  
+We will indicate it with the notation $Y \sim Binomial(n, p)$.
+```
+
+
+
+
+```{r, plot-binomial, echo = FALSE, fig.cap = "Binomial distribution for some values of $n$ and $p$.", fig.align = "center", fig.width = 6, fig.height = 3}
+tibble(x = seq(from = 0, to = 10, by = 1)) %>% 
+  crossing(
+    tibble(
+      n = c(1, 4, 10, 10),
+      p = c(.4, .2, .2, .5)
+    )
+  ) %>%
+  filter(x <= n) %>% 
+  mutate(
+    y = dbinom(x = x, size = n, prob = p),
+    # label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
+    #   fct_inorder()
+    label = str_c("n = ", n, ", p = ", p) %>% 
+      fct_inorder()
+  ) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point() +
+  geom_segment(aes(xend = x),
+               yend = 0) +
+  facet_wrap(~label) +
+  coord_cartesian(
+    # ylim = c(0, .3),
+    xlim = c(0, 10)
+  ) +
+  labs(
+    x = "x", y = "f(x)"
+  ) +
+  scale_x_continuous(breaks = seq(from = 0, to = 10, by = 2))
+```
 
 
 

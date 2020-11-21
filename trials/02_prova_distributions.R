@@ -109,7 +109,37 @@ tibble(x = seq(from = 0, to = 25, by = .01)) %>%
 
 
 
+# Binomial ####
 
+
+tibble(x = seq(from = 0, to = 10, by = 1)) %>% 
+  crossing(
+    tibble(
+      n = c(1, 4, 10, 10),
+      p = c(.4, .2, .2, .6)
+    )
+  ) %>%
+  filter(x <= n) %>% 
+  mutate(
+    y = dbinom(x = x, size = n, prob = p),
+    # label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
+    #   fct_inorder()
+    label = str_c("n = ", n, ", p = ", p) %>% 
+      fct_inorder()
+  ) %>%
+  ggplot(aes(x = x, y = y)) +
+  geom_point() +
+  geom_segment(aes(xend = x),
+               yend = 0) +
+  facet_wrap(~label) +
+  coord_cartesian(
+    # ylim = c(0, .3),
+    xlim = c(0, 10)
+  ) +
+  labs(
+    x = "x", y = "f(x)"
+  ) +
+  scale_x_continuous(breaks = seq(from = 0, to = 10, by = 2))
 
 
 
