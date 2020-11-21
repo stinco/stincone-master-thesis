@@ -175,7 +175,7 @@ Where:
 Therefore, $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_.
 
 
-### Distribution of the total cost of claims {#tcc-dist}
+### Distribution of the total cost of claims {#chap:tcc-dist}
 
 Under the hypotheses defined in definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same approach one can obtain all the moments.
 
@@ -380,17 +380,17 @@ The first step for defining a Pricing Rule is to model the total cost of claims 
 
 In general, in this context, modeling a _response variable_ $Y$ means finding a function $r:\mathcal{X}\rightarrow \mathcal{C}$ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$, returns the expected value of the response variable $E(Y)$ and eventually other moments of $Y$ or even the full distribution of $Y$. I used a generic $\mathcal{C}$ as codomain of the function $r(\cdot)$ to not specify whether in the model describe just $E(Y)$ (and so $\mathcal{C}=\mathbb{R}$) or something more, such as the couple $\left( E(S), Var(S) \right)$ or the full distribution of $S$.
 
-As we observed in section \@ref(tcc-dist), under the compound distribution hypotheses, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
+As we observed in section \@ref(chap:tcc-dist), under the compound distribution hypotheses, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
 
 
-### Response variables and distribution
+### Response variables and distributions
 
 Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a specified family.
 
 
-#### Distribution for the claims count $N$
+#### Distribution for the claims count $N$ {#chap:dist-n}
 
-The claim count $N$ is a discrete variable with determination in $\{0, 1, 2, 3,\dots\}$. Even if in practice the number of claims can't be arbitrarily high, the claim count is usually modeled with distributions that give a positive probability to all the numbers in its support. One of the most common distribution used for $N$ is the Poisson distribution.
+The claim count $N$ is a discrete variable with determination in $\{0, 1, 2, 3,\dots\}$. Even if in practice the number of claims can't be arbitrarily high, $N$ is usually modeled with distributions that give a positive probability to all the numbers in its support. One of the most common distribution used for $N$ is the Poisson distribution.
 
 ```{definition, def-poisson, name = "Poisson Distribution"}
 A random variable $N$ with support $\{0,1,2,3,\dots \}$ has a Poisson distribution, if its probability function is:
@@ -427,7 +427,7 @@ tibble(x = 0:22) %>%
   )
 ```
 
-The Poisson distribution is a parametric distribution that depends on only the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how increasing for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
+The Poisson distribution is a parametric distribution that depends on only the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
 
@@ -444,31 +444,82 @@ Looking to the distribution shape, we can see that:
 
 * if $\lambda<1$, the mode is in $n=0$;
 * if $\lambda=1$, $p(0)=p(1)=\frac{1}{e}$;
-* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assume a bell shape similar to the Normal distribution one.
+* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assume a bell shape similar to the Normal distribution one. This can be obtained with the _Central Limit Theorem_.
 
 In non-life insurance we usually are in the case with $\lambda<1$. E.g. the average number of claims for motor third party liability insurances in Italy, in 2018 has been 5.68%^[[ANIA yearly statistical report for motor third party liability](https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283)].
 
-The property $Var(N) = E(N)$ is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where $Var(N) > E(N)$. This phenomenon is called overdispesion.
+The property $Var(N) = E(N)$ is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where $Var(N) > E(N)$. This phenomenon is called _overdispesion_.
 
 To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \@ref(chap:models).
 
 
 #### Exposure
 
-In section \@ref(chap:non-life-ins) we said that non-life insurances usually have a fixed coverage period the usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage $c$ spans in two consecutive years $a$ and $a+1$, it is collected as two records: the couple $(c, a)$ and the couple $(c, a+1)$. This situation is quite common, as usually coverages start in the middle of the year and not at the first of the year.
+In section \@ref(chap:non-life-ins) we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage $c$ spans in two consecutive years $a$ and $a+1$, it is collected as two records: the couple $(c, a)$ and the couple $(c, a+1)$. This situation is quite common, as usually coverages start during the year and not all at the first of the year.
 
 The coverage span for an insurance coverage is called _exposure_ and it is usually measured in years-at-risk. For instance, if an insurance coverage spans for 3 months, it corresponds to a quarter of year, so the exposure, measured in years-at-risk, is $v=\frac{1}{4}$. The term year-at-risk comes from the fact that the policyholder exposure is a risk for the insurer, so the exposure is the period in which the insurer is exposed to the risk of paying claims.
 
-It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considered that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said $M$ the number of claims the policyholder will experience during his period of exposure $v$ and $N$ the number of claims the policyholder would experience during one year, we assume $E(M) = v E(N)$.
+It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considering that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said $M$ the number of claims the policyholder will experience during his period of exposure $v$ and $N$ the number of claims the policyholder would experience during one year, we assume $E(M) = v E(N)$.
 
 This assumption can be further extended if we assume that the claims come from a _Poisson process_.
 
+```{definition, def-process-count, name = "Counting Process"}
+A stocastic process $\{N(t), t\ge0\}$ is called \textit{counting process} if:
+
+\begin{enumerate}
+\item The determination of N(t) are natural numbers \\
+      $N(t) \in \{ 0, 1, 2, ... \} \ t\ge 0$
+\item The process is not decreasing \\
+      $s < t \Rightarrow N(s) \le N(t)$
+\end{enumerate}
+```
+
+In a counting process $\{N(t), t\ge0\}$:
+
+* $N(t)$ can be interpreted as the number of events or arrivals that occur in the period $[0, t]$;
+* $N(t) - N(s), \ s\le t$ can be interpreted as the number of events or arrivals that occur in the period $]s, t]$. $N(t) - N(s)$ is also called _increment_ of the process.
+
+The counting process can be used to model the number of claims that occur to a specific policy.
+
+```{definition, def-process-poisson, name = "Poisson Process"}
+A counting process $\{N(t), t\ge0\}$ is a \textit{Poisson process} with intensity $\lambda$ if:
+
+\begin{enumerate}
+\item The increments of the process are stocastically independent \\
+      $\forall n\ge0, \forall s_1 < t_1 \le \dots \le s_n < t_n$ \\
+      $\Rightarrow \ N(t_1)-N(s_1), \dots, N(t_n)-N(s_n)$ are stocastically independent;
+\item The probability of arrival in an interval is proportional to the size of the interval \\
+      $\forall t\ge 0, \forall \Delta t >0 \ \Rightarrow \ P\left( N(t + \Delta t) - N(t) = 1 \right) = \lambda \Delta t + \omicron (\Delta t)$ \\
+      where $\lim_{\Delta t \to 0}{\frac{\omicron(\Delta t)}{\Delta t}} = 0$
+\item Multiple arrivals are excluded \\
+      $\forall t\ge 0, \forall \Delta t >0 \ \Rightarrow \ P\left( N(t + \Delta t) - N(t) \ge 2 \right) = \omicron (\Delta t)$
+\item Arrivals at time $0$ are almost impossible \\
+      $P\left( N(0) = 0 \right) = 1 $
+\end{enumerate}
+```
 
 
+Under these hypotheses we obtain the following result:
 
+```{theorem, th-process-poisson, name = "Poisson Process"}
+If $\{N(t), t\ge 0 \}$ is a Poisson process with intensity $\lambda$, then:
+  
+$$\forall t\ge 0, \forall \Delta t >0, \ \Rightarrow \ N(t + \Delta t) - N(t) \sim Poisson(\lambda \Delta t)$$
+```
 
+This result tells us that the distribution of the number of events in any interval $]t, t+\Delta t]$ only depends on the size of the interval $\Delta t$. Moreover, for the Poisson property we saw in section \@ref(chap:dist-n), we get:
 
+$$E(N(t + \Delta t) - N(t)) = \lambda \Delta t$$
 
+So, the expected number of arrivals is proportional to the size of the interval $\Delta t$. The intensity of the process $\lambda$ can be also interpreted as the expected number of claims in a unitary period.
+
+If we assume that the claims that occur to a policy comes from a Poisson process with intensity $\lambda$, if we observe that policy for the period $]t, t+v]$, the claims count in that exposure period $M$ are distributed as:
+
+$$ M\sim Poisson(\lambda \Delta t) $$
+
+In particular, if the observed period spans 1 year, we get:
+
+$$ M = N \sim Poisson(\lambda) $$
 
 
 <!-- 
@@ -488,6 +539,9 @@ Poisson process
 
 
 #### Distribution for the claims size $Z$
+
+
+The claim size $Z$ is a continuour variable with determination in $[0, +\infty[$. As for the claims count $N$, even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive probability to all the numbers in $]0, +\infty[$. As the null claims are excluded, it is natural tu assume $P\left( Z=0 \right) = 0$. One of the most common distribution used for $Z$ is the Gamma distribution.
 
 ```{definition, def-gamma, name = "Gamma Distribution"}
 A random variable $Z$ with support $[0, +\infty[$ has a Gamma distribution, if its probability density function is:
@@ -537,8 +591,6 @@ Gamma distribution
   + excess, propensity
 - Binomial distribution
 
-Exposure (years-at-risk)
-Poisson process
 
 -->
 

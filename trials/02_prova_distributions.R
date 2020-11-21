@@ -88,7 +88,9 @@ tibble(x = seq(from = 0, to = 25, by = .01)) %>%
   ) %>% 
   mutate(
     y = dgamma(x = x, shape = alpha, rate = rho),
-    label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
+    # label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
+    #   fct_inorder()
+    label = str_c("\u03b1 = ", alpha, ", \u03c1 = ", rho) %>% 
       fct_inorder()
   ) %>% 
   ggplot(aes(x = x, y = y)) +
