@@ -902,13 +902,143 @@ Another characteristic of Gamma distribution that could be problematic in modeli
 \hypertarget{large-claims}{%
 \subsubsection{Large claims}\label{large-claims}}
 
-Modeling the large claims in quite difficult in practice becuse usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance.
+Modeling large claims in quite difficult in practice because usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance.
+
+First of all, to model large claims, we must define what a large claim is. What is usually done in practice is just choosing a threshold \(\bar{z}\) and considering large all the claims with a size that exceeds that threshold. The value \(\bar{z}\) must be chosen sufficiently big to consider large the claims above \(\bar{z}\), but not so big that there are not enough observed claims that exceeds \(\bar{z}\). One common choice for Motor Third Party Liability in European markets could be \(\bar{z} = 100' 000 \text{\euro}\).
+
+\begin{definition}[Large and Attritional Claims]
+\label{def:def-large-claim} \iffalse (Large and Attritional Claims) \fi{} Given a predetermined threshold \(\bar{z}\), we say that:
+
+\begin{itemize}
+\item a claim $Z$ is a \textit{large claim} if $Z \ge \bar{z}$
+\item a claim $Z$ is an \textit{attritional claim} if $Z < \bar{z}$
+\end{itemize}
+
+For each claim \(Z\) we call:
+
+\begin{itemize}
+\item \textit{Capped Claim Size} \\
+      $Z' = \min(Z, \bar{z})$;
+\item \textit{Excess Over the Threshold} \\
+      $Z'' = \max(Z - \bar{z}, 0)$.
+\end{itemize}
+\end{definition}
+
+In figure \ref{fig:large-claim} the \emph{Capped Claim Size} and the \emph{Excess Over the Threshold} are shown. It is easy to show that \(Z\) can be decomposed as:
+\[Z = Z' + Z''\]
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/large-claim-1.pdf}
+\caption{\label{fig:large-claim}Large claims.}
+\end{figure}
+
+Given the total number of claims \(N\), it can be decomposed as:
+\[N = N^{(a)} + N^{(l)}\]
+
+where
+
+\begin{itemize}
+\tightlist
+\item
+  \(N^{(a)}\) is the attritional claims count, i.e.~the number of claims with size \(Z < \bar{z}\);
+\item
+  \(N^{(l)}\) is the large claims count, i.e.~the number of claims with size \(Z \ge \bar{z}\);
+\end{itemize}
+
+Let's indicate with \(Z_{(i)}\) the \(i\)\textsuperscript{th} in order from the smallest to the bigger. Sorting the claims we can separate the attritional claims from the large claims as follows:
+
+\[
+\underbrace{Z_{(1)}, Z_{(2)}, \dots, Z_{(N^{(a)})}}_{\text{Attritional Claims}},
+\underbrace{Z_{(N^{(a)} + 1)}, Z_{(N^{(a)} + 2)}, \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}}
+\]
+
+In order to model the large claims it is possible to use the following three decompositions of the total cost of claims \(S\):
+
+\begin{equation}
+  \label{large-claim-decomposition-1}
+  \begin{split}
+    S & = \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
+        \underbrace{Z_{(N^{(a)} + 1)} + Z_{(N^{(a)} + 2)} + \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}} \\
+    & = \underbrace{\sum_{i=1}^{N^{(a)}}{Z_{(i)}}}_{=S^{(a)}} +
+            \underbrace{\sum_{i = N^{(a)} + 1}^{N^{(a)} + N^{(l)}}{Z_{(i)}}}_{=S^{(l)}}
+    = S^{(a)} + S^{(l)}
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \label{large-claim-decomposition-2}
+  \begin{split}
+    S & = \sum_{i=1}^{N}{Z_i} \\
+    & = \sum_{i=1}^{N}{\left(
+      \{Z_i|Z_i\ge\bar{z}\} I_{Z_i\ge\bar{z}} +
+      \{Z_i|Z_i<\bar{z}\} I_{Z_i<\bar{z}}
+      \right)}
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \label{large-claim-decomposition-3}
+  \begin{split}
+    S & = \sum_{i=1}^{N}{Z_i}
+    = \sum_{i=1}^{N}{\left(Z'_i + Z''_i\right)}
+    = \sum_{i=1}^{N}{\left(Z'_i + Z''_i I_{Z_i > \bar{z}}\right)}
+  \end{split}
+\end{equation}
+
+These three decompositions of \(S\) are useful because they provide three decompositions of \(E(S)\):
+
+\begin{equation}
+  \label{large-claim-decomposition-expected-1}
+  \begin{split}
+    E(S) & = E(S^{(a)}) + E(S^{(l)}) \\
+    & = E(N^{(a)}) E(Z|Z<\bar{z}) + E(N^{(l)}) E(Z|Z\ge\bar{z})
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \label{large-claim-decomposition-expected-2}
+  \begin{split}
+    E(S) & = E(N) E(Z) \\
+    & = E(N) \left[P(Z<\bar{z}) E(Z|Z<\bar{z}) + P(Z\ge\bar{z}) E(Z|Z \ge \bar{z}) \right] \\
+    & = E(N) \left[\left( 1 - P(Z\ge\bar{z}) \right) E(Z|Z<\bar{z}) + P(Z\ge\bar{z}) E(Z|Z \ge \bar{z})\right]
+  \end{split}
+\end{equation}
+
+\begin{equation}
+  \label{large-claim-decomposition-expected-3}
+  \begin{split}
+    E(S) & = E(N) E(Z) \\
+    & = E(N) \left[E(Z') + P(Z\ge\bar{z}) E(Z'')\right]
+  \end{split}
+\end{equation}
+
+\ref{large-claim-decomposition-expected-1}, \ref{large-claim-decomposition-expected-2} and \ref{large-claim-decomposition-expected-3} provide three approaches to model attritional and large claims.
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Looking to \ref{large-claim-decomposition-expected-1} we can model separately attritional claims and large claims. Modeling \(N^{(a)}\) and \(Z|Z<\bar{z}\) we estimate the total cost of claims for the attritional part \(S^{(a)}\); modeling \(N^{(l)}\) and \(Z|Z\ge\bar{z}\) we estimate the total cost of claims for the large part \(S^{(l)}\).
+\item
+  Looking to \ref{large-claim-decomposition-expected-2} we can model together the claim count \(N\), and then we can model the cost of the attritional claims \(Z|Z<\bar{z}\), the cost of the large claims \(Z|Z\ge\bar{z}\) and the probability to exceed the threshold \(P(Z\ge\bar{z})\).
+\item
+  Looking to \ref{large-claim-decomposition-expected-3} we can model together the claim count \(N\), and then we can model the capped claims size \(Z'\), the excess over the threshold \(Z''\) and the probability to exceed the threshold \(P(Z\ge\bar{z})\).
+\end{enumerate}
+
+If the large claims component weights a lot on the total cost of claims, these approaches could lead to quite different estimation of \(E(S)\). In particular, if in the observed data the number of large claims is small, it will be hard to model both \(N^{(l)}\) and \(P(Z\ge\bar{z})\), so the modeling process could lead to a flat or almost flat model for these components. However, with the first approach, a flat model for \(N^{(l)}\) leads to distribute the observed total cost of large claims proportionally to all the policies, while with the second and the third, a flat model for \(P(Z\ge\bar{z})\) leads to distribute the observed total cost of large claims proportionally to the expected number of claims \(E(N)\). So, with the first approach, a flat model brings to more solidarity between policies, while, with the second approach, a flat model could bring to an exacerbation of the differences identified by modeling \(N\).
+
+For the second approach we must also introduce a distribution suitable for modeling \(P(Z\ge\bar{z})\).
 
 \hypertarget{binomial-distribution}{%
 \subsubsection{Binomial distribution}\label{binomial-distribution}}
 
 \begin{definition}[Binomial Distribution]
 \label{def:def-binomial} \iffalse (Binomial Distribution) \fi{} A random variable \(Y\) with support \(\{0,1,2, \dots, n \}\) has a Binomial distribution, if its probability function is:
+
+\[
+p_Y(y) = P\left( Y = y \right) = \binom{n}{y} p^y (1-p)^{n-y}, \quad p \in [0, 1]
+\]
 
 We will indicate it with the notation \(Y \sim Binomial(n, p)\).
 \end{definition}
