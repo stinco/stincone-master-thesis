@@ -1103,14 +1103,14 @@ This way, we are decomposing only the claims with injuries between attritional a
 \hypertarget{model-fitting-and-data-available}{%
 \subsection{Model fitting and data available}\label{model-fitting-and-data-available}}
 
-Once we have defined how to decompose \(E(S)\) we have to model the response variables needed for that decomposition (\(N\), \(Z\), \(I_J\) \ldots{} ) with the explanatory variables. Thus we have to estimate a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) as defined in \ref{def:modeling}.
+Once we have chosen how to decompose \(S\), we have to model the response variables needed for that decomposition (\(N\), \(Z\), \(I_J\), \ldots) with the explanatory variables. Thus we have to estimate a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) as defined in \ref{def:modeling}.
 
-In order to estimate \(r(\cdot)\) we have also to take some assumptions on the distribution of the response variable and on the shape of \(r(\cdot)\). We will call \emph{model} a set of assumption of the response variable and the shape of \(r(\cdot)\). We will discuss some of the most widespread models for claims count and claims severity in chapter \ref{chap:models}.
+In order to estimate \(r(\cdot)\) we have also to take some assumptions on the distribution of the response variable and on the shape of \(r(\cdot)\). We will call \emph{model} a set of assumptions on the response variable and on the shape of \(r(\cdot)\). We will discuss some of the most widespread models for claims count and claims severity in chapter \ref{chap:models}.
 
-Defined the model, we have to estimate it using observed data. In general, to model a response variable \(Y_i\) with the explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), the observed data are in the form:
+Defined the model, we have to estimate it using observed data. In general, to model a response variable \(Y_i\) with the explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), the observed data is in the form:
 
 \[
-(\boldsymbol{x}_1, w_1, y_1), (\boldsymbol{x}_2, w_2, y_2), \dots, (\boldsymbol{x}_i, w_i, y_i), \dots, (\boldsymbol{x}_n, w_n, y_n)
+(\boldsymbol{x}_1, w_1, y_1), \ (\boldsymbol{x}_2, w_2, y_2), \ \dots, \ (\boldsymbol{x}_i, w_i, y_i), \ \dots, \ (\boldsymbol{x}_n, w_n, y_n)
 \]
 where:
 
@@ -1131,17 +1131,19 @@ What an observation is, depends on the variable we are modeling. For instance:
 \begin{itemize}
 \tightlist
 \item
-  If we are modeling the yearly claim count \(N_i\), each observation could be a policy (or a couple (policy, accounting year)), the weights could be the exposures \(v_i\) and the response variable could be the number of observed claims for that policy (or couple (policy, accounting year)).
+  If we are modeling the yearly claim count \(N_i\), each observation could be a policy (or a couple (policy, accounting year)), the weights could be the exposures \(v_i\) and the realizations of response variables could be the number of observed claims for that policy (or couple (policy, accounting year)).
 \item
-  If we are modeling the claim severity \(Z_j\), each observation could be a claim \(j\), the weights could all be \(1\) and the response variable could be the observed cost for the claim \(j\). It is also possible to model the claim severity taking into account the total cost of claims for the policy \(i\) \(S_i = \sum_{j=1}^{N_i}{Z_j}\). In this case, each observation would be a policy \(i\), the weights would be the number of claims for each policy \(n_i\) and the response variable the total observed cost for the claims of the policy \(i\).
+  If we are modeling the claim severity \(Z_j\), each observation could be a claim \(j\), the weights could all be \(1\) and the realizations of response variables could be the observed cost for the claim \(j\). It is also possible to model the claim severity taking into account the total cost of claims for the policy \(S_i = \sum_{j=1}^{N_i}{Z_j}\). In this case, each observation would be a policy \(i\), the weights would be the number of claims for each policy \(n_i\) and the realizations of response variables would be the total observed cost for the claims of the policy \(i\).
 \item
-  If we are modeling the occurrence of injuries in a claim \(I_{Jj}\), each observation could be a claim \(j\), the weights could be all \(1\) and the response variable an indicator that assume the value \(1\) if the claim \(j\) caused injuries and \(0\) otherwise. As for the claim severity, we can also aggregate data for policy, so each observation would be a policy \(i\), the weights would be the number of claims \(n_i\) for the policy \(i\) and the response variables would be the number of claims that caused injuries among the claims of the policy \(i\).
+  If we are modeling the occurrence of injuries in a claim \(I_{Jj}\), each observation could be a claim \(j\), the weights could be all \(1\) and the realizations of response variables could be an indicator that assume the value \(1\) if the claim \(j\) caused injuries and \(0\) otherwise. As for the claim severity, we can also aggregate data for policy, so each observation would be a policy \(i\), the weights would be the number of claims \(n_i\) for the policy \(i\) and the realizations of response variables would be the number of claims that caused injuries among the claims of the policy \(i\).
 \end{itemize}
 
-In each of these cases, \(y_i\) is seen as a realization of the random variable \(Y_i\). With an inference process we can make estimation on \(Y_i\) based on observation of their realizations \(y_i\).
+In each of these cases, \(y_i\) is seen as a realization of the random variable \(Y_i\). With an inferential process we obtain estimations on \(Y_i\) based on observations of their realizations \(y_i\).
 
 \hypertarget{settlement-process-and-ibnr}{%
 \subsubsection{Settlement process and IBNR}\label{settlement-process-and-ibnr}}
+
+One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
 \hypertarget{commercial-tariff-and-offer-price}{%
 \section{Commercial Tariff and Offer Price}\label{commercial-tariff-and-offer-price}}
