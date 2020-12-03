@@ -1098,7 +1098,7 @@ E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \
   & \quad \left. \right\}
 \end{align*}
 
-This way, we are decomposing only the claims with injuries between attritional and large. That make sense because claims that don't produce injuries usually have small severities.
+This way, we are decomposing only the claims with injuries between attritional and large. That makes sense because claims that don't produce injuries usually have small severities.
 
 \hypertarget{model-fitting-and-data-available}{%
 \subsection{Model fitting and data available}\label{model-fitting-and-data-available}}
@@ -1143,7 +1143,44 @@ In each of these cases, \(y_i\) is seen as a realization of the random variable 
 \hypertarget{settlement-process-and-ibnr}{%
 \subsubsection{Settlement process and IBNR}\label{settlement-process-and-ibnr}}
 
-One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
+One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
+
+In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed in the times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then get closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/settlement-process-1.pdf}
+\caption{\label{fig:settlement-process}Claim timeline.}
+\end{figure}
+
+From the moment the claim is reported (\(t_2\)), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim is settled, the sum between the payed and the reserved converges to the final cost of the claim.
+
+From this description emerges that:
+
+\begin{itemize}
+\tightlist
+\item
+  In the period \(]t_1, t_2[\) the insurer have an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \emph{Incurred But Not Yet Reported} (\emph{IBNyR}) claims.
+\item
+  In the period \([t_2, t_3[\) the insurer have an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \emph{Incurred But Not Enough Reported} (\emph{IBNeR}) claims.
+\end{itemize}
+
+This issue is particularly challenging when we have to perform a risk evaluation at a specific time. In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
+
+\begin{itemize}
+\tightlist
+\item
+  the number of reported claims \(n_i^{(t)} = n_i^{(\text{reported in } t)}\)
+\item
+  the sums already payed for each claim \(z_j^{(\text{payed in }t)}\) and the sums reserved for each claim \(z_j^{(\text{reserved in } t)}\): \(z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}\)
+\end{itemize}
+
+When we use these variables for modeling the total cost of claims we must be particularly aware on what we are using. In general
+
+\begin{align*}
+n_i & \ne n_i^{(t))} \\
+z_j & \ne z_j^{(t)}
+\end{align*}
 
 \hypertarget{commercial-tariff-and-offer-price}{%
 \section{Commercial Tariff and Offer Price}\label{commercial-tariff-and-offer-price}}

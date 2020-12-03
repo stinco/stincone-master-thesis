@@ -914,7 +914,7 @@ E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \
 \end{align*}
 ```
 
-This way, we are decomposing only the claims with injuries between attritional and large. That make sense because claims that don't produce injuries usually have small severities.
+This way, we are decomposing only the claims with injuries between attritional and large. That makes sense because claims that don't produce injuries usually have small severities.
 
 
 <!-- $$ -->
@@ -955,19 +955,88 @@ In each of these cases, $y_i$ is seen as a realization of the random variable $Y
 
 #### Settlement process and IBNR
 
-One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
+One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
+In figure \@ref(fig:settlement-process) the settlement process for a claim is represented. At time $t_1$ the insured event (e.g. an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called _Outstanding Loss Liability_. In $t_2$ the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In $t_3$ we have the settlement and in $t_4$ the claim is closed. In is possible that $t_4=t_3$, but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period $[t_2, t_3]$. These intermediate payments are payed in the times $\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]$. It is also possible that a claim is opened and then get closed without any payment. After the closing ($t_4$) it is also possible that a claim is reopened and that more payments emerge.
+
+```{tikz, settlement-process, fig.cap = "Claim timeline.", fig.ext = 'pdf', cache = TRUE, echo = FALSE}
+\newcommand{\ImageWidth}{11cm}
+\usetikzlibrary{decorations.pathreplacing, positioning, arrows.meta}
+
+\begin{tikzpicture}
+    % draw horizontal line   
+    \draw[thick, -Triangle] (0, 0) -- (\ImageWidth, 0) node[font = \scriptsize, below left = 3pt and -8pt]{$t$};
+    \draw[very thick] (0.5cm, 0) -- (9.5cm, 0);
+
+
+    % draw vertical lines and times
+    \draw (0.5cm, -3pt) -- (0.5cm, 3pt) node[anchor = south] {$t_{1}$};
+    \draw (2.5cm, -3pt) -- (2.5cm, 3pt) node[anchor = south] {$t_{2}$};
+    
+    \draw (4.0cm, -3pt) -- (4.0cm, 3pt) node[anchor = south] {$\tau_{1}$};
+    \draw (4.5cm, -3pt) -- (4.5cm, 3pt) node[anchor = south] {$\tau_{2}$};
+    
+    \path (5.25cm, -3pt) -- (5.255cm, 3pt) node[anchor = south] {$\dots$};
+    
+    \draw (6cm, -3pt) -- (6cm, 3pt) node[anchor = south] {$\tau_{n}$};
+    
+    \draw (7.5cm, -3pt) -- (7.5cm, 3pt) node[anchor = south] {$t_{3}$};
+    \draw (9.5cm, -3pt) -- (9.5cm, 3pt) node[anchor = south] {$t_{4}$};
+    
+    
+    % draw events names
+    
+    \node[align=center] at (0.5cm, -16pt) {\small occurrence};
+    \node[align=center] at (2.5cm, -16pt) {\small reporting};
+    
+    \node[align=center] at (5cm, -16pt) {\small intermediate \\ payments};
+    
+    \node[align=center] at (7.5cm, -16pt) {\small settlement};
+    \node[align=center] at (9.5cm, -16pt) {\small closing};
+    
+    % draw curly bracket
+     \draw [decorate, decoration = {brace, mirror, amplitude = 10pt}, xshift = 0pt, yshift = -10pt]
+(2.5cm, -20pt) -- (7.5cm, -20pt) node [black, midway, xshift = 0pt, yshift = -15pt] 
+{\small settlement process};
+
+\end{tikzpicture}
+```
+
+From the moment the claim is reported ($t_2$), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim is settled, the sum between the payed and the reserved converges to the final cost of the claim.
+
+From this description emerges that:
+
+* In the period $]t_1, t_2[$ the insurer have an outstanding loss liability for an event that has not been reported yet; in this case we will talk about _Incurred But Not Yet Reported_ (_IBNyR_) claims.
+* In the period $[t_2, t_3[$ the insurer have an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about _Incurred But Not Enough Reported_ (_IBNeR_) claims.
+
+This issue is particularly challenging when we have to perform a risk evaluation at a specific time. In general $t_1, t_2,\dots$ are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model $N$ and $Z$ at a specific time $t$, we can't observe the total number of claims occurred to each policy $n_i$ and the payments for each claim $z_j$. What we can use is:
+
+* the number of reported claims $n_i^{(t)} = n_i^{(\text{reported in } t)}$
+* the sums already payed for each claim $z_j^{(\text{payed in }t)}$ and the sums reserved for each claim $z_j^{(\text{reserved in } t)}$: $z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}$
+
+When we use these variables for modeling the total cost of claims we must be particularly aware on what we are using. In general:
+
+```{=latex}
+\begin{align*}
+n_i & \ne n_i^{(t)} \\
+z_j & \ne z_j^{(t)}
+\end{align*}
+```
+
+To tackle these problems what is usually done is ...
 
 
 <!--
 Qua devo spiegare
-- Distribuzioni
-  + Distribuzione di Poisson
-  + Distribuzione Gamma
-    * Sinistri punta: eccedenze, modello di propensity
-  + Distribuzione Binomiale
-  Appendice: Distribuzioni, momenti...
-- Dati a disposizione: osservazioni di queste variabili aleatorie
+- Processo di liquidazione
+- Momento di valutazione: non totalmente liquidato, non denunciato
+- Outstanding Loss Liabilities: la passività emerge in t1
+- Consolidamento (consolidation) dei sinistri
+- Variabile risposta: Pagato + Riservato (we trust reserving)
+  + IBNYR
+  + IBNER
+- Correttivi, proiezioni a costo ultimo. Valutazioni aggregate. Triangoli di runoff. Chain Ladder. Possono essere fatti gestione per gestione. Es: sinistri con lesioni hanno solitamente tempi di consolidamento più lunghi. Potrebbero esserci contenziosi.
+- Le OLL devono essere stimate a livello aggregato anche per valutare la posizione debitoria dell'azienda e vanno riportate a bilancio.
 -->
 
 
