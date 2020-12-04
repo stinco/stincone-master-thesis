@@ -105,10 +105,10 @@ documentclass: book
 always_allow_html: true
 
 
-######################################
-## Packages loaded on LaTeX header  ##
-## Thiese are needed for TikZ plots ##
-######################################
+#####################################
+## Packages loaded on LaTeX header ##
+## These are needed for TikZ plots ##
+#####################################
 # header-includes: 
 #   - \usepackage{pdftools}
 #   - \usepackage{tikz}
@@ -140,7 +140,8 @@ library(tidyverse)
 library(knitr)
 library(kableExtra)
 
-knitr::opts_chunk$set(fig.pos = 'hbtp')
+# knitr::opts_chunk$set(fig.pos = 'hbtp')
+knitr::opts_chunk$set(fig.pos = '!h')
 
 theme_set(theme_bw())
 ```

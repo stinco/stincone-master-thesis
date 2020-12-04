@@ -141,6 +141,10 @@ to Non-Life Insurance Pricing}
 % For the Title Page with Italian style (frontespizio)
 \usepackage[nouppercase]{frontespizio}
 
+% For \cancel{} in equation
+\usepackage[makeroom]{cancel}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% THE ACTUAL DOCUMENT STARTS HERE %%%%%
@@ -536,8 +540,8 @@ Where:
 
 This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain \(E(S)\) from \(E(N)\) and \(E(Z)\). That means that we can model separately \(E(N)\) and \(E(Z)\) and, from them, obtain \(E(S)\). That result is particularly useful in personalization (paragraph \ref{chap:personalization}), because, for each individual \(i\), given the information we have on him \(x_i=(x_{i1}, x_{i2}, \dots, x_{ip})\), we can estimate his expected claim size \(E(N_i)\) and his expected claim severity \(E(Z_i)\) and obtain his expected total cost of claims as \(E(S_i) = E(N_i) E(Z_i)\).
 
-\hypertarget{risk-premium-and-technical-price}{%
-\subsection{Risk premium and Technical Price}\label{risk-premium-and-technical-price}}
+\hypertarget{chap:risk-prem-tech-price}{%
+\subsection{Risk premium and Technical Price}\label{chap:risk-prem-tech-price}}
 
 The expected cost of claims \(E(S)\) is important because it gives us a first interpretation of what ``proper'' premium means.
 
@@ -728,7 +732,7 @@ p_N(n) = P\left( N = n \right) = e^{-\lambda}\frac{\lambda^n}{n!}, \quad \lambda
 We will indicate it with the notation \(N \sim Poisson(\lambda)\).
 \end{definition}
 
-\begin{figure}[hbtp]
+\begin{figure}[!h]
 
 {\centering \includegraphics{_main_files/figure-latex/plot-poisson-1} 
 
@@ -854,7 +858,7 @@ where \(\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}\
 We will indicate it with the notation \(Z \sim Gamma(\alpha, \rho)\).
 \end{definition}
 
-\begin{figure}[hbtp]
+\begin{figure}[!h]
 
 {\centering \includegraphics{_main_files/figure-latex/plot-gamma-1} 
 
@@ -1032,7 +1036,7 @@ p_Y(y) = P\left( Y = y \right) = \binom{n}{y} p^y (1-p)^{n-y}, \quad p \in [0, 1
 We will indicate it with the notation \(Y \sim Binomial(n, p)\).
 \end{definition}
 
-\begin{figure}[hbtp]
+\begin{figure}[!h]
 
 {\centering \includegraphics{_main_files/figure-latex/plot-binomial-1} 
 
@@ -1088,7 +1092,7 @@ where:
 Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
 
 \begin{align*}
-E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[11pt]
+E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[4pt]
   & = E(N) \left\{ \right. \\
   & \qquad \left( 1 - P(J) \right) E(Z|\bar{J}) \\
   & \qquad + P(J) \left[ \right. \\
@@ -1145,7 +1149,7 @@ In each of these cases, \(y_i\) is seen as a realization of the random variable 
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
-In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed in the times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then get closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
+In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed in the times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
 
 \begin{figure}
 \centering
@@ -1153,37 +1157,113 @@ In figure \ref{fig:settlement-process} the settlement process for a claim is rep
 \caption{\label{fig:settlement-process}Claim timeline.}
 \end{figure}
 
-From the moment the claim is reported (\(t_2\)), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim is settled, the sum between the payed and the reserved converges to the final cost of the claim.
+From the moment the claim is reported (\(t_2\)), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim gets settled, the sum between the payed and the reserved converges to the final cost of the claim.
 
 From this description emerges that:
 
 \begin{itemize}
 \tightlist
 \item
-  In the period \(]t_1, t_2[\) the insurer have an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \emph{Incurred But Not Yet Reported} (\emph{IBNyR}) claims.
+  In the period \(]t_1, t_2[\) the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \emph{Incurred But Not Yet Reported} claim (\emph{IBNyR}).
 \item
-  In the period \([t_2, t_3[\) the insurer have an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \emph{Incurred But Not Enough Reported} (\emph{IBNeR}) claims.
+  In the period \([t_2, t_3[\) the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \emph{Incurred But Not Enough Reported} claim (\emph{IBNeR}).
 \end{itemize}
 
-This issue is particularly challenging when we have to perform a risk evaluation at a specific time. In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
+\hypertarget{model-fitting-with-available-data}{%
+\subsubsection{Model fitting with available data}\label{model-fitting-with-available-data}}
+
+The IBNyR and IBNeR issue is particularly challenging when we have to perform a risk evaluation at a specific time \(t\). In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
 
 \begin{itemize}
 \tightlist
 \item
-  the number of reported claims \(n_i^{(t)} = n_i^{(\text{reported in } t)}\)
+  \(n_i^{(t)} = n_i^{(\text{reported in } t)}\)\\
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(n_i^{(\text{reported in } t)}\) is the number of reported claims in \(t\) for the policy \(i\);
+  \end{itemize}
 \item
-  the sums already payed for each claim \(z_j^{(\text{payed in }t)}\) and the sums reserved for each claim \(z_j^{(\text{reserved in } t)}\): \(z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}\)
+  \(z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}\)\\
+  where:
+
+  \begin{itemize}
+  \tightlist
+  \item
+    \(z_j^{(\text{payed in }t)}\) is the amount already payed in \(t\) for the claim \(j\);
+  \item
+    \(z_j^{(\text{reserved in } t)}\) is the amount reserved in \(t\) for the claim \(j\).
+  \end{itemize}
 \end{itemize}
 
-When we use these variables for modeling the total cost of claims we must be particularly aware on what we are using. In general
+When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
 
 \begin{align*}
-n_i & \ne n_i^{(t))} \\
-z_j & \ne z_j^{(t)}
+n_i^{(t)} & \ne n_i \\
+z_j^{(t)} & \ne z_j
 \end{align*}
+
+The common case is that \(n_i^{(t)} < n_i\) and \(z_j^{(t)} < z_j\). If we used \(n_i^{(t)}\) and \(z_j^{(t)}\) without any correcton, we would underestimate both \(E(N)\) and \(E(Z)\), obtaining a distorted estimate for \(E(S)\).
+
+To tackle these problems what is usually done is fitting the models for \(S_i\) with \(n_i^{(t)}\) and \(z_j^{(t)}\) and then apply a flat corrective coefficients \(\alpha\) to \(\widehat{E(S_i)}\) based on an aggregated estimate of \(E(S)\) that takes into account the long settlement process.
+
+An estimate for the expected total cost of claims for a generic policy in the portfolio \(E(S)\) can be obtained with techniques based on runoff triangles, such as the \emph{Chain Ladder}. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for \(E(S)\). Let's call it \(\widehat{E(S)}^{CL}\). This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
+
+Meanwhile, with the available data \(n_i^{(t)}\) and \(z_j^{(t)}\), the fitting for all the models needed in the decomposition of \(S\) is performed and, for each policy \(i\in\{1, 2, \dots, n\}\) for \(E(S_i)\) is obtained. Let's call it \(\widehat{E(S_i)}'\). As we used the data available in \(t\) that comes from claims not totally settled, \(\widehat{E(S_i)}'\) is a distorted estimate for \(E(S_i)\).
+
+We can then balance the estimates \(\widehat{E(S_i)}'\) with \(\widehat{E(S)}^{CL}\) by computing:
+
+\[
+\alpha = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL}
+\]
+
+and applying to the estimates as follows:
+
+\[
+\widehat{E(S_i)} = \alpha \ \widehat{E(S_i)}'
+\]
+
+We will call \(\widehat{E(S_i)}\) rebalanced estimates.
+
+The property of these balanced estimates is that on average they point to \(\widehat{E(S)}^{CL}\):
+
+\begin{align*}
+\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
+& = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
+& = \frac{\bcancel{n}}{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}} \widehat{E(S)}^{CL} \frac{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}}{\bcancel{n}} \\
+& = \widehat{E(S)}^{CL}
+\end{align*}
+
+So, if \(\widehat{E(S)}^{CL}\) is a unbiased estimator for \(E(S)\), we obtain:
+\[
+E\left( \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} \right)
+= E\left( \widehat{E(S)}^{CL} \right)
+= E(S)
+\]
+
+This procedure can be further developed by balancing not directly the total cost of claims \(E(S)\), but its components. For example, we could separately balance the total cost of claims that only caused damage to things and the total cost of claims that caused injuries. This separation in components can lead to a more precise estimate because usually claims that caused injuries have a slower settlement process so they will have a higher corrective coefficient \(\alpha\).
+
+The fact that the final estimates \(\widehat{E(S_i)}\) are rebalanced on \(\widehat{E(S)}^{CL}\) means that the explanatory variables effects estimated with \(n_i^{(t)}\) and \(z_j^{(t)}\) are used just as relative effects and not absolute ones. For instance, if the model says that young people have an expected total cost of claims \(\widehat{E(S_i)}'\) that is two times the old people one, that relative coefficient 2 will be kept also in the balanced estimate \(\widehat{E(S_i)}\).
+
+For this reason, in practice, often the modeling is considered composed in 2 parts:
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  \emph{Tariff Requirement} (or \emph{Fabbisogno Tariffario}): the estimate of \(\widehat{E(S)}^{CL}\) by aggregated data;
+\item
+  \emph{Personalization}: the estimate of \(\widehat{E(S_i)}'\) and the relative coefficients.
+\end{enumerate}
+
+The techniques used for \emph{Tariff Requirement} are employed also to estimating the general liability position for the company. This information is particularly important and it is reported in the company financial statement.
 
 \hypertarget{commercial-tariff-and-offer-price}{%
 \section{Commercial Tariff and Offer Price}\label{commercial-tariff-and-offer-price}}
+
+In section \ref{chap:risk-prem-tech-price} we defined the \emph{Risk Premium} \(P^{(risk)} = E(S)\) and the \emph{Technical Price} \(P^{(tech)} = E(S) + E\) and in section \ref{chap:personalization} we described how the risk premium is estimated. In this thesis we are not going to deal with the estimate of the expenses. In this section we are going to discuss what the tariff and the offer price are and which are the further needs that the offer should satisfy.
 
 \newpage
 
