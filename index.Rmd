@@ -40,7 +40,8 @@ abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 #favicon: "figures/icons/favicon.ico"
 
 quote: |
-  The data scientist is a person who is better at statistics than any software engineer \
+  The data scientist is a person \
+  who is better at statistics than any software engineer \
   and better at software engineering than any statistician.
 quote-author: Josh Wills
 
@@ -141,7 +142,7 @@ library(knitr)
 library(kableExtra)
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
-knitr::opts_chunk$set(fig.pos = '!h')
+knitr::opts_chunk$set(fig.pos = '!hbtp')
 
 theme_set(theme_bw())
 ```

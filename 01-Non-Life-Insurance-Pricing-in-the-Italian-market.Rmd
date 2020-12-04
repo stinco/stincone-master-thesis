@@ -252,7 +252,7 @@ The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separa
 In this section We are going to better explain how pricing based on policyholder information works.
 
 
-### Pricing variables
+### Pricing variables {#chap:pricing-variables}
 
 Usually for every policyholder we have a certain amount of information on him that is considered relevant for his risk evaluation. This information must be reliable and observable at the moment of the underwriting of the policy.
 
@@ -1031,11 +1031,11 @@ z_j^{(t)} & \ne z_j
 \end{align*}
 ```
 
-The common case is that $n_i^{(t)} < n_i$ and $z_j^{(t)} < z_j$. If we used $n_i^{(t)}$ and $z_j^{(t)}$ without any correcton, we would underestimate both $E(N)$ and $E(Z)$, obtaining a distorted estimate for $E(S)$.
+The common case is that $n_i^{(t)} < n_i$ and $z_j^{(t)} < z_j$. If we used $n_i^{(t)}$ and $z_j^{(t)}$ without any correction, we would underestimate both $E(N)$ and $E(Z)$, obtaining a distorted estimate for $E(S)$.
 
 To tackle these problems what is usually done is fitting the models for $S_i$ with $n_i^{(t)}$ and $z_j^{(t)}$ and then apply a flat corrective coefficients $\alpha$ to $\widehat{E(S_i)}$ based on an aggregated estimate of $E(S)$ that takes into account the long settlement process.
 
-An estimate for the expected total cost of claims for a generic policy in the portfolio $E(S)$ can be obtained with techniques based on runoff triangles, such as the _Chain Ladder_. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for $E(S)$. Let's call it $\widehat{E(S)}^{CL}$. This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
+An estimate for the expected total cost of claims for a generic policy in the portfolio $E(S)$ can be obtained with techniques based on runoff triangles, such as the _Chain Ladder_. These techniques are based on projecting the cost of claims already emerged to the final total cost of claims. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for $E(S)$. Let's call it $\widehat{E(S)}^{CL}$. This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
 
 Meanwhile, with the available data $n_i^{(t)}$ and $z_j^{(t)}$, the fitting for all the models needed in the decomposition of $S$ is performed and, for each policy $i\in\{1, 2, \dots, n\}$ for $E(S_i)$ is obtained. Let's call it $\widehat{E(S_i)}'$. As we used the data available in $t$ that comes from claims not totally settled, $\widehat{E(S_i)}'$ is a distorted estimate for $E(S_i)$.
 
@@ -1073,6 +1073,8 @@ $$
 
 This procedure can be further developed by balancing not directly the total cost of claims $E(S)$, but its components. For example, we could separately balance the total cost of claims that only caused damage to things and the total cost of claims that caused injuries. This separation in components can lead to a more precise estimate because usually claims that caused injuries have a slower settlement process so they will have a higher corrective coefficient $\alpha$.
 
+If the dataset contains policies from many years and during last years a relevant change in the portfolio risk mixture happened, it is also possible to compute $\alpha$ not with all the $n$ policies of the dataset, but only with the policies from the last year of the dataset.
+
 The fact that the final estimates $\widehat{E(S_i)}$ are rebalanced on $\widehat{E(S)}^{CL}$ means that the explanatory variables effects estimated with $n_i^{(t)}$ and $z_j^{(t)}$ are used just as relative effects and not absolute ones. For instance, if the model says that young people have an expected total cost of claims $\widehat{E(S_i)}'$ that is two times the old people one, that relative coefficient 2 will be kept also in the balanced estimate $\widehat{E(S_i)}$.
 
 For this reason, in practice, often the modeling is considered composed in 2 parts:
@@ -1082,62 +1084,63 @@ For this reason, in practice, often the modeling is considered composed in 2 par
 
 The techniques used for _Tariff Requirement_ are employed also to estimating the general liability position for the company. This information is particularly important and it is reported in the company financial statement.
 
-<!--
-Qua devo spiegare
-- Processo di liquidazione
-- Momento di valutazione: non totalmente liquidato, non denunciato
-- Outstanding Loss Liabilities: la passività emerge in t1
-- Consolidamento (consolidation) dei sinistri
-- Variabile risposta: Pagato + Riservato (we trust reserving)
-  + IBNYR
-  + IBNER
-- Correttivi, proiezioni a costo ultimo. Valutazioni aggregate. Triangoli di runoff. Chain Ladder. Possono essere fatti gestione per gestione. Es: sinistri con lesioni hanno solitamente tempi di consolidamento più lunghi. Potrebbero esserci contenziosi.
-- Le OLL devono essere stimate a livello aggregato anche per valutare la posizione debitoria dell'azienda e vanno riportate a bilancio.
--->
+
+## Beyond technical pricing
 
 
-<!--
-Consolidamento dei sinistri
-Pagato + Riservato (we trust reserving)
-IBNYR
-IBNER
+### Tariff and Offer Price
 
-Convoluzione
+In section \@ref(chap:risk-prem-tech-price) we defined:
 
-Sistema CARD
--->
+* the _Risk Premium_  
+  $P^{(risk)} = E(S)$
+* the _Technical Price_  
+  $P^{(tech)} = E(S) + E$
+
+In section \@ref(chap:personalization) we described how the risk premium can be estimated. In this thesis we are not going to deal with the estimate of the expenses.
+
+In this section we are going to discuss what the _Tariff_ and the _Offer Price_ are and which are the further needs that the offer should satisfy. The following description is referred to MTPL insurance in the Italian market. Most of the comment we make can be applied to other motor coverages too.
+
+The _Tariff_ is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the IVASS (Istituto per la vigilanza sulle Assicurazioni).
+
+In section \@ref(chap:pricing-variables) we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depends on it. Some of the variables used for technical pricing can't be used in tariff. In particular, the regulations say that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e. a lower class must correspond to a better tariff. We remind that in the Italian bonus-malus system the lower the class the better the premium. Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever is the client, independently to how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. For all these reasons, the tariff, before entering in production, must follow a strict approval process.
+
+To make the the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not to the tariff price, but to the price obtained subtracting from it a discount $D_i$. The premium obtained this way is called _Offer Price_.
+
+$$
+P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
+$$
+
+That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting can be partially spended by the agent and partially by the insurance company itself. The discounts can be changed over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support clients needs with important discounts on both new business and renewal. From a technical point of view, these discounts have been funded by the remarkable decrese on claim frequency due to the traffic decreasing. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
 
-## Commercial Tariff and Offer Price
+### Commercial price
 
-In section \@ref(chap:risk-prem-tech-price) we defined the _Risk Premium_ $P^{(risk)} = E(S)$ and the _Technical Price_ $P^{(tech)} = E(S) + E$ and in section \@ref(chap:personalization) we described how the risk premium is estimated. In this thesis we are not going to deal with the estimate of the expenses. In this section we are going to discuss what the tariff and the offer price are and which are the further needs that the offer should satisfy.
+Both tariff and offer price must be based not only on technical logics, but also con commercial ones. The commercial logics 
+
+In section \@ref(chap:actuary-importance) \dots
 
 
 <!--
 Vincoli normativi
 Aspetti commerciali
+
+Aspettative del cliente
 + conversion
 + retention
+
+Strategia aziendale
+- lifetime value: un cliente ti stipula anche altri contratti
+- cluster in cui aniamo forti
+- marketing: brand awareness, brand image
 -->
-
-
-
 
 
 
 
 \newpage
 
-## Non-Life Insurance in Italy
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
-
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
-
-
-## The actuary role
+### The actuary role
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
