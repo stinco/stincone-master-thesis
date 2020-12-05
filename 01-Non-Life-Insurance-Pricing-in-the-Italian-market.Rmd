@@ -1087,9 +1087,6 @@ The techniques used for _Tariff Requirement_ are employed also to estimating the
 
 ## Beyond technical pricing
 
-
-### Tariff and Offer Price
-
 In section \@ref(chap:risk-prem-tech-price) we defined:
 
 * the _Risk Premium_  
@@ -1100,6 +1097,9 @@ In section \@ref(chap:risk-prem-tech-price) we defined:
 In section \@ref(chap:personalization) we described how the risk premium can be estimated. In this thesis we are not going to deal with the estimate of the expenses.
 
 In this section we are going to discuss what the _Tariff_ and the _Offer Price_ are and which are the further needs that the offer should satisfy. The following description is referred to MTPL insurance in the Italian market. Most of the comment we make can be applied to other motor coverages too.
+
+
+### Tariff and Offer Price
 
 The _Tariff_ is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the IVASS (Istituto per la vigilanza sulle Assicurazioni).
 
@@ -1116,23 +1116,58 @@ That means that, for the offer price to adequately cover the cost of claims and 
 
 ### Commercial price
 
-Both tariff and offer price must be based not only on technical logics, but also con commercial ones. The commercial logics 
+Both tariff and offer price must be based not only on technical logics, but also on commercial ones. They are determined with a process of _Price Optimization_. The final goal for a company is to maximize the profits this year and in the next ones, so the objective of commercial pricing must be obtaining te optimal price to reach this goal. Maximizing profits is a quite generic goal and can't be easily expressed as an analytical optimization problem. For this reason the pricing choices can be guided by the business strategy that can be translated in specific _Key Performance Indidicators_ (KPI) that have to be optimized. In this optimization framework, the technical price can be seen as an estimate of the expected cost related to the policy. Knowing the costs it is possible to tune the final premium by working on margins.
 
-In section \@ref(chap:actuary-importance) \dots
+The components that act on price optimization can be addressed to:
+
+1. _technical pricing_;
+2. _client expectation_;
+3. _business strategy_.
+
+We already extesively covered technical pricing in previous chapters.
+
+Client expectation is basically the price that the client would pay for the specific product. Here the basic idea is that if the client is willing to pay a premium much higher than the technical one, it wouldn't make sense for the company to sell him the technical price. This is a big opportunity to gain margins. To analyze client expectation, what is usually done is:
+
+* for new business modeling his conversion probability
+* for renewal business modeling his retention probability.
+
+For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitor pricing and how easy comparing offers from other companies is. In the last years, the devolpment of aggregators has made much easier for consumers to compare the offers from different companies, increasing in the italian marked the competition and the attention on pricing. Anyway, if a company is able to differentiate themself from the others and to make its product perceived as more valuable, it can sell it at a higher price than other companies.
+
+If the technical price and the conversion probability function are given, finding the optimal price for policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling MTPL policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the lifetime value of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his contacts. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
+
+The business strategy could also contemplate being more aggressive on certain tergets of client and less on others. For example the company is particularly strong in certain regions, it could make sense for it to push in that region to further increase its market share. Vice versa, in regions where the company doesn't sell much, it could be safer not to push too much and to be more careful. In a risk management framework, this can be also interpreted as introducing a further risk margin for clusters where there isn't enough observed data and the lack of information brings to more uncertainty and then risk. An aggressive pricing can also makes sense in a young company that is grouwing and it is not supposed to be profitable from the first years. From a marketing point of view this strategy can increase the brand awareness by the clients and can strenghten the company image.
+
+Anyway, a company can't arbitrarily discount policies, because it must always respect the solvency constraints to safeguard itself from bankruptcy. 
+
+
 
 
 <!--
 Vincoli normativi
 Aspetti commerciali
 
+
+Prize optimization
+
+
 Aspettative del cliente
 + conversion
 + retention
+concerrenza, differenziazione
+ottimizzazione per massimizzare i profitti attesi su quella polizza
 
 Strategia aziendale
-- lifetime value: un cliente ti stipula anche altri contratti
-- cluster in cui aniamo forti
-- marketing: brand awareness, brand image
+- lifetime value
+  + presenza di altre garanzie
+  + un cliente ti stipula anche altri contratti
+- cluster in cui andiamo forti
+- marketing: una strategia aggressiva può portare a brand awareness, brand image
+
+ci sono sempre dei limiti
+
+risk adjustment: se una stima è imprecisa (magari perché ho poca esposizione in un cluster) posso aumentare i margini
+
+expert judgement
 -->
 
 
@@ -1141,6 +1176,9 @@ Strategia aziendale
 \newpage
 
 ### The actuary role
+
+In section \@ref(chap:actuary-importance) \dots
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
