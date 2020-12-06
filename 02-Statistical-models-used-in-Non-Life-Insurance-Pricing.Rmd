@@ -21,25 +21,48 @@ library(knitr)
 
 \chaptermark{Statistical models for Non Life Insurance Pricing}
 
+In this chapter we are going to describe some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:actuary-importance) we will compare them by discussing how they fit the pricing needs.
+
 
 ## Statistical Models
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
-
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
-
+In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description we will also present the Gradient Boostin Machine (GBM) that is one of the most effective general purpose machine learning model. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 
 ### GLM
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+#### Linear Exponential Family
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+One of the GLM assumption is that the response variables belong to a _Linear Exponential Family_. In this section we are going to explain what it is and which distributions fit its definition.
 
+```{definition, linear-exp-family, name = "Linear Exponential Family"}
+A Linear Exponential Family $\mathcal{F}$ is a probability distribution parametrical family with density function (or probability function in the discrete case) that can be expressed in the form:
+
+$$
+f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
+$$
+
+where:
+
+\begin{itemize}
+\item $\theta$ and $\lambda$ are two real parameters, $\theta\in\Theta\subseteq\mathbb{R}$, $\lambda\in\Lambda\subseteq]0, +\infty[$;
+\item $b(\cdot)$ and $c(\cdot)$ are real function, $c(y, \lambda)\ge0$;
+\item $\Theta$ is a non degenerate interval, i.e. $\text{int}\Theta$ is not empty.
+\end{itemize}
+
+```
+
+
+#### Model assumptions
+
+
+#### Variable selection
+
+
+
+
+\newpage
 
 ### Elastic Net
 

@@ -21,7 +21,7 @@ library(knitr)
 
 \chaptermark{Non-Life Insurance Pricing}
 
-In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the pricing process.
+In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process.
 
 
 ## What a Non-Life Insurance is {#chap:non-life-ins}
@@ -29,7 +29,7 @@ In this chapter I am going to provide an overview on how non-life insurance work
 The Italian Civil Code provides the following definition of insurance contract:
 
 ```{definition, ins-contr, name = "Insurance Contract, Art. 1882, Italian Civil Code"}
-The insurance is the contract with which an insurer, in exchange of the payment of a certain premium, obliged himself, within the agreed limits:
+The insurance is the contract by which an insurer, in exchange of the payment of a certain premium, obliged himself, within the agreed limits:
 \setlist{nolistsep}
 \begin{enumerate}[noitemsep]
   \item to pay an indemnity to the insured equivalent to the damage caused by an accident;
@@ -206,9 +206,9 @@ Where:
 * the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
 * the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
-This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$.
+This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (paragraph \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$.
 
-
+ <!-- $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$ -->
 
 ### Risk premium and Technical Price {#chap:risk-prem-tech-price}
 
@@ -221,7 +221,7 @@ P^{(risk)} = E(S)
 $$
 ```
 
-The _Risk Premium_ is the premium that on average covers the total cost of claims. As mentioned above, as the coverage spans are usually short, we are not taking into account the timing of the claims and we don't discount the fact that the claims occur later than the premium payment.
+The _Risk Premium_ is the premium that on average covers the total cost of claims. As mentioned above, as the coverage spans are usually short, we are not taking into account the timing of the claims so we don't discount the fact that the claims occur later than the premium payment.
 
 It is clear that this premium, that only covers the cost of claims, is not "proper" in the practice. 
 
@@ -234,7 +234,7 @@ P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
 $$
 ```
 
-Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, a loading must be added. This loading can be justified as a loading for the risk or as a profit loading.
+Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
 
 The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
 
@@ -732,8 +732,10 @@ In order to model the large claims it is possible to use the following three dec
   \label{large-claim-decomposition-2}
   S & = & \sum_{i=1}^{N}{Z_i}
     \ = \ \sum_{i=1}^{N}{\left(
-      \{Z_i|Z_i>\bar{z}\} I_{Z_i>\bar{z}} +
-      \{Z_i|Z_i\le\bar{z}\} I_{Z_i\le\bar{z}}
+      %\{Z_i|Z_i>\bar{z}\} I_{Z_i>\bar{z}} +
+      %\{Z_i|Z_i\le\bar{z}\} I_{Z_i\le\bar{z}}
+      Z_i I_{Z_i>\bar{z}} +
+      Z_i I_{Z_i\le\bar{z}}
       \right)} \\[12pt]
   \label{large-claim-decomposition-3}
   S & = & \sum_{i=1}^{N}{Z_i}
@@ -874,7 +876,7 @@ If $n>1$, the binomial distribution assumes a shape centered on its expected val
 
 In non-life insurance pricing, the binomial distribution can be used to model the probability for a claim to have specific characteristics. For example we can use it to model the probability that a certain claim is a large one $P(Z>\bar{z})$ in order to model separately attritional claims severity $\{Z|Z\le\bar{z}\}$ and large claims severity $\{Z|Z>\bar{z}\}$, as we have seen in section section \@ref(chap:large-claims).
 
-Another example is the decomposition between claims with only damage to things and claims with also injuries to people. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
+Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
 
 As for large claims we can decompose $S$ in the following two ways:
 
@@ -895,7 +897,7 @@ As for large claims we can decompose $S$ in the following two ways:
 
 where:
 
-* $N^{(things)}$ is the number of claims with only damage to things;
+* $N^{(things)}$ is the number of claims with only material damages;
 * $N^{(inj)}$ is the number of claims with injuries;
 * $J$ is the event that represent that a specific claim presents injuries; such as $Z$ is a representative for $Z_1, Z_2, \dots, Z_N$, $J$ is a representative for $J_1, J_2, \dots, J_N$.
 
@@ -949,7 +951,7 @@ What an observation is, depends on the variable we are modeling. For instance:
 * If we are modeling the claim severity $Z_j$, each observation could be a claim $j$, the weights could all be $1$ and the realizations of response variables could be the observed cost for the claim $j$. It is also possible to model the claim severity taking into account the total cost of claims for the policy $S_i = \sum_{j=1}^{N_i}{Z_j}$. In this case, each observation would be a policy $i$, the weights would be the number of claims for each policy $n_i$ and the realizations of response variables would be the total observed cost for the claims of the policy $i$.
 * If we are modeling the occurrence of injuries in a claim $I_{Jj}$, each observation could be a claim $j$, the weights could be all $1$ and the realizations of response variables could be an indicator that assume the value $1$ if the claim $j$ caused injuries and $0$ otherwise. As for the claim severity, we can also aggregate data for policy, so each observation would be a policy $i$, the weights would be the number of claims $n_i$ for the policy $i$ and the realizations of response variables would be the number of claims that caused injuries among the claims of the policy $i$.
 
-In each of these cases, $y_i$ is seen as a realization of the random variable $Y_i$. With an inferential process we obtain estimations on $Y_i$ based on observations of their realizations $y_i$.
+In each of these cases, $y_i$ is seen as a realization of the random variable $Y_i$. With an inferential process we obtain estimations on $Y_i$ disctribution based on observations of their realizations $y_i$.
 
 
 
@@ -1096,7 +1098,7 @@ In section \@ref(chap:risk-prem-tech-price) we defined:
 
 In section \@ref(chap:personalization) we described how the risk premium can be estimated. In this thesis we are not going to deal with the estimate of the expenses.
 
-In this section we are going to discuss what the _Tariff_ and the _Offer Price_ are and which are the further needs that the offer should satisfy. The following description is referred to MTPL insurance in the Italian market. Most of the comment we make can be applied to other motor coverages too.
+In this section we are going to discuss what the _Tariff_ and the _Offer Price_ are and which are the further needs that the offer should satisfy. The following description is referred to MTPL insurance in the Italian market. Most of the comments we make can be applied to other motor coverages too.
 
 
 ### Tariff and Offer Price
