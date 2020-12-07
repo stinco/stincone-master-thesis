@@ -152,6 +152,7 @@
 \usepackage{microtype}
 \usepackage{nicefrac}
 \usepackage{amsmath}
+\allowdisplaybreaks[1]   % To alow multipages equations with align
 \usepackage{amssymb}
 \usepackage{textcomp}
 \usepackage[cal=cm]{mathalfa}

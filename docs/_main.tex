@@ -147,7 +147,8 @@ to Non-Life Insurance Pricing}
 % For bold symbol in equations
 \usepackage{bm}
 
-
+% For multiline cells in tables
+\usepackage{makecell}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% THE ACTUAL DOCUMENT STARTS HERE %%%%%
@@ -470,18 +471,18 @@ The variable \(Z_i|N=n\) used in this definition can be interpreted as the \emph
 
 Let's consider the variabile \(Z_i|N>i\). We can interpret it as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that the \(i\)\textsuperscript{th} claim occurred}. From the hypotheses provided in definition \ref{def:comp-dist} we can obtain that also \(Z_i|N>i\) has the same distribution of \(Z_i|N=n, \ i<n\). This can be easily obtained as follows:
 
-\begin{eqnarray}
+\begin{align}
 \label{eq:z1}
-P\left(Z_i \middle| N\ge i \right) & = & P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
-\ = \\ \label{eq:z2} & = &
+P\left(Z_i \middle| N\ge i \right) & = P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
+\\ \label{eq:z2} & =
 \sum_{n=i}^{+\infty}{ \underbrace{P\left(Z_i\le z \middle| N=n\right)}_{=F_Z(z)} P\left( N = n \middle| N\ge i \right)}
-\ = \\ \label{eq:z3} & = &
+\\ \label{eq:z3} & =
 \sum_{n=i}^{+\infty}{ F_Z(z) P\left( N = n \middle| N\ge i \right)}
-\ = \\ \label{eq:z4} & = &
+\\ \label{eq:z4} & =
 F_Z(z) \underbrace{\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)}}_{=1}
-\ = \\ \nonumber & = &
+\\ \nonumber & =
 F_Z(z)
-\end{eqnarray}
+\end{align}
 
 Where:
 
@@ -504,20 +505,20 @@ Under the hypotheses defined in definition \ref{def:comp-dist}, it is possible t
 
 The expected value of the total cost of claims \(E(S)\) can be obtained from the expected value of the claims count \(E(N)\) and the expected value of the claim severity \(E(Z)\) as follows:
 
-\begin{eqnarray}
+\begin{align}
 \label{eq:s1}
-E(S) & = & \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
-\ = \\ \label{eq:s2} & = &
+E(S) & = \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
+\\ \label{eq:s2} & =
 \sum_{n=0}^{+\infty}{P(N=n) \, E\left(\sum_{i=1}^{n}{Z_i} \middle| N = n \right)}
-\ = \\ \label{eq:s3} & = &
+\\ \label{eq:s3} & =
 \sum_{n=0}^{+\infty}{P(N=n) \sum_{i=1}^{n}{\underbrace{E\left( Z_i \middle| N = n \right)}_{=E(Z)}}}
-\ = \\ \label{eq:s4} & = &
+\\ \label{eq:s4} & =
 \sum_{n=0}^{+\infty}{P(N=n) n E(Z)}
-\ = \\ \label{eq:s5} & = &
+\\ \label{eq:s5} & =
 E(Z) \underbrace{\sum_{n=0}^{+\infty}{n P(N=n)}}_{=E(N)}
-\ = \\ \label{eq:s6} & = &
+\\ \label{eq:s6} & =
 E(N)E(Z)
-\end{eqnarray}
+\end{align}
 
 Where:
 
@@ -665,10 +666,10 @@ In table \ref{tab:dummy-variables} the dummy variable encoding is illustrated.
 
 \caption{\label{tab:dummy-variables}Dummy variables encoding.}
 \centering
-\begin{tabular}[t]{lrrr}
+\begin{tabular}[t]{lccc}
 
-make & z1 & z2 & z3\\
-\hline
+\textbf{Make} & \textbf{$z_1$} & \textbf{$z_2$} & \textbf{$z_3$}\\
+\midrule\addlinespace
 Fiat & 1 & 0 & 0\\
 Alfa-Romeo & 0 & 1 & 0\\
 Lancia & 0 & 0 & 1\\
@@ -840,10 +841,10 @@ In particular, if the observed period spans 1 year, we get:
 
 \[ M = N \sim Poisson(\lambda) \]
 
-\hypertarget{distribution-for-the-claims-size-z}{%
-\subsubsection{\texorpdfstring{Distribution for the claims size \(Z\)}{Distribution for the claims size Z}}\label{distribution-for-the-claims-size-z}}
+\hypertarget{distribution-for-the-claim-severity-z}{%
+\subsubsection{\texorpdfstring{Distribution for the claim severity \(Z\)}{Distribution for the claim severity Z}}\label{distribution-for-the-claim-severity-z}}
 
-The claim size \(Z\) is a continuour variable with determination in \([0, +\infty[\). As for the claims count \(N\), even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive probability to all the numbers in \(]0, +\infty[\). As the null claims are excluded, it is natural tu assume \(P\left( Z=0 \right) = 0\). One of the most common distribution used for \(Z\) is the Gamma distribution.
+The claim severity \(Z\) is a continuour variable with determination in \([0, +\infty[\). As for the claims count \(N\), even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive probability to all the numbers in \(]0, +\infty[\). As the null claims are excluded, it is natural tu assume \(P\left( Z=0 \right) = 0\). One of the most common distribution used for \(Z\) is the Gamma distribution.
 
 \begin{definition}[Gamma Distribution]
 \label{def:def-gamma} \iffalse (Gamma Distribution) \fi{} A random variable \(Z\) with support \([0, +\infty[\) has a Gamma distribution, if its probability density function is:
@@ -895,14 +896,30 @@ In figure \ref{fig:plot-gamma}, for different levels of \(\alpha\) and \(\gamma\
 
 In figure \ref{fig:plot-gamma} the first three distributions represented have the same expected value \(E(Z)=\frac{\alpha}{\rho} = 4\), but different shapes. The third and the fourth have the same variance \(Var(Z) = \frac{\alpha}{\rho^2} = 8\), but different expected values. As the shape parameter \(\alpha\) increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
 
-From the parametrical form of the moments, we get that \(Var(Z)\) and \(E(Z)\) are linked as follows:
+Another parametrization often used for Gamma distribution is obtained by using the mean \(\mu\) as a parameter:
 
-\[Var(Z) = \frac{\alpha}{\rho^2} = \frac{1}{\alpha} \left(E(Z) \right)^ 2\]
+\[
+\mu = \frac{\alpha}{\rho}
+\]
 
-From this relation we find that the coefficient of variation is:
+With this parametrization, the density function becomes:
+
+\[
+f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\frac{\alpha}{\mu} z}, \quad \alpha > 0, \ \rho > 0
+\]
+
+The advantage of using the parameters \((\alpha, \mu)\) is that the link between \(E(Z)\) and \(Var(Z)\) becomes more clear:
+
+\begin{align*}
+E(Z)   & = \mu \\
+Var(Z) & = \frac{1}{\alpha}\mu^2
+\end{align*}
+
+Computing the coefficient of variation we then obtain:
+
 \[CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}\]
 
-This result means that, given the shape parameter \(\alpha\), the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern.
+This result means that, given the shape parameter \(\alpha\), the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter \ref{chap:models}, for Gamma distribution, we will use the parametrization based on \((\alpha, \mu)\) instead of the one based on \((\alpha, \rho)\).
 
 Another characteristic of Gamma distribution that could be problematic in modeling claims size is that it has a light tail. This means that, as \(z\) goes to \(+\infty\), \(f_Z(z)\) aproaches \(0\) quite fast. This could lead to a poor fitting for \emph{large claims}. Other distributions with havier tails are for example the \emph{log-Normal} and the \emph{Pareto}.
 
@@ -962,16 +979,16 @@ Let's indicate with \(Z_{(i)}\) the \(i\)\textsuperscript{th} in order from the 
 
 In order to model the large claims it is possible to use the following three decompositions of the total cost of claims \(S\):
 
-\begin{eqnarray}
+\begin{align}
   \nonumber
-  S & = & \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
+  S & = \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
         \underbrace{Z_{(N^{(a)} + 1)} + Z_{(N^{(a)} + 2)} + \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}} \\
   \label{large-claim-decomposition-1}
-    & = & \underbrace{\sum_{i=1}^{N^{(a)}}{Z_{(i)}}}_{=S^{(a)}} +
+    & = \underbrace{\sum_{i=1}^{N^{(a)}}{Z_{(i)}}}_{=S^{(a)}} +
             \underbrace{\sum_{i = N^{(a)} + 1}^{N^{(a)} + N^{(l)}}{Z_{(i)}}}_{=S^{(l)}}
     \ = \ S^{(a)} + S^{(l)} \\[12pt]
   \label{large-claim-decomposition-2}
-  S & = & \sum_{i=1}^{N}{Z_i}
+  S & = \sum_{i=1}^{N}{Z_i}
     \ = \ \sum_{i=1}^{N}{\left(
       %\{Z_i|Z_i>\bar{z}\} I_{Z_i>\bar{z}} +
       %\{Z_i|Z_i\le\bar{z}\} I_{Z_i\le\bar{z}}
@@ -979,29 +996,29 @@ In order to model the large claims it is possible to use the following three dec
       Z_i I_{Z_i\le\bar{z}}
       \right)} \\[12pt]
   \label{large-claim-decomposition-3}
-  S & = & \sum_{i=1}^{N}{Z_i}
+  S & = \sum_{i=1}^{N}{Z_i}
     \ = \ \sum_{i=1}^{N}{\left(Z'_i + Z''_i\right)}
     \ = \ \sum_{i=1}^{N}{\left(Z'_i + Z''_i I_{Z_i > \bar{z}}\right)}
-\end{eqnarray}
+\end{align}
 
 These three decompositions of \(S\) are useful because they provide three decompositions of \(E(S)\):
 
-\begin{eqnarray}
+\begin{align}
   \nonumber
-  E(S) & = & E(S^{(a)}) + E(S^{(l)}) \\
+  E(S) & = E(S^{(a)}) + E(S^{(l)}) \\
     \label{large-claim-decomposition-expected-1}
-    & = & E(N^{(a)}) E(Z|Z\le\bar{z}) + E(N^{(l)}) E(Z|Z>\bar{z}) \\[12pt]
+    & = E(N^{(a)}) E(Z|Z\le\bar{z}) + E(N^{(l)}) E(Z|Z>\bar{z}) \\[12pt]
   \nonumber
-  E(S) & = & E(N) E(Z) \\
+  E(S) & = E(N) E(Z) \\
     \nonumber
-    & = & E(N) \left[P(Z\le\bar{z}) E(Z|Z\le\bar{z}) + P(Z>\bar{z}) E(Z|Z > \bar{z}) \right] \\
+    & = E(N) \left[P(Z\le\bar{z}) E(Z|Z\le\bar{z}) + P(Z>\bar{z}) E(Z|Z > \bar{z}) \right] \\
     \label{large-claim-decomposition-expected-2}
-    & = & E(N) \left[\left( 1 - P(Z>\bar{z}) \right) E(Z|Z\le\bar{z}) + P(Z>\bar{z}) E(Z|Z > \bar{z})\right] \\[12pt]
+    & = E(N) \left[\left( 1 - P(Z>\bar{z}) \right) E(Z|Z\le\bar{z}) + P(Z>\bar{z}) E(Z|Z > \bar{z})\right] \\[12pt]
   \nonumber
-  E(S) & = & E(N) E(Z) \\
+  E(S) & = E(N) E(Z) \\
     \label{large-claim-decomposition-expected-3}
-    & = & E(N) \left[E(Z') + P(Z>\bar{z}) E(Z'')\right]
-\end{eqnarray}
+    & = E(N) \left[E(Z') + P(Z>\bar{z}) E(Z'')\right]
+\end{align}
 
 \ref{large-claim-decomposition-expected-1}, \ref{large-claim-decomposition-expected-2} and \ref{large-claim-decomposition-expected-3} provide three approaches to model attritional and large claims.
 
@@ -1032,7 +1049,7 @@ The \emph{binomial distribution} is used to model the counting on events that oc
 p_Y(y) = P\left( Y = y \right) = \binom{n}{y} p^y (1-p)^{n-y}, \quad p \in [0, 1]
 \]
 
-We will indicate it with the notation \(Y \sim Binomial(n, p)\).
+We will indicate it with the notation \(Y \sim Binom(n, p)\).
 \end{definition}
 
 \begin{figure}[!hbtp]
@@ -1057,24 +1074,38 @@ If \(n = 1\), the binomial distribution assumes only the values \(1\) (with prob
 
 If \(n>1\), the binomial distribution assumes a shape centered on its expected value \(E(Y)=np\) and fading for values of \(y\) that moves away from \(E(Y)\). As \(n\) increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
 
+From the binomial Distribution it is also possible to define the scaled binomial distribution by dividing its value by \(n\).
+
+\begin{definition}[Scaled Binomial Distribution]
+\label{def:def-scaled-binomial} \iffalse (Scaled Binomial Distribution) \fi{} If \(Y\sim Binom(n, p)\), and \(Y' = \frac{Y}{n}\), we will say that \(Y'\) has a \textit{Scaled Binomial Distribution} and we will indicate it with the notation \(Y' \sim Binom(n, p)/n\).
+
+The support of \(Y'\) is \(\{0, \frac{1}{n}, \frac{2}{n}, \dots, 1 \}\) and its probability function is:
+
+\[
+p_{Y'}(y') = P\left( Y' = y' \right) = \binom{n}{ny'} p^{ny'} (1-p)^{n-ny'}, \quad p \in [0, 1]
+\]
+\end{definition}
+
+In chapter \ref{chap:models} we will use the Scaled Binomial Distribution.
+
 In non-life insurance pricing, the binomial distribution can be used to model the probability for a claim to have specific characteristics. For example we can use it to model the probability that a certain claim is a large one \(P(Z>\bar{z})\) in order to model separately attritional claims severity \(\{Z|Z\le\bar{z}\}\) and large claims severity \(\{Z|Z>\bar{z}\}\), as we have seen in section section \ref{chap:large-claims}.
 
 Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
 
 As for large claims we can decompose \(S\) in the following two ways:
 
-\begin{eqnarray}
+\begin{align}
   \nonumber
-  E(S) & = & E(S^{(things)}) + E(S^{(inj)}) \\
+  E(S) & = E(S^{(things)}) + E(S^{(inj)}) \\
     \label{inj-claim-decomposition-expected-1}
-    & = & E(N^{(things)}) E(Z|\bar{J}) + E(N^{(inj)}) E(Z|J) \\[12pt]
+    & = E(N^{(things)}) E(Z|\bar{J}) + E(N^{(inj)}) E(Z|J) \\[12pt]
   \nonumber
-  E(S) & = & E(N) E(Z) \\
+  E(S) & = E(N) E(Z) \\
     \nonumber
-    & = & E(N) \left[P(\bar{J}) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\
+    & = E(N) \left[P(\bar{J}) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\
     \label{inj-claim-decomposition-expected-2}
-    & = & E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J)\right]
-\end{eqnarray}
+    & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J)\right]
+\end{align}
 
 where:
 
@@ -1146,9 +1177,9 @@ In each of these cases, \(y_i\) is seen as a realization of the random variable 
 \hypertarget{settlement-process-and-ibnr}{%
 \subsubsection{Settlement process and IBNR}\label{settlement-process-and-ibnr}}
 
-One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
+One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
-In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed in the times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
+In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
 
 \begin{figure}
 \centering
@@ -1376,11 +1407,43 @@ f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}}
 where:
 
 \begin{itemize}
-\item $\theta$ and $\lambda$ are two real parameters, $\theta\in\Theta\subseteq\mathbb{R}$, $\lambda\in\Lambda\subseteq]0, +\infty[$;
-\item $b(\cdot)$ and $c(\cdot)$ are real function, $c(y, \lambda)\ge0$;
+\item $\theta\in\Theta\subseteq\mathbb{R}$ is called \textit{canonical parameter};
+\item $\lambda\in\Lambda\subseteq]0, +\infty[$ is called \textit{dispersion parameter};
+\item $b: \Theta \rightarrow \mathbb{R}$ is a real function called \textit{cumulant function};
+\item $c: (\mathcal{Y}, \Lambda) \rightarrow [0, +\infty[$ is a real function;
 \item $\Theta$ is a non degenerate interval, i.e. $\text{int}\Theta$ is not empty.
 \end{itemize}
 \end{definition}
+
+An exponential family \(\mathcal{F}\) is characterized by the element \(\left( \Theta, b(\cdot), \Lambda, c(\cdot, \cdot) \right)\). By properly choosing the sets \(\Theta, \Lambda\) and the functions \(b(\cdot), c(\cdot, \cdot)\) it is possible to obtain many useful families.
+
+It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \ref{tab:exp-families} the characterizations for these exponential families are reported.
+
+\begin{table}[!h]
+
+\caption{\label{tab:exp-families}Some Linear Exponential Families.}
+\centering
+\begin{tabular}[t]{lcccccc}
+
+\textbf{Distribution} & \textbf{Notation} & \textbf{$\Theta$} & \textbf{$\theta$} & \textbf{$\Lambda$} & \textbf{$\lambda$} & \textbf{$b(\theta)$}\\
+\toprule\addlinespace
+Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma>0$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
+\addlinespace\hline\addlinespace
+Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu>0$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
+\addlinespace\hline\addlinespace
+Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha>0, \ \mu>0$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
+\addlinespace\hline\addlinespace
+\makecell[l]{Scaled\\Binomial} & \makecell[c]{$Binom(n, p)/n$,\\$n\in\mathbb{N}, \ p\in]0,1[$} & $\mathbb{R}$ & $\log{\frac{p}{1-p}}$ & $\left\{\frac{1}{n}\right\}$ & $\frac{1}{n}$ & $\log\left(1+e^{\theta}\right)$\\
+
+\end{tabular}
+\end{table}
+
+The distributions that belongs to an exponential family have many useful properties. For example they are provided with all the moments and they can be obtained using the derivatives of the cumulative function \(b(\cdot)\). If \(Y\) is a random variable with distribution belonging to an exponential family \(\mathcal{F}\) with parameters \(\theta, \lambda\), its first two moments are:
+
+\begin{align*}
+E(Y)   & = b'(\theta) \\
+Var(Y) & = \lambda b''(\theta)
+\end{align*}
 
 \hypertarget{model-assumptions}{%
 \subsubsection{Model assumptions}\label{model-assumptions}}

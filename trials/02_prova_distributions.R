@@ -1,3 +1,10 @@
+#####
+# 2. Prova Distributions
+# Leonardo Stincone
+# 21/11/2020
+# R 4.0.2
+#####
+
 library(tidyverse)
 library(knitr)
 library(kableExtra)

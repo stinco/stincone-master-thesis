@@ -46,18 +46,96 @@ $$
 where:
 
 \begin{itemize}
-\item $\theta$ and $\lambda$ are two real parameters, $\theta\in\Theta\subseteq\mathbb{R}$, $\lambda\in\Lambda\subseteq]0, +\infty[$;
-\item $b(\cdot)$ and $c(\cdot)$ are real function, $c(y, \lambda)\ge0$;
+\item $\theta\in\Theta\subseteq\mathbb{R}$ is called \textit{canonical parameter};
+\item $\lambda\in\Lambda\subseteq]0, +\infty[$ is called \textit{dispersion parameter};
+\item $b: \Theta \rightarrow \mathbb{R}$ is a real function called \textit{cumulant function};
+\item $c: (\mathcal{Y}, \Lambda) \rightarrow [0, +\infty[$ is a real function;
 \item $\Theta$ is a non degenerate interval, i.e. $\text{int}\Theta$ is not empty.
 \end{itemize}
 
 ```
 
+An exponential family $\mathcal{F}$ is characterized by the element $\left( \Theta, b(\cdot), \Lambda, c(\cdot, \cdot) \right)$. By properly choosing the sets $\Theta, \Lambda$ and the functions $b(\cdot), c(\cdot, \cdot)$ it is possible to obtain many useful families.
+
+It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \@ref(tab:exp-families) the characterizations for these exponential families are reported.
+
+```{r, exp-families-table, echo = FALSE}
+
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma>0$",
+                         "$Poisson(\\mu)$,\n$\\mu>0$",
+                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha>0, \\ \\mu>0$",
+                         "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}, \\ p\\in]0,1[$"),
+                       align = "c"),
+  `$\\Theta$` = c("$\\mathbb{R}$",
+                  "$\\mathbb{R}$",
+                  "$]-\\infty, 0[$",
+                  "$\\mathbb{R}$"),
+  `$\\theta$` = c("$\\mu$",
+                  "$\\log{(\\mu)}$",
+                  "$-\\frac{1}{\\mu}$",
+                  "$\\log{\\frac{p}{1-p}}$"),
+  `$\\Lambda$` = c("$]0, +\\infty[$",
+                  "$\\left\\{1\\right\\}$",
+                  "$]0,+\\infty[$",
+                  "$\\left\\{\\frac{1}{n}\\right\\}$"),
+  `$\\lambda$` = c("$\\sigma^2$",
+                  "$1$",
+                  "$\\frac{1}{\\alpha}$",
+                  "$\\frac{1}{n}$"),
+  `$b(\\theta)$` = c("$\\frac{\\theta^2}{2}$",
+                  "$e^{\\theta}$",
+                  "$-\\log{\\left(-\\theta\\right)}$",
+                  "$\\log\\left(1+e^{\\theta}\\right)$"),
+)
+
+table %>% 
+  kable(
+    # format = "latex",
+    booktabs = T,
+    align = "lcccccc",
+    vline = "",
+    # toprule = "", midrule = "\\midrule",
+    # linesep = "\\\\[-1em]", bottomrule = "",
+    toprule = "", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
+    # toprule = "", midrule = "\\midrule\\addlinespace",
+    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    caption = "Some Linear Exponential Families.",
+    label = "exp-families",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  row_spec(1, bold = T)
+  
+```
+
+The distributions that belongs to an exponential family have many useful properties. For example they are provided with all the moments and they can be obtained using the derivatives of the cumulative function $b(\cdot)$. If $Y$ is a random variable with distribution belonging to an exponential family $\mathcal{F}$ with parameters $\theta, \lambda$, its first two moments are:
+
+```{=latex}
+\begin{align*}
+E(Y)   & = b'(\theta) \\
+Var(Y) & = \lambda b''(\theta)
+\end{align*}
+```
+
+
+
 
 #### Model assumptions
 
 
+
+
+
 #### Variable selection
+
 
 
 

@@ -1,3 +1,10 @@
+#####
+# 1. Prova Kable
+# Leonardo Stincone
+# 10/11/2020
+# R 4.0.2
+#####
+
 library(tidyverse)
 library(knitr)
 library(kableExtra)
