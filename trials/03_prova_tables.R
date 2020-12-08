@@ -10,6 +10,7 @@
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(lubridate)
 
 theme_set(theme_bw())
 
@@ -187,11 +188,7 @@ table %>%
 
 
 
-
-
-
-
-
-
-
+# dmy("13/11/2020") - (dmy("8/12/2020") - dmy("13/11/2020"))
+# dmy("13/11/2020") - dmy("6/10/2020")
+# dmy("13/11/2020") + 38
 

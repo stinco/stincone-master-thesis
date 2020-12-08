@@ -178,6 +178,17 @@ $endfor$
 % For multiline cells in tables
 \usepackage{makecell}
 
+% % For Acronyms
+% % $if(loa)$
+% \usepackage[utf8]{inputenc}
+% \usepackage[acronym]{glossaries}
+% \makeglossaries
+% % $endif$
+% 
+% \newacronym{glm}{GLM}{Generalized Linear Model}
+% \newacronym{gam}{GAM}{Generalized Additive Model}
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% THE ACTUAL DOCUMENT STARTS HERE %%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -362,6 +373,13 @@ $endif$
 $if(abbreviations)$
 \include{$abbreviations$}
 $endif$
+
+
+% List of acronyms
+% $if(loa)$
+% \printglossary[type=\acronymtype]
+% $endif$
+
 
 % The Roman pages, like the Roman Empire, must come to its inevitable close.
 \end{romanpages}
