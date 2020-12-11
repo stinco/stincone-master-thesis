@@ -192,3 +192,67 @@ table %>%
 # dmy("13/11/2020") - dmy("6/10/2020")
 # dmy("13/11/2020") + 38
 
+
+
+
+# Canonical function ####
+
+
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  `\\makecell[c]{Cumulant function\\\\$b(\\theta)$}` = c("$\\frac{\\theta^2}{2}$",
+                     "$e^{\\theta}$",
+                     "$-\\log{\\left(-\\theta\\right)}$",
+                     "$\\log\\left(1+e^{\\theta}\\right)$"),
+  `$b'(\\theta)$` = c("$\\theta$",
+                      "$e^\\theta$",
+                      "$-\\frac{1}{\\theta}$",
+                      "$\\frac{e^{\\theta}}{1 + e^{\\theta}}$"),
+  `$g(\\mu)=b'^{-1}(\\mu)$` = c("$\\mu$",
+                                  "$\\log{(\\mu)}$",
+                                  "$-\\frac{1}{\\mu}$",
+                                  "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
+)
+
+table %>% 
+  kable(
+    # format = "latex",
+    booktabs = T,
+    align = "lcccccc",
+    vline = "",
+    # toprule = "", midrule = "\\midrule",
+    # linesep = "\\\\[-1em]", bottomrule = "",
+    toprule = "", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
+    # toprule = "", midrule = "\\midrule\\addlinespace",
+    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    caption = "Canonical link functions.",
+    label = "can-link-fun",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  row_spec(1, bold = T)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

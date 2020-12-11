@@ -155,6 +155,10 @@ to Non-Life Insurance Pricing}
 % \newacronym{glm}{GLM}{Generalized Linear Model}
 % \newacronym{gam}{GAM}{Generalized Additive Model}
 
+% For mathscr font in equations
+\usepackage{mathrsfs}
+
+
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% THE ACTUAL DOCUMENT STARTS HERE %%%%%
@@ -1397,7 +1401,7 @@ In this chapter we are going to describe some of the most widespread models for 
 \hypertarget{statistical-models}{%
 \section{Statistical Models}\label{statistical-models}}
 
-In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning model. This allows us to have a comparison between GLM based models and general purpose machine learning models.
+In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 \hypertarget{glm}{%
 \subsection{GLM}\label{glm}}
@@ -1408,7 +1412,7 @@ In this section we will start by describing the Generalized Linear Model (GLM), 
 One of the GLM assumptions is that the response variables belong to a \emph{Linear Exponential Family}. In this section we are going to explain what it is and which distributions fit its definition.
 
 \begin{definition}[Linear Exponential Family]
-\label{def:linear-exp-family} \iffalse (Linear Exponential Family) \fi{} A Linear Exponential Family \(\mathcal{F}\) is a parametrical family probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
+\label{def:linear-exp-family} \iffalse (Linear Exponential Family) \fi{} A Linear Exponential Family \(\mathcal{F}\) is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
 
 \[
 f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
@@ -1425,7 +1429,7 @@ where:
 \end{itemize}
 \end{definition}
 
-An exponential family \(\mathcal{F}\) is characterized by the elements \(\left( \Theta, b(\cdot), \Lambda, c(\cdot, \cdot) \right)\). By properly choosing the sets \(\Theta, \Lambda\) and the functions \(b(\cdot), c(\cdot, \cdot)\) it is possible to obtain many useful families.
+An exponential family \(\mathcal{F}\) is characterized by the elements \(\left( \Theta, b(\cdot), \Lambda, c(\cdot, \cdot) \right)\). By properly choosing the sets \(\Theta, \Lambda\) and the functions \(b(\cdot), c(\cdot, \cdot)\), it is possible to obtain many useful families.
 
 It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \ref{tab:exp-families} the characterizations for these exponential families are reported.
 
@@ -1450,10 +1454,11 @@ Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha>0, \ \mu>0$} & $]-\infty, 0[
 
 The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function \(b(\cdot)\). If \(Y\) is a random variable with distribution belonging to an exponential family \(\mathcal{F}\) with parameters \(\theta, \lambda\), its first two moments are:
 
-\begin{align*}
+\begin{align}
+\label{eq:exp-fam-expected-value}
 E(Y)   & = b'(\theta) \\
 Var(Y) & = \lambda b''(\theta)
-\end{align*}
+\end{align}
 
 As, within a specified family, the parameters \(\theta\) and \(\lambda\) determine a distribution, in practical problems the object of estimation will be the couple \((\theta, \lambda)\). In many problems it is natural to consider distributions from a linear exponential family where the dispersion parameter can be expressed as \(\lambda = \frac{\phi}{\omega}\), where \(\omega>0\) is a known \emph{weight} and \(\phi>0\) is a parameter that we will keep calling \emph{dispersion parameter}. In this case, the density of probability function depends on the parameters \(\theta\) and \(\phi\) and will be expressed as:
 \[
@@ -1473,7 +1478,7 @@ In this case the parameters \(\theta\) and \(\phi\) will be object of estimation
 \hypertarget{model-assumptions}{%
 \subsubsection{Model assumptions}\label{model-assumptions}}
 
-Let's assume that, for \(n\) statistical units, the observations \(\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots, (\boldsymbol{x}_n, \omega_n, y_n) \right\}\) are available, where \(\boldsymbol{x}_i\) is a vector of explanatory variables determinations, \(\omega_i\) is a known weight and \(y_i\) is the response variable determinations. \(\boldsymbol{x}_i, \omega_i, y_i\) are all real numbers. The vector \(\boldsymbol{y} = (y_1, \dots, y_n)^t\) is considered a determination of the response random vector \(\boldsymbol{Y} = (Y_1, \dots, Y_n)^t\).
+Let's assume that, for \(n\) statistical units, the observations \(\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots, (\boldsymbol{x}_n, \omega_n, y_n) \right\}\) are available, where \(\boldsymbol{x}_i\) is a vector of explanatory variables determinations, \(\omega_i\) is a known weight and \(y_i\) is the response variable determination. \(\boldsymbol{x}_i, \omega_i, y_i\) are all real numbers. The vector \(\boldsymbol{y} = (y_1, \dots, y_n)^t\) is considered a determination of the response random vector \(\boldsymbol{Y} = (Y_1, \dots, Y_n)^t\).
 
 In GLM we assume that:
 
@@ -1491,7 +1496,7 @@ In GLM we assume that:
   \[
   \eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}
   \]
-  that is linear function of the regression parameters \(\boldsymbol{\beta} = \left( \beta_0, \beta_1, \dots, \beta_p \right)\).
+  that is a linear function of the regression parameters \(\boldsymbol{\beta} = \left( \beta_0, \beta_1, \dots, \beta_p \right)\).
 \item
   The linear predictor \(\eta_i\) is linked to the expected value of the response variable \(\mu_i = E(Y_i)\) by the following relation:
   \[
@@ -1500,7 +1505,7 @@ In GLM we assume that:
   where \(g:\mathbb{R}\rightarrow\mathbb{R}\) is a monotonic function with continuous first and second derivatives. \(g(\cdot)\) is called \emph{link function}.
 \end{enumerate}
 
-Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in which each row represents the vector of the explanatory variables for the observation \(i\) \(\boldsymbol{x}_{i\cdot}\) and each column represents the vector of the observations for the explanatory variable \(j\) \(\boldsymbol{x}_{\cdot j}\). The design matrix is represented in figure \ref{fig:design-matrix}. The matrix starts with a column of 1s, that is used to model the intercept. Thus, it is a matrix \(n\times(p+1)\). We assume, as it is common in actuarial datasets, that \(n>p+1\).
+Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in which each row \(\boldsymbol{x}_{i\cdot}\) represents the vector of the explanatory variables for the observation \(i\) and each column \(\boldsymbol{x}_{\cdot j}\) represents the vector of the observations for the explanatory variable \(j\). The design matrix is represented in figure \ref{fig:design-matrix}. The matrix starts with a column of 1s, that is used to model the intercept. Thus, it is a matrix \(n\times(p+1)\). We assume, as it is common in actuarial datasets, that \(n>p+1\).
 
 \begin{figure}[!hbtp]
 
@@ -1511,7 +1516,7 @@ Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in whi
 \caption{Design Matrix $\boldsymbol{X}$.}\label{fig:design-matrix}
 \end{figure}
 
-With \(\boldsymbol{X}\), we can express the GLM structural assumptions in a matrix form as:
+We can then express the GLM structural assumptions in a matrix form as:
 
 \[
 \boldsymbol{g}(\boldsymbol{\mu}) = \boldsymbol{X} \boldsymbol{\beta}
@@ -1532,10 +1537,53 @@ where \(\boldsymbol{g}(\cdot)\) must be intended as the vectorial function that 
 \end{array}
 \]
 
-On the design matrix, we assume it to be a full rank matrix, i.e.~\(\text{rank}(\boldsymbol{X}) = p+1\). This assumption corresponds to assuming that the \(\boldsymbol{X}\) columns are linearly independent.
+We assume the design matrix to be a full rank matrix, i.e.~\(\text{rank}(\boldsymbol{X}) = p+1\). This assumption corresponds to assuming that the \(\boldsymbol{X}\) columns are linearly independent.
+
+The function \(g(\cdot)\) can be chosen as any monotonic function with continuous first and second derivatives. Given a family \(\mathcal{F}\) a common choice is its canonical link function that is defined as:
+\[
+g(\mu) = b'^{-1}(\mu)
+\]
+
+From \eqref{eq:exp-fam-expected-value} we we obtains that, as \(\mu = b'(\theta)\), choosing the canonical function corresponds in using \(\theta\) as the linear predictor:
+\[
+\eta = g(\mu) = b'^{-1}(\mu) = \theta
+\]
+
+In table \ref{tab:can-link-fun} the canonical link functions for the families mentioned in \ref{tab:exp-families} are reported:
+
+\begin{table}[!h]
+
+\caption{\label{tab:can-link-fun}Canonical link functions.}
+\centering
+\begin{tabular}[t]{lccc}
+
+\textbf{Distribution} & \textbf{\makecell[c]{Cumulant function\\$b(\theta)$}} & \textbf{\makecell[c]{Derivative\\$b'(\theta)$}} & \textbf{\makecell[c]{Canonical link function\\$g(\mu)=b'^{-1}(\mu)$}}\\
+\toprule\addlinespace
+Normal & $\frac{\theta^2}{2}$ & $\theta$ & $\mu$\\
+\addlinespace\hline\addlinespace
+Poisson & $e^{\theta}$ & $e^\theta$ & $\log{(\mu)}$\\
+\addlinespace\hline\addlinespace
+Gamma & $-\log{\left(-\theta\right)}$ & $-\frac{1}{\theta}$ & $-\frac{1}{\mu}$\\
+\addlinespace\hline\addlinespace
+\makecell[l]{Scaled\\Binomial} & $\log\left(1+e^{\theta}\right)$ & $\frac{e^{\theta}}{1 + e^{\theta}}$ & $\log{\left( \frac{p}{1-p} \right)}$\\
+
+\end{tabular}
+\end{table}
+
+In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drowback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This requires some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) must be \(>0\). For this reason, it is preferred to use \(g(\mu) = log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
 
 \hypertarget{model-fitting}{%
 \subsubsection{Model fitting}\label{model-fitting}}
+
+The model depends on the parameters \(\boldsymbol{\beta}, \phi\). Indeed, the parameters \(\theta_i\) can be obtained by \(\boldsymbol{\beta}\) as:
+
+\[
+\theta_i = b'^{-1}(\mu_i) = b'^{-1}(g^{-1}(\eta_i)) = b'^{-1}\left(g^{-1}\left(\boldsymbol{x}_i^t\boldsymbol{\beta}\right)\right)
+\]
+
+Therefore, fitting the model corresponds to estimate \(\boldsymbol{\beta}, \phi\). The technique used in GLM to estimate \(\boldsymbol{\beta}, \phi\) is the \emph{maximum likelihood}.
+
+Let's indicate with \(l(\boldsymbol{\beta}, \phi, \boldsymbol{y})\) the model likelihood.
 
 \hypertarget{variable-effects}{%
 \subsubsection{Variable effects}\label{variable-effects}}
