@@ -197,29 +197,28 @@ table %>%
 
 # Canonical function ####
 
-
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
                            align = "l"),
   `\\makecell[c]{Cumulant function\\\\$b(\\theta)$}` = c("$\\frac{\\theta^2}{2}$",
-                     "$e^{\\theta}$",
-                     "$-\\log{\\left(-\\theta\\right)}$",
-                     "$\\log\\left(1+e^{\\theta}\\right)$"),
-  `$b'(\\theta)$` = c("$\\theta$",
-                      "$e^\\theta$",
-                      "$-\\frac{1}{\\theta}$",
-                      "$\\frac{e^{\\theta}}{1 + e^{\\theta}}$"),
-  `$g(\\mu)=b'^{-1}(\\mu)$` = c("$\\mu$",
-                                  "$\\log{(\\mu)}$",
-                                  "$-\\frac{1}{\\mu}$",
-                                  "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
+                                                         "$e^{\\theta}$",
+                                                         "$-\\log{\\left(-\\theta\\right)}$",
+                                                         "$\\log\\left(1+e^{\\theta}\\right)$"),
+  `\\makecell[c]{Derivative\\\\$b'(\\theta)$}` = c("$\\theta$",
+                                                   "$e^\\theta$",
+                                                   "$-\\frac{1}{\\theta}$",
+                                                   "$\\frac{e^{\\theta}}{1 + e^{\\theta}}$"),
+  `\\makecell[c]{Canonical link function\\\\$g(\\mu)=b'^{-1}(\\mu)$}` = c("$\\mu$",
+                                                                          "$\\log{(\\mu)}$",
+                                                                          "$-\\frac{1}{\\mu}$",
+                                                                          "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
 )
 
 table %>% 
   kable(
     # format = "latex",
     booktabs = T,
-    align = "lcccccc",
+    align = "lccc",
     vline = "",
     # toprule = "", midrule = "\\midrule",
     # linesep = "\\\\[-1em]", bottomrule = "",
@@ -241,6 +240,40 @@ table %>%
 
 
 
+# Deviance ####
+
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  `\\makecell[c]{Deviance\\\\$D(\\hat{\\boldsymbol{\\beta}}, \\boldsymbol{y})$}` = c(
+    "$\\sum_{i=1}^{n}{\\left( y_i - \\hat{\\mu}_i \\right)^2}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} - \\left( y_i - \\hat{\\mu}_i \\right) \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ - \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} + \\frac{ y_i - \\hat{\\mu}_i }{\\hat{\\mu}_i} \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)}+ \\left(1-y_i\\right) \\log{\\left(\\frac{1-y_i}{1-\\hat{\\mu}_i}\\right)} \\right\\}}$"
+  ))
+
+table %>% 
+  kable(
+    # format = "latex",
+    booktabs = T,
+    align = "lc",
+    vline = "",
+    # toprule = "", midrule = "\\midrule",
+    # linesep = "\\\\[-1em]", bottomrule = "",
+    toprule = "", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
+    # toprule = "", midrule = "\\midrule\\addlinespace",
+    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    caption = "Deviance for exponential families",
+    label = "deviance",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  row_spec(1, bold = T)
 
 
 

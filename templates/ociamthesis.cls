@@ -152,7 +152,9 @@
 \usepackage{microtype}
 \usepackage{nicefrac}
 \usepackage{amsmath}
-\allowdisplaybreaks[1]   % To alow multipages equations with align
+\allowdisplaybreaks[1]                    % To alow multipages equations with align
+\DeclareMathOperator*{\argmin}{arg\,min}  % Declaring operator argmin
+\DeclareMathOperator*{\argmax}{arg\,max}  % Declaring operator argmax
 \usepackage{amssymb}
 \usepackage{textcomp}
 \usepackage[cal=cm]{mathalfa}

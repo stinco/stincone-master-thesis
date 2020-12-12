@@ -38,11 +38,9 @@ One of the GLM assumptions is that the response variables belong to a _Linear Ex
 
 ```{definition, linear-exp-family, name = "Linear Exponential Family"}
 A Linear Exponential Family $\mathcal{F}$ is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
-
 $$
 f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
 $$
-
 where:
 
 \begin{itemize}
@@ -117,7 +115,6 @@ table %>%
 ```
 
 The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function $b(\cdot)$. If $Y$ is a random variable with distribution belonging to an exponential family $\mathcal{F}$ with parameters $\theta, \lambda$, its first two moments are:
-
 ```{=latex}
 \begin{align}
 \label{eq:exp-fam-expected-value}
@@ -159,6 +156,8 @@ $$
 g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta}
 $$
 where $g:\mathbb{R}\rightarrow\mathbb{R}$ is a monotonic function with continuous first and second derivatives. $g(\cdot)$ is called _link function_.
+
+Often, the assumption 1 is called stochastic assumption, while the 2 and 3 are called structural assumptions.
 
 Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which each row $\boldsymbol{x}_{i\cdot}$ represents the vector of the explanatory variables for the observation $i$ and each column $\boldsymbol{x}_{\cdot j}$ represents the vector of the observations for the explanatory variable $j$. The design matrix is represented in figure \@ref(fig:design-matrix). The matrix starts with a column of 1s, that is used to model the intercept. Thus, it is a matrix $n\times(p+1)$. We assume, as it is common in actuarial datasets, that $n>p+1$.
 
@@ -208,13 +207,10 @@ Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which
 
 
 We can then express the GLM structural assumptions in a matrix form as:
-
 $$
 \boldsymbol{g}(\boldsymbol{\mu}) = \boldsymbol{X} \boldsymbol{\beta}
 $$
-
 where $\boldsymbol{g}(\cdot)$ must be intended as the vectorial function that links every $\mu_i$ to $g(\mu_i)$.
-
 $$
 \begin{array}{cccc}
 \boldsymbol{g}: & \mathbb{R}^n & \longrightarrow & \mathbb{R}^n \\
@@ -234,13 +230,12 @@ The function $g(\cdot)$ can be chosen as any monotonic function with continuous 
 $$
 g(\mu) = b'^{-1}(\mu)
 $$
-
-From \@ref(eq:exp-fam-expected-value) we we obtains that, as $\mu = b'(\theta)$, choosing the canonical function corresponds in using $\theta$ as the linear predictor:
+From \@ref(eq:exp-fam-expected-value) we we obtains that, as $\mu = b'(\theta)$, choosing the canonical function corresponds to using $\theta$ as the linear predictor:
 $$
 \eta = g(\mu) = b'^{-1}(\mu) = \theta
 $$
 
-In table \@ref(tab:can-link-fun) the canonical link functions for the families mentioned in \@ref(tab:exp-families) are reported:
+In table \@ref(tab:can-link-fun) the canonical link functions for the families mentioned in \@ref(tab:exp-families) are reported.
 
 ```{r, can-link-fun, echo = FALSE}
 table <- tibble(
@@ -264,7 +259,7 @@ table %>%
   kable(
     # format = "latex",
     booktabs = T,
-    align = "lcccccc",
+    align = "lccc",
     vline = "",
     # toprule = "", midrule = "\\midrule",
     # linesep = "\\\\[-1em]", bottomrule = "",
@@ -284,22 +279,172 @@ table %>%
   row_spec(1, bold = T)
 ```
 
-In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drowback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This requires some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ must be $>0$. For this reason, it is preferred to use $g(\mu) = log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
-
+In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
 
 
 #### Model fitting
 
-The model depends on the parameters $\boldsymbol{\beta}, \phi$. Indeed, the parameters $\theta_i$ can be obtained by $\boldsymbol{\beta}$ as:
-
+The model depends on the parameters $\left(\boldsymbol{\beta}, \phi\right)$. Indeed, the parameters $\theta_i$ can be obtained by $\boldsymbol{\beta}$ as:
 $$
 \theta_i = b'^{-1}(\mu_i) = b'^{-1}(g^{-1}(\eta_i)) = b'^{-1}\left(g^{-1}\left(\boldsymbol{x}_i^t\boldsymbol{\beta}\right)\right)
 $$
 
-Therefore, fitting the model corresponds to estimate $\boldsymbol{\beta}, \phi$. The technique used in GLM to estimate $\boldsymbol{\beta}, \phi$ is the _maximum likelihood_.
+Therefore, fitting the model corresponds to estimating $\left(\boldsymbol{\beta}, \phi\right)$. The technique used in GLM is the _maximum likelihood_. Let's indicate with $L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$ the model likelihood. We remind that the likelihood is a function of the parameters that maps $\left(\boldsymbol{\beta}, \phi\right)$ to the density (or probability in the discrete case) of the observed values $\boldsymbol{y}$ conditioned to the parameters $\left(\boldsymbol{\beta}, \phi\right)$
+$$
+\begin{array}{cccc}
+L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
+   & \left(\boldsymbol{\beta}, \phi\right) & \longmapsto & f_{\boldsymbol{Y}}(\boldsymbol{y}; \boldsymbol{\theta}, \phi)
+\end{array}
+$$
 
-Let's indicate with $l(\boldsymbol{\beta}, \phi, \boldsymbol{y})$ the model likelihood.
+The maximum likelihood estimates are the values $\left(\boldsymbol{\beta}, \phi\right)$ that maximize $L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$. In practice, $\boldsymbol{\beta}$ are the parameters of interest, while $\phi$ is considered as a disturbance parameter. It is also possible to show that conditioned to any $\phi$, the value for $\boldsymbol{\beta}$ that maximizes $L(\cdot, \cdot)$ does not depend on $\phi$. Therefore, $\boldsymbol{\beta}$ and $\phi$ can be estimated separately.
 
+Let's indicate with $\tilde{\boldsymbol{\beta}}$ the maximum likelihood estimator for $\boldsymbol{\beta}$. Its determination $\hat{\boldsymbol{\beta}}$ is defined as:
+```{=latex}
+\begin{equation}
+\label{eq:max-lik-est}
+\hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\end{equation}
+```
+
+
+Finding the values $\hat{\boldsymbol{\beta}}$ that maximize the likelihood corresponds to finding the values that maximize the log-likelihood $l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}$. For the independence hypothesis on $Y_1, \dots, Y_n$ we get:
+```{=latex}
+\begin{align}
+\nonumber
+l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
+\log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}
+\\ \nonumber & =
+\log{\left(\prod_{i=1}^{n}{\exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} c(y_i, \phi, \omega_i)}\right)}
+\\ \label{eq:log-like} & =
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\\ \nonumber & =
+\sum_{i=1}^{n}{l_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\end{align}
+```
+
+The maximum value of $l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$ can be obtained by imposing all its partial derivatives equal to $0$:
+$$
+\frac{\partial l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+{\partial\beta_j}
+= 0, \quad \forall j\in\{0,1,\dots,p\}
+$$
+
+These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that the Fisher scoring algorithm corresponds to iteratively solving a weighted least squares optimization problem.
+
+A statistic that can be used to measures the goodness of fit of a model is the _Deviance_. It can be used by comparing the current model log-likelihood $l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ with the _saturated model_ log-likelihood $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$. The saturated model is the model with $n$ parameter, so a model where the expected values of the response variables $\mu_1, \dots, \mu_n$ are estimated with their observed values $y_1, \dots, y_n$. It is possible to show that $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$. The closer $l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ is to $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$, the better the current model fitting is.
+
+```{definition, deviance-def, name = "Deviance"}
+Given $l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ the log-likelihood of the current model and $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
+$$
+S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y}) =
+-2\left(
+l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\right)
+$$
+The \textit{Deviance} of the current model is defined as:
+$$
+D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) =
+\phi \, S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
+$$
+
+```
+
+In deviance notation $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})$, the parameter $\phi$ is not reported because the deviance does not depend on $\phi$. Indeed, from \@ref(eq:log-like) we get:
+```{=latex}
+\begin{align*}
+S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
+& =
+-2\left(
+l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\right)
+\\ & =
+-2\left(
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\right.
+\\ & \qquad \qquad -
+\left.
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\theta_i^* - b(\theta_i^*) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\right)
+\\ & =
+-2\left(
+\sum_{i=1}^{n}{
+\frac{\omega_i}{\phi}
+\left\{
+\left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right]
+- \left[y_i\theta_i^* - b(\theta_i^*) \right]
+\right\}
+}
+\right)
+%
+\\[12pt]
+%
+D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
+& =
+-2\left(
+\sum_{i=1}^{n}{
+\omega_i
+\left\{
+\left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right]
+- \left[y_i\theta_i^* - b(\theta_i^*) \right]
+\right\}
+}
+\right)
+\end{align*}
+```
+
+In table \@ref(tab:deviance) the deviances for the families mentioned in \@ref(tab:exp-families) are reported.
+
+```{r, deviance-exp-fam, echo = FALSE}
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  `Deviance $D(\\hat{\\boldsymbol{\\beta}}, \\boldsymbol{y})$` = c(
+    "$\\sum_{i=1}^{n}{\\left( y_i - \\hat{\\mu}_i \\right)^2}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} - \\left( y_i - \\hat{\\mu}_i \\right) \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ - \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} + \\frac{ y_i - \\hat{\\mu}_i }{\\hat{\\mu}_i} \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)}+ \\left(1-y_i\\right) \\log{\\left(\\frac{1-y_i}{1-\\hat{\\mu}_i}\\right)} \\right\\}}$"
+  ))
+
+table %>% 
+  kable(
+    # format = "latex",
+    booktabs = T,
+    align = "lc",
+    vline = "",
+    # toprule = "", midrule = "\\midrule",
+    # linesep = "\\\\[-1em]", bottomrule = "",
+    toprule = "", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
+    # toprule = "", midrule = "\\midrule\\addlinespace",
+    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    caption = "Deviance for Linear Exponential Families",
+    label = "deviance",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  row_spec(1, bold = T)
+```
+
+As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depends on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_.
 
 <!--
 * Maximum likelihood
@@ -317,7 +462,8 @@ Let's indicate with $l(\boldsymbol{\beta}, \phi, \boldsymbol{y})$ the model like
 #### Variable effects
 
 
-<!-- * Qualitative variables / binary variables
+<!--
+* Qualitative variables / binary variables
   + Dummy variables
 * Quantitative variables
   + Linear effects
@@ -326,6 +472,7 @@ Let's indicate with $l(\boldsymbol{\beta}, \phi, \boldsymbol{y})$ the model like
 * Interactions
   + Manual interactions
     Problem: Scalability. Con p parametri ho choose(p, 2) possibili interazioni
+* link log -> modello moltiplicativo
  -->
 
 

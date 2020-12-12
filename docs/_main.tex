@@ -584,7 +584,7 @@ The result of the Technical Price with these loadings can be further modified ba
 \hypertarget{chap:personalization}{%
 \section{Modeling and Personalization}\label{chap:personalization}}
 
-In this section We are going to better explain how pricing based on policyholder information works.
+In this section we are going to better explain how pricing based on policyholder information works.
 
 \hypertarget{chap:pricing-variables}{%
 \subsection{Pricing variables}\label{chap:pricing-variables}}
@@ -837,22 +837,17 @@ Under these hypotheses we obtain the following result:
 
 \begin{theorem}[Poisson Process]
 \label{thm:th-process-poisson} \iffalse (Poisson Process) \fi{} If \(\{N(t), t\ge 0 \}\) is a Poisson process with intensity \(\lambda\), then:
-
 \[\forall t\ge 0, \forall \Delta t >0, \ \Rightarrow \ N(t + \Delta t) - N(t) \sim Poisson(\lambda \Delta t)\]
 \end{theorem}
 
 This result tells us that the distribution of the number of events in any interval \(]t, t+\Delta t]\) only depends on the size of the interval \(\Delta t\). Moreover, for the Poisson property we saw in section \ref{chap:dist-n}, we get:
-
 \[E(N(t + \Delta t) - N(t)) = \lambda \Delta t\]
 
 So, the expected number of arrivals is proportional to the size of the interval \(\Delta t\). The intensity of the process \(\lambda\) can be also interpreted as the expected number of claims in a unitary period.
 
 If we assume that the claims that occur to a policy comes from a Poisson process with intensity \(\lambda\), if we observe that policy for the period \(]t, t+v]\), the claims count in that exposure period \(M\) are distributed as:
-
 \[ M\sim Poisson(\lambda \Delta t) \]
-
 In particular, if the observed period spans 1 year, we get:
-
 \[ M = N \sim Poisson(\lambda) \]
 
 \hypertarget{distribution-for-the-claim-severity-z}{%
@@ -865,7 +860,7 @@ The claim severity \(Z\) is a continuour variable with determination in \([0, +\
 \[
 f_Z(z) = \frac{\rho^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\rho z}, \quad \alpha > 0, \ \rho > 0
 \]
-where \(\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}\)
+where \(\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}\).
 
 We will indicate it with the notation \(Z \sim Gamma(\alpha, \rho)\).
 \end{definition}
@@ -911,18 +906,15 @@ In figure \ref{fig:plot-gamma}, for different levels of \(\alpha\) and \(\gamma\
 In figure \ref{fig:plot-gamma} the first three distributions represented have the same expected value \(E(Z)=\frac{\alpha}{\rho} = 4\), but different shapes. The third and the fourth have the same variance \(Var(Z) = \frac{\alpha}{\rho^2} = 8\), but different expected values. As the shape parameter \(\alpha\) increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
 
 Another parametrization often used for Gamma distribution is obtained by using the mean \(\mu\) as a parameter:
-
 \[
 \mu = \frac{\alpha}{\rho}
 \]
-
 With this parametrization, the density function becomes:
-
 \[
 f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\frac{\alpha}{\mu} z}, \quad \alpha > 0, \ \rho > 0
 \]
 
-The advantage of using the parameters \((\alpha, \mu)\) is that the link between \(E(Z)\) and \(Var(Z)\) becomes more clear:
+The advantage of using the parameters \((\alpha, \mu)\) is that the link between \(E(Z)\) and \(Var(Z)\) becomes clearer:
 
 \begin{align*}
 E(Z)   & = \mu \\
@@ -930,9 +922,7 @@ Var(Z) & = \frac{1}{\alpha}\mu^2
 \end{align*}
 
 Computing the coefficient of variation we then obtain:
-
 \[CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}\]
-
 This result means that, given the shape parameter \(\alpha\), the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter \ref{chap:models}, for Gamma distribution, we will use the parametrization based on \((\alpha, \mu)\) instead of the one based on \((\alpha, \rho)\).
 
 Another characteristic of Gamma distribution that could be problematic in modeling claims size is that it has a light tail. This means that, as \(z\) goes to \(+\infty\), \(f_Z(z)\) aproaches \(0\) quite fast. This could lead to a poor fitting for \emph{large claims}. Other distributions with havier tails are for example the \emph{log-Normal} and the \emph{Pareto}.
@@ -985,7 +975,6 @@ where
 \end{itemize}
 
 Let's indicate with \(Z_{(i)}\) the \(i\)\textsuperscript{th} in order from the smallest to the bigger. Sorting the claims we can separate the attritional claims from the large claims as follows:
-
 \[
 \underbrace{Z_{(1)}, Z_{(2)}, \dots, Z_{(N^{(a)})}}_{\text{Attritional Claims}},
 \underbrace{Z_{(N^{(a)} + 1)}, Z_{(N^{(a)} + 2)}, \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}}
@@ -1058,11 +1047,9 @@ The \emph{binomial distribution} is used to model the counting on events that oc
 
 \begin{definition}[Binomial Distribution]
 \label{def:def-binomial} \iffalse (Binomial Distribution) \fi{} A random variable \(Y\) with support \(\{0,1,2, \dots, n \}\) has a Binomial distribution, if its probability function is:
-
 \[
 p_Y(y) = P\left( Y = y \right) = \binom{n}{y} p^y (1-p)^{n-y}, \quad p \in [0, 1]
 \]
-
 We will indicate it with the notation \(Y \sim Binom(n, p)\).
 \end{definition}
 
@@ -1094,7 +1081,6 @@ From the binomial Distribution it is also possible to define the scaled binomial
 \label{def:def-scaled-binomial} \iffalse (Scaled Binomial Distribution) \fi{} If \(Y\sim Binom(n, p)\), and \(Y' = \frac{Y}{n}\), we will say that \(Y'\) has a \textit{Scaled Binomial Distribution} and we will indicate it with the notation \(Y' \sim Binom(n, p)/n\).
 
 The support of \(Y'\) is \(\{0, \frac{1}{n}, \frac{2}{n}, \dots, 1 \}\) and its probability function is:
-
 \[
 p_{Y'}(y') = P\left( Y' = y' \right) = \binom{n}{ny'} p^{ny'} (1-p)^{n-ny'}, \quad p \in [0, 1]
 \]
@@ -1156,9 +1142,8 @@ Once we have chosen how to decompose \(S\), we have to model the response variab
 In order to estimate \(r(\cdot)\) we have also to take some assumptions on the distribution of the response variable and on the shape of \(r(\cdot)\). We will call \emph{model} a set of assumptions on the response variable and on the shape of \(r(\cdot)\). We will discuss some of the most widespread models for claims count and claims severity in chapter \ref{chap:models}.
 
 Defined the model, we have to estimate it using observed data. In general, to model a response variable \(Y_i\) with the explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), the observed data is in the form:
-
 \[
-(\boldsymbol{x}_1, w_1, y_1), \ (\boldsymbol{x}_2, w_2, y_2), \ \dots, \ (\boldsymbol{x}_i, w_i, y_i), \ \dots, \ (\boldsymbol{x}_n, w_n, y_n)
+\mathcal{D} = \left\{(\boldsymbol{x}_1, w_1, y_1), \ (\boldsymbol{x}_2, w_2, y_2), \ \dots, \ (\boldsymbol{x}_i, w_i, y_i), \ \dots, \ (\boldsymbol{x}_n, w_n, y_n)\right\}
 \]
 where:
 
@@ -1258,13 +1243,10 @@ An estimate for the expected total cost of claims for a generic policy in the po
 Meanwhile, with the available data \(n_i^{(t)}\) and \(z_j^{(t)}\), the fitting for all the models needed in the decomposition of \(S\) is performed and, for each policy \(i\in\{1, 2, \dots, n\}\) for \(E(S_i)\) is obtained. Let's call it \(\widehat{E(S_i)}'\). As we used the data available in \(t\) that comes from claims not totally settled, \(\widehat{E(S_i)}'\) is a distorted estimate for \(E(S_i)\).
 
 We can then balance the estimates \(\widehat{E(S_i)}'\) with \(\widehat{E(S)}^{CL}\) by computing:
-
 \[
 \alpha = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL}
 \]
-
 and applying to the estimates as follows:
-
 \[
 \widehat{E(S_i)} = \alpha \ \widehat{E(S_i)}'
 \]
@@ -1276,7 +1258,7 @@ The property of these balanced estimates is that on average they point to \(\wid
 \begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
 & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
-& = \frac{\bcancel{n}}{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}} \widehat{E(S)}^{CL} \frac{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}}{\bcancel{n}} \\
+& = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL} \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
 & = \widehat{E(S)}^{CL}
 \end{align*}
 
@@ -1333,7 +1315,6 @@ The \emph{Tariff} is the official price for the policy. Over the cost of claims 
 In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depends on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations say that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff. We remind that in the Italian bonus-malus system the lower the class the better the premium. Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently to how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not to the tariff price, but to the price obtained subtracting from it a discount \(D_i\ge0\). The premium obtained this way is called \emph{Offer Price}.
-
 \[
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 \]
@@ -1413,11 +1394,9 @@ One of the GLM assumptions is that the response variables belong to a \emph{Line
 
 \begin{definition}[Linear Exponential Family]
 \label{def:linear-exp-family} \iffalse (Linear Exponential Family) \fi{} A Linear Exponential Family \(\mathcal{F}\) is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
-
 \[
 f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
 \]
-
 where:
 
 \begin{itemize}
@@ -1505,6 +1484,8 @@ In GLM we assume that:
   where \(g:\mathbb{R}\rightarrow\mathbb{R}\) is a monotonic function with continuous first and second derivatives. \(g(\cdot)\) is called \emph{link function}.
 \end{enumerate}
 
+Often, the assumption 1 is called stochastic assumption, while the 2 and 3 are called structural assumptions.
+
 Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in which each row \(\boldsymbol{x}_{i\cdot}\) represents the vector of the explanatory variables for the observation \(i\) and each column \(\boldsymbol{x}_{\cdot j}\) represents the vector of the observations for the explanatory variable \(j\). The design matrix is represented in figure \ref{fig:design-matrix}. The matrix starts with a column of 1s, that is used to model the intercept. Thus, it is a matrix \(n\times(p+1)\). We assume, as it is common in actuarial datasets, that \(n>p+1\).
 
 \begin{figure}[!hbtp]
@@ -1517,13 +1498,10 @@ Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in whi
 \end{figure}
 
 We can then express the GLM structural assumptions in a matrix form as:
-
 \[
 \boldsymbol{g}(\boldsymbol{\mu}) = \boldsymbol{X} \boldsymbol{\beta}
 \]
-
 where \(\boldsymbol{g}(\cdot)\) must be intended as the vectorial function that links every \(\mu_i\) to \(g(\mu_i)\).
-
 \[
 \begin{array}{cccc}
 \boldsymbol{g}: & \mathbb{R}^n & \longrightarrow & \mathbb{R}^n \\
@@ -1543,13 +1521,12 @@ The function \(g(\cdot)\) can be chosen as any monotonic function with continuou
 \[
 g(\mu) = b'^{-1}(\mu)
 \]
-
-From \eqref{eq:exp-fam-expected-value} we we obtains that, as \(\mu = b'(\theta)\), choosing the canonical function corresponds in using \(\theta\) as the linear predictor:
+From \eqref{eq:exp-fam-expected-value} we we obtains that, as \(\mu = b'(\theta)\), choosing the canonical function corresponds to using \(\theta\) as the linear predictor:
 \[
 \eta = g(\mu) = b'^{-1}(\mu) = \theta
 \]
 
-In table \ref{tab:can-link-fun} the canonical link functions for the families mentioned in \ref{tab:exp-families} are reported:
+In table \ref{tab:can-link-fun} the canonical link functions for the families mentioned in \ref{tab:exp-families} are reported.
 
 \begin{table}[!h]
 
@@ -1570,20 +1547,151 @@ Gamma & $-\log{\left(-\theta\right)}$ & $-\frac{1}{\theta}$ & $-\frac{1}{\mu}$\\
 \end{tabular}
 \end{table}
 
-In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drowback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This requires some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) must be \(>0\). For this reason, it is preferred to use \(g(\mu) = log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
+In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drawback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This would require some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) would have to be \(<0\). For this reason, it is preferred to use \(g(\mu) = log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
 
 \hypertarget{model-fitting}{%
 \subsubsection{Model fitting}\label{model-fitting}}
 
-The model depends on the parameters \(\boldsymbol{\beta}, \phi\). Indeed, the parameters \(\theta_i\) can be obtained by \(\boldsymbol{\beta}\) as:
-
+The model depends on the parameters \(\left(\boldsymbol{\beta}, \phi\right)\). Indeed, the parameters \(\theta_i\) can be obtained by \(\boldsymbol{\beta}\) as:
 \[
 \theta_i = b'^{-1}(\mu_i) = b'^{-1}(g^{-1}(\eta_i)) = b'^{-1}\left(g^{-1}\left(\boldsymbol{x}_i^t\boldsymbol{\beta}\right)\right)
 \]
 
-Therefore, fitting the model corresponds to estimate \(\boldsymbol{\beta}, \phi\). The technique used in GLM to estimate \(\boldsymbol{\beta}, \phi\) is the \emph{maximum likelihood}.
+Therefore, fitting the model corresponds to estimating \(\left(\boldsymbol{\beta}, \phi\right)\). The technique used in GLM is the \emph{maximum likelihood}. Let's indicate with \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) the model likelihood. We remind that the likelihood is a function of the parameters that maps \(\left(\boldsymbol{\beta}, \phi\right)\) to the density (or probability in the discrete case) of the observed values \(\boldsymbol{y}\) conditioned to the parameters \(\left(\boldsymbol{\beta}, \phi\right)\)
+\[
+\begin{array}{cccc}
+L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
+   & \left(\boldsymbol{\beta}, \phi\right) & \longmapsto & f_{\boldsymbol{Y}}(\boldsymbol{y}; \boldsymbol{\theta}, \phi)
+\end{array}
+\]
 
-Let's indicate with \(l(\boldsymbol{\beta}, \phi, \boldsymbol{y})\) the model likelihood.
+The maximum likelihood estimates are the values \(\left(\boldsymbol{\beta}, \phi\right)\) that maximize \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\). In practice, \(\boldsymbol{\beta}\) are the parameters of interest, while \(\phi\) is considered as a disturbance parameter. It is also possible to show that conditioned to any \(\phi\), the value for \(\boldsymbol{\beta}\) that maximizes \(L(\cdot, \cdot)\) does not depend on \(\phi\). Therefore, \(\boldsymbol{\beta}\) and \(\phi\) can be estimated separately.
+
+Let's indicate with \(\tilde{\boldsymbol{\beta}}\) the maximum likelihood estimator for \(\boldsymbol{\beta}\). Its determination \(\hat{\boldsymbol{\beta}}\) is defined as:
+
+\begin{equation}
+\label{eq:max-lik-est}
+\hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\end{equation}
+
+Finding the values \(\hat{\boldsymbol{\beta}}\) that maximize the likelihood corresponds to finding the values that maximize the log-likelihood \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\). For the independence hypothesis on \(Y_1, \dots, Y_n\) we get:
+
+\begin{align}
+\nonumber
+l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
+\log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}
+\\ \nonumber & =
+\log{\left(\prod_{i=1}^{n}{\exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} c(y_i, \phi, \omega_i)}\right)}
+\\ \label{eq:log-like} & =
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\\ \nonumber & =
+\sum_{i=1}^{n}{l_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\end{align}
+
+The maximum value of \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) can be obtained by imposing all its partial derivatives equal to \(0\):
+\[
+\frac{\partial l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+{\partial\beta_j}
+= 0, \quad \forall j\in\{0,1,\dots,p\}
+\]
+
+These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that the Fisher scoring algorithm corresponds to iteratively solving a weighted least squares optimization problem.
+
+A statistic that can be used to measures the goodness of fit of a model is the \emph{Deviance}. It can be used by comparing the current model log-likelihood \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) with the \emph{saturated model} log-likelihood \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\). The saturated model is the model with \(n\) parameter, so a model where the expected values of the response variables \(\mu_1, \dots, \mu_n\) are estimated with their observed values \(y_1, \dots, y_n\). It is possible to show that \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\). The closer \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) is to \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\), the better the current model fitting is.
+
+\begin{definition}[Deviance]
+\label{def:deviance-def} \iffalse (Deviance) \fi{} Given \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) the log-likelihood of the current model and \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
+\[
+S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y}) =
+-2\left(
+l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\right)
+\]
+The \textit{Deviance} of the current model is defined as:
+\[
+D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) =
+\phi \, S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
+\]
+\end{definition}
+
+In deviance notation \(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})\), the parameter \(\phi\) is not reported because the deviance does not depend on \(\phi\). Indeed, from \eqref{eq:log-like} we get:
+
+\begin{align*}
+S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
+& =
+-2\left(
+l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\right)
+\\ & =
+-2\left(
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\right.
+\\ & \qquad \qquad -
+\left.
+\sum_{i=1}^{n}{
+\left\{
+\frac{\omega_i}{\phi} \left[y_i\theta_i^* - b(\theta_i^*) \right] + \log{\left(c(y_i, \phi, \omega_i)\right)}
+\right\}
+}
+\right)
+\\ & =
+-2\left(
+\sum_{i=1}^{n}{
+\frac{\omega_i}{\phi}
+\left\{
+\left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right]
+- \left[y_i\theta_i^* - b(\theta_i^*) \right]
+\right\}
+}
+\right)
+%
+\\[12pt]
+%
+D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
+& =
+-2\left(
+\sum_{i=1}^{n}{
+\omega_i
+\left\{
+\left[y_i\hat{\theta}_i - b(\hat{\theta}_i) \right]
+- \left[y_i\theta_i^* - b(\theta_i^*) \right]
+\right\}
+}
+\right)
+\end{align*}
+
+In table \ref{tab:deviance} the deviances for the families mentioned in \ref{tab:exp-families} are reported.
+
+\begin{table}[!h]
+
+\caption{\label{tab:deviance}Deviance for Linear Exponential Families}
+\centering
+\begin{tabular}[t]{lc}
+
+\textbf{Distribution} & \textbf{Deviance $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})$}\\
+\toprule\addlinespace
+Normal & $\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}$\\
+\addlinespace\hline\addlinespace
+Poisson & $2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} - \left( y_i - \hat{\mu}_i \right) \right\}}$\\
+\addlinespace\hline\addlinespace
+Gamma & $2\,\sum_{i=1}^{n}{\left\{ - \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} + \frac{ y_i - \hat{\mu}_i }{\hat{\mu}_i} \right\}}$\\
+\addlinespace\hline\addlinespace
+\makecell[l]{Scaled\\Binomial} & $2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)}+ \left(1-y_i\right) \log{\left(\frac{1-y_i}{1-\hat{\mu}_i}\right)} \right\}}$\\
+
+\end{tabular}
+\end{table}
+
+As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not depends on \(\hat{\boldsymbol{\beta}}\), maximizing the likelihood in equation \eqref{eq:max-lik-est} is the same as minimizing the deviance, that can be seen as a \emph{Loss Function}.
 
 \hypertarget{variable-effects}{%
 \subsubsection{Variable effects}\label{variable-effects}}

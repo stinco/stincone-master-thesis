@@ -200,7 +200,6 @@ E(N)E(Z)
 \end{align}
 ```
 
-
 Where:
 
 * the step \@ref(eq:s1) is given by the fact that the events $\{N=0\}, \{N=1\}, \{N=2\}, \dots$ constitute a partition of the certain event $\Omega$, that allows us to use the disintegrability property of the expected value;
@@ -252,7 +251,7 @@ $$
 The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separately. The process of defining the function for obtaining $\alpha_i$ is called personalization.
 -->
 
-In this section We are going to better explain how pricing based on policyholder information works.
+In this section we are going to better explain how pricing based on policyholder information works.
 
 
 ### Pricing variables {#chap:pricing-variables}
@@ -323,7 +322,6 @@ z_3 & = \begin{cases}
 \\
 \end{align*}
 ```
-
 The variables $z_1$, $z_2$, $z_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
 
 $$
@@ -444,7 +442,6 @@ tibble(x = 0:22) %>%
 The Poisson distribution is a parametric distribution that depends on only the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
-
 ```{=latex}
 \begin{align*}
 E(N)   & = \lambda \\
@@ -517,22 +514,17 @@ Under these hypotheses we obtain the following result:
 
 ```{theorem, th-process-poisson, name = "Poisson Process"}
 If $\{N(t), t\ge 0 \}$ is a Poisson process with intensity $\lambda$, then:
-  
 $$\forall t\ge 0, \forall \Delta t >0, \ \Rightarrow \ N(t + \Delta t) - N(t) \sim Poisson(\lambda \Delta t)$$
 ```
 
 This result tells us that the distribution of the number of events in any interval $]t, t+\Delta t]$ only depends on the size of the interval $\Delta t$. Moreover, for the Poisson property we saw in section \@ref(chap:dist-n), we get:
-
 $$E(N(t + \Delta t) - N(t)) = \lambda \Delta t$$
 
 So, the expected number of arrivals is proportional to the size of the interval $\Delta t$. The intensity of the process $\lambda$ can be also interpreted as the expected number of claims in a unitary period.
 
 If we assume that the claims that occur to a policy comes from a Poisson process with intensity $\lambda$, if we observe that policy for the period $]t, t+v]$, the claims count in that exposure period $M$ are distributed as:
-
 $$ M\sim Poisson(\lambda \Delta t) $$
-
 In particular, if the observed period spans 1 year, we get:
-
 $$ M = N \sim Poisson(\lambda) $$
 
 
@@ -561,7 +553,7 @@ A random variable $Z$ with support $[0, +\infty[$ has a Gamma distribution, if i
 $$
 f_Z(z) = \frac{\rho^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\rho z}, \quad \alpha > 0, \ \rho > 0
 $$
-where $\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}$
+where $\Gamma(\alpha) = \int_{0}^{+\infty}{z^{\alpha - 1} e^{-z} \mathrm{d} z}$.
 
 We will indicate it with the notation $Z \sim Gamma(\alpha, \rho)$.
 ```
@@ -600,7 +592,6 @@ The Gamma distribution is a parametric distribution that depends on two paramete
 * $\rho > 0$, called scale parameter
 
 The first two moments of the Gamma distribution are:
-
 ```{=latex}
 \begin{align*}
 E(Z)   & = \frac{\alpha}{\rho} \\
@@ -617,30 +608,23 @@ In figure \@ref(fig:plot-gamma), for different levels of $\alpha$ and $\gamma$ t
 In figure \@ref(fig:plot-gamma) the first three distributions represented have the same expected value $E(Z)=\frac{\alpha}{\rho} = 4$, but different shapes. The third and the fourth have the same variance $Var(Z) = \frac{\alpha}{\rho^2} = 8$, but different expected values. As the shape parameter $\alpha$ increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
 
 Another parametrization often used for Gamma distribution is obtained by using the mean $\mu$ as a parameter:
-
 $$
 \mu = \frac{\alpha}{\rho}
 $$
-
 With this parametrization, the density function becomes:
-
 $$
 f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\frac{\alpha}{\mu} z}, \quad \alpha > 0, \ \rho > 0
 $$
 
-The advantage of using the parameters $(\alpha, \mu)$ is that the link between $E(Z)$ and $Var(Z)$ becomes more clear:
-
+The advantage of using the parameters $(\alpha, \mu)$ is that the link between $E(Z)$ and $Var(Z)$ becomes clearer:
 ```{=latex}
 \begin{align*}
 E(Z)   & = \mu \\
 Var(Z) & = \frac{1}{\alpha}\mu^2
 \end{align*}
 ```
-
 Computing the coefficient of variation we then obtain:
-
 $$CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}$$
-
 This result means that, given the shape parameter $\alpha$, the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter \@ref(chap:models), for Gamma distribution, we will use the parametrization based on $(\alpha, \mu)$ instead of the one based on $(\alpha, \rho)$.
 
 Another characteristic of Gamma distribution that could be problematic in modeling claims size is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ aproaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with havier tails are for example the _log-Normal_ and the _Pareto_.
@@ -736,15 +720,12 @@ where
 
 
 Let's indicate with $Z_{(i)}$ the $i$^th^ in order from the smallest to the bigger. Sorting the claims we can separate the attritional claims from the large claims as follows:
-
 $$
 \underbrace{Z_{(1)}, Z_{(2)}, \dots, Z_{(N^{(a)})}}_{\text{Attritional Claims}},
 \underbrace{Z_{(N^{(a)} + 1)}, Z_{(N^{(a)} + 2)}, \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}}
 $$
 
 In order to model the large claims it is possible to use the following three decompositions of the total cost of claims $S$:
-
-
 ```{=latex}
 \begin{align}
   \nonumber
@@ -771,8 +752,6 @@ In order to model the large claims it is possible to use the following three dec
 
 
 These three decompositions of $S$ are useful because they provide three decompositions of $E(S)$:
-
-
 ```{=latex}
 \begin{align}
   \nonumber
@@ -846,11 +825,9 @@ The _binomial distribution_ is used to model the counting on events that occurs 
 
 ```{definition, def-binomial, name = "Binomial Distribution"}
 A random variable $Y$ with support $\{0,1,2, \dots, n \}$ has a Binomial distribution, if its probability function is:
-
 $$
 p_Y(y) = P\left( Y = y \right) = \binom{n}{y} p^y (1-p)^{n-y}, \quad p \in [0, 1]
 $$
-  
 We will indicate it with the notation $Y \sim Binom(n, p)$.
 ```
 
@@ -888,7 +865,6 @@ tibble(x = seq(from = 0, to = 10, by = 1)) %>%
 The binomial distribution is a parametric distribution that depends on the parameters $n$ and $p$. $n$ represents the number of trials, while $p$ represents the probability for a trial to success. The assumption is that the $n$ trials are identical, so they have all the same probability $p$ to success. In figure \@ref(fig:plot-binomial), for different levels of $n$ and $p$, the distribution is represented.
 
 The first two moments of the binomial distribution are:
-
 ```{=latex}
 \begin{align*}
 E(N)   & = np \\
@@ -906,7 +882,6 @@ From the binomial Distribution it is also possible to define the scaled binomial
 If $Y\sim Binom(n, p)$, and $Y' = \frac{Y}{n}$, we will say that $Y'$ has a \textit{Scaled Binomial Distribution} and we will indicate it with the notation $Y' \sim Binom(n, p)/n$.
 
 The support of $Y'$ is $\{0, \frac{1}{n}, \frac{2}{n}, \dots, 1 \}$ and its probability function is:
-  
 $$
 p_{Y'}(y') = P\left( Y' = y' \right) = \binom{n}{ny'} p^{ny'} (1-p)^{n-ny'}, \quad p \in [0, 1]
 $$
@@ -975,9 +950,8 @@ Once we have chosen how to decompose $S$, we have to model the response variable
 In order to estimate $r(\cdot)$ we have also to take some assumptions on the distribution of the response variable and on the shape of $r(\cdot)$. We will call _model_ a set of assumptions on the response variable and on the shape of $r(\cdot)$. We will discuss some of the most widespread models for claims count and claims severity in chapter \@ref(chap:models).
 
 Defined the model, we have to estimate it using observed data. In general, to model a response variable $Y_i$ with the explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$, the observed data is in the form:
-
 $$
-(\boldsymbol{x}_1, w_1, y_1), \ (\boldsymbol{x}_2, w_2, y_2), \ \dots, \ (\boldsymbol{x}_i, w_i, y_i), \ \dots, \ (\boldsymbol{x}_n, w_n, y_n)
+\mathcal{D} = \left\{(\boldsymbol{x}_1, w_1, y_1), \ (\boldsymbol{x}_2, w_2, y_2), \ \dots, \ (\boldsymbol{x}_i, w_i, y_i), \ \dots, \ (\boldsymbol{x}_n, w_n, y_n)\right\}
 $$
 where:
 
@@ -1066,7 +1040,6 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
   + $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
-
 ```{=latex}
 \begin{align*}
 n_i^{(t)} & \ne n_i \\
@@ -1083,13 +1056,10 @@ An estimate for the expected total cost of claims for a generic policy in the po
 Meanwhile, with the available data $n_i^{(t)}$ and $z_j^{(t)}$, the fitting for all the models needed in the decomposition of $S$ is performed and, for each policy $i\in\{1, 2, \dots, n\}$ for $E(S_i)$ is obtained. Let's call it $\widehat{E(S_i)}'$. As we used the data available in $t$ that comes from claims not totally settled, $\widehat{E(S_i)}'$ is a distorted estimate for $E(S_i)$.
 
 We can then balance the estimates $\widehat{E(S_i)}'$ with $\widehat{E(S)}^{CL}$ by computing:
-
 $$
 \alpha = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL}
 $$
-
 and applying to the estimates as follows:
-
 $$
 \widehat{E(S_i)} = \alpha \ \widehat{E(S_i)}'
 $$
@@ -1097,12 +1067,19 @@ $$
 We will call $\widehat{E(S_i)}$ rebalanced estimates.
 
 The property of these balanced estimates is that on average they point to $\widehat{E(S)}^{CL}$:
-
+<!-- ```{=latex} -->
+<!-- \begin{align*} -->
+<!-- \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\ -->
+<!-- & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\ -->
+<!-- & = \frac{\bcancel{n}}{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}} \widehat{E(S)}^{CL} \frac{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}}{\bcancel{n}} \\ -->
+<!-- & = \widehat{E(S)}^{CL} -->
+<!-- \end{align*} -->
+<!-- ``` -->
 ```{=latex}
 \begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
 & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
-& = \frac{\bcancel{n}}{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}} \widehat{E(S)}^{CL} \frac{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}}{\bcancel{n}} \\
+& = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL} \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
 & = \widehat{E(S)}^{CL}
 \end{align*}
 ```
@@ -1149,7 +1126,6 @@ The _Tariff_ is the official price for the policy. Over the cost of claims and t
 In section \@ref(chap:pricing-variables) we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depends on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations say that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e. a lower class must correspond to a better tariff. We remind that in the Italian bonus-malus system the lower the class the better the premium. Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently to how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not to the tariff price, but to the price obtained subtracting from it a discount $D_i\ge0$. The premium obtained this way is called _Offer Price_.
-
 $$
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 $$
