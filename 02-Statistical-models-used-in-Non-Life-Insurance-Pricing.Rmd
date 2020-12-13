@@ -6,6 +6,8 @@ output:
   bookdown::html_document2: default
 documentclass: book
 bibliography: references.bib
+editor_options: 
+  chunk_output_type: inline
 ---
 
 ```{r echo=FALSE}
@@ -62,9 +64,9 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
                            align = "l"),
-  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma>0$",
-                         "$Poisson(\\mu)$,\n$\\mu>0$",
-                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha>0, \\ \\mu>0$",
+  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma0$",
+                         "$Poisson(\\mu)$,\n$\\mu0$",
+                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha0, \\ \\mu0$",
                          "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}, \\ p\\in]0,1[$"),
                        align = "c"),
   `$\\Theta$` = c("$\\mathbb{R}$",
@@ -89,18 +91,34 @@ table <- tibble(
                   "$\\log\\left(1+e^{\\theta}\\right)$"),
 )
 
+
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>"),
+      Notation = Notation %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>"),
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
+
 table %>% 
   kable(
     # format = "latex",
     booktabs = T,
     align = "lcccccc",
     vline = "",
-    # toprule = "", midrule = "\\midrule",
-    # linesep = "\\\\[-1em]", bottomrule = "",
-    toprule = "", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
-    # toprule = "", midrule = "\\midrule\\addlinespace",
-    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Some Linear Exponential Families.",
     label = "exp-families",
     escape = FALSE
@@ -110,7 +128,7 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(1, bold = T)
+  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
   
 ```
 
@@ -255,18 +273,29 @@ table <- tibble(
                                   "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
 )
 
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>")
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
 table %>% 
   kable(
     # format = "latex",
     booktabs = T,
     align = "lccc",
     vline = "",
-    # toprule = "", midrule = "\\midrule",
-    # linesep = "\\\\[-1em]", bottomrule = "",
-    toprule = "", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
-    # toprule = "", midrule = "\\midrule\\addlinespace",
-    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Canonical link functions.",
     label = "can-link-fun",
     escape = FALSE
@@ -276,7 +305,7 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(1, bold = T)
+  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
 ```
 
 In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
@@ -420,18 +449,29 @@ table <- tibble(
     "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)}+ \\left(1-y_i\\right) \\log{\\left(\\frac{1-y_i}{1-\\hat{\\mu}_i}\\right)} \\right\\}}$"
   ))
 
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>")
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
 table %>% 
   kable(
     # format = "latex",
     booktabs = T,
     align = "lc",
     vline = "",
-    # toprule = "", midrule = "\\midrule",
-    # linesep = "\\\\[-1em]", bottomrule = "",
-    toprule = "", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "",
-    # toprule = "", midrule = "\\midrule\\addlinespace",
-    # linesep = "\\addlinespace\\addlinespace", bottomrule = "",
+    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Deviance for Linear Exponential Families",
     label = "deviance",
     escape = FALSE
@@ -441,7 +481,7 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(1, bold = T)
+  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
 ```
 
 As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depends on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_.
@@ -462,6 +502,152 @@ As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depen
 #### Variable effects
 
 
+(ref:expl-var-types-caption-latex) Explanatory variables types.
+
+(ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
+
+
+```{r, echo = FALSE}
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+
+n <- 100
+b0 <- 1
+b1 <- 2
+b2 <- 1
+b12 <- -1
+sigma <- .2
+
+df1 <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
+  mutate(mu = b0 + b1 * x)
+df1$y <- rnorm(n = n, mean = df1$mu, sd = sigma)
+
+df2 <- tibble(x = c(rep(0, times = n/2), rep(1, times = n/2))) %>% 
+  mutate(mu = b0 + b2 * x)
+df2$y <- rnorm(n = n, mean = df2$mu, sd = sigma)
+
+df3 <- tibble(x1 = runif(n = n, min = 0, max = 1),
+              x2 = c(rep(0, times = n/2), rep(1, times = n/2))) %>% 
+  mutate(mu = b0 + b1 * x1 + b2*x2)
+df3$y <- rnorm(n = n, mean = df3$mu, sd = sigma)
+
+df4 <- tibble(x1 = runif(n = n, min = 0, max = 1),
+              x2 = c(rep(0, times = n/2), rep(1, times = n/2))) %>% 
+  mutate(mu = b0 + b1 * x1 + b2 * x2 + b12 * x1 * x2)
+df4$y <- rnorm(n = n, mean = df4$mu, sd = sigma)
+
+
+p1 <- df1 %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(
+    intercept = b0,
+    slope = b1,
+    color = col1
+  ) +
+  geom_point(alpha = .5) +
+  # labs(title = "Quantitative variable") +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+  
+
+p2 <- df2 %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(
+    intercept = b0,
+    slope = b2,
+    color = col1
+  ) +
+geom_point(alpha = .5) +
+  geom_point(
+    data = tibble(x = c(0, 1), y = c(b0, b0 + b2)),
+    mapping = aes(x = x, y = y),
+    color = col1,
+    size = 3,
+    alpha = .8
+  ) +
+  # labs(title = "Qualitative variable") +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
+p3 <- df3 %>% 
+  mutate(x2 = factor(x2)) %>% 
+  ggplot(aes(x = x1, color = x2, y = y)) +
+  geom_abline(
+    intercept = b0,
+    slope = b1,
+    color = col1
+  ) +
+  geom_abline(
+    intercept = b0 + b2,
+    slope = b1,
+    color = col2
+  ) +
+  geom_point(alpha = .5) +
+  scale_color_manual(values = c(col1, col2)) +
+  # labs(title = "Quantitative and qualitative variable without interaction") +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
+p4 <- df4 %>% 
+  mutate(x2 = factor(x2)) %>% 
+  ggplot(aes(x = x1, color = x2, y = y)) +
+  geom_abline(
+    intercept = b0,
+    slope = b1,
+    color = col1
+  ) +
+  geom_abline(
+    intercept = b0 + b2,
+    slope = b1 + b12,
+    color = col2
+  ) +
+  geom_point(alpha = .5) +
+  scale_color_manual(values = c(col1, col2)) +
+  # labs(title = "Quantitative and qualitative variable with interaction") +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+```
+
+```{r out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction')}
+# p1
+# p2
+# p3
+# p4
+
+
+# To align the plots in a subfigure environment
+plot_grid_split <- function(..., align = "hv", axis = "tblr"){
+  aligned_plots <- cowplot::align_plots(..., align = align, axis = axis)
+  plots <- lapply(1:length(aligned_plots), function(x){
+    cowplot::ggdraw(aligned_plots[[x]])
+  })
+  invisible(capture.output(plots))
+}
+
+plot_grid_split(p1, p2, p3, p4)
+
+```
+
+
+
 <!--
 * Qualitative variables / binary variables
   + Dummy variables
@@ -479,7 +665,6 @@ As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depen
 
 
 #### Variable selection
-
 
 
 

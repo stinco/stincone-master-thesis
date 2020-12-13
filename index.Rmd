@@ -151,6 +151,10 @@ always_allow_html: true
 library(tidyverse)
 library(knitr)
 library(kableExtra)
+library(scales)
+library(ggeasy)
+library(gridExtra)
+library(cowplot)
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')

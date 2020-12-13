@@ -1417,7 +1417,7 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 \caption{\label{tab:exp-families}Some Linear Exponential Families.}
 \centering
 \begin{tabular}[t]{lcccccc}
-
+\toprule
 \textbf{Distribution} & \textbf{Notation} & \textbf{$\Theta$} & \textbf{$\theta$} & \textbf{$\Lambda$} & \textbf{$\lambda$} & \textbf{$b(\theta)$}\\
 \toprule\addlinespace
 Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma>0$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
@@ -1427,7 +1427,7 @@ Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu>0$} & $\mathbb{R}$ & $\log{(\mu)}$ 
 Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha>0, \ \mu>0$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
 \addlinespace\hline\addlinespace
 \makecell[l]{Scaled\\Binomial} & \makecell[c]{$Binom(n, p)/n$,\\$n\in\mathbb{N}, \ p\in]0,1[$} & $\mathbb{R}$ & $\log{\frac{p}{1-p}}$ & $\left\{\frac{1}{n}\right\}$ & $\frac{1}{n}$ & $\log\left(1+e^{\theta}\right)$\\
-
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -1533,7 +1533,7 @@ In table \ref{tab:can-link-fun} the canonical link functions for the families me
 \caption{\label{tab:can-link-fun}Canonical link functions.}
 \centering
 \begin{tabular}[t]{lccc}
-
+\toprule
 \textbf{Distribution} & \textbf{\makecell[c]{Cumulant function\\$b(\theta)$}} & \textbf{\makecell[c]{Derivative\\$b'(\theta)$}} & \textbf{\makecell[c]{Canonical link function\\$g(\mu)=b'^{-1}(\mu)$}}\\
 \toprule\addlinespace
 Normal & $\frac{\theta^2}{2}$ & $\theta$ & $\mu$\\
@@ -1543,7 +1543,7 @@ Poisson & $e^{\theta}$ & $e^\theta$ & $\log{(\mu)}$\\
 Gamma & $-\log{\left(-\theta\right)}$ & $-\frac{1}{\theta}$ & $-\frac{1}{\mu}$\\
 \addlinespace\hline\addlinespace
 \makecell[l]{Scaled\\Binomial} & $\log\left(1+e^{\theta}\right)$ & $\frac{e^{\theta}}{1 + e^{\theta}}$ & $\log{\left( \frac{p}{1-p} \right)}$\\
-
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -1677,7 +1677,7 @@ In table \ref{tab:deviance} the deviances for the families mentioned in \ref{tab
 \caption{\label{tab:deviance}Deviance for Linear Exponential Families}
 \centering
 \begin{tabular}[t]{lc}
-
+\toprule
 \textbf{Distribution} & \textbf{Deviance $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})$}\\
 \toprule\addlinespace
 Normal & $\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}$\\
@@ -1687,7 +1687,7 @@ Poisson & $2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\righ
 Gamma & $2\,\sum_{i=1}^{n}{\left\{ - \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} + \frac{ y_i - \hat{\mu}_i }{\hat{\mu}_i} \right\}}$\\
 \addlinespace\hline\addlinespace
 \makecell[l]{Scaled\\Binomial} & $2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)}+ \left(1-y_i\right) \log{\left(\frac{1-y_i}{1-\hat{\mu}_i}\right)} \right\}}$\\
-
+\bottomrule
 \end{tabular}
 \end{table}
 
@@ -1695,6 +1695,19 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 
 \hypertarget{variable-effects}{%
 \subsubsection{Variable effects}\label{variable-effects}}
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[Quantitative\label{fig:expl-var-types-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-1} }\subfloat[Qualitative\label{fig:expl-var-types-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-2} }\newline\subfloat[Quantitative and qualitative \\ without interaction\label{fig:expl-var-types-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-3} }\subfloat[Quantitative and qualitative \\ with interaction\label{fig:expl-var-types-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-4} }
+
+}
+
+\caption{Explanatory variables types.}\label{fig:expl-var-types}
+\end{figure}
 
 \hypertarget{variable-selection}{%
 \subsubsection{Variable selection}\label{variable-selection}}

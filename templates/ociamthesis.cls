@@ -176,6 +176,19 @@
 \usepackage{booktabs} 
 	% For better looking tables
 
+%\usepackage{subfig}
+  % For subfigures
+
+\usepackage{subcaption}
+\captionsetup[subfigure]{justification=centering}
+  % For subfigures
+
+\setlength{\abovecaptionskip}{10pt plus 3pt minus 2pt} % Space above captions
+\setlength{\belowcaptionskip}{10pt plus 3pt minus 2pt} % Space below captions
+  
+\usepackage{float}
+  % For images after section title in appendix
+
 \usepackage{pdfpages} 
 	% Allows multi-page pdfs to be inserted as graphics
 
