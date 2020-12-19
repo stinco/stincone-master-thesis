@@ -7,7 +7,7 @@ output:
 documentclass: book
 bibliography: references.bib
 editor_options: 
-  chunk_output_type: inline
+  chunk_output_type: console
 ---
 
 ```{r echo=FALSE}
@@ -184,7 +184,9 @@ Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which
 \usetikzlibrary{arrows.meta, bending, matrix, positioning}
 \pgfdeclarelayer{bg}    % declare background layer
 \pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
-
+%\usepackage{xcolor}
+\definecolor{col1}{HTML}{F8766D}
+\definecolor{col2}{HTML}{00BFC4}
 
 \begin{center}
 \begin{tikzpicture}[node distance = 1mm and 0mm, baseline]
@@ -202,20 +204,24 @@ Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which
 
 % Draw red vertical rectangle
 \begin{pgfonlayer}{bg}    % select the background layer
-\draw[red!60, very thick, fill = red!60, fill opacity = 0.2] 
+%\draw[red!60, very thick, fill = red!60, fill opacity = 0.2] 
+%        (M1-1-4.north west) -| (M1-6-4.south east) -| (M1-1-4.north west);
+\draw[col1, very thick, fill = col1, fill opacity = 0.2] 
         (M1-1-4.north west) -| (M1-6-4.south east) -| (M1-1-4.north west);
 \end{pgfonlayer}
 \node (ev) [below = 1cm of M1-6-4.south, align = center] {$\boldsymbol{x}_{\cdot j}$\\explanatory\\variable $j$};
-\draw[red!60, very thick,shorten >=1mm, -{Stealth[bend]}] 
+\draw[col1, very thick,shorten >=1mm, -{Stealth[bend]}] 
         (ev.north) to (M1-6-4.south);
 
 % Draw blue horizontal rectangle
 \begin{pgfonlayer}{bg}    % select the background layer
-\draw[blue!60, very thick, fill = blue!60, fill opacity = 0.2]
+%\draw[blue!60, very thick, fill = blue!60, fill opacity = 0.2]
+%        (M1-4-1.north west) -| (M1-4-6.south east) -| (M1-4-1.north west);
+\draw[col2, very thick, fill = col2, fill opacity = 0.2]
         (M1-4-1.north west) -| (M1-4-6.south east) -| (M1-4-1.north west);
 \end{pgfonlayer}
 \node (obs) [right = 1cm of M1-4-6.east, align = center] {$\boldsymbol{x}_{i\cdot}$\\observation $i$};
-\draw[blue!60, very thick,shorten >=1mm, -{Stealth[bend]}] 
+\draw[col2, very thick,shorten >=1mm, -{Stealth[bend]}] 
         (obs.west) to (M1-4-6.east);
 
 \end{tikzpicture}
@@ -507,20 +513,21 @@ As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depen
 (ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
 
 
-```{r, echo = FALSE}
+```{r, plot-quant-qual-build, echo = FALSE}
 
 set.seed(42)
 
 col1 <- hue_pal()(2)[1]
 col2 <- hue_pal()(2)[2]
 
+line_size <- 2
 
-n <- 100
+n <- 200
 b0 <- 1
 b1 <- 2
 b2 <- 1
 b12 <- -1
-sigma <- .2
+sigma <- .1
 
 df1 <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
   mutate(mu = b0 + b1 * x)
@@ -530,26 +537,28 @@ df2 <- tibble(x = c(rep(0, times = n/2), rep(1, times = n/2))) %>%
   mutate(mu = b0 + b2 * x)
 df2$y <- rnorm(n = n, mean = df2$mu, sd = sigma)
 
-df3 <- tibble(x1 = runif(n = n, min = 0, max = 1),
-              x2 = c(rep(0, times = n/2), rep(1, times = n/2))) %>% 
+df3 <- tibble(x1 = runif(n = 2*n, min = 0, max = 1),
+              x2 = c(rep(0, times = n), rep(1, times = n))) %>% 
   mutate(mu = b0 + b1 * x1 + b2*x2)
-df3$y <- rnorm(n = n, mean = df3$mu, sd = sigma)
+df3$y <- rnorm(n = 2*n, mean = df3$mu, sd = sigma)
 
-df4 <- tibble(x1 = runif(n = n, min = 0, max = 1),
-              x2 = c(rep(0, times = n/2), rep(1, times = n/2))) %>% 
+df4 <- tibble(x1 = runif(n = 2*n, min = 0, max = 1),
+              x2 = c(rep(0, times = n), rep(1, times = n))) %>% 
   mutate(mu = b0 + b1 * x1 + b2 * x2 + b12 * x1 * x2)
-df4$y <- rnorm(n = n, mean = df4$mu, sd = sigma)
+df4$y <- rnorm(n = 2*n, mean = df4$mu, sd = sigma)
 
 
-p1 <- df1 %>% 
+p_quant_qual_1 <- df1 %>% 
   ggplot(aes(x = x, y = y)) +
   geom_abline(
     intercept = b0,
     slope = b1,
-    color = col1
+    color = col1,
+    size = line_size
   ) +
   geom_point(alpha = .5) +
   # labs(title = "Quantitative variable") +
+  scale_x_continuous(limits = c(0, 1)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -557,22 +566,33 @@ p1 <- df1 %>%
   )
   
 
-p2 <- df2 %>% 
+p_quant_qual_2 <- df2 %>% 
+  mutate(x = 1/2 * x + 1/4) %>% 
   ggplot(aes(x = x, y = y)) +
-  geom_abline(
-    intercept = b0,
-    slope = b2,
-    color = col1
-  ) +
-geom_point(alpha = .5) +
+  # geom_abline(
+  #   intercept = b0,
+  #   slope = b2,
+  #   color = col1
+  # ) +
   geom_point(
-    data = tibble(x = c(0, 1), y = c(b0, b0 + b2)),
+    # data = tibble(x = c(0, 1), y = c(b0, b0 + b2)),
+    data = tibble(x = c(1/4, 3/4), y = c(b0, b0 + b2)),
     mapping = aes(x = x, y = y),
     color = col1,
-    size = 3,
+    size = 5#,
+    # alpha = .8
+  ) +
+  geom_point(alpha = .5) +
+  geom_point(
+    # data = tibble(x = c(0, 1), y = c(b0, b0 + b2)),
+    data = tibble(x = c(1/4, 3/4), y = c(b0, b0 + b2)),
+    mapping = aes(x = x, y = y),
+    color = col1,
+    size = 5,
     alpha = .8
   ) +
   # labs(title = "Qualitative variable") +
+  scale_x_continuous(limits = c(0, 1)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -580,22 +600,25 @@ geom_point(alpha = .5) +
   )
 
 
-p3 <- df3 %>% 
+p_quant_qual_3 <- df3 %>% 
   mutate(x2 = factor(x2)) %>% 
   ggplot(aes(x = x1, color = x2, y = y)) +
   geom_abline(
     intercept = b0,
     slope = b1,
-    color = col1
+    color = col1,
+    size = line_size
   ) +
   geom_abline(
     intercept = b0 + b2,
     slope = b1,
-    color = col2
+    color = col2,
+    size = line_size
   ) +
   geom_point(alpha = .5) +
   scale_color_manual(values = c(col1, col2)) +
   # labs(title = "Quantitative and qualitative variable without interaction") +
+  scale_x_continuous(limits = c(0, 1)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -603,22 +626,25 @@ p3 <- df3 %>%
   )
 
 
-p4 <- df4 %>% 
+p_quant_qual_4 <- df4 %>% 
   mutate(x2 = factor(x2)) %>% 
   ggplot(aes(x = x1, color = x2, y = y)) +
   geom_abline(
     intercept = b0,
     slope = b1,
-    color = col1
+    color = col1,
+    size = line_size
   ) +
   geom_abline(
     intercept = b0 + b2,
     slope = b1 + b12,
-    color = col2
+    color = col2,
+    size = line_size
   ) +
   geom_point(alpha = .5) +
   scale_color_manual(values = c(col1, col2)) +
   # labs(title = "Quantitative and qualitative variable with interaction") +
+  scale_x_continuous(limits = c(0, 1)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -626,12 +652,7 @@ p4 <- df4 %>%
   )
 ```
 
-```{r out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction')}
-# p1
-# p2
-# p3
-# p4
-
+```{r, plot-quant-qual-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction')}
 
 # To align the plots in a subfigure environment
 plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -642,10 +663,155 @@ plot_grid_split <- function(..., align = "hv", axis = "tblr"){
   invisible(capture.output(plots))
 }
 
-plot_grid_split(p1, p2, p3, p4)
+plot_grid_split(p_quant_qual_1, p_quant_qual_2, p_quant_qual_3, p_quant_qual_4)
 
 ```
 
+(ref:expl-var-quant-effect-caption-latex) Explanatory quantitative variables effects.
+
+(ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
+
+
+```{r, plot-quant-effect-build, echo = FALSE}
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+line_size <- 2
+
+n <- 200
+b0 <- 1
+b1 <- 2
+b2 <- 1
+b12 <- -1
+sigma <- 0.05
+
+
+f1 <- function(x){1.5 * (x - .3)^2 + .25}
+
+f2 <- function(x){20*(x - .5)^4 + -4 * (x - .8)^2 - 2 * x + 2}
+
+f3 <- function(x){
+  case_when(
+    x <= .25 ~ -2 * x + 1,
+    x <= .75 ~ -1/2 * x + 5/8,
+    TRUE ~ 1/4
+  )
+}
+
+f4 <- function(x){
+  case_when(
+    x <= .75 ~ 1.5 * (x - .75)^2 + .2,
+    TRUE ~ .2
+  )
+}
+
+df <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
+  mutate(
+    mu1 = f1(x),
+    mu2 = f2(x),
+    mu3 = f3(x),
+    mu4 = f4(x)
+  )
+
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rnorm(n = n, mean = df$mu2, sd = sigma)
+df$y3 <- rnorm(n = n, mean = df$mu3, sd = sigma)
+df$y4 <- rnorm(n = n, mean = df$mu4, sd = sigma)
+
+
+p_quant_effect_1 <- df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  stat_function(
+    fun = f1,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
+p_quant_effect_2 <- df %>% 
+  select(x, value = y2) %>%  
+  ggplot() +
+  stat_function(
+    fun = f2,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_quant_effect_3 <- df %>% 
+  select(x, value = y3) %>%  
+  ggplot() +
+  # geom_vline(data = tibble(xint = c(.25, .75)),
+  #            aes(xintercept = xint),
+  #            linetype = "dotted") +
+  geom_vline(xintercept = c(.25, .75),
+             linetype = "dotted") +
+  stat_function(
+    fun = f3,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_quant_effect_4 <- df %>% 
+  select(x, value = y4) %>%  
+  ggplot() +
+  geom_vline(xintercept = .75,
+             linetype = "dotted") +
+  stat_function(
+    fun = f4,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+```
+
+```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-quant-effect-caption-gitbook)", "(ref:expl-var-quant-effect-caption-latex)"), label="expl-var-quant-effect", echo=FALSE, fig.ncol=2, fig.subcap=c('Polynomial degree 2', 'Polynomial degree 4', 'Piece-wise linear', 'Piece-wise polynomial degree 2')}
+
+# # To align the plots in a subfigure environment
+# plot_grid_split <- function(..., align = "hv", axis = "tblr"){
+#   aligned_plots <- cowplot::align_plots(..., align = align, axis = axis)
+#   plots <- lapply(1:length(aligned_plots), function(x){
+#     cowplot::ggdraw(aligned_plots[[x]])
+#   })
+#   invisible(capture.output(plots))
+# }
+
+plot_grid_split(p_quant_effect_1, p_quant_effect_2, p_quant_effect_3, p_quant_effect_4)
+```
 
 
 <!--
@@ -655,6 +821,7 @@ plot_grid_split(p1, p2, p3, p4)
   + Linear effects
   + Polynomial effects
     - GAM reference
+  + piece wise
 * Interactions
   + Manual interactions
     Problem: Scalability. Con p parametri ho choose(p, 2) possibili interazioni
@@ -666,6 +833,13 @@ plot_grid_split(p1, p2, p3, p4)
 
 #### Variable selection
 
+<!--
+* problem: effect not known
+  + not known variables
+  + not known shape
+
+
+-->
 
 
 

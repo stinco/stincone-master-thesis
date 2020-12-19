@@ -144,6 +144,13 @@ always_allow_html: true
 #   - \newacronym{glm}{GLM}{Generalized Linear Model}
 #   - \newacronym{gam}{GAM}{Generalized Additive Model}
 
+header-includes:
+  - \usepackage{xcolor}
+  - \definecolor{col1}{HTML}{F8766D}
+  - \definecolor{col2}{HTML}{00BFC4}
+
+
+
 ---
 
 

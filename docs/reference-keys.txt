@@ -26,6 +26,7 @@ tab:can-link-fun
 def:deviance-def
 tab:deviance
 fig:expl-var-types
+fig:expl-var-quant-effect
 chap:nlip-ita-market
 chap:non-life-ins
 non-life-insurance-pricing

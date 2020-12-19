@@ -10,3 +10,7 @@ readr
 purrr
 stringr
 forcats
+scales
+ggeasy
+gridExtra
+cowplot

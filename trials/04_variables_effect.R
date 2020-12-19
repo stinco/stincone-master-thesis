@@ -182,6 +182,172 @@ plot_grid_split(p1, p2, p3, p4)
 
 
 
+# Quantitative variables ####
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+
+n <- 200
+b0 <- 1
+b1 <- 2
+b2 <- 1
+b12 <- -1
+sigma <- 0.05
+
+
+f1 <- function(x){1.5 * (x - .3)^2 + .25}
+
+f2 <- function(x){20*(x - .5)^4 + -4 * (x - .8)^2 - 2 * x + 2}
+
+f3 <- function(x){
+  case_when(
+    x <= .25 ~ -2 * x + 1,
+    x <= .75 ~ -1/2 * x + 5/8,
+    TRUE ~ 1/4
+  )
+}
+
+f4 <- function(x){
+  case_when(
+    x <= .75 ~ 1.5 * (x - .75)^2 + .2,
+    TRUE ~ .2
+  )
+}
+
+df <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
+  mutate(
+    mu1 = f1(x),
+    mu2 = f2(x),
+    mu3 = f3(x),
+    mu4 = f4(x)
+  )
+
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rnorm(n = n, mean = df$mu2, sd = sigma)
+df$y3 <- rnorm(n = n, mean = df$mu3, sd = sigma)
+df$y4 <- rnorm(n = n, mean = df$mu4, sd = sigma)
+
+
+df %>% 
+  select(x, y1:y4) %>% 
+  pivot_longer(cols = y1:y4) %>% 
+  ggplot() +
+  stat_function(data = tibble(name = "y1"),
+                fun = f1,
+                col = col1,
+                size = 2) +
+  stat_function(data = tibble(name = "y2"),
+                fun = f2,
+                col = col1,
+                size = 2) +
+  geom_vline(data = tibble(name = "y3", xint = c(.25, .75)),
+             aes(xintercept = xint),
+             linetype = "dotted") +
+  stat_function(data = tibble(name = "y3"),
+                fun = f3,
+                col = col1,
+                size = 2) +
+  geom_vline(data = tibble(name = "y4", xint = .75),
+             aes(xintercept = xint),
+             linetype = "dotted") +
+  stat_function(data = tibble(name = "y4"),
+                fun = f4,
+                col = col1,
+                size = 2) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  ) +
+  facet_wrap(~name)
+
+
+
+
+p1 <- df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  stat_function(
+    fun = f1,
+    col = col1,
+    size = 2
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
+p2 <- df %>% 
+  select(x, value = y2) %>%  
+  ggplot() +
+  stat_function(
+    fun = f2,
+    col = col1,
+    size = 2
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p3 <- df %>% 
+  select(x, value = y3) %>%  
+  ggplot() +
+  # geom_vline(data = tibble(xint = c(.25, .75)),
+  #            aes(xintercept = xint),
+  #            linetype = "dotted") +
+  geom_vline(xintercept = c(.25, .75),
+             linetype = "dotted") +
+  stat_function(
+    fun = f3,
+    col = col1,
+    size = 2
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p4 <- df %>% 
+  select(x, value = y4) %>%  
+  ggplot() +
+  geom_vline(xintercept = .75,
+             linetype = "dotted") +
+  stat_function(
+    fun = f4,
+    col = col1,
+    size = 2
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  scale_x_continuous(limits = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
 
 
 

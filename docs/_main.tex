@@ -1420,11 +1420,11 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 \toprule
 \textbf{Distribution} & \textbf{Notation} & \textbf{$\Theta$} & \textbf{$\theta$} & \textbf{$\Lambda$} & \textbf{$\lambda$} & \textbf{$b(\theta)$}\\
 \toprule\addlinespace
-Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma>0$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
+Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma0$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
 \addlinespace\hline\addlinespace
-Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu>0$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
+Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu0$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
 \addlinespace\hline\addlinespace
-Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha>0, \ \mu>0$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
+Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha0, \ \mu0$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
 \addlinespace\hline\addlinespace
 \makecell[l]{Scaled\\Binomial} & \makecell[c]{$Binom(n, p)/n$,\\$n\in\mathbb{N}, \ p\in]0,1[$} & $\mathbb{R}$ & $\log{\frac{p}{1-p}}$ & $\left\{\frac{1}{n}\right\}$ & $\frac{1}{n}$ & $\log\left(1+e^{\theta}\right)$\\
 \bottomrule
@@ -1707,6 +1707,19 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 }
 
 \caption{Explanatory variables types.}\label{fig:expl-var-types}
+\end{figure}
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[Polynomial degree 2\label{fig:expl-var-quant-effect-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-quant-effect-1} }\subfloat[Polynomial degree 4\label{fig:expl-var-quant-effect-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-quant-effect-2} }\newline\subfloat[Piece-wise linear\label{fig:expl-var-quant-effect-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-quant-effect-3} }\subfloat[Piece-wise polynomial degree 2\label{fig:expl-var-quant-effect-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-quant-effect-4} }
+
+}
+
+\caption{Explanatory quantitative variables effects.}\label{fig:expl-var-quant-effect}
 \end{figure}
 
 \hypertarget{variable-selection}{%
