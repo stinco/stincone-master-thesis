@@ -280,7 +280,7 @@ Regarding the topic of variables reliability, the Italian Insurance Associations
 One of the roles of the actuary is to understand how reliable the information on the policyholder is and to decide how to use that information.
 
 
-### Pricing variables encoding
+### Pricing variables encoding {#chap:pricing-variables-encoding}
 
 Formally the pricing variables can be encoded as a vector of real numbers. $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$. In the modeling framework they can be also called explanatory variables, covariates, predictors or features.
 
@@ -293,48 +293,48 @@ The quantitative variables, with eventual transformations, are already suitable 
 
 To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
 
-If a variable $x$ has only 2 possible modalities, it can be easily encoded in a binary variable $z$ that assigns $0$ to one modality and $1$ to the other. For example, if $x = \text{sex}$, it can be encoded this way:
+If a variable $x$ has only 2 possible modalities, it can be easily encoded in a binary variable $x'$ that assigns $0$ to one modality and $1$ to the other. For example, if $x = \text{sex}$, it can be encoded this way:
 $$
-z = \begin{cases}
+x' = \begin{cases}
 1 & \text{if } \text{sex } = \text{ `Male'} \\
 0 & \text{if } \text{sex } = \text{ `Female'}
 \end{cases}
 $$
 
-In general, if a variable $x$ has $K$ modalities, it can be encoded in $K-1$ binary variables $z_1, z_2, \dots, z_{K-1}$. For example, if $x = \text{make}$ and it can have 4 possible modalities ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
+In general, if a variable $x$ has $K$ modalities, it can be encoded in $K-1$ binary variables $x'_1, x'_2, \dots, x'_{K-1}$. For example, if $x = \text{make}$ and it can have 4 possible modalities ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
 
 ```{=latex}
 \begin{align*}
-z_1 & = \begin{cases}
+x'_1 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Fiat'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
-z_2 & = \begin{cases}
+x'_2 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Alfa-Romeo'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
-z_3 & = \begin{cases}
+x'_3 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Lancia'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
 \end{align*}
 ```
-The variables $z_1$, $z_2$, $z_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
+The variables $x'_1$, $x'_2$, $x'_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
 
 $$
-\text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ z_1=z_2=z_3=0
+\text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ x'_1=x'_2=x'_3=0
 $$
 In table \@ref(tab:dummy-variables) the dummy variable encoding is illustrated.
 
 ```{r, dummy-variables-table, echo = FALSE}
 table <- tibble(
   Make = c("Fiat", "Alfa-Romeo", "Lancia", "Ferrari"),
-  `$z_1$` = c(1, 0, 0, 0),
-  `$z_2$` = c(0, 1, 0, 0),
-  `$z_3$` = c(0, 0, 1, 0)
+  `$x'_1$` = c(1, 0, 0, 0),
+  `$x'_2$` = c(0, 1, 0, 0),
+  `$x'_3$` = c(0, 0, 1, 0)
 )
 
 table %>% 

@@ -507,11 +507,9 @@ As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depen
 
 #### Variable effects
 
+As we mentioned in \@ref(chap:pricing-variables-encoding) the explanatory variables can be _quantitative_ or _qualitative_. In GLM the assumption is that the variables effect on the linear predictor $\eta$ is linear.
 
-(ref:expl-var-types-caption-latex) Explanatory variables types.
-
-(ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
-
+In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
 
 ```{r, plot-quant-qual-build, echo = FALSE}
 
@@ -667,9 +665,19 @@ plot_grid_split(p_quant_qual_1, p_quant_qual_2, p_quant_qual_3, p_quant_qual_4)
 
 ```
 
-(ref:expl-var-quant-effect-caption-latex) Explanatory quantitative variables effects.
+In top-left panel, we see the effect of the quantitative $x$ in the model $\mu_i = \beta_0 + \beta_1 x_i$. As we can see it is a straight line. The coefficient $\beta_1$ represents the slope of the line, thus $\beta_1>0$ means that $x$ and $Y$ are positively correlated, while $\beta_1<0$ means that $x$ and $Y$ are negatively correlated. For example, if $x$ is the power of the vehicle and $Y$ the yearly number of claims, $\beta_1>0$ means that the more powerful the vehicle is, the more claims the policyholder will experience on average.
 
-(ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
+In top-right panel, we see the effect of a qualitative binary variable $x$ in the model $\mu_i = \beta_0 + \beta_1 x_i$. The variable is encoded with values $0$ and $1$, so $\beta_1$ represents the effect of the modality $x=1$. In general, for a qualitative variable with $K$ modalities we will have $K-1$ dummy variables $x'_1, \dots, x'_{K-1}$ and the model will be $\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots +  + \beta_{K-1} x'_{i, K-1}$. Thus, the $\beta_j$ coefficient represents the relative effect of the modality $j$ compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if $x$ is the vehicle make, $Y$ the yearly number of claims, the base level for $x$ is 'Fiat' and the $j$^th^ modality is 'Ferrari', $\beta_j>0$ means that Ferrari cars on average experience more claims that Fiat cars.
+
+In general, in a multivariate model, the coefficient $\beta_j$ represents the effect of the variable $j$ given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable 'vehicle power', the coefficient $\beta_j$ corresponding to the modality 'Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called _Simpson paradox_ ^[<https://en.wikipedia.org/wiki/Simpson%27s_paradox>].
+
+In bottom-left panel of figure \@ref(fig:expl-var-types), we see the effect of a quantitative variable $x_1$ and a qualitative binary variable $x_2$ together in the model $\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}$. As we can seen, the effects of $x_1$ variable in the two groups defined by $x_2$ variable are represented by two parallel straight lines. The first one is $\mu_i = \beta_0 + \beta_1 x_{i1}$ and the second is $\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}$. The coefficient $\beta_2$ represents the vertical distance between the two lines.
+
+In bottom-right panel, the interaction effect between $x_1$ and $x_2$ is included in the model. The model becomes $\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}$. That means that the effect of $x_1$ variables depends on the determination of the $x_2$ variable. In the group with $x_2=0$ the effect is represented by the line $\mu_i = \beta_0 + \beta_1 x_i$; the group with $x_2=1$ the effect is represented by the line $\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}$.
+
+(ref:expl-var-types-caption-latex) Explanatory variables types.
+
+(ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
 
 
 ```{r, plot-quant-effect-build, echo = FALSE}
@@ -812,6 +820,18 @@ p_quant_effect_4 <- df %>%
 
 plot_grid_split(p_quant_effect_1, p_quant_effect_2, p_quant_effect_3, p_quant_effect_4)
 ```
+
+
+
+For quantitative variables it is possible to consider also non linear effects...
+
+This can be achieved by...
+
+
+
+(ref:expl-var-quant-effect-caption-latex) Explanatory quantitative variables effects.
+
+(ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
 
 
 <!--

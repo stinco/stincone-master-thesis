@@ -621,8 +621,8 @@ Regarding the topic of variables reliability, the Italian Insurance Associations
 
 One of the roles of the actuary is to understand how reliable the information on the policyholder is and to decide how to use that information.
 
-\hypertarget{pricing-variables-encoding}{%
-\subsection{Pricing variables encoding}\label{pricing-variables-encoding}}
+\hypertarget{chap:pricing-variables-encoding}{%
+\subsection{Pricing variables encoding}\label{chap:pricing-variables-encoding}}
 
 Formally the pricing variables can be encoded as a vector of real numbers. \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p\). In the modeling framework they can be also called explanatory variables, covariates, predictors or features.
 
@@ -641,38 +641,38 @@ The quantitative variables, with eventual transformations, are already suitable 
 
 To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
 
-If a variable \(x\) has only 2 possible modalities, it can be easily encoded in a binary variable \(z\) that assigns \(0\) to one modality and \(1\) to the other. For example, if \(x = \text{sex}\), it can be encoded this way:
+If a variable \(x\) has only 2 possible modalities, it can be easily encoded in a binary variable \(x'\) that assigns \(0\) to one modality and \(1\) to the other. For example, if \(x = \text{sex}\), it can be encoded this way:
 \[
-z = \begin{cases}
+x' = \begin{cases}
 1 & \text{if } \text{sex } = \text{ `Male'} \\
 0 & \text{if } \text{sex } = \text{ `Female'}
 \end{cases}
 \]
 
-In general, if a variable \(x\) has \(K\) modalities, it can be encoded in \(K-1\) binary variables \(z_1, z_2, \dots, z_{K-1}\). For example, if \(x = \text{make}\) and it can have 4 possible modalities (`Fiat', `Alfa-Romeo', `Lancia', `Ferrari') it can be encoded this way:
+In general, if a variable \(x\) has \(K\) modalities, it can be encoded in \(K-1\) binary variables \(x'_1, x'_2, \dots, x'_{K-1}\). For example, if \(x = \text{make}\) and it can have 4 possible modalities (`Fiat', `Alfa-Romeo', `Lancia', `Ferrari') it can be encoded this way:
 
 \begin{align*}
-z_1 & = \begin{cases}
+x'_1 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Fiat'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
-z_2 & = \begin{cases}
+x'_2 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Alfa-Romeo'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
-z_3 & = \begin{cases}
+x'_3 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Lancia'} \\
 0 & \text{otherwise} \\
 \end{cases}
 \\
 \end{align*}
 
-The variables \(z_1\), \(z_2\), \(z_3\) are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality `Ferrari' is not needed. Indeed:
+The variables \(x'_1\), \(x'_2\), \(x'_3\) are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality `Ferrari' is not needed. Indeed:
 
 \[
-\text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ z_1=z_2=z_3=0
+\text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ x'_1=x'_2=x'_3=0
 \]
 In table \ref{tab:dummy-variables} the dummy variable encoding is illustrated.
 
@@ -682,7 +682,7 @@ In table \ref{tab:dummy-variables} the dummy variable encoding is illustrated.
 \centering
 \begin{tabular}[t]{lccc}
 
-\textbf{Make} & \textbf{$z_1$} & \textbf{$z_2$} & \textbf{$z_3$}\\
+\textbf{Make} & \textbf{$x'_1$} & \textbf{$x'_2$} & \textbf{$x'_3$}\\
 \midrule\addlinespace
 Fiat & 1 & 0 & 0\\
 Alfa-Romeo & 0 & 1 & 0\\
@@ -1696,9 +1696,9 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 \hypertarget{variable-effects}{%
 \subsubsection{Variable effects}\label{variable-effects}}
 
+As we mentioned in \ref{chap:pricing-variables-encoding} the explanatory variables can be \emph{quantitative} or \emph{qualitative}. In GLM the assumption is that the variables effect on the linear predictor \(\eta\) is linear.
 
-
-
+In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
 
 \begin{figure}[!hbtp]
 
@@ -1708,6 +1708,16 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 
 \caption{Explanatory variables types.}\label{fig:expl-var-types}
 \end{figure}
+
+In top-left panel, we see the effect of the quantitative \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). As we can see it is a straight line. The coefficient \(\beta_1\) represents the slope of the line, thus \(\beta_1>0\) means that \(x\) and \(Y\) are positively correlated, while \(\beta_1<0\) means that \(x\) and \(Y\) are negatively correlated. For example, if \(x\) is the power of the vehicle and \(Y\) the yearly number of claims, \(\beta_1>0\) means that the more powerful the vehicle is, the more claims the policyholder will experience on average.
+
+In top-right panel, we see the effect of a qualitative binary variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). The variable is encoded with values \(0\) and \(1\), so \(\beta_1\) represents the effect of the modality \(x=1\). In general, for a qualitative variable with \(K\) modalities we will have \(K-1\) dummy variables \(x'_1, \dots, x'_{K-1}\) and the model will be \(\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots + + \beta_{K-1} x'_{i, K-1}\). Thus, the \(\beta_j\) coefficient represents the relative effect of the modality \(j\) compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if \(x\) is the vehicle make, \(Y\) the yearly number of claims, the base level for \(x\) is `Fiat' and the \(j\)\textsuperscript{th} modality is `Ferrari', \(\beta_j>0\) means that Ferrari cars on average experience more claims that Fiat cars.
+
+In general, in a multivariate model, the coefficient \(\beta_j\) represents the effect of the variable \(j\) given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable `vehicle power', the coefficient \(\beta_j\) corresponding to the modality `Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called \emph{Simpson paradox} \footnote{\url{https://en.wikipedia.org/wiki/Simpson\%27s_paradox}}.
+
+In bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect of a quantitative variable \(x_1\) and a qualitative binary variable \(x_2\) together in the model \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\). As we can seen, the effects of \(x_1\) variable in the two groups defined by \(x_2\) variable are represented by two parallel straight lines. The first one is \(\mu_i = \beta_0 + \beta_1 x_{i1}\) and the second is \(\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}\). The coefficient \(\beta_2\) represents the vertical distance between the two lines.
+
+In bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is included in the model. The model becomes \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\). That means that the effect of \(x_1\) variables depends on the determination of the \(x_2\) variable. In the group with \(x_2=0\) the effect is represented by the line \(\mu_i = \beta_0 + \beta_1 x_i\); the group with \(x_2=1\) the effect is represented by the line \(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\).
 
 
 
@@ -1721,6 +1731,14 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 
 \caption{Explanatory quantitative variables effects.}\label{fig:expl-var-quant-effect}
 \end{figure}
+
+For quantitative variables it is possible to consider also non linear effects\ldots{}
+
+This can be achieved by\ldots{}
+
+
+
+
 
 \hypertarget{variable-selection}{%
 \subsubsection{Variable selection}\label{variable-selection}}
