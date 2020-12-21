@@ -349,8 +349,119 @@ p4 <- df %>%
 
 
 
+# response families ####
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+line_size <- 2
+
+n <- 200
+b0 <- -2
+b1 <- 4
+# b2 <- 1
+# b12 <- -1
+sigma <- .2
+alpha <- 2
+
+df <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
+  mutate(
+    eta1 = b0 + b1 * x,
+    eta2 = b0 + b1 * x,
+    eta3 = b0 + b1 * x,
+    eta4 = b0 + b1 * x,
+    mu1 = eta1,
+    mu2 = plogis(eta2),
+    mu3 = exp(eta3),
+    mu4 = exp(eta4)
+  )
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rbinom(n = n, size = 1, prob = df$mu2)
+df$y3 <- rpois(n = n, lambda = df$mu3)
+df$y4 <- rgamma(n = n, shape = alpha, rate = alpha/df$mu4)
 
 
 
+p_resp_1 <- df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  geom_abline(
+    intercept = b0,
+    slope = b1,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
 
+p_resp_2 <- df %>% 
+  select(x, value = y2) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){plogis(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_resp_3 <- df %>% 
+  select(x, value = y3) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){exp(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_resp_4 <- df %>% 
+  select(x, value = y4) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){exp(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+
+plot_grid_split(p_resp_1, p_resp_2, p_resp_3, p_resp_4,
+                align = "h")
 

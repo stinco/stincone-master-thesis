@@ -1700,6 +1700,10 @@ As we mentioned in \ref{chap:pricing-variables-encoding} the explanatory variabl
 
 In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
 
+
+
+
+
 \begin{figure}[!hbtp]
 
 {\centering \subfloat[Quantitative\label{fig:expl-var-types-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-1} }\subfloat[Qualitative\label{fig:expl-var-types-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-2} }\newline\subfloat[Quantitative and qualitative \\ without interaction\label{fig:expl-var-types-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-3} }\subfloat[Quantitative and qualitative \\ with interaction\label{fig:expl-var-types-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/expl-var-types-4} }
@@ -1719,6 +1723,8 @@ In bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect of a 
 
 In bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is included in the model. The model becomes \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\). That means that the effect of \(x_1\) variables depends on the determination of the \(x_2\) variable. In the group with \(x_2=0\) the effect is represented by the line \(\mu_i = \beta_0 + \beta_1 x_i\); the group with \(x_2=1\) the effect is represented by the line \(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\).
 
+For quantitative variables, it is possible to consider also non linear effects in GLMs. Some exmples are reported in figure \ref{fig:expl-var-quant-effect}.
+
 
 
 
@@ -1732,16 +1738,34 @@ In bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is inc
 \caption{Explanatory quantitative variables effects.}\label{fig:expl-var-quant-effect}
 \end{figure}
 
-For quantitative variables it is possible to consider also non linear effects\ldots{}
+The basic way to achieve it is by adding polynomial terms to the linear predictor. For instance, if \(x\) is a quantitative variable, it is possible to add to the model the term \(x^2\), obtaining the model \(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_i^2\). An example a model with both \(x\) and \(x^2\) terms is represented in top-left panel of figure \ref{fig:expl-var-quant-effect}. Adding the quadratic term, the effect graph becomes a parabola.
 
-This can be achieved by\ldots{}
+With the same logic, it is possible to add more power terms. In general, if we want to model \(x\) with a polynomial of degree \(d\), we can consider the model \(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d\). In top-right panel of figure \ref{fig:expl-var-quant-effect} a 4\textsuperscript{th} degree polynomial effect is repesented. We highlight that the model is still considered linear, as the attribute ``Linear'' in ``General Linear Model'' is referred to the relation between the parameters \(\beta_j\) and the linear predictor \(\eta_i\) that must be linear.
+
+Another way to model non liner effects of explanatory varibles is to separate the effects by pieces. In bottom-left panel of figure \ref{fig:expl-var-quant-effect} a case in which the \(x\) effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms \((x-\nu)_+\), where \((x)_+\) represents the positive part of \(x\) (\((x)_+ = \max(0,x)\)) and \(\nu\) is the value of \(x\) corresponding to one of the angular points. The \(\nu\) values are called \emph{nodes}, If the nodes are \(\nu_1, \nu_2, \dots, \nu_m\), the model can be represented as \(\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+\). This kind of functions are called \emph{linear splines} and will be further discussed in section \ref{chap:gam}. If we want the effect to be null from a certain point \(\nu\), we can consider the variable \(x' = \min(x, \nu)\). This corresponds to aggregate to \(\nu\) all the \(x\) after \(\nu\).
+
+The piece-wise approach can be enhanced by also considering polynomials terms. For instance, in bottom-left panel of figure \ref{fig:expl-var-quant-effect}, the model represented is \(\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2\), where \((x)_-\) is the negative part of \(x\) (\((x)_- = \min(0,x)\)). \(f(x) = (x-\nu)^2\) is a parabola with vertex in \(\nu\). The fact of not adding the linear term leads to a monotonic non-increasing effect made by a semiparabola and a horizontal semiline that starts from its vertex.
+
+The examples represented in figures \ref{fig:expl-var-types} and \ref{fig:expl-var-quant-effect} are based on simulated data. That means that the linear predictor structure is known and the coefficients \(\beta_0, \beta_1, \dots, \beta_J\) are known. In practice, the real model is not known and the coefficients and the structure must be estimated by the data. Thus, we can take assumptions on the structure and we can estimate the coefficients with \(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_J\). In many cases it is not so clear whether to consider or not a variable and how to consider it. For example, with the same data both bottom-left and bottom-right models could work fine. In section \ref{chap:variable-selection} we are going to discuss some variable selection techniques for GLM.
+
+\hypertarget{link-functions-and-relativities}{%
+\subsubsection{Link functions and relativities}\label{link-functions-and-relativities}}
 
 
 
 
 
-\hypertarget{variable-selection}{%
-\subsubsection{Variable selection}\label{variable-selection}}
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[Normal - identity\label{fig:resp-var-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/resp-var-1} }\subfloat[Binomial - logit\label{fig:resp-var-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/resp-var-2} }\newline\subfloat[Poisson - log\label{fig:resp-var-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/resp-var-3} }\subfloat[Gamma - log\label{fig:resp-var-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/resp-var-4} }
+
+}
+
+\caption{Response variables and link functions.}\label{fig:resp-var}
+\end{figure}
+
+\hypertarget{chap:variable-selection}{%
+\subsubsection{Variable selection}\label{chap:variable-selection}}
 
 \newpage
 
@@ -1754,8 +1778,17 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
-\hypertarget{gam}{%
-\subsection{GAM}\label{gam}}
+\hypertarget{bayesian-glm}{%
+\subsection{Bayesian GLM}\label{bayesian-glm}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+
+Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+
+\hypertarget{chap:gam}{%
+\subsection{GAM}\label{chap:gam}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 

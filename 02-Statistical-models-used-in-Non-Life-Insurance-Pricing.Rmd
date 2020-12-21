@@ -511,6 +511,10 @@ As we mentioned in \@ref(chap:pricing-variables-encoding) the explanatory variab
 
 In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
 
+(ref:expl-var-types-caption-latex) Explanatory variables types.
+
+(ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
+
 ```{r, plot-quant-qual-build, echo = FALSE}
 
 set.seed(42)
@@ -675,10 +679,13 @@ In bottom-left panel of figure \@ref(fig:expl-var-types), we see the effect of a
 
 In bottom-right panel, the interaction effect between $x_1$ and $x_2$ is included in the model. The model becomes $\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}$. That means that the effect of $x_1$ variables depends on the determination of the $x_2$ variable. In the group with $x_2=0$ the effect is represented by the line $\mu_i = \beta_0 + \beta_1 x_i$; the group with $x_2=1$ the effect is represented by the line $\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}$.
 
-(ref:expl-var-types-caption-latex) Explanatory variables types.
 
-(ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
+For quantitative variables, it is possible to consider also non linear effects in GLMs. Some exmples are reported in figure \@ref(fig:expl-var-quant-effect).
 
+
+(ref:expl-var-quant-effect-caption-latex) Explanatory quantitative variables effects.
+
+(ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
 
 ```{r, plot-quant-effect-build, echo = FALSE}
 set.seed(42)
@@ -736,11 +743,14 @@ p_quant_effect_1 <- df %>%
   stat_function(
     fun = f1,
     col = col1,
-    size = line_size
+    size = line_size,
+    xlim = c(-0.05, 1.05)
   ) +
   geom_point(aes(x = x, y = value),
              alpha = .4) +
-  scale_x_continuous(limits = c(0, 1)) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(NA, 1.05)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -754,11 +764,14 @@ p_quant_effect_2 <- df %>%
   stat_function(
     fun = f2,
     col = col1,
-    size = line_size
+    size = line_size,
+    xlim = c(-0.05, 1.05)
   ) +
   geom_point(aes(x = x, y = value),
              alpha = .4) +
-  scale_x_continuous(limits = c(0, 1)) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(NA, 1.05)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -776,11 +789,14 @@ p_quant_effect_3 <- df %>%
   stat_function(
     fun = f3,
     col = col1,
-    size = line_size
+    size = line_size,
+    xlim = c(-0.05, 1.05)
   ) +
   geom_point(aes(x = x, y = value),
              alpha = .4) +
-  scale_x_continuous(limits = c(0, 1)) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(NA, 1.05)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -795,11 +811,14 @@ p_quant_effect_4 <- df %>%
   stat_function(
     fun = f4,
     col = col1,
-    size = line_size
+    size = line_size,
+    xlim = c(-0.05, 1.05)
   ) +
   geom_point(aes(x = x, y = value),
              alpha = .4) +
-  scale_x_continuous(limits = c(0, 1)) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(NA, 1.05)) +
   easy_remove_axes(
     which = "both",
     what = "text",
@@ -822,16 +841,15 @@ plot_grid_split(p_quant_effect_1, p_quant_effect_2, p_quant_effect_3, p_quant_ef
 ```
 
 
+The basic way to achieve it is by adding polynomial terms to the linear predictor. For instance, if $x$ is a quantitative variable, it is possible to add to the model the term $x^2$, obtaining the model $\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_i^2$. An example a model with both $x$ and $x^2$ terms is represented in top-left panel of figure \@ref(fig:expl-var-quant-effect). Adding the quadratic term, the effect graph becomes a parabola.
 
-For quantitative variables it is possible to consider also non linear effects...
+With the same logic, it is possible to add more power terms. In general, if we want to model $x$ with a polynomial of degree $d$, we can consider the model $\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d$. In top-right panel of figure \@ref(fig:expl-var-quant-effect) a 4^th^ degree polynomial effect is repesented. We highlight that the model is still considered linear, as the attribute "Linear" in "General Linear Model" is referred to the relation between the parameters $\beta_j$ and the linear predictor $\eta_i$ that must be linear.
 
-This can be achieved by...
+Another way to model non liner effects of explanatory varibles is to separate the effects by pieces. In bottom-left panel of figure \@ref(fig:expl-var-quant-effect) a case in which the $x$ effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms $(x-\nu)_+$, where $(x)_+$ represents the positive part of $x$ ($(x)_+ = \max(0,x)$) and $\nu$ is the value of $x$ corresponding to one of the angular points. The $\nu$ values are called _nodes_, If the nodes are $\nu_1, \nu_2, \dots, \nu_m$, the model can be represented as $\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+$. This kind of functions are called _linear splines_ and will be further discussed in section \@ref(chap:gam). If we want the effect to be null from a certain point $\nu$, we can consider the variable $x' = \min(x, \nu)$. This corresponds to aggregate to $\nu$ all the $x$ after $\nu$.
 
+The piece-wise approach can be enhanced by also considering polynomials terms. For instance, in bottom-left panel of figure \@ref(fig:expl-var-quant-effect), the model represented is $\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2$, where $(x)_-$ is the negative part of $x$ ($(x)_- = \min(0,x)$). $f(x) = (x-\nu)^2$ is a parabola with vertex in $\nu$. The fact of not adding the linear term leads to a monotonic non-increasing effect made by a semiparabola and a horizontal semiline that starts from its vertex.
 
-
-(ref:expl-var-quant-effect-caption-latex) Explanatory quantitative variables effects.
-
-(ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
+The examples represented in figures \@ref(fig:expl-var-types) and \@ref(fig:expl-var-quant-effect) are based on simulated data. That means that the linear predictor structure is known and the coefficients $\beta_0, \beta_1, \dots, \beta_J$ are known. In practice, the real model is not known and the coefficients and the structure must be estimated by the data. Thus, we can take assumptions on the structure and we can estimate the coefficients with $\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_J$. In many cases it is not so clear whether to consider or not a variable and how to consider it. For example, with the same data both bottom-left and bottom-right models could work fine. In section \@ref(chap:variable-selection) we are going to discuss some variable selection techniques for GLM.
 
 
 <!--
@@ -845,20 +863,178 @@ This can be achieved by...
 * Interactions
   + Manual interactions
     Problem: Scalability. Con p parametri ho choose(p, 2) possibili interazioni
-* link log -> modello moltiplicativo
  -->
 
+<!--
+Disclaimer:
+Non è nota a priori la forma del predittore lineare e va stimata
+Nei grafici ho sempre rappresentato la curva coi veri \beta tramite i quali i punti sono stati simulati
+Nella pratica i \beta non sono noti e avremo solo gli \hat{\beta}
+-->
 
 
 
-#### Variable selection
+#### Link functions and relativities
+
+(ref:resp-var-caption-latex) Response variables and link functions.
+
+(ref:resp-var-caption-gitbook) Response variables and link functions, Normal - identity (top-left), Binomial - logit (top-right), Poisson - log (bottom-left) and Gamma - log (bottom-right).
+
+
+```{r, plot-resp-var, echo = FALSE}
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+line_size <- 2
+
+n <- 200
+b0 <- -2
+b1 <- 4
+# b2 <- 1
+# b12 <- -1
+sigma <- .2
+alpha <- 2
+
+df <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
+  mutate(
+    eta1 = b0 + b1 * x,
+    eta2 = b0 + b1 * x,
+    eta3 = b0 + b1 * x,
+    eta4 = b0 + b1 * x,
+    mu1 = eta1,
+    mu2 = plogis(eta2),
+    mu3 = exp(eta3),
+    mu4 = exp(eta4)
+  )
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rbinom(n = n, size = 1, prob = df$mu2)
+df$y3 <- rpois(n = n, lambda = df$mu3)
+df$y4 <- rgamma(n = n, shape = alpha, rate = alpha/df$mu4)
+
+
+
+p_resp_1 <- df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  geom_abline(
+    intercept = b0,
+    slope = b1,
+    col = col1,
+    size = line_size
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_resp_2 <- df %>% 
+  select(x, value = y2) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){plogis(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1)) +
+  easy_remove_axes(
+    which = "both",
+    what = "text",
+    teach = FALSE
+  )
+
+p_resp_3 <- df %>% 
+  select(x, value = y3) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){exp(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(0, 14)) #+
+  # easy_remove_axes(
+  #   which = "both",
+  #   what = "text",
+  #   teach = FALSE
+  # )
+
+p_resp_4 <- df %>% 
+  select(x, value = y4) %>%  
+  ggplot() +
+  stat_function(
+    fun = function(x){exp(b0 + b1 * x)},
+    col = col1,
+    size = line_size,
+    xlim = c(-0.05, 1.05)
+  ) +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  # scale_x_continuous(limits = c(0, 1)) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(0, 14)) #+
+  # easy_remove_axes(
+  #   which = "both",
+  #   what = "text",
+  #   teach = FALSE
+  # )
+
+```
+
+```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:resp-var-caption-gitbook)", "(ref:resp-var-caption-latex)"), label="resp-var", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal - identity', 'Binomial - logit', 'Poisson - log', 'Gamma - log')}
+
+# # To align the plots in a subfigure environment
+# plot_grid_split <- function(..., align = "hv", axis = "tblr"){
+#   aligned_plots <- cowplot::align_plots(..., align = align, axis = axis)
+#   plots <- lapply(1:length(aligned_plots), function(x){
+#     cowplot::ggdraw(aligned_plots[[x]])
+#   })
+#   invisible(capture.output(plots))
+# }
+
+plot_grid_split(p_resp_1, p_resp_2, p_resp_3, p_resp_4,
+                align = "h")
+```
+
+
+
+
+<!--
+link log -> modello moltiplicativo
+-->
+
+#### Variable selection {#chap:variable-selection}
 
 <!--
 * problem: effect not known
   + not known variables
   + not known shape
-
-
+* aproaches
+  + looking to residuals (x_i, r_i)
+  + hypotheses testing
+  + AIC/BIC
+* manual work
+  + scalability
+    - choice of variables. Ho 2^p possibili modelli
+    - choice of interactions. Ho choose(p, 2) possibili interazioni
+    Usually actuarial models are updated once a year, so it is possible to start from models made the year before
+* domain knowledge, expertise
 -->
 
 
@@ -874,7 +1050,16 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
 
-### GAM
+### Bayesian GLM
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+
+Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+
+
+### GAM {#chap:gam}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
