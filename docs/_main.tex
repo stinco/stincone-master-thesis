@@ -782,8 +782,8 @@ The property \(Var(N) = E(N)\) is an important constraint when the distribution 
 
 To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \ref{chap:models}.
 
-\hypertarget{exposure}{%
-\subsubsection{Exposure}\label{exposure}}
+\hypertarget{chap:exposure}{%
+\subsubsection{Exposure}\label{chap:exposure}}
 
 In section \ref{chap:non-life-ins} we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage \(c\) spans in two consecutive years \(a\) and \(a+1\), it is collected as two records: the couple \((c, a)\) and the couple \((c, a+1)\). This situation is quite common, as usually coverages start during the year and not all at the first of the year.
 
@@ -846,7 +846,7 @@ This result tells us that the distribution of the number of events in any interv
 So, the expected number of arrivals is proportional to the size of the interval \(\Delta t\). The intensity of the process \(\lambda\) can be also interpreted as the expected number of claims in a unitary period.
 
 If we assume that the claims that occur to a policy comes from a Poisson process with intensity \(\lambda\), if we observe that policy for the period \(]t, t+v]\), the claims count in that exposure period \(M\) are distributed as:
-\[ M\sim Poisson(\lambda \Delta t) \]
+\[ M\sim Poisson(v \lambda) \]
 In particular, if the observed period spans 1 year, we get:
 \[ M = N \sim Poisson(\lambda) \]
 
@@ -1387,8 +1387,8 @@ In this section we will start by describing the Generalized Linear Model (GLM), 
 \hypertarget{glm}{%
 \subsection{GLM}\label{glm}}
 
-\hypertarget{linear-exponential-family}{%
-\subsubsection{Linear Exponential Family}\label{linear-exponential-family}}
+\hypertarget{chap:linear-exp-families}{%
+\subsubsection{Linear Exponential Families}\label{chap:linear-exp-families}}
 
 One of the GLM assumptions is that the response variables belong to a \emph{Linear Exponential Family}. In this section we are going to explain what it is and which distributions fit its definition.
 
@@ -1420,13 +1420,13 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 \toprule
 \textbf{Distribution} & \textbf{Notation} & \textbf{$\Theta$} & \textbf{$\theta$} & \textbf{$\Lambda$} & \textbf{$\lambda$} & \textbf{$b(\theta)$}\\
 \toprule\addlinespace
-Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma0$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
+Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}, \ \sigma \in ]0, +\infty[$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
 \addlinespace\hline\addlinespace
-Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu0$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
+Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu \in ]0, +\infty[$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
 \addlinespace\hline\addlinespace
-Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha0, \ \mu0$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
+Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha \in ]0, +\infty[, \ \mu \in ]0, +\infty[$} & $]-\infty, 0[$ & $-\frac{1}{\mu}$ & $]0,+\infty[$ & $\frac{1}{\alpha}$ & $-\log{\left(-\theta\right)}$\\
 \addlinespace\hline\addlinespace
-\makecell[l]{Scaled\\Binomial} & \makecell[c]{$Binom(n, p)/n$,\\$n\in\mathbb{N}, \ p\in]0,1[$} & $\mathbb{R}$ & $\log{\frac{p}{1-p}}$ & $\left\{\frac{1}{n}\right\}$ & $\frac{1}{n}$ & $\log\left(1+e^{\theta}\right)$\\
+\makecell[l]{Scaled\\Binomial} & \makecell[c]{$Binom(n, p)/n$,\\$n\in\mathbb{N}, \ p\in]0,1[$} & $\mathbb{R}$ & $\log{\left(\frac{p}{1-p}\right)}$ & $\left\{\frac{1}{n}\right\}$ & $\frac{1}{n}$ & $\log\left(1+e^{\theta}\right)$\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -1548,6 +1548,8 @@ Gamma & $-\log{\left(-\theta\right)}$ & $-\frac{1}{\theta}$ & $-\frac{1}{\mu}$\\
 \end{table}
 
 In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drawback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This would require some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) would have to be \(<0\). For this reason, it is preferred to use \(g(\mu) = log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
+
+In Scaled Binomial case the canonical function \(g(p) = \log{\left(\frac{p}{1-p}\right)}\) is called logit and its inverse \(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\) is called logistic. For Scaled Binomial distribution we keep using the notation \(p\) for the expected value as it correspond to the probability of success \(p\).
 
 \hypertarget{model-fitting}{%
 \subsubsection{Model fitting}\label{model-fitting}}
@@ -1698,7 +1700,7 @@ As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not dep
 
 As we mentioned in \ref{chap:pricing-variables-encoding} the explanatory variables can be \emph{quantitative} or \emph{qualitative}. In GLM the assumption is that the variables effect on the linear predictor \(\eta\) is linear.
 
-In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
+In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown for a GLM with Normal response and identity link.
 
 
 
@@ -1751,6 +1753,8 @@ The examples represented in figures \ref{fig:expl-var-types} and \ref{fig:expl-v
 \hypertarget{link-functions-and-relativities}{%
 \subsubsection{Link functions and relativities}\label{link-functions-and-relativities}}
 
+As we mentioned in \ref{chap:linear-exp-families}, GLM supports several families. In figure \ref{fig:resp-var} the models \(g(\mu_i) = \beta_0 + \beta_1 x_i\) with different response variable distributions and link functions. As we can see from the plots, a linear effect on \(x\) corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
+
 
 
 
@@ -1764,8 +1768,66 @@ The examples represented in figures \ref{fig:expl-var-types} and \ref{fig:expl-v
 \caption{Response variables and link functions.}\label{fig:resp-var}
 \end{figure}
 
+If \(g(\mu) = \log(\mu)\) the model structure can be expressed as:
+
+\begin{align*}
+\mu_i & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
+\end{align*}
+
+The term \(e^{\beta_j}\) can be seen as the multiplicative relativity corresponding to the variable \(x_j\). If \(x_j\) is a dummy variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplicated by when \(x_{ij}=1\). If \(x_j\) is a quntitative variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplicated by for every one-unit increasing of \(x_{ij}\). Indeed, \(\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}\).
+
+The fact that with log link the relation between coefficients \(\beta_0, \beta_1, \dots, \beta_p\) and expected value \(\mu_i\) becomes multiplicative is particularly useful to deal with exposure \(v_i\). In section \ref{chap:exposure} we have seen that often the observations are couples (policy, accounting year), so they have different exposures \(v_i\). Thus, we usually work with the number of claims occurred in the exposure period \(M_i\) and we observe its realization \(m_i\). The assumption we take is that:
+\[M_i \sim Poisson(v_i \mu_i)\]
+where \(\mu_i\) is the expected value of the yearly number of claims \(N_i\).
+
+Under the GLM assumptions, we obtain
+
+\begin{align*}
+E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
+& = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \log(v_i)}
+\end{align*}
+
+That means that we can model \(M_1, M_2, \dots, M_n\) as response variables in a GLM with Poisson response in wich the linear predictor depends from an offset additive term \(\log(v_i)\).
+
+If \(g(p) = \text{logit}(p)\) the model structure can be expressed as:
+
+\begin{align*}
+\frac{p_i}{1-p_i} & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
+\end{align*}
+
+Thus, the term \(e^{\beta_j}\) can be seen as the multplicative relativity corresponding to the variable \(x_j\). However, in this case the relativity doesn't multiply directly the probability of success \(p\), but it multiplies the odds of success \(\frac{p}{1-p}\).
+
 \hypertarget{chap:variable-selection}{%
 \subsubsection{Variable selection}\label{chap:variable-selection}}
+
+One of the most challenging aspects of GLM fitting is selecting the variables and their effects by looking to observed data. In practice we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients \(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p\) and then the variance of \(\hat{\mu}_i = \hat{\beta}_0, \hat{\beta}_1 x_{i1}, \dots, \hat{\beta}_p x_{ip}\). On the other hand, being too frugal with explanatory variables could lead to waste part of the predictive power of the available explanatory variables.
+
+One useful tool we have to understand if an explanatory variable \(x\) is relevant or not is plotting the points \((x_i, y_i)\) as we did in \ref{fig:expl-var-types}, \ref{fig:expl-var-quant-effect} and \ref{fig:resp-var}. If there are too many observations and the plot is not easily readable, it is possible to group the points by \(x\) modalities and show for each group the average of \(y_i\) and a confidence interval that gives an idea on the dispersion of the observations around the average. If \(x\) is a continuous variable with too many modalities, it is possible to group them into buckets. Showing the average of \(y_i\) for groups of \(x\) is particularly useful for Binomial and Poisson data, where the fact that \(y_i\) can present few different values compromises the plot readability. An example is reported in figure \ref{fig:var-selection}. The top-left and bottom-left panels represent a case in which \(x\) and \(y\) are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[No effect - ungrouped\label{fig:var-selection-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-1} }\subfloat[Positive effect - ungrouped\label{fig:var-selection-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-2} }\newline\subfloat[No effect - grouped\label{fig:var-selection-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-3} }\subfloat[Positive effect - grouped\label{fig:var-selection-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-4} }
+
+}
+
+\caption{Explanatory variable effect evaluation.}\label{fig:var-selection}
+\end{figure}
+
+If we are dealing with a multivariate model where we already inserted the variables \(x_1, \dots, x_p\) and we want to evaluate the additional information \(x_{p+1}\) brings, it is possible to look at the plot \((x_{i, p+1}, r_i)\), where \(r_i\) are the residuals of the model without the variable \(x_{p+1}\):
+\[
+r_i = y_i - \hat{\mu}_i = y_i - g^{-1}\left( \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \dots + \hat{\beta}_p x_{ip} \right)
+\]
+
+If the plot shows a clear trend, we will add the variable \(x\) to the model, otherwise we won't.
+
+The choice of adding or not a variable in the model can be supported by \emph{hypothesis testing}.
 
 \newpage
 

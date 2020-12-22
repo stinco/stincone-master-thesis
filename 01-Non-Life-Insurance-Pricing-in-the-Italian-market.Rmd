@@ -464,7 +464,7 @@ The property $Var(N) = E(N)$ is an important constraint when the distribution is
 To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \@ref(chap:models).
 
 
-#### Exposure
+#### Exposure {#chap:exposure}
 
 In section \@ref(chap:non-life-ins) we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage $c$ spans in two consecutive years $a$ and $a+1$, it is collected as two records: the couple $(c, a)$ and the couple $(c, a+1)$. This situation is quite common, as usually coverages start during the year and not all at the first of the year.
 
@@ -523,7 +523,7 @@ $$E(N(t + \Delta t) - N(t)) = \lambda \Delta t$$
 So, the expected number of arrivals is proportional to the size of the interval $\Delta t$. The intensity of the process $\lambda$ can be also interpreted as the expected number of claims in a unitary period.
 
 If we assume that the claims that occur to a policy comes from a Poisson process with intensity $\lambda$, if we observe that policy for the period $]t, t+v]$, the claims count in that exposure period $M$ are distributed as:
-$$ M\sim Poisson(\lambda \Delta t) $$
+$$ M\sim Poisson(v \lambda) $$
 In particular, if the observed period spans 1 year, we get:
 $$ M = N \sim Poisson(\lambda) $$
 
@@ -1033,11 +1033,11 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
 
 * $n_i^{(t)} = n_i^{(\text{reported in } t)}$  
   where:
-  + $n_i^{(\text{reported in } t)}$ is the number of reported claims in $t$ for the policy $i$;
+  * $n_i^{(\text{reported in } t)}$ is the number of reported claims in $t$ for the policy $i$;
 * $z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}$  
   where:
-  + $z_j^{(\text{payed in }t)}$ is the amount already payed in $t$ for the claim $j$;
-  + $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
+  * $z_j^{(\text{payed in }t)}$ is the amount already payed in $t$ for the claim $j$;
+  * $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
 ```{=latex}

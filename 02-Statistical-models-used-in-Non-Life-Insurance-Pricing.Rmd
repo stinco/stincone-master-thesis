@@ -34,7 +34,7 @@ In this section we will start by describing the Generalized Linear Model (GLM), 
 ### GLM
 
 
-#### Linear Exponential Family
+#### Linear Exponential Families {#chap:linear-exp-families}
 
 One of the GLM assumptions is that the response variables belong to a _Linear Exponential Family_. In this section we are going to explain what it is and which distributions fit its definition.
 
@@ -64,9 +64,9 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
                            align = "l"),
-  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma0$",
-                         "$Poisson(\\mu)$,\n$\\mu0$",
-                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha0, \\ \\mu0$",
+  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma \\in ]0, +\\infty[$",
+                         "$Poisson(\\mu)$,\n$\\mu \\in ]0, +\\infty[$",
+                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha \\in ]0, +\\infty[, \\ \\mu \\in ]0, +\\infty[$",
                          "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}, \\ p\\in]0,1[$"),
                        align = "c"),
   `$\\Theta$` = c("$\\mathbb{R}$",
@@ -76,7 +76,7 @@ table <- tibble(
   `$\\theta$` = c("$\\mu$",
                   "$\\log{(\\mu)}$",
                   "$-\\frac{1}{\\mu}$",
-                  "$\\log{\\frac{p}{1-p}}$"),
+                  "$\\log{\\left(\\frac{p}{1-p}\\right)}$"),
   `$\\Lambda$` = c("$]0, +\\infty[$",
                   "$\\left\\{1\\right\\}$",
                   "$]0,+\\infty[$",
@@ -316,6 +316,8 @@ table %>%
 
 In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
 
+In Scaled Binomial case the canonical function $g(p) = \log{\left(\frac{p}{1-p}\right)}$ is called logit and its inverse $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ is called logistic. For Scaled Binomial distribution we keep using the notation $p$ for the expected value as it correspond to the probability of success $p$.
+
 
 #### Model fitting
 
@@ -509,7 +511,7 @@ As $l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depen
 
 As we mentioned in \@ref(chap:pricing-variables-encoding) the explanatory variables can be _quantitative_ or _qualitative_. In GLM the assumption is that the variables effect on the linear predictor $\eta$ is linear.
 
-In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown for a GLM with normal response and identity link.
+In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown for a GLM with Normal response and identity link.
 
 (ref:expl-var-types-caption-latex) Explanatory variables types.
 
@@ -876,6 +878,9 @@ Nella pratica i \beta non sono noti e avremo solo gli \hat{\beta}
 
 #### Link functions and relativities
 
+As we mentioned in \@ref(chap:linear-exp-families), GLM supports several families. In figure \@ref(fig:resp-var) the models $g(\mu_i) = \beta_0 + \beta_1 x_i$ with different response variable distributions and link functions. As we can see from the plots, a linear effect on $x$ corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
+
+
 (ref:resp-var-caption-latex) Response variables and link functions.
 
 (ref:resp-var-caption-gitbook) Response variables and link functions, Normal - identity (top-left), Binomial - logit (top-right), Poisson - log (bottom-left) and Gamma - log (bottom-right).
@@ -896,25 +901,21 @@ b1 <- 4
 # b2 <- 1
 # b12 <- -1
 sigma <- .2
-alpha <- 2
+alpha <- 4
 
 df <- tibble(x = runif(n = n, min = 0, max = 1)) %>% 
   mutate(
-    eta1 = b0 + b1 * x,
-    eta2 = b0 + b1 * x,
-    eta3 = b0 + b1 * x,
-    eta4 = b0 + b1 * x,
-    mu1 = eta1,
-    mu2 = plogis(eta2),
-    mu3 = exp(eta3),
-    mu4 = exp(eta4)
+    eta = b0 + b1 * x,
+    mu1 = eta,
+    mu2 = plogis(eta),
+    mu3 = exp(eta),
+    mu4 = exp(eta)
   )
 
 df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
 df$y2 <- rbinom(n = n, size = 1, prob = df$mu2)
 df$y3 <- rpois(n = n, lambda = df$mu3)
 df$y4 <- rgamma(n = n, shape = alpha, rate = alpha/df$mu4)
-
 
 
 p_resp_1 <- df %>% 
@@ -931,10 +932,11 @@ p_resp_1 <- df %>%
   # scale_x_continuous(limits = c(0, 1)) +
   coord_cartesian(xlim = c(0, 1)) +
   easy_remove_axes(
-    which = "both",
+    which = "x",
     what = "text",
     teach = FALSE
-  )
+  ) +
+  labs(x = "x", y = "y")
 
 p_resp_2 <- df %>% 
   select(x, value = y2) %>%  
@@ -950,10 +952,11 @@ p_resp_2 <- df %>%
   # scale_x_continuous(limits = c(0, 1)) +
   coord_cartesian(xlim = c(0, 1)) +
   easy_remove_axes(
-    which = "both",
+    which = "x",
     what = "text",
     teach = FALSE
-  )
+  ) +
+  labs(x = "x", y = "y")
 
 p_resp_3 <- df %>% 
   select(x, value = y3) %>%  
@@ -967,13 +970,16 @@ p_resp_3 <- df %>%
   geom_point(aes(x = x, y = value),
              alpha = .4) +
   # scale_x_continuous(limits = c(0, 1)) +
+  scale_y_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12),
+                     minor_breaks = 0:12) +
   coord_cartesian(xlim = c(0, 1),
-                  ylim = c(0, 14)) #+
-  # easy_remove_axes(
-  #   which = "both",
-  #   what = "text",
-  #   teach = FALSE
-  # )
+                  ylim = c(0, 11)) +
+  easy_remove_axes(
+    which = "x",
+    what = "text",
+    teach = FALSE
+  ) +
+  labs(x = "x", y = "y")
 
 p_resp_4 <- df %>% 
   select(x, value = y4) %>%  
@@ -987,13 +993,16 @@ p_resp_4 <- df %>%
   geom_point(aes(x = x, y = value),
              alpha = .4) +
   # scale_x_continuous(limits = c(0, 1)) +
+  scale_y_continuous(breaks = c(0, 2, 4, 6, 8, 10, 12),
+                     minor_breaks = 0:12) +
   coord_cartesian(xlim = c(0, 1),
-                  ylim = c(0, 14)) #+
-  # easy_remove_axes(
-  #   which = "both",
-  #   what = "text",
-  #   teach = FALSE
-  # )
+                  ylim = c(0, 11)) +
+  easy_remove_axes(
+    which = "x",
+    what = "text",
+    teach = FALSE
+  ) +
+  labs(x = "x", y = "y")
 
 ```
 
@@ -1013,13 +1022,226 @@ plot_grid_split(p_resp_1, p_resp_2, p_resp_3, p_resp_4,
 ```
 
 
+If $g(\mu) = \log(\mu)$ the model structure can be expressed as:
+```{=latex}
+\begin{align*}
+\mu_i & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
+\end{align*}
+```
 
+The term $e^{\beta_j}$ can be seen as the multiplicative relativity corresponding to the variable $x_j$. If $x_j$ is a dummy variable, $e^{\beta_j}$ is the factor the expected value $\mu_i$ is multiplicated by when $x_{ij}=1$. If $x_j$ is a quntitative variable, $e^{\beta_j}$ is the factor the expected value $\mu_i$ is multiplicated by for every one-unit increasing of $x_{ij}$. Indeed, $\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}$.
 
-<!--
-link log -> modello moltiplicativo
--->
+The fact that with log link the relation between coefficients $\beta_0, \beta_1, \dots, \beta_p$ and expected value $\mu_i$ becomes multiplicative is particularly useful to deal with exposure $v_i$. In section \@ref(chap:exposure) we have seen that often the observations are couples (policy, accounting year), so they have different exposures $v_i$. Thus, we usually work with the number of claims occurred in the exposure period $M_i$ and we observe its realization $m_i$. The assumption we take is that:
+$$M_i \sim Poisson(v_i \mu_i)$$
+where $\mu_i$ is the expected value of the yearly number of claims $N_i$.
+
+Under the GLM assumptions, we obtain
+```{=latex}
+\begin{align*}
+E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
+& = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \log(v_i)}
+\end{align*}
+```
+
+That means that we can model $M_1, M_2, \dots, M_n$ as response variables in a GLM with Poisson response in wich the linear predictor depends from an offset additive term $\log(v_i)$.
+
+If $g(p) = \text{logit}(p)$ the model structure can be expressed as:
+```{=latex}
+\begin{align*}
+\frac{p_i}{1-p_i} & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
+& = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
+\end{align*}
+```
+
+Thus, the term $e^{\beta_j}$ can be seen as the multplicative relativity corresponding to the variable $x_j$. However, in this case the relativity doesn't multiply directly the probability of success $p$, but it multiplies the odds of success $\frac{p}{1-p}$.
+
 
 #### Variable selection {#chap:variable-selection}
+
+One of the most challenging aspects of GLM fitting is selecting the variables and their effects by looking to observed data. In practice we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients $\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p$ and then the variance of $\hat{\mu}_i = \hat{\beta}_0, \hat{\beta}_1 x_{i1}, \dots, \hat{\beta}_p x_{ip}$. On the other hand, being too frugal with explanatory variables could lead to waste part of the predictive power of the available explanatory variables.
+
+One useful tool we have to understand if an explanatory variable $x$ is relevant or not is plotting the points $(x_i, y_i)$ as we did in \@ref(fig:expl-var-types), \@ref(fig:expl-var-quant-effect) and \@ref(fig:resp-var). If there are too many observations and the plot is not easily readable, it is possible to group the points by $x$ modalities and show for each group the average of $y_i$ and a confidence interval that gives an idea on the dispersion of the observations around the average. If $x$ is a continuous variable with too many modalities, it is possible to group them into buckets. Showing the average of $y_i$ for groups of $x$ is particularly useful for Binomial and Poisson data, where the fact that $y_i$ can present few different values compromises the plot readability. An example is reported in figure \@ref(fig:var-selection). The top-left and bottom-left panels represent a case in which $x$ and $y$ are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
+
+(ref:var-selection-caption-latex) Explanatory variable effect evaluation.
+
+(ref:var-selection-caption-gitbook) Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right).
+
+```{r, plot-var-selection, message=FALSE, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:var-selection-caption-gitbook)", "(ref:var-selection-caption-latex)"), label="var-selection", echo=FALSE, fig.ncol=2, fig.subcap=c('No effect - ungrouped', 'Positive effect - ungrouped', 'No effect - grouped', 'Positive effect - grouped')}
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+line_size <- 2
+
+n <- 1000
+b0 <- -2
+b1 <- 4
+sigma <- 2
+
+df <- tibble(x = rbeta(n = n, shape1 = 3, shape2 = 3)) %>% 
+  mutate(
+    mu1 = 0,
+    mu2 = b0 + b1 * x,
+    x_group = floor(10*x) / 10 + 0.05
+  )
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rnorm(n = n, mean = df$mu2, sd = sigma)
+
+
+# Top-left plot
+p_var_selection_1 <- df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(-7, 7)) +
+  labs(x = "x", y = "y")
+
+p_var_selection_1
+
+
+# Top-right plot
+p_var_selection_2 <- df %>% 
+  select(x, value = y2) %>% 
+  ggplot() +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(-7, 7)) +
+  labs(x = "x", y = "y")
+
+p_var_selection_2
+
+
+# Aggregate data
+df_summary <- df %>%
+  group_by(x_group) %>%
+  summarize(
+    n = n(),
+    y1_mean = mean(y1),
+    y1_sd = sd(y1) / sqrt(n),
+    y2_mean = mean(y2),
+    y2_sd = sd(y2) / sqrt(n)
+  ) %>%
+  mutate(
+    y1_up = y1_mean + 2 * y1_sd,
+    y1_down = y1_mean - 2 * y1_sd,
+    y2_up = y2_mean + 2 * y2_sd,
+    y2_down = y2_mean - 2 * y2_sd
+  )
+
+
+
+# Bottom-left plot
+df_plot_1 <- df_summary %>%
+  select(x = x_group, mean = y1_mean, down = y1_down, up = y1_up, n) %>%
+  pivot_longer(cols = c("mean", "n"),
+               names_to = "variable", values_to = "value") %>%
+  mutate(variable = factor(variable, levels = c("mean", "n")))
+
+
+p_1 <- df_plot_1 %>%
+  mutate(x = factor(x)) %>%
+  ggplot(aes(x = x, y = value)) +
+  facet_grid(
+    variable ~ .,
+    scales = "free",
+    labeller = labeller(variable = c("mean" = "y", "n" = "count"))
+  ) +
+  geom_point(data = filter(df_plot_1, variable == "mean")) +
+  geom_line(data = filter(df_plot_1, variable == "mean"),
+            group = 1) +
+  geom_ribbon(data = filter(df_plot_1, variable == "mean"),
+              aes(x = x, ymin = down, ymax = up),
+              alpha = .5) +
+  geom_col(data = filter(df_plot_1, variable == "n"),
+           alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
+  labs(x = "x", y = "", title = "")
+
+
+p_1_ylim <- p_1 +
+  coord_cartesian(ylim = c(-2.5, 2.5))
+
+g_1 <- ggplotGrob(p_1)
+g_1_ylim <- ggplotGrob(p_1_ylim)
+
+g_1[["grobs"]][[2]] <- g_1_ylim[["grobs"]][[2]]
+g_1[["grobs"]][[6]] <- g_1_ylim[["grobs"]][[6]]
+
+
+g_1$heights[7] = 3*g_1$heights[7]
+
+grid.newpage()
+grid.draw(g_1)
+
+
+
+# Bottom-right plot
+df_plot_2 <- df_summary %>%
+  select(x = x_group, mean = y2_mean, down = y2_down, up = y2_up, n) %>%
+  pivot_longer(cols = c("mean", "n"),
+               names_to = "variable", values_to = "value") %>%
+  mutate(variable = factor(variable, levels = c("mean", "n")))
+
+
+
+p_2 <- df_plot_2 %>%
+  mutate(x = factor(x)) %>%
+  ggplot(aes(x = x, y = value)) +
+  facet_grid(
+    variable ~ .,
+    scales = "free",
+    labeller = labeller(variable = c("mean" = "y", "n" = "count"))#,
+  ) +
+  geom_point(data = filter(df_plot_2, variable == "mean")) +
+  geom_line(data = filter(df_plot_2, variable == "mean"),
+            group = 1) +
+  geom_ribbon(data = filter(df_plot_2, variable == "mean"),
+              aes(x = x, ymin = down, ymax = up),
+              alpha = .5) +
+  geom_col(data = filter(df_plot_2, variable == "n"),
+           alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
+  labs(x = "x", y = "", title = "")
+
+p_2_ylim <- p_2 +
+  coord_cartesian(ylim = c(-2.5, 2.5))
+
+g_2 <- ggplotGrob(p_2)
+g_2_ylim <- ggplotGrob(p_2_ylim)
+
+g_2[["grobs"]][[2]] <- g_2_ylim[["grobs"]][[2]]
+g_2[["grobs"]][[6]] <- g_2_ylim[["grobs"]][[6]]
+
+
+g_2$heights[7] = 3*g_2$heights[7]
+
+grid.newpage()
+grid.draw(g_2)
+
+```
+
+If we are dealing with a multivariate model where we already inserted the variables $x_1, \dots, x_p$ and we want to evaluate the additional information $x_{p+1}$ brings, it is possible to look at the plot $(x_{i, p+1}, r_i)$, where $r_i$ are the residuals of the model without the variable $x_{p+1}$:
+$$
+r_i = y_i - \hat{\mu}_i = y_i - g^{-1}\left( \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \dots + \hat{\beta}_p x_{ip} \right)
+$$
+
+If the plot shows a clear trend, we will add the variable $x$ to the model, otherwise we won't.
+
+The choice of adding or not a variable in the model can be supported by _hypothesis testing_.
+
+<!--
+Hypothesis testing
+- diverse tecniche che si basano su diverse statistiche
+- log-rapporto di versosimiglianza
+-->
+
+
 
 <!--
 * problem: effect not known
@@ -1028,10 +1250,13 @@ link log -> modello moltiplicativo
 * aproaches
   + looking to residuals (x_i, r_i)
   + hypotheses testing
+    - test multipli, p-hacking
+    - overfitting
   + AIC/BIC
 * manual work
   + scalability
     - choice of variables. Ho 2^p possibili modelli
+    - how to model quantitative variables
     - choice of interactions. Ho choose(p, 2) possibili interazioni
     Usually actuarial models are updated once a year, so it is possible to start from models made the year before
 * domain knowledge, expertise

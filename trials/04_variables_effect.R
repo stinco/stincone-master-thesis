@@ -14,6 +14,10 @@ library(lubridate)
 library(scales)
 library(ggeasy)
 library(gridExtra)
+library(cowplot)
+library(grid)
+library(gtable)
+
 
 theme_set(theme_bw())
 
@@ -464,4 +468,170 @@ p_resp_4 <- df %>%
 
 plot_grid_split(p_resp_1, p_resp_2, p_resp_3, p_resp_4,
                 align = "h")
+
+
+
+
+# Significative variables ####
+
+set.seed(42)
+
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+
+line_size <- 2
+
+n <- 1000
+b0 <- -2
+b1 <- 4
+sigma <- 2
+
+df <- tibble(x = rbeta(n = n, shape1 = 3, shape2 = 3)) %>% 
+  mutate(
+    mu1 = 0,
+    mu2 = b0 + b1 * x,
+    x_group = floor(10*x) / 10 + 0.05
+  )
+
+df$y1 <- rnorm(n = n, mean = df$mu1, sd = sigma)
+df$y2 <- rnorm(n = n, mean = df$mu2, sd = sigma)
+
+
+# Top-left plot
+df %>% 
+  select(x, value = y1) %>% 
+  ggplot() +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(-7, 7)) +
+  labs(x = "x", y = "y")
+
+
+# Top-right plot
+df %>% 
+  select(x, value = y2) %>% 
+  ggplot() +
+  geom_point(aes(x = x, y = value),
+             alpha = .4) +
+  coord_cartesian(xlim = c(0, 1),
+                  ylim = c(-7, 7)) +
+  labs(x = "x", y = "y")
+
+
+
+# Aggregate data
+df_summary <- df %>% 
+  group_by(x_group) %>% 
+  summarize(
+    n = n(),
+    y1_mean = mean(y1),
+    y1_sd = sd(y1) / sqrt(n),
+    y2_mean = mean(y2),
+    y2_sd = sd(y2) / sqrt(n)
+  ) %>% 
+  mutate(
+    y1_up = y1_mean + 2 * y1_sd,
+    y1_down = y1_mean - 2 * y1_sd,
+    y2_up = y2_mean + 2 * y2_sd,
+    y2_down = y2_mean - 2 * y2_sd
+  )
+
+
+
+# Bottom-left plot
+df_plot_1 <- df_summary %>% 
+  select(x = x_group, mean = y1_mean, down = y1_down, up = y1_up, n) %>% 
+  pivot_longer(cols = c("mean", "n"),
+               names_to = "variable", values_to = "value") %>% 
+  mutate(variable = factor(variable, levels = c("mean", "n")))
+
+
+p_1 <- df_plot_1 %>%
+  mutate(x = factor(x)) %>%
+  ggplot(aes(x = x, y = value)) +
+  facet_grid(
+    variable ~ .,
+    scales = "free",
+    labeller = labeller(variable = c("mean" = "y", "n" = "count"))
+  ) +
+  geom_point(data = filter(df_plot_1, variable == "mean")) +
+  geom_line(data = filter(df_plot_1, variable == "mean"),
+            group = 1) +
+  geom_ribbon(data = filter(df_plot_1, variable == "mean"),
+              aes(x = x, ymin = down, ymax = up),
+              alpha = .5) +
+  geom_col(data = filter(df_plot_1, variable == "n"),
+           alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
+  labs(x = "x", y = "", title = "")
+
+
+p_1_ylim <- p_1 +
+  coord_cartesian(ylim = c(-2.5, 2.5))
+
+g_1 <- ggplotGrob(p_1)
+g_1_ylim <- ggplotGrob(p_1_ylim)
+
+g_1[["grobs"]][[2]] <- g_1_ylim[["grobs"]][[2]]
+g_1[["grobs"]][[6]] <- g_1_ylim[["grobs"]][[6]]
+
+
+g_1$heights[7] = 3*g_1$heights[7]
+grid.draw(g_1)
+
+
+
+# Bottom-right plot
+df_plot_2 <- df_summary %>% 
+  select(x = x_group, mean = y2_mean, down = y2_down, up = y2_up, n) %>% 
+  pivot_longer(cols = c("mean", "n"),
+               names_to = "variable", values_to = "value") %>% 
+  mutate(variable = factor(variable, levels = c("mean", "n")))
+  
+
+
+p_2 <- df_plot_2 %>%
+  mutate(x = factor(x)) %>%
+  ggplot(aes(x = x, y = value)) +
+  facet_grid(
+    variable ~ .,
+    scales = "free",
+    labeller = labeller(variable = c("mean" = "y", "n" = "count"))#,
+  ) +
+  geom_point(data = filter(df_plot_2, variable == "mean")) +
+  geom_line(data = filter(df_plot_2, variable == "mean"),
+            group = 1) +
+  geom_ribbon(data = filter(df_plot_2, variable == "mean"),
+              aes(x = x, ymin = down, ymax = up),
+              alpha = .5) +
+  geom_col(data = filter(df_plot_2, variable == "n"),
+           alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
+  labs(x = "x", y = "", title = "")
+
+p_2_ylim <- p_2 +
+  coord_cartesian(ylim = c(-2.5, 2.5))
+
+g_2 <- ggplotGrob(p_2)
+g_2_ylim <- ggplotGrob(p_2_ylim)
+
+g_2[["grobs"]][[2]] <- g_2_ylim[["grobs"]][[2]]
+g_2[["grobs"]][[6]] <- g_2_ylim[["grobs"]][[6]]
+
+
+g_2$heights[7] = 3*g_2$heights[7]
+grid.draw(g_2)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

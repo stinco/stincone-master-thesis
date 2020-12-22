@@ -100,7 +100,7 @@ div.abstract{
 <li class="chapter" data-level="1.3" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#chap:personalization"><i class="fa fa-check"></i><b>1.3</b> Modeling and Personalization</a>
 <ul>
 <li class="chapter" data-level="1.3.1" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#chap:pricing-variables"><i class="fa fa-check"></i><b>1.3.1</b> Pricing variables</a></li>
-<li class="chapter" data-level="1.3.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#pricing-variables-encoding"><i class="fa fa-check"></i><b>1.3.2</b> Pricing variables encoding</a></li>
+<li class="chapter" data-level="1.3.2" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#chap:pricing-variables-encoding"><i class="fa fa-check"></i><b>1.3.2</b> Pricing variables encoding</a></li>
 <li class="chapter" data-level="1.3.3" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#pricing-rule-and-modeling"><i class="fa fa-check"></i><b>1.3.3</b> Pricing Rule and Modeling</a></li>
 <li class="chapter" data-level="1.3.4" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#response-variables-and-distributions"><i class="fa fa-check"></i><b>1.3.4</b> Response variables and distributions</a></li>
 <li class="chapter" data-level="1.3.5" data-path="chap-nlip-ita-market.html"><a href="chap-nlip-ita-market.html#model-fitting-and-data-available"><i class="fa fa-check"></i><b>1.3.5</b> Model fitting and data available</a></li>
@@ -118,8 +118,9 @@ div.abstract{
 <ul>
 <li class="chapter" data-level="2.1.1" data-path="chap-models.html"><a href="chap-models.html#glm"><i class="fa fa-check"></i><b>2.1.1</b> GLM</a></li>
 <li class="chapter" data-level="2.1.2" data-path="chap-models.html"><a href="chap-models.html#elastic-net"><i class="fa fa-check"></i><b>2.1.2</b> Elastic Net</a></li>
-<li class="chapter" data-level="2.1.3" data-path="chap-models.html"><a href="chap-models.html#gam"><i class="fa fa-check"></i><b>2.1.3</b> GAM</a></li>
-<li class="chapter" data-level="2.1.4" data-path="chap-models.html"><a href="chap-models.html#gbm"><i class="fa fa-check"></i><b>2.1.4</b> GBM</a></li>
+<li class="chapter" data-level="2.1.3" data-path="chap-models.html"><a href="chap-models.html#bayesian-glm"><i class="fa fa-check"></i><b>2.1.3</b> Bayesian GLM</a></li>
+<li class="chapter" data-level="2.1.4" data-path="chap-models.html"><a href="chap-models.html#chap:gam"><i class="fa fa-check"></i><b>2.1.4</b> GAM</a></li>
+<li class="chapter" data-level="2.1.5" data-path="chap-models.html"><a href="chap-models.html#gbm"><i class="fa fa-check"></i><b>2.1.5</b> GBM</a></li>
 </ul></li>
 <li class="chapter" data-level="2.2" data-path="chap-models.html"><a href="chap-models.html#chap:model-comparison"><i class="fa fa-check"></i><b>2.2</b> Model comparison</a></li>
 <li class="chapter" data-level="2.3" data-path="chap-models.html"><a href="chap-models.html#chap:actuary-importance"><i class="fa fa-check"></i><b>2.3</b> The actuary importance</a></li>
@@ -322,7 +323,7 @@ The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separa
 <p>Regarding the topic of variables reliability, the Italian Insurance Associations (<a href="https://www.ania.it/">ANIA</a>) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle such as when it has been registered or how many changes of ownership did it experienced.</p>
 <p>One of the roles of the actuary is to understand how reliable the information on the policyholder is and to decide how to use that information.</p>
 </div>
-<div id="pricing-variables-encoding" class="section level3" number="1.3.2">
+<div id="chap:pricing-variables-encoding" class="section level3" number="1.3.2">
 <h3><span class="header-section-number">1.3.2</span> Pricing variables encoding</h3>
 <p>Formally the pricing variables can be encoded as a vector of real numbers. <span class="math inline">\(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p\)</span>. In the modeling framework they can be also called explanatory variables, covariates, predictors or features.</p>
 <p>The pricing variables can be of two types:</p>
@@ -332,34 +333,34 @@ The coefficient $\alpha_i$ and the reference premium $P$ can be estimated separa
 </ol>
 <p>The quantitative variables, with eventual transformations, are already suitable to be used.</p>
 <p>To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.</p>
-<p>If a variable <span class="math inline">\(x\)</span> has only 2 possible modalities, it can be easily encoded in a binary variable <span class="math inline">\(z\)</span> that assigns <span class="math inline">\(0\)</span> to one modality and <span class="math inline">\(1\)</span> to the other. For example, if <span class="math inline">\(x = \text{sex}\)</span>, it can be encoded this way:
+<p>If a variable <span class="math inline">\(x\)</span> has only 2 possible modalities, it can be easily encoded in a binary variable <span class="math inline">\(x&#39;\)</span> that assigns <span class="math inline">\(0\)</span> to one modality and <span class="math inline">\(1\)</span> to the other. For example, if <span class="math inline">\(x = \text{sex}\)</span>, it can be encoded this way:
 <span class="math display">\[
-z = \begin{cases}
+x&#39; = \begin{cases}
 1 &amp; \text{if } \text{sex } = \text{ `Male&#39;} \\
 0 &amp; \text{if } \text{sex } = \text{ `Female&#39;}
 \end{cases}
 \]</span></p>
-<p>In general, if a variable <span class="math inline">\(x\)</span> has <span class="math inline">\(K\)</span> modalities, it can be encoded in <span class="math inline">\(K-1\)</span> binary variables <span class="math inline">\(z_1, z_2, \dots, z_{K-1}\)</span>. For example, if <span class="math inline">\(x = \text{make}\)</span> and it can have 4 possible modalities (‘Fiat’, ‘Alfa-Romeo’, ‘Lancia’, ‘Ferrari’) it can be encoded this way:</p>
+<p>In general, if a variable <span class="math inline">\(x\)</span> has <span class="math inline">\(K\)</span> modalities, it can be encoded in <span class="math inline">\(K-1\)</span> binary variables <span class="math inline">\(x&#39;_1, x&#39;_2, \dots, x&#39;_{K-1}\)</span>. For example, if <span class="math inline">\(x = \text{make}\)</span> and it can have 4 possible modalities (‘Fiat’, ‘Alfa-Romeo’, ‘Lancia’, ‘Ferrari’) it can be encoded this way:</p>
 <span class="math display">\[\begin{align*}
-z_1 &amp; = \begin{cases}
+x&#39;_1 &amp; = \begin{cases}
 1 &amp; \text{if } \text{make } = \text{ `Fiat&#39;} \\
 0 &amp; \text{otherwise} \\
 \end{cases}
 \\
-z_2 &amp; = \begin{cases}
+x&#39;_2 &amp; = \begin{cases}
 1 &amp; \text{if } \text{make } = \text{ `Alfa-Romeo&#39;} \\
 0 &amp; \text{otherwise} \\
 \end{cases}
 \\
-z_3 &amp; = \begin{cases}
+x&#39;_3 &amp; = \begin{cases}
 1 &amp; \text{if } \text{make } = \text{ `Lancia&#39;} \\
 0 &amp; \text{otherwise} \\
 \end{cases}
 \\
 \end{align*}\]</span>
-<p>The variables <span class="math inline">\(z_1\)</span>, <span class="math inline">\(z_2\)</span>, <span class="math inline">\(z_3\)</span> are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality ‘Ferrari’ is not needed. Indeed:</p>
+<p>The variables <span class="math inline">\(x&#39;_1\)</span>, <span class="math inline">\(x&#39;_2\)</span>, <span class="math inline">\(x&#39;_3\)</span> are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality ‘Ferrari’ is not needed. Indeed:</p>
 <p><span class="math display">\[
-\text{make } = \text{`Ferrari&#39;} \ \Longleftrightarrow \ z_1=z_2=z_3=0
+\text{make } = \text{`Ferrari&#39;} \ \Longleftrightarrow \ x&#39;_1=x&#39;_2=x&#39;_3=0
 \]</span>
 In table <a href="chap-nlip-ita-market.html#tab:dummy-variables">1.1</a> the dummy variable encoding is illustrated.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
@@ -372,13 +373,13 @@ In table <a href="chap-nlip-ita-market.html#tab:dummy-variables">1.1</a> the dum
 Make
 </th>
 <th style="text-align:center;font-weight: bold;">
-<span class="math inline">\(z_1\)</span>
+<span class="math inline">\(x&#39;_1\)</span>
 </th>
 <th style="text-align:center;font-weight: bold;">
-<span class="math inline">\(z_2\)</span>
+<span class="math inline">\(x&#39;_2\)</span>
 </th>
 <th style="text-align:center;font-weight: bold;">
-<span class="math inline">\(z_3\)</span>
+<span class="math inline">\(x&#39;_3\)</span>
 </th>
 </tr>
 </thead>
@@ -505,7 +506,7 @@ Var(N) &amp; = \lambda
 <p>The property <span class="math inline">\(Var(N) = E(N)\)</span> is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where <span class="math inline">\(Var(N) &gt; E(N)\)</span>. This phenomenon is called <em>overdispesion</em>.</p>
 <p>To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter <a href="chap-models.html#chap:models">2</a>.</p>
 </div>
-<div id="exposure" class="section level4" number="1.3.4.2">
+<div id="chap:exposure" class="section level4" number="1.3.4.2">
 <h4><span class="header-section-number">1.3.4.2</span> Exposure</h4>
 <p>In section <a href="chap-nlip-ita-market.html#chap:non-life-ins">1.1</a> we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage <span class="math inline">\(c\)</span> spans in two consecutive years <span class="math inline">\(a\)</span> and <span class="math inline">\(a+1\)</span>, it is collected as two records: the couple <span class="math inline">\((c, a)\)</span> and the couple <span class="math inline">\((c, a+1)\)</span>. This situation is quite common, as usually coverages start during the year and not all at the first of the year.</p>
 <p>The coverage span for an insurance coverage is called <em>exposure</em> and it is usually measured in years-at-risk. For instance, if an insurance coverage spans for 3 months, it corresponds to a quarter of year, so the exposure, measured in years-at-risk, is <span class="math inline">\(v=\frac{1}{4}\)</span>. The term year-at-risk comes from the fact that the policyholder exposure is a risk for the insurer, so the exposure is the period in which the insurer is exposed to the risk of paying claims.</p>
@@ -535,7 +536,7 @@ Var(N) &amp; = \lambda
 <span class="math display">\[E(N(t + \Delta t) - N(t)) = \lambda \Delta t\]</span></p>
 <p>So, the expected number of arrivals is proportional to the size of the interval <span class="math inline">\(\Delta t\)</span>. The intensity of the process <span class="math inline">\(\lambda\)</span> can be also interpreted as the expected number of claims in a unitary period.</p>
 <p>If we assume that the claims that occur to a policy comes from a Poisson process with intensity <span class="math inline">\(\lambda\)</span>, if we observe that policy for the period <span class="math inline">\(]t, t+v]\)</span>, the claims count in that exposure period <span class="math inline">\(M\)</span> are distributed as:
-<span class="math display">\[ M\sim Poisson(\lambda \Delta t) \]</span>
+<span class="math display">\[ M\sim Poisson(v \lambda) \]</span>
 In particular, if the observed period spans 1 year, we get:
 <span class="math display">\[ M = N \sim Poisson(\lambda) \]</span></p>
 <!-- 
