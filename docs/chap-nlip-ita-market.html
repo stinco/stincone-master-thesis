@@ -221,7 +221,7 @@ has a compound distribution.
 </div>
 <p>The variable <span class="math inline">\(Z_i|N=n\)</span> used in this definition can be interpreted as the <em>claim severity for the <span class="math inline">\(i\)</span><sup>th</sup> claim under the hypothesis that <span class="math inline">\(n\)</span> claims occurred</em>. The two hypotheses provided in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a> imply that the distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> does not depend from <span class="math inline">\(i\)</span> nor from <span class="math inline">\(n\)</span>. For this reason, in the following, we are going to use the notation <span class="math inline">\(Z\)</span> to represent a random variable with the <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span> distribution and <span class="math inline">\(F_Z(\cdot)\)</span> for its cumulative distribution function (i.e. <span class="math inline">\(F_Z(z) = P(Z\le z)\)</span>).</p>
 <p>Let’s consider the variabile <span class="math inline">\(Z_i|N&gt;i\)</span>. We can interpret it as the <em>claim severity for the <span class="math inline">\(i\)</span><sup>th</sup> claim under the hypothesis that the <span class="math inline">\(i\)</span><sup>th</sup> claim occurred</em>. From the hypotheses provided in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a> we can obtain that also <span class="math inline">\(Z_i|N&gt;i\)</span> has the same distribution of <span class="math inline">\(Z_i|N=n, \ i&lt;n\)</span>. This can be easily obtained as follows:</p>
-<span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}
 \label{eq:z1}
 P\left(Z_i \middle| N\ge i \right) &amp; = P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
 \\ \label{eq:z2} &amp; =
@@ -232,7 +232,7 @@ P\left(Z_i \middle| N\ge i \right) &amp; = P\left(Z_i \middle| \bigvee_{n = i}^{
 F_Z(z) \underbrace{\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)}}_{=1}
 \\ \nonumber &amp; =
 F_Z(z)
-\end{align}\]</span>
+\end{align}\]</span></p>
 <p>Where:</p>
 <ul>
 <li>the step <a href="#eq:z1">(<strong>??</strong>)</a> and the step <a href="#eq:z2">(<strong>??</strong>)</a> are given by the fact that the event <span class="math inline">\(\{N\ge i\}\)</span> can be decomposed as <span class="math inline">\(\{N\ge i\} = \left\{ \bigvee_{n = i}^{+\infty}{(N=n)} \right\}\)</span> and that the events <span class="math inline">\(\{N=n\}, n\in\{i, i+1, i+2, \dots\}\)</span> are two-by-two disjoint, so they constitute a partition of <span class="math inline">\(\{N\ge i\}\)</span>, that allows us to use the disintegrability property of the probability;</li>
@@ -245,7 +245,7 @@ F_Z(z)
 <h3><span class="header-section-number">1.2.2</span> Distribution of the total cost of claims</h3>
 <p>Under the hypotheses defined in definition <a href="chap-nlip-ita-market.html#def:comp-dist">1.2</a>, it is possible to obtain the full distribution of <span class="math inline">\(S\)</span> given the distribution of <span class="math inline">\(N\)</span> and <span class="math inline">\(Z\)</span>. In this chapter we are going to provide only the formula of the expected value <span class="math inline">\(E(S)\)</span>, but, with the same approach one can obtain all the moments.</p>
 <p>The expected value of the total cost of claims <span class="math inline">\(E(S)\)</span> can be obtained from the expected value of the claims count <span class="math inline">\(E(N)\)</span> and the expected value of the claim severity <span class="math inline">\(E(Z)\)</span> as follows:</p>
-<span class="math display">\[\begin{align}
+<p><span class="math display">\[\begin{align}
 \label{eq:s1}
 E(S) &amp; = \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
 \\ \label{eq:s2} &amp; =
@@ -258,7 +258,7 @@ E(S) &amp; = \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
 E(Z) \underbrace{\sum_{n=0}^{+\infty}{n P(N=n)}}_{=E(N)}
 \\ \label{eq:s6} &amp; =
 E(N)E(Z)
-\end{align}\]</span>
+\end{align}\]</span></p>
 <p>Where:</p>
 <ul>
 <li>the step <a href="#eq:s1">(<strong>??</strong>)</a> is given by the fact that the events <span class="math inline">\(\{N=0\}, \{N=1\}, \{N=2\}, \dots\)</span> constitute a partition of the certain event <span class="math inline">\(\Omega\)</span>, that allows us to use the disintegrability property of the expected value;</li>
@@ -340,7 +340,7 @@ x&#39; = \begin{cases}
 0 &amp; \text{if } \text{sex } = \text{ `Female&#39;}
 \end{cases}
 \]</span></p>
-<p>In general, if a variable <span class="math inline">\(x\)</span> has <span class="math inline">\(K\)</span> modalities, it can be encoded in <span class="math inline">\(K-1\)</span> binary variables <span class="math inline">\(x&#39;_1, x&#39;_2, \dots, x&#39;_{K-1}\)</span>. For example, if <span class="math inline">\(x = \text{make}\)</span> and it can have 4 possible modalities (‘Fiat’, ‘Alfa-Romeo’, ‘Lancia’, ‘Ferrari’) it can be encoded this way:</p>
+<p>In general, if a variable <span class="math inline">\(x\)</span> has <span class="math inline">\(K\)</span> modalities, it can be encoded in <span class="math inline">\(K-1\)</span> binary variables <span class="math inline">\(x&#39;_1, x&#39;_2, \dots, x&#39;_{K-1}\)</span>. For example, if <span class="math inline">\(x = \text{make}\)</span> and it can have 4 possible modalities (‘Fiat’, ‘Alfa-Romeo’, ‘Lancia’, ‘Ferrari’) it can be encoded this way:
 <span class="math display">\[\begin{align*}
 x&#39;_1 &amp; = \begin{cases}
 1 &amp; \text{if } \text{make } = \text{ `Fiat&#39;} \\
@@ -357,9 +357,9 @@ x&#39;_3 &amp; = \begin{cases}
 0 &amp; \text{otherwise} \\
 \end{cases}
 \\
-\end{align*}\]</span>
-<p>The variables <span class="math inline">\(x&#39;_1\)</span>, <span class="math inline">\(x&#39;_2\)</span>, <span class="math inline">\(x&#39;_3\)</span> are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality ‘Ferrari’ is not needed. Indeed:</p>
-<p><span class="math display">\[
+\end{align*}\]</span></p>
+<p>The variables <span class="math inline">\(x&#39;_1\)</span>, <span class="math inline">\(x&#39;_2\)</span>, <span class="math inline">\(x&#39;_3\)</span> are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality ‘Ferrari’ is not needed. Indeed:
+<span class="math display">\[
 \text{make } = \text{`Ferrari&#39;} \ \Longleftrightarrow \ x&#39;_1=x&#39;_2=x&#39;_3=0
 \]</span>
 In table <a href="chap-nlip-ita-market.html#tab:dummy-variables">1.1</a> the dummy variable encoding is illustrated.</p>
@@ -490,11 +490,11 @@ Figure 1.2: Poisson distribution for some values of <span class="math inline">\(
 </p>
 </div>
 <p>The Poisson distribution is a parametric distribution that depends on only the parameter <span class="math inline">\(\lambda\)</span>. In figure <a href="chap-nlip-ita-market.html#fig:plot-poisson">1.2</a>, for different levels of <span class="math inline">\(\lambda\)</span> the distribution is represented. These plots show how for larger values of <span class="math inline">\(\lambda\)</span>, the distribution is shifted to larger values and it is wider.</p>
-<p>Indeed, the first two moments are:</p>
+<p>Indeed, the first two moments are:
 <span class="math display">\[\begin{align*}
 E(N)   &amp; = \lambda \\
 Var(N) &amp; = \lambda
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Thus, increasing <span class="math inline">\(\lambda\)</span>, both <span class="math inline">\(E(N)\)</span> and <span class="math inline">\(Var(N)\)</span> increase.</p>
 <p>Looking to the distribution shape, we can see that:</p>
 <ul>
@@ -574,11 +574,11 @@ Figure 1.3: Gamma distribution for some values of <span class="math inline">\(\a
 <li><span class="math inline">\(\alpha &gt; 0\)</span>, called shape parameter</li>
 <li><span class="math inline">\(\rho &gt; 0\)</span>, called scale parameter</li>
 </ul>
-<p>The first two moments of the Gamma distribution are:</p>
+<p>The first two moments of the Gamma distribution are:
 <span class="math display">\[\begin{align*}
 E(Z)   &amp; = \frac{\alpha}{\rho} \\
 Var(Z) &amp; = \frac{\alpha}{\rho^2}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>In figure <a href="chap-nlip-ita-market.html#fig:plot-gamma">1.3</a>, for different levels of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\gamma\)</span> the distribution is represented. These plots show how changing the values of <span class="math inline">\(\alpha\)</span> and <span class="math inline">\(\gamma\)</span>, the shape changes. We can see that:</p>
 <ul>
 <li>if <span class="math inline">\(\alpha &lt; 1\)</span>, <span class="math inline">\(f_z(\cdot)\)</span> is not defined in <span class="math inline">\(0\)</span> and it has a vertical asymptote in <span class="math inline">\(z = 0\)</span>. In <span class="math inline">\(]0, +\infty]\)</span> it is monotonically decreasing.</li>
@@ -594,11 +594,11 @@ With this parametrization, the density function becomes:
 <span class="math display">\[
 f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\frac{\alpha}{\mu} z}, \quad \alpha &gt; 0, \ \rho &gt; 0
 \]</span></p>
-<p>The advantage of using the parameters <span class="math inline">\((\alpha, \mu)\)</span> is that the link between <span class="math inline">\(E(Z)\)</span> and <span class="math inline">\(Var(Z)\)</span> becomes clearer:</p>
+<p>The advantage of using the parameters <span class="math inline">\((\alpha, \mu)\)</span> is that the link between <span class="math inline">\(E(Z)\)</span> and <span class="math inline">\(Var(Z)\)</span> becomes clearer:
 <span class="math display">\[\begin{align*}
 E(Z)   &amp; = \mu \\
 Var(Z) &amp; = \frac{1}{\alpha}\mu^2
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>Computing the coefficient of variation we then obtain:
 <span class="math display">\[CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}\]</span>
 This result means that, given the shape parameter <span class="math inline">\(\alpha\)</span>, the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter <a href="chap-models.html#chap:models">2</a>, for Gamma distribution, we will use the parametrization based on <span class="math inline">\((\alpha, \mu)\)</span> instead of the one based on <span class="math inline">\((\alpha, \rho)\)</span>.</p>
@@ -622,8 +622,8 @@ Figure 1.4: Large claims.
 </p>
 </div>
 <p>Given the total number of claims <span class="math inline">\(N\)</span>, it can be decomposed as:
-<span class="math display">\[N = N^{(a)} + N^{(l)}\]</span></p>
-<p>where</p>
+<span class="math display">\[N = N^{(a)} + N^{(l)}\]</span>
+where</p>
 <ul>
 <li><span class="math inline">\(N^{(a)}\)</span> is the attritional claims count, i.e. the number of claims with size <span class="math inline">\(Z \le \bar{z}\)</span>;</li>
 <li><span class="math inline">\(N^{(l)}\)</span> is the large claims count, i.e. the number of claims with size <span class="math inline">\(Z &gt; \bar{z}\)</span>;</li>
@@ -633,7 +633,7 @@ Figure 1.4: Large claims.
 \underbrace{Z_{(1)}, Z_{(2)}, \dots, Z_{(N^{(a)})}}_{\text{Attritional Claims}},
 \underbrace{Z_{(N^{(a)} + 1)}, Z_{(N^{(a)} + 2)}, \dots Z_{(N^{(a)} + N^{(l)})}}_{\text{Large Claims}}
 \]</span></p>
-<p>In order to model the large claims it is possible to use the following three decompositions of the total cost of claims <span class="math inline">\(S\)</span>:</p>
+<p>In order to model the large claims it is possible to use the following three decompositions of the total cost of claims <span class="math inline">\(S\)</span>:
 <span class="math display">\[\begin{align}
   \nonumber
   S &amp; = \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
@@ -654,8 +654,8 @@ Figure 1.4: Large claims.
   S &amp; = \sum_{i=1}^{N}{Z_i}
     \ = \ \sum_{i=1}^{N}{\left(Z&#39;_i + Z&#39;&#39;_i\right)}
     \ = \ \sum_{i=1}^{N}{\left(Z&#39;_i + Z&#39;&#39;_i I_{Z_i &gt; \bar{z}}\right)}
-\end{align}\]</span>
-<p>These three decompositions of <span class="math inline">\(S\)</span> are useful because they provide three decompositions of <span class="math inline">\(E(S)\)</span>:</p>
+\end{align}\]</span></p>
+<p>These three decompositions of <span class="math inline">\(S\)</span> are useful because they provide three decompositions of <span class="math inline">\(E(S)\)</span>:
 <span class="math display">\[\begin{align}
   \nonumber
   E(S) &amp; = E(S^{(a)}) + E(S^{(l)}) \\
@@ -671,7 +671,7 @@ Figure 1.4: Large claims.
   E(S) &amp; = E(N) E(Z) \\
     \label{large-claim-decomposition-expected-3}
     &amp; = E(N) \left[E(Z&#39;) + P(Z&gt;\bar{z}) E(Z&#39;&#39;)\right]
-\end{align}\]</span>
+\end{align}\]</span></p>
 <!-- ```{=latex} -->
 <!-- \begin{equation} -->
 <!--   \label{large-claim-decomposition-expected-1} -->
@@ -727,11 +727,11 @@ Figure 1.5: Binomial distribution for some values of <span class="math inline">\
 </p>
 </div>
 <p>The binomial distribution is a parametric distribution that depends on the parameters <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>. <span class="math inline">\(n\)</span> represents the number of trials, while <span class="math inline">\(p\)</span> represents the probability for a trial to success. The assumption is that the <span class="math inline">\(n\)</span> trials are identical, so they have all the same probability <span class="math inline">\(p\)</span> to success. In figure <a href="chap-nlip-ita-market.html#fig:plot-binomial">1.5</a>, for different levels of <span class="math inline">\(n\)</span> and <span class="math inline">\(p\)</span>, the distribution is represented.</p>
-<p>The first two moments of the binomial distribution are:</p>
+<p>The first two moments of the binomial distribution are:
 <span class="math display">\[\begin{align*}
 E(N)   &amp; = np \\
 Var(N) &amp; = np(1-p)
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>If <span class="math inline">\(n = 1\)</span>, the binomial distribution assumes only the values <span class="math inline">\(1\)</span> (with probability <span class="math inline">\(p\)</span>) and <span class="math inline">\(0\)</span> (with probability <span class="math inline">\(1-p\)</span>). In this case it is also called <em>Bernoullian distribution</em> and it can be used to model the indicator of an event <span class="math inline">\(I_E\)</span>.</p>
 <p>If <span class="math inline">\(n&gt;1\)</span>, the binomial distribution assumes a shape centered on its expected value <span class="math inline">\(E(Y)=np\)</span> and fading for values of <span class="math inline">\(y\)</span> that moves away from <span class="math inline">\(E(Y)\)</span>. As <span class="math inline">\(n\)</span> increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the <em>Central Limit Theorem</em>.</p>
 <p>From the binomial Distribution it is also possible to define the scaled binomial distribution by dividing its value by <span class="math inline">\(n\)</span>.</p>
@@ -746,7 +746,7 @@ p_{Y&#39;}(y&#39;) = P\left( Y&#39; = y&#39; \right) = \binom{n}{ny&#39;} p^{ny&
 <p>In chapter <a href="chap-models.html#chap:models">2</a> we will use the Scaled Binomial Distribution.</p>
 <p>In non-life insurance pricing, the binomial distribution can be used to model the probability for a claim to have specific characteristics. For example we can use it to model the probability that a certain claim is a large one <span class="math inline">\(P(Z&gt;\bar{z})\)</span> in order to model separately attritional claims severity <span class="math inline">\(\{Z|Z\le\bar{z}\}\)</span> and large claims severity <span class="math inline">\(\{Z|Z&gt;\bar{z}\}\)</span>, as we have seen in section section <a href="chap-nlip-ita-market.html#chap:large-claims">1.3.4.4</a>.</p>
 <p>Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.</p>
-<p>As for large claims we can decompose <span class="math inline">\(S\)</span> in the following two ways:</p>
+<p>As for large claims we can decompose <span class="math inline">\(S\)</span> in the following two ways:
 <span class="math display">\[\begin{align}
   \nonumber
   E(S) &amp; = E(S^{(things)}) + E(S^{(inj)}) \\
@@ -759,13 +759,13 @@ p_{Y&#39;}(y&#39;) = P\left( Y&#39; = y&#39; \right) = \binom{n}{ny&#39;} p^{ny&
     \label{inj-claim-decomposition-expected-2}
     &amp; = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J)\right]
 \end{align}\]</span>
-<p>where:</p>
+where:</p>
 <ul>
 <li><span class="math inline">\(N^{(things)}\)</span> is the number of claims with only material damages;</li>
 <li><span class="math inline">\(N^{(inj)}\)</span> is the number of claims with injuries;</li>
 <li><span class="math inline">\(J\)</span> is the event that represent that a specific claim presents injuries; such as <span class="math inline">\(Z\)</span> is a representative for <span class="math inline">\(Z_1, Z_2, \dots, Z_N\)</span>, <span class="math inline">\(J\)</span> is a representative for <span class="math inline">\(J_1, J_2, \dots, J_N\)</span>.</li>
 </ul>
-<p>Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:</p>
+<p>Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
 <span class="math display">\[\begin{align*}
 E(S) &amp; = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[4pt]
   &amp; = E(N) \left\{ \right. \\
@@ -775,7 +775,7 @@ E(S) &amp; = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \righ
   &amp; \qquad \qquad + P(Z &lt; \bar{z} | J) E\left( Z \mid Z &lt; \bar{z} \land J \right) \\
   &amp; \qquad \left. \right] \\
   &amp; \quad \left. \right\}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>This way, we are decomposing only the claims with injuries between attritional and large. That makes sense because claims that don’t produce injuries usually have small severities.</p>
 <!-- $$ -->
 <!-- E(N) \left\{\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) \left[ -->
@@ -840,11 +840,11 @@ where:
 <li><span class="math inline">\(z_j^{(\text{reserved in } t)}\)</span> is the amount reserved in <span class="math inline">\(t\)</span> for the claim <span class="math inline">\(j\)</span>.</li>
 </ul></li>
 </ul>
-<p>When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:</p>
+<p>When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
 <span class="math display">\[\begin{align*}
 n_i^{(t)} &amp; \ne n_i \\
 z_j^{(t)} &amp; \ne z_j
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>The common case is that <span class="math inline">\(n_i^{(t)} &lt; n_i\)</span> and <span class="math inline">\(z_j^{(t)} &lt; z_j\)</span>. If we used <span class="math inline">\(n_i^{(t)}\)</span> and <span class="math inline">\(z_j^{(t)}\)</span> without any correction, we would underestimate both <span class="math inline">\(E(N)\)</span> and <span class="math inline">\(E(Z)\)</span>, obtaining a distorted estimate for <span class="math inline">\(E(S)\)</span>.</p>
 <p>To tackle these problems what is usually done is fitting the models for <span class="math inline">\(S_i\)</span> with <span class="math inline">\(n_i^{(t)}\)</span> and <span class="math inline">\(z_j^{(t)}\)</span> and then apply a flat corrective coefficients <span class="math inline">\(\alpha\)</span> to <span class="math inline">\(\widehat{E(S_i)}\)</span> based on an aggregated estimate of <span class="math inline">\(E(S)\)</span> that takes into account the long settlement process.</p>
 <p>An estimate for the expected total cost of claims for a generic policy in the portfolio <span class="math inline">\(E(S)\)</span> can be obtained with techniques based on runoff triangles, such as the <em>Chain Ladder</em>. These techniques are based on projecting the cost of claims already emerged to the final total cost of claims. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for <span class="math inline">\(E(S)\)</span>. Let’s call it <span class="math inline">\(\widehat{E(S)}^{CL}\)</span>. This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.</p>
@@ -866,13 +866,13 @@ and applying to the estimates as follows:
 <!-- & = \frac{\bcancel{n}}{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}} \widehat{E(S)}^{CL} \frac{\cancel{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}}{\bcancel{n}} \\ -->
 <!-- & = \widehat{E(S)}^{CL} -->
 <!-- \end{align*} -->
-<!-- ``` --></p>
+<!-- ``` -->
 <span class="math display">\[\begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} &amp; = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}&#39;}}{n} \\
 &amp; = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}&#39;}}{n} \\
 &amp; = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}&#39;}} \widehat{E(S)}^{CL} \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}&#39;}}{n} \\
 &amp; = \widehat{E(S)}^{CL}
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>So, if <span class="math inline">\(\widehat{E(S)}^{CL}\)</span> is a unbiased estimator for <span class="math inline">\(E(S)\)</span>, we obtain:
 <span class="math display">\[
 E\left( \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} \right)
@@ -937,7 +937,7 @@ P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 <h2><span class="header-section-number">1.5</span> The actuary role</h2>
 <p>In this technical and commercial pricing framework, the actuary is the one that conduct the analysis and define the pricing rules. The <em>International Actuarial Association</em> (IAA) describes the actuaries are “highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more” and it states that their work “requires a combination of strong analytical skills, business knowledge, and understanding of human behavior.”<a href="#fn2" class="footnote-ref" id="fnref2"><sup>2</sup></a></p>
 <p>First of all, the actuary must master the main statistical and data science techniques used to develop model for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be en expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define price for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn’t exist in the past, historical data doesn’t exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.</p>
-<p>In the last years, the increase of competition brought to an increasing in commercial price importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price. The importance for commercial pricing implicate that the technical pricing must not be conducted independently from commercial pricing. Even in companies where the technical pricing and the commercial pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need have some relevant implications on how technical pricing is conducted that we will further discuss in section <a href="chap-models.html#chap:actuary-importance">2.3</a>.</p>
+<p>In the last years, the increase of competition brought to an increase in commercial price importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price. The importance for commercial pricing implicate that the technical pricing must not be conducted independently from commercial pricing. Even in companies where the technical pricing and the commercial pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section <a href="chap-models.html#chap:actuary-importance">2.3</a>.</p>
 <!--
 expert judgement
 statistical and machine learning techniques

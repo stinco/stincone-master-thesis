@@ -155,15 +155,15 @@ to Non-Life Insurance Pricing</p></a>
 <div id="chap:models" class="section level1" number="2">
 <h1><span class="header-section-number">2</span> <strong>Statistical models for Non Life Insurance Pricing</strong></h1>
 <p><!--this will include a mini table of contents--></p>
-<p>In this chapter we are going to describe some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section <a href="chap-models.html#chap:actuary-importance">2.3</a> we will compare them by discussing how they fit the pricing needs.</p>
+<p>In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section <a href="chap-models.html#chap:actuary-importance">2.3</a> we will compare them by discussing how they fit the pricing needs.</p>
 <div id="statistical-models" class="section level2" number="2.1">
 <h2><span class="header-section-number">2.1</span> Statistical Models</h2>
-<p>In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.</p>
+<p>In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.</p>
 <div id="glm" class="section level3" number="2.1.1">
 <h3><span class="header-section-number">2.1.1</span> GLM</h3>
 <div id="chap:linear-exp-families" class="section level4" number="2.1.1.1">
 <h4><span class="header-section-number">2.1.1.1</span> Linear Exponential Families</h4>
-<p>One of the GLM assumptions is that the response variables belong to a <em>Linear Exponential Family</em>. In this section we are going to explain what it is and which distributions fit its definition.</p>
+<p>One of the GLM assumptions is that the response variables belong to a <em>Linear Exponential Family</em>. In this section we are going to explain what a linear exponential family is and which distributions fit its definition.</p>
 
 <div class="definition">
 <p><span id="def:linear-exp-family" class="definition"><strong>Definition 2.1  (Linear Exponential Family)  </strong></span>A Linear Exponential Family <span class="math inline">\(\mathcal{F}\)</span> is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
@@ -209,7 +209,7 @@ Notation
 Normal
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(N(\mu, \sigma^2)\)</span>,<br><span class="math inline">\(\mu\in\mathbb{R}, \ \sigma \in ]0, +\infty[\)</span>
+<span class="math inline">\(N(\mu, \sigma^2)\)</span>,<br><span class="math inline">\(\mu\in\mathbb{R}\)</span> <br> <span class="math inline">\(\sigma \in ]0, +\infty[\)</span>
 </td>
 <td style="text-align:center;">
 <span class="math inline">\(\mathbb{R}\)</span>
@@ -255,7 +255,7 @@ Poisson
 Gamma
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(Gamma(\alpha, \mu)\)</span>,<br><span class="math inline">\(\alpha \in ]0, +\infty[, \ \mu \in ]0, +\infty[\)</span>
+<span class="math inline">\(Gamma(\alpha, \mu)\)</span>,<br><span class="math inline">\(\alpha \in ]0, +\infty[\)</span> <br> <span class="math inline">\(\mu \in ]0, +\infty[\)</span>
 </td>
 <td style="text-align:center;">
 <span class="math inline">\(]-\infty, 0[\)</span>
@@ -278,7 +278,7 @@ Gamma
 Scaled<br>Binomial
 </td>
 <td style="text-align:center;">
-<span class="math inline">\(Binom(n, p)/n\)</span>,<br><span class="math inline">\(n\in\mathbb{N}, \ p\in]0,1[\)</span>
+<span class="math inline">\(Binom(n, p)/n\)</span>,<br><span class="math inline">\(n\in\mathbb{N}\)</span> <br> <span class="math inline">\(p\in]0,1[\)</span>
 </td>
 <td style="text-align:center;">
 <span class="math inline">\(\mathbb{R}\)</span>
@@ -298,12 +298,12 @@ Scaled<br>Binomial
 </tr>
 </tbody>
 </table>
-<p>The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function <span class="math inline">\(b(\cdot)\)</span>. If <span class="math inline">\(Y\)</span> is a random variable with distribution belonging to an exponential family <span class="math inline">\(\mathcal{F}\)</span> with parameters <span class="math inline">\(\theta, \lambda\)</span>, its first two moments are:</p>
+<p>The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function <span class="math inline">\(b(\cdot)\)</span>. If <span class="math inline">\(Y\)</span> is a random variable with distribution belonging to an exponential family <span class="math inline">\(\mathcal{F}\)</span> with parameters <span class="math inline">\(\theta, \lambda\)</span>, its first two moments are:
 <span class="math display">\[\begin{align}
 \label{eq:exp-fam-expected-value}
 E(Y)   &amp; = b&#39;(\theta) \\
 Var(Y) &amp; = \lambda b&#39;&#39;(\theta)
-\end{align}\]</span>
+\end{align}\]</span></p>
 <p>As, within a specified family, the parameters <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\lambda\)</span> determine a distribution, in practical problems the object of estimation will be the couple <span class="math inline">\((\theta, \lambda)\)</span>. In many problems it is natural to consider distributions from a linear exponential family where the dispersion parameter can be expressed as <span class="math inline">\(\lambda = \frac{\phi}{\omega}\)</span>, where <span class="math inline">\(\omega&gt;0\)</span> is a known <em>weight</em> and <span class="math inline">\(\phi&gt;0\)</span> is a parameter that we will keep calling <em>dispersion parameter</em>. In this case, the density of probability function depends on the parameters <span class="math inline">\(\theta\)</span> and <span class="math inline">\(\phi\)</span> and will be expressed as:
 <span class="math display">\[
 f(y; \theta, \phi, \omega) = \exp{\left\{ \frac{\omega}{\phi} \left[y\theta - b(\theta) \right] \right\}} c(y, \phi, \omega), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
@@ -360,8 +360,8 @@ where <span class="math inline">\(\boldsymbol{g}(\cdot)\)</span> must be intende
                   \right)
 \end{array}
 \]</span></p>
-<p>We assume the design matrix to be a full rank matrix, i.e. <span class="math inline">\(\text{rank}(\boldsymbol{X}) = p+1\)</span>. This assumption corresponds to assuming that the <span class="math inline">\(\boldsymbol{X}\)</span> columns are linearly independent.</p>
-<p>The function <span class="math inline">\(g(\cdot)\)</span> can be chosen as any monotonic function with continuous first and second derivatives. Given a family <span class="math inline">\(\mathcal{F}\)</span> a common choice is its canonical link function that is defined as:
+<p>We assume the design matrix to be a full rank matrix, i.e. <span class="math inline">\(\text{rank}(\boldsymbol{X}) = p+1\)</span>. This assumption corresponds to assuming that <span class="math inline">\(\boldsymbol{X}\)</span> columns are linearly independent.</p>
+<p>The function <span class="math inline">\(g(\cdot)\)</span> can be chosen as any monotonic function with continuous first and second derivatives. Given a family <span class="math inline">\(\mathcal{F}\)</span>, a common choice is its canonical link function that is defined as:
 <span class="math display">\[
 g(\mu) = b&#39;^{-1}(\mu)
 \]</span>
@@ -449,8 +449,8 @@ Scaled<br>Binomial
 </tr>
 </tbody>
 </table>
-<p>In the Gamma case, its canonical function <span class="math inline">\(g(\mu)=-\frac{1}{\mu}\)</span> has the drawback that it links the expected values <span class="math inline">\(\mu\in]0,+\infty[\)</span> to <span class="math inline">\(\eta\in]-\infty, 0[\)</span>. This would require some constraints on <span class="math inline">\(\boldsymbol{\beta}\)</span> because <span class="math inline">\(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\)</span> would have to be <span class="math inline">\(&lt;0\)</span>. For this reason, it is preferred to use <span class="math inline">\(g(\mu) = log(\mu)\)</span> that maps <span class="math inline">\(]0, +\infty[\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
-<p>In Scaled Binomial case the canonical function <span class="math inline">\(g(p) = \log{\left(\frac{p}{1-p}\right)}\)</span> is called logit and its inverse <span class="math inline">\(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\)</span> is called logistic. For Scaled Binomial distribution we keep using the notation <span class="math inline">\(p\)</span> for the expected value as it correspond to the probability of success <span class="math inline">\(p\)</span>.</p>
+<p>In Gamma case, its canonical function <span class="math inline">\(g(\mu)=-\frac{1}{\mu}\)</span> has the drawback that it links the expected values <span class="math inline">\(\mu\in]0,+\infty[\)</span> to <span class="math inline">\(\eta\in]-\infty, 0[\)</span>. This would require some constraints on <span class="math inline">\(\boldsymbol{\beta}\)</span> because <span class="math inline">\(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\)</span> would have to be <span class="math inline">\(&lt;0\)</span>. For this reason, it is preferred to use <span class="math inline">\(g(\mu) = \log(\mu)\)</span> that maps <span class="math inline">\(]0, +\infty[\)</span> to <span class="math inline">\(\mathbb{R}\)</span>.</p>
+<p>In Scaled Binomial case the canonical function <span class="math inline">\(g(p) = \log{\left(\frac{p}{1-p}\right)}\)</span> is called logit and its inverse <span class="math inline">\(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\)</span> is called logistic. For Scaled Binomial distribution we keep using the notation <span class="math inline">\(p\)</span> for the expected value as it corresponds to the probability of success <span class="math inline">\(p\)</span>.</p>
 </div>
 <div id="model-fitting" class="section level4" number="2.1.1.3">
 <h4><span class="header-section-number">2.1.1.3</span> Model fitting</h4>
@@ -465,13 +465,13 @@ L: &amp; \mathbb{R}^{p+1} \times \Lambda &amp; \longrightarrow &amp; [0, +\infty
    &amp; \left(\boldsymbol{\beta}, \phi\right) &amp; \longmapsto &amp; f_{\boldsymbol{Y}}(\boldsymbol{y}; \boldsymbol{\theta}, \phi)
 \end{array}
 \]</span></p>
-<p>The maximum likelihood estimates are the values <span class="math inline">\(\left(\boldsymbol{\beta}, \phi\right)\)</span> that maximize <span class="math inline">\(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\)</span>. In practice, <span class="math inline">\(\boldsymbol{\beta}\)</span> are the parameters of interest, while <span class="math inline">\(\phi\)</span> is considered as a disturbance parameter. It is also possible to show that conditioned to any <span class="math inline">\(\phi\)</span>, the value for <span class="math inline">\(\boldsymbol{\beta}\)</span> that maximizes <span class="math inline">\(L(\cdot, \cdot)\)</span> does not depend on <span class="math inline">\(\phi\)</span>. Therefore, <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\phi\)</span> can be estimated separately.</p>
-<p>Let’s indicate with <span class="math inline">\(\tilde{\boldsymbol{\beta}}\)</span> the maximum likelihood estimator for <span class="math inline">\(\boldsymbol{\beta}\)</span>. Its determination <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is defined as:</p>
+<p>The maximum likelihood estimates are the values <span class="math inline">\(\left(\boldsymbol{\beta}, \phi\right)\)</span> that maximize <span class="math inline">\(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\)</span>. In practice, <span class="math inline">\(\boldsymbol{\beta}\)</span> are the parameters of interest, while <span class="math inline">\(\phi\)</span> is considered as a disturbance parameter. It is possible to show that conditioned to any <span class="math inline">\(\phi\)</span>, the value for <span class="math inline">\(\boldsymbol{\beta}\)</span> that maximizes <span class="math inline">\(L(\cdot, \cdot)\)</span> does not depend on <span class="math inline">\(\phi\)</span>. Therefore, <span class="math inline">\(\boldsymbol{\beta}\)</span> and <span class="math inline">\(\phi\)</span> can be estimated separately.</p>
+<p>Let’s indicate with <span class="math inline">\(\tilde{\boldsymbol{\beta}}\)</span> the maximum likelihood estimator for <span class="math inline">\(\boldsymbol{\beta}\)</span>. Its determination <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> is defined as:
 <span class="math display">\[\begin{equation}
 \label{eq:max-lik-est}
 \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
-\end{equation}\]</span>
-<p>Finding the values <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that maximize the likelihood corresponds to finding the values that maximize the log-likelihood <span class="math inline">\(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\)</span>. For the independence hypothesis on <span class="math inline">\(Y_1, \dots, Y_n\)</span> we get:</p>
+\end{equation}\]</span></p>
+<p>Finding the values <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span> that maximize the likelihood corresponds to finding the values that maximize the log-likelihood <span class="math inline">\(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\)</span>. For the independence hypothesis on <span class="math inline">\(Y_1, \dots, Y_n\)</span> we get:
 <span class="math display">\[\begin{align}
 \nonumber
 l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) &amp; =
@@ -486,14 +486,14 @@ l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) &amp; =
 }
 \\ \nonumber &amp; =
 \sum_{i=1}^{n}{l_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
-\end{align}\]</span>
+\end{align}\]</span></p>
 <p>The maximum value of <span class="math inline">\(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\)</span> can be obtained by imposing all its partial derivatives equal to <span class="math inline">\(0\)</span>:
 <span class="math display">\[
 \frac{\partial l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 {\partial\beta_j}
 = 0, \quad \forall j\in\{0,1,\dots,p\}
 \]</span></p>
-<p>These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that the Fisher scoring algorithm corresponds to iteratively solving a weighted least squares optimization problem.</p>
+<p>These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that Newton-Raphson algorithm corresponds to iteratively solving a weighted least squares optimization problem.</p>
 <p>A statistic that can be used to measures the goodness of fit of a model is the <em>Deviance</em>. It can be used by comparing the current model log-likelihood <span class="math inline">\(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\)</span> with the <em>saturated model</em> log-likelihood <span class="math inline">\(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\)</span>. The saturated model is the model with <span class="math inline">\(n\)</span> parameter, so a model where the expected values of the response variables <span class="math inline">\(\mu_1, \dots, \mu_n\)</span> are estimated with their observed values <span class="math inline">\(y_1, \dots, y_n\)</span>. It is possible to show that <span class="math inline">\(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\)</span>. The closer <span class="math inline">\(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\)</span> is to <span class="math inline">\(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\)</span>, the better the current model fitting is.</p>
 
 <div class="definition">
@@ -511,7 +511,7 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) =
 \phi \, S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
 \]</span></p>
 </div>
-<p>In deviance notation <span class="math inline">\(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})\)</span>, the parameter <span class="math inline">\(\phi\)</span> is not reported because the deviance does not depend on <span class="math inline">\(\phi\)</span>. Indeed, from <a href="#eq:log-like">(<strong>??</strong>)</a> we get:</p>
+<p>In deviance notation <span class="math inline">\(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})\)</span>, the parameter <span class="math inline">\(\phi\)</span> is not reported because the deviance does not depend on <span class="math inline">\(\phi\)</span>. Indeed, from <a href="#eq:log-like">(<strong>??</strong>)</a> we get:
 <span class="math display">\[\begin{align*}
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
 &amp; =
@@ -559,7 +559,7 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
 \right\}
 }
 \right)
-\end{align*}\]</span>
+\end{align*}\]</span></p>
 <p>In table <a href="chap-models.html#tab:deviance">2.3</a> the deviances for the families mentioned in <a href="chap-models.html#tab:exp-families">2.1</a> are reported.</p>
 <table class="table" style="width: auto !important; margin-left: auto; margin-right: auto;">
 <caption>
@@ -610,7 +610,7 @@ Scaled<br>Binomial
 </tr>
 </tbody>
 </table>
-<p>As <span class="math inline">\(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\)</span> does not depends on <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span>, maximizing the likelihood in equation <a href="#eq:max-lik-est">(<strong>??</strong>)</a> is the same as minimizing the deviance, that can be seen as a <em>Loss Function</em>.</p>
+<p>As <span class="math inline">\(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\)</span> does not depend on <span class="math inline">\(\hat{\boldsymbol{\beta}}\)</span>, maximizing the likelihood in equation <a href="#eq:max-lik-est">(<strong>??</strong>)</a> is the same as minimizing the deviance, that can be seen as a <em>Loss Function</em>.</p>
 <!--
 * Maximum likelihood
 * Iteratively reweighted least squares
@@ -623,8 +623,7 @@ Scaled<br>Binomial
 </div>
 <div id="variable-effects" class="section level4" number="2.1.1.4">
 <h4><span class="header-section-number">2.1.1.4</span> Variable effects</h4>
-<p>As we mentioned in <a href="chap-nlip-ita-market.html#chap:pricing-variables-encoding">1.3.2</a> the explanatory variables can be <em>quantitative</em> or <em>qualitative</em>. In GLM the assumption is that the variables effect on the linear predictor <span class="math inline">\(\eta\)</span> is linear.</p>
-<p>In figure <a href="chap-models.html#fig:expl-var-types">2.2</a> the effects of quantitative and qualitative variables are shown for a GLM with Normal response and identity link.</p>
+<p>As we mentioned in <a href="chap-nlip-ita-market.html#chap:pricing-variables-encoding">1.3.2</a>, the explanatory variables can be <em>quantitative</em> or <em>qualitative</em>. In GLM, if explanatory variables transformation terms aren’t added to the linear predictor <span class="math inline">\(\eta\)</span>, the variables effect on <span class="math inline">\(\eta\)</span> is linear. In figure <a href="chap-models.html#fig:expl-var-types">2.2</a> the effects of quantitative and qualitative variables are shown. The data is simulated from a GLM with Normal response and identity link.</p>
 
 
 <div class="figure" style="text-align: center"><span id="fig:expl-var-types"></span>
@@ -633,12 +632,12 @@ Scaled<br>Binomial
 Figure 2.2: Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
 </p>
 </div>
-<p>In top-left panel, we see the effect of the quantitative <span class="math inline">\(x\)</span> in the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i\)</span>. As we can see it is a straight line. The coefficient <span class="math inline">\(\beta_1\)</span> represents the slope of the line, thus <span class="math inline">\(\beta_1&gt;0\)</span> means that <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> are positively correlated, while <span class="math inline">\(\beta_1&lt;0\)</span> means that <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> are negatively correlated. For example, if <span class="math inline">\(x\)</span> is the power of the vehicle and <span class="math inline">\(Y\)</span> the yearly number of claims, <span class="math inline">\(\beta_1&gt;0\)</span> means that the more powerful the vehicle is, the more claims the policyholder will experience on average.</p>
-<p>In top-right panel, we see the effect of a qualitative binary variable <span class="math inline">\(x\)</span> in the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i\)</span>. The variable is encoded with values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, so <span class="math inline">\(\beta_1\)</span> represents the effect of the modality <span class="math inline">\(x=1\)</span>. In general, for a qualitative variable with <span class="math inline">\(K\)</span> modalities we will have <span class="math inline">\(K-1\)</span> dummy variables <span class="math inline">\(x&#39;_1, \dots, x&#39;_{K-1}\)</span> and the model will be <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x&#39;_{i1} + \beta_2 x&#39;_{i2} + \dots + + \beta_{K-1} x&#39;_{i, K-1}\)</span>. Thus, the <span class="math inline">\(\beta_j\)</span> coefficient represents the relative effect of the modality <span class="math inline">\(j\)</span> compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if <span class="math inline">\(x\)</span> is the vehicle make, <span class="math inline">\(Y\)</span> the yearly number of claims, the base level for <span class="math inline">\(x\)</span> is ‘Fiat’ and the <span class="math inline">\(j\)</span><sup>th</sup> modality is ‘Ferrari’, <span class="math inline">\(\beta_j&gt;0\)</span> means that Ferrari cars on average experience more claims that Fiat cars.</p>
-<p>In general, in a multivariate model, the coefficient <span class="math inline">\(\beta_j\)</span> represents the effect of the variable <span class="math inline">\(j\)</span> given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable ‘vehicle power’, the coefficient <span class="math inline">\(\beta_j\)</span> corresponding to the modality ‘Ferrari’ represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called <em>Simpson paradox</em>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
+<p>In top-left panel, we see the effect of the quantitative variable <span class="math inline">\(x\)</span> in the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i\)</span>. As we can see it is a straight line. The coefficient <span class="math inline">\(\beta_1\)</span> represents the slope of the line, thus <span class="math inline">\(\beta_1&gt;0\)</span> means that <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> are positively correlated, while <span class="math inline">\(\beta_1&lt;0\)</span> means that <span class="math inline">\(x\)</span> and <span class="math inline">\(Y\)</span> are negatively correlated. For example, if <span class="math inline">\(x\)</span> is the power of the vehicle and <span class="math inline">\(Y\)</span> the yearly number of claims, <span class="math inline">\(\beta_1&gt;0\)</span> means that the more powerful the vehicle is, the more claims the policyholder will experience on average.</p>
+<p>In top-right panel, we see the effect of a qualitative binary variable <span class="math inline">\(x\)</span> in the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i\)</span>. The variable is encoded with values <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>, so <span class="math inline">\(\beta_1\)</span> represents the effect of the modality <span class="math inline">\(x=1\)</span>. In general, for a qualitative variable with <span class="math inline">\(K\)</span> modalities we will have <span class="math inline">\(K-1\)</span> dummy variables <span class="math inline">\(x&#39;_1, \dots, x&#39;_{K-1}\)</span> and the model will be <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x&#39;_{i1} + \beta_2 x&#39;_{i2} + \dots + + \beta_{K-1} x&#39;_{i, K-1}\)</span>. Thus, the <span class="math inline">\(\beta_j\)</span> coefficient represents the relative effect of the modality <span class="math inline">\(j\)</span> compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if <span class="math inline">\(x\)</span> is the vehicle make, <span class="math inline">\(Y\)</span> the yearly number of claims, the base level for <span class="math inline">\(x\)</span> is ‘Fiat’ and the <span class="math inline">\(j\)</span><sup>th</sup> modality is ‘Ferrari’, then <span class="math inline">\(\beta_j&gt;0\)</span> means that Ferrari cars on average experience more claims that Fiat cars.</p>
+<p>In general, in a multivariate model, the coefficient <span class="math inline">\(\beta_j\)</span> represents the effect of the variable <span class="math inline">\(j\)</span> given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable ‘vehicle power’, the coefficient <span class="math inline">\(\beta_j\)</span> corresponding to the modality ‘Ferrari’ represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called <em>Simpson’s paradox</em>.<a href="#fn3" class="footnote-ref" id="fnref3"><sup>3</sup></a></p>
 <p>In bottom-left panel of figure <a href="chap-models.html#fig:expl-var-types">2.2</a>, we see the effect of a quantitative variable <span class="math inline">\(x_1\)</span> and a qualitative binary variable <span class="math inline">\(x_2\)</span> together in the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\)</span>. As we can seen, the effects of <span class="math inline">\(x_1\)</span> variable in the two groups defined by <span class="math inline">\(x_2\)</span> variable are represented by two parallel straight lines. The first one is <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i1}\)</span> and the second is <span class="math inline">\(\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}\)</span>. The coefficient <span class="math inline">\(\beta_2\)</span> represents the vertical distance between the two lines.</p>
 <p>In bottom-right panel, the interaction effect between <span class="math inline">\(x_1\)</span> and <span class="math inline">\(x_2\)</span> is included in the model. The model becomes <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\)</span>. That means that the effect of <span class="math inline">\(x_1\)</span> variables depends on the determination of the <span class="math inline">\(x_2\)</span> variable. In the group with <span class="math inline">\(x_2=0\)</span> the effect is represented by the line <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i\)</span>; the group with <span class="math inline">\(x_2=1\)</span> the effect is represented by the line <span class="math inline">\(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\)</span>.</p>
-<p>For quantitative variables, it is possible to consider also non linear effects in GLMs. Some exmples are reported in figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>.</p>
+<p>For quantitative variables, it is possible to consider also non linear effects in GLMs. Some examples are reported in figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>.</p>
 
 
 <div class="figure" style="text-align: center"><span id="fig:expl-var-quant-effect"></span>
@@ -647,10 +646,10 @@ Figure 2.2: Explanatory variables types, quantitative (top-left), qualitative (t
 Figure 2.3: Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
 </p>
 </div>
-<p>The basic way to achieve it is by adding polynomial terms to the linear predictor. For instance, if <span class="math inline">\(x\)</span> is a quantitative variable, it is possible to add to the model the term <span class="math inline">\(x^2\)</span>, obtaining the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_i^2\)</span>. An example a model with both <span class="math inline">\(x\)</span> and <span class="math inline">\(x^2\)</span> terms is represented in top-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>. Adding the quadratic term, the effect graph becomes a parabola.</p>
-<p>With the same logic, it is possible to add more power terms. In general, if we want to model <span class="math inline">\(x\)</span> with a polynomial of degree <span class="math inline">\(d\)</span>, we can consider the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d\)</span>. In top-right panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> a 4<sup>th</sup> degree polynomial effect is repesented. We highlight that the model is still considered linear, as the attribute “Linear” in “General Linear Model” is referred to the relation between the parameters <span class="math inline">\(\beta_j\)</span> and the linear predictor <span class="math inline">\(\eta_i\)</span> that must be linear.</p>
-<p>Another way to model non liner effects of explanatory varibles is to separate the effects by pieces. In bottom-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> a case in which the <span class="math inline">\(x\)</span> effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms <span class="math inline">\((x-\nu)_+\)</span>, where <span class="math inline">\((x)_+\)</span> represents the positive part of <span class="math inline">\(x\)</span> (<span class="math inline">\((x)_+ = \max(0,x)\)</span>) and <span class="math inline">\(\nu\)</span> is the value of <span class="math inline">\(x\)</span> corresponding to one of the angular points. The <span class="math inline">\(\nu\)</span> values are called <em>nodes</em>, If the nodes are <span class="math inline">\(\nu_1, \nu_2, \dots, \nu_m\)</span>, the model can be represented as <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+\)</span>. This kind of functions are called <em>linear splines</em> and will be further discussed in section <a href="chap-models.html#chap:gam">2.1.4</a>. If we want the effect to be null from a certain point <span class="math inline">\(\nu\)</span>, we can consider the variable <span class="math inline">\(x&#39; = \min(x, \nu)\)</span>. This corresponds to aggregate to <span class="math inline">\(\nu\)</span> all the <span class="math inline">\(x\)</span> after <span class="math inline">\(\nu\)</span>.</p>
-<p>The piece-wise approach can be enhanced by also considering polynomials terms. For instance, in bottom-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>, the model represented is <span class="math inline">\(\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2\)</span>, where <span class="math inline">\((x)_-\)</span> is the negative part of <span class="math inline">\(x\)</span> (<span class="math inline">\((x)_- = \min(0,x)\)</span>). <span class="math inline">\(f(x) = (x-\nu)^2\)</span> is a parabola with vertex in <span class="math inline">\(\nu\)</span>. The fact of not adding the linear term leads to a monotonic non-increasing effect made by a semiparabola and a horizontal semiline that starts from its vertex.</p>
+<p>The basic way to achieve it is by adding polynomial terms to the linear predictor. For instance, if <span class="math inline">\(x\)</span> is a quantitative variable, it is possible to add to the model the term <span class="math inline">\(x^2\)</span>, obtaining the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_i^2\)</span>. An example of model with both <span class="math inline">\(x\)</span> and <span class="math inline">\(x^2\)</span> terms is represented in top-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>. Adding the quadratic term, the effect graph becomes a parabola.</p>
+<p>With the same logic, it is possible to add more power terms. In general, if we want to model <span class="math inline">\(x\)</span> with a polynomial of degree <span class="math inline">\(d\)</span>, we can consider the model <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d\)</span>. In top-right panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> a 4<sup>th</sup> degree polynomial effect is represented. We highlight that the model is still considered linear, as the attribute “Linear” in “General Linear Model” is referred to the relation between the parameters <span class="math inline">\(\beta_j\)</span> and the linear predictor <span class="math inline">\(\eta_i\)</span> that is still linear.</p>
+<p>Another way to model non liner effects of explanatory variables is to separate the effects by pieces. In bottom-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> a case in which the <span class="math inline">\(x\)</span> effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms <span class="math inline">\((x-\nu)_+\)</span>, where <span class="math inline">\((x)_+\)</span> represents the positive part of <span class="math inline">\(x\)</span> (<span class="math inline">\((x)_+ = \max(0,x)\)</span>) and <span class="math inline">\(\nu\)</span> is the value of <span class="math inline">\(x\)</span> in the angular point. The <span class="math inline">\(\nu\)</span> values are called <em>nodes</em>, If the nodes are <span class="math inline">\(\nu_1, \nu_2, \dots, \nu_m\)</span>, the model can be represented as <span class="math inline">\(\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+\)</span>. This kind of functions are called <em>linear splines</em> and will be further discussed in section <a href="chap-models.html#chap:gam">2.1.4</a>. If we want the effect to be null from a certain point <span class="math inline">\(\nu\)</span>, we can consider the variable <span class="math inline">\(x&#39; = \min(\nu, x)\)</span> instead of <span class="math inline">\(x\)</span>. This corresponds to aggregate to <span class="math inline">\(\nu\)</span> all the <span class="math inline">\(x\)</span> after <span class="math inline">\(\nu\)</span>.</p>
+<p>The piece-wise approach can be enhanced by also considering polynomial terms. For instance, in bottom-left panel of figure <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a>, the model represented is <span class="math inline">\(\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2\)</span>, where <span class="math inline">\((x)_-\)</span> is the negative part of <span class="math inline">\(x\)</span> (<span class="math inline">\((x)_- = \min(0,x)\)</span>). <span class="math inline">\(f(x) = (x-\nu)^2\)</span> is a parabola with vertex in <span class="math inline">\(\nu\)</span>. The fact of not adding the linear term leads to a monotonic effect made by a semi-parabola and a horizontal semi-line that starts from its vertex.</p>
 <p>The examples represented in figures <a href="chap-models.html#fig:expl-var-types">2.2</a> and <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> are based on simulated data. That means that the linear predictor structure is known and the coefficients <span class="math inline">\(\beta_0, \beta_1, \dots, \beta_J\)</span> are known. In practice, the real model is not known and the coefficients and the structure must be estimated by the data. Thus, we can take assumptions on the structure and we can estimate the coefficients with <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_J\)</span>. In many cases it is not so clear whether to consider or not a variable and how to consider it. For example, with the same data both bottom-left and bottom-right models could work fine. In section <a href="chap-models.html#chap:variable-selection">2.1.1.6</a> we are going to discuss some variable selection techniques for GLM.</p>
 <!--
 * Qualitative variables / binary variables
@@ -673,7 +672,7 @@ Nella pratica i \beta non sono noti e avremo solo gli \hat{\beta}
 </div>
 <div id="link-functions-and-relativities" class="section level4" number="2.1.1.5">
 <h4><span class="header-section-number">2.1.1.5</span> Link functions and relativities</h4>
-<p>As we mentioned in <a href="chap-models.html#chap:linear-exp-families">2.1.1.1</a>, GLM supports several families. In figure <a href="chap-models.html#fig:resp-var">2.4</a> the models <span class="math inline">\(g(\mu_i) = \beta_0 + \beta_1 x_i\)</span> with different response variable distributions and link functions. As we can see from the plots, a linear effect on <span class="math inline">\(x\)</span> corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.</p>
+<p>As we mentioned in <a href="chap-models.html#chap:linear-exp-families">2.1.1.1</a>, GLM supports several families. In figure <a href="chap-models.html#fig:resp-var">2.4</a> the models <span class="math inline">\(g(\mu_i) = \beta_0 + \beta_1 x_i\)</span> with different response variable distributions and link functions are represented. As we can see from the plots, a linear effect on <span class="math inline">\(x\)</span> corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.</p>
 
 
 <div class="figure" style="text-align: center"><span id="fig:resp-var"></span>
@@ -682,43 +681,67 @@ Nella pratica i \beta non sono noti e avremo solo gli \hat{\beta}
 Figure 2.4: Response variables and link functions, Normal - identity (top-left), Binomial - logit (top-right), Poisson - log (bottom-left) and Gamma - log (bottom-right).
 </p>
 </div>
-<p>If <span class="math inline">\(g(\mu) = \log(\mu)\)</span> the model structure can be expressed as:</p>
+<p>If <span class="math inline">\(g(\mu) = \log(\mu)\)</span>, the model structure can be expressed as:
 <span class="math display">\[\begin{align*}
 \mu_i &amp; = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 &amp; = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
-\end{align*}\]</span>
-<p>The term <span class="math inline">\(e^{\beta_j}\)</span> can be seen as the multiplicative relativity corresponding to the variable <span class="math inline">\(x_j\)</span>. If <span class="math inline">\(x_j\)</span> is a dummy variable, <span class="math inline">\(e^{\beta_j}\)</span> is the factor the expected value <span class="math inline">\(\mu_i\)</span> is multiplicated by when <span class="math inline">\(x_{ij}=1\)</span>. If <span class="math inline">\(x_j\)</span> is a quntitative variable, <span class="math inline">\(e^{\beta_j}\)</span> is the factor the expected value <span class="math inline">\(\mu_i\)</span> is multiplicated by for every one-unit increasing of <span class="math inline">\(x_{ij}\)</span>. Indeed, <span class="math inline">\(\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}\)</span>.</p>
+\end{align*}\]</span></p>
+<p>The term <span class="math inline">\(e^{\beta_j}\)</span> can be seen as the multiplicative relativity corresponding to the variable <span class="math inline">\(x_j\)</span>. If <span class="math inline">\(x_j\)</span> is a dummy variable, <span class="math inline">\(e^{\beta_j}\)</span> is the factor the expected value <span class="math inline">\(\mu_i\)</span> is multiplied by when <span class="math inline">\(x_{ij}=1\)</span>. If <span class="math inline">\(x_j\)</span> is a quantitative variable, <span class="math inline">\(e^{\beta_j}\)</span> is the factor the expected value <span class="math inline">\(\mu_i\)</span> is multiplied by for every one-unit increasing of <span class="math inline">\(x_{ij}\)</span>. Indeed:
+<span class="math display">\[\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}\]</span></p>
 <p>The fact that with log link the relation between coefficients <span class="math inline">\(\beta_0, \beta_1, \dots, \beta_p\)</span> and expected value <span class="math inline">\(\mu_i\)</span> becomes multiplicative is particularly useful to deal with exposure <span class="math inline">\(v_i\)</span>. In section <a href="chap-nlip-ita-market.html#chap:exposure">1.3.4.2</a> we have seen that often the observations are couples (policy, accounting year), so they have different exposures <span class="math inline">\(v_i\)</span>. Thus, we usually work with the number of claims occurred in the exposure period <span class="math inline">\(M_i\)</span> and we observe its realization <span class="math inline">\(m_i\)</span>. The assumption we take is that:
 <span class="math display">\[M_i \sim Poisson(v_i \mu_i)\]</span>
 where <span class="math inline">\(\mu_i\)</span> is the expected value of the yearly number of claims <span class="math inline">\(N_i\)</span>.</p>
-<p>Under the GLM assumptions, we obtain</p>
+<p>Under the GLM assumptions, we obtain
 <span class="math display">\[\begin{align*}
 E(M_i) &amp; = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 &amp; = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 &amp; = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \log(v_i)}
-\end{align*}\]</span>
-<p>That means that we can model <span class="math inline">\(M_1, M_2, \dots, M_n\)</span> as response variables in a GLM with Poisson response in wich the linear predictor depends from an offset additive term <span class="math inline">\(\log(v_i)\)</span>.</p>
-<p>If <span class="math inline">\(g(p) = \text{logit}(p)\)</span> the model structure can be expressed as:</p>
+\end{align*}\]</span></p>
+<p>That means that we can model <span class="math inline">\(M_1, M_2, \dots, M_n\)</span> as response variables in a GLM with Poisson response in which the linear predictor depends on an offset additive term <span class="math inline">\(\log(v_i)\)</span>.</p>
+<p>If <span class="math inline">\(g(p) = \text{logit}(p)\)</span>, the model structure can be expressed as:
 <span class="math display">\[\begin{align*}
 \frac{p_i}{1-p_i} &amp; = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 &amp; = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
-\end{align*}\]</span>
-<p>Thus, the term <span class="math inline">\(e^{\beta_j}\)</span> can be seen as the multplicative relativity corresponding to the variable <span class="math inline">\(x_j\)</span>. However, in this case the relativity doesn’t multiply directly the probability of success <span class="math inline">\(p\)</span>, but it multiplies the odds of success <span class="math inline">\(\frac{p}{1-p}\)</span>.</p>
+\end{align*}\]</span></p>
+<p>Thus, the term <span class="math inline">\(e^{\beta_j}\)</span> can be seen as the multiplicative relativity corresponding to the variable <span class="math inline">\(x_j\)</span>. However, in this case the relativity doesn’t multiply directly the probability of success <span class="math inline">\(p\)</span>, but it multiplies the odds of success <span class="math inline">\(\frac{p}{1-p}\)</span>.</p>
 </div>
 <div id="chap:variable-selection" class="section level4" number="2.1.1.6">
 <h4><span class="header-section-number">2.1.1.6</span> Variable selection</h4>
-<p>One of the most challenging aspects of GLM fitting is selecting the variables and their effects by looking to observed data. In practice we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients <span class="math inline">\(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_p\)</span> and then the variance of <span class="math inline">\(\hat{\mu}_i = \hat{\beta}_0, \hat{\beta}_1 x_{i1}, \dots, \hat{\beta}_p x_{ip}\)</span>. On the other hand, being too frugal with explanatory variables could lead to waste part of the predictive power of the available explanatory variables.</p>
+<p>One of the most challenging aspects of GLM fitting is selecting the variables and their effects by looking to observed data. In practice we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients <span class="math inline">\(\tilde{\beta}_0, \tilde{\beta}_1, \dots, \tilde{\beta}_p\)</span> and then the variance of <span class="math inline">\(\tilde{\mu}_i = \tilde{\beta}_0 + \tilde{\beta}_1 x_{i1} + \dots + \tilde{\beta}_p x_{ip}\)</span>. On the other hand, being too frugal with explanatory variables could lead to waste part of the predictive power of the available explanatory variables.</p>
+<p>One useful tool we have to understand if an explanatory variable <span class="math inline">\(x\)</span> is relevant or not is plotting the points <span class="math inline">\((x_i, y_i)\)</span>, as we did in <a href="chap-models.html#fig:expl-var-types">2.2</a>, <a href="chap-models.html#fig:expl-var-quant-effect">2.3</a> and <a href="chap-models.html#fig:resp-var">2.4</a>. If there are too many observations and the plot is not easily readable, it is possible to group the points by <span class="math inline">\(x\)</span> modalities and show for each group the average of <span class="math inline">\(y_i\)</span> and a confidence interval that gives an idea on the dispersion of the observations around the average. If <span class="math inline">\(x\)</span> is a continuous variable with too many modalities, it is possible to group them into buckets. Showing the average of <span class="math inline">\(y_i\)</span> for groups of <span class="math inline">\(x\)</span> is particularly useful for Binomial and Poisson data, where the fact that <span class="math inline">\(y_i\)</span> can present few different values compromises the plot readability. An example is reported in figure <a href="chap-models.html#fig:var-selection">2.5</a>. The top-left and bottom-left panels represent a case in which <span class="math inline">\(x\)</span> and <span class="math inline">\(y\)</span> are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.</p>
+
+
+<div class="figure" style="text-align: center"><span id="fig:var-selection"></span>
+<img src="_main_files/figure-html/var-selection-1.png" alt="Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right)." width="50%" /><img src="_main_files/figure-html/var-selection-2.png" alt="Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right)." width="50%" /><img src="_main_files/figure-html/var-selection-3.png" alt="Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right)." width="50%" /><img src="_main_files/figure-html/var-selection-4.png" alt="Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right)." width="50%" />
+<p class="caption">
+Figure 2.5: Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right).
+</p>
+</div>
+<p>If we are dealing with a multivariate model where we already inserted the variables <span class="math inline">\(x_1, \dots, x_p\)</span> and we want to evaluate the additional information <span class="math inline">\(x_{p+1}\)</span> brings, it is possible to look at the plot <span class="math inline">\((x_{i, p+1}, r_i)\)</span>, where <span class="math inline">\(r_i\)</span> are the residuals of the model without the variable <span class="math inline">\(x_{p+1}\)</span>:
+<span class="math display">\[
+r_i = y_i - \hat{\mu}_i = y_i - g^{-1}\left( \hat{\beta}_0 + \hat{\beta}_1 x_{i1} + \dots + \hat{\beta}_p x_{ip} \right)
+\]</span></p>
+<p>If the plot shows a clear trend, we will add the variable <span class="math inline">\(x\)</span> to the model, otherwise we won’t.</p>
+<p>The choice of adding or not a variable in the model can be supported by <em>hypothesis testing</em>.</p>
+<!--
+Hypothesis testing
+- diverse tecniche che si basano su diverse statistiche
+- log-rapporto di versosimiglianza
+-->
 <!--
 * problem: effect not known
   + not known variables
   + not known shape
-* aproaches
+* approaches
   + looking to residuals (x_i, r_i)
   + hypotheses testing
+    - test multipli, p-hacking
+    - overfitting
   + AIC/BIC
 * manual work
   + scalability
     - choice of variables. Ho 2^p possibili modelli
+    - how to model quantitative variables
     - choice of interactions. Ho choose(p, 2) possibili interazioni
     Usually actuarial models are updated once a year, so it is possible to start from models made the year before
 * domain knowledge, expertise

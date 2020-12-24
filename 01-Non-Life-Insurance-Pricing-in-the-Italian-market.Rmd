@@ -46,8 +46,11 @@ Starting from this legal definition, we can formalize a non-life insurance contr
 Let's:
 
 * $\left]t_1, t_2\right]$, with $t_1<t_2$, be the coverage period;
+
 * $P>0$ be the premium payed by the policyholder to the insurer;
+
 * $N\in\mathbb{N}$ be the number of claims occurred during the coverage period (_claims count_);
+
 * $\tau_1, \tau_2, \dots, \tau_N$, with $t_1<\tau_1< \tau_2 < \dots < \tau_N<t_2$, be the timing of each claim;
 * $Z_1, Z_2, \dots, Z_N > 0$ be the amount of each claim (_claims severities_ or _claims sizes_).
 
@@ -150,7 +153,6 @@ The variable $Z_i|N=n$ used in this definition can be interpreted as the _claim 
 
 Let's consider the variabile $Z_i|N>i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N>i$ has the same distribution of $Z_i|N=n, \ i<n$. This can be easily obtained as follows:
 
-```{=latex}
 \begin{align}
 \label{eq:z1}
 P\left(Z_i \middle| N\ge i \right) & = P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
@@ -163,9 +165,6 @@ F_Z(z) \underbrace{\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)}}_
 \\ \nonumber & =
 F_Z(z)
 \end{align}
-```
-
-
 
 Where:
 
@@ -182,8 +181,6 @@ Under the hypotheses defined in definition \@ref(def:comp-dist), it is possible 
 
 The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
 
-
-```{=latex}
 \begin{align}
 \label{eq:s1}
 E(S) & = \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
@@ -198,7 +195,6 @@ E(Z) \underbrace{\sum_{n=0}^{+\infty}{n P(N=n)}}_{=E(N)}
 \\ \label{eq:s6} & =
 E(N)E(Z)
 \end{align}
-```
 
 Where:
 
@@ -302,8 +298,6 @@ x' = \begin{cases}
 $$
 
 In general, if a variable $x$ has $K$ modalities, it can be encoded in $K-1$ binary variables $x'_1, x'_2, \dots, x'_{K-1}$. For example, if $x = \text{make}$ and it can have 4 possible modalities ('Fiat', 'Alfa-Romeo', 'Lancia', 'Ferrari') it can be encoded this way:
-
-```{=latex}
 \begin{align*}
 x'_1 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Fiat'} \\
@@ -321,9 +315,8 @@ x'_3 & = \begin{cases}
 \end{cases}
 \\
 \end{align*}
-```
-The variables $x'_1$, $x'_2$, $x'_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
 
+The variables $x'_1$, $x'_2$, $x'_3$ are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality 'Ferrari' is not needed. Indeed:
 $$
 \text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ x'_1=x'_2=x'_3=0
 $$
@@ -442,12 +435,10 @@ tibble(x = 0:22) %>%
 The Poisson distribution is a parametric distribution that depends on only the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
-```{=latex}
 \begin{align*}
 E(N)   & = \lambda \\
 Var(N) & = \lambda
 \end{align*}
-```
 
 Thus, increasing $\lambda$, both $E(N)$ and $Var(N)$ increase.
 
@@ -592,12 +583,10 @@ The Gamma distribution is a parametric distribution that depends on two paramete
 * $\rho > 0$, called scale parameter
 
 The first two moments of the Gamma distribution are:
-```{=latex}
 \begin{align*}
 E(Z)   & = \frac{\alpha}{\rho} \\
 Var(Z) & = \frac{\alpha}{\rho^2}
 \end{align*}
-```
 
 In figure \@ref(fig:plot-gamma), for different levels of $\alpha$ and $\gamma$ the distribution is represented. These plots show how changing the values of $\alpha$ and $\gamma$, the shape changes. We can see that:
 
@@ -617,12 +606,11 @@ f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-
 $$
 
 The advantage of using the parameters $(\alpha, \mu)$ is that the link between $E(Z)$ and $Var(Z)$ becomes clearer:
-```{=latex}
 \begin{align*}
 E(Z)   & = \mu \\
 Var(Z) & = \frac{1}{\alpha}\mu^2
 \end{align*}
-```
+
 Computing the coefficient of variation we then obtain:
 $$CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}$$
 This result means that, given the shape parameter $\alpha$, the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter \@ref(chap:models), for Gamma distribution, we will use the parametrization based on $(\alpha, \mu)$ instead of the one based on $(\alpha, \rho)$.
@@ -712,7 +700,6 @@ $$Z = Z' + Z''$$
 
 Given the total number of claims $N$, it can be decomposed as:
 $$N = N^{(a)} + N^{(l)}$$
-
 where
 
 * $N^{(a)}$ is the attritional claims count, i.e. the number of claims with size $Z \le \bar{z}$;
@@ -726,7 +713,6 @@ $$
 $$
 
 In order to model the large claims it is possible to use the following three decompositions of the total cost of claims $S$:
-```{=latex}
 \begin{align}
   \nonumber
   S & = \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
@@ -748,11 +734,9 @@ In order to model the large claims it is possible to use the following three dec
     \ = \ \sum_{i=1}^{N}{\left(Z'_i + Z''_i\right)}
     \ = \ \sum_{i=1}^{N}{\left(Z'_i + Z''_i I_{Z_i > \bar{z}}\right)}
 \end{align}
-```
 
 
 These three decompositions of $S$ are useful because they provide three decompositions of $E(S)$:
-```{=latex}
 \begin{align}
   \nonumber
   E(S) & = E(S^{(a)}) + E(S^{(l)}) \\
@@ -769,9 +753,6 @@ These three decompositions of $S$ are useful because they provide three decompos
     \label{large-claim-decomposition-expected-3}
     & = E(N) \left[E(Z') + P(Z>\bar{z}) E(Z'')\right]
 \end{align}
-```
-
-
 
 
 <!-- ```{=latex} -->
@@ -865,12 +846,10 @@ tibble(x = seq(from = 0, to = 10, by = 1)) %>%
 The binomial distribution is a parametric distribution that depends on the parameters $n$ and $p$. $n$ represents the number of trials, while $p$ represents the probability for a trial to success. The assumption is that the $n$ trials are identical, so they have all the same probability $p$ to success. In figure \@ref(fig:plot-binomial), for different levels of $n$ and $p$, the distribution is represented.
 
 The first two moments of the binomial distribution are:
-```{=latex}
 \begin{align*}
 E(N)   & = np \\
 Var(N) & = np(1-p)
 \end{align*}
-```
 
 If $n = 1$, the binomial distribution assumes only the values $1$ (with probability $p$) and $0$ (with probability $1-p$). In this case it is also called _Bernoullian distribution_ and it can be used to model the indicator of an event $I_E$.
 
@@ -894,8 +873,6 @@ In non-life insurance pricing, the binomial distribution can be used to model th
 Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
 
 As for large claims we can decompose $S$ in the following two ways:
-
-```{=latex}
 \begin{align}
   \nonumber
   E(S) & = E(S^{(things)}) + E(S^{(inj)}) \\
@@ -908,9 +885,6 @@ As for large claims we can decompose $S$ in the following two ways:
     \label{inj-claim-decomposition-expected-2}
     & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J)\right]
 \end{align}
-```
-
-
 where:
 
 * $N^{(things)}$ is the number of claims with only material damages;
@@ -918,8 +892,6 @@ where:
 * $J$ is the event that represent that a specific claim presents injuries; such as $Z$ is a representative for $Z_1, Z_2, \dots, Z_N$, $J$ is a representative for $J_1, J_2, \dots, J_N$.
 
 Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
-
-```{=latex}
 \begin{align*}
 E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[4pt]
   & = E(N) \left\{ \right. \\
@@ -930,7 +902,6 @@ E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \
   & \qquad \left. \right] \\
   & \quad \left. \right\}
 \end{align*}
-```
 
 This way, we are decomposing only the claims with injuries between attritional and large. That makes sense because claims that don't produce injuries usually have small severities.
 
@@ -1040,12 +1011,10 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
   * $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
-```{=latex}
 \begin{align*}
 n_i^{(t)} & \ne n_i \\
 z_j^{(t)} & \ne z_j
 \end{align*}
-```
 
 The common case is that $n_i^{(t)} < n_i$ and $z_j^{(t)} < z_j$. If we used $n_i^{(t)}$ and $z_j^{(t)}$ without any correction, we would underestimate both $E(N)$ and $E(Z)$, obtaining a distorted estimate for $E(S)$.
 
@@ -1075,14 +1044,12 @@ The property of these balanced estimates is that on average they point to $\wide
 <!-- & = \widehat{E(S)}^{CL} -->
 <!-- \end{align*} -->
 <!-- ``` -->
-```{=latex}
 \begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
 & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
 & = \frac{n}{\sum_{i=1}^{n}{\widehat{E(S_i)}'}} \widehat{E(S)}^{CL} \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
 & = \widehat{E(S)}^{CL}
 \end{align*}
-```
 
 So, if $\widehat{E(S)}^{CL}$ is a unbiased estimator for $E(S)$, we obtain:
 $$

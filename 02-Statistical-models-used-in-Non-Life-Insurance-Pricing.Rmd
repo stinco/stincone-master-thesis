@@ -138,13 +138,11 @@ table %>%
 ```
 
 The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function $b(\cdot)$. If $Y$ is a random variable with distribution belonging to an exponential family $\mathcal{F}$ with parameters $\theta, \lambda$, its first two moments are:
-```{=latex}
 \begin{align}
 \label{eq:exp-fam-expected-value}
 E(Y)   & = b'(\theta) \\
 Var(Y) & = \lambda b''(\theta)
 \end{align}
-```
 
 As, within a specified family, the parameters $\theta$ and $\lambda$ determine a distribution, in practical problems the object of estimation will be the couple $(\theta, \lambda)$. In many problems it is natural to consider distributions from a linear exponential family where the dispersion parameter can be expressed as $\lambda = \frac{\phi}{\omega}$, where $\omega>0$ is a known _weight_ and $\phi>0$ is a parameter that we will keep calling _dispersion parameter_. In this case, the density of probability function depends on the parameters $\theta$ and $\phi$ and will be expressed as:
 $$
@@ -342,16 +340,12 @@ $$
 The maximum likelihood estimates are the values $\left(\boldsymbol{\beta}, \phi\right)$ that maximize $L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$. In practice, $\boldsymbol{\beta}$ are the parameters of interest, while $\phi$ is considered as a disturbance parameter. It is possible to show that conditioned to any $\phi$, the value for $\boldsymbol{\beta}$ that maximizes $L(\cdot, \cdot)$ does not depend on $\phi$. Therefore, $\boldsymbol{\beta}$ and $\phi$ can be estimated separately.
 
 Let's indicate with $\tilde{\boldsymbol{\beta}}$ the maximum likelihood estimator for $\boldsymbol{\beta}$. Its determination $\hat{\boldsymbol{\beta}}$ is defined as:
-```{=latex}
 \begin{equation}
 \label{eq:max-lik-est}
 \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 \end{equation}
-```
-
 
 Finding the values $\hat{\boldsymbol{\beta}}$ that maximize the likelihood corresponds to finding the values that maximize the log-likelihood $l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}$. For the independence hypothesis on $Y_1, \dots, Y_n$ we get:
-```{=latex}
 \begin{align}
 \nonumber
 l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
@@ -367,7 +361,6 @@ l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
 \\ \nonumber & =
 \sum_{i=1}^{n}{l_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 \end{align}
-```
 
 The maximum value of $l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$ can be obtained by imposing all its partial derivatives equal to $0$:
 $$
@@ -398,7 +391,6 @@ $$
 ```
 
 In deviance notation $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})$, the parameter $\phi$ is not reported because the deviance does not depend on $\phi$. Indeed, from \@ref(eq:log-like) we get:
-```{=latex}
 \begin{align*}
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
 & =
@@ -447,7 +439,6 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
 }
 \right)
 \end{align*}
-```
 
 In table \@ref(tab:deviance) the deviances for the families mentioned in \@ref(tab:exp-families) are reported.
 
@@ -1026,12 +1017,10 @@ plot_grid_split(p_resp_1, p_resp_2, p_resp_3, p_resp_4,
 
 
 If $g(\mu) = \log(\mu)$, the model structure can be expressed as:
-```{=latex}
 \begin{align*}
 \mu_i & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
 \end{align*}
-```
 
 The term $e^{\beta_j}$ can be seen as the multiplicative relativity corresponding to the variable $x_j$. If $x_j$ is a dummy variable, $e^{\beta_j}$ is the factor the expected value $\mu_i$ is multiplied by when $x_{ij}=1$. If $x_j$ is a quantitative variable, $e^{\beta_j}$ is the factor the expected value $\mu_i$ is multiplied by for every one-unit increasing of $x_{ij}$. Indeed:
 $$\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}$$
@@ -1041,23 +1030,19 @@ $$M_i \sim Poisson(v_i \mu_i)$$
 where $\mu_i$ is the expected value of the yearly number of claims $N_i$.
 
 Under the GLM assumptions, we obtain
-```{=latex}
 \begin{align*}
 E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 & = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \log(v_i)}
 \end{align*}
-```
 
 That means that we can model $M_1, M_2, \dots, M_n$ as response variables in a GLM with Poisson response in which the linear predictor depends on an offset additive term $\log(v_i)$.
 
 If $g(p) = \text{logit}(p)$, the model structure can be expressed as:
-```{=latex}
 \begin{align*}
 \frac{p_i}{1-p_i} & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
 \end{align*}
-```
 
 Thus, the term $e^{\beta_j}$ can be seen as the multiplicative relativity corresponding to the variable $x_j$. However, in this case the relativity doesn't multiply directly the probability of success $p$, but it multiplies the odds of success $\frac{p}{1-p}$.
 

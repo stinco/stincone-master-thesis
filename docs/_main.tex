@@ -409,7 +409,6 @@ Starting from this legal definition, we can formalize a non-life insurance contr
 Let's:
 
 \begin{itemize}
-\tightlist
 \item
   \(\left]t_1, t_2\right]\), with \(t_1<t_2\), be the coverage period;
 \item
@@ -650,7 +649,6 @@ x' = \begin{cases}
 \]
 
 In general, if a variable \(x\) has \(K\) modalities, it can be encoded in \(K-1\) binary variables \(x'_1, x'_2, \dots, x'_{K-1}\). For example, if \(x = \text{make}\) and it can have 4 possible modalities (`Fiat', `Alfa-Romeo', `Lancia', `Ferrari') it can be encoded this way:
-
 \begin{align*}
 x'_1 & = \begin{cases}
 1 & \text{if } \text{make } = \text{ `Fiat'} \\
@@ -670,7 +668,6 @@ x'_3 & = \begin{cases}
 \end{align*}
 
 The variables \(x'_1\), \(x'_2\), \(x'_3\) are called dummy variables. We can observe that all the information about the make is embedded in just these 3 variables, so a fourth dummy variable that indicate the modality `Ferrari' is not needed. Indeed:
-
 \[
 \text{make } = \text{`Ferrari'} \ \Longleftrightarrow \ x'_1=x'_2=x'_3=0
 \]
@@ -756,7 +753,6 @@ We will indicate it with the notation \(N \sim Poisson(\lambda)\).
 The Poisson distribution is a parametric distribution that depends on only the parameter \(\lambda\). In figure \ref{fig:plot-poisson}, for different levels of \(\lambda\) the distribution is represented. These plots show how for larger values of \(\lambda\), the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
-
 \begin{align*}
 E(N)   & = \lambda \\
 Var(N) & = \lambda
@@ -885,7 +881,6 @@ The Gamma distribution is a parametric distribution that depends on two paramete
 \end{itemize}
 
 The first two moments of the Gamma distribution are:
-
 \begin{align*}
 E(Z)   & = \frac{\alpha}{\rho} \\
 Var(Z) & = \frac{\alpha}{\rho^2}
@@ -915,7 +910,6 @@ f_Z(z) = \frac{\left(\frac{\alpha}{\mu}\right)^\alpha}{\Gamma(\alpha)}z^{\alpha-
 \]
 
 The advantage of using the parameters \((\alpha, \mu)\) is that the link between \(E(Z)\) and \(Var(Z)\) becomes clearer:
-
 \begin{align*}
 E(Z)   & = \mu \\
 Var(Z) & = \frac{1}{\alpha}\mu^2
@@ -963,7 +957,6 @@ In figure \ref{fig:large-claim} the \emph{Capped Claim Size} and the \emph{Exces
 
 Given the total number of claims \(N\), it can be decomposed as:
 \[N = N^{(a)} + N^{(l)}\]
-
 where
 
 \begin{itemize}
@@ -981,7 +974,6 @@ Let's indicate with \(Z_{(i)}\) the \(i\)\textsuperscript{th} in order from the 
 \]
 
 In order to model the large claims it is possible to use the following three decompositions of the total cost of claims \(S\):
-
 \begin{align}
   \nonumber
   S & = \underbrace{Z_{(1)} + Z_{(2)} + \dots + Z_{(N^{(a)})}}_{\text{Attritional Claims}} +
@@ -1005,7 +997,6 @@ In order to model the large claims it is possible to use the following three dec
 \end{align}
 
 These three decompositions of \(S\) are useful because they provide three decompositions of \(E(S)\):
-
 \begin{align}
   \nonumber
   E(S) & = E(S^{(a)}) + E(S^{(l)}) \\
@@ -1065,7 +1056,6 @@ We will indicate it with the notation \(Y \sim Binom(n, p)\).
 The binomial distribution is a parametric distribution that depends on the parameters \(n\) and \(p\). \(n\) represents the number of trials, while \(p\) represents the probability for a trial to success. The assumption is that the \(n\) trials are identical, so they have all the same probability \(p\) to success. In figure \ref{fig:plot-binomial}, for different levels of \(n\) and \(p\), the distribution is represented.
 
 The first two moments of the binomial distribution are:
-
 \begin{align*}
 E(N)   & = np \\
 Var(N) & = np(1-p)
@@ -1093,7 +1083,6 @@ In non-life insurance pricing, the binomial distribution can be used to model th
 Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
 
 As for large claims we can decompose \(S\) in the following two ways:
-
 \begin{align}
   \nonumber
   E(S) & = E(S^{(things)}) + E(S^{(inj)}) \\
@@ -1106,7 +1095,6 @@ As for large claims we can decompose \(S\) in the following two ways:
     \label{inj-claim-decomposition-expected-2}
     & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J)\right]
 \end{align}
-
 where:
 
 \begin{itemize}
@@ -1120,7 +1108,6 @@ where:
 \end{itemize}
 
 Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
-
 \begin{align*}
 E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[4pt]
   & = E(N) \left\{ \right. \\
@@ -1228,7 +1215,6 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
 \end{itemize}
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
-
 \begin{align*}
 n_i^{(t)} & \ne n_i \\
 z_j^{(t)} & \ne z_j
@@ -1254,7 +1240,6 @@ and applying to the estimates as follows:
 We will call \(\widehat{E(S_i)}\) rebalanced estimates.
 
 The property of these balanced estimates is that on average they point to \(\widehat{E(S)}^{CL}\):
-
 \begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
 & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
@@ -1432,7 +1417,6 @@ Gamma & \makecell[c]{$Gamma(\alpha, \mu)$,\\$\alpha \in ]0, +\infty[$ \\ $\mu \i
 \end{table}
 
 The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function \(b(\cdot)\). If \(Y\) is a random variable with distribution belonging to an exponential family \(\mathcal{F}\) with parameters \(\theta, \lambda\), its first two moments are:
-
 \begin{align}
 \label{eq:exp-fam-expected-value}
 E(Y)   & = b'(\theta) \\
@@ -1570,14 +1554,12 @@ L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
 The maximum likelihood estimates are the values \(\left(\boldsymbol{\beta}, \phi\right)\) that maximize \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\). In practice, \(\boldsymbol{\beta}\) are the parameters of interest, while \(\phi\) is considered as a disturbance parameter. It is possible to show that conditioned to any \(\phi\), the value for \(\boldsymbol{\beta}\) that maximizes \(L(\cdot, \cdot)\) does not depend on \(\phi\). Therefore, \(\boldsymbol{\beta}\) and \(\phi\) can be estimated separately.
 
 Let's indicate with \(\tilde{\boldsymbol{\beta}}\) the maximum likelihood estimator for \(\boldsymbol{\beta}\). Its determination \(\hat{\boldsymbol{\beta}}\) is defined as:
-
 \begin{equation}
 \label{eq:max-lik-est}
 \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 \end{equation}
 
 Finding the values \(\hat{\boldsymbol{\beta}}\) that maximize the likelihood corresponds to finding the values that maximize the log-likelihood \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\). For the independence hypothesis on \(Y_1, \dots, Y_n\) we get:
-
 \begin{align}
 \nonumber
 l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
@@ -1622,7 +1604,6 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) =
 \end{definition}
 
 In deviance notation \(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})\), the parameter \(\phi\) is not reported because the deviance does not depend on \(\phi\). Indeed, from \eqref{eq:log-like} we get:
-
 \begin{align*}
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
 & =
@@ -1767,7 +1748,6 @@ As we mentioned in \ref{chap:linear-exp-families}, GLM supports several families
 \end{figure}
 
 If \(g(\mu) = \log(\mu)\), the model structure can be expressed as:
-
 \begin{align*}
 \mu_i & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
@@ -1781,7 +1761,6 @@ The fact that with log link the relation between coefficients \(\beta_0, \beta_1
 where \(\mu_i\) is the expected value of the yearly number of claims \(N_i\).
 
 Under the GLM assumptions, we obtain
-
 \begin{align*}
 E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 & = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
@@ -1791,7 +1770,6 @@ E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}}
 That means that we can model \(M_1, M_2, \dots, M_n\) as response variables in a GLM with Poisson response in which the linear predictor depends on an offset additive term \(\log(v_i)\).
 
 If \(g(p) = \text{logit}(p)\), the model structure can be expressed as:
-
 \begin{align*}
 \frac{p_i}{1-p_i} & = e^{\beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
