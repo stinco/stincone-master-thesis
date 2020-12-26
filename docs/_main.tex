@@ -402,11 +402,11 @@ The Italian Civil Code provides the following definition of insurance contract:
 
 This definition identifies two parties: the \emph{Insurer} and the \emph{Policyholder}. The policyholder pays to the Insurer a certain \emph{Premium} at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (\emph{Claim}) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability insurance, it depends on the damage the policyholder has provided to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability insurance, it depends on the damage the policyholder has caused to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
-Let's:
+Let:
 
 \begin{itemize}
 \item
@@ -429,17 +429,17 @@ S =
   \sum_{i=1}^{N}{Z_i}  & \text{if } N>0
 \end{cases}
 \]
-For semplicity, in the following we are going to just use the notation \(S = \sum_{i=1}^{N}{Z_i}\) with the meaning of \(0\) if \(N=0\).
+For simplicity, in the following we are going to just use the notation \(S = \sum_{i=1}^{N}{Z_i}\) with the meaning of \(0\) if \(N=0\).
 
 Figure \ref{fig:ins-cashflow} shows the cash flows corresponding to the insurance contract. From this representation we can interpret the entering into an insurance contract by the policyholder as a way to exchange the negative cash flows \(-Z_1, -Z_2, \dots, -Z_N\) with one single negative cash flow \(-P\). On the other hand, the insurer undertakes the negative cash flows \(-Z_1, -Z_2, \dots, -Z_N\) in exchange for a positive cash flow \(+P\).
 
 The major difference between these cash flows is that \(P\) is a certain amount, while \(Z_1, Z_2, \dots, Z_N\), at the time \(t_1\), are uncertain in the amount, in the count (\(N\)) and in the timing (\(\tau_1, \tau_2, \dots, \tau_N\)). So, the policyholder, paying a premium \(P\), is giving his risk to the insurer.
 
-This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in \(t_1\), while the costs will emerge later. In most of other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage), doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly estimate the future costs and determine an adequate premium.
+This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in \(t_1\), while the costs will emerge later. In most other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage), doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly predict the future costs in order to determine an adequate premium.
 
-From a statistical point of view, we can translate this uncertainty saying that \(N\) and \(Z_1, Z_2, \dots, Z_N\) are random variables. Therefore, we can say that \(\left\{N, Z_1, Z_2, \dots \right\}\) is a stochastic process. Usually, in non-file insurance pricing, the variables \(\tau_1, \tau_2, \dots, \tau_N\) are not taken into account because the coverage span is short and from a financial point of view the timing of the claims occurrences is negligible.
+From a statistical point of view, we can translate this uncertainty saying that \(N\) and \(Z_1, Z_2, \dots, Z_N\) are random variables. Therefore, we can say that \(\left\{N, Z_1, Z_2, \dots \right\}\) is a stochastic process. Usually, in non-file insurance pricing, the variables \(\tau_1, \tau_2, \dots, \tau_N\) are not taken into account because the coverage span is short and from a financial point of view the timing of the claims occurrences has negligible effect.
 
-Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all \(>0\). This assumption corresponds to the fact that we are excluding the null claims, i.e.~the claims that have been opened, but result in no payment due by the insurer. For the values of \(Z_i\) with \(N<i\) we can use the rule that \(\{N<i\} \Rightarrow \{Z_i = 0\}\), so \(Z_{N+1}=0, \, Z_{N+2}=0, \, \dots\). Therefore, we can say that:
+Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all positive. This assumption corresponds to the fact that we are excluding the null claims, i.e.~the claims that have been opened, but result in no payment due by the insurer. For the values of \(Z_i\) with \(N<i\) we can use the rule that \(\{N<i\} \Rightarrow \{Z_i = 0\}\), so \(Z_{N+1}=0, \, Z_{N+2}=0, \, \dots\). Therefore, we can say that:
 \[
 \{N<i \} \Longleftrightarrow \{Z_i = 0\}
 \]
@@ -480,13 +480,13 @@ S = \sum_{i=1}^{N}{Z_i}
 has a compound distribution.
 \end{definition}
 
-The variable \(Z_i|N=n\) used in this definition can be interpreted as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that \(n\) claims occurred}. The two hypotheses provided in definition \ref{def:comp-dist} imply that the distribution of \(Z_i|N=n, \ i<n\) does not depend from \(i\) nor from \(n\). For this reason, in the following, we are going to use the notation \(Z\) to represent a random variable with the \(Z_i|N=n, \ i<n\) distribution and \(F_Z(\cdot)\) for its cumulative distribution function (i.e.~\(F_Z(z) = P(Z\le z)\)).
+The variable \(Z_i|N=n\) used in this definition can be interpreted as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that \(n\) claims occurred}. The two hypotheses provided in definition \ref{def:comp-dist} imply that the distribution of \(Z_i|N=n, \ i\le n\) does not depend on \(i\) nor on \(n\). For this reason, in the following, we are going to use the notation \(Z\) to represent a random variable with the ditribution of \(Z_i|N=n, \ i\le n\) and \(F_Z(\cdot)\) for its cumulative distribution function (i.e.~\(F_Z(z) = P(Z\le z)\)).
 
-Let's consider the variabile \(Z_i|N>i\). We can interpret it as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that the \(i\)\textsuperscript{th} claim occurred}. From the hypotheses provided in definition \ref{def:comp-dist} we can obtain that also \(Z_i|N>i\) has the same distribution of \(Z_i|N=n, \ i<n\). This can be easily obtained as follows:
+Let's consider the variabile \(Z_i|N\ge i\). We can interpret it as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that the \(i\)\textsuperscript{th} claim occurred}. From the hypotheses provided in definition \ref{def:comp-dist} we can obtain that also \(Z_i|N\ge i\) has the same distribution of \(Z_i|N=n, \ i\le n\). This can be easily obtained as follows:
 
 \begin{align}
 \label{eq:z1}
-P\left(Z_i \middle| N\ge i \right) & = P\left(Z_i \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
+P\left(Z_i \le z \middle| N\ge i \right) & = P\left(Z_i \le z \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
 \\ \label{eq:z2} & =
 \sum_{n=i}^{+\infty}{ \underbrace{P\left(Z_i\le z \middle| N=n\right)}_{=F_Z(z)} P\left( N = n \middle| N\ge i \right)}
 \\ \label{eq:z3} & =
@@ -576,9 +576,9 @@ P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
 \]
 \end{definition}
 
-Secondly, even if the policyholder would pay a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
+Secondly, even if the policyholder paid a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
 
-The result of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
+The amount of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
 
 \hypertarget{chap:personalization}{%
 \section{Modeling and Personalization}\label{chap:personalization}}
@@ -689,7 +689,7 @@ Ferrari & 0 & 0 & 0\\
 \end{tabular}
 \end{table}
 
-For some models it is suggested to use also the dummy variable that indicates the \(K\)\textsuperscript{th} modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper it is preferred the \(K-1\) dummy variables encoding, so we will always consider it.
+For some models it is suggested to use also the dummy variable that indicates the \(K\)\textsuperscript{th} modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper the \(K-1\) dummy variables encoding is preferred, so we will always consider it.
 
 In the following, when I use the notation \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\), I'll always consider that the qualitative variables have been already encoded as dummy variables, so \((x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\)
 
@@ -716,7 +716,7 @@ The first step for defining a Pricing Rule is to model the total cost of claims 
 \begin{definition}[Modeling]
 \label{def:modeling} \iffalse (Modeling) \fi{} Modeling a \emph{response variable} \(Y\) means finding a function
 \[r:\mathcal{X}\rightarrow \mathcal{C}\]
-that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and eventually other moments of \(Y\) or even the full distribution of \(Y\).
+that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and possibly other moments of \(Y\) or even the full distribution of \(Y\).
 \end{definition}
 
 In definition \ref{def:modeling} I used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether the model describes just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more, such as the couple \(\left( E(Y), Var(Y) \right)\) or the full distribution of \(Y\).
@@ -731,7 +731,7 @@ Usually in statistical modeling, the response variables are seen as random varia
 \hypertarget{chap:dist-n}{%
 \subsubsection{\texorpdfstring{Distribution for the claims count \(N\)}{Distribution for the claims count N}}\label{chap:dist-n}}
 
-The claim count \(N\) is a discrete variable with determination in \(\{0, 1, 2, 3,\dots\}\). Even if in practice the number of claims can't be arbitrarily high, \(N\) is usually modeled with distributions that give a positive probability to all the numbers in its support. One of the most common distribution used for \(N\) is the Poisson distribution.
+The claim count \(N\) is a discrete variable with values in \(\{0, 1, 2, 3,\dots\}\). Even if in practice the number of claims can't be arbitrarily high, \(N\) is usually modeled with distributions that give a positive probability to all natural numbers. One of the most common distribution used for \(N\) is the Poisson distribution.
 
 \begin{definition}[Poisson Distribution]
 \label{def:def-poisson} \iffalse (Poisson Distribution) \fi{} A random variable \(N\) with support \(\{0,1,2,3,\dots \}\) has a Poisson distribution, if its probability function is:
@@ -750,7 +750,7 @@ We will indicate it with the notation \(N \sim Poisson(\lambda)\).
 \caption{Poisson distribution for some values of $\lambda$.}\label{fig:plot-poisson}
 \end{figure}
 
-The Poisson distribution is a parametric distribution that depends on only the parameter \(\lambda\). In figure \ref{fig:plot-poisson}, for different levels of \(\lambda\) the distribution is represented. These plots show how for larger values of \(\lambda\), the distribution is shifted to larger values and it is wider.
+The Poisson distribution is a parametric distribution that only depends on the parameter \(\lambda\). In figure \ref{fig:plot-poisson}, for different levels of \(\lambda\) the distribution is represented. These plots show how for larger values of \(\lambda\), the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
 \begin{align*}
@@ -774,7 +774,7 @@ Looking to the distribution shape, we can see that:
 
 In non-life insurance we usually are in the case with \(\lambda<1\). E.g. the average number of claims for motor third party liability insurances in Italy, in 2018 has been 5.68\%\footnote{\href{https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283}{ANIA yearly statistical report for motor third party liability}}.
 
-The property \(Var(N) = E(N)\) is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where \(Var(N) > E(N)\). This phenomenon is called \emph{overdispesion}.
+The property \(Var(N) = E(N)\) is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where \(Var(N) > E(N)\). This phenomenon is called \emph{overdispersion}.
 
 To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \ref{chap:models}.
 
@@ -785,7 +785,7 @@ In section \ref{chap:non-life-ins} we said that non-life insurances usually have
 
 The coverage span for an insurance coverage is called \emph{exposure} and it is usually measured in years-at-risk. For instance, if an insurance coverage spans for 3 months, it corresponds to a quarter of year, so the exposure, measured in years-at-risk, is \(v=\frac{1}{4}\). The term year-at-risk comes from the fact that the policyholder exposure is a risk for the insurer, so the exposure is the period in which the insurer is exposed to the risk of paying claims.
 
-It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considering that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said \(M\) the number of claims the policyholder will experience during his period of exposure \(v\) and \(N\) the number of claims the policyholder would experience during one year, we assume \(E(M) = v E(N)\).
+It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considering that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said \(M\) the number of claims the policyholder will experience during his period of exposure \(v\) (measured in years) and \(N\) the number of claims the policyholder would experience during one year, we assume \(E(M) = v E(N)\).
 
 This assumption can be further extended if we assume that the claims come from a \emph{Poisson process}.
 
@@ -839,9 +839,9 @@ Under these hypotheses we obtain the following result:
 This result tells us that the distribution of the number of events in any interval \(]t, t+\Delta t]\) only depends on the size of the interval \(\Delta t\). Moreover, for the Poisson property we saw in section \ref{chap:dist-n}, we get:
 \[E(N(t + \Delta t) - N(t)) = \lambda \Delta t\]
 
-So, the expected number of arrivals is proportional to the size of the interval \(\Delta t\). The intensity of the process \(\lambda\) can be also interpreted as the expected number of claims in a unitary period.
+So, the expected number of arrivals is proportional to the size of the interval \(\Delta t\). The intensity of the process \(\lambda\) can be also interpreted as the expected number of claims in a unit period.
 
-If we assume that the claims that occur to a policy comes from a Poisson process with intensity \(\lambda\), if we observe that policy for the period \(]t, t+v]\), the claims count in that exposure period \(M\) are distributed as:
+If we assume that the claims that occur to a policy come from a Poisson process with intensity \(\lambda\), if we observe that policy for the period \(]t, t+v]\), the claims count in that exposure period \(M\) are distributed as:
 \[ M\sim Poisson(v \lambda) \]
 In particular, if the observed period spans 1 year, we get:
 \[ M = N \sim Poisson(\lambda) \]
@@ -849,7 +849,7 @@ In particular, if the observed period spans 1 year, we get:
 \hypertarget{distribution-for-the-claim-severity-z}{%
 \subsubsection{\texorpdfstring{Distribution for the claim severity \(Z\)}{Distribution for the claim severity Z}}\label{distribution-for-the-claim-severity-z}}
 
-The claim severity \(Z\) is a continuour variable with determination in \([0, +\infty[\). As for the claims count \(N\), even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive probability to all the numbers in \(]0, +\infty[\). As the null claims are excluded, it is natural tu assume \(P\left( Z=0 \right) = 0\). One of the most common distribution used for \(Z\) is the Gamma distribution.
+The claim severity \(Z\) is a continuous variable with values in \([0, +\infty[\). As for the claims count \(N\), even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive density to all the numbers in \(]0, +\infty[\). As the null claims are excluded, it is natural to assume \(P\left( Z=0 \right) = 0\). One of the most common distribution used for \(Z\) is the Gamma distribution.
 
 \begin{definition}[Gamma Distribution]
 \label{def:def-gamma} \iffalse (Gamma Distribution) \fi{} A random variable \(Z\) with support \([0, +\infty[\) has a Gamma distribution, if its probability density function is:
@@ -917,9 +917,9 @@ Var(Z) & = \frac{1}{\alpha}\mu^2
 
 Computing the coefficient of variation we then obtain:
 \[CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}\]
-This result means that, given the shape parameter \(\alpha\), the coefficient of variation is constant. As we saw for Poisson distribution, it is possible that observed data shows a different pattern. In chapter \ref{chap:models}, for Gamma distribution, we will use the parametrization based on \((\alpha, \mu)\) instead of the one based on \((\alpha, \rho)\).
+This result means that the coefficient of variation is constant (given the shape parameter \(\alpha\)). As we saw for the Poisson distribution, it is possible that observed data shows a different pattern. In chapter \ref{chap:models}, for the Gamma distribution, we will use the parametrization based on \((\alpha, \mu)\) instead of the one based on \((\alpha, \rho)\).
 
-Another characteristic of Gamma distribution that could be problematic in modeling claims size is that it has a light tail. This means that, as \(z\) goes to \(+\infty\), \(f_Z(z)\) aproaches \(0\) quite fast. This could lead to a poor fitting for \emph{large claims}. Other distributions with havier tails are for example the \emph{log-Normal} and the \emph{Pareto}.
+Another characteristic of Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as \(z\) goes to \(+\infty\), \(f_Z(z)\) aproaches \(0\) quite fast. This could lead to a poor fitting for \emph{large claims}. Other distributions with havier tails are for example the \emph{log-Normal} and the \emph{Pareto}.
 
 \hypertarget{chap:large-claims}{%
 \subsubsection{Large claims}\label{chap:large-claims}}
@@ -1027,14 +1027,14 @@ These three decompositions of \(S\) are useful because they provide three decomp
   Looking to \ref{large-claim-decomposition-expected-3} we can model together the claim count \(N\), and then we can model the capped claims size \(Z'\), the excess over the threshold \(Z''\) and the probability to exceed the threshold \(P(Z>\bar{z})\).
 \end{enumerate}
 
-If the large claims component weights a lot on the total cost of claims, these approaches could lead to quite different estimations of \(E(S)\). In particular, if in the observed data the number of large claims is small, it will be hard to model both \(N^{(l)}\) and \(P(Z>\bar{z})\), so the modeling process could lead to a flat or almost flat model for these components. However, with the first approach, a flat model for \(N^{(l)}\) leads to distribute the observed total cost of large claims proportionally to all the policies, while with the second and the third, a flat model for \(P(Z>\bar{z})\) leads to distribute the observed total cost of large claims proportionally to the expected number of claims \(E(N)\). So, with the first approach, a flat model brings to more solidarity between policies, while, with the second approach, a flat model could bring to an exacerbation of the differences identified by modeling \(N\).
+If the large claims component weighs a lot on the total cost of claims, these approaches could lead to quite different estimates of \(E(S)\). In particular, if in the observed data the number of large claims is small, it will be hard to model both \(N^{(l)}\) and \(P(Z>\bar{z})\), so for these components the modeling process could lead to a flat model (i.e.~a model without any explanatory variable) or almost flat one (i.e.~a model with just few explanatory variables and with mild effects). However, with the first approach, a flat model for \(N^{(l)}\) leads to distribute the observed total cost of large claims proportionally to all the policies, while with the second and the third, a flat model for \(P(Z>\bar{z})\) leads to distribute the observed total cost of large claims proportionally to the expected number of claims \(E(N)\). So, with the first approach, a flat model brings to more solidarity between policies, while, with the second approach, a flat model could bring to an exacerbation of the differences identified by modeling \(N\).
 
 For the second approach we must also introduce a distribution suitable for modeling \(P(Z>\bar{z})\).
 
 \hypertarget{binomial-distribution}{%
 \subsubsection{Binomial distribution}\label{binomial-distribution}}
 
-The \emph{binomial distribution} is used to model the counting on events that occurs (successes) in a fixed amount of trials \(n\). For example we can use it to model the number of large claims withing a fixed number of \(n\) claims.
+The \emph{binomial distribution} is used to model the counting on events that occurs (successes) in a fixed amount of trials \(n\). For example we can use it to model the number of large claims within a fixed number of \(n\) claims.
 
 \begin{definition}[Binomial Distribution]
 \label{def:def-binomial} \iffalse (Binomial Distribution) \fi{} A random variable \(Y\) with support \(\{0,1,2, \dots, n \}\) has a Binomial distribution, if its probability function is:
@@ -1053,7 +1053,7 @@ We will indicate it with the notation \(Y \sim Binom(n, p)\).
 \caption{Binomial distribution for some values of $n$ and $p$.}\label{fig:plot-binomial}
 \end{figure}
 
-The binomial distribution is a parametric distribution that depends on the parameters \(n\) and \(p\). \(n\) represents the number of trials, while \(p\) represents the probability for a trial to success. The assumption is that the \(n\) trials are identical, so they have all the same probability \(p\) to success. In figure \ref{fig:plot-binomial}, for different levels of \(n\) and \(p\), the distribution is represented.
+The binomial distribution is a parametric distribution that depends on the parameters \(n\) and \(p\). \(n\) represents the number of trials, while \(p\) represents the probability for a trial to succed. The assumption is that the \(n\) trials are identical, so they have all the same probability \(p\) to succed. In figure \ref{fig:plot-binomial} the distribution is represented for different levels of \(n\) and \(p\).
 
 The first two moments of the binomial distribution are:
 \begin{align*}
@@ -1078,7 +1078,7 @@ p_{Y'}(y') = P\left( Y' = y' \right) = \binom{n}{ny'} p^{ny'} (1-p)^{n-ny'}, \qu
 
 In chapter \ref{chap:models} we will use the Scaled Binomial Distribution.
 
-In non-life insurance pricing, the binomial distribution can be used to model the probability for a claim to have specific characteristics. For example we can use it to model the probability that a certain claim is a large one \(P(Z>\bar{z})\) in order to model separately attritional claims severity \(\{Z|Z\le\bar{z}\}\) and large claims severity \(\{Z|Z>\bar{z}\}\), as we have seen in section section \ref{chap:large-claims}.
+In non-life insurance pricing, the binomial distribution can be used to model the probability for a claim to have specific characteristics. For example we can use it to model the probability that a certain claim is a large one, \(P(Z>\bar{z})\), in order to model separately attritional claims severity \(\{Z|Z\le\bar{z}\}\) and large claims severity \(\{Z|Z>\bar{z}\}\), as we have seen in section \ref{chap:large-claims}.
 
 Another example is the decomposition between claims with only material damages and claims with also bodily injuries. Modeling separately these two components is useful because they usually have a different distribution for the claim size.
 
@@ -1104,7 +1104,7 @@ where:
 \item
   \(N^{(inj)}\) is the number of claims with injuries;
 \item
-  \(J\) is the event that represent that a specific claim presents injuries; such as \(Z\) is a representative for \(Z_1, Z_2, \dots, Z_N\), \(J\) is a representative for \(J_1, J_2, \dots, J_N\).
+  \(J\) is the event that represents that a specific claim presents injuries; such as \(Z\) is a representative for \(Z_1, Z_2, \dots, Z_N\), \(J\) is a representative for \(J_1, J_2, \dots, J_N\).
 \end{itemize}
 
 Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
@@ -1158,14 +1158,14 @@ What an observation is, depends on the variable we are modeling. For instance:
   If we are modeling the occurrence of injuries in a claim \(I_{Jj}\), each observation could be a claim \(j\), the weights could be all \(1\) and the realizations of response variables could be an indicator that assume the value \(1\) if the claim \(j\) caused injuries and \(0\) otherwise. As for the claim severity, we can also aggregate data for policy, so each observation would be a policy \(i\), the weights would be the number of claims \(n_i\) for the policy \(i\) and the realizations of response variables would be the number of claims that caused injuries among the claims of the policy \(i\).
 \end{itemize}
 
-In each of these cases, \(y_i\) is seen as a realization of the random variable \(Y_i\). With an inferential process we obtain estimations on \(Y_i\) disctribution based on observations of their realizations \(y_i\).
+In each of these cases, \(y_i\) is seen as a realization of the random variable \(Y_i\). With an inferential process we obtain estimations on \(Y_i\) distribution based on observations of their realizations \(y_i\).
 
 \hypertarget{settlement-process-and-ibnr}{%
 \subsubsection{Settlement process and IBNR}\label{settlement-process-and-ibnr}}
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
-In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim in reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can takes a lot of time. When the situation in clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
+In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are payed. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period \([t_2, t_3]\). These intermediate payments are payed at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
 
 \begin{figure}
 \centering
@@ -1220,13 +1220,13 @@ n_i^{(t)} & \ne n_i \\
 z_j^{(t)} & \ne z_j
 \end{align*}
 
-The common case is that \(n_i^{(t)} < n_i\) and \(z_j^{(t)} < z_j\). If we used \(n_i^{(t)}\) and \(z_j^{(t)}\) without any correction, we would underestimate both \(E(N)\) and \(E(Z)\), obtaining a distorted estimate for \(E(S)\).
+The common case is that \(n_i^{(t)} < n_i\) and \(z_j^{(t)} < z_j\). If we used \(n_i^{(t)}\) and \(z_j^{(t)}\) without any correction, we would underestimate both \(E(N)\) and \(E(Z)\), obtaining a biased estimate for \(E(S)\).
 
-To tackle these problems what is usually done is fitting the models for \(S_i\) with \(n_i^{(t)}\) and \(z_j^{(t)}\) and then apply a flat corrective coefficients \(\alpha\) to \(\widehat{E(S_i)}\) based on an aggregated estimate of \(E(S)\) that takes into account the long settlement process.
+To tackle these problems what is usually done is fitting the models for \(S_i\) with \(n_i^{(t)}\) and \(z_j^{(t)}\) and then apply a flat corrective coefficient \(\alpha\) to \(\widehat{E(S_i)}\) based on an aggregated estimate of \(E(S)\) that takes into account the long settlement process.
 
 An estimate for the expected total cost of claims for a generic policy in the portfolio \(E(S)\) can be obtained with techniques based on runoff triangles, such as the \emph{Chain Ladder}. These techniques are based on projecting the cost of claims already emerged to the final total cost of claims. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for \(E(S)\). Let's call it \(\widehat{E(S)}^{CL}\). This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
 
-Meanwhile, with the available data \(n_i^{(t)}\) and \(z_j^{(t)}\), the fitting for all the models needed in the decomposition of \(S\) is performed and, for each policy \(i\in\{1, 2, \dots, n\}\) for \(E(S_i)\) is obtained. Let's call it \(\widehat{E(S_i)}'\). As we used the data available in \(t\) that comes from claims not totally settled, \(\widehat{E(S_i)}'\) is a distorted estimate for \(E(S_i)\).
+Meanwhile, with the available data \(n_i^{(t)}\) and \(z_j^{(t)}\), the fitting for all the models needed in the decomposition of \(S\) is performed and, for each policy \(i\in\{1, 2, \dots, n\}\), \(E(S_i)\) is obtained. Let's call it \(\widehat{E(S_i)}'\). As we used the data available in \(t\) that comes from claims not totally settled, \(\widehat{E(S_i)}'\) is a biased estimate for \(E(S_i)\).
 
 We can then balance the estimates \(\widehat{E(S_i)}'\) with \(\widehat{E(S)}^{CL}\) by computing:
 \[
@@ -1239,7 +1239,7 @@ and applying to the estimates as follows:
 
 We will call \(\widehat{E(S_i)}\) rebalanced estimates.
 
-The property of these balanced estimates is that on average they point to \(\widehat{E(S)}^{CL}\):
+The property of these rebalanced estimates is that on average they are equal to \(\widehat{E(S)}^{CL}\):
 \begin{align*}
 \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} & = \frac{\sum_{i=1}^{n}{\alpha\widehat{E(S_i)}'}}{n} \\
 & = \alpha\frac{\sum_{i=1}^{n}{\widehat{E(S_i)}'}}{n} \\
@@ -1256,7 +1256,7 @@ E\left( \frac{\sum_{i=1}^{n}{\widehat{E(S_i)}}}{n} \right)
 
 This procedure can be further developed by balancing not directly the total cost of claims \(E(S)\), but its components. For example, we could separately balance the total cost of claims that only caused damage to things and the total cost of claims that caused injuries. This separation in components can lead to a more precise estimate because usually claims that caused injuries have a slower settlement process so they will have a higher corrective coefficient \(\alpha\).
 
-If the dataset contains policies from many years and during last years a relevant change in the portfolio risk mixture happened, it is also possible to compute \(\alpha\) not with all the \(n\) policies of the dataset, but only with the policies from the last year of the dataset.
+If the dataset contains policies from many years and during the last years a relevant change in the portfolio risk mixture happened, it is also possible to compute \(\alpha\) only with the policies from the last year of the dataset, rather than with all the \(n\) policies of the dataset.
 
 The fact that the final estimates \(\widehat{E(S_i)}\) are rebalanced on \(\widehat{E(S)}^{CL}\) means that the explanatory variables effects estimated with \(n_i^{(t)}\) and \(z_j^{(t)}\) are used just as relative effects and not absolute ones. For instance, if the model says that young people have an expected total cost of claims \(\widehat{E(S_i)}'\) that is two times the old people one, that relative coefficient 2 will be kept also in the balanced estimate \(\widehat{E(S_i)}\).
 
@@ -1304,12 +1304,12 @@ To make the offer price more flexible and to facilitate business competition, th
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 \]
 
-That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called \emph{discounting flexibility}, can be partially spended by the agent and partially by the insurance company itself. The discounts can be changed over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support clients needs with important discounts on both new business and renewal. From a technical point of view, these discounts have been funded by the remarkable decrese on claim frequency due to the traffic decreasing. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
+That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called \emph{discounting flexibility}, can be partially spent by the agent and partially by the insurance company itself. The discounts can be changed over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new business and renewals. From a technical point of view, these discounts have been funded by the remarkable decrese on claim frequency due to the traffic decreasing. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
 \hypertarget{commercial-price}{%
 \subsection{Commercial price}\label{commercial-price}}
 
-Both tariff and offer price must be based not only on technical logic, but also on commercial one. They are determined with a process of \emph{Price Optimization}. The final goal for a company is to maximize profits this year and in the next ones, so the objective of commercial pricing must be obtaining the optimal price to reach this goal. Maximizing profits is a quite generic goal and can't be easily expressed as an analytical optimization problem. For this reason the pricing choices can be guided by the business strategy that can be translated in specific \emph{Key Performance Indicators} (KPI) that have to be optimized. In this optimization framework, the technical price can be seen as an estimate of the expected cost related to the policy. Knowing the costs it is possible to tune the final premium by working on margins.
+Both tariff and offer price must be based not only on technical logic, but also on commercial logic. They are determined with a process of \emph{Price Optimization}. The final goal for a company is to maximize profits this year and in the next ones, so the objective of commercial pricing must be obtaining the optimal price to reach this goal. Maximizing profits is a quite generic goal and can't be easily expressed as an analytical optimization problem. For this reason the pricing choices can be guided by the business strategy that can be translated in specific \emph{Key Performance Indicators} (KPI) that have to be optimized. In this optimization framework, the technical price can be seen as an estimate of the expected cost related to the policy. Knowing the costs it is possible to tune the final premium by working on margins.
 
 The components that act on price optimization can be addressed to:
 
@@ -1336,9 +1336,9 @@ Client expectation is basically the price that the client is willing to pay for 
   for renewal business modeling his retention probability.
 \end{itemize}
 
-For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product been perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer service and customer experience.
+For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer service and customer experience.
 
-If the technical price and the conversion probability function are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling MTPL policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the \emph{lifetime value} of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
+If the technical price and the conversion probability functions are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling MTPL policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the \emph{lifetime value} of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
 
 The business strategy could also contemplate being more aggressive on certain targets of client and less on others. For example, if the company is particularly strong in certain regions, it could make sense for it to push in that region to further increase its market share. Vice versa, in regions where the company doesn't sell much, it could be safer not to push too much and to be more careful. In a risk management framework, this can be also interpreted as introducing a further risk margin for clusters where there isn't enough observed data and the lack of information brings to more uncertainty. An aggressive pricing can also make sense for a young company that is growing and it is not supposed to be profitable from the first years. From a marketing point of view this strategy can increase the brand awareness by the clients and can strengthen the company image.
 
@@ -1347,11 +1347,11 @@ Anyway, a company can't arbitrarily discount policies because an excess in disco
 \hypertarget{the-actuary-role}{%
 \section{The actuary role}\label{the-actuary-role}}
 
-In this technical and commercial pricing framework, the actuary is the one that conduct the analysis and define the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries are ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior''.\footnote{\href{https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About\%20Actuaries.aspx}{IAA, About Actuaries}}
+In this technical and commercial pricing framework, the actuary is the one that conducts the analysis and defines the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries are ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior''.\footnote{\href{https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About\%20Actuaries.aspx}{IAA, About Actuaries}}
 
-First of all, the actuary must master the main statistical and data science techniques used to develop model for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be en expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define price for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
+First of all, the actuary must master the main statistical and data science techniques used to develop model for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
 
-In the last years, the increase of competition brought to an increase in commercial price importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price. The importance for commercial pricing implicate that the technical pricing must not be conducted independently from commercial pricing. Even in companies where the technical pricing and the commercial pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
+In the last years, the increase of competition brought to an increase in commercial price importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price. The importance for commercial pricing implies that the technical pricing must not be conducted independently from commercial pricing. Even in companies where the technical pricing and the commercial pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
 
 --\textgreater{}
 
@@ -1499,13 +1499,13 @@ where \(\boldsymbol{g}(\cdot)\) must be intended as the vectorial function that 
 \end{array}
 \]
 
-We assume the design matrix to be a full rank matrix, i.e.~\(\text{rank}(\boldsymbol{X}) = p+1\). This assumption corresponds to assuming that \(\boldsymbol{X}\) columns are linearly independent.
+We assume the design matrix to be a full rank matrix, i.e.~\(\text{rank}(\boldsymbol{X}) = p+1\). This assumption corresponds to assuming that the columns of \(\boldsymbol{X}\) are linearly independent.
 
 The function \(g(\cdot)\) can be chosen as any monotonic function with continuous first and second derivatives. Given a family \(\mathcal{F}\), a common choice is its canonical link function that is defined as:
 \[
 g(\mu) = b'^{-1}(\mu)
 \]
-From \eqref{eq:exp-fam-expected-value} we we obtains that, as \(\mu = b'(\theta)\), choosing the canonical function corresponds to using \(\theta\) as the linear predictor:
+From \eqref{eq:exp-fam-expected-value} we obtain that, as \(\mu = b'(\theta)\), choosing the canonical function corresponds to using \(\theta\) as the linear predictor:
 \[
 \eta = g(\mu) = b'^{-1}(\mu) = \theta
 \]
@@ -1531,9 +1531,9 @@ Gamma & $-\log{\left(-\theta\right)}$ & $-\frac{1}{\theta}$ & $-\frac{1}{\mu}$\\
 \end{tabular}
 \end{table}
 
-In Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drawback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This would require some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) would have to be \(<0\). For this reason, it is preferred to use \(g(\mu) = \log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
+In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the drawback that it links the expected values \(\mu\in]0,+\infty[\) to \(\eta\in]-\infty, 0[\). This would require some constraints on \(\boldsymbol{\beta}\) because \(\eta=\boldsymbol{x}^t\boldsymbol{\beta}\) would have to be \(<0\). For this reason, it is preferred to use \(g(\mu) = \log(\mu)\) that maps \(]0, +\infty[\) to \(\mathbb{R}\).
 
-In Scaled Binomial case the canonical function \(g(p) = \log{\left(\frac{p}{1-p}\right)}\) is called logit and its inverse \(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\) is called logistic. For Scaled Binomial distribution we keep using the notation \(p\) for the expected value as it corresponds to the probability of success \(p\).
+In the Scaled Binomial case the canonical function \(g(p) = \log{\left(\frac{p}{1-p}\right)}\) is called logit and its inverse \(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\) is called logistic. For Scaled Binomial distribution we keep using the notation \(p\) for the expected value as it corresponds to the probability of success \(p\).
 
 \hypertarget{model-fitting}{%
 \subsubsection{Model fitting}\label{model-fitting}}
@@ -1585,7 +1585,7 @@ The maximum value of \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) 
 
 These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that Newton-Raphson algorithm corresponds to iteratively solving a weighted least squares optimization problem.
 
-A statistic that can be used to measures the goodness of fit of a model is the \emph{Deviance}. It can be used by comparing the current model log-likelihood \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) with the \emph{saturated model} log-likelihood \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\). The saturated model is the model with \(n\) parameter, so a model where the expected values of the response variables \(\mu_1, \dots, \mu_n\) are estimated with their observed values \(y_1, \dots, y_n\). It is possible to show that \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\). The closer \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) is to \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\), the better the current model fitting is.
+A statistic that can be used to measure the goodness of fit of a model is the \emph{Deviance}. It can be used by comparing the current model log-likelihood \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) with the \emph{saturated model} log-likelihood \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\). The saturated model is the model with \(n\) parameters, so a model where the expected values of the response variables \(\mu_1, \dots, \mu_n\) are estimated with their observed values \(y_1, \dots, y_n\). It is possible to show that \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\). The closer \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) is to \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\), the better the current model fitting is.
 
 \begin{definition}[Deviance]
 \label{def:deviance-def} \iffalse (Deviance) \fi{} Given \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) the log-likelihood of the current model and \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
@@ -1694,15 +1694,15 @@ As we mentioned in \ref{chap:pricing-variables-encoding}, the explanatory variab
 \caption{Explanatory variables types.}\label{fig:expl-var-types}
 \end{figure}
 
-In top-left panel, we see the effect of the quantitative variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). As we can see it is a straight line. The coefficient \(\beta_1\) represents the slope of the line, thus \(\beta_1>0\) means that \(x\) and \(Y\) are positively correlated, while \(\beta_1<0\) means that \(x\) and \(Y\) are negatively correlated. For example, if \(x\) is the power of the vehicle and \(Y\) the yearly number of claims, \(\beta_1>0\) means that the more powerful the vehicle is, the more claims the policyholder will experience on average.
+In the top-left panel, we see the effect of the quantitative variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). As we can see it is a straight line. The coefficient \(\beta_1\) represents the slope of the line, thus \(\beta_1>0\) means that \(x\) and \(Y\) are positively correlated, while \(\beta_1<0\) means that \(x\) and \(Y\) are negatively correlated. For example, if \(x\) is the power of the vehicle and \(Y\) the yearly number of claims, \(\beta_1>0\) means that the more powerful the vehicle is, the more claims the policyholder will experience on average.
 
-In top-right panel, we see the effect of a qualitative binary variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). The variable is encoded with values \(0\) and \(1\), so \(\beta_1\) represents the effect of the modality \(x=1\). In general, for a qualitative variable with \(K\) modalities we will have \(K-1\) dummy variables \(x'_1, \dots, x'_{K-1}\) and the model will be \(\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots + + \beta_{K-1} x'_{i, K-1}\). Thus, the \(\beta_j\) coefficient represents the relative effect of the modality \(j\) compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if \(x\) is the vehicle make, \(Y\) the yearly number of claims, the base level for \(x\) is `Fiat' and the \(j\)\textsuperscript{th} modality is `Ferrari', then \(\beta_j>0\) means that Ferrari cars on average experience more claims that Fiat cars.
+In the top-right panel, we see the effect of a qualitative binary variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). The variable is encoded with values \(0\) and \(1\), so \(\beta_1\) represents the effect of the modality \(x=1\). In general, for a qualitative variable with \(K\) modalities we will have \(K-1\) dummy variables \(x'_1, \dots, x'_{K-1}\) and the model will be \(\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots + + \beta_{K-1} x'_{i, K-1}\). Thus, the \(\beta_j\) coefficient represents the relative effect of the modality \(j\) compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if \(x\) is the vehicle make, \(Y\) the yearly number of claims, the base level for \(x\) is `Fiat' and the \(j\)\textsuperscript{th} modality is `Ferrari', then \(\beta_j>0\) means that Ferrari cars on average experience more claims that Fiat cars.
 
-In general, in a multivariate model, the coefficient \(\beta_j\) represents the effect of the variable \(j\) given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable `vehicle power', the coefficient \(\beta_j\) corresponding to the modality `Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called \emph{Simpson's paradox} \footnote{\url{https://en.wikipedia.org/wiki/Simpson\%27s_paradox}}.
+In general, in a multivariate model, the coefficient \(\beta_j\) represents the effect of the variable \(j\) given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable `vehicle power', the coefficient \(\beta_j\) corresponding to the modality `Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called \emph{Simpson's paradox} \footnote{Simpson's paradox, \url{https://en.wikipedia.org/wiki/Simpson\%27s_paradox}}.
 
-In bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect of a quantitative variable \(x_1\) and a qualitative binary variable \(x_2\) together in the model \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\). As we can seen, the effects of \(x_1\) variable in the two groups defined by \(x_2\) variable are represented by two parallel straight lines. The first one is \(\mu_i = \beta_0 + \beta_1 x_{i1}\) and the second is \(\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}\). The coefficient \(\beta_2\) represents the vertical distance between the two lines.
+In the bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect of a quantitative variable \(x_1\) and a qualitative binary variable \(x_2\) together in the model \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\). As we can seen, the effects of \(x_1\) variable in the two groups defined by \(x_2\) variable are represented by two parallel straight lines. The first one is \(\mu_i = \beta_0 + \beta_1 x_{i1}\) and the second is \(\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}\). The coefficient \(\beta_2\) represents the vertical distance between the two lines.
 
-In bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is included in the model. The model becomes \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\). That means that the effect of \(x_1\) variables depends on the determination of the \(x_2\) variable. In the group with \(x_2=0\) the effect is represented by the line \(\mu_i = \beta_0 + \beta_1 x_i\); the group with \(x_2=1\) the effect is represented by the line \(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\).
+In the bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is included in the model. The model becomes \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\). That means that the effect of \(x_1\) variables depends on the determination of the \(x_2\) variable. In the group with \(x_2=0\) the effect is represented by the line \(\mu_i = \beta_0 + \beta_1 x_i\); the group with \(x_2=1\) the effect is represented by the line \(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\).
 
 For quantitative variables, it is possible to consider also non linear effects in GLMs. Some examples are reported in figure \ref{fig:expl-var-quant-effect}.
 
@@ -1753,10 +1753,10 @@ If \(g(\mu) = \log(\mu)\), the model structure can be expressed as:
 & = e^{\beta_0} \left(e^{\beta_1}\right)^{x_{i1}} \left(e^{\beta_2}\right)^{x_{i2}} \dots \left(e^{\beta_p}\right)^{x_{ip}}
 \end{align*}
 
-The term \(e^{\beta_j}\) can be seen as the multiplicative relativity corresponding to the variable \(x_j\). If \(x_j\) is a dummy variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplied by when \(x_{ij}=1\). If \(x_j\) is a quantitative variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplied by for every one-unit increasing of \(x_{ij}\). Indeed:
+The term \(e^{\beta_j}\) can be seen as the multiplicative factor corresponding to the variable \(x_j\). If \(x_j\) is a dummy variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplied by when \(x_{ij}=1\). If \(x_j\) is a quantitative variable, \(e^{\beta_j}\) is the factor the expected value \(\mu_i\) is multiplied by for every one-unit increasing of \(x_{ij}\). Indeed:
 \[\left(e^{\beta_j}\right)^{x_j+1} = e^{\beta_j} \left(e^{\beta_j}\right)^{x_j}\]
 
-The fact that with log link the relation between coefficients \(\beta_0, \beta_1, \dots, \beta_p\) and expected value \(\mu_i\) becomes multiplicative is particularly useful to deal with exposure \(v_i\). In section \ref{chap:exposure} we have seen that often the observations are couples (policy, accounting year), so they have different exposures \(v_i\). Thus, we usually work with the number of claims occurred in the exposure period \(M_i\) and we observe its realization \(m_i\). The assumption we take is that:
+The fact that with a log link the relation between coefficients \(\beta_0, \beta_1, \dots, \beta_p\) and expected value \(\mu_i\) becomes multiplicative is particularly useful to deal with exposure \(v_i\). In section \ref{chap:exposure} we have seen that often the observations are couples (policy, accounting year), so they have different exposures \(v_i\). Thus, we usually work with the number of claims occurred in the exposure period \(M_i\) and we observe its realization \(m_i\). The assumption we take is that:
 \[M_i \sim Poisson(v_i \mu_i)\]
 where \(\mu_i\) is the expected value of the yearly number of claims \(N_i\).
 
