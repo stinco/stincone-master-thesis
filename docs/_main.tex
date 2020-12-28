@@ -383,7 +383,7 @@ Lorem ipsum \ldots{}
 
 \chaptermark{Non-Life Insurance Pricing}
 
-In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process.
+In this chapter we are going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process.
 
 \hypertarget{chap:non-life-ins}{%
 \section{What a Non-Life Insurance is}\label{chap:non-life-ins}}
@@ -453,7 +453,7 @@ Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all positive. This assumpti
 \hypertarget{non-life-insurance-pricing}{%
 \section{Non-Life insurance pricing}\label{non-life-insurance-pricing}}
 
-In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a ``proper'' premium taking into account risk related factors and commercial related factors. The process of \emph{pricing} corresponds in defining the set of rules for determining this ``proper'' premium \(P_i\) for a specific policyholder \(i\), given the known information on him. In the next sections I am going to better explain what ``proper'' means.
+In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a ``proper'' premium taking into account risk related factors and commercial related factors. The process of \emph{pricing} corresponds in defining the set of rules for determining this ``proper'' premium \(P_i\) for a specific policyholder \(i\), given the known information on him. In the next sections we are going to better explain what ``proper'' means.
 
 \hypertarget{compound-distribution-hypotheses}{%
 \subsection{Compound distribution hypotheses}\label{compound-distribution-hypotheses}}
@@ -578,7 +578,7 @@ P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
 
 Secondly, even if the policyholder paid a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
 
-The amount of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
+The amount of the Technical Price with these loadings can be further modified based on business logic, as we are going to discuss later.
 
 \hypertarget{chap:personalization}{%
 \section{Modeling and Personalization}\label{chap:personalization}}
@@ -691,7 +691,7 @@ Ferrari & 0 & 0 & 0\\
 
 For some models it is suggested to use also the dummy variable that indicates the \(K\)\textsuperscript{th} modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper the \(K-1\) dummy variables encoding is preferred, so we will always consider it.
 
-In the following, when I use the notation \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\), I'll always consider that the qualitative variables have been already encoded as dummy variables, so \((x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\)
+In the following, when we use the notation \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\), I'll always consider that the qualitative variables have been already encoded as dummy variables, so \((x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\)
 
 \hypertarget{pricing-rule-and-modeling}{%
 \subsection{Pricing Rule and Modeling}\label{pricing-rule-and-modeling}}
@@ -719,7 +719,7 @@ The first step for defining a Pricing Rule is to model the total cost of claims 
 that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and possibly other moments of \(Y\) or even the full distribution of \(Y\).
 \end{definition}
 
-In definition \ref{def:modeling} I used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether the model describes just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more, such as the couple \(\left( E(Y), Var(Y) \right)\) or the full distribution of \(Y\).
+In definition \ref{def:modeling} we used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether the model describes just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more, such as the couple \(\left( E(Y), Var(Y) \right)\) or the full distribution of \(Y\).
 
 As we observed in section \ref{chap:tcc-dist}, under the compound distribution hypotheses, it is not needed to model directly the total cost of claims \(S\), but we can separately model \(N\) and \(Z\).
 
@@ -1559,10 +1559,10 @@ Let's indicate with \(\tilde{\boldsymbol{\beta}}\) the maximum likelihood estima
 \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 \end{equation}
 
-Finding the values \(\hat{\boldsymbol{\beta}}\) that maximize the likelihood corresponds to finding the values that maximize the log-likelihood \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\). For the independence hypothesis on \(Y_1, \dots, Y_n\) we get:
+Finding the values \(\hat{\boldsymbol{\beta}}\) that maximize the likelihood corresponds to finding the values that maximize the log-likelihood \(\ell\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) = \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}\). For the independence hypothesis on \(Y_1, \dots, Y_n\) we get:
 \begin{align}
 \nonumber
-l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
+\ell\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
 \log{\left(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\right)}
 \\ \nonumber & =
 \log{\left(\prod_{i=1}^{n}{\exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} c(y_i, \phi, \omega_i)}\right)}
@@ -1573,27 +1573,27 @@ l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right) & =
 \right\}
 }
 \\ \nonumber & =
-\sum_{i=1}^{n}{l_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\sum_{i=1}^{n}{\ell_i\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 \end{align}
 
-The maximum value of \(l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) can be obtained by imposing all its partial derivatives equal to \(0\):
+The maximum value of \(\ell\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) can be obtained by imposing all its partial derivatives equal to \(0\):
 \[
-\frac{\partial l\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+\frac{\partial \ell\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
 {\partial\beta_j}
 = 0, \quad \forall j\in\{0,1,\dots,p\}
 \]
 
 These equations can be solved with numerical methods, such as Newton-Raphson algorithm or its variant Fisher scoring. It is possible to show that Newton-Raphson algorithm corresponds to iteratively solving a weighted least squares optimization problem.
 
-A statistic that can be used to measure the goodness of fit of a model is the \emph{Deviance}. It can be used by comparing the current model log-likelihood \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) with the \emph{saturated model} log-likelihood \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\). The saturated model is the model with \(n\) parameters, so a model where the expected values of the response variables \(\mu_1, \dots, \mu_n\) are estimated with their observed values \(y_1, \dots, y_n\). It is possible to show that \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\). The closer \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) is to \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\), the better the current model fitting is.
+A statistic that can be used to measure the goodness of fit of a model is the \emph{Deviance}. It can be used by comparing the current model log-likelihood \(\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) with the \emph{saturated model} log-likelihood \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\). The saturated model is the model with \(n\) parameters, so a model where the expected values of the response variables \(\mu_1, \dots, \mu_n\) are estimated with their observed values \(y_1, \dots, y_n\). It is possible to show that \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge \ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\). The closer \(\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) is to \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\), the better the current model fitting is.
 
 \begin{definition}[Deviance]
-\label{def:deviance-def} \iffalse (Deviance) \fi{} Given \(l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) the log-likelihood of the current model and \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
+\label{def:deviance-def} \iffalse (Deviance) \fi{} Given \(\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)\) the log-likelihood of the current model and \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
 \[
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y}) =
 -2\left(
-l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
-- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- \ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
 \right)
 \]
 The \textit{Deviance} of the current model is defined as:
@@ -1608,8 +1608,8 @@ In deviance notation \(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})\), the parame
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y})
 & =
 -2\left(
-l\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
-- l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- \ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
 \right)
 \\ & =
 -2\left(
@@ -1674,10 +1674,10 @@ Gamma & $2\,\sum_{i=1}^{n}{\left\{ - \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} 
 \end{tabular}
 \end{table}
 
-As \(l_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not depend on \(\hat{\boldsymbol{\beta}}\), maximizing the likelihood in equation \eqref{eq:max-lik-est} is the same as minimizing the deviance, that can be seen as a \emph{Loss Function}.
+As \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not depend on \(\hat{\boldsymbol{\beta}}\), maximizing the likelihood in equation \eqref{eq:max-lik-est} is the same as minimizing the deviance, that can be seen as a \emph{Loss Function}.
 
-\hypertarget{variable-effects}{%
-\subsubsection{Variable effects}\label{variable-effects}}
+\hypertarget{chap:var-effects}{%
+\subsubsection{Variable effects}\label{chap:var-effects}}
 
 As we mentioned in \ref{chap:pricing-variables-encoding}, the explanatory variables can be \emph{quantitative} or \emph{qualitative}. In GLM, if explanatory variables transformation terms aren't added to the linear predictor \(\eta\), the variables effect on \(\eta\) is linear. In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown. The data is simulated from a GLM with Normal response and identity link.
 
@@ -1804,7 +1804,78 @@ r_i = y_i - \hat{\mu}_i = y_i - g^{-1}\left( \hat{\beta}_0 + \hat{\beta}_1 x_{i1
 
 If the plot shows a clear trend, we will add the variable \(x\) to the model, otherwise we won't.
 
-The choice of adding or not a variable in the model can be supported by \emph{hypothesis testing}.
+The choice of adding or not a variable in the model can be supported by \emph{hypothesis testing}. Given a GLM with coefficients \(\beta_0, \beta_1, \dots, \beta_p\), it is possible to test if a group of coefficients \(\beta_{j_1}, \beta_{j_2}, \dots, \beta_{j_s}\) is equal to zero. Formally the hypotheses tested are:
+\[
+\begin{cases}
+H_0: & \beta_{j_k} = 0 \ \forall k \in \{1, 2, \dots, s\} \\
+H_1: & \exists k: \beta_{j_k} \neq 0
+\end{cases}
+\]
+
+It the hypothesis \(H_0\) is accepted, the variables \(x_{j_1}, x_{j_2}, \dots, x_{j_s}\) can be removed from the model; if the hypothesis \(H_0\) is rejected, at least some of the variables the variables \(x_{j_1}, x_{j_2}, \dots, x_{j_s}\) should be kept in the model.
+
+If we want to test if a quantitative variable \(x_j\) has a significant effect, we can conduct the test on the single coefficient \(\beta_j\). If we want to test if a qualitative variable with dummy encoding \(x_{j_1}, x_{j_2}, \dots, x_{j_s}\) is significant, we can conduct the test on the coefficients \(\beta_{j_1}, \beta_{j_2}, \dots, \beta_{j_s}\). For qualitative variables it is also possible to conduct a test for each level \(x_{j_k}\); in this case we would test one by one if each level has an effect that is significantly different form the base level effect.
+
+To conduct the test it is possible to use several statistics. One of them it the test based on log likelihood ratio. Let's indicate with \(\hat{\boldsymbol{\beta}}\) the estimated coefficients from the model without any constraint and with \(\hat{\boldsymbol{\beta}}^{(0)}\) the estimated coefficients with the constraints defined by \(H_0\). As the space \(\hat{\boldsymbol{\beta}}^{(0)}\) belongs to is a subset of the space \(\hat{\boldsymbol{\beta}}\) belongs to, it results:
+\[
+L\left(\hat{\boldsymbol{\beta}}^{(0)}\right) \le L\left(\hat{\boldsymbol{\beta}}\right)
+\]
+and then:
+\[
+\frac{L\left(\hat{\boldsymbol{\beta}}^{(0)}\right)}{L\left(\hat{\boldsymbol{\beta}}\right)} \le 1
+\]
+
+The basic idea is that, if the variables \(x_{j_1}, x_{j_2}, \dots, x_{j_s}\) have a significant effect, \(L\left(\hat{\boldsymbol{\beta}}\right)\) will be much higher than \(L\left(\hat{\boldsymbol{\beta}}^{(0)}\right)\) and we will reject the hypothesis \(H_0\), while if the variables \(x_{j_1}, x_{j_2}, \dots, x_{j_s}\) have not a significant effect, \(L\left(\hat{\boldsymbol{\beta}}\right)\) will be more or less the same as \(L\left(\hat{\boldsymbol{\beta}}^{(0)}\right)\) and we will accept the hypothesis \(H_0\).
+
+To perform the test, the quantity usually employed is the following:
+\begin{align*}
+\lambda & = -2 \log{\left( \frac{L\left(\hat{\boldsymbol{\beta}}^{(0)}\right)}{L\left(\hat{\boldsymbol{\beta}}\right)} \right)} \\
+& = -2 \left[ \ell\left(\hat{\boldsymbol{\beta}}^{(0)}\right) - \ell\left(\hat{\boldsymbol{\beta}}\right) \right]
+\end{align*}
+
+If we indicate \(\tilde{\lambda} = -2 \left[ \ell\left(\tilde{\boldsymbol{\beta}}^{(0)}\right) - \ell\left(\tilde{\boldsymbol{\beta}}\right) \right]\), it is possible to demonstrate the following approximate result on \(\tilde{\lambda}\) distribution:
+\[
+\tilde{\lambda} \dot\sim \chi^2(s)
+\]
+
+Therefore, with a significance level \(\alpha\) we will reject \(H_0\) when \(\lambda > \chi_{s, 1-\alpha}\), where \(\chi_{s, 1-\alpha}\) is the quantile of order \(1-\alpha\) of the distribution \(\chi^2(s)\).
+
+The same approach can be used in general for testing hypotheses that can be expressed as \(H_0: \boldsymbol{L}\boldsymbol{\beta} = \xi\), where \(\boldsymbol{L}\) is a matrix \(s\times(p+1)\) and \(\xi\in\mathbb{R}^{p+1}\). This is particularly useful in qualitative variables to test if some of the levels have the same effect and can be then unified. For example, if \(x_{j_1}\) and \(x_{j_2}\) are two dummy variables that describe two levels of the same quantitative variable, we can perform the test \(H_0: \beta_{j_1} = \beta_{j_2}\) in order to decide whether is suitable to unify the two levels.
+
+Anyway, selecting the variables by performing hypotheses testing have some drawbacks. First of all, conducting a lot of test produce the multiple test problem. Let's consider the case in which we conduct a test of the kind \(H_0: \beta_j = 0\) with a significant level \(\alpha=0.05\) on many variables that have no effect on the response. On average, although the null hypotheses are always true, we will reject them once every 20 tests. That means that if we have available 100 variables, we will randomly select 5 of them, falling in \emph{overfitting}. To fix this problem, it is possible to use the Bonferroni correction, that consist in dividing \(\alpha\) by the number of test conducted. But this could be a too restrictive correction that could lead to discard from the model some useful variables.
+
+Moreover, hypothesis testing aim is finding whether data supports or not an hypothesis. If the aim of the model is prediction, basing variable selection on hypotheses testing could lead to a sub-optimal model.
+
+Another method for variable selection is comparing the models by computing \emph{information criteria}. Two information criteria commonly used are the \emph{Akaike Information Criterion} (AIC) and the \emph{Bayesian Information Criterion} (BIC):
+\begin{align*}
+AIC & = -2\ell(\boldsymbol{\beta}) + 2 (p+1) \\
+BIC & = -2\ell(\boldsymbol{\beta}) + \log(n) (p+1)
+\end{align*}
+
+The aim of these statistics is to penalize the likelihood by adding a component that measures the complexity of the model. Among the models considered, the optimal model will be the one that minimize the information criterion. Thus, if two models have the same likelihood, the optimal model will be the one with less parameters. If the model with more parameter has a higher likelihood, it will be chosen only if that increase in likelihood compensated the increase in complexity.
+
+Another way to compute model predictive performance is by randomly splitting the available dataset \(\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots, (\boldsymbol{x}_n, \omega_n, y_n) \right\}\) into a \emph{training set} (or learning set) \(\mathcal{D}^{\mathcal{B}}\) and a \emph{test set} \(\mathcal{D}^{\bar{\mathcal{B}}}\), with \(\mathcal{B}\subset\{1,2,\dots,n\}\) labeling the dataset \(\mathcal{D}^{\bar{\mathcal{B}}} = \left\{ (\boldsymbol{x}_i, \omega_i, y_i): i \in \mathcal{B} \right\} \subset \mathcal{D}\) and \(\bar{\mathcal{B}} = \{1, 2, \dots, n\} \setminus \mathcal{B}\). With this split, we can fit the model on only the training set \(\mathcal{D}^{\mathcal{B}}\) and assess its performance on the test set \(\mathcal{D}^{\bar{\mathcal{B}}}\) by computing the deviance \(D\left( \hat{\boldsymbol{\beta}}^{\mathcal{B}}, \boldsymbol{y}^{\bar{\mathcal{B}}} \right)\), where \(\hat{\boldsymbol{\beta}}^{\mathcal{B}}\) is the coefficients estimated on the training set and \(\boldsymbol{y}^{\bar{\mathcal{B}}}\) is the vector of the observed response variables in the test set. This way it is possible to choose the best model as the one that minimize the deviance in the test set and then fitting it with the whole dataset \(\mathcal{D}\).
+
+A limit of the train-test approach is that it could bring to overfitting in the test set. Indeed, in particular if the dataset is small, it is possible that a specific set of variables minimize the deviance on the test set just by chance. To prevent this, it is possible to conduct a \emph{K-fold cross validation}. This consist in randomly partitioning the dataset \(\mathcal{D}\) into \(K\) subsets \(\mathcal{D}^{\mathcal{B}_1}, \mathcal{D}^{\mathcal{B}_2}, \dots, \mathcal{D}^{\mathcal{B}_K}\) and, for each subset \(\mathcal{D}^{\mathcal{B}_k}\), performing a train-test procedure keeping \(\mathcal{D}^{\setminus \mathcal{B}_k} = \mathcal{D} \setminus \mathcal{D}^{\mathcal{B}_k}\) as a training set and \(\mathcal{D}^{\mathcal{B}_k}\) as a test set. For each \(k\) we can compute the testing deviance \(D\left( \hat{\boldsymbol{\beta}}^{\setminus \mathcal{B}_k}, \boldsymbol{y}^{\mathcal{B}_k} \right)\). We can then compute the average deviance within the \(K\) subset as:
+\[
+D^{CV} = \frac{1}{K} \sum_{k=1}^{K}{D\left( \hat{\boldsymbol{\beta}}^{\setminus \mathcal{B}_k}, \boldsymbol{y}^{\mathcal{B}_k} \right)}
+\]
+Thus, the best model will be the one that minimize \(D^{CV}\).
+
+The higher \(K\) is, the less subjected to randomness \(D^{CV}\) is. However, the higher \(K\) is, the more computationally heavy the procedure is. A common choice for \(K\) is \(K=10\). If we choose \(K=n\), the procedure is also called \emph{leave-one-out cross validation}.
+
+\hypertarget{scalability-and-manual-fitting}{%
+\subsubsection{Scalability and manual fitting}\label{scalability-and-manual-fitting}}
+
+One problem of GLM is that the variables selection process is not so easily scalable. Indeed, if we consider \(p\) explanatory variables, even without taking into account interactions and quantitative variables transformation, there are \(2^p\) possible models that can be obtained by choosing a subset of those variables. As \(p\) increases, building all these models and choosing the optimal one becomes unfeasible. One strategy to reducing the time consumption is to use a \emph{stepwise procedure}. First of all we must choose a criterion to compare the models, such as the AIC.
+
+Then we have to choose a starting model that consider the variables subset \(\mathcal{C}_0 \subset \{ 1,2,\dots,p \}\). It is possible to compare this model with all the models that can be obtained by removing one variable from \(\mathcal{C}_0\) or adding to it one that is not included in \(\mathcal{C}_0\). From all these model we can compute the AIC and we will choose as \(\mathcal{C}_1\) the set of variables that minimize the AIC. If none of the considered model has an AIC lower to the one obtained with the variables \(\mathcal{C}_0\), the procedure ends and our final set of variables is \(\mathcal{C}_0\). Otherwise, we will repeat the step with \(\mathcal{C}_1\). The procedure can be iteratively repeated until we obtain a subset of variables \(\mathcal{C}_f\) that can't be improved by removing or adding a variable. The model with the variables \(\mathcal{C}_f\) will be our chosen one.
+
+This procedure is much faster than computing all the \(2^p\) models, but it is still not so scalable for large \(p\). Moreover, in this procedure we are not taking into account the interactions and the possible transformations for the quantitative variables. This can be achieved by slightly modifying the algorithm, but it would further increase the complexity and the time consumption. Another option is starting from the result of the stepwise regression and manually choosing interactions and quantitative variables transformations by looking at plots as described in \ref{chap:var-effects}.
+
+One characteristic of GLM is that the variables effects can be easily interpreted and the variable selection process is for large part manual. This aspect can be problematic if there are a lot of explanatory variables, but it brings some important benefits too. Indeed, the actuary can take choices on variable selection not only based on observed data, but also on his domain knowledge. For instance, the choice of selecting or not an explanatory variable can be guided also on its interpretation: if the observed effect makes sense, it can be added to the model even if it is not statistically significant and it doesn't decrease the AIC, and, on the opposite, if the observed effect is not reasonable, the actuary can choose not to insert the variable in the model even if its effect is supported by the data. So, in the actuarial practice, in the GLM fitting process there is always a subjective component that weights on the final result. For these reason it is important for the actuary to have a deep knowledge on the phenomenon he is modeling.
+
+An aspect that facilitates the model building and reduces the complexity of the process, even if there are many variables, is that usually the models are not built from scratch. Actuarial models are usually updated once a year, so it is also possible to start the new model by fitting on new data the final model from the year before. As the models are usually built with policies data from more than one year, the new dataset partially overlaps with the one from the previous year. Anyway, the overlapping observations aren't identical: the new dataset will have the new settlement information and some new explanatory variables. Anyway, if the actuary is familiar with the effects of the variables in the previous models, he already knows which will probably be relevant and which don't even deserve too much attention.
 
 \newpage
 

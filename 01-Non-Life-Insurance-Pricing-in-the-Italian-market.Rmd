@@ -21,7 +21,7 @@ library(knitr)
 
 \chaptermark{Non-Life Insurance Pricing}
 
-In this chapter I am going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process.
+In this chapter we are going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process.
 
 
 ## What a Non-Life Insurance is {#chap:non-life-ins}
@@ -128,7 +128,7 @@ $$
 
 ## Non-Life insurance pricing
 
-In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a "proper" premium taking into account risk related factors and commercial related factors. The process of _pricing_ corresponds in defining the set of rules for determining this "proper" premium $P_i$ for a specific policyholder $i$, given the known information on him. In the next sections I am going to better explain what "proper" means.
+In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determine a "proper" premium taking into account risk related factors and commercial related factors. The process of _pricing_ corresponds in defining the set of rules for determining this "proper" premium $P_i$ for a specific policyholder $i$, given the known information on him. In the next sections we are going to better explain what "proper" means.
 
 
 ### Compound distribution hypotheses
@@ -234,7 +234,7 @@ $$
 
 Secondly, even if the policyholder paid a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
 
-The amount of the Technical Price with these loadings can be further modified based on business logic, as I am going to discuss later.
+The amount of the Technical Price with these loadings can be further modified based on business logic, as we are going to discuss later.
 
 
 ## Modeling and Personalization {#chap:personalization}
@@ -354,7 +354,7 @@ table %>%
 
 For some models it is suggested to use also the dummy variable that indicates the $K$^th^ modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper the $K-1$ dummy variables encoding is preferred, so we will always consider it.
 
-In the following, when I use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
+In the following, when we use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
 
 
 ### Pricing Rule and Modeling
@@ -383,7 +383,7 @@ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \d
 ```
 
 
-In definition \@ref(def:modeling) I used a generic $\mathcal{C}$ as codomain of the function $r(\cdot)$ to not specify whether the model describes just $E(Y)$ (and so $\mathcal{C}=\mathbb{R}$) or something more, such as the couple $\left( E(Y), Var(Y) \right)$ or the full distribution of $Y$.
+In definition \@ref(def:modeling) we used a generic $\mathcal{C}$ as codomain of the function $r(\cdot)$ to not specify whether the model describes just $E(Y)$ (and so $\mathcal{C}=\mathbb{R}$) or something more, such as the couple $\left( E(Y), Var(Y) \right)$ or the full distribution of $Y$.
 
 As we observed in section \@ref(chap:tcc-dist), under the compound distribution hypotheses, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
 
