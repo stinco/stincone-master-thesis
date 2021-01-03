@@ -156,7 +156,7 @@ In this case the parameters $\theta$ and $\phi$ will be object of estimation, wh
 
 
 
-#### Model assumptions
+#### Model assumptions {#chap:glm-assumptions}
 
 Let's assume that, for $n$ statistical units, the observations $\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots,  (\boldsymbol{x}_n, \omega_n, y_n) \right\}$ are available, where $\boldsymbol{x}_i$ is a vector of explanatory variables determinations, $\omega_i$ is a known weight and $y_i$ is the response variable determination. $\boldsymbol{x}_i, \omega_i, y_i$ are all real numbers. The vector $\boldsymbol{y} = (y_1, \dots, y_n)^t$ is considered a determination of the response random vector $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$.
 
@@ -493,7 +493,11 @@ table %>%
   row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
 ```
 
-As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depend on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_.
+As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depend on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_:
+\begin{equation}
+\label{eq:max-lik-est-deviance}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})}
+\end{equation}
 
 <!--
 * Maximum likelihood
@@ -1340,12 +1344,192 @@ Model effects
 
 
 
-
-
 #### Model assumptions
 
+In GAM, the assumptions are the same of GLM stated in \@ref(chap:glm-assumptions) with the following advancement in the linear predictor:
+$$
+g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \qquad i\in\{1,2,\dots,n\}
+$$
+where
 
-#### ...
+* $\boldsymbol{x}_i$ is the vector of the variables with a linear effect as described in GLM, that also include a term $1$ that represent the intercept;
+* $\boldsymbol{\beta}$ is the vector of the linear coefficients as described in GLM;
+* $z_{i,1}, z_{i,2}, \dots, z_{i,q}$ are the quantitative variables with a non linear effect;
+* $f_1(\cdot), f_2(\cdot), \dots, f_q(\cdot)$ are continous functions with first and second derivative continuous.
+
+The functions $f_l(\cdot)$ introduce the possibility to model non-linear effects of the variables $z_l$.
+
+
+#### Cubic splines
+
+A class of functions commonly used for modeling $f_l(\cdot)$ is the class of the _cubic splines_.
+
+```{definition, cubic-splines, name = "Cubic Splines"}
+Given $m$ real numbers $\nu_1, \nu_2, \dots, \nu_m$, called \textit{nodes}, and given a function $f:[\nu_1, \nu_m] \to \mathbb{R}$ such that:
+$$
+f(x) = h_t(x), \qquad x\in[\nu_t, \nu_{t+1}[
+$$
+where, for $t = 1, 2, \dots, m-1$, $h_t(x) = \alpha_t + \vartheta_t x + \gamma_t x^2 + \delta_t x^3$ and, for the last index $m-1$, $f(x) = h_t(x)$ is extended to $[\nu_t, \nu_{t+1}]$
+
+$f(x)$ is called \textit{cubic spline} if it satisfies the following conditions in the internal knots $\nu_2, \nu_3, \dots, \nu_{m-1}$
+\begin{equation}
+\label{eq:cubic-spline-contraints}
+h_{t-1}(\nu_t) = h_{t}(\nu_t), \qquad h'_{t-1}(\nu_t) = h'_{t}(\nu_t), \qquad h''_{t-1}(\nu_t) = h''_{t}(\nu_t)
+\end{equation}
+```
+
+The constraints for $f(\cdot)$ make it a continous functions with first and second derivative continuous in $]\nu_1, \nu_m[$. It is possible to extend the cubic spline $f(\cdot)$ to an interval $[a, b] \supset [\nu_1, \nu_m]$ with linear extensions on $[a, \nu_1[$ and $]\nu_m, b]$. The function $f:[a,b]\to\mathbb{R}$ is called _natural cubic spline_.
+
+In definition \@ref(def:cubic-splines) we introduced 4 parameters ($\alpha_t, \vartheta_t, \gamma_t, \delta_t$) for each of the $m-1$ inteevals $[\nu_t, \nu_{t+1}[$, $t\in\{1,2,\dots,m-1\}$. So, we have $4(m-1)$ parameters. In equation \@ref(eq:cubic-spline-contraints) we introduced $3$ constraints for each of the $m-2$ knot in $\nu_2, \nu_3, \dots, \nu_{m-1}$. So the free parameters becomes $4(m-1) - 3(m-2) = m+2$. The linear extension on $[a, \nu_1[$ and $]\nu_m, b]$ corresponds to the constraint $f''(x)=0$ on $[a, \nu_1[ \, \cup \, ]\nu_m, b]$, thus, $h''_1(\nu_1)=0$ and $h''_m(\nu_m)$. Adding these two constraints, we get that the natural cubic spline $f:[a,b]\to\mathbb{R}$ has $m$ degrees of freedom.
+
+With an approach similar to the one we used in \@ref(chap:var-effects) for split-wise effects in GLM, we can represent a cubic spline by the functions $x \mapsto \left( x-\nu_t \right)_+^3$, $t=1,2,\dots,m$.
+
+The expression:
+\begin{equation}
+\label{eq:cubic-spline-decomposition}
+f(x) = \alpha_0 + \vartheta_0 x + \sum_{t=1}^{m}{c_t \left( x-\nu_t \right)_+^3}, \qquad \text{with} \quad \sum_{t=1}^{m}{c_t} = 0 \quad \text{and} \quad \sum_{t=1}^{m}{c_t\nu_t} = 0
+\end{equation}
+gives a natural cubic spline.
+
+The two side constraints ensure that we have a smooth linear extension above $\nu_m$ The expression \@ref(eq:cubic-spline-decomposition) presents $m+2$ parameters, thus, with the 2 side constraints, there are $m$ degrees of freedom. From this expression it is easy to show that the natural cubic splines over the interval $[a,b]$ with knots $\nu_1, \nu_2, \dots, \nu_m$ constitute a $m$-dimensional vectorial space.
+
+
+#### Smoothing
+
+If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the estimators for the parameters increase. We can see this effect in figure \@ref(fig:cub-spline).
+
+(ref:cub-spline-caption-latex) GLM with cubic splines for different numbers of knots.
+
+(ref:cub-spline-caption-gitbook) GLM with cubic splines for different numbers of knots, $0$ knots (top-left), $3$ knots (top-right), $7$ knots (bottom-left) and $35$ knots (bottom-right).
+
+```{r, plot-cub-spline-build, echo = FALSE}
+
+# Read Lidar data
+lidar = read.table("data/lidar.dat", header = TRUE) %>% 
+  as_tibble()
+
+lidar = lidar[sort.list(lidar$range), ]
+
+# Standardizzo lidar$range
+lidar$range = (lidar$range - mean(lidar$range)) / sd(lidar$range)
+
+
+
+# Linear fitting
+
+fit <- lm(logratio~., data = lidar)
+
+p_cub_spline_1 <- lidar %>% 
+  ggplot(aes(x = range, y = logratio)) +
+  geom_abline(
+    intercept = fit$coefficients[1],
+    slope = fit$coefficients[2],
+    col = col1,
+    size = line_size
+  ) +
+  geom_point()
+
+
+
+# Cubic spline fitting
+
+fbase = function(x, k, p) ifelse(x - k > 0, (x - k)^p, 0)
+p <- 3
+
+
+plot_spline_lidar <- function(dataset, nodes, p = p){
+  # Create basis for splines
+  lidar1 <- dataset
+  for (i in 1:length(nodes)){
+    lidar1 <- lidar1 %>% 
+      mutate(b = fbase(range, nodes[i], p))
+    
+    names(lidar1)[ncol(lidar1)] = paste("b", i, sep = "")
+  }
+  
+  # Fit GLM
+  fit <- lm(logratio~., data = lidar1)
+  
+  # Create fitted values
+  new_lidar1 <- tibble(
+    range = seq(from = min(lidar$range), to = max(lidar$range), length.out = 1e3)
+  )
+  for (i in 1:length(nodes)){
+    new_lidar1 <- new_lidar1 %>% 
+      mutate(b = fbase(range, nodes[i], p))
+    
+    names(new_lidar1)[ncol(new_lidar1)] = paste("b", i, sep = "")
+  }
+  
+  new_lidar1$fit <- predict(fit, newdata = new_lidar1)
+  
+  
+  p <- lidar1 %>% 
+    ggplot(aes(x = range, y = logratio)) +
+    geom_vline(data = tibble(nodes),
+               aes(xintercept = nodes),
+               linetype = "dotted") +
+    geom_line(
+      data = new_lidar1,
+      aes(x = range, y = fit),
+      col = col1,
+      size = line_size
+    ) +
+    geom_point()
+  
+  return(p)
+}
+
+
+p_cub_spline_2 <- plot_spline_lidar(dataset = lidar,
+                        nodes = c(-1, 0, 1),
+                        p = 3)
+
+p_cub_spline_3 <- plot_spline_lidar(dataset = lidar,
+                        nodes = seq(from = -1.5, to = 1.5, by = .5),
+                        p = 3)
+
+p_cub_spline_4 <- plot_spline_lidar(dataset = lidar,
+                        nodes = seq(from = -1.7, to = 1.7, by = .1),
+                        p = 3)
+```
+
+
+```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots')}
+
+# # To align the plots in a subfigure environment
+# plot_grid_split <- function(..., align = "hv", axis = "tblr"){
+#   aligned_plots <- cowplot::align_plots(..., align = align, axis = axis)
+#   plots <- lapply(1:length(aligned_plots), function(x){
+#     cowplot::ggdraw(aligned_plots[[x]])
+#   })
+#   invisible(capture.output(plots))
+# }
+
+plot_grid_split(p_cub_spline_1, p_cub_spline_2, p_cub_spline_3, p_cub_spline_4)
+
+```
+
+
+In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
+
+A measure of the wigglyness of a function is given by the integral of its second derivative squared:
+\begin{equation}
+\label{eq:wigglyness}
+\int_{a}^{b}{\left( f''(x) \right)^2 dx}
+\end{equation}
+
+
+
+
+
+What is done in GAM to contain this wiggliness and to prevent overfitting is to take into account a penalization for wiggliness. This can be achieved by considering the minimization problem in \@ref(eq:max-lik-est-deviance) and adding a penalization term to the deviance:
+\begin{equation}
+\label{eq:gam-est-deviance}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''(z_l) \right)^2 dz_l}}\right)}
+\end{equation}
+
+
 
 
 
