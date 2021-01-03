@@ -24,7 +24,7 @@ library(splines)
 theme_set(theme_bw())
 
 
-# wiggliness ####
+# Pauli trial ####
 
 # df <- tibble(
 #   x = seq(from = 0, to = 1, by = 0.001),
@@ -50,76 +50,99 @@ d2 = D(D(f, name = "x"), name = "x")
 curve(eval(d2, data.frame(x = x))^2, ylim = c(0, 17000), yaxs = "i")
 
 
-f1_expr <- expression(sin(2*pi*x))
-f1_2_expr <- D(D(f1_expr, name = "x"), name = "x")
 
-f2_expr <- expression(sin(3*pi*x))
+
+# My trial ####
+
+f2_expr <- expression(sin(2*pi*x))
 f2_2_expr <- D(D(f2_expr, name = "x"), name = "x")
 
-f3_expr <- expression(0.76*(sin(pi*x) + sin(4*pi*x)) - 0.5)
+f3_expr <- expression(sin(3*pi*x))
 f3_2_expr <- D(D(f3_expr, name = "x"), name = "x")
 
+f4_expr <- expression(0.76*(sin(pi*x) + sin(4*pi*x)) - 0.5)
+f4_2_expr <- D(D(f4_expr, name = "x"), name = "x")
 
-f1 <- function(x){eval(f1_expr[[1]])}
-f1_2 <- function(x){eval(f1_2_expr)^2}
 
-f2 <- function(x){eval(f2_expr[[1]])}
+
+f1 <- function(x){x - 1/2}
+f1_2 <- function(x){0}
+
+f1 <- function(x){eval(f2_expr[[1]])}
 f2_2 <- function(x){eval(f2_2_expr)^2}
 
-f3 <- function(x){eval(f3_expr[[1]])}
+f2 <- function(x){eval(f3_expr[[1]])}
 f3_2 <- function(x){eval(f3_2_expr)^2}
+
+f3 <- function(x){eval(f4_expr[[1]])}
+f4_2 <- function(x){eval(f4_2_expr)^2}
 
 
 
 tibble(
-  x = (0:100) / 100,
-  y = rep(0, 101),
-  type = c(rep("f", 50), rep("f2", 51)) %>% 
+  x = 0:1,
+  y = 0:1,
+  type = c("f", "f2") %>% 
     factor(levels = c("f", "f2")),
-  fun = c(rep(1, 101), rep(2, 0), rep(3, 0))
+  fun = 1:2
 ) %>% 
   ggplot(aes(x = x, y = y)) +
-  geom_point() +
-  stat_function(fun = f1,
-                data = data.frame(x = 0, y = 0,
-                                  type = factor("f"),
-                                  fun = 1)) +
+  geom_abline(aes(intercept = intercept, slope = slope),
+              data = data.frame(x = 0, y = 0,
+                                type = factor("f"),
+                                fun = 1,
+                                intercept = -.5,
+                                slope = 1),
+              col = col1,
+              size = line_size) +
   geom_area(stat = "function", fun = f1_2,
             data = data.frame(x = 0, y = 0,
                               type = factor("f2"),
                               fun = 1),
-            alpha = .5) +
-  stat_function(fun = f2,
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f1,
                 data = data.frame(x = 0, y = 0,
                                   type = factor("f"),
-                                  fun = 2)) +
+                                  fun = 2),
+                col = col1,
+                size = line_size) +
   geom_area(stat = "function", fun = f2_2,
             data = data.frame(x = 0, y = 0,
                               type = factor("f2"),
                               fun = 2),
-            alpha = .5) +
-  stat_function(fun = f3,
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f2,
                 data = data.frame(x = 0, y = 0,
                                   type = factor("f"),
-                                  fun = 3)) +
+                                  fun = 3),
+                col = col1,
+                size = line_size) +
   geom_area(stat = "function", fun = f3_2,
             data = data.frame(x = 0, y = 0,
                               type = factor("f2"),
                               fun = 3),
-            alpha = .5) +
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f3,
+                data = data.frame(x = 0, y = 0,
+                                  type = factor("f"),
+                                  fun = 4),
+                col = col1,
+                size = line_size) +
+  geom_area(stat = "function", fun = f4_2,
+            data = data.frame(x = 0, y = 0,
+                              type = factor("f2"),
+                              fun = 4),
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
   facet_grid(type ~ fun,
-             scales = "free_y")
+             scales = "free_y") +
+  scale_x_continuous(limits = c(0, 1))
 
 
-sin(pi/2)
-
-eval(f1, data.frame(x = 1.1, panel = 0))
-
-f1(1)
-f1_2(1)
-
-
-f <- function(x){eval(f1[[1]])}
-f(1)
-
-f1_2(.2)

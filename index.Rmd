@@ -157,6 +157,7 @@ library(gridExtra)
 library(cowplot)
 library(grid)
 library(gtable)
+library(mgcv)
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')

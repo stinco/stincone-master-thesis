@@ -1682,7 +1682,7 @@ Gamma & $2\,\sum_{i=1}^{n}{\left\{ - \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} 
 As \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not depend on \(\hat{\boldsymbol{\beta}}\), maximizing the likelihood in equation \eqref{eq:max-lik-est} is the same as minimizing the deviance, that can be seen as a \emph{Loss Function}:
 \begin{equation}
 \label{eq:max-lik-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\boldsymbol{\beta}, \boldsymbol{y})}
 \end{equation}
 
 \hypertarget{chap:var-effects}{%
@@ -1732,7 +1732,7 @@ The basic way to achieve it is by adding polynomial terms to the linear predicto
 
 With the same logic, it is possible to add more power terms. In general, if we want to model \(x\) with a polynomial of degree \(d\), we can consider the model \(\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d\). In top-right panel of figure \ref{fig:expl-var-quant-effect} a 4\textsuperscript{th} degree polynomial effect is represented. We highlight that the model is still considered linear, as the attribute ``Linear'' in ``General Linear Model'' is referred to the relation between the parameters \(\beta_j\) and the linear predictor \(\eta_i\) that is still linear.
 
-Another way to model non liner effects of explanatory variables is to separate the effects by pieces. In bottom-left panel of figure \ref{fig:expl-var-quant-effect} a case in which the \(x\) effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms \((x-\nu)_+\), where \((x)_+\) represents the positive part of \(x\) (\((x)_+ = \max(0,x)\)) and \(\nu\) is the value of \(x\) in the angular point. The \(\nu\) values are called \emph{nodes}, If the nodes are \(\nu_1, \nu_2, \dots, \nu_m\), the model can be represented as \(\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+\). This kind of functions are called \emph{linear splines} and will be further discussed in section \ref{chap:gam}. If we want the effect to be null from a certain point \(\nu\), we can consider the variable \(x' = \min(\nu, x)\) instead of \(x\). This corresponds to aggregate to \(\nu\) all the \(x\) after \(\nu\).
+Another way to model non liner effects of explanatory variables is to separate the effects by pieces. In bottom-left panel of figure \ref{fig:expl-var-quant-effect} a case in which the \(x\) effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms \((x-\nu)_+\), where \((x)_+\) represents the positive part of \(x\) (\((x)_+ = \max(0,x)\)) and \(\nu\) is the value of \(x\) in the angular point. The \(\nu\) values are called \emph{knots}, If the knots are \(\nu_1, \nu_2, \dots, \nu_m\), the model can be represented as \(\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+\). This kind of functions are called \emph{linear splines} and will be further discussed in section \ref{chap:gam}. If we want the effect to be null from a certain point \(\nu\), we can consider the variable \(x' = \min(\nu, x)\) instead of \(x\). This corresponds to aggregate to \(\nu\) all the \(x\) after \(\nu\).
 
 The piece-wise approach can be enhanced by also considering polynomial terms. For instance, in bottom-left panel of figure \ref{fig:expl-var-quant-effect}, the model represented is \(\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2\), where \((x)_-\) is the negative part of \(x\) (\((x)_- = \min(0,x)\)). \(f(x) = (x-\nu)^2\) is a parabola with vertex in \(\nu\). The fact of not adding the linear term leads to a monotonic effect made by a semi-parabola and a horizontal semi-line that starts from its vertex.
 
@@ -1922,7 +1922,7 @@ The functions \(f_l(\cdot)\) introduce the possibility to model non-linear effec
 A class of functions commonly used for modeling \(f_l(\cdot)\) is the class of the \emph{cubic splines}.
 
 \begin{definition}[Cubic Splines]
-\label{def:cubic-splines} \iffalse (Cubic Splines) \fi{} Given \(m\) real numbers \(\nu_1, \nu_2, \dots, \nu_m\), called \textit{nodes}, and given a function \(f:[\nu_1, \nu_m] \to \mathbb{R}\) such that:
+\label{def:cubic-splines} \iffalse (Cubic Splines) \fi{} Given \(m\) real numbers \(\nu_1, \nu_2, \dots, \nu_m\), called \textit{knots}, and given a function \(f:[\nu_1, \nu_m] \to \mathbb{R}\) such that:
 \[
 f(x) = h_t(x), \qquad x\in[\nu_t, \nu_{t+1}[
 \]
@@ -1953,7 +1953,7 @@ The two side constraints ensure that we have a smooth linear extension above \(\
 \hypertarget{smoothing}{%
 \subsubsection{Smoothing}\label{smoothing}}
 
-If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the estimators for the parameters increase. We can see this effect in figure \ref{fig:cub-spline}.
+If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the parameters estimators increases. We can see this effect in figure \ref{fig:cub-spline}.
 
 
 
@@ -1970,11 +1970,61 @@ If we try to fit a cubic spline on data, we find that by increasing the number o
 
 In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
 
-What is done in GAM to contain this wigglyness and to prevent overfitting is to take into account a penalization for wigglyness. This can be achieved by considering the minimization problem in \eqref{eq:max-lik-est-deviance} and adding a penalization term to the deviance:
+A measure of the wigglyness of a function is given by the integral of its squared second derivative:
+\begin{equation}
+\label{eq:wigglyness}
+\int_{a}^{b}{\left( f''(x) \right)^2 dx}
+\end{equation}
+
+In figure \ref{fig:wiggliness} some examples of functions \(f(x)\) and their squared second derivatives \(\left(f''(x)\right)^2\) are represented. In the top panels, four functions of increasing wiggliness are represented and, in the bottom panels, we can see their four squared second derivatives.
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/wiggliness-1} 
+
+}
+
+\caption{\(\left(f''(x)\right)^2\) for functions with different wiggliness.}\label{fig:wiggliness}
+\end{figure}
+
+As we can see from the plots, if a function \(f(x)\) is linear, \(\left(f''(x)\right)^2\) is null and, as the curvature of the function increases, \(\left(f''(x)\right)^2\) increses. For this reason, \(\left(f''(x)\right)^2\) can also be seen as a measure of how much \(f(x)\) differs from a linear function.
+
+What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on \(\left(f''(x)\right)^2\). If we have a regression problem with one explanatory variable \(x\), this can be achieved by considering the minimization problem in \eqref{eq:max-lik-est-deviance} and adding a penalization term to the deviance:
+
 \begin{equation}
 \label{eq:gam-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''(z_l) \right)^2 dz_l}}\right)}
+\hat{f} = \argmin_{f}{\left(D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right)}
 \end{equation}
+
+In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indicate all the parameters of the natural cubic spline. The hyper-parameter \(\lambda>0\) is called \emph{smoothing parameter}. It measures how much we want to penalize wiggliness. If we choose \(\lambda=0\) we won't penalize for \(\left( f''(x) \right)^2\) and the optimization problem correspond to the maximum likelihood one. The higher \(\lambda\) is, the more penalization for \(\left( f''(x) \right)^2\) we introduce and the more regual the estimate \(\hat{f}(x)\) will be. If \(\lambda\to+\infty\), we will introduce an infinite penalization for wiggliness, so the result will have \(\hat{f}''(x)=0\), thus \(\hat{f}(x)\) will be linear. An example with different levels of \(\lambda\) can be seen in figure \ref{fig:gam-lambda}.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[$\lambda = 0$\label{fig:gam-lambda-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-1} }\subfloat[$\lambda = 10$\label{fig:gam-lambda-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-2} }\newline\subfloat[$\lambda = 10^3$\label{fig:gam-lambda-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-3} }\subfloat[$\lambda = 10^6$\label{fig:gam-lambda-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-4} }
+
+}
+
+\caption{GAM estimate \(\hat{f}(x)\) for different levels of \(\lambda\).}\label{fig:gam-lambda}
+\end{figure}
+
+All the models has been fitted with \(m = 50\) knots. As we can see, with \(\lambda = 0\) we are clearly overfitting observations, while with \(\lambda = 10^6\) we are clearly underfitting them.
+
+As soon as the number of knots \(m\) is large enough, the exact number \(m\) and the positioning of the knots \(\nu_1, \nu_2, \dots, \nu_m\) is not important. If the function is flexible enough, the tuning of the curve is done by just tuning \(\lambda\). It is possible to use as many knots as the observations are, but it could be too computationally heavy. A possible choice is to fix a number of knots \(m\) and positioning \(\nu_1, \nu_2, \dots, \nu_m\) on empirical quantiles of the observed \(x\) or equally spaced in the range of \(x\). In our example, \(m=50\) knots seems to be large enough.
+
+Now the selection of the \(x\) effect consists just in finding the optimal parameter \(\lambda\). To do so, for a set \(\Lambda\) of values of \(\lambda\) we can perform a K-fold cross validation as described in \ref{chap:var-effects} and, for each \(\lambda\in\Lambda\), compute the average test deviance:
+\[
+D^{CV}_\lambda = \frac{1}{K} \sum_{k=1}^{K}{D\left( \hat{f}_\lambda^{\setminus \mathcal{B}_k}, \boldsymbol{y}^{\mathcal{B}_k} \right)}
+\]
+At this point we will choose the hyperparameter that minimizes the cross-validation deviance:
+\[
+\hat{\lambda} = \argmin_{\lambda\in\Lambda}{D^{CV}_\lambda}
+\]
 
 \newpage
 

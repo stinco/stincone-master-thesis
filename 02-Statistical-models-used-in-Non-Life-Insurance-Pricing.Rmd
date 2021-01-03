@@ -496,7 +496,7 @@ table %>%
 As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depend on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_:
 \begin{equation}
 \label{eq:max-lik-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\boldsymbol{\beta}, \boldsymbol{y})}
 \end{equation}
 
 <!--
@@ -850,7 +850,7 @@ The basic way to achieve it is by adding polynomial terms to the linear predicto
 
 With the same logic, it is possible to add more power terms. In general, if we want to model $x$ with a polynomial of degree $d$, we can consider the model $\mu_i = \beta_0 + \beta_1 x_{i} + \beta_2 x_{i}^2 + \dots + \beta_d x_{i}^d$. In top-right panel of figure \@ref(fig:expl-var-quant-effect) a 4^th^ degree polynomial effect is represented. We highlight that the model is still considered linear, as the attribute "Linear" in "General Linear Model" is referred to the relation between the parameters $\beta_j$ and the linear predictor $\eta_i$ that is still linear.
 
-Another way to model non liner effects of explanatory variables is to separate the effects by pieces. In bottom-left panel of figure \@ref(fig:expl-var-quant-effect) a case in which the $x$ effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms $(x-\nu)_+$, where $(x)_+$ represents the positive part of $x$ ($(x)_+ = \max(0,x)$) and $\nu$ is the value of $x$ in the angular point. The $\nu$ values are called _nodes_, If the nodes are $\nu_1, \nu_2, \dots, \nu_m$, the model can be represented as $\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+$. This kind of functions are called _linear splines_ and will be further discussed in section \@ref(chap:gam). If we want the effect to be null from a certain point $\nu$, we can consider the variable $x' = \min(\nu, x)$ instead of $x$. This corresponds to aggregate to $\nu$ all the $x$ after $\nu$.
+Another way to model non liner effects of explanatory variables is to separate the effects by pieces. In bottom-left panel of figure \@ref(fig:expl-var-quant-effect) a case in which the $x$ effect is separated in 3 pieces is represented. As in all the pieces the effect is linear, the graph of the variable effect is a broken line. This effect can be achieved by adding to the model the terms $(x-\nu)_+$, where $(x)_+$ represents the positive part of $x$ ($(x)_+ = \max(0,x)$) and $\nu$ is the value of $x$ in the angular point. The $\nu$ values are called _knots_, If the knots are $\nu_1, \nu_2, \dots, \nu_m$, the model can be represented as $\mu_i = \beta_0 + \beta_1 x_i + \beta_2 (x_i-\nu_1)_+ + \beta_3 (x_i-\nu_2)_+ + \dots + \beta_{m+1} (x_i-\nu_m)_+$. This kind of functions are called _linear splines_ and will be further discussed in section \@ref(chap:gam). If we want the effect to be null from a certain point $\nu$, we can consider the variable $x' = \min(\nu, x)$ instead of $x$. This corresponds to aggregate to $\nu$ all the $x$ after $\nu$.
 
 The piece-wise approach can be enhanced by also considering polynomial terms. For instance, in bottom-left panel of figure \@ref(fig:expl-var-quant-effect), the model represented is $\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2$, where $(x)_-$ is the negative part of $x$ ($(x)_- = \min(0,x)$). $f(x) = (x-\nu)^2$ is a parabola with vertex in $\nu$. The fact of not adding the linear term leads to a monotonic effect made by a semi-parabola and a horizontal semi-line that starts from its vertex.
 
@@ -1157,7 +1157,7 @@ p_1 <- df_plot_1 %>%
             group = 1) +
   geom_ribbon(data = filter(df_plot_1, variable == "mean"),
               aes(x = x, ymin = down, ymax = up),
-              alpha = .5) +
+              alpha = .3) +
   geom_col(data = filter(df_plot_1, variable == "n"),
            alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
   labs(x = "x", y = "", title = "")
@@ -1202,7 +1202,7 @@ p_2 <- df_plot_2 %>%
             group = 1) +
   geom_ribbon(data = filter(df_plot_2, variable == "mean"),
               aes(x = x, ymin = down, ymax = up),
-              alpha = .5) +
+              alpha = .3) +
   geom_col(data = filter(df_plot_2, variable == "n"),
            alpha = .8, col = hue_pal()(1), fill = hue_pal()(1)) +
   labs(x = "x", y = "", title = "")
@@ -1365,7 +1365,7 @@ The functions $f_l(\cdot)$ introduce the possibility to model non-linear effects
 A class of functions commonly used for modeling $f_l(\cdot)$ is the class of the _cubic splines_.
 
 ```{definition, cubic-splines, name = "Cubic Splines"}
-Given $m$ real numbers $\nu_1, \nu_2, \dots, \nu_m$, called \textit{nodes}, and given a function $f:[\nu_1, \nu_m] \to \mathbb{R}$ such that:
+Given $m$ real numbers $\nu_1, \nu_2, \dots, \nu_m$, called \textit{knots}, and given a function $f:[\nu_1, \nu_m] \to \mathbb{R}$ such that:
 $$
 f(x) = h_t(x), \qquad x\in[\nu_t, \nu_{t+1}[
 $$
@@ -1396,7 +1396,7 @@ The two side constraints ensure that we have a smooth linear extension above $\n
 
 #### Smoothing
 
-If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the estimators for the parameters increase. We can see this effect in figure \@ref(fig:cub-spline).
+If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the parameters estimators increases. We can see this effect in figure \@ref(fig:cub-spline).
 
 (ref:cub-spline-caption-latex) GLM with cubic splines for different numbers of knots.
 
@@ -1427,7 +1427,7 @@ p_cub_spline_1 <- lidar %>%
     col = col1,
     size = line_size
   ) +
-  geom_point()
+  geom_point(alpha = .5)
 
 
 
@@ -1437,12 +1437,12 @@ fbase = function(x, k, p) ifelse(x - k > 0, (x - k)^p, 0)
 p <- 3
 
 
-plot_spline_lidar <- function(dataset, nodes, p = p){
+plot_spline_lidar <- function(dataset, knots, p = p){
   # Create basis for splines
   lidar1 <- dataset
-  for (i in 1:length(nodes)){
+  for (i in 1:length(knots)){
     lidar1 <- lidar1 %>% 
-      mutate(b = fbase(range, nodes[i], p))
+      mutate(b = fbase(range, knots[i], p))
     
     names(lidar1)[ncol(lidar1)] = paste("b", i, sep = "")
   }
@@ -1454,9 +1454,9 @@ plot_spline_lidar <- function(dataset, nodes, p = p){
   new_lidar1 <- tibble(
     range = seq(from = min(lidar$range), to = max(lidar$range), length.out = 1e3)
   )
-  for (i in 1:length(nodes)){
+  for (i in 1:length(knots)){
     new_lidar1 <- new_lidar1 %>% 
-      mutate(b = fbase(range, nodes[i], p))
+      mutate(b = fbase(range, knots[i], p))
     
     names(new_lidar1)[ncol(new_lidar1)] = paste("b", i, sep = "")
   }
@@ -1466,31 +1466,32 @@ plot_spline_lidar <- function(dataset, nodes, p = p){
   
   p <- lidar1 %>% 
     ggplot(aes(x = range, y = logratio)) +
-    geom_vline(data = tibble(nodes),
-               aes(xintercept = nodes),
-               linetype = "dotted") +
+    geom_vline(data = tibble(knots),
+               aes(xintercept = knots),
+               linetype = "dotted",
+               alpha = .5) +
     geom_line(
       data = new_lidar1,
       aes(x = range, y = fit),
       col = col1,
       size = line_size
     ) +
-    geom_point()
+    geom_point(alpha = .5)
   
   return(p)
 }
 
 
 p_cub_spline_2 <- plot_spline_lidar(dataset = lidar,
-                        nodes = c(-1, 0, 1),
+                        knots = c(-1, 0, 1),
                         p = 3)
 
 p_cub_spline_3 <- plot_spline_lidar(dataset = lidar,
-                        nodes = seq(from = -1.5, to = 1.5, by = .5),
+                        knots = seq(from = -1.5, to = 1.5, by = .5),
                         p = 3)
 
 p_cub_spline_4 <- plot_spline_lidar(dataset = lidar,
-                        nodes = seq(from = -1.7, to = 1.7, by = .1),
+                        knots = seq(from = -1.7, to = 1.7, by = .1),
                         p = 3)
 ```
 
@@ -1510,28 +1511,220 @@ plot_grid_split(p_cub_spline_1, p_cub_spline_2, p_cub_spline_3, p_cub_spline_4)
 
 ```
 
-
 In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
 
-A measure of the wigglyness of a function is given by the integral of its second derivative squared:
+A measure of the wigglyness of a function is given by the integral of its squared second derivative:
 \begin{equation}
 \label{eq:wigglyness}
 \int_{a}^{b}{\left( f''(x) \right)^2 dx}
 \end{equation}
 
+In figure \@ref(fig:wiggliness) some examples of functions $f(x)$ and their squared second derivatives $\left(f''(x)\right)^2$ are represented. In the top panels, four functions of increasing wiggliness are represented and, in the bottom panels,  we can see their four squared second derivatives.
 
 
+(ref:wiggliness-caption-latex) $\left(f''(x)\right)^2$ for functions with different wiggliness.
+
+```{r, plot-wiggliness-print, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap="(ref:wiggliness-caption-latex)", label="wiggliness", echo=FALSE}
+
+# Define expressions and compute derivatives
+f2_expr <- expression(sin(2*pi*x))
+f2_2_expr <- D(D(f2_expr, name = "x"), name = "x")
+
+f3_expr <- expression(sin(3*pi*x))
+f3_2_expr <- D(D(f3_expr, name = "x"), name = "x")
+
+f4_expr <- expression(0.76*(sin(pi*x) + sin(4*pi*x)) - 0.5)
+f4_2_expr <- D(D(f4_expr, name = "x"), name = "x")
 
 
-What is done in GAM to contain this wiggliness and to prevent overfitting is to take into account a penalization for wiggliness. This can be achieved by considering the minimization problem in \@ref(eq:max-lik-est-deviance) and adding a penalization term to the deviance:
+# Define functions
+f1 <- function(x){x - 1/2}
+f1_2 <- function(x){0}
+
+f1 <- function(x){eval(f2_expr[[1]])}
+f2_2 <- function(x){eval(f2_2_expr)^2}
+
+f2 <- function(x){eval(f3_expr[[1]])}
+f3_2 <- function(x){eval(f3_2_expr)^2}
+
+f3 <- function(x){eval(f4_expr[[1]])}
+f4_2 <- function(x){eval(f4_2_expr)^2}
+
+
+# Plot functions
+tibble(
+  x = 0:1,
+  y = 0:1,
+  type = c("f", "f2") %>% 
+    factor(levels = c("f", "f2")),
+  fun = 1:2
+) %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_abline(aes(intercept = intercept, slope = slope),
+              data = data.frame(x = 0, y = 0,
+                                type = factor("f"),
+                                fun = 1,
+                                intercept = -.5,
+                                slope = 1),
+              col = col1,
+              size = line_size) +
+  geom_area(stat = "function", fun = f1_2,
+            data = data.frame(x = 0, y = 0,
+                              type = factor("f2"),
+                              fun = 1),
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f1,
+                data = data.frame(x = 0, y = 0,
+                                  type = factor("f"),
+                                  fun = 2),
+                col = col1,
+                size = line_size) +
+  geom_area(stat = "function", fun = f2_2,
+            data = data.frame(x = 0, y = 0,
+                              type = factor("f2"),
+                              fun = 2),
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f2,
+                data = data.frame(x = 0, y = 0,
+                                  type = factor("f"),
+                                  fun = 3),
+                col = col1,
+                size = line_size) +
+  geom_area(stat = "function", fun = f3_2,
+            data = data.frame(x = 0, y = 0,
+                              type = factor("f2"),
+                              fun = 3),
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  stat_function(fun = f3,
+                data = data.frame(x = 0, y = 0,
+                                  type = factor("f"),
+                                  fun = 4),
+                col = col1,
+                size = line_size) +
+  geom_area(stat = "function", fun = f4_2,
+            data = data.frame(x = 0, y = 0,
+                              type = factor("f2"),
+                              fun = 4),
+            alpha = .5,
+            col = col1,
+            size = line_size / 2) +
+  facet_grid(type ~ fun,
+             scales = "free_y") +
+  scale_x_continuous(limits = c(0, 1)) #+
+  # easy_remove_axes(
+  #   which = "both",
+  #   what = "text",
+  #   teach = FALSE
+  # )
+
+```
+
+As we can see from the plots, if a function $f(x)$ is linear, $\left(f''(x)\right)^2$ is null and, as the curvature of the function increases, $\left(f''(x)\right)^2$ increses. For this reason, $\left(f''(x)\right)^2$ can also be seen as a measure of how much $f(x)$ differs from a linear function.
+
+What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on $\left(f''(x)\right)^2$. If we have a regression problem with one explanatory variable $x$, this can be achieved by considering the minimization problem in \@ref(eq:max-lik-est-deviance) and adding a penalization term to the deviance:
+
 \begin{equation}
 \label{eq:gam-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left(D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''(z_l) \right)^2 dz_l}}\right)}
+\hat{f} = \argmin_{f}{\left(D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right)}
 \end{equation}
 
+<!-- \begin{equation} -->
+<!-- \label{eq:gam-est-deviance} -->
+<!-- \hat{\boldsymbol{f}} = \argmin_{\boldsymbol{f}}{\left(D(\boldsymbol{f}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''_l(z_l) \right)^2 dz_l}}\right)} -->
+<!-- \end{equation} -->
+
+In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda>0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem correspond to the maximum likelihood one. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the more regual the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
 
 
+(ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$.
 
+(ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right).
+
+```{r, plot-gam-lambda-build, echo = FALSE}
+
+# Hyperparameters
+k <- 50
+
+sp1 <- 0
+sp2 <- 10
+sp3 <- 1e3
+sp4 <- 1e6
+
+
+# Plotting function
+plot_gam_lidar <- function(dataset, k, sp){
+  
+  # Model fitting
+  
+  ## Attention, the default basis is bs='tp'
+  # tp: thin plate regression splines
+  # cr: natural cubic regression spline
+  # bs: b-slines
+  
+  gam1 <- gam(formula = as.formula(str_c("logratio ~ s(range, bs = 'cr', k = ", k, ")")),
+              sp = sp,
+              data = dataset,
+              family = gaussian())
+  
+  
+  # Predictions on new data
+  new_dataset <- tibble(range = seq(from = min(dataset$range),
+                                  to = max(dataset$range),
+                                  length.out = 1e3))
+  
+  new_dataset$fit1 <- predict(gam1, newdata = new_dataset)
+  
+  
+  # Plotting results
+  p <- dataset %>% 
+    ggplot(aes(x = range, y = logratio)) +
+    geom_line(
+      data = new_dataset,
+      aes(x = range, y = fit1),
+      col = col1,
+      size = line_size
+    ) +
+    geom_point(alpha = .5) +
+    easy_remove_legend(
+      teach = F
+    )
+  
+  return(p)
+  
+}
+
+p_gam_lambda_1 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp1)
+p_gam_lambda_2 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp2)
+p_gam_lambda_3 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp3)
+p_gam_lambda_4 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp4)
+
+
+```
+
+```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$')}
+
+plot_grid_split(p_gam_lambda_1, p_gam_lambda_2, p_gam_lambda_3, p_gam_lambda_4)
+
+```
+
+All the models has been fitted with $m = 50$ knots. As we can see, with $\lambda = 0$ we are clearly overfitting observations, while with $\lambda = 10^6$ we are clearly underfitting them.
+
+As soon as the number of knots $m$ is large enough, the exact number $m$ and the positioning of the knots $\nu_1, \nu_2, \dots, \nu_m$ is not important. If the function is flexible enough, the tuning of the curve is done by just tuning $\lambda$. It is possible to use as many knots as the observations are, but it could be too computationally heavy. A possible choice is to fix a number of knots $m$ and positioning $\nu_1, \nu_2, \dots, \nu_m$ on empirical quantiles of the observed $x$ or equally spaced in the range of $x$. In our example, $m=50$ knots seems to be large enough.
+
+Now the selection of the $x$ effect consists just in finding the optimal parameter $\lambda$. To do so, for a set $\Lambda$ of values of $\lambda$ we can perform a K-fold cross validation as described in \@ref(chap:var-effects) and, for each $\lambda\in\Lambda$, compute the average test deviance:
+$$
+D^{CV}_\lambda = \frac{1}{K} \sum_{k=1}^{K}{D\left( \hat{f}_\lambda^{\setminus \mathcal{B}_k}, \boldsymbol{y}^{\mathcal{B}_k} \right)}
+$$
+At this point we will choose the hyperparameter that minimizes the cross-validation deviance:
+$$
+\hat{\lambda} = \argmin_{\lambda\in\Lambda}{D^{CV}_\lambda}
+$$
 
 
 
