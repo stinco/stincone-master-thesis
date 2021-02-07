@@ -1160,8 +1160,8 @@ What an observation is, depends on the variable we are modeling. For instance:
 
 In each of these cases, \(y_i\) is seen as a realization of the random variable \(Y_i\). With an inferential process we obtain estimations on \(Y_i\) distribution based on observations of their realizations \(y_i\).
 
-\hypertarget{settlement-process-and-ibnr}{%
-\subsubsection{Settlement process and IBNR}\label{settlement-process-and-ibnr}}
+\hypertarget{settlement-process-and-ibnr-claims}{%
+\subsubsection{Settlement process and IBNR claims}\label{settlement-process-and-ibnr-claims}}
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
@@ -1215,10 +1215,9 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
 \end{itemize}
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
-\begin{align*}
-n_i^{(t)} & \ne n_i \\
-z_j^{(t)} & \ne z_j
-\end{align*}
+\[
+n_i^{(t)} \ne n_i, \qquad z_j^{(t)} \ne z_j
+\]
 
 The common case is that \(n_i^{(t)} < n_i\) and \(z_j^{(t)} < z_j\). If we used \(n_i^{(t)}\) and \(z_j^{(t)}\) without any correction, we would underestimate both \(E(N)\) and \(E(Z)\), obtaining a biased estimate for \(E(S)\).
 
@@ -1896,7 +1895,7 @@ In section \ref{chap:var-effects} we have seen that sometimes quantitative varia
 \hypertarget{model-assumptions}{%
 \subsubsection{Model assumptions}\label{model-assumptions}}
 
-In GAM, the assumptions are the same of GLM stated in \ref{chap:glm-assumptions} with the following advancement in the linear predictor:
+In GAM, the assumptions are the same of GLM, stated in \ref{chap:glm-assumptions}, with the following advancement in the linear predictor:
 \[
 g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \qquad i\in\{1,2,\dots,n\}
 \]
@@ -1905,39 +1904,39 @@ where
 \begin{itemize}
 \tightlist
 \item
-  \(\boldsymbol{x}_i\) is the vector of the variables with a linear effect as described in GLM, that also include a term \(1\) that represent the intercept;
+  \(\boldsymbol{x}_i\) is the vector of the variables with a linear effect as described in GLM, that also include a term \(1\) that represents the intercept;
 \item
   \(\boldsymbol{\beta}\) is the vector of the linear coefficients as described in GLM;
 \item
   \(z_{i,1}, z_{i,2}, \dots, z_{i,q}\) are the quantitative variables with a non linear effect;
 \item
-  \(f_1(\cdot), f_2(\cdot), \dots, f_q(\cdot)\) are continous functions with first and second derivative continuous.
+  \(f_1(\cdot), f_2(\cdot), \dots, f_q(\cdot)\) are continuous functions with continuous first and second derivatives.
 \end{itemize}
 
 The functions \(f_l(\cdot)\) introduce the possibility to model non-linear effects of the variables \(z_l\).
 
-\hypertarget{cubic-splines}{%
-\subsubsection{Cubic splines}\label{cubic-splines}}
+\hypertarget{chap:cubic-splines}{%
+\subsubsection{Cubic splines}\label{chap:cubic-splines}}
 
 A class of functions commonly used for modeling \(f_l(\cdot)\) is the class of the \emph{cubic splines}.
 
 \begin{definition}[Cubic Splines]
-\label{def:cubic-splines} \iffalse (Cubic Splines) \fi{} Given \(m\) real numbers \(\nu_1, \nu_2, \dots, \nu_m\), called \textit{knots}, and given a function \(f:[\nu_1, \nu_m] \to \mathbb{R}\) such that:
+\label{def:cubic-splines} \iffalse (Cubic Splines) \fi{} Let consider \(m\) real numbers \(\nu_1, \nu_2, \dots, \nu_m\), called \textit{knots}, and a function \(f:[\nu_1, \nu_m] \to \mathbb{R}\) such that:
 \[
 f(x) = h_t(x), \qquad x\in[\nu_t, \nu_{t+1}[
 \]
-where, for \(t = 1, 2, \dots, m-1\), \(h_t(x) = \alpha_t + \vartheta_t x + \gamma_t x^2 + \delta_t x^3\) and, for the last index \(m-1\), \(f(x) = h_t(x)\) is extended to \([\nu_t, \nu_{t+1}]\)
+where, for \(t = 1, 2, \dots, m-1\), \(h_t(x) = \alpha_t + \vartheta_t x + \gamma_t x^2 + \delta_t x^3\). For the last index \(m-1\), \(f(x) = h_{m-1}(x)\) is extended to \([\nu_{m-1}, \nu_{m}]\).
 
-\(f(x)\) is called \textit{cubic spline} if it satisfies the following conditions in the internal knots \(\nu_2, \nu_3, \dots, \nu_{m-1}\)
+\(f(x)\) is a \textit{cubic spline} if it satisfies the following conditions in the internal knots \(\nu_2, \nu_3, \dots, \nu_{m-1}\)
 \begin{equation}
-\label{eq:cubic-spline-contraints}
+\label{eq:cubic-spline-constraints}
 h_{t-1}(\nu_t) = h_{t}(\nu_t), \qquad h'_{t-1}(\nu_t) = h'_{t}(\nu_t), \qquad h''_{t-1}(\nu_t) = h''_{t}(\nu_t)
 \end{equation}
 \end{definition}
 
-The constraints for \(f(\cdot)\) make it a continous functions with first and second derivative continuous in \(]\nu_1, \nu_m[\). It is possible to extend the cubic spline \(f(\cdot)\) to an interval \([a, b] \supset [\nu_1, \nu_m]\) with linear extensions on \([a, \nu_1[\) and \(]\nu_m, b]\). The function \(f:[a,b]\to\mathbb{R}\) is called \emph{natural cubic spline}.
+The constraints for \(f(\cdot)\) make it a continuous functions with first and second derivatives continuous in \(]\nu_1, \nu_m[\). It is possible to extend the cubic spline \(f(\cdot)\) to an interval \([a, b] \supset [\nu_1, \nu_m]\) with linear extensions on \([a, \nu_1[\) and \(]\nu_m, b]\). The so built function \(f:[a,b]\to\mathbb{R}\) is called \emph{natural cubic spline}.
 
-In definition \ref{def:cubic-splines} we introduced 4 parameters (\(\alpha_t, \vartheta_t, \gamma_t, \delta_t\)) for each of the \(m-1\) inteevals \([\nu_t, \nu_{t+1}[\), \(t\in\{1,2,\dots,m-1\}\). So, we have \(4(m-1)\) parameters. In equation \eqref{eq:cubic-spline-contraints} we introduced \(3\) constraints for each of the \(m-2\) knot in \(\nu_2, \nu_3, \dots, \nu_{m-1}\). So the free parameters becomes \(4(m-1) - 3(m-2) = m+2\). The linear extension on \([a, \nu_1[\) and \(]\nu_m, b]\) corresponds to the constraint \(f''(x)=0\) on \([a, \nu_1[ \, \cup \, ]\nu_m, b]\), thus, \(h''_1(\nu_1)=0\) and \(h''_m(\nu_m)\). Adding these two constraints, we get that the natural cubic spline \(f:[a,b]\to\mathbb{R}\) has \(m\) degrees of freedom.
+In definition \ref{def:cubic-splines} we introduced 4 parameters (\(\alpha_t, \vartheta_t, \gamma_t, \delta_t\)) for each of the \(m-1\) intervals \([\nu_t, \nu_{t+1}[\), \(t\in\{1,2,\dots,m-1\}\). So, we have \(4(m-1)\) parameters. In equation \eqref{eq:cubic-spline-constraints} we introduced \(3\) constraints for each of the \(m-2\) knot in \(\nu_2, \nu_3, \dots, \nu_{m-1}\). So the free parameters become \(4(m-1) - 3(m-2) = m+2\). The linear extension on \([a, \nu_1[\) and \(]\nu_m, b]\) corresponds to the constraint \(f''(x)=0\) on \([a, \nu_1[ \, \cup \, ]\nu_m, b]\), thus, \(h''_1(\nu_1)=0\) and \(h''_m(\nu_m)=0\). Adding these two constraints, we get that the natural cubic spline \(f:[a,b]\to\mathbb{R}\) has \(m\) degrees of freedom.
 
 With an approach similar to the one we used in \ref{chap:var-effects} for split-wise effects in GLM, we can represent a cubic spline by the functions \(x \mapsto \left( x-\nu_t \right)_+^3\), \(t=1,2,\dots,m\).
 
@@ -1948,12 +1947,12 @@ f(x) = \alpha_0 + \vartheta_0 x + \sum_{t=1}^{m}{c_t \left( x-\nu_t \right)_+^3}
 \end{equation}
 gives a natural cubic spline.
 
-The two side constraints ensure that we have a smooth linear extension above \(\nu_m\) The expression \eqref{eq:cubic-spline-decomposition} presents \(m+2\) parameters, thus, with the 2 side constraints, there are \(m\) degrees of freedom. From this expression it is easy to show that the natural cubic splines over the interval \([a,b]\) with knots \(\nu_1, \nu_2, \dots, \nu_m\) constitute a \(m\)-dimensional vectorial space.
+The two side constraints ensure that we have a smooth linear extension above \(\nu_m\). The expression \eqref{eq:cubic-spline-decomposition} presents \(m+2\) parameters, thus, with the 2 side constraints, there are \(m\) degrees of freedom. From this expression it is easy to show that the natural cubic splines over the interval \([a,b]\) with knots \(\nu_1, \nu_2, \dots, \nu_m\) constitute a \(m\)-dimensional vectorial space.
 
 \hypertarget{smoothing}{%
 \subsubsection{Smoothing}\label{smoothing}}
 
-If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and thus the variance of the parameters estimators increases. We can see this effect in figure \ref{fig:cub-spline}.
+If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and, thus, the variance of the parameters estimators increases. We can see this effect in figure \ref{fig:cub-spline}.
 
 
 
@@ -1970,9 +1969,9 @@ If we try to fit a cubic spline on data, we find that by increasing the number o
 
 In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
 
-A measure of the wigglyness of a function is given by the integral of its squared second derivative:
+A measure of the wiggliness of a function is given by the integral of its squared second derivative:
 \begin{equation}
-\label{eq:wigglyness}
+\label{eq:wiggliness}
 \int_{a}^{b}{\left( f''(x) \right)^2 dx}
 \end{equation}
 
@@ -1989,7 +1988,7 @@ In figure \ref{fig:wiggliness} some examples of functions \(f(x)\) and their squ
 \caption{\(\left(f''(x)\right)^2\) for functions with different wiggliness.}\label{fig:wiggliness}
 \end{figure}
 
-As we can see from the plots, if a function \(f(x)\) is linear, \(\left(f''(x)\right)^2\) is null and, as the curvature of the function increases, \(\left(f''(x)\right)^2\) increses. For this reason, \(\left(f''(x)\right)^2\) can also be seen as a measure of how much \(f(x)\) differs from a linear function.
+As we can see from the plots, if a function \(f(x)\) is linear, \(\left(f''(x)\right)^2\) is null and, as the curvature of the function increases, \(\left(f''(x)\right)^2\) increases. For this reason, \(\left(f''(x)\right)^2\) can also be seen as a measure of how much \(f(x)\) differs from a linear function.
 
 What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on \(\left(f''(x)\right)^2\). If we have a regression problem with one explanatory variable \(x\), this can be achieved by considering the minimization problem in \eqref{eq:max-lik-est-deviance} and adding a penalization term to the deviance:
 
@@ -1998,7 +1997,7 @@ What is done in GAM to contain this wiggliness and to prevent overfitting is tak
 \hat{f} = \argmin_{f}{\left(D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right)}
 \end{equation}
 
-In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indicate all the parameters of the natural cubic spline. The hyper-parameter \(\lambda>0\) is called \emph{smoothing parameter}. It measures how much we want to penalize wiggliness. If we choose \(\lambda=0\) we won't penalize for \(\left( f''(x) \right)^2\) and the optimization problem correspond to the maximum likelihood one. The higher \(\lambda\) is, the more penalization for \(\left( f''(x) \right)^2\) we introduce and the more regual the estimate \(\hat{f}(x)\) will be. If \(\lambda\to+\infty\), we will introduce an infinite penalization for wiggliness, so the result will have \(\hat{f}''(x)=0\), thus \(\hat{f}(x)\) will be linear. An example with different levels of \(\lambda\) can be seen in figure \ref{fig:gam-lambda}.
+In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indicate all the parameters of the natural cubic spline. The hyper-parameter \(\lambda>0\) is called \emph{smoothing parameter}. It measures how much we want to penalize wiggliness. If we choose \(\lambda=0\) we won't penalize for \(\left( f''(x) \right)^2\) and the optimization problem correspond to the maximum likelihood one. The higher \(\lambda\) is, the more penalization for \(\left( f''(x) \right)^2\) we introduce and the smoother the estimate \(\hat{f}(x)\) will be. If \(\lambda\to+\infty\), we will introduce an infinite penalization for wiggliness, so the result will have \(\hat{f}''(x)=0\), thus \(\hat{f}(x)\) will be linear. An example with different levels of \(\lambda\) can be seen in figure \ref{fig:gam-lambda}.
 
 
 
@@ -2015,16 +2014,50 @@ In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indi
 
 All the models has been fitted with \(m = 50\) knots. As we can see, with \(\lambda = 0\) we are clearly overfitting observations, while with \(\lambda = 10^6\) we are clearly underfitting them.
 
-As soon as the number of knots \(m\) is large enough, the exact number \(m\) and the positioning of the knots \(\nu_1, \nu_2, \dots, \nu_m\) is not important. If the function is flexible enough, the tuning of the curve is done by just tuning \(\lambda\). It is possible to use as many knots as the observations are, but it could be too computationally heavy. A possible choice is to fix a number of knots \(m\) and positioning \(\nu_1, \nu_2, \dots, \nu_m\) on empirical quantiles of the observed \(x\) or equally spaced in the range of \(x\). In our example, \(m=50\) knots seems to be large enough.
+As soon as the number of knots \(m\) is large enough, the exact number \(m\) and the positioning of the knots \(\nu_1, \nu_2, \dots, \nu_m\) is not important. If the function is flexible enough, the tuning of the curve is done by just tuning \(\lambda\). It is possible to use as many knots as the determinations of \(x\) are, but it could be too computationally expensive. A possible choice is to fix a number of knots \(m\) and positioning \(\nu_1, \nu_2, \dots, \nu_m\) on empirical quantiles of the observed \(x\) or equally spaced in the range of \(x\). In our example, \(m=50\) knots seems to be large enough.
 
 Now the selection of the \(x\) effect consists just in finding the optimal parameter \(\lambda\). To do so, for a set \(\Lambda\) of values of \(\lambda\) we can perform a K-fold cross validation as described in \ref{chap:var-effects} and, for each \(\lambda\in\Lambda\), compute the average test deviance:
 \[
 D^{CV}_\lambda = \frac{1}{K} \sum_{k=1}^{K}{D\left( \hat{f}_\lambda^{\setminus \mathcal{B}_k}, \boldsymbol{y}^{\mathcal{B}_k} \right)}
 \]
-At this point we will choose the hyperparameter that minimizes the cross-validation deviance:
+At this point we will choose the hyper-parameter that minimizes the cross-validation deviance:
 \[
 \hat{\lambda} = \argmin_{\lambda\in\Lambda}{D^{CV}_\lambda}
 \]
+
+\hypertarget{why-cubic-splines}{%
+\subsubsection{Why cubic splines}\label{why-cubic-splines}}
+
+In section \ref{chap:cubic-splines} we said that \emph{cubic splines} are commonly used for modeling \(f(\cdot)\) in GAMs. This choice comes from the following theorem.
+
+\begin{theorem}[Spline property]
+\label{thm:th-splines-property} \iffalse (Spline property) \fi{} Given the knots \(\nu_1, \nu_2, \dots, \nu_m\) and the values \(y_1, y_1, \dots, y_m\), for any \(a\le\nu_1\) and \(b\ge\nu_m\), only one natural cubic spline \(s(\cdot)\), such that \(s(\nu_k)=y_k, \ k\in \{1, \dots, m\}\), exists.
+
+Moreover, given \(f(\cdot)\) a function two times differentiable with continuity, such that \(f(\nu_k)=y_k, \ k\in 1, \dots, m\), then, for any \(a\le\nu_1\) and \(b\ge\nu_m\), it results
+\[
+\int_a^b{\left( s''(x)\right)^2 dx} \le \int_a^b{\left( f''(x)\right)^2 dx}
+\]
+\end{theorem}
+One consequence of this thorem is that, within all the continuous function \(f(\cdot)\) with continuous first and second derivatives, the one that minimize the optimization problem \eqref{eq:gam-est-deviance} is always a natural cubic splines.
+
+Let's consider the determinations \(x_1^* < x_2^* < \dots < x_m^*\) of the variable \(x\). If \(f(\cdot)\) is a continuous function with continuous first and second derivatives, for the theorem \ref{thm:th-splines-property}, there exists only one natural cubic spline \(s(\cdot)\) such that \(s(x_k^*) = f(x_k^*), \ k\in \{1, \dots, m\}\). As, \(s(x_i)=f(x_i) \ \forall i \in \mathcal{D}\), it results that \(D(s, \boldsymbol{y}) = D(f, \boldsymbol{y})\). As \(D(s, \boldsymbol{y}) = D(f, \boldsymbol{y})\) and \(\int_a^b{\left( s''(x)\right)^2 dx} \le \int_a^b{\left( f''(x)\right)^2 dx}\), it results that, for any given \(\lambda\):
+\[
+D(s, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( s''(x) \right)^2 dx}
+\ \le \ 
+D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}
+\]
+
+For this reason, if the aim of the model estimation is to minimize \eqref{eq:gam-est-deviance}, for choosing \(f\) we can just consider the class of the natural cubic splines.
+
+\hypertarget{other-basis}{%
+\subsubsection{Other basis}\label{other-basis}}
+
+In section \ref{chap:cubic-splines} we said that natural cubic splines on knots \(\nu_1, \dots, \nu_m\) contitute a \(m\)-dimensional vectorial space and that a possible basis decomposition is \eqref{eq:cubic-spline-decomposition}.
+
+Another usual basis is th \emph{B-spline} basis. B-splines are functions defined recursively as:
+
+\hypertarget{gam-extensions}{%
+\subsubsection{GAM extensions}\label{gam-extensions}}
 
 \newpage
 

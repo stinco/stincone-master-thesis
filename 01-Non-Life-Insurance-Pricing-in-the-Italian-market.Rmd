@@ -941,7 +941,7 @@ In each of these cases, $y_i$ is seen as a realization of the random variable $Y
 
 
 
-#### Settlement process and IBNR
+#### Settlement process and IBNR claims
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
@@ -1011,10 +1011,13 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
   * $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
-\begin{align*}
+$$
+n_i^{(t)} \ne n_i, \qquad z_j^{(t)} \ne z_j
+$$
+<!--\begin{align*}
 n_i^{(t)} & \ne n_i \\
 z_j^{(t)} & \ne z_j
-\end{align*}
+\end{align*}-->
 
 The common case is that $n_i^{(t)} < n_i$ and $z_j^{(t)} < z_j$. If we used $n_i^{(t)}$ and $z_j^{(t)}$ without any correction, we would underestimate both $E(N)$ and $E(Z)$, obtaining a biased estimate for $E(S)$.
 
