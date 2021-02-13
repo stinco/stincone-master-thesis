@@ -59,7 +59,7 @@ An exponential family $\mathcal{F}$ is characterized by the elements $\left( \Th
 
 It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \@ref(tab:exp-families) the characterizations for these exponential families are reported.
 
-```{r, exp-families-table, echo = FALSE}
+```{r, exp-families-table, echo = FALSE, cache = TRUE}
 
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
@@ -264,7 +264,7 @@ $$
 
 In table \@ref(tab:can-link-fun) the canonical link functions for the families mentioned in \@ref(tab:exp-families) are reported.
 
-```{r, can-link-fun, echo = FALSE}
+```{r, can-link-fun, echo = FALSE, cache = TRUE}
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
                            align = "l"),
@@ -447,7 +447,7 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
 
 In table \@ref(tab:deviance) the deviances for the families mentioned in \@ref(tab:exp-families) are reported.
 
-```{r, deviance-exp-fam, echo = FALSE}
+```{r, deviance-exp-fam, echo = FALSE, cache = TRUE}
 table <- tibble(
   Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
                            align = "l"),
@@ -520,7 +520,7 @@ As we mentioned in \@ref(chap:pricing-variables-encoding), the explanatory varia
 
 (ref:expl-var-types-caption-gitbook) Explanatory variables types, quantitative (top-left), qualitative (top-right), quantitative and qualitative without interaction (bottom-left) and quantitative and qualitative without interaction (bottom-right).
 
-```{r, plot-quant-qual-build, echo = FALSE}
+```{r, plot-quant-qual-build, echo = FALSE, cache = TRUE}
 
 set.seed(42)
 
@@ -659,7 +659,7 @@ p_quant_qual_4 <- df4 %>%
   )
 ```
 
-```{r, plot-quant-qual-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction')}
+```{r, plot-quant-qual-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction'), cache = TRUE}
 
 # To align the plots in a subfigure environment
 plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -692,7 +692,7 @@ For quantitative variables, it is possible to consider also non linear effects i
 
 (ref:expl-var-quant-effect-caption-gitbook) Explanatory quantitative variables effects, polynomial degree 2 (top-left), polynomial degree 4 (top-right), piece-wise linear (bottom-left) and piece-wise polynomial degree 2 (bottom-right).
 
-```{r, plot-quant-effect-build, echo = FALSE}
+```{r, plot-quant-effect-build, echo = FALSE, cache = TRUE}
 set.seed(42)
 
 col1 <- hue_pal()(2)[1]
@@ -831,7 +831,7 @@ p_quant_effect_4 <- df %>%
   )
 ```
 
-```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-quant-effect-caption-gitbook)", "(ref:expl-var-quant-effect-caption-latex)"), label="expl-var-quant-effect", echo=FALSE, fig.ncol=2, fig.subcap=c('Polynomial degree 2', 'Polynomial degree 4', 'Piece-wise linear', 'Piece-wise polynomial degree 2')}
+```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-quant-effect-caption-gitbook)", "(ref:expl-var-quant-effect-caption-latex)"), label="expl-var-quant-effect", echo=FALSE, fig.ncol=2, fig.subcap=c('Polynomial degree 2', 'Polynomial degree 4', 'Piece-wise linear', 'Piece-wise polynomial degree 2'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -889,7 +889,7 @@ As we mentioned in \@ref(chap:linear-exp-families), GLM supports several familie
 (ref:resp-var-caption-gitbook) Response variables and link functions, Normal - identity (top-left), Binomial - logit (top-right), Poisson - log (bottom-left) and Gamma - log (bottom-right).
 
 
-```{r, plot-resp-var, echo = FALSE}
+```{r, plot-resp-var, echo = FALSE, cache = TRUE}
 
 set.seed(42)
 
@@ -1009,7 +1009,7 @@ p_resp_4 <- df %>%
 
 ```
 
-```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:resp-var-caption-gitbook)", "(ref:resp-var-caption-latex)"), label="resp-var", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal - identity', 'Binomial - logit', 'Poisson - log', 'Gamma - log')}
+```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:resp-var-caption-gitbook)", "(ref:resp-var-caption-latex)"), label="resp-var", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal - identity', 'Binomial - logit', 'Poisson - log', 'Gamma - log'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1066,7 +1066,7 @@ One useful tool we have to understand if an explanatory variable $x$ is relevant
 
 (ref:var-selection-caption-gitbook) Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right).
 
-```{r, plot-var-selection, message=FALSE, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:var-selection-caption-gitbook)", "(ref:var-selection-caption-latex)"), label="var-selection", echo=FALSE, fig.ncol=2, fig.subcap=c('No effect - ungrouped', 'Positive effect - ungrouped', 'No effect - grouped', 'Positive effect - grouped')}
+```{r, plot-var-selection, message=FALSE, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:var-selection-caption-gitbook)", "(ref:var-selection-caption-latex)"), label="var-selection", echo=FALSE, fig.ncol=2, fig.subcap=c('No effect - ungrouped', 'Positive effect - ungrouped', 'No effect - grouped', 'Positive effect - grouped'), cache = TRUE}
 
 set.seed(42)
 
@@ -1402,7 +1402,7 @@ If we try to fit a cubic spline on data, we find that by increasing the number o
 
 (ref:cub-spline-caption-gitbook) GLM with cubic splines for different numbers of knots, $0$ knots (top-left), $3$ knots (top-right), $7$ knots (bottom-left) and $35$ knots (bottom-right).
 
-```{r, plot-cub-spline-build, echo = FALSE}
+```{r, plot-cub-spline-build, echo = FALSE, cache = TRUE}
 
 # Read Lidar data
 lidar = read.table("data/lidar.dat", header = TRUE) %>% 
@@ -1496,7 +1496,7 @@ p_cub_spline_4 <- plot_spline_lidar(dataset = lidar,
 ```
 
 
-```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots')}
+```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1524,7 +1524,7 @@ In figure \@ref(fig:wiggliness) some examples of functions $f(x)$ and their squa
 
 (ref:wiggliness-caption-latex) $\left(f''(x)\right)^2$ for functions with different wiggliness.
 
-```{r, plot-wiggliness-print, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap="(ref:wiggliness-caption-latex)", label="wiggliness", echo=FALSE}
+```{r, plot-wiggliness-print, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap="(ref:wiggliness-caption-latex)", label="wiggliness", echo=FALSE, cache = TRUE}
 
 # Define expressions and compute derivatives
 f2_expr <- expression(sin(2*pi*x))
@@ -1646,7 +1646,7 @@ In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicat
 
 (ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right).
 
-```{r, plot-gam-lambda-build, echo = FALSE}
+```{r, plot-gam-lambda-build, echo = FALSE, cache = TRUE}
 
 # Hyperparameters
 k <- 50
@@ -1707,7 +1707,7 @@ p_gam_lambda_4 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp4)
 
 ```
 
-```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$')}
+```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$'), cache = TRUE}
 
 plot_grid_split(p_gam_lambda_1, p_gam_lambda_2, p_gam_lambda_3, p_gam_lambda_4)
 
@@ -1756,10 +1756,142 @@ For this reason, if the aim of the model estimation is to minimize \@ref(eq:gam-
 
 In section \@ref(chap:cubic-splines) we said that natural cubic splines on knots $\nu_1, \dots, \nu_m$ contitute a $m$-dimensional vectorial space and that a possible basis decomposition is \@ref(eq:cubic-spline-decomposition).
 
-Another usual basis is th _B-spline_ basis. B-splines are functions defined recursively as:
+Another usual basis is th _B-spline_ basis. B-splines are functions defined recursively as follows.
+
+```{definition, b-splines, name = "B-splines"}
+For $k\in\{1,2,\dots,m-1\}$:
+$$
+B_{0,k}(x) = 
+\begin{cases}
+1: & \nu_k < x < \nu_{k+1} \\
+0: & \text{otherwise} 0
+\end{cases}
+$$
+
+For $j \ge 0$ and $k\in\{1,2,\dots,m+j-1\}$:
+$$
+B_{j,k}(x) = 
+\frac{x-\nu_{k-j-1}}{\nu_{k}-\nu_{k-j-1}} B_{j,k-1}(x)
++ \frac{\nu_{k+1}-x}{\nu_{k+1}-\nu_{k-j}} B_{j,k}(x)
+$$
+```
+
+In figure \@ref(fig:b-splines-plot) B-splines are represented. 
+
+(ref:plot-b-splines-caption-latex) B-splines with different degrees.
+
+(ref:plot-b-splines-caption-gitbook) B-splines with different degrees, degree $1$ (left), degree $2$ (center), degree $3$ (right)
 
 
+```{r, plot-b-splines-build, echo = FALSE, cache = TRUE}
 
+knots <- c(1,2,3)
+x <- seq(from = 0, to = 4, by = .01)
+
+base_1 = bs(x, knots = knots, degree = 1, intercept = TRUE)
+
+p_b_splines_1 <- cbind(x, base_1) %>% 
+  as_tibble() %>% 
+  pivot_longer(
+    cols = -x,
+    names_to = "base",
+    values_to = "value"
+  ) %>% 
+  ggplot(aes(x = x, y = value, color = base)) +
+  geom_line() +
+  easy_remove_axes(
+    which = "y",
+    what = "text",
+    teach = FALSE
+  ) +
+  easy_remove_legend() +
+  scale_x_continuous(
+    breaks = 0:4,
+    labels = c(
+      expression(nu[1]),
+      expression(nu[2]),
+      expression(nu[3]),
+      expression(nu[4]),
+      expression(nu[5])
+    )
+  ) +
+  labs(x = "x", y = "y")
+
+
+base_2 = bs(x, knots = knots, degree = 2, intercept = TRUE)
+
+p_b_splines_2 <- cbind(x, base_2) %>% 
+  as_tibble() %>% 
+  pivot_longer(
+    cols = -x,
+    names_to = "base",
+    values_to = "value"
+  ) %>% 
+  ggplot(aes(x = x, y = value, color = base)) +
+  geom_line() +
+  easy_remove_axes(
+    which = "y",
+    what = "text",
+    teach = FALSE
+  ) +
+  easy_remove_legend() +
+  scale_x_continuous(
+    breaks = 0:4,
+    labels = c(
+      expression(nu[1]),
+      expression(nu[2]),
+      expression(nu[3]),
+      expression(nu[4]),
+      expression(nu[5])
+    )
+  ) +
+  labs(x = "x", y = "y")
+
+
+base_3 = bs(x, knots = knots, degree = 3, intercept = TRUE)
+
+p_b_splines_3 <- cbind(x, base_3) %>% 
+  as_tibble() %>% 
+  pivot_longer(
+    cols = -x,
+    names_to = "base",
+    values_to = "value"
+  ) %>% 
+  ggplot(aes(x = x, y = value, color = base)) +
+  geom_line() +
+  easy_remove_axes(
+    which = "y",
+    what = "text",
+    teach = FALSE
+  ) +
+  easy_remove_legend() +
+  scale_x_continuous(
+    breaks = 0:4,
+    labels = c(
+      expression(nu[1]),
+      expression(nu[2]),
+      expression(nu[3]),
+      expression(nu[4]),
+      expression(nu[5])
+    )
+  ) +
+  labs(x = "x", y = "y")
+
+```
+
+
+```{r, plot-b-splines-print, out.width = "35%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:plot-b-splines-caption-gitbook)", "(ref:plot-b-splines-caption-latex)"), label = "b-splines-plot", echo = FALSE, fig.ncol = 3, fig.subcap = c('degree $1$', 'degree $2$', 'degree $3$'), cache = TRUE}
+
+plot_grid_split(p_b_splines_1, p_b_splines_2, p_b_splines_3)
+
+```
+
+It can be proven that \@ref(def:b-splines) defines functions $B_{j,k}(x)$ that, given $j$ are splines of degree $j$. Moreover, $B_{j,1}, \dots, B_{j,m+j-1}$ constitute a basis of the vector space of the splines of degree $j$ on the knots $\nu_1, \dots, \nu_m$. In particular, $B_{3,1}, \dots, B_{j,m+2}$ consitute a basis of the vector space of the splines of degree $3$. Therefore, if $s(x)$ is third degree spline on the knots $\nu_1, \dots, \nu_m$, it can be expressed as a linear combination of $B_{3,1}, \dots, B_{3,m+2}$:
+$$
+s(x) = \sum_{k=1}^{m+2}{\beta_{k}B_{3,k}(x)}
+$$
+
+B-splines are preferred compared to truncated polynomial as they are less correlated and leads to more stable and less computationally expensive estimates.
 
 <!--
 Da scrivere
@@ -1778,6 +1910,10 @@ Da scrivere
 - Altre splines (interazioni)
 - GCV
 -->
+
+
+#### Some considerations on GAM
+
 
 
 \newpage

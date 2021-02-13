@@ -322,7 +322,7 @@ $$
 $$
 In table \@ref(tab:dummy-variables) the dummy variable encoding is illustrated.
 
-```{r, dummy-variables-table, echo = FALSE}
+```{r, dummy-variables-table, echo = FALSE, cache = TRUE}
 table <- tibble(
   Make = c("Fiat", "Alfa-Romeo", "Lancia", "Ferrari"),
   `$x'_1$` = c(1, 0, 0, 0),
@@ -405,7 +405,7 @@ $$
 We will indicate it with the notation $N \sim Poisson(\lambda)$.
 ```
 
-```{r, plot-poisson, echo = FALSE, fig.cap = "Poisson distribution for some values of $\\lambda$.", fig.align = "center", fig.width = 6, fig.height = 3}
+```{r, plot-poisson, echo = FALSE, fig.cap = "Poisson distribution for some values of $\\lambda$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
 tibble(x = 0:22) %>% 
   crossing(
     tibble(
@@ -550,7 +550,7 @@ We will indicate it with the notation $Z \sim Gamma(\alpha, \rho)$.
 ```
 
 
-```{r, plot-gamma, echo = FALSE, fig.cap = "Gamma distribution for some values of $\\alpha$ and $\\rho$.", fig.align = "center", fig.width = 6, fig.height = 3}
+```{r, plot-gamma, echo = FALSE, fig.cap = "Gamma distribution for some values of $\\alpha$ and $\\rho$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
 tibble(x = seq(from = 0, to = 25, by = .01)) %>% 
   crossing(
     tibble(
@@ -812,7 +812,7 @@ $$
 We will indicate it with the notation $Y \sim Binom(n, p)$.
 ```
 
-```{r, plot-binomial, echo = FALSE, fig.cap = "Binomial distribution for some values of $n$ and $p$.", fig.align = "center", fig.width = 6, fig.height = 3}
+```{r, plot-binomial, echo = FALSE, fig.cap = "Binomial distribution for some values of $n$ and $p$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
 tibble(x = seq(from = 0, to = 10, by = 1)) %>% 
   crossing(
     tibble(

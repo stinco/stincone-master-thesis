@@ -14,3 +14,6 @@ scales
 ggeasy
 gridExtra
 cowplot
+gtable
+nlme
+mgcv

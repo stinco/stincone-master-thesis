@@ -158,6 +158,7 @@ library(cowplot)
 library(grid)
 library(gtable)
 library(mgcv)
+library(splines)
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')

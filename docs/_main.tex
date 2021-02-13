@@ -2054,10 +2054,53 @@ For this reason, if the aim of the model estimation is to minimize \eqref{eq:gam
 
 In section \ref{chap:cubic-splines} we said that natural cubic splines on knots \(\nu_1, \dots, \nu_m\) contitute a \(m\)-dimensional vectorial space and that a possible basis decomposition is \eqref{eq:cubic-spline-decomposition}.
 
-Another usual basis is th \emph{B-spline} basis. B-splines are functions defined recursively as:
+Another usual basis is th \emph{B-spline} basis. B-splines are functions defined recursively as follows.
+
+\begin{definition}[B-splines]
+\label{def:b-splines} \iffalse (B-splines) \fi{} For \(k\in\{1,2,\dots,m-1\}\):
+\[
+B_{0,k}(x) = 
+\begin{cases}
+1: & \nu_k < x < \nu_{k+1} \\
+0: & \text{otherwise} 0
+\end{cases}
+\]
+
+For \(j \ge 0\) and \(k\in\{1,2,\dots,m+j-1\}\):
+\[
+B_{j,k}(x) = 
+\frac{x-\nu_{k-j-1}}{\nu_{k}-\nu_{k-j-1}} B_{j,k-1}(x)
++ \frac{\nu_{k+1}-x}{\nu_{k+1}-\nu_{k-j}} B_{j,k}(x)
+\]
+\end{definition}
+
+In figure \ref{fig:b-splines-plot} B-splines are represented.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[degree $1$\label{fig:b-splines-plot-1}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-1} }\subfloat[degree $2$\label{fig:b-splines-plot-2}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-2} }\subfloat[degree $3$\label{fig:b-splines-plot-3}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-3} }
+
+}
+
+\caption{B-splines with different degrees.}\label{fig:b-splines-plot}
+\end{figure}
+
+It can be proven that \ref{def:b-splines} defines functions \(B_{j,k}(x)\) that, given \(j\) are splines of degree \(j\). Moreover, \(B_{j,1}, \dots, B_{j,m+j-1}\) constitute a basis of the vector space of the splines of degree \(j\) on the knots \(\nu_1, \dots, \nu_m\). In particular, \(B_{3,1}, \dots, B_{j,m+2}\) consitute a basis of the vector space of the splines of degree \(3\). Therefore, if \(s(x)\) is third degree spline on the knots \(\nu_1, \dots, \nu_m\), it can be expressed as a linear combination of \(B_{3,1}, \dots, B_{3,m+2}\):
+\[
+s(x) = \sum_{k=1}^{m+2}{\beta_{k}B_{3,k}(x)}
+\]
+
+B-splines are preferred compared to truncated polynomial as they are less correlated and leads to more stable and less computationally expensive estimates.
 
 \hypertarget{gam-extensions}{%
 \subsubsection{GAM extensions}\label{gam-extensions}}
+
+\hypertarget{some-considerations-on-gam}{%
+\subsubsection{Some considerations on GAM}\label{some-considerations-on-gam}}
 
 \newpage
 
