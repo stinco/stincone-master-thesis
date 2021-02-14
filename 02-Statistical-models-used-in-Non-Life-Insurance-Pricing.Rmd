@@ -1289,7 +1289,7 @@ D^{CV(K)} = \frac{1}{K} \sum_{k=1}^{K}{D\left( \hat{\boldsymbol{\beta}}^{\setmin
 $$
 Thus, the best model will be the one that minimize $D^{CV(K)}$.
 
-The higher $K$ is, the less subjected to randomness $D^{CV(K)}$ is. However, the higher $K$ is, the computationally heavier the procedure is. A common choice for $K$ is $K=10$. If we choose $K=n$, the procedure is also called _leave-one-out cross validation_.
+The higher $K$ is, the less subjected to randomness $D^{CV(K)}$ is. However, the higher $K$ is, the more computationally expensive the procedure is. A common choice for $K$ is $K=10$. If we choose $K=n$, the procedure is also called _leave-one-out cross validation_.
 
 
 #### Scalability and manual fitting
@@ -1639,7 +1639,7 @@ What is done in GAM to contain this wiggliness and to prevent overfitting is tak
 <!-- \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}{\left(D(\boldsymbol{f}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''_l(z_l) \right)^2 dz_l}}\right)} -->
 <!-- \end{equation} -->
 
-In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda>0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem correspond to the maximum likelihood one. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
+In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda>0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem corresponds to the maximum likelihood. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
 
 
 (ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$.
@@ -1724,21 +1724,21 @@ In general, if we have $q$ quantitative explanatory variables that we want to fi
 {\left(
   D(\boldsymbol{f}, \boldsymbol{y})
     + \sum_{l=1}^{q}{
-      \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x) \right)^2 dx}
+      \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
     }
 \right)} 
 \end{equation}
 where $\boldsymbol{f} = \left( f_1, f_2,\dots,f_q \right)$.
 
-In this context, we have to tune a vector of $q$ smoothing parameters
+In this context, we have to tune a vector of $q$ smoothing parameters:
 $$\boldsymbol{\lambda} = \left( \lambda_1, \lambda_2, \dots, \lambda_q \right)$$
 
 
 #### Choice of the smoothing parameters
 
-As described, the selection of the $x_l$ effect consists just in finding the optimal parameter $\lambda_l$. The technique commonly used in machine learning for hyperparameter tuning is the _Cross Validation_.
+As described, the selection of the $x_l$ effect consists just in finding the optimal parameter $\lambda_l$. The technique commonly used in machine learning for hyper-parameter tuning is the _Cross Validation_.
 
-For a set $\Lambda$ of values of $\boldsymbol{\lambda}$ we can perform a K-fold cross validation as described in \@ref(chap:variable-selection) and, for each vector $\boldsymbol{\lambda}\in\Lambda$, compute the average test deviance:
+For a set $\Lambda$ of values of $\boldsymbol{\lambda}$ we can perform a K-fold cross validation as described in \@ref(chap:variable-selection) and, for each $\boldsymbol{\lambda}\in\Lambda$, we can compute the average test deviance:
 $$
 D^{CV(K)}_{\boldsymbol{\lambda}} =
 \frac{1}{K} \sum_{k=1}^{K}{
@@ -1747,21 +1747,21 @@ D\left(
 \right)
 }
 $$
-At this point we will choose the hyper-parameter vector that minimizes the cross-validation deviance:
+At this point, we will choose the hyper-parameter vector that minimizes the cross-validation deviance:
 $$
 \hat{\boldsymbol{\lambda}} = \argmin_{\boldsymbol{\lambda}\in\Lambda}{D^{CV(K)}_{\boldsymbol{\lambda}}}
 $$
 
-In particular if $q$ is big, this procedure can be too computationally heavier. Two alternatives are the _Generalized Cross Validation_ (GCV) and the _Un-Biased Risk Estimator_ (UBRE). The idea behing this aproaches is to estimate the test set deviance by just computing the training set deviance and applying to it a correction that penalizes for the complexity of the model, as it is done in AIC and BIC, described in section \@ref(chap:variable-selection).
+In particular if $q$ is big, this procedure can be too computationally expensive. Two alternatives are the _Generalized Cross Validation_ (GCV) and the _Un-Biased Risk Estimator_ (UBRE). The idea behind these approaches is to estimate the test set deviance by just computing the training set deviance and applying to it a correction that penalizes for the complexity of the model, as it is done in AIC and BIC, described in section \@ref(chap:variable-selection).
 
 GCV and UBRE formulas are based on the fact that GAMs with identity link and Normal response are _linear smoothers_, i.e. $\boldsymbol{\hat{\mu}}$ can be expressed as:
 \begin{equation}
 \label{eq:linear-smoother}
 \boldsymbol{\hat{\mu}} = L \boldsymbol{y}
 \end{equation}
-where $L$ is a $n\times n$ matrix that depends on the design matrix $\boldsymbol{X}$ and the hyperparameters. $L$ is called _smoothing matrix_. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \@ref(eq:linear-smoother) still holds up with a local approximation.
+where $L$ is a $n\times n$ matrix that depends on the design matrix $\boldsymbol{X}$ and the hyper-parameters. $L$ is called _smoothing matrix_. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \@ref(eq:linear-smoother) still holds up with a local approximation.
 
-It can be proven that the trace of $L$ measures the flexibility of the function. In fact, in Linear Model $L=\left( X^tX \right)^{-1}X^t$ and $\text{tr}(L) = \text{tr}\left( \left( X^tX \right)^{-1}X^t \right) = p+1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(L)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(L)$ decreases.
+It can be proven that the trace of $L$ measures the flexibility of the function. Indeed, in Linear Model $L=\left( X^tX \right)^{-1}X^t$ and $\text{tr}(L) = \text{tr}\left( \left( X^tX \right)^{-1}X^t \right) = p+1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(L)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(L)$ decreases.
 
 For linear smoothers it can be proved that the _leave one out cross validation_ is:
 $$
@@ -1769,7 +1769,7 @@ D^{CV(n)} = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - L_{ii
 $$
 where $L_{ii}$ is the $i$^th^ element of the diagonal of the smoothing matrix $L$.
 
-This formula is particularly convenient because it requires just the fitting with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are $\mu_i$ and $L_{ii}$, that both depend on the model fitted with the whole dataset.
+This formula is particularly convenient because it requires just the fit with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are $\mu_i$ and $L_{ii}$, that both depend on the model fitted with the whole dataset.
 
 This formula can be further simplified by replacing the values $L_{ii}$ with their average $\frac{\text{tr}(L)}{n}$. This way we get the GCV.
 $$
@@ -1793,12 +1793,12 @@ In section \@ref(chap:cubic-splines) we said that _cubic splines_ are commonly u
 ```{theorem, th-splines-property, name = "Spline property"}
 Given the knots $\nu_1, \nu_2, \dots, \nu_m$ and the values $y_1, y_1, \dots, y_m$, for any $a\le\nu_1$ and $b\ge\nu_m$, only one natural cubic spline $s(\cdot)$, such that $s(\nu_k)=y_k, \ k\in \{1, \dots, m\}$, exists.
 
-Moreover, given $f(\cdot)$ a function two times differentiable with continuity, such that $f(\nu_k)=y_k, \ k\in 1, \dots, m$, then, for any $a\le\nu_1$ and $b\ge\nu_m$, it results
+Moreover, given $f(\cdot)$ a function two times differentiable with continuity, such that $f(\nu_k)=y_k, \ k\in \{1, \dots, m\}$, then, for any $a\le\nu_1$ and $b\ge\nu_m$, it results
 $$
 \int_a^b{\left( s''(x)\right)^2 dx} \le \int_a^b{\left( f''(x)\right)^2 dx}
 $$
 ```
-One consequence of this thorem is that, within all the continuous function $f(\cdot)$ with continuous first and second derivatives, the one that minimize the optimization problem \@ref(eq:gam-est-deviance) is always a natural cubic splines.
+One consequence of this theorem is that, within all the continuous function $f(\cdot)$ with continuous first and second derivatives, the one that minimize the optimization problem \@ref(eq:gam-est-deviance) is always a natural cubic splines.
 
 Let's consider the determinations $x_1^* < x_2^* < \dots < x_m^*$ of the variable $x$. If $f(\cdot)$ is a continuous function with continuous first and second derivatives, for the theorem \@ref(thm:th-splines-property), there exists only one natural cubic spline $s(\cdot)$ such that $s(x_k^*) = f(x_k^*), \ k\in \{1, \dots, m\}$. As, $s(x_i)=f(x_i) \ \forall i \in \mathcal{D}$, it results that $D(s, \boldsymbol{y}) = D(f, \boldsymbol{y})$. As $D(s, \boldsymbol{y}) = D(f, \boldsymbol{y})$ and $\int_a^b{\left( s''(x)\right)^2 dx} \le \int_a^b{\left( f''(x)\right)^2 dx}$, it results that, for any given $\lambda$:
 $$
@@ -1813,7 +1813,7 @@ For this reason, if the aim of the model estimation is to minimize \@ref(eq:gam-
 
 #### Other basis
 
-In section \@ref(chap:cubic-splines) we said that natural cubic splines on knots $\nu_1, \dots, \nu_m$ contitute a $m$-dimensional vector space and that a possible basis decomposition is \@ref(eq:cubic-spline-decomposition).
+In section \@ref(chap:cubic-splines) we said that natural cubic splines on knots $\nu_1, \dots, \nu_m$ constitute a $m$-dimensional vector space and that a possible basis decomposition is \@ref(eq:cubic-spline-decomposition).
 
 Another usual basis is the _B-spline_ basis. B-splines are functions defined recursively as follows.
 
@@ -1827,9 +1827,9 @@ B_{0,k}(x) =
 \end{cases}
 $$
 
-For $j \ge 0$ and $k\in\{1,2,\dots,m+j-1\}$:
+For $j \ge 0$ and $k\in\{1,2,\dots,m+j\}$:
 $$
-B_{j,k}(x) = 
+B_{j+1,k}(x) = 
 \frac{x-\nu_{k-j-1}}{\nu_{k}-\nu_{k-j-1}} B_{j,k-1}(x)
 + \frac{\nu_{k+1}-x}{\nu_{k+1}-\nu_{k-j}} B_{j,k}(x)
 $$
@@ -1945,7 +1945,7 @@ plot_grid_split(p_b_splines_1, p_b_splines_2, p_b_splines_3)
 
 ```
 
-It can be proven that \@ref(def:b-splines) defines functions $B_{j,k}(x)$ that, given $j$, are splines of degree $j$. Moreover, $B_{j,1}, \dots, B_{j,m+j-1}$ constitute a basis of the vector space of the splines of degree $j$ on the knots $\nu_1, \dots, \nu_m$. In particular, $B_{3,1}, \dots, B_{j,m+2}$ consitute a basis of the vector space of the splines of degree $3$. Therefore, if $s(x)$ is third degree spline on the knots $\nu_1, \dots, \nu_m$, it can be expressed as a linear combination of $B_{3,1}, \dots, B_{3,m+2}$:
+It can be proven that \@ref(def:b-splines) defines functions $B_{j,k}(x)$ that, given $j$, are splines of degree $j$. Moreover, $B_{j,1}, \dots, B_{j,m+j-1}$ constitute a basis of the vector space of the splines of degree $j$ on the knots $\nu_1, \dots, \nu_m$. In particular, $B_{3,1}, \dots, B_{j,m+2}$ constitute a basis of the vector space of the splines of degree $3$. Therefore, if $s(x)$ is third degree spline on the knots $\nu_1, \dots, \nu_m$, it can be expressed as a linear combination of $B_{3,1}, \dots, B_{3,m+2}$:
 $$
 s(x) = \sum_{k=1}^{m+2}{\beta_{k}B_{3,k}(x)}
 $$
