@@ -2071,15 +2071,28 @@ where \(L_{ii}\) is the \(i\)\textsuperscript{th} element of the diagonal of the
 This formula is particularly convenient because it requires just the fit with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are \(\mu_i\) and \(L_{ii}\), that both depend on the model fitted with the whole dataset.
 
 This formula can be further simplified by replacing the values \(L_{ii}\) with their average \(\frac{\text{tr}(L)}{n}\). This way we get the GCV.
-\[
+\begin{equation}
+\label{eq:gcv}
 GCV = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2}
-\]
+\end{equation}
 
 As for K-fold cross validation we can compute the GCV for different values of \(\boldsymbol{\lambda} \in \Lambda\) and choose the value \(\boldsymbol{\hat{\lambda}}\) that minimizes the GCV.
 
-We can perform a similar procedure using the UBRE, that is defined as:
+The formula \eqref{eq:gcv} can be expressed as:
+\begin{align}
+\nonumber
+GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2} \\
+\nonumber
+& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 \underbrace{\frac{\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}}{n}}_{=D(\boldsymbol{\hat{f}},\boldsymbol{y})} \\
+\label{eq:gcv-gam}
+& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
+\end{align}
+
+The expression \eqref{eq:gcv-gam} generalizes the GCV to al the GAMs, also in the case in which the link is not identity and the response is not Normal.
+
+To select the best value of \(\boldsymbol{\lambda}\), we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 \[
-UBRE = \frac{1}{n} D(\boldsymbol{f}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(L)\phi 
+UBRE = \frac{1}{n} D(\boldsymbol{\hat{f}}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(L)\phi 
 \]
 
 Using the UBRE instead the GCV is preferred when \(\phi\) is known, such as in Poisson regression case, in which \(\phi=1\).
@@ -2141,7 +2154,7 @@ In figure \ref{fig:b-splines-plot} some B-splines of different degrees are repre
 
 \begin{figure}[!hbtp]
 
-{\centering \subfloat[degree $1$\label{fig:b-splines-plot-1}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-1} }\subfloat[degree $2$\label{fig:b-splines-plot-2}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-2} }\subfloat[degree $3$\label{fig:b-splines-plot-3}]{\includegraphics[width=0.35\linewidth]{_main_files/figure-latex/b-splines-plot-3} }
+{\centering \subfloat[degree $1$\label{fig:b-splines-plot-1}]{\includegraphics[width=0.32\linewidth]{_main_files/figure-latex/b-splines-plot-1} }\subfloat[degree $2$\label{fig:b-splines-plot-2}]{\includegraphics[width=0.32\linewidth]{_main_files/figure-latex/b-splines-plot-2} }\subfloat[degree $3$\label{fig:b-splines-plot-3}]{\includegraphics[width=0.32\linewidth]{_main_files/figure-latex/b-splines-plot-3} }
 
 }
 
@@ -2157,6 +2170,13 @@ B-splines are preferred compared to truncated polynomial as they are less correl
 
 \hypertarget{gam-extensions}{%
 \subsubsection{GAM extensions}\label{gam-extensions}}
+
+GAM can be further extended by considering consider non-parametrical interactions and modeling them with two-dimensional splines, such as:
+\[
+f(x_{l_1}, x_{l_2})
+\]
+
+This approach can be adopted also for modeling geographical data, in which \(x_{l_1}, x_{l_2}\) are coordinates on the map, such as longitude and latitude.
 
 \hypertarget{some-considerations-on-gam}{%
 \subsubsection{Some considerations on GAM}\label{some-considerations-on-gam}}
@@ -2207,8 +2227,11 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
+\hypertarget{considerations-of-models}{%
+\section{Considerations of models}\label{considerations-of-models}}
+
 \hypertarget{chap:model-comparison}{%
-\section{Model comparison}\label{chap:model-comparison}}
+\subsection{Model comparison}\label{chap:model-comparison}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
@@ -2217,7 +2240,7 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
 \hypertarget{chap:actuary-importance}{%
-\section{The actuary importance}\label{chap:actuary-importance}}
+\subsection{The actuary importance}\label{chap:actuary-importance}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 

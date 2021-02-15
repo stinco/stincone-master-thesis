@@ -1772,15 +1772,28 @@ where $L_{ii}$ is the $i$^th^ element of the diagonal of the smoothing matrix $L
 This formula is particularly convenient because it requires just the fit with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are $\mu_i$ and $L_{ii}$, that both depend on the model fitted with the whole dataset.
 
 This formula can be further simplified by replacing the values $L_{ii}$ with their average $\frac{\text{tr}(L)}{n}$. This way we get the GCV.
-$$
+\begin{equation}
+\label{eq:gcv}
 GCV = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2}
-$$
+\end{equation}
 
 As for K-fold cross validation we can compute the GCV for different values of $\boldsymbol{\lambda} \in \Lambda$ and choose the value $\boldsymbol{\hat{\lambda}}$ that minimizes the GCV.
 
-We can perform a similar procedure using the UBRE, that is defined as:
+The formula \@ref(eq:gcv) can be expressed as:
+\begin{align}
+\nonumber
+GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2} \\
+\nonumber
+& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 \underbrace{\frac{\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}}{n}}_{=D(\boldsymbol{\hat{f}},\boldsymbol{y})} \\
+\label{eq:gcv-gam}
+& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
+\end{align}
+
+The expression \@ref(eq:gcv-gam) generalizes the GCV to al the GAMs, also in the case in which the link is not identity and the response is not Normal.
+
+To select the best value of $\boldsymbol{\lambda}$, we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 $$
-UBRE = \frac{1}{n} D(\boldsymbol{f}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(L)\phi 
+UBRE = \frac{1}{n} D(\boldsymbol{\hat{f}}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(L)\phi 
 $$
 
 Using the UBRE instead the GCV is preferred when $\phi$ is known, such as in Poisson regression case, in which $\phi=1$.
@@ -1939,7 +1952,7 @@ p_b_splines_3 <- cbind(x, base_3) %>%
 ```
 
 
-```{r, plot-b-splines-print, out.width = "35%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:plot-b-splines-caption-gitbook)", "(ref:plot-b-splines-caption-latex)"), label = "b-splines-plot", echo = FALSE, fig.ncol = 3, fig.subcap = c('degree $1$', 'degree $2$', 'degree $3$'), cache = TRUE}
+```{r, plot-b-splines-print, out.width = "32%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:plot-b-splines-caption-gitbook)", "(ref:plot-b-splines-caption-latex)"), label = "b-splines-plot", echo = FALSE, fig.ncol = 3, fig.subcap = c('degree $1$', 'degree $2$', 'degree $3$'), cache = TRUE}
 
 plot_grid_split(p_b_splines_1, p_b_splines_2, p_b_splines_3)
 
@@ -1962,6 +1975,12 @@ Da scrivere
 
 #### GAM extensions
 
+GAM can be further extended by considering consider non-parametrical interactions and modeling them with two-dimensional splines, such as:
+$$
+f(x_{l_1}, x_{l_2})
+$$
+
+This approach can be adopted also for modeling geographical data, in which $x_{l_1}, x_{l_2}$ are coordinates on the map, such as longitude and latitude.
 
 <!--
 Da scrivere
@@ -1972,6 +1991,12 @@ Da scrivere
 
 
 #### Some considerations on GAM
+
+<!--
+- flessibile
+- semiparametrico
+- automatico. Non devo fare lavoro manuale con splitwise e polinomi vari
+-->
 
 
 
@@ -2022,7 +2047,9 @@ Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, bl
 
 
 
-## Model comparison {#chap:model-comparison}
+## Considerations of models
+
+### Model comparison {#chap:model-comparison}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
@@ -2032,7 +2059,7 @@ Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, bl
 
 
 
-## The actuary importance {#chap:actuary-importance}
+### The actuary importance {#chap:actuary-importance}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
