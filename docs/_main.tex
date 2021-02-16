@@ -2171,15 +2171,28 @@ B-splines are preferred compared to truncated polynomial as they are less correl
 \hypertarget{gam-extensions}{%
 \subsubsection{GAM extensions}\label{gam-extensions}}
 
-GAM can be further extended by considering consider non-parametrical interactions and modeling them with two-dimensional splines, such as:
+As in GLM, in GAM we can consider interactions between a variable with non-linear effect \(x_{l_2}\) and another variable \(x_{l_1}\). This can be achieved by adding to the linear predictor a term such as:
+\[
+x_{l_1} f(x_{l_2})
+\]
+This is particularly useful when \(x_{l_1}\) is a binary variable and we want to fit two different curves for \(x_{l_2}\) in the case \(x_{l_1}=0\) and in the case \(x_{l_1}=1\).
+
+If we want to consider a more complex interaction between two quantitative variables with non-linear effect, GAM can be extended by considering consider non-parametrical interactions and modeling them with two-dimensional splines, such as:
 \[
 f(x_{l_1}, x_{l_2})
 \]
-
-This approach can be adopted also for modeling geographical data, in which \(x_{l_1}, x_{l_2}\) are coordinates on the map, such as longitude and latitude.
+In this case, instead of fitting a curve on \((x_l, y)\), we will fit a flexible surface on \((x_{l_1}, x_{l_2}, y)\). This approach can be adopted also for modeling geographical data, in which \(x_{l_1}, x_{l_2}\) are coordinates on the map, such as longitude and latitude.
 
 \hypertarget{some-considerations-on-gam}{%
 \subsubsection{Some considerations on GAM}\label{some-considerations-on-gam}}
+
+As we have seen in this chapter, GAMs are flexible tools for fitting quantitative variables with non-linear effects.
+
+One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components \(f(x_{l})\). The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable \(x_l\) on the response \(y\) just by plotting the graph \(\left(x_l, f(x_l)\right)\), while the interactions between variables are added manually so we have a full control of our model.
+
+Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable \(x_l\), we have to perform a manual process of wise splitting and polynomial fitting on the range of \(x_l\), in GAM we do not have to explicity specify the shape of \(f(x_l)\) and everything is done by the algorithm.
+
+This higher flexibility and authomation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces an higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
 
 \newpage
 
@@ -2248,8 +2261,8 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
-\hypertarget{implementation}{%
-\section{Implementation}\label{implementation}}
+\hypertarget{chap:implementation}{%
+\section{Implementation}\label{chap:implementation}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
