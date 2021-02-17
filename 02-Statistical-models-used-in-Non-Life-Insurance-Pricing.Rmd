@@ -1981,7 +1981,7 @@ x_{l_1} f(x_{l_2})
 $$
 This is particularly useful when $x_{l_1}$ is a binary variable and we want to fit two different curves for $x_{l_2}$ in the case $x_{l_1}=0$ and in the case $x_{l_1}=1$.
 
-If we want to consider a more complex interaction between two quantitative variables with non-linear effect, GAM can be extended by considering consider non-parametrical interactions and modeling them with two-dimensional splines, such as:
+If we want to consider a more complex interaction between two quantitative variables with non-linear effect, GAM can be extended by considering non-parametrical interactions and modeling them with two-dimensional splines, such as:
 $$
 f(x_{l_1}, x_{l_2})
 $$
@@ -1999,11 +1999,11 @@ Da scrivere
 
 As we have seen in this chapter, GAMs are flexible tools for fitting quantitative variables with non-linear effects.
 
-One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components $f(x_{l})$. The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable $x_l$ on the response $y$ just by plotting the graph $\left(x_l, f(x_l)\right)$, while the interactions between variables are added manually so we have a full control of our model.
+One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components $f(x_{l})$. The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable $x_l$ on the response $y$ just by plotting the graph $\left(x_l, f(x_l)\right)$, while the interactions between variables are added manually so we have a full control of them.
 
 Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable $x_l$, we have to perform a manual process of wise splitting and polynomial fitting on the range of $x_l$, in GAM we do not have to explicity specify the shape of $f(x_l)$ and everything is done by the algorithm.
 
-This higher flexibility and authomation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces an higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
+This higher flexibility and automation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces an higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
 
 <!--
 - flessibile
