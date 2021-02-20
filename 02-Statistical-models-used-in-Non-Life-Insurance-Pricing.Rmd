@@ -23,12 +23,12 @@ library(knitr)
 
 \chaptermark{Statistical models for Non Life Insurance Pricing}
 
-In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:actuary-importance) we will compare them by discussing how they fit the pricing needs.
+In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:considerations-on-models) we will compare them by discussing how they fit the pricing needs.
 
 
 ## Statistical Models
 
-In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Elastic Net and the Generalized Additive Model (GAM). After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
+In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Generalized Additive Model (GAM) and the Shrinkage estimators for GLM. After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 
 ### GLM
@@ -1628,7 +1628,6 @@ tibble(
 As we can see from the plots, if a function $f(x)$ is linear, $\left(f''(x)\right)^2$ is null and, as the curvature of the function increases, $\left(f''(x)\right)^2$ increases. For this reason, $\left(f''(x)\right)^2$ can also be seen as a measure of how much $f(x)$ differs from a linear function.
 
 What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on $\left(f''(x)\right)^2$. If we have a regression problem with one explanatory variable $x$, this can be achieved by considering the minimization problem in \@ref(eq:max-lik-est-deviance) and adding a penalization term to the deviance:
-
 \begin{equation}
 \label{eq:gam-est-deviance}
 \hat{f} = \argmin_{f}{\left(D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right)}
@@ -1639,7 +1638,7 @@ What is done in GAM to contain this wiggliness and to prevent overfitting is tak
 <!-- \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}{\left(D(\boldsymbol{f}, \boldsymbol{y}) + \sum_{l=1}^{s}{\lambda_l \int_{a_l}^{b_l}{\left( f''_l(z_l) \right)^2 dz_l}}\right)} -->
 <!-- \end{equation} -->
 
-In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda>0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem corresponds to the maximum likelihood. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
+In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda\ge0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem corresponds to the maximum likelihood. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
 
 
 (ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$.
@@ -1734,7 +1733,7 @@ In this context, we have to tune a vector of $q$ smoothing parameters:
 $$\boldsymbol{\lambda} = \left( \lambda_1, \lambda_2, \dots, \lambda_q \right)$$
 
 
-#### Choice of the smoothing parameters
+#### Choice of the smoothing parameters {#chap:gam-choice-lambda}
 
 As described, the selection of the $x_l$ effect consists just in finding the optimal parameter $\lambda_l$. The technique commonly used in machine learning for hyper-parameter tuning is the _Cross Validation_.
 
@@ -1761,7 +1760,7 @@ GCV and UBRE formulas are based on the fact that GAMs with identity link and Nor
 \end{equation}
 where $L$ is a $n\times n$ matrix that depends on the design matrix $\boldsymbol{X}$ and the hyper-parameters. $L$ is called _smoothing matrix_. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \@ref(eq:linear-smoother) still holds up with a local approximation.
 
-It can be proven that the trace of $L$ measures the flexibility of the function. Indeed, in Linear Model $L=\left( X^tX \right)^{-1}X^t$ and $\text{tr}(L) = \text{tr}\left( \left( X^tX \right)^{-1}X^t \right) = p+1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(L)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(L)$ decreases.
+It can be proven that the trace of $L$ measures the flexibility of the function. Indeed, in Linear Model $L = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t$ and $\text{tr}(L) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(L)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(L)$ decreases.
 
 For linear smoothers it can be proved that the _leave one out cross validation_ is:
 $$
@@ -2016,13 +2015,200 @@ This higher flexibility and automation comes at the cost of introducing more com
 
 ### Shrinkage estimators for GLM
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in GLM when there are many explanatory variables. All the models presented in this chapter are actually GLM. The advancements consist in the way the parameters are estimated.
+
+
+#### The Bias-Variance Trade Off
+
+One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator $\boldsymbol{\tilde{\beta}}^{ML}$ is unbiased, that is $E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}$. This property in general is not true for GLM with other link and response distribution, but it is true asymptotically: $\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}$. However, the bias is not the only relevant aspect of an estimator. If we consider the _Mean Squared Error_ (MSE) of an estimator $\tilde{\beta}_j$, we get the following result:
+\begin{equation}
+\label{eq:bias-variance}
+MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
+\underbrace{\left( E(\tilde{\beta}_j)-\beta_j \right)^2}_{\text{Bias}^2} + 
+\underbrace{Var\left( \tilde{\beta}_j \right)}_{\text{Variance}}
+\end{equation}
+
+The idea behind shrinkage estimators is to add an amount of smart bias to $\tilde{\beta}_j$ in order to reduce its variance.
+
+The trade-off between Bias and Variance described by equation \@ref(eq:bias-variance) can be interpreted in relation to the complexity of the model. Figure \@ref(fig:bias-variance) shows how the prediction error changes by increasing the complexity of the model. In linear smoothers, the complexity of the model can be measured as the effective degrees of freedom $\text{tr}(L)$ (see section \@ref(chap:gam-choice-lambda)), that in the case of the GLM with maximum likelihood estimators is just the number of parameters $p+1$. Usually, in machine learning models, the complexity of the model is determined by tuning one or more hyper-parameters. In the case of GAM, for example, by increasing $\lambda$ we obtain a less complex model, while by decreasing it we obtain a more complex model.
+
+A model not complex enough produces estimators with low variance but high bias, that leads to underfitting. A too complex model produces estimators with low bias but high variance, that leads to overfitting.
+
+As maximum likelihood estimators for GLM the complexity increases with $p$, they are not suitable when $p$ is large (high dimensionality).
+
+(ref:bias-variance-caption) The Bias-Variance trade off. The horizontal axis shows the increase in complexity and the vertical axis shows the effect on in-sample error (training set) and out-of-sample error (test set). The error can be measured as the Mean Squared Error (MSE) or in general as the Deviance.
+
+```{r, plot-bias-variance, out.width = "80%", fig.align='center', fig.cap = "(ref:bias-variance-caption)", label = "bias-variance", echo = FALSE, fig.ncol = 2, cache = TRUE}
+
+train_error <- function(x){
+  (1 - 0.1) / (x + 1)^2
+}
+
+test_error <- function(x){
+  train_error(x) + x^2/10 + 0.1
+}
+
+
+text_low <- textGrob(
+  "Low Complexity\nHigh Bias\nLow Variance\nUnderfitting",
+  gp = gpar(fontsize = 10)
+)
+
+text_high <- textGrob(
+  "High Complexity\nLow Bias\nHigh Variance\nOverfitting",
+  gp = gpar(fontsize = 10)
+)
+
+text_opt <- textGrob("Optimal Complexity", gp = gpar(fontsize = 10))
+
+text_y <- -0.3
+text_x_low <- 0.25
+text_x_high <- 3.25
+
+
+x_opt <- 1.0479
+text_y_opt <- 1.55
+
+
+tibble(
+  x = c(0, 0),
+  y = c(0, 0),
+  # set = c("Training", "Test") %>% 
+  set = c("In-Sample Error", "Out-Of-Sample Error") %>% 
+    # factor(., levels = .)
+    fct_inorder()
+) %>% 
+  ggplot(aes(x = x, y = y, color = set)) +
+  geom_vline(
+    xintercept = x_opt,
+    linetype = "dotted"
+  ) +
+  stat_function(
+    # data = tibble(x = 0, y = 0, set = "Training set"),
+    data = tibble(x = 0, y = 0, set = "In-Sample Error"),
+    fun = train_error,
+    size = line_size
+  ) +
+  stat_function(
+    # data = tibble(x = 0, y = 0, set = "Test set"),
+    data = tibble(x = 0, y = 0, set = "Out-Of-Sample Error"),
+    fun = test_error,
+    size = line_size
+  ) +
+  scale_x_continuous(limits = c(0, 3.5)) +
+  scale_y_continuous(limits = c(0, NA)) +
+  labs(x = "Model Complexity", y = "Loss") +
+  theme(plot.margin = unit(c(1.5, 1, 1.2, 1), "lines")) +
+  # annotation_custom(text_high, xmin = 0.5, xmax = 0.5, ymin = -0.07, ymax = -0.07) + 
+  annotation_custom(
+    grob = text_low,
+    xmin = text_x_low, xmax = text_x_low,
+    ymin = text_y, ymax = text_y
+  ) +
+  annotation_custom(
+    grob = text_high,
+    xmin = text_x_high, xmax = text_x_high,
+    ymin = text_y, ymax = text_y
+  ) + 
+  annotation_custom(
+    grob = text_opt,
+    xmin = x_opt, xmax = x_opt,
+    ymin = text_y_opt, ymax = text_y_opt
+  ) + 
+  coord_cartesian(
+    ylim = c(0, 1.4),
+    clip = "off"
+  ) +
+  easy_remove_axes(
+    which = "both",
+    what = c("text", "ticks")
+  ) +
+  easy_remove_legend_title() +
+  theme(
+    legend.position = "bottom",
+    legend.justification = "center",
+    legend.margin = margin(0, 0, 0, 0),
+    legend.box.margin = margin(5, 0, 0, 0)
+    # legend.box.margin = margin(15, 0, 0, 0)
+  )
+
+```
+
 
 
 #### Ridge Regression
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+One shrinkage estimator for GLM is the _Ridge Estimator_. In Ridge Regression, the decrease in variance of $\tilde{\boldsymbol{\beta}}$ is achieved by considering the optimization problem \@ref(eq:max-lik-est-deviance) and adding to the Deviance a penalization term that depends on the magnitude of $\beta_1, \beta_2, \dots, \beta_p$:
+\begin{equation}
+\label{eq:ridge-est-deviance}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}}{\left(D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right)}
+\end{equation}
+where:
 
+* $\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)$ is the set of the GLM coefficients except for the intercept $\beta_0$;
+* $\|\cdot\|_2^2$ is the $L^2$ norm, i.e. $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$;
+* $\lambda\ge0$ is an hyper-parameter that control the penalization.
+
+The term $\|\boldsymbol{\beta}_{\setminus0}\|_2^2$ produces a penalization for high values of $\hat{\beta}_j$ that leads to a shrinkage of the coefficients. The fact that $\beta_0$ is excluded from the penalization is aimed not to introduce a bias towards $0$ in the intercept. As the magnitude of $\beta_j$ depends on the values of $x_j$, it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
+
+As for GAM, if $\lambda=0$, the optimization problem \@ref(eq:ridge-est-deviance) corresponds to the maximum likelihood, while for $\lambda\to+\infty$ the optimal point is $\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)$, that corresponds to the trivial model with no explanatory variables. An example of the effect of $\lambda$ is reported in figure \@ref(...). The optimal point for $\lambda=0$ can be obtained through a Cross Validation as seen in section \@ref(#chap:gam-choice-lambda).
+
+The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because in this case \@ref(eq:ridge-est-deviance) has an explicit solution. To make the results more interpretable, let's assume that the response variables have $E(Y)=0$ and that the explanatory variables are centered on $0$, i.e. $\bar{x}_j=0, \ j\in\{1,2,\dots,p\}$. That means that $\beta_0=0$ and the model is $E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p$. With these assumptions, we obtain:
+\begin{equation}
+\label{eq:ridge-estimator}
+\hat{\boldsymbol{\beta}}_{\lambda,\setminus0} = \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t y
+\end{equation}
+where:
+
+* $\hat{\boldsymbol{\beta}}_{\lambda,\setminus0} = \left(\hat{\beta}_1, \hat{\beta}_2, \dots, \hat{\beta}_p\right)$;
+* $\boldsymbol{X}$ is the design matrix without the first column of $1$s, as the intercept is excluded from the model;
+* $I_p$ is the identity matrix with dimension $p$.
+
+From the formula \@ref(eq:ridge-estimator) we can see that, while the maximum likelihood estimator is unbiased, if $\lambda>0$, the Ridge estimator is biased.
+\begin{align*}
+E\left(\tilde{\boldsymbol{\beta}}_{0,\setminus0}\right) & =
+\left(\boldsymbol{X}^t\boldsymbol{X}\right)^{-1}\boldsymbol{X}^t E(Y) \\ & =
+\left(\boldsymbol{X}^t\boldsymbol{X}\right)^{-1}\boldsymbol{X}^t \boldsymbol{X} \boldsymbol{\beta}_{\setminus0} \\ & =
+\boldsymbol{\beta}_{\setminus0} \\[6pt]
+E\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0}\right) & =
+\left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t E(Y) \\ & =
+\left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t\boldsymbol{X} \boldsymbol{\beta}_{\setminus0} \\ & \neq
+\boldsymbol{\beta}_{\setminus0}
+\end{align*}
+
+Moreover, from the formula \@ref(eq:ridge-estimator) we find that, even if there is multicollinearity and $\boldsymbol{X}^t\boldsymbol{X}$ is not invertible, the Ridge estimator is computable. This aspect is particularly interesting when $p > n$.
+
+If we assume that the explanatory variables are independent, i.e. $\boldsymbol{X}^t\boldsymbol{X} = I_p$ we can further simplify \@ref(eq:ridge-estimator) to:
+$$
+\hat{\boldsymbol{\beta}}_{\lambda,\setminus0} =
+\frac{1}{1+\lambda} \boldsymbol{X}^t y = 
+\frac{1}{1+\lambda} \hat{\boldsymbol{\beta}}_{0,\setminus0}
+$$
+
+that results in:
+\begin{align*}
+E\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0}\right) & =
+\frac{1}{1+\lambda} \boldsymbol{\beta}_{\setminus0} \\
+Var\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0} \right) & =
+\frac{1}{\left(1+\lambda\right)^2} Var\left( \tilde{\boldsymbol{\beta}}_{0,\setminus0} \right)
+\end{align*}
+
+This result means that, if the explanatory variables are independent, the Ridge penalization shrinks all the estimated coefficients by a factor of $\frac{1}{1+\lambda}$ and reduce their variance by a factor of $\frac{1}{\left(1+\lambda\right)^2}$.
+
+From formula \@ref(eq:ridge-estimator) we also find that, as in GAM, if the link is identity and the response is Normal, the Ridge regression is a linear smoother. In this case the smoothing matrix is:
+$$
+L_{\lambda} = \boldsymbol{X} \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t
+$$
+
+In the case of independent explanatory variables we get:
+$$
+L_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\lambda} L_0
+$$
+and then $\text{tr}\left(L_{\lambda}\right) = \frac{p}{1+\lambda}$.
+
+
+
+\newpage
 
 #### LASSO Regression
 
@@ -2059,7 +2245,7 @@ Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, bl
 
 
 
-## Considerations of models
+## Considerations on models {#chap:considerations-on-models}
 
 ### Model comparison {#chap:model-comparison}
 
