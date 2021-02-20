@@ -165,6 +165,11 @@ $endfor$
 	\renewcommand{\st}{\textsuperscript{st}}
 	\newcommand{\rd}{\textsuperscript{rd}}
 
+% To make equal with 'def' above in equations
+\newcommand\eqdef{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny def}}}{=}}}
+
+% For the norm in equations
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
 
 % For the Title Page with Italian style (frontespizio)
 \usepackage[nouppercase]{frontespizio}
