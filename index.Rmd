@@ -153,6 +153,7 @@ library(knitr)
 library(kableExtra)
 library(scales)
 library(ggeasy)
+library(ggforce)     # For plotting ellipses
 library(gridExtra)
 library(cowplot)
 library(grid)

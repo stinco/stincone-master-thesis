@@ -2013,7 +2013,7 @@ In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indi
 
 }
 
-\caption{GAM estimate \(\hat{f}(x)\) for different levels of \(\lambda\).}\label{fig:gam-lambda}
+\caption{GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\).}\label{fig:gam-lambda}
 \end{figure}
 
 All the models has been fitted with \(m = 50\) knots. As we can see, with \(\lambda = 0\) we are clearly overfitting observations, while with \(\lambda = 10^6\) we are clearly underfitting them.
@@ -2092,7 +2092,7 @@ GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\te
 & = \left( \frac{n}{n - \text{tr}(L)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
 \end{align}
 
-The expression \eqref{eq:gcv-gam} generalizes the GCV to al the GAMs, also in the case in which the link is not identity and the response is not Normal.
+The expression \eqref{eq:gcv-gam} generalizes the GCV to all the GAMs, also in the case in which the link is not identity and the response is not Normal.
 
 To select the best value of \(\boldsymbol{\lambda}\), we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 \[
@@ -2194,7 +2194,7 @@ As we have seen in this chapter, GAMs are flexible tools for fitting quantitativ
 
 One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components \(f(x_{l})\). The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable \(x_l\) on the response \(y\) just by plotting the graph \(\left(x_l, f(x_l)\right)\), while the interactions between variables are added manually so we have a full control of them.
 
-Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable \(x_l\), we have to perform a manual process of wise splitting and polynomial fitting on the range of \(x_l\), in GAM we do not have to explicity specify the shape of \(f(x_l)\) and everything is done by the algorithm.
+Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable \(x_l\), we have to perform a manual process of wise splitting and polynomial fitting on the range of \(x_l\), in GAM we do not have to explicitly specify the shape of \(f(x_l)\) and everything is done by the algorithm.
 
 This higher flexibility and automation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces an higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
 
@@ -2226,13 +2226,15 @@ As maximum likelihood estimators for GLM the complexity increases with \(p\), th
 
 
 
+
+
 \begin{figure}[!hbtp]
 
 {\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/bias-variance-1} 
 
 }
 
-\caption{The Bias-Variance trade off. The horizontal axis shows the increase in complexity and the vertical axis shows the effect on in-sample error (training set) and out-of-sample error (test set). The error can be measured as the Mean Squared Error (MSE) or in general as the Deviance.}\label{fig:bias-variance}
+\caption[The Bias-Variance trade off.]{The Bias-Variance trade off. The horizontal axis shows the increase in complexity and the vertical axis shows the effect on in-sample error (training set) and out-of-sample error (test set). The error can be measured as the Mean Squared Error (MSE) or in general as the Deviance.}\label{fig:bias-variance}
 \end{figure}
 
 \hypertarget{ridge-regression}{%
@@ -2257,7 +2259,7 @@ where:
 
 The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\hat{\beta}_j\) that leads to a shrinkage of the coefficients. The fact that \(\beta_0\) is excluded from the penalization is aimed not to introduce a bias towards \(0\) in the intercept. As the magnitude of \(\beta_j\) depends on the values of \(x_j\), it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
 
-As for GAM, if \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood, while for \(\lambda\to+\infty\) the optimal point is \(\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)\), that corresponds to the trivial model with no explanatory variables. An example of the effect of \(\lambda\) is reported in figure @ref(\ldots). The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section @ref(\#chap:gam-choice-lambda).
+As for GAM, if \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood, while for \(\lambda\to+\infty\) the optimal point is \(\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)\), that corresponds to the trivial model with no explanatory variables. An example of the effect of \(\lambda\) is reported in figure @ref(\ldots). The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section \ref{chap:gam-choice-lambda}.
 
 The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because in this case \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
 \begin{equation}
@@ -2323,7 +2325,20 @@ and then \(\text{tr}\left(L_{\lambda}\right) = \frac{p}{1+\lambda}\).
 \hypertarget{lasso-regression}{%
 \subsubsection{LASSO Regression}\label{lasso-regression}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[Ridge\label{fig:opt-ridge-lasso-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/opt-ridge-lasso-1} }\subfloat[LASSO\label{fig:opt-ridge-lasso-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/opt-ridge-lasso-2} }
+
+}
+
+\caption{Optimization Ridge vs LASSO.}\label{fig:opt-ridge-lasso}
+\end{figure}
+
+\newpage
 
 \hypertarget{elastic-net}{%
 \subsubsection{Elastic Net}\label{elastic-net}}

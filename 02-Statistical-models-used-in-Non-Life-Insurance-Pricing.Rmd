@@ -1641,9 +1641,9 @@ What is done in GAM to contain this wiggliness and to prevent overfitting is tak
 In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda\ge0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem corresponds to the maximum likelihood. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
 
 
-(ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$.
+(ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$.
 
-(ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right).
+(ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right).
 
 ```{r, plot-gam-lambda-build, echo = FALSE, cache = TRUE}
 
@@ -1788,7 +1788,7 @@ GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\te
 & = \left( \frac{n}{n - \text{tr}(L)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
 \end{align}
 
-The expression \@ref(eq:gcv-gam) generalizes the GCV to al the GAMs, also in the case in which the link is not identity and the response is not Normal.
+The expression \@ref(eq:gcv-gam) generalizes the GCV to all the GAMs, also in the case in which the link is not identity and the response is not Normal.
 
 To select the best value of $\boldsymbol{\lambda}$, we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 $$
@@ -2000,7 +2000,7 @@ As we have seen in this chapter, GAMs are flexible tools for fitting quantitativ
 
 One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components $f(x_{l})$. The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable $x_l$ on the response $y$ just by plotting the graph $\left(x_l, f(x_l)\right)$, while the interactions between variables are added manually so we have a full control of them.
 
-Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable $x_l$, we have to perform a manual process of wise splitting and polynomial fitting on the range of $x_l$, in GAM we do not have to explicity specify the shape of $f(x_l)$ and everything is done by the algorithm.
+Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable $x_l$, we have to perform a manual process of wise splitting and polynomial fitting on the range of $x_l$, in GAM we do not have to explicitly specify the shape of $f(x_l)$ and everything is done by the algorithm.
 
 This higher flexibility and automation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces an higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
 
@@ -2038,7 +2038,9 @@ As maximum likelihood estimators for GLM the complexity increases with $p$, they
 
 (ref:bias-variance-caption) The Bias-Variance trade off. The horizontal axis shows the increase in complexity and the vertical axis shows the effect on in-sample error (training set) and out-of-sample error (test set). The error can be measured as the Mean Squared Error (MSE) or in general as the Deviance.
 
-```{r, plot-bias-variance, out.width = "80%", fig.align='center', fig.cap = "(ref:bias-variance-caption)", label = "bias-variance", echo = FALSE, fig.ncol = 2, cache = TRUE}
+(ref:bias-variance-caption-short) The Bias-Variance trade off.
+
+```{r, plot-bias-variance, out.width = "80%", fig.align='center', fig.cap = "(ref:bias-variance-caption)", fig.scap = "(ref:bias-variance-caption-short)", label = "bias-variance", echo = FALSE, fig.ncol = 2, cache = TRUE}
 
 train_error <- function(x){
   (1 - 0.1) / (x + 1)^2
@@ -2151,7 +2153,7 @@ where:
 
 The term $\|\boldsymbol{\beta}_{\setminus0}\|_2^2$ produces a penalization for high values of $\hat{\beta}_j$ that leads to a shrinkage of the coefficients. The fact that $\beta_0$ is excluded from the penalization is aimed not to introduce a bias towards $0$ in the intercept. As the magnitude of $\beta_j$ depends on the values of $x_j$, it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
 
-As for GAM, if $\lambda=0$, the optimization problem \@ref(eq:ridge-est-deviance) corresponds to the maximum likelihood, while for $\lambda\to+\infty$ the optimal point is $\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)$, that corresponds to the trivial model with no explanatory variables. An example of the effect of $\lambda$ is reported in figure \@ref(...). The optimal point for $\lambda=0$ can be obtained through a Cross Validation as seen in section \@ref(#chap:gam-choice-lambda).
+As for GAM, if $\lambda=0$, the optimization problem \@ref(eq:ridge-est-deviance) corresponds to the maximum likelihood, while for $\lambda\to+\infty$ the optimal point is $\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)$, that corresponds to the trivial model with no explanatory variables. An example of the effect of $\lambda$ is reported in figure \@ref(...). The optimal point for $\lambda=0$ can be obtained through a Cross Validation as seen in section \@ref(chap:gam-choice-lambda).
 
 The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because in this case \@ref(eq:ridge-est-deviance) has an explicit solution. To make the results more interpretable, let's assume that the response variables have $E(Y)=0$ and that the explanatory variables are centered on $0$, i.e. $\bar{x}_j=0, \ j\in\{1,2,\dots,p\}$. That means that $\beta_0=0$ and the model is $E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p$. With these assumptions, we obtain:
 \begin{equation}
@@ -2206,14 +2208,248 @@ L_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\
 $$
 and then $\text{tr}\left(L_{\lambda}\right) = \frac{p}{1+\lambda}$.
 
-
-
 \newpage
 
 #### LASSO Regression
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
+(ref:opt-ridge-lasso-caption-latex) Optimization Ridge vs LASSO.
+
+(ref:opt-ridge-lasso-caption-gitbook) Optimization Ridge vs LASSO, Ridge (left), LASSO (right).
+
+
+```{r, plot-opt-ridge-lasso-build, echo = FALSE, cache = TRUE}
+
+x0 <- 2
+y0 <- 1/2
+angle <- pi/8
+
+a <- 2
+b <- 1
+
+# LASSO
+dev1 <- 10768094850759922072879/33946139684317548575040 # Computed externally with Wolfram Alpha
+a1 <- 2 * sqrt(dev1)
+b1 <- 1 * sqrt(dev1)
+
+# Ridge
+dev2 <- 0.289349 # Computed externally with Wolfram Alpha
+a2 <- 2 * sqrt(dev2)
+b2 <- 1 * sqrt(dev2)
+
+
+p_ridge <- tibble(
+  x = 0,
+  y = 0
+) %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_segment(
+    x = -Inf, y = 0, xend = +Inf, yend = 0,
+    arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_segment(
+    x = 0, y = -Inf, xend = 0, yend = Inf,
+    arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_point(
+    data = tibble(x = x0, y = y0),
+    mapping = aes(x = x, y = y),
+    size = 3,
+    alpha = .8,
+    color = "grey20"
+  ) +
+  geom_text(
+    data = tibble(
+      x = x0, y = y0, label = expression(hat(beta)[ML])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05
+  ) +
+  geom_text(
+    data = tibble(
+      x = 3, y = 0, label = expression(beta[1])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_y = 0.11, nudge_x = 0.05
+  ) +
+  geom_text(
+    data = tibble(
+      x = 0, y = 1.2, label = expression(beta[2])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05
+  ) +
+  geom_ellipse(
+    data = tibble(
+      x = rep(x0, 2),
+      y = rep(y0, 2),
+      x0 = rep(x0, 2),
+      y0 = rep(y0, 2),
+      a = c(a/5, a/3),
+      b = c(b/5, b/3),
+      angle = rep(angle, 2)
+    ),
+    mapping = aes(x0 = x0, y0 = y0, a = a, b = b, angle = angle),
+    color = "grey20"
+  ) +
+  # Ridge
+  geom_ellipse(
+    aes(x0 = 0, y0 = 0, a = 1, b = 1, angle = 0),
+    fill = "grey20",
+    color = NA,
+    alpha = .4,
+  ) +
+  # Ridge
+  geom_ellipse(
+    aes(x0 = x0, y0 = y0, a = a2, b = b2, angle = angle),
+    color = col1
+  ) +
+  geom_point(
+    data = tibble(x = 0.988412, y = 0.151795),
+    mapping = aes(x = x, y = y),
+    size = 3,
+    alpha = .8,
+    color = col1
+  ) +
+  geom_text(
+    data = tibble(x = 0.988412, y = 0.151795, label = expression(hat(beta)[Ridge])),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05,
+    color = col1
+  ) +
+  coord_equal(
+    xlim = c(-1.1, 2.9),
+    ylim = c(-1.1, 1.1),
+    clip = "off"
+  ) +
+  easy_remove_axes(
+    which = "both",
+    what = c("ticks", "title", "text", "line")
+  ) +
+  theme(
+    plot.margin = unit(c(1, 1, 1, 1), "lines"),
+    panel.border = element_blank()
+  )
+
+
+
+p_lasso <- tibble(
+  x = 0,
+  y = 0
+) %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_segment(
+    x = -Inf, y = 0, xend = +Inf, yend = 0,
+    arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_segment(
+    x = 0, y = -Inf, xend = 0, yend = Inf,
+    arrow = arrow(length=unit(0.30,"cm"), type = "closed")
+  ) +
+  geom_point(
+    data = tibble(x = x0, y = y0),
+    mapping = aes(x = x, y = y),
+    size = 3,
+    alpha = .8,
+    color = "grey20"
+  ) +
+  geom_text(
+    data = tibble(
+      x = x0, y = y0, label = expression(hat(beta)[ML])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05
+  ) +
+  geom_text(
+    data = tibble(
+      x = 3, y = 0, label = expression((beta)[1])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_y = 0.11, nudge_x = 0.05
+  ) +
+  geom_text(
+    data = tibble(
+      x = 0, y = 1.2, label = expression(beta[2])
+    ),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05
+  ) +
+  geom_ellipse(
+    data = tibble(
+      x = rep(x0, 2),
+      y = rep(y0, 2),
+      x0 = rep(x0, 2),
+      y0 = rep(y0, 2),
+      a = c(a/5, a/3),
+      b = c(b/5, b/3),
+      angle = rep(angle, 2)
+    ),
+    mapping = aes(x0 = x0, y0 = y0, a = a, b = b, angle = angle),
+    color = "grey20"
+  ) +
+  # LASSO
+  geom_polygon(
+    data = tibble(
+      x = c(1, 0, -1, 0),
+      y = c(0, 1, 0, -1)
+    ),
+    alpha = .4,
+    size = 0
+  ) +
+  # geom_path(
+  #   data = tibble(
+  #     x = c(1, 0, -1, 0, 1),
+  #     y = c(0, 1, 0, -1, 0),
+  #   ),
+  # ) +
+  # LASSO
+  geom_ellipse(
+    aes(x0 = x0, y0 = y0, a = a1, b = b1, angle = angle),
+    color = col2
+  ) +
+  geom_point(
+    data = tibble(x = 1, y = 0),
+    mapping = aes(x = x, y = y),
+    size = 3,
+    alpha = .8,
+    color = col2
+  ) +
+  geom_text(
+    data = tibble(x = 1, y = 0, label = expression(hat(beta)[LASSO])),
+    mapping = aes(x = x, y = y, label = label),
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.1,
+    color = col2
+  ) +
+  coord_equal(
+    xlim = c(-1.1, 2.9),
+    ylim = c(-1.1, 1.1),
+    clip = "off"
+  ) +
+  easy_remove_axes(
+    which = "both",
+    what = c("ticks", "title", "text", "line")
+  ) +
+  theme(
+    plot.margin = unit(c(1, 1, 1, 1), "lines"),
+    panel.border = element_blank()
+  )
+
+
+```
+
+
+```{r, plot-opt-ridge-lasso-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:opt-ridge-lasso-caption-gitbook)", "(ref:opt-ridge-lasso-caption-latex)"), label="opt-ridge-lasso", echo=FALSE, fig.ncol=2, fig.subcap=c('Ridge', 'LASSO'), cache = FALSE}
+
+plot_grid_split(p_ridge, p_lasso)
+
+```
+
+
+
+
+
+
+\newpage
 
 #### Elastic Net
 
