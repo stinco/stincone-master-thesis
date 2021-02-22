@@ -2060,24 +2060,24 @@ In particular if \(q\) is big, this procedure can be too computationally expensi
 GCV and UBRE formulas are based on the fact that GAMs with identity link and Normal response are \emph{linear smoothers}, i.e.~\(\boldsymbol{\hat{\mu}}\) can be expressed as:
 \begin{equation}
 \label{eq:linear-smoother}
-\boldsymbol{\hat{\mu}} = L \boldsymbol{y}
+\boldsymbol{\hat{\mu}} = H \boldsymbol{y}
 \end{equation}
-where \(L\) is a \(n\times n\) matrix that depends on the design matrix \(\boldsymbol{X}\) and the hyper-parameters. \(L\) is called \emph{smoothing matrix}. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \eqref{eq:linear-smoother} still holds up with a local approximation.
+where \(H\) is a \(n\times n\) matrix that depends on the design matrix \(\boldsymbol{X}\) and the hyper-parameters. \(H\) is called \emph{smoothing matrix}. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \eqref{eq:linear-smoother} still holds up with a local approximation.
 
-It can be proven that the trace of \(L\) measures the flexibility of the function. Indeed, in Linear Model \(L = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t\) and \(\text{tr}(L) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1\), that is the number of \emph{degrees of freedom} of the model. For this reason \(\text{tr}(L)\) is also called number of \emph{effective degrees of freedom} of the model. In GAM, as the smoothing parameter \(\lambda\) increases, the flexibility of the model decreases and \(\text{tr}(L)\) decreases.
+It can be proven that the trace of \(H\) measures the flexibility of the function. Indeed, in Linear Model \(L = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t\) and \(\text{tr}(H) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1\), that is the number of \emph{degrees of freedom} of the model. For this reason \(\text{tr}(H)\) is also called number of \emph{effective degrees of freedom} of the model. In GAM, as the smoothing parameter \(\lambda\) increases, the flexibility of the model decreases and \(\text{tr}(H)\) decreases.
 
 For linear smoothers it can be proved that the \emph{leave one out cross validation} is:
 \[
-D^{CV(n)} = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - L_{ii}} \right)^2}
+D^{CV(n)} = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - H_{ii}} \right)^2}
 \]
-where \(L_{ii}\) is the \(i\)\textsuperscript{th} element of the diagonal of the smoothing matrix \(L\).
+where \(H_{ii}\) is the \(i\)\textsuperscript{th} element of the diagonal of the smoothing matrix \(H\).
 
-This formula is particularly convenient because it requires just the fit with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are \(\mu_i\) and \(L_{ii}\), that both depend on the model fitted with the whole dataset.
+This formula is particularly convenient because it requires just the fit with the whole dataset and not one fit for each fold. Indeed, in the formula the quantities that must be computed are \(\mu_i\) and \(H_{ii}\), that both depend on the model fitted with the whole dataset.
 
-This formula can be further simplified by replacing the values \(L_{ii}\) with their average \(\frac{\text{tr}(L)}{n}\). This way we get the GCV.
+This formula can be further simplified by replacing the values \(H_{ii}\) with their average \(\frac{\text{tr}(H)}{n}\). This way we get the GCV.
 \begin{equation}
 \label{eq:gcv}
-GCV = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2}
+GCV = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(H)}{n}} \right)^2}
 \end{equation}
 
 As for K-fold cross validation we can compute the GCV for different values of \(\boldsymbol{\lambda} \in \Lambda\) and choose the value \(\boldsymbol{\hat{\lambda}}\) that minimizes the GCV.
@@ -2085,18 +2085,18 @@ As for K-fold cross validation we can compute the GCV for different values of \(
 The formula \eqref{eq:gcv} can be expressed as:
 \begin{align}
 \nonumber
-GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(L)}{n}} \right)^2} \\
+GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\text{tr}(H)}{n}} \right)^2} \\
 \nonumber
-& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 \underbrace{\frac{\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}}{n}}_{=D(\boldsymbol{\hat{f}},\boldsymbol{y})} \\
+& = \left( \frac{n}{n - \text{tr}(H)} \right)^2 \underbrace{\frac{\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}}{n}}_{=D(\boldsymbol{\hat{f}},\boldsymbol{y})} \\
 \label{eq:gcv-gam}
-& = \left( \frac{n}{n - \text{tr}(L)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
+& = \left( \frac{n}{n - \text{tr}(H)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
 \end{align}
 
 The expression \eqref{eq:gcv-gam} generalizes the GCV to all the GAMs, also in the case in which the link is not identity and the response is not Normal.
 
 To select the best value of \(\boldsymbol{\lambda}\), we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 \[
-UBRE = \frac{1}{n} D(\boldsymbol{\hat{f}}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(L)\phi 
+UBRE = \frac{1}{n} D(\boldsymbol{\hat{f}}, \boldsymbol{y}) - \phi + \frac{2}{n} \text{tr}(H)\phi 
 \]
 
 Using the UBRE instead the GCV is preferred when \(\phi\) is known, such as in Poisson regression case, in which \(\phi=1\).
@@ -2218,7 +2218,7 @@ MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\ri
 
 The idea behind shrinkage estimators is to add an amount of smart bias to \(\tilde{\beta}_j\) in order to reduce its variance.
 
-The trade-off between Bias and Variance described by equation \eqref{eq:bias-variance} can be interpreted in relation to the complexity of the model. Figure \ref{fig:bias-variance} shows how the prediction error changes by increasing the complexity of the model. In linear smoothers, the complexity of the model can be measured as the effective degrees of freedom \(\text{tr}(L)\) (see section \ref{chap:gam-choice-lambda}), that in the case of the GLM with maximum likelihood estimators is just the number of parameters \(p+1\). Usually, in machine learning models, the complexity of the model is determined by tuning one or more hyper-parameters. In the case of GAM, for example, by increasing \(\lambda\) we obtain a less complex model, while by decreasing it we obtain a more complex model.
+The trade-off between Bias and Variance described by equation \eqref{eq:bias-variance} can be interpreted in relation to the complexity of the model. Figure \ref{fig:bias-variance} shows how the prediction error changes by increasing the complexity of the model. In linear smoothers, the complexity of the model can be measured as the effective degrees of freedom \(\text{tr}(H)\) (see section \ref{chap:gam-choice-lambda}), that in the case of the GLM with maximum likelihood estimators is just the number of parameters \(p+1\). Usually, in machine learning models, the complexity of the model is determined by tuning one or more hyper-parameters. In the case of GAM, for example, by increasing \(\lambda\) we obtain a less complex model, while by decreasing it we obtain a more complex model.
 
 A model not complex enough produces estimators with low variance but high bias, that leads to underfitting. A too complex model produces estimators with low bias but high variance, that leads to overfitting.
 
@@ -2240,7 +2240,7 @@ As maximum likelihood estimators for GLM the complexity increases with \(p\), th
 \hypertarget{ridge-regression}{%
 \subsubsection{Ridge Regression}\label{ridge-regression}}
 
-One shrinkage estimator for GLM is the \emph{Ridge Estimator}. In Ridge Regression, the decrease in variance of \(\tilde{\boldsymbol{\beta}}\) is achieved by considering the optimization problem \eqref{eq:max-lik-est-deviance} and adding to the Deviance a penalization term that depends on the magnitude of \(\beta_1, \beta_2, \dots, \beta_p\):
+One shrinkage estimator for GLM is the \emph{Ridge} Estimator. In Ridge Regression, the decrease in variance of \(\tilde{\boldsymbol{\beta}}\) is achieved by considering the optimization problem \eqref{eq:max-lik-est-deviance} and adding to the Deviance a penalization term that depends on the magnitude of \(\beta_1, \beta_2, \dots, \beta_p\):
 \begin{equation}
 \label{eq:ridge-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}}{\left(D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right)}
@@ -2257,11 +2257,11 @@ where:
   \(\lambda\ge0\) is an hyper-parameter that control the penalization.
 \end{itemize}
 
-The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\hat{\beta}_j\) that leads to a shrinkage of the coefficients. The fact that \(\beta_0\) is excluded from the penalization is aimed not to introduce a bias towards \(0\) in the intercept. As the magnitude of \(\beta_j\) depends on the values of \(x_j\), it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
+The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\beta_j\) that leads to a shrinkage of the coefficients. The fact that \(\beta_0\) is excluded from the penalization is aimed not to introduce a bias towards \(0\) in the intercept. As the magnitude of \(\beta_j\) depends on the values of \(x_j\), it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
 
 As for GAM, if \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood, while for \(\lambda\to+\infty\) the optimal point is \(\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)\), that corresponds to the trivial model with no explanatory variables. An example of the effect of \(\lambda\) is reported in figure @ref(\ldots). The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section \ref{chap:gam-choice-lambda}.
 
-The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because in this case \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
+The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because, in this case, the optimization problem \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
 \begin{equation}
 \label{eq:ridge-estimator}
 \hat{\boldsymbol{\beta}}_{\lambda,\setminus0} = \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t y
@@ -2298,7 +2298,6 @@ If we assume that the explanatory variables are independent, i.e.~\(\boldsymbol{
 \frac{1}{1+\lambda} \boldsymbol{X}^t y = 
 \frac{1}{1+\lambda} \hat{\boldsymbol{\beta}}_{0,\setminus0}
 \]
-
 that results in:
 \begin{align*}
 E\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0}\right) & =
@@ -2311,19 +2310,36 @@ This result means that, if the explanatory variables are independent, the Ridge 
 
 From formula \eqref{eq:ridge-estimator} we also find that, as in GAM, if the link is identity and the response is Normal, the Ridge regression is a linear smoother. In this case the smoothing matrix is:
 \[
-L_{\lambda} = \boldsymbol{X} \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t
+H_{\lambda} = \boldsymbol{X} \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t
 \]
 
 In the case of independent explanatory variables we get:
 \[
-L_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\lambda} L_0
+H_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\lambda} H_0
 \]
-and then \(\text{tr}\left(L_{\lambda}\right) = \frac{p}{1+\lambda}\).
-
-\newpage
+and then \(\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}\). This result means that, by increasing \(\lambda\), the effective number of degrees of fredom decrease.
 
 \hypertarget{lasso-regression}{%
 \subsubsection{LASSO Regression}\label{lasso-regression}}
+
+Another shrinkage estimator for GLM is the \emph{LASSO} (Least Absolute Shrinkage and Selection Operator). LASSO is based on the same idea of Ridge Regression, but, instead of considering a penalization based on \(L^2\) norm, it considers a penalization based on \(L^1\) norm:
+\begin{equation}
+\label{eq:lasso-est-deviance}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}}{\left(D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right)}
+\end{equation}
+where:
+
+\begin{itemize}
+\tightlist
+\item
+  \(\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)\) is the set of the GLM coefficients except for the intercept \(\beta_0\);
+\item
+  \(\|\cdot\|_1\) is the \(L^1\) norm, i.e.~\(\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}\);
+\item
+  \(\lambda\ge0\) is an hyper-parameter that control the penalization.
+\end{itemize}
+
+An example of the effect of the \(L^1\) penalization for different values of \(\lambda\) is shown in figure @ref(\ldots).
 
 
 
@@ -2349,8 +2365,13 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
+\hypertarget{some-considerations-on-shrinkage-estimators}{%
+\subsubsection{Some considerations on Shrinkage Estimators}\label{some-considerations-on-shrinkage-estimators}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
 \hypertarget{bayesian-glm}{%
-\subsubsection{Bayesian GLM}\label{bayesian-glm}}
+\subsection{Bayesian GLM}\label{bayesian-glm}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
