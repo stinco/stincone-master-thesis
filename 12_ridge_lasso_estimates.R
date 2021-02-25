@@ -5,9 +5,10 @@
 # R 4.0.2
 #####
 
-install.packages("ggforce")
+
 # Libraries ####
 
+# install.packages("ggforce")
 library(tidyverse)
 library(knitr)
 library(kableExtra)
@@ -37,7 +38,8 @@ line_size <- 2
 # Simulate data ####
 
 n <- c(45, 20, 20, 10, 5)
-b <- c(0, 2, 1, -1, -2)
+# b <- c(0, 2, 1, -1, -2)
+b <- c(0, 2, 0.2, -1, -2)
 
 sigma <- .5
 
@@ -93,11 +95,16 @@ x_mat <- model.matrix(y ~ x, data = df)
 
 # x_mat[1:5, ]
 
-lambda_grid <- 10^seq(log10(0.001), log10(100), length.out = 100)
+# lambda_grid <- 10^seq(log10(0.001), log10(100), length.out = 100)
+lambda_grid <- 10^seq(log10(0.001), log10(10), length.out = 100)
+
+# alpha = 0 -> Ridge
+# alpha = 1 -> LASSO
+alpha <- 0
 
 fit_ridge <- glmnet(
   x = x_mat, y = df$y,
-  alpha = 1, lambda = lambda_grid
+  alpha = alpha, lambda = lambda_grid
 )
 
 # # plot(fit_ridge, xvar = "norm", label = TRUE)
@@ -131,12 +138,14 @@ fit_ridge_beta_long <- fit_ridge$beta %>%
 #   filter(lambda == max(lambda))
 
 # lambda <- c(0, 0.1, 1, 10)
-lambda <- c(0.1, 0.3, 0.6, 1)
+# lambda <- c(0.1, 0.3, 0.6, 1)
+lambda <- c(0, 0.1, 0.6, 1)
 
-fit_ridge_beta_long %>% 
+
+p_ridge_coeff <- fit_ridge_beta_long %>% 
   ggplot(aes(x = lambda, y = value, color = coefficient)) +
   geom_vline(
-    xintercept = lambda,
+    xintercept = c(lambda[lambda > 0]),
     linetype = "dotted"
   ) +
   geom_line() +
@@ -187,8 +196,16 @@ fit_ridge_pred <- predict(
 # df_summarize
 
 
-df %>% 
+
+p_ridge_pred <- df %>% 
   ggplot(aes(x = x, y = y)) +
+  geom_hline(
+    # yintercept = mean(df$y),
+    data = fit_ridge_pred %>% 
+      filter(x == "a"),
+    mapping = aes(yintercept = value),
+    linetype = "dotted"
+  ) +
   geom_point(
     data = fit_ridge_pred,
     mapping = aes(x = x, y = value, color = x),
@@ -206,7 +223,8 @@ df %>%
   easy_remove_legend()
 
 
-
+p_ridge_coeff
+p_ridge_pred
 
 
 

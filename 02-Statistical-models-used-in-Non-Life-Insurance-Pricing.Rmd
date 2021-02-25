@@ -1630,7 +1630,7 @@ As we can see from the plots, if a function $f(x)$ is linear, $\left(f''(x)\righ
 What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on $\left(f''(x)\right)^2$. If we have a regression problem with one explanatory variable $x$, this can be achieved by considering the minimization problem in \@ref(eq:max-lik-est-deviance) and adding a penalization term to the deviance:
 \begin{equation}
 \label{eq:gam-est-deviance}
-\hat{f} = \argmin_{f}{\left(D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right)}
+\hat{f} = \argmin_{f}{\left\{D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right\}}
 \end{equation}
 
 <!-- \begin{equation} -->
@@ -1720,12 +1720,13 @@ In general, if we have $q$ quantitative explanatory variables that we want to fi
 \begin{equation}
 \label{eq:gam-est-deviance-multi}
 \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
-{\left(
+{\left\{
   D(\boldsymbol{f}, \boldsymbol{y})
     + \sum_{l=1}^{q}{
       \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
     }
-\right)} 
+\right\}
+} 
 \end{equation}
 where $\boldsymbol{f} = \left( f_1, f_2,\dots,f_q \right)$.
 
@@ -2020,7 +2021,7 @@ In this section we are going to present the shrinkage estimators, that are a cla
 
 #### The Bias-Variance Trade Off
 
-One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator $\boldsymbol{\tilde{\beta}}^{ML}$ is unbiased, that is $E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}$. This property in general is not true for GLM with other link and response distribution, but it is true asymptotically: $\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}$. However, the bias is not the only relevant aspect of an estimator. If we consider the _Mean Squared Error_ (MSE) of an estimator $\tilde{\beta}_j$, we get the following result:
+One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator $\boldsymbol{\tilde{\beta}}^{ML}$ is unbiased, that is $E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}$.^[This property in general is not true for GLM with other link and response distribution, but it is true asymptotically: $\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}$.] However, the bias is not the only relevant aspect of an estimator. If we consider the _Mean Squared Error_ (MSE) of an estimator $\tilde{\beta}_j$, we get the following result:
 \begin{equation}
 \label{eq:bias-variance}
 MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
@@ -2034,7 +2035,7 @@ The trade-off between Bias and Variance described by equation \@ref(eq:bias-vari
 
 A model not complex enough produces estimators with low variance but high bias, that leads to underfitting. A too complex model produces estimators with low bias but high variance, that leads to overfitting.
 
-As maximum likelihood estimators for GLM the complexity increases with $p$, they are not suitable when $p$ is large (high dimensionality).
+As with maximum likelihood estimators for GLM the complexity increases with $p$, they are not suitable when $p$ is large (high dimensionality).
 
 (ref:bias-variance-caption) The Bias-Variance trade off. The horizontal axis shows the increase in complexity and the vertical axis shows the effect on in-sample error (training set) and out-of-sample error (test set). The error can be measured as the Mean Squared Error (MSE) or in general as the Deviance.
 
@@ -2140,18 +2141,19 @@ tibble(
 
 #### Ridge Regression
 
-One shrinkage estimator for GLM is the _Ridge_ Estimator. In Ridge Regression, the decrease in variance of $\tilde{\boldsymbol{\beta}}$ is achieved by considering the optimization problem \@ref(eq:max-lik-est-deviance) and adding to the Deviance a penalization term that depends on the magnitude of $\beta_1, \beta_2, \dots, \beta_p$:
+One shrinkage estimator for GLM is the _Ridge_ estimator. In Ridge Regression, the decrease in variance of $\tilde{\boldsymbol{\beta}}$ is achieved by considering the optimization problem \@ref(eq:max-lik-est-deviance) and adding to the Deviance a penalization term that depends on the magnitude of $\beta_1, \beta_2, \dots, \beta_p$:
 \begin{equation}
 \label{eq:ridge-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}}{\left(D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right)}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
 \end{equation}
 where:
 
 * $\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)$ is the set of the GLM coefficients except for the intercept $\beta_0$;
 * $\|\cdot\|_2^2$ is the $L^2$ norm, i.e. $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$;
-* $\lambda\ge0$ is an hyper-parameter that control the penalization.
+* $\lambda\ge0$ is an hyper-parameter that controls the penalization.
 
-The term $\|\boldsymbol{\beta}_{\setminus0}\|_2^2$ produces a penalization for high values of $\beta_j$ that leads to a shrinkage of the coefficients. The fact that $\beta_0$ is excluded from the penalization is aimed not to introduce a bias towards $0$ in the intercept. As the magnitude of $\beta_j$ depends on the values of $x_j$, it is preferred to standardize all the explanatory variables not to introduce a distorting effect due to the unit of measure of the explanatory variables.
+The term $\|\boldsymbol{\beta}_{\setminus0}\|_2^2$ produces a penalization for high values of $\beta_j$ that leads to a shrinkage of the coefficients.
+The exclusion of $\beta_0$ from the penalization term is intended to prevent the introduction of a bias towards $0$ in the intercept. As the magnitude of $\beta_j$ depends on the values of $x_j$, it is preferred to standardize all the explanatory variables to avoid distorting effects due to the unit of measure of the explanatory variables.
 
 As for GAM, if $\lambda=0$, the optimization problem \@ref(eq:ridge-est-deviance) corresponds to the maximum likelihood, while for $\lambda\to+\infty$ the optimal point is $\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)$, that corresponds to the trivial model with no explanatory variables. An example of the effect of $\lambda$ is reported in figure \@ref(...). The optimal point for $\lambda=0$ can be obtained through a Cross Validation as seen in section \@ref(chap:gam-choice-lambda).
 
@@ -2180,7 +2182,7 @@ E\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0}\right) & =
 
 Moreover, from the formula \@ref(eq:ridge-estimator) we find that, even if there is multicollinearity and $\boldsymbol{X}^t\boldsymbol{X}$ is not invertible, the Ridge estimator is computable. This aspect is particularly interesting when $p > n$.
 
-If we assume that the explanatory variables are independent, i.e. $\boldsymbol{X}^t\boldsymbol{X} = I_p$ we can further simplify \@ref(eq:ridge-estimator) to:
+If we assume that the explanatory variables are independent, i.e. $\boldsymbol{X}^t\boldsymbol{X} = I_p$ we can further simplify the expression \@ref(eq:ridge-estimator) to:
 $$
 \hat{\boldsymbol{\beta}}_{\lambda,\setminus0} =
 \frac{1}{1+\lambda} \boldsymbol{X}^t y = 
@@ -2205,7 +2207,7 @@ In the case of independent explanatory variables we get:
 $$
 H_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\lambda} H_0
 $$
-and then $\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}$. This result means that, by increasing $\lambda$, the effective number of degrees of fredom decrease.
+and then $\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}$. This result means that, by increasing $\lambda$, the effective number of degrees of fredom decreases.
 
 
 #### LASSO Regression
@@ -2213,13 +2215,13 @@ and then $\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}$. This result 
 Another shrinkage estimator for GLM is the _LASSO_ (Least Absolute Shrinkage and Selection Operator). LASSO is based on the same idea of Ridge Regression, but, instead of considering a penalization based on $L^2$ norm, it considers a penalization based on $L^1$ norm:
 \begin{equation}
 \label{eq:lasso-est-deviance}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}}{\left(D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right)}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right\}}
 \end{equation}
 where:
 
 * $\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)$ is the set of the GLM coefficients except for the intercept $\beta_0$;
 * $\|\cdot\|_1$ is the $L^1$ norm, i.e. $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$;
-* $\lambda\ge0$ is an hyper-parameter that control the penalization.
+* $\lambda\ge0$ is an hyper-parameter that controls the penalization.
 
 An example of the effect of the $L^1$ penalization for different values of $\lambda$ is shown in figure \@ref(...).
 
@@ -2228,10 +2230,11 @@ An example of the effect of the $L^1$ penalization for different values of $\lam
 
 
 
-(ref:opt-ridge-lasso-caption-latex) Optimization Ridge vs LASSO.
+(ref:opt-ridge-lasso-caption-latex) Optimization Ridge vs LASSO. The axes represent the components of $\boldsymbol{\beta}$. $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. The grey area around the axes intersection represents the feasibility regions determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$, that is a circle in the Ridge case $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$ and a square in the LASSO case $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. $\hat{\boldsymbol{\beta}}^{Ridge}$ and $\hat{\boldsymbol{\beta}}^{LASSO}$ are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the square makes the LASSO attain solutions with many coefficients exactly equal to zero.
 
 (ref:opt-ridge-lasso-caption-gitbook) Optimization Ridge vs LASSO, Ridge (left), LASSO (right).
 
+(ref:opt-ridge-lasso-caption-short) Optimization Ridge vs LASSO.
 
 ```{r, plot-opt-ridge-lasso-build, echo = FALSE, cache = TRUE}
 
@@ -2377,7 +2380,7 @@ p_lasso <- tibble(
   ) +
   geom_text(
     data = tibble(
-      x = 3, y = 0, label = expression((beta)[1])
+      x = 3, y = 0, label = expression(beta[1])
     ),
     mapping = aes(x = x, y = y, label = label),
     parse = T, hjust = 0, nudge_y = 0.11, nudge_x = 0.05
@@ -2453,7 +2456,7 @@ p_lasso <- tibble(
 ```
 
 
-```{r, plot-opt-ridge-lasso-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:opt-ridge-lasso-caption-gitbook)", "(ref:opt-ridge-lasso-caption-latex)"), label="opt-ridge-lasso", echo=FALSE, fig.ncol=2, fig.subcap=c('Ridge', 'LASSO'), cache = TRUE}
+```{r, plot-opt-ridge-lasso-print, out.width = "50%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:opt-ridge-lasso-caption-gitbook)", "(ref:opt-ridge-lasso-caption-latex)"), fig.scap = "(ref:opt-ridge-lasso-caption-short)", label="opt-ridge-lasso", echo=FALSE, fig.ncol=2, fig.subcap=c('Ridge', 'LASSO'), cache=TRUE}
 
 plot_grid_split(p_ridge, p_lasso)
 
@@ -2463,16 +2466,25 @@ plot_grid_split(p_ridge, p_lasso)
 
 
 
-
 \newpage
+
 
 #### Elastic Net
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+\begin{equation}
+\label{eq:elastic-net-est-deviance}
+\hat{\boldsymbol{\beta}} =  \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) +
+\lambda \left(
+\sum_{j=1}^p{\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2}
+\right)
+\right\}}
+\end{equation}
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+
+
+\newpage
 
 
 #### Some considerations on Shrinkage Estimators
