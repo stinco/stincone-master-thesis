@@ -2258,10 +2258,29 @@ where:
   \(\lambda\ge0\) is an hyper-parameter that controls the penalization.
 \end{itemize}
 
-The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\beta_j\) that leads to a shrinkage of the coefficients.
+The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\beta_j\). This penalization leads to a shrinkage of the coefficients.
 The exclusion of \(\beta_0\) from the penalization term is intended to prevent the introduction of a bias towards \(0\) in the intercept. As the magnitude of \(\beta_j\) depends on the values of \(x_j\), it is preferred to standardize all the explanatory variables to avoid distorting effects due to the unit of measure of the explanatory variables.
 
-As for GAM, if \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood, while for \(\lambda\to+\infty\) the optimal point is \(\hat{\boldsymbol{\beta}} = \left(\bar{y}, 0, \dots, 0\right)\), that corresponds to the trivial model with no explanatory variables. An example of the effect of \(\lambda\) is reported in figure @ref(\ldots). The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section \ref{chap:gam-choice-lambda}.
+As for GAM, the hyper-parameter \(\lambda\) determines the amount of penalization given to high values of the coefficients \(\hat{\beta}_j\). If \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood. As \(\lambda\) increases, the optimal coefficients \(\hat{\beta}_j\) tends to shrink towards \(0\). In the limit case, if \(\lambda\to+\infty\), the optimal coefficients \(\hat{\beta}_j\) are all equal to \(0\), except for \(\hat{\beta}_0\), that is equal to \(\bar{y}\), so the estimated model corresponds to the trivial model with only the intercept \(g(\mu)=\beta_0\).
+
+An example of the effect of \(\lambda\) is reported in figure \ref{fig:ridge-lambda}. The data represented has been simulated from a GLM with idenity link and Normal response. As we can see, if \(\lambda=0\), all the estimated responses \(\hat{\mu}_j\) correspond to the average of the response on that group \(\bar{y}_j\). As \(\lambda\) increases, the estimated responses move towards the global average \(\bar{y}\). The speed of convergence to \(0\) depends on how much the group average \(\bar{y}_j\) differs from the global average \(\bar{y}\) and on the number of observation of the group: if in a group \(j\) there are many observations, we have a lot of information on that group, the group average \(\bar{y}_j\) have a small variance and it is a reliable estimate for \(\mu_j\), while if there are few observations, the group average \(\bar{y}_j\) have a high variance and it is not very reliable.
+
+The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section \ref{chap:gam-choice-lambda}.
+
+
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[$\lambda = 0$\label{fig:ridge-lambda-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/ridge-lambda-1} }\subfloat[$\lambda = 0.1$\label{fig:ridge-lambda-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/ridge-lambda-2} }\newline\subfloat[$\lambda = 1$\label{fig:ridge-lambda-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/ridge-lambda-3} }\subfloat[$\lambda = 10$\label{fig:ridge-lambda-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/ridge-lambda-4} }\newline\subfloat[$\hat{\beta}_j$ for different values of $\lambda$\label{fig:ridge-lambda-5}]{\includegraphics[width=0.7\linewidth]{_main_files/figure-latex/ridge-lambda-5} }
+
+}
+
+\caption{Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\).}\label{fig:ridge-lambda}
+\end{figure}
 
 The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because, in this case, the optimization problem \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
 \begin{equation}
@@ -2341,7 +2360,36 @@ where:
   \(\lambda\ge0\) is an hyper-parameter that controls the penalization.
 \end{itemize}
 
-An example of the effect of the \(L^1\) penalization for different values of \(\lambda\) is shown in figure @ref(\ldots).
+An example of the effect of the \(L^1\) penalization for different values of \(\lambda\) is shown in figure \ref{fig:lasso-lambda}. The simulated dataset is the same used for the Ridge example in figure \ref{fig:ridge-lambda}. As we can see from the plots, the substantial difference between Ridge and LASSO is that in LASSO from a certain value of \(\lambda\) the coefficients are shrunk exactly to \(0\). While in Ridge that is just a limit property, in LASSO, for each coefficient \(\beta_j\) there is a level of the penalization parameter \(\lambda'_j\) such as for \(\lambda \ge \lambda'_j\), the estimated coefficient \(\hat{\beta}_j\) is forced to exactly \(0\).
+
+
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \subfloat[$\lambda = 0$\label{fig:lasso-lambda-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/lasso-lambda-1} }\subfloat[$\lambda = 0.1$\label{fig:lasso-lambda-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/lasso-lambda-2} }\newline\subfloat[$\lambda = 0.6$\label{fig:lasso-lambda-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/lasso-lambda-3} }\subfloat[$\lambda = 1$\label{fig:lasso-lambda-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/lasso-lambda-4} }\newline\subfloat[$\hat{\beta}_j$ for different values of $\lambda$\label{fig:lasso-lambda-5}]{\includegraphics[width=0.7\linewidth]{_main_files/figure-latex/lasso-lambda-5} }
+
+}
+
+\caption{LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\). High values of \(\lambda\) force the coefficients to be exactly equal to \(0\).}\label{fig:lasso-lambda}
+\end{figure}
+
+This property of the LASSO Regression can be derived from a different representation of the optimization problems \eqref{eq:ridge-est-deviance} and \eqref{eq:lasso-est-deviance}. It can be proven that in general, considering a penalization given by the \(L^p\) norm, the unconstrained optimization problem:
+\begin{equation}
+\label{eq:ld-est-deviance}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_d^d\right\}}
+\end{equation}
+is equivalent to the constrained optimization problem:
+\begin{equation}
+\label{eq:lp-est-deviance-constr}
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}:\  \|\boldsymbol{\beta}_{\setminus0}\|_d^d \le s_{\lambda}}{ \left\{ D(\boldsymbol{\beta}, \boldsymbol{y}) \right\} }
+\end{equation}
+where \(s_{\lambda}\) is a quantity that depends on \(\lambda\).
+
+The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric interpretation of the optimization problem. Figure \ref{opt-ridge-lasso} shows the visual representation of the optimization problem \eqref{eq:lp-est-deviance-constr} in the Ridge case (\(d=2\)) and in the LASSO case (\(d=1\)). The axes represent the component of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). In the Normal case with identity link they are concentric ellipses centered in \(\hat{\boldsymbol{\beta}}^{ML}\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\). This area, in the Ridge case corresponds to the circle \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\), while in the LASSO case corresponds to the square \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). The sharpness of the LASSO feasibility region imply that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall in one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\). In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to \(0\).
 
 
 
@@ -2355,14 +2403,17 @@ An example of the effect of the \(L^1\) penalization for different values of \(\
 
 }
 
-\caption[Optimization Ridge vs LASSO.]{Optimization Ridge vs LASSO. The axes represent the components of \(\boldsymbol{\beta}\). \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). The grey area around the axes intersection represents the feasibility regions determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\), that is a circle in the Ridge case \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\) and a square in the LASSO case \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the square makes the LASSO attain solutions with many coefficients exactly equal to zero.}\label{fig:opt-ridge-lasso}
+\caption[Geometrical interpretation of the optimization problem for Ridge and LASSO.]{Geometrical interpretation of the optimization problem for Ridge and LASSO. The axes represent the components of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\), that is a circle in the Ridge case \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\) and a square in the LASSO case \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall in one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\).}\label{fig:opt-ridge-lasso}
 \end{figure}
 
-\newpage
+The fact that in LASSO Regression the estimated coefficients can be exactly equal to \(0\) is a precious benefit. Indeed, LASSO Regression performs a feature selection removing the coefficients that are not relevant for predicting the response. The LASSO fitting is much more efficient than the other procedures we have seen for feature selection in GLM such as the stepwise selection (section \ref{chap:variable-selection}) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the LASSO regression and giving them as input for a maximum likelihood fitting. If in the dataset there are many variable but only few of them are relevant for the response, this procedure can returns better predictions than just LASSO regression.
 
 \hypertarget{elastic-net}{%
 \subsubsection{Elastic Net}\label{elastic-net}}
 
+Compared to the Ridge Regression, the LASSO Regression has the benefit of performing a feature selection by forcing many coefficients to \(0\). Anyway this doesn't necessarily mean that the LASSO produces estimates that always outperform Ridge estimates. It strongly depends on the case. In general, if in a dataset only few of the explanatory variables have an effect on the response, the LASSO will produce better estimates, but, if all the variables bring a small amount of information on the response, the the LASSO will suppress some of this information, while the Ridge will catch it. The problem is that when we have real dataset we do not know in which case we are. The \emph{Elastic Net} is a generalization of the Ridge and the LASSO that provide a solution for this kind of problem.
+
+The Elastic Net consists a penalized Deviance optimization problem in which the penalization term is a mixture of the Ridge penalization and the LASSO penalization:
 \begin{equation}
 \label{eq:elastic-net-est-deviance}
 \hat{\boldsymbol{\beta}} =  \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
@@ -2372,13 +2423,18 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) +
 \right)
 \right\}}
 \end{equation}
+where \(\alpha \in [0,1]\) is an hyper-parameter that weights the two penalization components.
 
-\newpage
+Looking to the equation \eqref{eq:elastic-net-est-deviance} it is clear that, if \(\alpha=0\), the Elastic Net corresponds to the Ridge Regression, while, if \(\alpha=1\), the Elastic Net corresponds to the LASSO regression. If \(\alpha \in ]0,1[\), the result will be a compromise between the two.
+
+The hyper-parameter \(\alpha\) can be estimated together with \(\lambda\) in a Cross Validation procedure (see section \ref{chap:variable-selection}). If the data suggests that many variables are useful for predicting the response, the estimated hyper-parameter \(\hat{\alpha}\) will be close to \(0\), while if the data suggests that only few variables are useful, the estimated hyper-parameter \(\hat{\alpha}\) will be close to \(1\).
 
 \hypertarget{some-considerations-on-shrinkage-estimators}{%
 \subsubsection{Some considerations on Shrinkage Estimators}\label{some-considerations-on-shrinkage-estimators}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+\newpage
 
 \hypertarget{bayesian-glm}{%
 \subsection{Bayesian GLM}\label{bayesian-glm}}
@@ -2390,15 +2446,6 @@ Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu lao
 Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
 \newpage
-
-\hypertarget{gbm}{%
-\subsection{GBM}\label{gbm}}
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
-
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
 \hypertarget{chap:considerations-on-models}{%
 \section{Considerations on models}\label{chap:considerations-on-models}}

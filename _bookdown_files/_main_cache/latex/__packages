@@ -18,3 +18,5 @@ gtable
 nlme
 mgcv
 ggforce
+Matrix
+glmnet

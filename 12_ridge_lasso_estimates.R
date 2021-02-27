@@ -38,7 +38,6 @@ line_size <- 2
 # Simulate data ####
 
 n <- c(45, 20, 20, 10, 5)
-# b <- c(0, 2, 1, -1, -2)
 b <- c(0, 2, 0.2, -1, -2)
 
 sigma <- .5
@@ -66,65 +65,32 @@ df <- tibble(
 df$y <- rnorm(n = sum(n), mean = df$mu, sd = sigma)
 
 
-# # Maximum Likelihood
-# df_summarize <- df %>% 
-#   group_by(x) %>% 
-#   summarize(
-#     y_mean = mean(y),
-#     y_sd = sd(y),
-#     y_mean_sd = sd(y) / sqrt(n())
-#   )
-# 
-# df %>% 
-#   ggplot(aes(x = x, y = y)) +
-#   geom_point(
-#     data = df_summarize,
-#     mapping = aes(x = x, y = y_mean, color = x),
-#     # color = col1,
-#     size = 5#,
-#     # alpha = .8
-#   ) +
-#   geom_point(alpha = .5) +
-#   easy_remove_legend()
 
-
-
-# Ridge regression
+# Ridge regression ####
 
 x_mat <- model.matrix(y ~ x, data = df) 
 
-# x_mat[1:5, ]
 
-# lambda_grid <- 10^seq(log10(0.001), log10(100), length.out = 100)
-lambda_grid <- 10^seq(log10(0.001), log10(10), length.out = 100)
+lambda_grid_ridge <- 10^seq(log10(0.001), log10(100), length.out = 100)
+# lambda_grid_lasso <- 10^seq(log10(0.001), log10(10), length.out = 100)
 
-# alpha = 0 -> Ridge
-# alpha = 1 -> LASSO
-alpha <- 0
+alpha_ridge <- 0
+# alpha_lasso <- 1
 
 fit_ridge <- glmnet(
   x = x_mat, y = df$y,
-  alpha = alpha, lambda = lambda_grid
+  alpha = alpha_ridge, lambda = lambda_grid_ridge
 )
-
-# # plot(fit_ridge, xvar = "norm", label = TRUE)
-# plot(fit_ridge, xvar = "lambda", label = TRUE)
-# # plot(fit_ridge, xvar = "dev", label = TRUE)
-# 
-# names(fit_ridge)
-# 
-# fit_ridge$lambda
 
 
 fit_ridge_beta_long <- fit_ridge$beta %>% 
   t() %>% 
   as.matrix() %>% 
-  as_data_frame() %>% 
+  as_tibble() %>% 
   mutate(
     lambda = fit_ridge$lambda,
     log_lambda = log(lambda)
   ) %>% 
-  # select(-`(Intercept)`) %>% 
   rename(xa = `(Intercept)`) %>% 
   pivot_longer(
     cols = xa:xe,
@@ -132,20 +98,14 @@ fit_ridge_beta_long <- fit_ridge$beta %>%
   ) %>% 
   mutate(coefficient = str_sub(coefficient, 2, 2))
 
-# fit_ridge_beta_long %>% 
-#   filter(value > 0) %>%
-#   group_by(coefficient) %>% 
-#   filter(lambda == max(lambda))
-
-# lambda <- c(0, 0.1, 1, 10)
-# lambda <- c(0.1, 0.3, 0.6, 1)
-lambda <- c(0, 0.1, 0.6, 1)
+lambda_ridge <- c(0, 0.1, 1, 10)
+# lambda_lasso <- c(0, 0.1, 0.6, 1)
 
 
 p_ridge_coeff <- fit_ridge_beta_long %>% 
   ggplot(aes(x = lambda, y = value, color = coefficient)) +
   geom_vline(
-    xintercept = c(lambda[lambda > 0]),
+    xintercept = c(lambda_ridge[lambda_ridge > 0]),
     linetype = "dotted"
   ) +
   geom_line() +
@@ -159,13 +119,10 @@ p_ridge_coeff <- fit_ridge_beta_long %>%
   easy_remove_legend()
   
 
-
-
-
 fit_ridge_pred <- predict(
   fit_ridge,
   type = "response",
-  s = lambda,
+  s = lambda_ridge,
   newx = unique(x_mat)
 ) %>% 
   as_tibble() %>%
@@ -175,8 +132,204 @@ fit_ridge_pred <- predict(
   ) %>% 
   left_join(
     tibble(
-      name = as.character(1:length(lambda)),
-      lambda = lambda
+      name = as.character(1:length(lambda_ridge)),
+      lambda = lambda_ridge
+    ),
+    by = "name"
+  ) #%>% 
+  # mutate(
+  #   lambda = str_c("lambda = ", lambda) %>% 
+  #     fct_inorder()
+  # )
+
+
+
+p_ridge_pred_1 <- df %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_hline(
+    # yintercept = mean(df$y),
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[1]) %>% 
+      filter(x == "a"),
+    mapping = aes(yintercept = value),
+    linetype = "dotted"
+  ) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[1]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3
+  ) +
+  geom_point(alpha = .3) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[1]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3,
+    alpha = .8
+  ) +
+  # facet_wrap(~lambda) +
+  easy_remove_legend()
+
+p_ridge_pred_2 <- df %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_hline(
+    # yintercept = mean(df$y),
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[2]) %>% 
+      filter(x == "a"),
+    mapping = aes(yintercept = value),
+    linetype = "dotted"
+  ) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[2]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3
+  ) +
+  geom_point(alpha = .3) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[2]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3,
+    alpha = .8
+  ) +
+  # facet_wrap(~lambda) +
+  easy_remove_legend()
+
+p_ridge_pred_3 <- df %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_hline(
+    # yintercept = mean(df$y),
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[3]) %>% 
+      filter(x == "a"),
+    mapping = aes(yintercept = value),
+    linetype = "dotted"
+  ) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[3]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3
+  ) +
+  geom_point(alpha = .3) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[3]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3,
+    alpha = .8
+  ) +
+  # facet_wrap(~lambda) +
+  easy_remove_legend()
+
+p_ridge_pred_4 <- df %>% 
+  ggplot(aes(x = x, y = y)) +
+  geom_hline(
+    # yintercept = mean(df$y),
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[4]) %>% 
+      filter(x == "a"),
+    mapping = aes(yintercept = value),
+    linetype = "dotted"
+  ) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[4]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3
+  ) +
+  geom_point(alpha = .3) +
+  geom_point(
+    data = fit_ridge_pred %>% 
+      filter(lambda == lambda_ridge[4]),
+    mapping = aes(x = x, y = value, color = x),
+    size = 3,
+    alpha = .8
+  ) +
+  # facet_wrap(~lambda) +
+  easy_remove_legend()
+
+p_ridge_pred_1
+p_ridge_pred_2
+p_ridge_pred_3
+p_ridge_pred_4
+p_ridge_coeff
+
+
+
+
+
+# LASSO regression ####
+
+x_mat <- model.matrix(y ~ x, data = df) 
+
+
+# lambda_grid_ridge <- 10^seq(log10(0.001), log10(100), length.out = 100)
+lambda_grid_lasso <- 10^seq(log10(0.001), log10(10), length.out = 100)
+
+# alpha_ridge <- 0
+alpha_lasso <- 1
+
+fit_lasso <- glmnet(
+  x = x_mat, y = df$y,
+  alpha = alpha_lasso, lambda = lambda_grid_lasso
+)
+
+
+fit_lasso_beta_long <- fit_lasso$beta %>% 
+  t() %>% 
+  as.matrix() %>% 
+  as_tibble() %>% 
+  mutate(
+    lambda = fit_lasso$lambda,
+    log_lambda = log(lambda)
+  ) %>% 
+  rename(xa = `(Intercept)`) %>% 
+  pivot_longer(
+    cols = xa:xe,
+    names_to = "coefficient"
+  ) %>% 
+  mutate(coefficient = str_sub(coefficient, 2, 2))
+
+# lambda_ridge <- c(0, 0.1, 1, 10)
+lambda_lasso <- c(0, 0.1, 0.6, 1)
+
+
+p_lasso_coeff <- fit_lasso_beta_long %>% 
+  ggplot(aes(x = lambda, y = value, color = coefficient)) +
+  geom_vline(
+    xintercept = c(lambda_lasso[lambda_lasso > 0]),
+    linetype = "dotted"
+  ) +
+  geom_line() +
+  geom_text(
+    fit_lasso_beta_long %>% 
+      filter(lambda == min(lambda)),
+    mapping = aes(label = coefficient),
+    nudge_x = -0.1
+  ) +
+  scale_x_log10() +
+  easy_remove_legend()
+  
+
+fit_lasso_pred <- predict(
+  fit_lasso,
+  type = "response",
+  s = lambda_lasso,
+  newx = unique(x_mat)
+) %>% 
+  as_tibble() %>%
+  mutate(x = c("a", "b", "c", "d", "e")) %>% 
+  pivot_longer(
+    cols = -x
+  ) %>% 
+  left_join(
+    tibble(
+      name = as.character(1:length(lambda_lasso)),
+      lambda = lambda_lasso
     ),
     by = "name"
   ) %>% 
@@ -186,35 +339,23 @@ fit_ridge_pred <- predict(
   )
 
 
-# fit_ridge_pred %>% 
-#   ggplot(aes(x = x, y = value, color = x)) +
-#   geom_point() +
-#   facet_wrap(~lambda) +
-#   easy_remove_legend()
-
-
-# df_summarize
-
-
-
-p_ridge_pred <- df %>% 
+p_lasso_pred <- df %>% 
   ggplot(aes(x = x, y = y)) +
   geom_hline(
     # yintercept = mean(df$y),
-    data = fit_ridge_pred %>% 
+    data = fit_lasso_pred %>% 
       filter(x == "a"),
     mapping = aes(yintercept = value),
     linetype = "dotted"
   ) +
   geom_point(
-    data = fit_ridge_pred,
+    data = fit_lasso_pred,
     mapping = aes(x = x, y = value, color = x),
-    size = 3#,
-    # alpha = .8
+    size = 3
   ) +
   geom_point(alpha = .3) +
   geom_point(
-    data = fit_ridge_pred,
+    data = fit_lasso_pred,
     mapping = aes(x = x, y = value, color = x),
     size = 3,
     alpha = .8
@@ -223,17 +364,8 @@ p_ridge_pred <- df %>%
   easy_remove_legend()
 
 
-p_ridge_coeff
-p_ridge_pred
-
-
-
-
-
-
-
-
-
+p_lasso_coeff
+p_lasso_pred
 
 
 

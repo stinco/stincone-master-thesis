@@ -160,6 +160,8 @@ library(grid)
 library(gtable)
 library(mgcv)
 library(splines)
+library(forcats)
+library(glmnet)       # For Elastic Net
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')
