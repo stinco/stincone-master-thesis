@@ -1062,11 +1062,13 @@ One of the most challenging aspects of GLM fitting is selecting the variables an
 
 One useful tool we have to understand if an explanatory variable $x$ is relevant or not is plotting the points $(x_i, y_i)$, as we did in \@ref(fig:expl-var-types), \@ref(fig:expl-var-quant-effect) and \@ref(fig:resp-var). If there are too many observations and the plot is not easily readable, it is possible to group the points by $x$ modalities and show for each group the average of $y_i$ and a confidence interval that gives an idea on the dispersion of the observations around the average. If $x$ is a continuous variable with too many modalities, it is possible to group them into buckets. Showing the average of $y_i$ for groups of $x$ is particularly useful for Binomial and Poisson data, where the fact that $y_i$ can present few different values compromises the plot readability. An example is reported in figure \@ref(fig:var-selection). The top-left and bottom-left panels represent a case in which $x$ and $y$ are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
 
-(ref:var-selection-caption-latex) Explanatory variable effect evaluation.
+(ref:var-selection-caption-latex) Explanatory variable effect evaluation. The top-left and bottom-left panels represent a case in which $x$ and $y$ are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
 
-(ref:var-selection-caption-gitbook) Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right).
+(ref:var-selection-caption-gitbook) Explanatory variable effect evaluation, No effect - ungrouped (top-left), Positive effect - ungrouped (top-right), No effect - grouped (bottom-left) and Positive effect - grouped (bottom-right). The top-left and bottom-left panels represent a case in which $x$ and $y$ are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
 
-```{r, plot-var-selection, message=FALSE, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:var-selection-caption-gitbook)", "(ref:var-selection-caption-latex)"), label="var-selection", echo=FALSE, fig.ncol=2, fig.subcap=c('No effect - ungrouped', 'Positive effect - ungrouped', 'No effect - grouped', 'Positive effect - grouped'), cache = TRUE}
+(ref:var-selection-caption-short) Explanatory variable effect evaluation.
+
+```{r, plot-var-selection, message=FALSE, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:var-selection-caption-gitbook)", "(ref:var-selection-caption-latex)"), fig.scap="(ref:var-selection-caption-short)", label="var-selection", echo=FALSE, fig.ncol=2, fig.subcap=c('No effect - ungrouped', 'Positive effect - ungrouped', 'No effect - grouped', 'Positive effect - grouped'), cache = TRUE}
 
 set.seed(42)
 
@@ -1398,9 +1400,11 @@ The two side constraints ensure that we have a smooth linear extension above $\n
 
 If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and, thus, the variance of the parameters estimators increases. We can see this effect in figure \@ref(fig:cub-spline).
 
-(ref:cub-spline-caption-latex) GLM with cubic splines for different numbers of knots.
+(ref:cub-spline-caption-latex) GLM with cubic splines for different numbers of knots. The more knots there are, the wigglier the estimated function $\hat{f}(x)$ is.
 
-(ref:cub-spline-caption-gitbook) GLM with cubic splines for different numbers of knots, $0$ knots (top-left), $3$ knots (top-right), $7$ knots (bottom-left) and $35$ knots (bottom-right).
+(ref:cub-spline-caption-gitbook) GLM with cubic splines for different numbers of knots, $0$ knots (top-left), $3$ knots (top-right), $7$ knots (bottom-left) and $35$ knots (bottom-right). The more knots there are, the wigglier the estimated function $\hat{f}(x)$ is.
+
+(ref:cub-spline-caption-short) GLM with cubic splines for different numbers of knots.
 
 ```{r, plot-cub-spline-build, echo = FALSE, cache = TRUE}
 
@@ -1496,7 +1500,7 @@ p_cub_spline_4 <- plot_spline_lidar(dataset = lidar,
 ```
 
 
-```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots'), cache = TRUE}
+```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), fig.scap="(ref:cub-spline-caption-short)", label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1522,9 +1526,11 @@ A measure of the wiggliness of a function is given by the integral of its square
 In figure \@ref(fig:wiggliness) some examples of functions $f(x)$ and their squared second derivatives $\left(f''(x)\right)^2$ are represented. In the top panels, four functions of increasing wiggliness are represented and, in the bottom panels,  we can see their four squared second derivatives.
 
 
-(ref:wiggliness-caption-latex) $\left(f''(x)\right)^2$ for functions with different wiggliness.
+(ref:wiggliness-caption-latex) $\left(f''(x)\right)^2$ for functions with different wiggliness. The wigglier the function $f(x)$ is, the higher $\left(f''(x)\right)^2$ is.
 
-```{r, plot-wiggliness-print, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap="(ref:wiggliness-caption-latex)", label="wiggliness", echo=FALSE, cache = TRUE}
+(ref:wiggliness-caption-short) $\left(f''(x)\right)^2$ for functions with different wiggliness.
+
+```{r, plot-wiggliness-print, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap="(ref:wiggliness-caption-latex)", fig.scap="(ref:wiggliness-caption-short)", label="wiggliness", echo=FALSE, cache = TRUE}
 
 # Define expressions and compute derivatives
 f2_expr <- expression(sin(2*pi*x))
@@ -1641,9 +1647,11 @@ What is done in GAM to contain this wiggliness and to prevent overfitting is tak
 In the notation of the formula \@ref(eq:gam-est-deviance) we used $f$ to indicate all the parameters of the natural cubic spline. The hyper-parameter $\lambda\ge0$ is called _smoothing parameter_. It measures how much we want to penalize wiggliness. If we choose $\lambda=0$ we won't penalize for $\left( f''(x) \right)^2$ and the optimization problem corresponds to the maximum likelihood. The higher $\lambda$ is, the more penalization for $\left( f''(x) \right)^2$ we introduce and the smoother the estimate $\hat{f}(x)$ will be. If $\lambda\to+\infty$, we will introduce an infinite penalization for wiggliness, so the result will have $\hat{f}''(x)=0$, thus $\hat{f}(x)$ will be linear. An example with different levels of $\lambda$ can be seen in figure \@ref(fig:gam-lambda).
 
 
-(ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$.
+(ref:gam-lambda-caption-latex) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$. The higher $\lambda$ is, the less wiggly the estimated function $\hat{f}(x)$ is.
 
-(ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right).
+(ref:gam-lambda-caption-gitbook) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$, $\lambda = 0$ (top-left), $\lambda = 10$ (top-right), $\lambda = 10^3$ (bottom-left) and $\lambda = 10^6$ (bottom-right). The higher $\lambda$ is, the less wiggly the estimated function $\hat{f}(x)$ is.
+
+(ref:gam-lambda-caption-short) GAM estimate $\hat{f}(x)$ for different levels of the smoothing parameter $\lambda$.
 
 ```{r, plot-gam-lambda-build, echo = FALSE, cache = TRUE}
 
@@ -1706,7 +1714,7 @@ p_gam_lambda_4 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp4)
 
 ```
 
-```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$'), cache = TRUE}
+```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), fig.scap="(ref:gam-lambda-caption-short)", label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$'), cache = TRUE}
 
 plot_grid_split(p_gam_lambda_1, p_gam_lambda_2, p_gam_lambda_3, p_gam_lambda_4)
 
@@ -2400,7 +2408,7 @@ p_ridge_pred_4 <- df %>%
 
 ```
 
-```{r, plot-ridge-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:ridge-lambda-caption-gitbook)", "(ref:ridge-lambda-caption-latex)"), label="ridge-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_ridge, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
+```{r, plot-ridge-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:ridge-lambda-caption-gitbook)", "(ref:ridge-lambda-caption-latex)"), fig.scap="(ref:ridge-lambda-caption-short)", label="ridge-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_ridge, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
 
 
 plot_grid_split(
@@ -2714,7 +2722,7 @@ p_lasso_pred_4 <- df %>%
 
 ```
 
-```{r, plot-lasso-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:lasso-lambda-caption-gitbook)", "(ref:lasso-lambda-caption-latex)"), label="lasso-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_lasso, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
+```{r, plot-lasso-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:lasso-lambda-caption-gitbook)", "(ref:lasso-lambda-caption-latex)"), fig.scap="(ref:lasso-lambda-caption-short)", label="lasso-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_lasso, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
 
 
 plot_grid_split(
@@ -3001,22 +3009,40 @@ The hyper-parameter $\alpha$ can be estimated together with $\lambda$ in a Cross
 
 #### Some considerations on Shrinkage Estimators
 
+As we have said, shrinkage estimators are particularly useful when the number of parameters $p$ in the model is large (high dimensionality) and the maximum likelihood estimator have a high variance. This could happen when we have some qualitative variables with many modalities, as for example the make and the model of the insured vehicle in car insurance. As we have seen with the examples represented in figure \@ref(fig:ridge-lambda) and \@ref(fig:lasso-lambda), the penalization will shrink more the coefficients in the groups with few observations and only the groups with an average response $\bar{y}_j$ significantly different from the global average response $\bar{y}$ will emerge. This procedure is more efficient and more robust to overfitting than grouping modalities based on hypothesis testing or other criteria.
+
+If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients $\beta_j$ corresponding to the modalities of those variables. This technique is useful also in the case we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable "number of claims experienced in the previous year", we will have most of the observation in the modality corresponding to $0$ claims, very few in the modality corresponding to $1$ claim and almost nobody with $2$ or more claims. If we are fitting a model for the claim frequency and we consider the variable $x_j$ that indicates whether the policyholder experienced one or more claims in the previous year $x_j=1$ or not $x_j=0$, it is likely that the maximum likelihood estimator for the coefficient $\hat{\beta}_{x_j=1}$ will be greater than $0$, as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that in there are just few observation with $x_j=1$ it is possible that the coefficient $\hat{\beta}_{x_j=1}$ is not significantly different from $0$. If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable $x_j$ in the model or not. If we don't consider it we are probably discard some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk to overfit the data. With shrinkage estimators we can choose to insert the variable $x_j$ in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
+
+Another interesting observation about GLM fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable $x_j$ is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient $\beta_j$ with an estimator $\tilde{\beta}_j$ that is equal to the maximum likelihood estimator $\tilde{\beta}_j^{ML}$ when the coefficient pass a specific criterion and is equal to $0$ when $\tilde{\beta}_j^{ML}$ doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on $\tilde{\beta}_j^{ML}$, and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards $0$ of the coefficient $\tilde{\beta}_j$ that reduce its variance as all the coefficients not relevant for prediction are set equal to $0$ and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable $x_j$, in all the procedures commonly used for feature selection, the probability that $\tilde{\beta}_j$ passes the procedure or not depends on how strong the effect $\beta_j$ is and how many observations there are in the classes $x_j=0$ and $x_j=1$.
+
+We also mantion that the Shrinkage Estimators can be used in synergy with GAMs. Indeed it is possible to fit to the quantitative variables a cubic spline with a GAM penalization based on the second derivative of the spline and to the qualitative variables a shrinkage estimator with an Elastic Net penalization.
+\begin{equation}
+\label{eq:gam-en-est-deviance-multi}
+\boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
+{\left\{
+  D(\boldsymbol{f}, \boldsymbol{y})
+    + \sum_{l=1}^{q}{
+      \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
+    }
+    + \lambda_{EN} \left(
+      \sum_{j=1}^p{\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2}
+    \right)
+\right\}
+} 
+\end{equation}
+where the coefficients $\beta_j$ considered in the Elastic Net penalization are only the ones corresponding to qualitatives variables.
+
 <!--
 Benefici ridge/lasso
 - Utili quando p è grande
 - Molto utili per variabili qualitative con molte modalità. Es: marca, modello.
   Posso mettere la penalizzazione solo su alcune delle variabili o posso mettere un peso diverso per penalizzare in modo diverso le diverse variabili
-- Posso usarlo assieme al GAM
 - Benefit of shrinkage (Ridge):
   Un coefficiente ha senso, non mi fido tanto del valore stimato, gli metto una penalizzazione ad hoc.
   È meglio che metterlo in offset
-
-Nota: con la stepwise regression anche gli stimatori non sono unbiased. Di fatto si ha \beta_j di ML se significativo e 0 altrimenti.
+  Nota: con la stepwise regression anche gli stimatori non sono unbiased. Di fatto si ha \beta_j di ML se significativo e 0 altrimenti.
+- Posso usarlo assieme al GAM
 -->
-
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
 
 \newpage
 
@@ -3029,6 +3055,13 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris inter
 - Se ho una quantitativa discreta posso riparametrizzare in modo che sia monotona
 - Altro: modelli gerarchici, mixed models GLMM
 - Se prior non semplice: stima con metodi MCMC
+- Empirical bayes: scelgo lambda con cross validation
+- In generale posso introdurre la mia informazione a priori e mettergli un coefficiente >0 anche se un elastic net con cross validation mi porterebbe a dargli 0
+- Volendo posso scegliere la prior tale che la stima a posteriori mi venga uno specifico coefficiente
+  Questo è meglio di offset perché:
+  1. ho la consapevolezza di quanto forte gli ho messo la prior e quindi di quanto forte è la mia imposizione
+  2. Se cambio qualcosa negli altri parametri e rifitto il modello, viene tutto gestito in automatico
+  
 -->
 
 #### Bayesian framework

@@ -1240,7 +1240,6 @@ and applying to the estimates as follows:
 \[
 \widehat{E(S_i)} = \alpha \ \widehat{E(S_i)}'
 \]
-
 We will call \(\widehat{E(S_i)}\) rebalanced estimates.
 
 The property of these rebalanced estimates is that on average they are equal to \(\widehat{E(S)}^{CL}\):
@@ -1275,7 +1274,7 @@ For this reason, in practice, often the modeling is considered composed in 2 par
   \emph{Personalization}: the estimate of \(\widehat{E(S_i)}'\) and the relative coefficients.
 \end{enumerate}
 
-The techniques used for \emph{Tariff Requirement} are employed also to estimating the general liability position for the company. This information is particularly important and it is reported in the company financial statement.
+The techniques used for \emph{Tariff Requirement} are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in Non-Life insurace companies.
 
 \hypertarget{beyond-technical-pricing}{%
 \section{Beyond technical pricing}\label{beyond-technical-pricing}}
@@ -1303,17 +1302,17 @@ The \emph{Tariff} is the official price for the policy. Over the cost of claims 
 
 In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depends on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations say that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff. We remind that in the Italian bonus-malus system the lower the class the better the premium. Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently to how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
-To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not to the tariff price, but to the price obtained subtracting from it a discount \(D_i\ge0\). The premium obtained this way is called \emph{Offer Price}.
+To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not at the tariff price, but at the price obtained subtracting from it a discount \(D_i\ge0\). The premium obtained this way is called \emph{Offer Price}.
 \[
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 \]
 
 That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called \emph{discounting flexibility}, can be partially spent by the agent and partially by the insurance company itself. The discounts can be changed over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new business and renewals. From a technical point of view, these discounts have been funded by the remarkable decrese on claim frequency due to the traffic decreasing. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
-\hypertarget{commercial-price}{%
-\subsection{Commercial price}\label{commercial-price}}
+\hypertarget{price-optimization}{%
+\subsection{Price Optimization}\label{price-optimization}}
 
-Both tariff and offer price must be based not only on technical logic, but also on commercial logic. They are determined with a process of \emph{Price Optimization}. The final goal for a company is to maximize profits this year and in the next ones, so the objective of commercial pricing must be obtaining the optimal price to reach this goal. Maximizing profits is a quite generic goal and can't be easily expressed as an analytical optimization problem. For this reason the pricing choices can be guided by the business strategy that can be translated in specific \emph{Key Performance Indicators} (KPI) that have to be optimized. In this optimization framework, the technical price can be seen as an estimate of the expected cost related to the policy. Knowing the costs it is possible to tune the final premium by working on margins.
+Both tariff and offer price must be based not only on technical logic, but also on commercial logic. They are determined with a process of \emph{Price Optimization}. The final goal for a company is to maximize profits this year and in the next ones, so the objective of price optimization must be obtaining the optimal price to reach this goal. Maximizing profits is a quite generic goal and can't be easily expressed as an analytical optimization problem. For this reason the pricing choices can be guided by the business strategy that can be translated in specific \emph{Key Performance Indicators} (KPI) that have to be optimized. In this optimization framework, the technical price can be seen as an estimate of the expected cost related to the policy. Knowing the costs it is possible to tune the final premium by working on margins.
 
 The components that act on price optimization can be addressed to:
 
@@ -1330,17 +1329,17 @@ The components that act on price optimization can be addressed to:
 
 We already extensively covered technical pricing in previous chapters.
 
-Client expectation is basically the price that the client is willing to pay for the specific product. Here the basic idea is that if the client would pay a premium much higher than the technical one, it wouldn't make sense for the company to sell him the product at technical price. This is a big opportunity to gain margins. To analyze client expectation, what is usually done is:
+Client expectation is basically the price that the client is willing to pay for the specific product. If the client would pay a premium higher than the technical one, the insurance company has the space for determining an offer price higher than the technical one and gaining margins on that contract. To analyze client expectation, what is usually done is:
 
 \begin{itemize}
 \tightlist
 \item
-  for new business modeling his conversion probability
+  for new business modeling his conversion probability;
 \item
   for renewal business modeling his retention probability.
 \end{itemize}
 
-For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer service and customer experience.
+For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer care and customer experience.
 
 If the technical price and the conversion probability functions are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling MTPL policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the \emph{lifetime value} of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
 
@@ -1351,11 +1350,13 @@ Anyway, a company can't arbitrarily discount policies because an excess in disco
 \hypertarget{the-actuary-role}{%
 \section{The actuary role}\label{the-actuary-role}}
 
-In this technical and commercial pricing framework, the actuary is the one that conducts the analysis and defines the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries are ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior''.\footnote{\href{https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About\%20Actuaries.aspx}{IAA, About Actuaries}}
+In this technical pricing and price optimization framework, the actuary is the one that conducts the analysis and defines the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries as ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior''.\footnote{\href{https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About\%20Actuaries.aspx}{IAA, About Actuaries}}
 
-First of all, the actuary must master the main statistical and data science techniques used to develop model for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
+First of all, the actuary must master the main statistical and data science techniques used to develop models for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
 
-In the last years, the increase of competition brought to an increase in commercial price importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price. The importance for commercial pricing implies that the technical pricing must not be conducted independently from commercial pricing. Even in companies where the technical pricing and the commercial pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
+In the last years, the increase of competition brought to an increase in price optimization importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price.
+
+The importance for price optimization implies that the technical pricing must not be conducted independently from tariff and offer pricing. Even in companies where the technical pricing and the offer pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
 
 --\textgreater{}
 
@@ -1801,13 +1802,15 @@ One useful tool we have to understand if an explanatory variable \(x\) is releva
 
 
 
+
+
 \begin{figure}[!hbtp]
 
 {\centering \subfloat[No effect - ungrouped\label{fig:var-selection-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-1} }\subfloat[Positive effect - ungrouped\label{fig:var-selection-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-2} }\newline\subfloat[No effect - grouped\label{fig:var-selection-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-3} }\subfloat[Positive effect - grouped\label{fig:var-selection-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/var-selection-4} }
 
 }
 
-\caption{Explanatory variable effect evaluation.}\label{fig:var-selection}
+\caption[Explanatory variable effect evaluation.]{Explanatory variable effect evaluation. The top-left and bottom-left panels represent a case in which \(x\) and \(y\) are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.}\label{fig:var-selection}
 \end{figure}
 
 If we are dealing with a multivariate model where we already inserted the variables \(x_1, \dots, x_p\) and we want to evaluate the additional information brought by \(x_{p+1}\), it is possible to look at the plot \((x_{i, p+1}, r_i)\), where \(r_i\) are the residuals of the model without the variable \(x_{p+1}\):
@@ -1963,13 +1966,15 @@ If we try to fit a cubic spline on data, we find that by increasing the number o
 
 
 
+
+
 \begin{figure}[!hbtp]
 
 {\centering \subfloat[$0$ knots\label{fig:cub-spline-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/cub-spline-1} }\subfloat[$3$ knots\label{fig:cub-spline-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/cub-spline-2} }\newline\subfloat[$7$ knots\label{fig:cub-spline-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/cub-spline-3} }\subfloat[$35$ knots\label{fig:cub-spline-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/cub-spline-4} }
 
 }
 
-\caption{GLM with cubic splines for different numbers of knots.}\label{fig:cub-spline}
+\caption[GLM with cubic splines for different numbers of knots.]{GLM with cubic splines for different numbers of knots. The more knots there are, the wigglier the estimated function \(\hat{f}(x)\) is.}\label{fig:cub-spline}
 \end{figure}
 
 In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
@@ -1984,13 +1989,15 @@ In figure \ref{fig:wiggliness} some examples of functions \(f(x)\) and their squ
 
 
 
+
+
 \begin{figure}[!hbtp]
 
 {\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/wiggliness-1} 
 
 }
 
-\caption{\(\left(f''(x)\right)^2\) for functions with different wiggliness.}\label{fig:wiggliness}
+\caption[\(\left(f''(x)\right)^2\) for functions with different wiggliness.]{\(\left(f''(x)\right)^2\) for functions with different wiggliness. The wigglier the function \(f(x)\) is, the higher \(\left(f''(x)\right)^2\) is.}\label{fig:wiggliness}
 \end{figure}
 
 As we can see from the plots, if a function \(f(x)\) is linear, \(\left(f''(x)\right)^2\) is null and, as the curvature of the function increases, \(\left(f''(x)\right)^2\) increases. For this reason, \(\left(f''(x)\right)^2\) can also be seen as a measure of how much \(f(x)\) differs from a linear function.
@@ -2007,13 +2014,15 @@ In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indi
 
 
 
+
+
 \begin{figure}[!hbtp]
 
 {\centering \subfloat[$\lambda = 0$\label{fig:gam-lambda-1}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-1} }\subfloat[$\lambda = 10$\label{fig:gam-lambda-2}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-2} }\newline\subfloat[$\lambda = 10^3$\label{fig:gam-lambda-3}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-3} }\subfloat[$\lambda = 10^6$\label{fig:gam-lambda-4}]{\includegraphics[width=0.5\linewidth]{_main_files/figure-latex/gam-lambda-4} }
 
 }
 
-\caption{GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\).}\label{fig:gam-lambda}
+\caption[GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\).]{GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\). The higher \(\lambda\) is, the less wiggly the estimated function \(\hat{f}(x)\) is.}\label{fig:gam-lambda}
 \end{figure}
 
 All the models has been fitted with \(m = 50\) knots. As we can see, with \(\lambda = 0\) we are clearly overfitting observations, while with \(\lambda = 10^6\) we are clearly underfitting them.
@@ -2279,7 +2288,7 @@ The optimal point for \(\lambda=0\) can be obtained through a Cross Validation a
 
 }
 
-\caption{Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\).}\label{fig:ridge-lambda}
+\caption[The Bias-Variance trade off. Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\).]{Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\).}\label{fig:ridge-lambda}
 \end{figure}
 
 The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because, in this case, the optimization problem \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
@@ -2374,7 +2383,7 @@ An example of the effect of the \(L^1\) penalization for different values of \(\
 
 }
 
-\caption{LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\). High values of \(\lambda\) force the coefficients to be exactly equal to \(0\).}\label{fig:lasso-lambda}
+\caption[The Bias-Variance trade off. LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\).]{LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\). High values of \(\lambda\) force the coefficients to be exactly equal to \(0\).}\label{fig:lasso-lambda}
 \end{figure}
 
 This property of the LASSO Regression can be derived from a different representation of the optimization problems \eqref{eq:ridge-est-deviance} and \eqref{eq:lasso-est-deviance}. It can be proven that in general, considering a penalization given by the \(L^d\) norm, the unconstrained optimization problem:
@@ -2432,7 +2441,28 @@ The hyper-parameter \(\alpha\) can be estimated together with \(\lambda\) in a C
 \hypertarget{some-considerations-on-shrinkage-estimators}{%
 \subsubsection{Some considerations on Shrinkage Estimators}\label{some-considerations-on-shrinkage-estimators}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+As we have said, shrinkage estimators are particularly useful when the number of parameters \(p\) in the model is large (high dimensionality) and the maximum likelihood estimator have a high variance. This could happen when we have some qualitative variables with many modalities, as for example the make and the model of the insured vehicle in car insurance. As we have seen with the examples represented in figure \ref{fig:ridge-lambda} and \ref{fig:lasso-lambda}, the penalization will shrink more the coefficients in the groups with few observations and only the groups with an average response \(\bar{y}_j\) significantly different from the global average response \(\bar{y}\) will emerge. This procedure is more efficient and more robust to overfitting than grouping modalities based on hypothesis testing or other criteria.
+
+If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients \(\beta_j\) corresponding to the modalities of those variables. This technique is useful also in the case we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable ``number of claims experienced in the previous year'', we will have most of the observation in the modality corresponding to \(0\) claims, very few in the modality corresponding to \(1\) claim and almost nobody with \(2\) or more claims. If we are fitting a model for the claim frequency and we consider the variable \(x_j\) that indicates whether the policyholder experienced one or more claims in the previous year \(x_j=1\) or not \(x_j=0\), it is likely that the maximum likelihood estimator for the coefficient \(\hat{\beta}_{x_j=1}\) will be greater than \(0\), as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that in there are just few observation with \(x_j=1\) it is possible that the coefficient \(\hat{\beta}_{x_j=1}\) is not significantly different from \(0\). If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable \(x_j\) in the model or not. If we don't consider it we are probably discard some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk to overfit the data. With shrinkage estimators we can choose to insert the variable \(x_j\) in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
+
+Another interesting observation about GLM fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable \(x_j\) is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient \(\beta_j\) with an estimator \(\tilde{\beta}_j\) that is equal to the maximum likelihood estimator \(\tilde{\beta}_j^{ML}\) when the coefficient pass a specific criterion and is equal to \(0\) when \(\tilde{\beta}_j^{ML}\) doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on \(\tilde{\beta}_j^{ML}\), and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards \(0\) of the coefficient \(\tilde{\beta}_j\) that reduce its variance as all the coefficients not relevant for prediction are set equal to \(0\) and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable \(x_j\), in all the procedures commonly used for feature selection, the probability that \(\tilde{\beta}_j\) passes the procedure or not depends on how strong the effect \(\beta_j\) is and how many observations there are in the classes \(x_j=0\) and \(x_j=1\).
+
+We also mantion that the Shrinkage Estimators can be used in synergy with GAMs. Indeed it is possible to fit to the quantitative variables a cubic spline with a GAM penalization based on the second derivative of the spline and to the qualitative variables a shrinkage estimator with an Elastic Net penalization.
+\begin{equation}
+\label{eq:gam-en-est-deviance-multi}
+\boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
+{\left\{
+  D(\boldsymbol{f}, \boldsymbol{y})
+    + \sum_{l=1}^{q}{
+      \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
+    }
+    + \lambda_{EN} \left(
+      \sum_{j=1}^p{\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2}
+    \right)
+\right\}
+} 
+\end{equation}
+where the coefficients \(\beta_j\) considered in the Elastic Net penalization are only the ones corresponding to qualitatives variables.
 
 \newpage
 
