@@ -1761,7 +1761,7 @@ GCV and UBRE formulas are based on the fact that GAMs with identity link and Nor
 \end{equation}
 where $H$ is a $n\times n$ matrix that depends on the design matrix $\boldsymbol{X}$ and the hyper-parameters. $H$ is called _smoothing matrix_. In general, if the link is not identity and the response is not Normal, GAM is not a linear smoother, but the formula \@ref(eq:linear-smoother) still holds up with a local approximation.
 
-It can be proven that the trace of $H$ measures the flexibility of the function. Indeed, in Linear Model $L = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t$ and $\text{tr}(H) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(H)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(H)$ decreases.
+It can be proven that the trace of $H$ measures the flexibility of the function. Indeed, in Linear Model $H = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t$ and $\text{tr}(H) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1$, that is the number of _degrees of freedom_ of the model. For this reason $\text{tr}(H)$ is also called number of _effective degrees of freedom_ of the model. In GAM, as the smoothing parameter $\lambda$ increases, the flexibility of the model decreases and $\text{tr}(H)$ decreases.
 
 For linear smoothers it can be proved that the _leave one out cross validation_ is:
 $$
@@ -2021,7 +2021,7 @@ In this section we are going to present the shrinkage estimators, that are a cla
 
 #### The Bias-Variance Trade Off
 
-One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator $\boldsymbol{\tilde{\beta}}^{ML}$ is unbiased, that is $E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}$.^[This property in general is not true for GLM with other link and response distribution, but it is true asymptotically: $\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}$.] However, the bias is not the only relevant aspect of an estimator. If we consider the _Mean Squared Error_ (MSE) of an estimator $\tilde{\beta}_j$, we get the following result:
+One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator $\boldsymbol{\tilde{\beta}}^{ML}$ is unbiased, that is $E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}$.^[This property in general is not true for GLM with other links and response distributions, but it is true asymptotically: $\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}$.] However, the bias is not the only relevant aspect of an estimator. If we consider the _Mean Squared Error_ (MSE) of an estimator $\tilde{\beta}_j$, we get the following result:
 \begin{equation}
 \label{eq:bias-variance}
 MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
@@ -2141,7 +2141,7 @@ tibble(
 
 #### Ridge Regression
 
-One shrinkage estimator for GLM is the _Ridge_ estimator. In Ridge Regression, the decrease in variance of $\tilde{\boldsymbol{\beta}}$ is achieved by considering the optimization problem \@ref(eq:max-lik-est-deviance) and adding to the Deviance a penalization term that depends on the magnitude of $\beta_1, \beta_2, \dots, \beta_p$:
+One shrinkage estimator for GLM is the _Ridge Regression_. In Ridge Regression, the decrease in variance of $\tilde{\boldsymbol{\beta}}$ is achieved by considering the optimization problem \@ref(eq:max-lik-est-deviance) and adding to the Deviance a penalization term that depends on the magnitude of $\beta_1, \beta_2, \dots, \beta_p$:
 \begin{equation}
 \label{eq:ridge-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
@@ -2425,7 +2425,7 @@ where:
 * $\boldsymbol{X}$ is the design matrix without the first column of $1$s, as the intercept is excluded from the model;
 * $I_p$ is the identity matrix with dimension $p$.
 
-From the formula \@ref(eq:ridge-estimator) we can see that, while the maximum likelihood estimator is unbiased, if $\lambda>0$, the Ridge estimator is biased.
+From the formula \@ref(eq:ridge-estimator) we can see that, while the maximum likelihood estimator is unbiased, if $\lambda>0$ the Ridge estimator is biased.
 \begin{align*}
 E\left(\tilde{\boldsymbol{\beta}}_{0,\setminus0}\right) & =
 \left(\boldsymbol{X}^t\boldsymbol{X}\right)^{-1}\boldsymbol{X}^t E(Y) \\ & =
@@ -2439,7 +2439,7 @@ E\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0}\right) & =
 
 Moreover, from the formula \@ref(eq:ridge-estimator) we find that, even if there is multicollinearity and $\boldsymbol{X}^t\boldsymbol{X}$ is not invertible, the Ridge estimator is computable. This aspect is particularly interesting when $p > n$.
 
-If we assume that the explanatory variables are independent, i.e. $\boldsymbol{X}^t\boldsymbol{X} = I_p$ we can further simplify the expression \@ref(eq:ridge-estimator) to:
+If we assume that the explanatory variables are independent and standardized, i.e. $\boldsymbol{X}^t\boldsymbol{X} = I_p$, we can further simplify the expression \@ref(eq:ridge-estimator) to:
 $$
 \hat{\boldsymbol{\beta}}_{\lambda,\setminus0} =
 \frac{1}{1+\lambda} \boldsymbol{X}^t y = 
@@ -2480,7 +2480,7 @@ where:
 * $\|\cdot\|_1$ is the $L^1$ norm, i.e. $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$;
 * $\lambda\ge0$ is an hyper-parameter that controls the penalization.
 
-An example of the effect of the $L^1$ penalization for different values of $\lambda$ is shown in figure \@ref(fig:lasso-lambda). The simulated dataset is the same used for the Ridge example in figure \@ref(fig:ridge-lambda). As we can see from the plots, the substantial difference between Ridge and LASSO is that in LASSO from a certain value of $\lambda$ the coefficients are shrunk exactly to $0$. While in Ridge that is just a limit property, in LASSO, for each coefficient $\beta_j$ there is a level of the penalization parameter $\lambda'_j$ such as for $\lambda \ge \lambda'_j$, the estimated coefficient $\hat{\beta}_j$ is forced to exactly $0$.
+An example of the effect of the $L^1$ penalization for different values of $\lambda$ is shown in figure \@ref(fig:lasso-lambda). The simulated dataset is the same used for the Ridge example in figure \@ref(fig:ridge-lambda). As we can see from the plots, the substantial difference between Ridge and LASSO is that in LASSO from a certain value of $\lambda$ the coefficients are shrunk exactly to $0$. While in Ridge that is just a limit property, in LASSO, for each coefficient $\beta_j$ there is a level of the penalization parameter $\lambda'_j$ such that for $\lambda \ge \lambda'_j$, the estimated coefficient $\hat{\beta}_j$ is forced to exactly $0$.
 
 
 (ref:lasso-lambda-caption-latex) LASSO Regression coefficients for different levels of the penalization parameter $\lambda$. If $\lambda=0$, the coefficients correspond to the maximum likelihood coefficients. As $\lambda$ increases, the coefficients are shrunk towards $0$. High values of $\lambda$ force the coefficients to be exactly equal to $0$.
@@ -2727,7 +2727,7 @@ plot_grid_split(
 
 ```
 
-This property of the LASSO Regression can be derived from a different representation of the optimization problems \@ref(eq:ridge-est-deviance) and \@ref(eq:lasso-est-deviance). It can be proven that in general, considering a penalization given by the $L^p$ norm, the unconstrained optimization problem:
+This property of the LASSO Regression can be derived from a different representation of the optimization problems \@ref(eq:ridge-est-deviance) and \@ref(eq:lasso-est-deviance). It can be proven that in general, considering a penalization given by the $L^d$ norm, the unconstrained optimization problem:
 \begin{equation}
 \label{eq:ld-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_d^d\right\}}
@@ -2739,10 +2739,10 @@ is equivalent to the constrained optimization problem:
 \end{equation}
 where $s_{\lambda}$ is a quantity that depends on $\lambda$.
 
-The representation \@ref(eq:lp-est-deviance-constr) provides a useful geometric interpretation of the optimization problem. Figure \@ref(opt-ridge-lasso) shows the visual representation of the optimization problem \@ref(eq:lp-est-deviance-constr) in the Ridge case ($d=2$) and in the LASSO case ($d=1$). The axes represent the component of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. In the Normal case with identity link they are concentric ellipses centered in $\hat{\boldsymbol{\beta}}^{ML}$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$. This area, in the Ridge case corresponds to the circle $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$, while in the LASSO case corresponds to the square $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall in one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$. In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to $0$.
+The representation \@ref(eq:lp-est-deviance-constr) provides a useful geometric interpretation of the optimization problem. Figure \@ref(fig:opt-ridge-lasso) shows the visual representation of the optimization problem \@ref(eq:lp-est-deviance-constr) in the Ridge case ($d=2$) and in the LASSO case ($d=1$). The axes represent the component of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. In the Normal case with identity link they are concentric ellipses centered in $\hat{\boldsymbol{\beta}}^{ML}$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$. This area, in the Ridge case corresponds to the circle $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$, while in the LASSO case corresponds to the square $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall into one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$. In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to $0$.
 
 
-(ref:opt-ridge-lasso-caption-latex) Geometrical interpretation of the optimization problem for Ridge and LASSO. The axes represent the components of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$, that is a circle in the Ridge case $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$ and a square in the LASSO case $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. $\hat{\boldsymbol{\beta}}^{Ridge}$ and $\hat{\boldsymbol{\beta}}^{LASSO}$ are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall in one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$.
+(ref:opt-ridge-lasso-caption-latex) Geometrical interpretation of the optimization problem for Ridge and LASSO. The axes represent the components of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$, that is a circle in the Ridge case $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$ and a square in the LASSO case $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. $\hat{\boldsymbol{\beta}}^{Ridge}$ and $\hat{\boldsymbol{\beta}}^{LASSO}$ are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall into one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$.
 
 (ref:opt-ridge-lasso-caption-gitbook) Geometrical interpretation of the optimization problem for Ridge and LASSO, Ridge (left), LASSO (right).
 
@@ -2974,14 +2974,14 @@ plot_grid_split(p_ridge, p_lasso)
 
 ```
 
-The fact that in LASSO Regression the estimated coefficients can be exactly equal to $0$ is a precious benefit. Indeed, LASSO Regression performs a feature selection removing the coefficients that are not relevant for predicting the response. The LASSO fitting is much more efficient than the other procedures we have seen for feature selection in GLM such as the stepwise selection (section \@ref(chap:variable-selection)) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the LASSO regression and giving them as input for a maximum likelihood fitting. If in the dataset there are many variable but only few of them are relevant for the response, this procedure can returns better predictions than just LASSO regression.
+The fact that in LASSO Regression the estimated coefficients can be exactly equal to $0$ is a precious benefit. Indeed, LASSO Regression performs a feature selection removing the coefficients that are not relevant for predicting the response. The LASSO fitting is much more efficient than the other procedures we have seen for feature selection in GLM such as the stepwise selection based on AIC or other criteria (section \@ref(chap:variable-selection)) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the LASSO regression and giving them as input for a maximum likelihood fitting. If in the dataset there are many variable but only few of them are relevant for the response, this procedure can returns better predictions than just LASSO regression.
 
 
 #### Elastic Net
 
-Compared to the Ridge Regression, the LASSO Regression has the benefit of performing a feature selection by forcing many coefficients to $0$. Anyway this doesn't necessarily mean that the LASSO produces estimates that always outperform Ridge estimates. It strongly depends on the case. In general, if in a dataset only few of the explanatory variables have an effect on the response, the LASSO will produce better estimates, but, if all the variables bring a small amount of information on the response, the the LASSO will suppress some of this information, while the Ridge will catch it. The problem is that when we have real dataset we do not know in which case we are. The _Elastic Net_ is a generalization of the Ridge and the LASSO that provide a solution for this kind of problem.
+Compared to the Ridge Regression, the LASSO Regression has the benefit of performing a feature selection by forcing many coefficients to $0$. Anyway this doesn't necessarily mean that the LASSO produces estimates that always outperform Ridge estimates. It strongly depends on the case. In general, if in a dataset only few of the explanatory variables have an effect on the response, the LASSO will produce better estimates, but, if all the variables bring a small amount of information on the response, the the LASSO will suppress some of this information, while the Ridge will catch it. The problem is that in practice, when we have a real dataset, we do not know in which case we are. The _Elastic Net_ is a generalization of the Ridge and the LASSO that provides a solution for this kind of problem.
 
-The Elastic Net consists a penalized Deviance optimization problem in which the penalization term is a mixture of the Ridge penalization and the LASSO penalization:
+The Elastic Net consists in a penalized Deviance optimization problem in which the penalization term is a mixture of the Ridge penalization and the LASSO penalization:
 \begin{equation}
 \label{eq:elastic-net-est-deviance}
 \hat{\boldsymbol{\beta}} =  \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
@@ -3001,13 +3001,15 @@ The hyper-parameter $\alpha$ can be estimated together with $\lambda$ in a Cross
 
 #### Some considerations on Shrinkage Estimators
 
-<!-- Benefici ridge/lasso
-
-Molto utili per variabili qualitative con molte modalità. Es: marca, modello
-
-Benefit of shrinkage (Ridge):
-Un coefficiente ha senso, non mi fido tanto del valore stimato, gli metto una penalizzazione ad hoc.
-È meglio che metterlo in offset
+<!--
+Benefici ridge/lasso
+- Utili quando p è grande
+- Molto utili per variabili qualitative con molte modalità. Es: marca, modello.
+  Posso mettere la penalizzazione solo su alcune delle variabili o posso mettere un peso diverso per penalizzare in modo diverso le diverse variabili
+- Posso usarlo assieme al GAM
+- Benefit of shrinkage (Ridge):
+  Un coefficiente ha senso, non mi fido tanto del valore stimato, gli metto una penalizzazione ad hoc.
+  È meglio che metterlo in offset
 
 Nota: con la stepwise regression anche gli stimatori non sono unbiased. Di fatto si ha \beta_j di ML se significativo e 0 altrimenti.
 -->
@@ -3018,13 +3020,37 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris inter
 
 \newpage
 
+
 ### Bayesian GLM
+
+<!--
+- Posso mettere penalizzazioni diverse ai diversi coefficienti
+- Se voglio che un coefficiente sia positivo, gli do una prior con distribuzione tutta >0
+- Se ho una quantitativa discreta posso riparametrizzare in modo che sia monotona
+- Altro: modelli gerarchici, mixed models GLMM
+- Se prior non semplice: stima con metodi MCMC
+-->
+
+#### Bayesian framework
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+#### Bayesian estimators for GLM
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+
+#### LASSO and Ridge Regression as Bayesian estimators
+
+<!-- Empirical Bayes -->
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+
+#### Some considerations on Bayesian estimators
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
 
 \newpage
@@ -3055,6 +3081,13 @@ Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, bl
 
 
 ## Implementation {#chap:implementation}
+
+<!--
+Tutti hanno algoritmi efficienti
+Diverse soluzioni con diversi programmi
+h2o
+-->
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
