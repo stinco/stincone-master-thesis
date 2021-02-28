@@ -30,7 +30,7 @@ vignettes/*.pdf
 /cache/
 
 # bookdown default cache directories
-/_bookdown_files/
+_bookdown_files/
 
 # Temporary files created by R markdown
 *.utf8.md
@@ -45,3 +45,4 @@ figure/
 
 # Some draft and trials
 draft/
+trials/
