@@ -1712,7 +1712,7 @@ In the top-left panel, we see the effect of the quantitative variable \(x\) in t
 
 In the top-right panel, we see the effect of a qualitative binary variable \(x\) in the model \(\mu_i = \beta_0 + \beta_1 x_i\). The variable is encoded with values \(0\) and \(1\), so \(\beta_1\) represents the effect of the modality \(x=1\). In general, for a qualitative variable with \(K\) modalities we will have \(K-1\) dummy variables \(x'_1, \dots, x'_{K-1}\) and the model will be \(\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots + + \beta_{K-1} x'_{i, K-1}\). Thus, the \(\beta_j\) coefficient represents the relative effect of the modality \(j\) compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if \(x\) is the vehicle make, \(Y\) the yearly number of claims, the base level for \(x\) is `Fiat' and the \(j\)\textsuperscript{th} modality is `Ferrari', then \(\beta_j>0\) means that Ferrari cars on average experience more claims that Fiat cars.
 
-In general, in a multivariate model, the coefficient \(\beta_j\) represents the effect of the variable \(j\) given all the others. For example, in the example of Fiat and Ferrari cars, if in the model there is also the variable `vehicle power', the coefficient \(\beta_j\) corresponding to the modality `Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called \emph{Simpson's paradox} \footnote{Simpson's paradox, \url{https://en.wikipedia.org/wiki/Simpson\%27s_paradox}}.
+In general, in a multivariate model, the coefficient \(\beta_j\) represents the effect of the variable \(j\) given all the others. In the example of Fiat and Ferrari cars, if in the model there is also the variable `vehicle power', the coefficient \(\beta_j\) corresponding to the modality `Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called \emph{Simpson's paradox} \footnote{Simpson's paradox, \url{https://en.wikipedia.org/wiki/Simpson\%27s_paradox}}.
 
 In the bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect of a quantitative variable \(x_1\) and a qualitative binary variable \(x_2\) together in the model \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}\). As we can seen, the effects of \(x_1\) variable in the two groups defined by \(x_2\) variable are represented by two parallel straight lines. The first one is \(\mu_i = \beta_0 + \beta_1 x_{i1}\) and the second is \(\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}\). The coefficient \(\beta_2\) represents the vertical distance between the two lines.
 
@@ -2469,18 +2469,36 @@ where the coefficients \(\beta_j\) considered in the Elastic Net penalization ar
 \hypertarget{bayesian-glm}{%
 \subsection{Bayesian GLM}\label{bayesian-glm}}
 
-\hypertarget{bayesian-framework}{%
-\subsubsection{Bayesian framework}\label{bayesian-framework}}
+In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that introduce a bias in the estimates. As we will see in section \ref{chap:ridge-lasso-bayes}, Ridge Regression and LASSO Regression can be interpreted as bayesian estimators.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+\hypertarget{the-bayesian-framework}{%
+\subsubsection{The Bayesian framework}\label{the-bayesian-framework}}
+
+In classical inference what is commonly done for estimating an unknown parameter \(\theta\) using an observed sample \(\boldsymbol{y}\), is to considerate the value \(\hat{\theta}^{ML}\) that maximize the likelihood:
+\[
+\hat{\theta}^{ML} = \argmax_{\theta\in\Theta}{\ell(\theta)} = \argmax_{\theta\in\Theta}{p(\boldsymbol{y}|\theta)}
+\]
+where \(p(\boldsymbol{y}|\theta)\) is the probability (or the density) of the sample \(\boldsymbol{y}\) given the parameter \(\theta\). That means that, within all the possible parameters \(\theta\in\Theta\), we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample \(\boldsymbol{y}\). We hilight that \(\ell(\theta)\) is not a probability distribution on \(\theta\), so for example, in general, \(\int_{\Theta}{\ell(\theta)d\theta}\ne1\).
+
+The Bayesian inference introduce the concept of prior distribution over \(\theta\): \(\pi(\theta)\). This distribution represent how probable we assume the different values of \(\theta\in\Theta\) are on our mind prior to the observation of the sample.
+
+With the bayes theorem, having a prior distribution \(\pi(\theta)\), we can compute the posterior distribution for \(\theta\) given the observed sample \(\boldsymbol{y}\):
+\[
+\pi(\theta|\boldsymbol{y}) = \frac{p(\boldsymbol{y}|\theta)\pi(\theta)}{p(\boldsymbol{y})}
+\]
+
+\(\pi(\theta|\boldsymbol{y})\) is actually a probability distribution, so we can compute probabilities and take prediction on \(\theta\) given the distribution \(\pi(\theta|\boldsymbol{y})\). For example, it is possibile to compute the expected value of \(\theta\) given \(\boldsymbol{y}\):
+\[
+E(\theta|\boldsymbol{y}) = \int_{\Theta}{\theta \pi(\theta|\boldsymbol{y}) d\theta}
+\]
 
 \hypertarget{bayesian-estimators-for-glm}{%
 \subsubsection{Bayesian estimators for GLM}\label{bayesian-estimators-for-glm}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
-\hypertarget{lasso-and-ridge-regression-as-bayesian-estimators}{%
-\subsubsection{LASSO and Ridge Regression as Bayesian estimators}\label{lasso-and-ridge-regression-as-bayesian-estimators}}
+\hypertarget{chap:ridge-lasso-bayes}{%
+\subsubsection{LASSO and Ridge Regression as Bayesian estimators}\label{chap:ridge-lasso-bayes}}
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
