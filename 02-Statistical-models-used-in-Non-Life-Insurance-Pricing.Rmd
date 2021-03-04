@@ -3060,19 +3060,69 @@ $$
 $$
 where $p(\boldsymbol{y}|\theta)$ is the probability (or the density) of the sample $\boldsymbol{y}$ given the parameter $\theta$. That means that, within all the possible parameters $\theta\in\Theta$, we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample $\boldsymbol{y}$. We hilight that $\ell(\theta)$ is not a probability distribution on $\theta$, so for example, in general, $\int_{\Theta}{\ell(\theta)d\theta}\ne1$.
 
-The Bayesian inference introduce the concept of prior distribution over $\theta$: $\pi(\theta)$. This distribution represent how probable we assume the different values of $\theta\in\Theta$ are on our mind prior to the observation of the sample.
+The _Bayesian Inference_ introduces the concept of prior distribution over $\theta$: $\pi(\theta)$. This distribution represents how probable we assume the different values of $\theta\in\Theta$ are on our mind prior to the observation of the sample. In classical statistics, the parameter $\theta$ is seen as a specific real number that is unknown. In the Bayesian framework, the parameter $\theta$ is seen as a random variable and its distribution represent our information on it. This aspect introduces a subjective point of view of probability.
 
-With the bayes theorem, having a prior distribution $\pi(\theta)$, we can compute the posterior distribution for $\theta$ given the observed sample $\boldsymbol{y}$:
+With the _Bayes Theorem_, having a prior distribution $\pi(\theta)$, we can compute the posterior distribution for $\theta$ given the observed sample $\boldsymbol{y}$:
 $$
 \pi(\theta|\boldsymbol{y}) = \frac{p(\boldsymbol{y}|\theta)\pi(\theta)}{p(\boldsymbol{y})}
 $$
 
-$\pi(\theta|\boldsymbol{y})$ is actually a probability distribution, so we can compute probabilities and take prediction on $\theta$ given the distribution $\pi(\theta|\boldsymbol{y})$. For example, it is possibile to compute the expected value of $\theta$ given $\boldsymbol{y}$:
+$\pi(\theta|\boldsymbol{y})$ is actually a probability distribution, so we can compute probabilities and take prediction on $\theta$ given the distribution $\pi(\theta|\boldsymbol{y})$.
+
+Two useful stastistics based on the posterior distribution $\pi(\theta|\boldsymbol{y})$ are the expected value of $\theta$ given $\boldsymbol{y}$:
 $$
 E(\theta|\boldsymbol{y}) = \int_{\Theta}{\theta \pi(\theta|\boldsymbol{y}) d\theta}
 $$
+and the mode of $\theta$ given $\boldsymbol{y}$:
+$$
+Mode(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
+$$
 
+These two statistics can be used as point estimates for the parameter $\theta$. In the following we are going to refer to $Mode(\theta|\boldsymbol{y})$ as the _Maximum a Posteriori_ (MAP) estimate:
+$$
+\hat{\theta}^{MAP} = Mode(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
+$$
 
+#### Bayesian estimator for the mean of a Normal distribution
+
+One example to dive into the the Bayesian inference that is useful to better understand the logic of Bayesian estimators in GLM is the inference on the mean of a Normal distribution from an observed sample.
+
+Let's assume we have a independent and identically distributed sample $\boldsymbol{y} = (y_1, y_2, \dots, y_n)$ from a Normal distribution:
+$$
+p(y_i | \mu, \sigma^2) \sim \mathcal{N}(\mu, \sigma^2), \ i\in\{1,2,\dots,n\}
+$$
+Let's assume that $\sigma^2$ is known and we want to infer the value of $\mu$. In the Bayesian framework, $\mu$ is a random variable, so the first thing we have to do is to define a prior distribution for it. Let's assume:
+$$
+\pi(\mu) \sim \mathcal{N}(\mu_0, \sigma_0)
+$$
+where $\mu_0$ and $\sigma_0$ are known parameters.
+
+Under these assumptions we can compute the posterior distribution as:
+$$
+\pi(\mu|\boldsymbol{y}) = \frac{p(\boldsymbol{y}|\mu)\pi(\mu)}{p(\boldsymbol{y})}
+$$
+
+As we want to conduct inference on the parameter $\mu$ and the denominator $p(\boldsymbol{y})$ does not depend on $\mu$, we can just consider the numerator:
+$$
+\pi(\mu|\boldsymbol{y}) \propto p(\boldsymbol{y}|\mu)\pi(\mu)
+$$
+
+Substituting $p(\boldsymbol{y}|\mu)$ and $\pi(\mu)$ with the distributions assumed, we get:
+$$
+\pi(\mu|\boldsymbol{y}) \sim \mathcal{N}\left(  \mu_n, \sigma_n \right)
+$$
+where:
+\begin{align*}
+\mu_n & = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}} \\
+\sigma_n^2 & = \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1}
+\end{align*}
+
+<!--
+Osservazioni
+- Commento sul risultato
+- Esempio grafico
+- Caso non informative prior -> Maximum Likelihood
+-->
 
 
 #### Bayesian estimators for GLM
