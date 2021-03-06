@@ -659,7 +659,7 @@ p_quant_qual_4 <- df4 %>%
   )
 ```
 
-```{r, plot-quant-qual-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction'), cache = TRUE}
+```{r, plot-quant-qual-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-types-caption-gitbook)", "(ref:expl-var-types-caption-latex)"), label="expl-var-types", echo=FALSE, fig.ncol=2, fig.subcap=c('Quantitative', 'Qualitative', 'Quantitative and qualitative \\\\ without interaction', 'Quantitative and qualitative \\\\ with interaction'), cache = TRUE}
 
 # To align the plots in a subfigure environment
 plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -831,7 +831,7 @@ p_quant_effect_4 <- df %>%
   )
 ```
 
-```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-quant-effect-caption-gitbook)", "(ref:expl-var-quant-effect-caption-latex)"), label="expl-var-quant-effect", echo=FALSE, fig.ncol=2, fig.subcap=c('Polynomial degree 2', 'Polynomial degree 4', 'Piece-wise linear', 'Piece-wise polynomial degree 2'), cache = TRUE}
+```{r, plot-quant-effect-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:expl-var-quant-effect-caption-gitbook)", "(ref:expl-var-quant-effect-caption-latex)"), label="expl-var-quant-effect", echo=FALSE, fig.ncol=2, fig.subcap=c('Polynomial degree 2', 'Polynomial degree 4', 'Piece-wise linear', 'Piece-wise polynomial degree 2'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1009,7 +1009,7 @@ p_resp_4 <- df %>%
 
 ```
 
-```{r, plot-quant-effect-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:resp-var-caption-gitbook)", "(ref:resp-var-caption-latex)"), label="resp-var", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal - identity', 'Binomial - logit', 'Poisson - log', 'Gamma - log'), cache = TRUE}
+```{r, plot-quant-effect-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:resp-var-caption-gitbook)", "(ref:resp-var-caption-latex)"), label="resp-var", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal - identity', 'Binomial - logit', 'Poisson - log', 'Gamma - log'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1500,7 +1500,7 @@ p_cub_spline_4 <- plot_spline_lidar(dataset = lidar,
 ```
 
 
-```{r, plot-cub-spline-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), fig.scap="(ref:cub-spline-caption-short)", label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots'), cache = TRUE}
+```{r, plot-cub-spline-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:cub-spline-caption-gitbook)", "(ref:cub-spline-caption-latex)"), fig.scap="(ref:cub-spline-caption-short)", label="cub-spline", echo=FALSE, fig.ncol=2, fig.subcap=c('$0$ knots', '$3$ knots', '$7$ knots', '$35$ knots'), cache = TRUE}
 
 # # To align the plots in a subfigure environment
 # plot_grid_split <- function(..., align = "hv", axis = "tblr"){
@@ -1714,7 +1714,7 @@ p_gam_lambda_4 <- plot_gam_lidar(dataset = lidar, k = k, sp = sp4)
 
 ```
 
-```{r, plot-gam-lambda-print, out.width = "50%", fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), fig.scap="(ref:gam-lambda-caption-short)", label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$'), cache = TRUE}
+```{r, plot-gam-lambda-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:gam-lambda-caption-gitbook)", "(ref:gam-lambda-caption-latex)"), fig.scap="(ref:gam-lambda-caption-short)", label="gam-lambda", echo=FALSE, fig.ncol=2, fig.subcap=c('$\\lambda = 0$', '$\\lambda = 10$', '$\\lambda = 10^3$', '$\\lambda = 10^6$'), cache = TRUE}
 
 plot_grid_split(p_gam_lambda_1, p_gam_lambda_2, p_gam_lambda_3, p_gam_lambda_4)
 
@@ -1960,7 +1960,7 @@ p_b_splines_3 <- cbind(x, base_3) %>%
 ```
 
 
-```{r, plot-b-splines-print, out.width = "32%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:plot-b-splines-caption-gitbook)", "(ref:plot-b-splines-caption-latex)"), label = "b-splines-plot", echo = FALSE, fig.ncol = 3, fig.subcap = c('degree $1$', 'degree $2$', 'degree $3$'), cache = TRUE}
+```{r, plot-b-splines-print, out.width = "32%", fig.width = 3, fig.height = 2.25, fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:plot-b-splines-caption-gitbook)", "(ref:plot-b-splines-caption-latex)"), label = "b-splines-plot", echo = FALSE, fig.ncol = 3, fig.subcap = c('degree $1$', 'degree $2$', 'degree $3$'), cache = TRUE}
 
 plot_grid_split(p_b_splines_1, p_b_splines_2, p_b_splines_3)
 
@@ -2408,7 +2408,7 @@ p_ridge_pred_4 <- df %>%
 
 ```
 
-```{r, plot-ridge-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:ridge-lambda-caption-gitbook)", "(ref:ridge-lambda-caption-latex)"), fig.scap="(ref:ridge-lambda-caption-short)", label="ridge-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_ridge, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
+```{r, plot-ridge-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.width = c(4,4,4,4,5.6), fig.height = c(2.25,2.25,2.25,2.25,3.15), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:ridge-lambda-caption-gitbook)", "(ref:ridge-lambda-caption-latex)"), fig.scap="(ref:ridge-lambda-caption-short)", label="ridge-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_ridge, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
 
 
 plot_grid_split(
@@ -2722,7 +2722,7 @@ p_lasso_pred_4 <- df %>%
 
 ```
 
-```{r, plot-lasso-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:lasso-lambda-caption-gitbook)", "(ref:lasso-lambda-caption-latex)"), fig.scap="(ref:lasso-lambda-caption-short)", label="lasso-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_lasso, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
+```{r, plot-lasso-lambda-print, out.width = c("50%", "50%", "50%", "50%", "70%"), fig.width = c(4,4,4,4,5.6), fig.height = c(2.25,2.25,2.25,2.25,3.15), fig.align='center', fig.cap=ifelse(knitr::is_html_output(), "(ref:lasso-lambda-caption-gitbook)", "(ref:lasso-lambda-caption-latex)"), fig.scap="(ref:lasso-lambda-caption-short)", label="lasso-lambda", echo=FALSE, fig.ncol=2, fig.subcap = c(str_c('$\\lambda = ', lambda_lasso, '$'), '$\\hat{\\beta}_j$ for different values of $\\lambda$'), cache = TRUE}
 
 
 plot_grid_split(
@@ -2801,14 +2801,14 @@ p_ridge <- tibble(
       x = x0, y = y0, label = expression(hat(beta)[ML])
     ),
     mapping = aes(x = x, y = y, label = label),
-    parse = T, hjust = 0, nudge_x = 0.05
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.07
   ) +
   geom_text(
     data = tibble(
       x = 3, y = 0, label = expression(beta[1])
     ),
     mapping = aes(x = x, y = y, label = label),
-    parse = T, hjust = 0, nudge_y = 0.11, nudge_x = 0.05
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.11
   ) +
   geom_text(
     data = tibble(
@@ -2896,14 +2896,14 @@ p_lasso <- tibble(
       x = x0, y = y0, label = expression(hat(beta)[ML])
     ),
     mapping = aes(x = x, y = y, label = label),
-    parse = T, hjust = 0, nudge_x = 0.05
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.07
   ) +
   geom_text(
     data = tibble(
       x = 3, y = 0, label = expression(beta[1])
     ),
     mapping = aes(x = x, y = y, label = label),
-    parse = T, hjust = 0, nudge_y = 0.11, nudge_x = 0.05
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.11
   ) +
   geom_text(
     data = tibble(
@@ -2955,7 +2955,7 @@ p_lasso <- tibble(
   geom_text(
     data = tibble(x = 1, y = 0, label = expression(hat(beta)[LASSO])),
     mapping = aes(x = x, y = y, label = label),
-    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.1,
+    parse = T, hjust = 0, nudge_x = 0.05, nudge_y = 0.151795,
     color = col2
   ) +
   coord_equal(
@@ -2976,7 +2976,7 @@ p_lasso <- tibble(
 ```
 
 
-```{r, plot-opt-ridge-lasso-print, out.width = "50%", fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:opt-ridge-lasso-caption-gitbook)", "(ref:opt-ridge-lasso-caption-latex)"), fig.scap = "(ref:opt-ridge-lasso-caption-short)", label="opt-ridge-lasso", echo=FALSE, fig.ncol=2, fig.subcap=c('Ridge', 'LASSO'), cache=TRUE}
+```{r, plot-opt-ridge-lasso-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:opt-ridge-lasso-caption-gitbook)", "(ref:opt-ridge-lasso-caption-latex)"), fig.scap = "(ref:opt-ridge-lasso-caption-short)", label="opt-ridge-lasso", echo=FALSE, fig.ncol=2, fig.subcap=c('Ridge', 'LASSO'), cache=TRUE}
 
 plot_grid_split(p_ridge, p_lasso)
 
@@ -3049,38 +3049,38 @@ Benefici ridge/lasso
 
 ### Bayesian GLM
 
-In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that introduce a bias in the estimates. As we will see in section \@ref(chap:ridge-lasso-bayes), Ridge Regression and LASSO Regression can be interpreted as bayesian estimators.
+In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:ridge-lasso-bayes), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
 
 
 #### The Bayesian framework
 
-In classical inference what is commonly done for estimating an unknown parameter $\theta$ using an observed sample $\boldsymbol{y}$, is to considerate the value $\hat{\theta}^{ML}$ that maximize the likelihood:
+In classical inference what is commonly done for estimating an unknown parameter $\theta$ using an observed sample $\boldsymbol{y}=(y_1, y_2, \dots, y_n)$, is to considerate the value $\hat{\theta}^{ML}$ that maximize the likelihood:
 $$
 \hat{\theta}^{ML} = \argmax_{\theta\in\Theta}{\ell(\theta)} = \argmax_{\theta\in\Theta}{p(\boldsymbol{y}|\theta)}
 $$
-where $p(\boldsymbol{y}|\theta)$ is the probability (or the density) of the sample $\boldsymbol{y}$ given the parameter $\theta$. That means that, within all the possible parameters $\theta\in\Theta$, we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample $\boldsymbol{y}$. We hilight that $\ell(\theta)$ is not a probability distribution on $\theta$, so for example, in general, $\int_{\Theta}{\ell(\theta)d\theta}\ne1$.
+where $p(\boldsymbol{y}|\theta)$ is the probability (or the density) of the sample $\boldsymbol{y}$ given the parameter $\theta$. That means that, within all the possible parameters $\theta\in\Theta$, we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample $\boldsymbol{y}$. We highlight that $\ell(\theta)$ is not a probability distribution on $\theta$, so for example, in general, $\int_{\Theta}{\ell(\theta)d\theta}\ne1$.
 
-The _Bayesian Inference_ introduces the concept of prior distribution over $\theta$: $\pi(\theta)$. This distribution represents how probable we assume the different values of $\theta\in\Theta$ are on our mind prior to the observation of the sample. In classical statistics, the parameter $\theta$ is seen as a specific real number that is unknown. In the Bayesian framework, the parameter $\theta$ is seen as a random variable and its distribution represent our information on it. This aspect introduces a subjective point of view of probability.
+The _Bayesian Inference_ introduces the concept of prior distribution of th parameter $\pi(\theta)$. This distribution represents how probable we assume the different values of $\theta\in\Theta$ are on our mind prior to the observation of the sample. In classical statistics, the parameter $\theta$ is seen as a specific real number that is unknown. In the Bayesian framework, the parameter $\theta$ is seen as a random variable and its distribution represent our information on it. This aspect introduces a subjective point of view of probability.
 
 With the _Bayes Theorem_, having a prior distribution $\pi(\theta)$, we can compute the posterior distribution for $\theta$ given the observed sample $\boldsymbol{y}$:
 $$
 \pi(\theta|\boldsymbol{y}) = \frac{p(\boldsymbol{y}|\theta)\pi(\theta)}{p(\boldsymbol{y})}
 $$
 
-$\pi(\theta|\boldsymbol{y})$ is actually a probability distribution, so we can compute probabilities and take prediction on $\theta$ given the distribution $\pi(\theta|\boldsymbol{y})$.
+$\pi(\theta|\boldsymbol{y})$ is actually a probability distribution, so we can compute probabilities and make predictions on $\theta$ given the distribution $\pi(\theta|\boldsymbol{y})$.
 
-Two useful stastistics based on the posterior distribution $\pi(\theta|\boldsymbol{y})$ are the expected value of $\theta$ given $\boldsymbol{y}$:
+Two useful statistics based on the posterior distribution $\pi(\theta|\boldsymbol{y})$ are the expected value of $\theta$ given $\boldsymbol{y}$:
 $$
 E(\theta|\boldsymbol{y}) = \int_{\Theta}{\theta \pi(\theta|\boldsymbol{y}) d\theta}
 $$
 and the mode of $\theta$ given $\boldsymbol{y}$:
 $$
-Mode(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
+\text{Mode}(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
 $$
 
-These two statistics can be used as point estimates for the parameter $\theta$. In the following we are going to refer to $Mode(\theta|\boldsymbol{y})$ as the _Maximum a Posteriori_ (MAP) estimate:
+These two statistics can be used as point estimates for the parameter $\theta$. In the following we are going to refer to $\text{Mode}(\theta|\boldsymbol{y})$ as the _Maximum a Posteriori_ (MAP) estimate:
 $$
-\hat{\theta}^{MAP} = Mode(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
+\hat{\theta}^{MAP} = \text{Mode}(\theta|\boldsymbol{y}) = \argmax_{\theta\in\Theta}{\pi(\theta|\boldsymbol{y})}
 $$
 
 #### Bayesian estimator for the mean of a Normal distribution
@@ -3088,13 +3088,16 @@ $$
 One example to dive into the the Bayesian inference that is useful to better understand the logic of Bayesian estimators in GLM is the inference on the mean of a Normal distribution from an observed sample.
 
 Let's assume we have a independent and identically distributed sample $\boldsymbol{y} = (y_1, y_2, \dots, y_n)$ from a Normal distribution:
-$$
+\begin{equation}
+\label{eq:bayes-normal-normal-likelihood}
 p(y_i | \mu, \sigma^2) \sim \mathcal{N}(\mu, \sigma^2), \ i\in\{1,2,\dots,n\}
-$$
+\end{equation}
+
 Let's assume that $\sigma^2$ is known and we want to infer the value of $\mu$. In the Bayesian framework, $\mu$ is a random variable, so the first thing we have to do is to define a prior distribution for it. Let's assume:
-$$
+\begin{equation}
+\label{eq:bayes-normal-normal-prior}
 \pi(\mu) \sim \mathcal{N}(\mu_0, \sigma_0)
-$$
+\end{equation}
 where $\mu_0$ and $\sigma_0$ are known parameters.
 
 Under these assumptions we can compute the posterior distribution as:
@@ -3103,31 +3106,156 @@ $$
 $$
 
 As we want to conduct inference on the parameter $\mu$ and the denominator $p(\boldsymbol{y})$ does not depend on $\mu$, we can just consider the numerator:
-$$
+\begin{equation}
+\label{eq:bayes-normal-normal-posterior-compute}
 \pi(\mu|\boldsymbol{y}) \propto p(\boldsymbol{y}|\mu)\pi(\mu)
+\end{equation}
+
+It is possible to prove that, by substituting in formula \@ref(eq:bayes-normal-normal-posterior-compute) the likelihood $p(\boldsymbol{y}|\mu)$ and prior $\pi(\mu)$ with \@ref(eq:bayes-normal-normal-likelihood) and \@ref(eq:bayes-normal-normal-prior), we get:
+\begin{equation}
+\label{eq:bayes-normal-normal-posterior-result}
+\pi(\mu|\boldsymbol{y}) \sim \mathcal{N}\left(  \mu_n, \sigma_n \right)
+\end{equation}
+where:
+\begin{align}
+\label{eq:bayes-normal-normal-mu}
+\mu_n & = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}} \\
+\label{eq:bayes-normal-normal-sigma}
+\sigma_n^2 & = \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1}
+\end{align}
+
+The posterior distribution for the mean $\pi(\mu|\boldsymbol{y})$ is still a Normal distribution with parameters $(\mu_n, \sigma_n^2)$ that depend on the initial parameters $(\mu_0, \sigma_0^2)$, the observed sample average $\bar{y}$ and the sample size $n$.
+
+Figure \@ref(fig:bayes-normal) shows the prior $\pi(\mu)$, the likelihood $\pi(\mu|\boldsymbol{y})$ and the posterior distribution $\pi(\mu|\boldsymbol{y})$ for different values of the initial parameters and for different sample sizes $n$. As we can see, $\pi(\mu|\boldsymbol{y})$ lie between $\pi(\mu)$ and $\pi(\mu|\boldsymbol{y})$.
+
+(ref:bayes-normal-caption) prior $\pi(\mu)$, likelihood $\pi(\mu|\boldsymbol{y})$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution. The panels shows $\pi(\mu)$, $\pi(\mu|\boldsymbol{y})$ and $\pi(\mu|\boldsymbol{y})$ for different values of the prior variance $\sigma_0$ (rows) of $\mu$ and different sample size $n$ (columns).
+
+(ref:bayes-normal-caption-short) prior $\pi(\mu)$, likelihood $\pi(\mu|\boldsymbol{y})$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution.
+
+```{r, bayes-normal, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap = "(ref:bayes-normal-caption)", fig.scap = "(ref:bayes-normal-caption-short)", label = "bayes-normal", echo = FALSE, cache = TRUE}
+
+mu_0 <- 0
+sigma_0 <- c(4, 1, .4) # Variabile
+sigma <- 4
+n <- c(1, 4, 10) # Variabile
+ybar <- 4
+
+x <- seq(from = -2, to = 6, by = .1)
+
+df <- crossing(
+  mu_0, sigma_0, sigma, n, ybar, x
+) %>% 
+  mutate(
+    mu_n = (mu_0*sigma + n*ybar*sigma_0) / (sigma + n*sigma_0),
+    sigma_n = (sigma*sigma_0) / (sigma + n*sigma_0),
+    prior = dnorm(x, mean = mu_0, sd = sqrt(sigma_0)),
+    likelihood = dnorm(x, mean = ybar, sd = sqrt(sigma/n)),
+    posterior = dnorm(x, mean = mu_n, sd = sqrt(sigma_n))
+  ) %>% 
+  pivot_longer(
+    cols = c(prior, likelihood, posterior),
+    names_to = "distribution",
+    values_to = "density"
+  ) %>% 
+  mutate(
+    distribution = distribution %>% 
+      str_to_title() %>% 
+      fct_inorder()
+  ) %>% 
+  mutate(
+    n = as.character(n),
+    n_label = str_c("n == ", n) %>% 
+      fct_inorder(),
+    sigma_0_label = str_c("sigma[0] == ", sigma_0) %>%
+      fct_inorder(),
+  )
+
+df_notes <- df %>%
+      select(sigma_0_label, n_label, mu_0, ybar, mu_n) %>%
+      unique()
+
+
+p_bayes_normal <- df %>% 
+  ggplot() +
+  geom_vline(
+    data = df_notes %>% 
+      pivot_longer(cols = c(mu_0, ybar, mu_n)),
+    mapping = aes(xintercept = value),
+    linetype = "dotted",
+    color = "grey20"
+  ) +
+  # geom_segment(
+  #   aes(x = mu_n, xend = mu_n),
+  #   y = -Inf, yend = 1,
+  #   linetype = "dotted",
+  #   color = "grey20"
+  # ) +
+  # geom_text(
+  geom_label(
+    data = df_notes %>%   
+      crossing(
+        tibble(label = expression(mu[n]))
+      ),
+    mapping = aes(x = mu_n, label = label),
+    y = 1, label.size = NA,
+    parse = T, nudge_x = 0.1,
+    color = "grey20"
+  ) +
+  geom_line(
+    aes(x = x, y = density, color = distribution),
+    size = 1,
+    alpha = .8
+  ) +
+  facet_grid(
+    sigma_0_label ~ n_label,
+    labeller = label_parsed
+  ) +
+  ylim(0, 1.1) +
+  labs(x = "y", y = "Density", color = "Distribution") +
+  scale_x_continuous(
+    breaks = c(0, 4),
+    labels = c(
+      expression(mu[0]),
+      expression(bar(y))
+    )
+  ) 
+
+p_bayes_normal
+
+```
+
+As $\pi(\mu|\boldsymbol{y})$ is a Normal distribution, the expected value $E(\mu|\boldsymbol{y})$ and the mode $\text{Mode}(\mu|\boldsymbol{y})$ coincide, so our maximum a posteriori estimate for $\mu$ will be:
+$$
+\hat{\mu}^{MAP} = \text{Mode}(\mu|\boldsymbol{y}) = E(\mu|\boldsymbol{y}) = \mu_n = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}}
 $$
 
-Substituting $p(\boldsymbol{y}|\mu)$ and $\pi(\mu)$ with the distributions assumed, we get:
-$$
-\pi(\mu|\boldsymbol{y}) \sim \mathcal{N}\left(  \mu_n, \sigma_n \right)
-$$
-where:
+From the formula \@ref(eq:bayes-normal-normal-mu) we get some interesting insights on $E(\mu|\boldsymbol{y})=\mu_n$. $\mu_n$ is a weighted average between the prior mean $\mu_0$ and the sample mean $\bar{y}$, so it stays between $\mu_0$ and $\bar{y}$. The weight for $\mu_0$ and $\bar{y}$ are given respectively by the reciprocal of the prior variance $\frac{1}{Var(\mu)}=\frac{1}{\sigma_0^2}$ and the reciprocal of the sample mean variance $\frac{1}{Var(\bar{y})}=\frac{n}{\sigma^2}$. That means that the lower the prior variance is, the greater the weight for $\mu_0$ is, and the lower the sample mean variance is, the greater the weight for $\bar{y}$ is. The reciprocal of the variance can be interpreted as the amount of information we have on that estimate. Thus, a prior distribution with a lower variance is a more informative prior, while a prior distribution with an higher variance is a less informative prior. The sample mean variance $Var(\bar{y})=\frac{\sigma^2}{n}$ depends on $\sigma^2$ and $n$. If $n$ increases, the $Var(\bar{y})$ decreases and so the weight for $\bar{y}$ increases. That corresponds of saying that, by increasing the sample size $n$, we give more credibility to the observed sample mean $\bar{y}$.
+
+From the formula \@ref(eq:bayes-normal-normal-sigma) we see that the reciprocal of $Var(\mu|\boldsymbol{y})=\sigma_n^2$ is the sum between the reciprocal of $Var(\mu)=\sigma_0^2$ and the reciprocal of $Var(\bar{y})=\frac{\sigma^2}{n}$. Interpreting the reciprocal of the variance as the information on that estimate, this result on $Var(\mu|\boldsymbol{y})$ corresponds to saying that the information on the posterior distribution is the sum of the prior information and the information obtained by the sample.
+
+On the limit case, if $n\to +\infty$, the posterior mean converges to the observed sample mean $\mu_n\to \bar{y}$ and the posterior variance converges to zero $\sigma_n\to 0$.
+
+Another limit case is to consider a prior distribution with $\sigma_0^2 = +\infty$, that is $\pi(\mu)\propto k, k\in]0,+\infty[$. This is an improper prior, as for any value of $k\in]0,+\infty[$, we get $\int_{\mathbb{R}}{\pi(\mu)d\mu}=+\infty$. This kind of prior distribution is called _Non-informative prior_, as it gives no information on the parameter. In this case, by \@ref(eq:bayes-normal-normal-mu) and \@ref(eq:bayes-normal-normal-sigma) we get:
 \begin{align*}
-\mu_n & = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}} \\
-\sigma_n^2 & = \left( \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2} \right)^{-1}
+\mu_n & = \bar{y} \\
+\sigma_n^2 & = \frac{\sigma^2}{n} \\
 \end{align*}
+From equation, \@ref(eq:bayes-normal-normal-posterior-compute) we get that, if we use a non-informative prior, the posterior distribution is proportional to the likelihood $\pi(\mu|\boldsymbol{y}) \propto p(\boldsymbol{y}|\mu)$. That means that the Maximum a Posteriori estimates $\hat{\mu}^{MAP}$ corresponds to the maximum likelihood estimates $\hat{\mu}^{ML}$. This results gives a new interpretation of the Maximum Likelihood estimates, as it can be always seen as a Bayesian posterior estimate with a Non-informative prior distribution.
 
 <!--
 Osservazioni
 - Commento sul risultato
 - Esempio grafico
 - Caso non informative prior -> Maximum Likelihood
+- Anche a \sigma^2 si può assegnare una prior distribution e otterremo una posterior
 -->
 
 
 #### Bayesian estimators for GLM
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients $\boldsymbol{\beta}, \sigma^2$.
+
+...
 
 
 #### LASSO and Ridge Regression as Bayesian estimators {#chap:ridge-lasso-bayes}
