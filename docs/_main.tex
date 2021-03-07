@@ -1540,15 +1540,15 @@ In the Gamma case, its canonical function \(g(\mu)=-\frac{1}{\mu}\) has the draw
 
 In the Scaled Binomial case the canonical function \(g(p) = \log{\left(\frac{p}{1-p}\right)}\) is called logit and its inverse \(g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}\) is called logistic. For Scaled Binomial distribution we keep using the notation \(p\) for the expected value as it corresponds to the probability of success \(p\).
 
-\hypertarget{model-fitting}{%
-\subsubsection{Model fitting}\label{model-fitting}}
+\hypertarget{chap:glm-model-fitting}{%
+\subsubsection{Model fitting}\label{chap:glm-model-fitting}}
 
 The model depends on the parameters \(\left(\boldsymbol{\beta}, \phi\right)\). Indeed, the parameters \(\theta_i\) can be obtained by \(\boldsymbol{\beta}\) as:
 \[
 \theta_i = b'^{-1}(\mu_i) = b'^{-1}(g^{-1}(\eta_i)) = b'^{-1}\left(g^{-1}\left(\boldsymbol{x}_i^t\boldsymbol{\beta}\right)\right)
 \]
 
-Therefore, fitting the model corresponds to estimating \(\left(\boldsymbol{\beta}, \phi\right)\). The technique used in GLM is the \emph{maximum likelihood}. Let's indicate with \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) the model likelihood. We remind that the likelihood is a function of the parameters that maps \(\left(\boldsymbol{\beta}, \phi\right)\) to the density (or probability in the discrete case) of the observed values \(\boldsymbol{y}\) conditioned to the parameters \(\left(\boldsymbol{\beta}, \phi\right)\)
+Therefore, fitting the model corresponds to estimating \(\left(\boldsymbol{\beta}, \phi\right)\). The technique used in GLM is the \emph{Maximum Likelihood}. Let's indicate with \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) the model likelihood. We remind that the likelihood is a function of the parameters that maps \(\left(\boldsymbol{\beta}, \phi\right)\) to the density (or probability in the discrete case) of the observed values \(\boldsymbol{y}\) conditioned to the parameters \(\left(\boldsymbol{\beta}, \phi\right)\)
 \[
 \begin{array}{cccc}
 L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
@@ -2476,9 +2476,9 @@ In this section we are going to present the Bayesian estimators for GLM.The nove
 
 In classical inference what is commonly done for estimating an unknown parameter \(\theta\) using an observed sample \(\boldsymbol{y}=(y_1, y_2, \dots, y_n)\), is to considerate the value \(\hat{\theta}^{ML}\) that maximize the likelihood:
 \[
-\hat{\theta}^{ML} = \argmax_{\theta\in\Theta}{\ell(\theta)} = \argmax_{\theta\in\Theta}{p(\boldsymbol{y}|\theta)}
+\hat{\theta}^{ML} = \argmax_{\theta\in\Theta}{L(\theta)} = \argmax_{\theta\in\Theta}{p(\boldsymbol{y}|\theta)}
 \]
-where \(p(\boldsymbol{y}|\theta)\) is the probability (or the density) of the sample \(\boldsymbol{y}\) given the parameter \(\theta\). That means that, within all the possible parameters \(\theta\in\Theta\), we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample \(\boldsymbol{y}\). We highlight that \(\ell(\theta)\) is not a probability distribution on \(\theta\), so for example, in general, \(\int_{\Theta}{\ell(\theta)d\theta}\ne1\).
+where \(p(\boldsymbol{y}|\theta)\) is the probability (or the density) of the sample \(\boldsymbol{y}\) given the parameter \(\theta\). That means that, within all the possible parameters \(\theta\in\Theta\), we select the most likely one, that is the one that, conditioned to it, returns the maximum probability for the observed sample \(\boldsymbol{y}\). We highlight that \(L(\theta)\) is not a probability distribution on \(\theta\), so for example, in general, \(\int_{\Theta}{L(\theta)d\theta}\ne1\).
 
 The \emph{Bayesian Inference} introduces the concept of prior distribution of th parameter \(\pi(\theta)\). This distribution represents how probable we assume the different values of \(\theta\in\Theta\) are on our mind prior to the observation of the sample. In classical statistics, the parameter \(\theta\) is seen as a specific real number that is unknown. In the Bayesian framework, the parameter \(\theta\) is seen as a random variable and its distribution represent our information on it. This aspect introduces a subjective point of view of probability.
 
@@ -2547,7 +2547,7 @@ where:
 
 The posterior distribution for the mean \(\pi(\mu|\boldsymbol{y})\) is still a Normal distribution with parameters \((\mu_n, \sigma_n^2)\) that depend on the initial parameters \((\mu_0, \sigma_0^2)\), the observed sample average \(\bar{y}\) and the sample size \(n\).
 
-Figure \ref{fig:bayes-normal} shows the prior \(\pi(\mu)\), the likelihood \(\pi(\mu|\boldsymbol{y})\) and the posterior distribution \(\pi(\mu|\boldsymbol{y})\) for different values of the initial parameters and for different sample sizes \(n\). As we can see, \(\pi(\mu|\boldsymbol{y})\) lie between \(\pi(\mu)\) and \(\pi(\mu|\boldsymbol{y})\).
+Figure \ref{fig:bayes-normal} shows the prior \(\pi(\mu)\), the likelihood \(\pi(\mu|\boldsymbol{y})\) and the posterior distribution \(\pi(\mu|\boldsymbol{y})\) for different values of the initial parameters and for different sample sizes \(n\). As we can see, \(\pi(\mu|\boldsymbol{y})\) lies between \(\pi(\mu)\) and \(\pi(\mu|\boldsymbol{y})\).
 
 
 
@@ -2559,7 +2559,7 @@ Figure \ref{fig:bayes-normal} shows the prior \(\pi(\mu)\), the likelihood \(\pi
 
 }
 
-\caption[prior \(\pi(\mu)\), likelihood \(\pi(\mu|\boldsymbol{y})\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution.]{prior \(\pi(\mu)\), likelihood \(\pi(\mu|\boldsymbol{y})\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution. The panels shows \(\pi(\mu)\), \(\pi(\mu|\boldsymbol{y})\) and \(\pi(\mu|\boldsymbol{y})\) for different values of the prior variance \(\sigma_0\) (rows) of \(\mu\) and different sample size \(n\) (columns).}\label{fig:bayes-normal}
+\caption[Prior \(\pi(\mu)\), likelihood \(\pi(\mu|\boldsymbol{y})\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution.]{Prior \(\pi(\mu)\), likelihood \(\pi(\mu|\boldsymbol{y})\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution. The panels shows \(\pi(\mu)\), \(\pi(\mu|\boldsymbol{y})\) and \(\pi(\mu|\boldsymbol{y})\) for different values of the prior variance \(\sigma_0\) (rows) of \(\mu\) and different sample size \(n\) (columns).}\label{fig:bayes-normal}
 \end{figure}
 
 As \(\pi(\mu|\boldsymbol{y})\) is a Normal distribution, the expected value \(E(\mu|\boldsymbol{y})\) and the mode \(\text{Mode}(\mu|\boldsymbol{y})\) coincide, so our maximum a posteriori estimate for \(\mu\) will be:
@@ -2567,25 +2567,50 @@ As \(\pi(\mu|\boldsymbol{y})\) is a Normal distribution, the expected value \(E(
 \hat{\mu}^{MAP} = \text{Mode}(\mu|\boldsymbol{y}) = E(\mu|\boldsymbol{y}) = \mu_n = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}}
 \]
 
-From the formula \eqref{eq:bayes-normal-normal-mu} we get some interesting insights on \(E(\mu|\boldsymbol{y})=\mu_n\). \(\mu_n\) is a weighted average between the prior mean \(\mu_0\) and the sample mean \(\bar{y}\), so it stays between \(\mu_0\) and \(\bar{y}\). The weight for \(\mu_0\) and \(\bar{y}\) are given respectively by the reciprocal of the prior variance \(\frac{1}{Var(\mu)}=\frac{1}{\sigma_0^2}\) and the reciprocal of the sample mean variance \(\frac{1}{Var(\bar{y})}=\frac{n}{\sigma^2}\). That means that the lower the prior variance is, the greater the weight for \(\mu_0\) is, and the lower the sample mean variance is, the greater the weight for \(\bar{y}\) is. The reciprocal of the variance can be interpreted as the amount of information we have on that estimate. Thus, a prior distribution with a lower variance is a more informative prior, while a prior distribution with an higher variance is a less informative prior. The sample mean variance \(Var(\bar{y})=\frac{\sigma^2}{n}\) depends on \(\sigma^2\) and \(n\). If \(n\) increases, the \(Var(\bar{y})\) decreases and so the weight for \(\bar{y}\) increases. That corresponds of saying that, by increasing the sample size \(n\), we give more credibility to the observed sample mean \(\bar{y}\).
+From the formula \eqref{eq:bayes-normal-normal-mu} we get some interesting insights on \(E(\mu|\boldsymbol{y})=\mu_n\). \(\mu_n\) is a weighted average between the prior mean \(\mu_0\) and the sample mean \(\bar{y}\), so it stays between \(\mu_0\) and \(\bar{y}\). The weight for \(\mu_0\) and \(\bar{y}\) are given respectively by the reciprocal of the prior variance \(\frac{1}{Var(\mu)}=\frac{1}{\sigma_0^2}\) and the reciprocal of the sample mean variance \(\frac{1}{Var(\bar{y})}=\frac{n}{\sigma^2}\). That means that the lower the prior variance is, the greater the weight for \(\mu_0\) is, and the lower the sample mean variance is, the greater the weight for \(\bar{y}\) is. The reciprocal of the variance can be interpreted as the amount of information we have on that estimate. Thus, a prior distribution with a lower variance is a more informative prior, while a prior distribution with an higher variance is a less informative prior. The sample mean variance \(Var(\bar{y})=\frac{\sigma^2}{n}\) depends on \(\sigma^2\) and \(n\). If \(n\) increases, the \(Var(\bar{y})\) decreases and so the weight for \(\bar{y}\) increases. That corresponds to saying that, by increasing the sample size \(n\), we give more credibility to the observed sample mean \(\bar{y}\).
 
-From the formula \eqref{eq:bayes-normal-normal-sigma} we see that the reciprocal of \(Var(\mu|\boldsymbol{y})=\sigma_n^2\) is the sum between the reciprocal of \(Var(\mu)=\sigma_0^2\) and the reciprocal of \(Var(\bar{y})=\frac{\sigma^2}{n}\). Interpreting the reciprocal of the variance as the information on that estimate, this result on \(Var(\mu|\boldsymbol{y})\) corresponds to saying that the information on the posterior distribution is the sum of the prior information and the information obtained by the sample.
+From the formula \eqref{eq:bayes-normal-normal-sigma} we see that the reciprocal of \(Var(\mu|\boldsymbol{y})=\sigma_n^2\) is the sum between the reciprocal of \(Var(\mu)=\sigma_0^2\) and the reciprocal of \(Var(\bar{y})=\frac{\sigma^2}{n}\). Interpreting the reciprocal of the variance as the \emph{information} on that estimate, this result on \(Var(\mu|\boldsymbol{y})\) corresponds to saying that the information on the posterior distribution is the sum of the prior information and the information obtained by the sample.
 
 On the limit case, if \(n\to +\infty\), the posterior mean converges to the observed sample mean \(\mu_n\to \bar{y}\) and the posterior variance converges to zero \(\sigma_n\to 0\).
 
-Another limit case is to consider a prior distribution with \(\sigma_0^2 = +\infty\), that is \(\pi(\mu)\propto k, k\in]0,+\infty[\). This is an improper prior, as for any value of \(k\in]0,+\infty[\), we get \(\int_{\mathbb{R}}{\pi(\mu)d\mu}=+\infty\). This kind of prior distribution is called \emph{Non-informative prior}, as it gives no information on the parameter. In this case, by \eqref{eq:bayes-normal-normal-mu} and \eqref{eq:bayes-normal-normal-sigma} we get:
+Another limit case is to consider a prior distribution with \(\sigma_0^2 = +\infty\), that is \(\pi(\mu)\propto k, \ k\in]0,+\infty[\). This is an improper prior, as for any value of \(k\in]0,+\infty[\), we get \(\int_{\mathbb{R}}{\pi(\mu)d\mu}=+\infty\). This kind of prior distribution is called \emph{Non-informative prior}, as it gives no information on the parameter. In this case, by \eqref{eq:bayes-normal-normal-mu} and \eqref{eq:bayes-normal-normal-sigma} we get:
 \begin{align*}
 \mu_n & = \bar{y} \\
 \sigma_n^2 & = \frac{\sigma^2}{n} \\
 \end{align*}
 From equation, \eqref{eq:bayes-normal-normal-posterior-compute} we get that, if we use a non-informative prior, the posterior distribution is proportional to the likelihood \(\pi(\mu|\boldsymbol{y}) \propto p(\boldsymbol{y}|\mu)\). That means that the Maximum a Posteriori estimates \(\hat{\mu}^{MAP}\) corresponds to the maximum likelihood estimates \(\hat{\mu}^{ML}\). This results gives a new interpretation of the Maximum Likelihood estimates, as it can be always seen as a Bayesian posterior estimate with a Non-informative prior distribution.
 
+In this example, for simplicity, we considered \(\sigma^2\) as a known parameter. In practice this isn't a common situation. Usually \(\sigma^2\) have to be estimated like \(\mu\). In the Bayesian framework we must assign a prior distribution \(\pi(\sigma^2)\) to it. If we don't want to introduce a bias, we can choose a non informative prior.
+
+The problem of inference on the mean \(\mu\) of a Normal distribution \(y_i\sim\mathcal{N}(\mu, \sigma^2)\) with a Normal prior assigned to \(\mu\sim\mathcal{N}(\mu_0, \sigma_0^2)\) is particularly convenient because it produces an explicit solution for \(\pi(\mu|\boldsymbol{y})\) that it is easily interpretable and can be easily computed. Given the sample distribution \(p(\boldsymbol{y}|\theta)\), the prior distributions \(\pi(\theta)\) that returns a posterior distribution \(\pi(\theta|\boldsymbol{y})\) from the same family of the prior are called \emph{conjugate prior}. Other examples of conjugate prior are the Beta distribution for the probability of success \(p\) in a Binomial sample and the Gamma distribution for the parameter \(\lambda\) in a Poisson sample.
+
+In general we are not constrained to use conjugate priors, but we can choose for \(\pi(\theta)\) the distribution that better describes our prior information. When there is not an explicit solution for \(\pi(\theta|\boldsymbol{y})\), it can be estimated with simulation techniques. The techniques commonly adopted are based on \emph{Markov Chain Monte Carlo} (MCMC). These are highly flexible techniques, but they come with a high computation cost.
+
 \hypertarget{bayesian-estimators-for-glm}{%
 \subsubsection{Bayesian estimators for GLM}\label{bayesian-estimators-for-glm}}
 
-The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients \(\boldsymbol{\beta}, \sigma^2\).
+The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients \(\boldsymbol{\beta}, \sigma^2\). By assuming a prior distribution on \(\boldsymbol{\beta}\) we will introduce a bias driven by our prior information.
 
-\ldots{}
+In section \ref{chap:glm-model-fitting} we have seen that in GLM the common estimator used for \(\boldsymbol{\beta}\) is the Maximum Likelihood estimator \(\tilde{\boldsymbol{\beta}}^{ML}\) with determinations:
+\begin{equation}
+\label{eq:bayes-max-lik-est}
+\hat{\boldsymbol{\beta}}^{ML} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)}
+\end{equation}
+
+If in equation \eqref{eq:bayes-max-lik-est} we substitute \(L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)\) with \(\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)\), we obtain the Maximum a posteriori Estimator \(\tilde{\boldsymbol{\beta}}^{ML}\)
+\begin{equation}
+\label{eq:bayes-map-est-1}
+\hat{\boldsymbol{\beta}}^{MAP} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)}
+=
+\argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) \pi(\boldsymbol{\beta}, \phi) \right\}}
+\end{equation}
+
+If we assume a non informative prior distribution for \(\phi\), the equation becomes:
+\begin{equation}
+\label{eq:bayes-map-est-2}
+\hat{\boldsymbol{\beta}}^{MAP} =
+\argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) \pi(\boldsymbol{\beta}) \right\}}
+\end{equation}
 
 \hypertarget{chap:ridge-lasso-bayes}{%
 \subsubsection{LASSO and Ridge Regression as Bayesian estimators}\label{chap:ridge-lasso-bayes}}
