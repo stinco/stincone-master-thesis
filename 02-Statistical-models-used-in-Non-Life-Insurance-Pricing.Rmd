@@ -2752,7 +2752,7 @@ The representation \@ref(eq:lp-est-deviance-constr) provides a useful geometric 
 
 (ref:opt-ridge-lasso-caption-latex) Geometrical interpretation of the optimization problem for Ridge and LASSO. The axes represent the components of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$, that is a circle in the Ridge case $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$ and a square in the LASSO case $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. $\hat{\boldsymbol{\beta}}^{Ridge}$ and $\hat{\boldsymbol{\beta}}^{LASSO}$ are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall into one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$.
 
-(ref:opt-ridge-lasso-caption-gitbook) Geometrical interpretation of the optimization problem for Ridge and LASSO, Ridge (left), LASSO (right).
+(ref:opt-ridge-lasso-caption-gitbook) Geometrical interpretation of the optimization problem for Ridge (left) and LASSO (right). The axes represent the components of $\boldsymbol{\beta}$. The point $\hat{\boldsymbol{\beta}}^{ML}$ represents the maximum likelihood estimator for $\boldsymbol{\beta}$, that is the optimal point for the Deviance $D(\boldsymbol{\beta}, \boldsymbol{y})$ without any constraints. The ellipses around $\hat{\boldsymbol{\beta}}^{ML}$ represent the contour lines of $D(\boldsymbol{\beta}, \boldsymbol{y})$. The grey area around the axes intersection represents the feasibility region determined by $\|\boldsymbol{\beta}\|_d^d \le s_\lambda$, that is a circle in the Ridge case $\|\boldsymbol{\beta}\|_2^2 \le s_\lambda$ and a square in the LASSO case $\|\boldsymbol{\beta}\|_1^1 \le s_\lambda$. $\hat{\boldsymbol{\beta}}^{Ridge}$ and $\hat{\boldsymbol{\beta}}^{LASSO}$ are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point $\hat{\boldsymbol{\beta}}^{LASSO}$ could fall into one of the corners of the square leading one of the coefficients $\hat{\beta}_j^{LASSO}$ to be exactly equal to $0$.
 
 (ref:opt-ridge-lasso-caption-short) Geometrical interpretation of the optimization problem for Ridge and LASSO.
 
@@ -3007,7 +3007,7 @@ The hyper-parameter $\alpha$ can be estimated together with $\lambda$ in a Cross
 
 
 
-#### Some considerations on Shrinkage Estimators
+#### Some considerations on Shrinkage Estimators {#chap:shrinkage-considerations}
 
 As we have said, shrinkage estimators are particularly useful when the number of parameters $p$ in the model is large (high dimensionality) and the maximum likelihood estimator have a high variance. This could happen when we have some qualitative variables with many modalities, as for example the make and the model of the insured vehicle in car insurance. As we have seen with the examples represented in figure \@ref(fig:ridge-lambda) and \@ref(fig:lasso-lambda), the penalization will shrink more the coefficients in the groups with few observations and only the groups with an average response $\bar{y}_j$ significantly different from the global average response $\bar{y}$ will emerge. This procedure is more efficient and more robust to overfitting than grouping modalities based on hypothesis testing or other criteria.
 
@@ -3049,7 +3049,7 @@ Benefici ridge/lasso
 
 ### Bayesian GLM
 
-In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:ridge-lasso-bayes), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
+In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
 
 
 #### The Bayesian framework
@@ -3126,11 +3126,11 @@ where:
 
 The posterior distribution for the mean $\pi(\mu|\boldsymbol{y})$ is still a Normal distribution with parameters $(\mu_n, \sigma_n^2)$ that depend on the initial parameters $(\mu_0, \sigma_0^2)$, the observed sample average $\bar{y}$ and the sample size $n$.
 
-Figure \@ref(fig:bayes-normal) shows the prior $\pi(\mu)$, the likelihood $\pi(\mu|\boldsymbol{y})$ and the posterior distribution $\pi(\mu|\boldsymbol{y})$ for different values of the initial parameters and for different sample sizes $n$. As we can see, $\pi(\mu|\boldsymbol{y})$ lies between $\pi(\mu)$ and $\pi(\mu|\boldsymbol{y})$.
+Figure \@ref(fig:bayes-normal) shows the prior $\pi(\mu)$, the likelihood $p(\boldsymbol{y}|\mu)$ and the posterior distribution $\pi(\mu|\boldsymbol{y})$ for different values of the initial parameters and for different sample sizes $n$. As we can see, $\pi(\mu|\boldsymbol{y})$ lies between $\pi(\mu)$ and $p(\boldsymbol{y}|\mu)$.
 
-(ref:bayes-normal-caption) Prior $\pi(\mu)$, likelihood $\pi(\mu|\boldsymbol{y})$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution. The panels shows $\pi(\mu)$, $\pi(\mu|\boldsymbol{y})$ and $\pi(\mu|\boldsymbol{y})$ for different values of the prior variance $\sigma_0$ (rows) of $\mu$ and different sample size $n$ (columns).
+(ref:bayes-normal-caption) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution. The panels shows $\pi(\mu)$, $p(\boldsymbol{y}|\mu)$ and $\pi(\mu|\boldsymbol{y})$ for different values of the prior variance $\sigma_0$ (rows) and different sample sizes $n$ (columns).
 
-(ref:bayes-normal-caption-short) Prior $\pi(\mu)$, likelihood $\pi(\mu|\boldsymbol{y})$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution.
+(ref:bayes-normal-caption-short) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution.
 
 ```{r, bayes-normal, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap = "(ref:bayes-normal-caption)", fig.scap = "(ref:bayes-normal-caption-short)", label = "bayes-normal", echo = FALSE, cache = TRUE}
 
@@ -3224,7 +3224,7 @@ p_bayes_normal
 
 ```
 
-As $\pi(\mu|\boldsymbol{y})$ is a Normal distribution, the expected value $E(\mu|\boldsymbol{y})$ and the mode $\text{Mode}(\mu|\boldsymbol{y})$ coincide, so our maximum a posteriori estimate for $\mu$ will be:
+As $\pi(\mu|\boldsymbol{y})$ is a Normal distribution, the expected value $E(\mu|\boldsymbol{y})$ and the mode $\text{Mode}(\mu|\boldsymbol{y})$ coincide, so our Maximum a Posteriori estimate for $\mu$ will be:
 $$
 \hat{\mu}^{MAP} = \text{Mode}(\mu|\boldsymbol{y}) = E(\mu|\boldsymbol{y}) = \mu_n = \frac{\frac{n}{\sigma^2}\bar{y} + \frac{1}{\sigma_0^2}\mu_0}{ \frac{n}{\sigma^2} + \frac{1}{\sigma_0^2}}
 $$
@@ -3244,9 +3244,9 @@ From equation, \@ref(eq:bayes-normal-normal-posterior-compute) we get that, if w
 
 In this example, for simplicity, we considered $\sigma^2$ as a known parameter. In practice this isn't a common situation. Usually $\sigma^2$ have to be estimated like $\mu$. In the Bayesian framework we must assign a prior distribution $\pi(\sigma^2)$ to it. If we don't want to introduce a bias, we can choose a non informative prior.
 
-The problem of inference on the mean $\mu$ of a Normal distribution $y_i\sim\mathcal{N}(\mu, \sigma^2)$ with a Normal prior assigned to $\mu\sim\mathcal{N}(\mu_0, \sigma_0^2)$ is particularly convenient because it produces an explicit solution for $\pi(\mu|\boldsymbol{y})$ that it is easily interpretable and can be easily computed. Given the sample distribution $p(\boldsymbol{y}|\theta)$, the prior distributions $\pi(\theta)$ that returns a posterior distribution $\pi(\theta|\boldsymbol{y})$ from the same family of the prior are called _conjugate prior_. Other examples of conjugate prior are the Beta distribution for the probability of success $p$ in a Binomial sample and the Gamma distribution for the parameter $\lambda$ in a Poisson sample.
+The problem of inference on the mean $\mu$ of a Normal distribution $y_i\sim\mathcal{N}(\mu, \sigma^2)$ with a Normal prior assigned to $\mu\sim\mathcal{N}(\mu_0, \sigma_0^2)$ is particularly convenient because it produces an explicit solution for $\pi(\mu|\boldsymbol{y})$ that it is easily interpretable and can be easily computed. Given the sample distribution $p(\boldsymbol{y}|\theta)$, the prior distributions $\pi(\theta)$ that returns a posterior distribution $\pi(\theta|\boldsymbol{y})$ from the same family of the prior are called _conjugate prior_. Other examples of conjugate priors are the Beta distribution for the probability of success $p$ in a Binomial sample and the Gamma distribution for the parameter $\lambda$ in a Poisson sample.
 
-In general we are not constrained to use conjugate priors, but we can choose for $\pi(\theta)$ the distribution that better describes our prior information. When there is not an explicit solution for $\pi(\theta|\boldsymbol{y})$, it can be estimated with simulation techniques. The techniques commonly adopted are based on _Markov Chain Monte Carlo_ (MCMC). These are highly flexible techniques, but they come with a high computation cost.
+In general we are not constrained to use conjugate priors and we can choose for $\pi(\theta)$ the distribution that better describes our prior information. When there is not an explicit solution for $\pi(\theta|\boldsymbol{y})$, it can be computed numerically with simulation techniques. The techniques commonly adopted are based on _Markov Chain Monte Carlo_ (MCMC). These are highly flexible techniques, but they come with a high computational cost.
 
 <!--
 Osservazioni
@@ -3258,17 +3258,17 @@ Osservazioni
 -->
 
 
-#### Bayesian estimators for GLM
+#### Bayesian estimators for GLM {#chap:bayes-glm}
 
-The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients $\boldsymbol{\beta}, \sigma^2$. By assuming a prior distribution on $\boldsymbol{\beta}$ we will introduce a bias driven by our prior information.
+The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients $(\boldsymbol{\beta}, \phi)$. By assuming a prior distribution on $\boldsymbol{\beta}$ we will introduce a bias driven by our prior information.
 
-In section \@ref(chap:glm-model-fitting) we have seen that in GLM the common estimator used for $\boldsymbol{\beta}$ is the Maximum Likelihood estimator $\tilde{\boldsymbol{\beta}}^{ML}$ with determinations:
+In section \@ref(chap:glm-model-fitting) we saw that in GLM the common estimator used for $\boldsymbol{\beta}$ is the Maximum Likelihood estimator $\tilde{\boldsymbol{\beta}}^{ML}$ with determinations:
 \begin{equation}
 \label{eq:bayes-max-lik-est}
 \hat{\boldsymbol{\beta}}^{ML} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)}
 \end{equation}
 
-If in equation \@ref(eq:bayes-max-lik-est) we substitute $L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)$ with $\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)$, we obtain the Maximum a posteriori Estimator $\tilde{\boldsymbol{\beta}}^{ML}$
+If in equation \@ref(eq:bayes-max-lik-est) we substitute $L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)$ with $\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)$, we obtain the Maximum a Posteriori estimator $\tilde{\boldsymbol{\beta}}^{MAP}$
 \begin{equation}
 \label{eq:bayes-map-est-1}
 \hat{\boldsymbol{\beta}}^{MAP} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)}
@@ -3283,21 +3283,137 @@ If we assume a non informative prior distribution for $\phi$, the equation becom
 \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) \pi(\boldsymbol{\beta}) \right\}}
 \end{equation}
 
+Considering the log-likelihood $\ell\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) = \log{\left( L\left( \boldsymbol{\beta}, \phi \mid \boldsymbol{y} \right)\right)}$, the optimization problem \@ref(eq:bayes-map-est-2) becomes:
+\begin{equation}
+\label{eq:bayes-map-est-3}
+\hat{\boldsymbol{\beta}}^{MAP} =
+\argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{\ell\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) + \log{\left(\pi(\boldsymbol{\beta})\right)} \right\}}
+\end{equation}
 
-#### LASSO and Ridge Regression as Bayesian estimators {#chap:ridge-lasso-bayes}
+And expressed in terms of deviance $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) = -2\phi\left(\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+- \ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\right)$:
+\begin{equation}
+\label{eq:bayes-map-est-4}
+\hat{\boldsymbol{\beta}}^{MAP} =
+\argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(\pi(\boldsymbol{\beta})\right)} \right\}}
+\end{equation}
 
-<!-- Empirical Bayes -->
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+From equation \@ref(eq:bayes-map-est-4) we find that, adding a prior ditribution $\pi(\boldsymbol{\beta})$, corresponds to adding a term $-2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}$ to de deviance in the optimization problem that defines the estimator. In particular, if the prior is non-informative, we get that $\pi(\boldsymbol{\beta})\propto k, \ k\in]0,+\infty[$ does not depend on $\boldsymbol{\beta}$, so the optimization problem corresponds to the Maximum Likelihood.
 
 
-#### Some considerations on Bayesian estimators
+#### Ridge and LASSO Regression as Bayesian estimators for GLM {#chap:bayes-ridge-lasso}
+
+Let's assume the parameters $\beta_1, \beta_2, \dots, \beta_p$ to be identically distributed with _Normal_ distribution centered in $0$:
+$$
+\pi(\beta_j) = \frac{1}{\sqrt{2\pi}\sigma}e^{-\frac{1}{2\sigma^2}\beta_j^2}, \quad j\in\{1,2,\dots,p\}
+$$
+and let's assign to $\beta_0$ a non informative distribution:
+$$
+\pi(\beta_0) \propto k, \ k\in]0,+\infty[
+$$
+If we also assume that the parameters are independent, we get:
+\begin{equation}
+\label{eq:bayes-glm-prior-normal}
+\pi(\boldsymbol{\beta}) \propto \prod_{j=1}^{p}{\pi(\beta_j)} \propto e^{-\frac{1}{2\sigma^2}{\sum_{j=1}^{p}{\beta_j^2}}} 
+\end{equation}
+By substituting \@ref(eq:bayes-glm-prior-normal) to \@ref(eq:bayes-map-est-4), we get:
+\begin{align}
+\nonumber
+\hat{\boldsymbol{\beta}}^{MAP} & =
+\argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(e^{-\frac{1}{2\sigma^2}{\sum_{j=1}^{p}{\beta_j^2}}}\right)} \right\}} \\
+\label{eq:bayes-map-est-normal}
+& = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{\phi}{\sigma^2} {\sum_{j=1}^{p}{\beta_j^2}}\right\}}
+\end{align}
+From the expression \@ref(eq:bayes-map-est-normal), if we substitute $\frac{\phi}{\sigma^2}$ with $\lambda$, we obtain the optimization problem of the Ridge regression \@ref(eq:ridge-est-deviance). That means that the Ridge estimator can be seen as a Maximum a Posteriori estimator in which the prior distribution for $\beta_1, \beta_2, \dots, \beta_p$ are independent Normal centered in $0$ with the same variance $\sigma^2$. From the substitution $\lambda=\frac{\phi}{\sigma^2}$ we can also interpet the role of $\lambda$ and $\sigma^2$. A lower $\sigma^2$ corresponds to a more informative prior that gives more credibility to the prior mean $E(\beta_j)=0$. In the Ridge usual parametrization, this corresponds to a greater $\lambda$ and so an higher weight to the penalization $\sum_{j=1}^{p}{\beta_j^2}$, that brings a higher shrinkage to the etimates.
+
+With the same approach, we can assume $\beta_1, \beta_2, \dots, \beta_p$ to be identically distributed with _Laplace_ distribution centered in $0$:
+$$
+\pi(\beta_j) = \frac{1}{2b}e^{-\frac{|\beta_j|}{b}}, \quad j\in\{1,2,\dots,p\}
+$$
+Under this assumption, the prior distribution for the coefficients becomes:
+\begin{equation}
+\label{eq:bayes-glm-prior-laplace}
+\pi(\boldsymbol{\beta}) \propto \prod_{j=1}^{p}{\pi(\beta_j)} \propto e^{-\frac{1}{b}{\sum_{j=1}^{p}{|\beta_j|}}} 
+\end{equation}
+And the optimization problem \@ref(eq:bayes-map-est-4) results in:
+\begin{align}
+\nonumber
+\hat{\boldsymbol{\beta}}^{MAP} & =
+\argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(e^{-\frac{1}{b}{\sum_{j=1}^{p}{|\beta_j|}}}\right)} \right\}}  \\
+\label{eq:bayes-map-est-laplace}
+& = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{b} {\sum_{j=1}^{p}{|\beta_j|}}\right\}}
+\end{align}
+By substituting $\frac{2\phi}{b}$ with $\lambda$ in equation \@ref(eq:bayes-map-est-laplace), we obtain the optimization problem of the LASSO regression \@ref(eq:lasso-est-deviance). In Laplace distribution the variance is $Var(\beta_j) = 2b^2$. By decreasing $b$, the variance in $\pi(\beta_j)$ decreases, so the prior is more informative and we give more credibility to the prior mean $0$. As for Ridge regression, a lower variance in the prior distribution translates into an higher penalization parameter $\lambda$ and a higher shrinkage for the coefficients.
+
+Figure \@ref(fig:normal-laplace) shows a Normal and a Laplace distribution with unitary variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly $0$ the unimportant coefficients in the LASSO regression.
+
+(ref:normal-laplace-caption-latex) Normal density function and Laplace density function with unitary variance.
+
+(ref:normal-laplace-caption-gitbook) Normal density function and Laplace density function with unitary variance.
+
+(ref:normal-laplace-caption-short) Normal density function and Laplace density function with unitary variance.
+
+```{r, plot-normal-laplace-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:normal-laplace-caption-gitbook)", "(ref:normal-laplace-caption-latex)"), fig.scap = "(ref:normal-laplace-caption-short)", label="normal-laplace", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal distribution', 'Laplace distribution'), cache=TRUE}
+
+
+p_normal <- ggplot() +
+  stat_function(
+    fun = dnorm,
+    color = col1,
+    size = line_size
+  ) +
+  xlim(-3, 3) +
+  ylim(0, 0.75) +
+  labs(
+    x = expression(beta[j]),
+    y = expression(pi(beta[j]))
+  )
+
+p_laplace <- ggplot() +
+  stat_function(
+    fun = function(x){dlaplace(x, location = 0, scale = sqrt(2)/2)},
+    color = col1,
+    size = line_size
+  ) +
+  xlim(-3, 3) +
+  ylim(0, 0.75) +
+  labs(
+    x = expression(beta[j]),
+    y = expression(pi(beta[j]))
+  )
+
+plot_grid_split(p_normal, p_laplace)
+
+```
+
+The approach usually adopted in Ridge and LASSO regression is to select the optimal hyperparameter $\lambda$ based on Cross Validation, so the prior distribution is estimated from the data. This approach stands in contrast to standard Bayesian methods, in which the prior distribution represents the a priori information and should be fixed before observing the sample. The Bayesian procedures in which the prior distribution is estimated from the data are called _Empirical Bayes_ methods.
+
+
+#### Other Bayesian estimators for GLM
+
+The Bayesian framework provides more flexibility in prior information than what Risge and LASSO regression offer. Even staying with the Normal prior distributions, it is possible to give to the different coefficients $\beta_j$ different prior variances $\sigma_j^2$, that would represent how much we trust the estimated coefficient to be different from $0$. For example it is possible to use a non informative prior for most of the coefficient and to introduce an informative prior only to the more delicate coefficients. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \@ref(chap:shrinkage-considerations), this technique can be useful in the case of highly unbalanced explanatory variables.
 
 
 <!--
 - Posso mettere penalizzazioni diverse ai diversi coefficienti
 - Se voglio che un coefficiente sia positivo, gli do una prior con distribuzione tutta >0
+- Riparametrizzazione Akur8
 - Se ho una quantitativa discreta posso riparametrizzare in modo che sia monotona
+-->
+
+
+
+
+
+#### Some considerations on Bayesian estimators for GLM
+
+
+<!--
 - Altro: modelli gerarchici, mixed models GLMM
 - Se prior non semplice: stima con metodi MCMC
 - Empirical bayes: scelgo lambda con cross validation
@@ -3306,6 +3422,7 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris inter
   Questo è meglio di offset perché:
   1. ho la consapevolezza di quanto forte gli ho messo la prior e quindi di quanto forte è la mia imposizione
   2. Se cambio qualcosa negli altri parametri e rifitto il modello, viene tutto gestito in automatico
+- In pratica spesso si usa informazione a priori nella scelta dei parametri da tenere o togliere dal modello o anche nell'introduzione degli offset
 -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.

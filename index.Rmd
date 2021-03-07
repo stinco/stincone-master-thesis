@@ -153,7 +153,7 @@ library(knitr)
 library(kableExtra)
 library(scales)
 library(ggeasy)
-library(ggforce)     # For plotting ellipses
+library(ggforce)       # For plotting ellipses
 library(gridExtra)
 library(cowplot)
 library(grid)
@@ -161,7 +161,8 @@ library(gtable)
 library(mgcv)
 library(splines)
 library(forcats)
-library(glmnet)       # For Elastic Net
+library(glmnet)         # For Elastic Net
+library(LaplacesDemon)  # For Laplace density function
 
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')
