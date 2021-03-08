@@ -6,6 +6,8 @@ output:
   bookdown::html_document2: default
 documentclass: book
 bibliography: references.bib
+editor_options: 
+  chunk_output_type: console
 ---
 
 ```{r echo=FALSE}
@@ -405,7 +407,7 @@ $$
 We will indicate it with the notation $N \sim Poisson(\lambda)$.
 ```
 
-```{r, plot-poisson, echo = FALSE, fig.cap = "Poisson distribution for some values of $\\lambda$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
+```{r, plot-poisson, echo = FALSE, fig.cap = "Poisson distribution for some values of $\\lambda$.", fig.align = "center", out.width = "90%", fig.width = 6, fig.height = 4, cache = TRUE}
 tibble(x = 0:22) %>% 
   crossing(
     tibble(
@@ -414,7 +416,7 @@ tibble(x = 0:22) %>%
   ) %>% 
   mutate(
     y = dpois(x = x, lambda = lambda),
-    lambda_label = str_c("lambda = ", lambda) %>% 
+    lambda_label = str_c("lambda == ", lambda) %>% 
       fct_inorder()
   ) %>% 
   ggplot(aes(x = x, y = y)) +
@@ -423,7 +425,10 @@ tibble(x = 0:22) %>%
     aes(xend = x),
     yend = 0
   ) +
-  facet_wrap(~lambda_label) +
+  facet_wrap(
+    ~lambda_label,
+    labeller = label_parsed
+  ) +
   coord_cartesian(
     xlim = c(0, 20)
   ) +
@@ -550,7 +555,7 @@ We will indicate it with the notation $Z \sim Gamma(\alpha, \rho)$.
 ```
 
 
-```{r, plot-gamma, echo = FALSE, fig.cap = "Gamma distribution for some values of $\\alpha$ and $\\rho$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
+```{r, plot-gamma, echo = FALSE, fig.cap = "Gamma distribution for some values of $\\alpha$ and $\\rho$.", fig.align = "center", out.width = "90%", fig.width = 6, fig.height = 4,  cache = TRUE}
 tibble(x = seq(from = 0, to = 25, by = .01)) %>% 
   crossing(
     tibble(
@@ -560,12 +565,15 @@ tibble(x = seq(from = 0, to = 25, by = .01)) %>%
   ) %>% 
   mutate(
     y = dgamma(x = x, shape = alpha, rate = rho),
-    label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
+    label = str_c("list(alpha == ", alpha, ", ", "rho == ", rho, ")") %>%
       fct_inorder()
   ) %>% 
   ggplot(aes(x = x, y = y)) +
   geom_line() +
-  facet_wrap(~label) +
+  facet_wrap(
+    ~label,
+    labeller = label_parsed
+  ) +
   coord_cartesian(
     ylim = c(0, .3),
     xlim = c(0, 20)
@@ -812,7 +820,7 @@ $$
 We will indicate it with the notation $Y \sim Binom(n, p)$.
 ```
 
-```{r, plot-binomial, echo = FALSE, fig.cap = "Binomial distribution for some values of $n$ and $p$.", fig.align = "center", fig.width = 6, fig.height = 3, cache = TRUE}
+```{r, plot-binomial, echo = FALSE, fig.cap = "Binomial distribution for some values of $n$ and $p$.", fig.align = "center", out.width = "90%", fig.width = 6, fig.height = 4, cache = TRUE}
 tibble(x = seq(from = 0, to = 10, by = 1)) %>% 
   crossing(
     tibble(
@@ -825,14 +833,17 @@ tibble(x = seq(from = 0, to = 10, by = 1)) %>%
     y = dbinom(x = x, size = n, prob = p),
     # label = str_c("alpha = ", alpha, ", rho = ", rho) %>% 
     #   fct_inorder()
-    label = str_c("n = ", n, ", p = ", p) %>% 
+    label = str_c("list(italic(n) == ", n, ", italic(p) == ", p, ")") %>% 
       fct_inorder()
   ) %>%
   ggplot(aes(x = x, y = y)) +
   geom_point() +
   geom_segment(aes(xend = x),
                yend = 0) +
-  facet_wrap(~label) +
+  facet_wrap(
+    ~label,
+    labeller = label_parsed
+  ) +
   coord_cartesian(
     # ylim = c(0, .3),
     xlim = c(0, 10)
