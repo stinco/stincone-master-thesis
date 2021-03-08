@@ -3350,15 +3350,26 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{b} {\sum_{j=1}^{p}{|\beta_j
 \end{align}
 By substituting $\frac{2\phi}{b}$ with $\lambda$ in equation \@ref(eq:bayes-map-est-laplace), we obtain the optimization problem of the LASSO regression \@ref(eq:lasso-est-deviance). In Laplace distribution the variance is $Var(\beta_j) = 2b^2$. By decreasing $b$, the variance in $\pi(\beta_j)$ decreases, so the prior is more informative and we give more credibility to the prior mean $0$. As for Ridge regression, a lower variance in the prior distribution translates into an higher penalization parameter $\lambda$ and a higher shrinkage for the coefficients.
 
-Figure \@ref(fig:normal-laplace) shows a Normal and a Laplace distribution with unitary variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly $0$ the unimportant coefficients in the LASSO regression.
+With the same approach, if we assume the following prior distribution:
+$$
+\pi(\beta_j) \propto e^{-\frac{1}{k}\left(\alpha|\beta_j| + (1-\alpha)\beta_j^2\right)}, \quad \alpha\in[0,1], \ j\in\{1,2,\dots,p\}
+$$
+we obtain the Elastic Net optimization problem:
+$$
+\hat{\boldsymbol{\beta}}^{MAP} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{k} {\sum_{j=1}^{p}{\left(\alpha|\beta_j| + (1-\alpha)\beta_j^2\right)}}\right\}}
+$$
+where $k>0$ is a constant that determine the variance of the prior distribution.
 
-(ref:normal-laplace-caption-latex) Normal density function and Laplace density function with unitary variance.
+Figure \@ref(fig:normal-laplace) shows a Normal, a Laplace and a Elastic Net prior destribution with $\alpha=\frac{1}{2}$. All the distributions represented have with unitary variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly $0$ the unimportant coefficients in the LASSO regression. The Elastic Net prior is a mixture between the Normal distribution and the Laplace distribution.
 
-(ref:normal-laplace-caption-gitbook) Normal density function and Laplace density function with unitary variance.
+(ref:normal-laplace-caption-latex) Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.
 
-(ref:normal-laplace-caption-short) Normal density function and Laplace density function with unitary variance.
+(ref:normal-laplace-caption-gitbook) Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.
 
-```{r, plot-normal-laplace-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:normal-laplace-caption-gitbook)", "(ref:normal-laplace-caption-latex)"), fig.scap = "(ref:normal-laplace-caption-short)", label="normal-laplace", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal distribution', 'Laplace distribution'), cache=TRUE}
+(ref:normal-laplace-caption-short) Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.
+
+```{r, plot-normal-laplace-print, out.width = "50%", fig.width = 5, fig.height = 3.5, fig.align='center', fig.cap = ifelse(knitr::is_html_output(), "(ref:normal-laplace-caption-gitbook)", "(ref:normal-laplace-caption-latex)"), fig.scap = "(ref:normal-laplace-caption-short)", label="normal-laplace", echo=FALSE, fig.ncol=2, fig.subcap=c('Normal distribution', 'Laplace distribution', "Elastic Net prior distribution with $\\alpha=\\frac{1}{2}$"), cache=TRUE}
 
 
 p_normal <- ggplot() +
@@ -3387,7 +3398,24 @@ p_laplace <- ggplot() +
     y = expression(pi(beta[j]))
   )
 
-plot_grid_split(p_normal, p_laplace)
+alpha <- .5
+k <- 1.4
+scale <- 2.18117 # Computed externally with Wolfram Alpha
+
+p_en <- ggplot() +
+  stat_function(
+    fun = function(x){1/scale*exp(-1/k*((1-alpha)*x^2 + alpha*abs(x)))},
+    color = col1,
+    size = line_size
+  ) +
+  xlim(-3, 3) +
+  ylim(0, 0.75) +
+  labs(
+    x = expression(beta[j]),
+    y = expression(pi(beta[j]))
+  )
+
+plot_grid_split(p_normal, p_laplace, p_en)
 
 ```
 
@@ -3396,8 +3424,19 @@ The approach usually adopted in Ridge and LASSO regression is to select the opti
 
 #### Other Bayesian estimators for GLM
 
-The Bayesian framework provides more flexibility in prior information than what Risge and LASSO regression offer. Even staying with the Normal prior distributions, it is possible to give to the different coefficients $\beta_j$ different prior variances $\sigma_j^2$, that would represent how much we trust the estimated coefficient to be different from $0$. For example it is possible to use a non informative prior for most of the coefficient and to introduce an informative prior only to the more delicate coefficients. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \@ref(chap:shrinkage-considerations), this technique can be useful in the case of highly unbalanced explanatory variables.
+The Bayesian framework provides more flexibility in prior information than what standard Ridge and LASSO regression offer.
 
+Even staying with the Normal prior distributions, it is possible to give to the different coefficients $\beta_j$ different prior variances $\sigma_j^2$, that would represent how much we trust the estimated coefficient to be different from $0$. For example it is possible to use a non informative prior for most of the coefficient and to introduce an informative prior only to the more delicate coefficients. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \@ref(chap:shrinkage-considerations), this technique can be useful in the case of highly unbalanced explanatory variables.
+
+It is also possible to assign to the coefficients prior distributions different from $0$. If to the coefficient $\beta_j$ we assign a prior $\beta_j\sim\mathcal{N}(\beta_{j0}, \sigma_j^2)$, this results in a shrinkage towards $\beta_{j0}$ instead than towards $0$. This in the Bayesian reasoning can be useful if we want to add to the model information taken outside the sample. For example, if we want to fit a model for a small portfolio of insurance policies we can introduce prior information from estimates from other portfolios or from market data. Given the prior distribution, the exposure of the portfolio used for fitting will determine how much information we have on that portfolio and so how much our posterior estimates will be close to the Maximum Likelihood estimates.
+
+The Bayesian framework allows us also to use prior distributions for the coefficients different from the Normal and the Laplace. For example, if we want a coefficient $\beta_j$ to be positive, we can assign to it a prior distribution $\pi(\beta_j)$ with all the mass of positive values and density equal $0$ to all the negative determinations. This will force the Maximum a Posteriori estimate to be non negative.
+
+A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables $x_1, x_2, \dots, x_J$. In the common GLM parametrization, each dummy variable corresponds to a coefficient $\beta_1, \beta_2, \dots, \beta_J$. We can consider the difference between each and the previous one: $\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}$. The new parametrization depends on the coefficients: $\beta_1, \gamma_2, \dots, \gamma_J$. If we assign a prior distribution centered on  $0$ for the coefficients $\gamma_2, \dots, \gamma_J$ this will produce a shrinkage of each of them toward the previous one, forcing to have small steps from one modality of the variable to the next one. Moreover, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
+$$
+\gamma_2, \dots, \gamma_J \ge 0 \longrightarrow \beta_1\le\beta_2\le\dots\le\beta_J
+$$
+In the same way, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on negative determinations, the result will be a monotonically non increasing effect.
 
 <!--
 - Posso mettere penalizzazioni diverse ai diversi coefficienti
@@ -3405,8 +3444,6 @@ The Bayesian framework provides more flexibility in prior information than what 
 - Riparametrizzazione Akur8
 - Se ho una quantitativa discreta posso riparametrizzare in modo che sia monotona
 -->
-
-
 
 
 
