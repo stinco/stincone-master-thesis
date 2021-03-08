@@ -3299,7 +3299,7 @@ And expressed in terms of deviance $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) 
 D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(\pi(\boldsymbol{\beta})\right)} \right\}}
 \end{equation}
 
-From equation \@ref(eq:bayes-map-est-4) we find that, adding a prior ditribution $\pi(\boldsymbol{\beta})$, corresponds to adding a term $-2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}$ to de deviance in the optimization problem that defines the estimator. In particular, if the prior is non-informative, we get that $\pi(\boldsymbol{\beta})\propto k, \ k\in]0,+\infty[$ does not depend on $\boldsymbol{\beta}$, so the optimization problem corresponds to the Maximum Likelihood.
+From equation \@ref(eq:bayes-map-est-4) we find that, adding a prior distribution $\pi(\boldsymbol{\beta})$, corresponds to adding a term $-2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}$ to the deviance in the optimization problem that defines the estimator. In particular, if the prior is non-informative, we get that $\pi(\boldsymbol{\beta})\propto k, \ k\in]0,+\infty[$ does not depend on $\boldsymbol{\beta}$, so the optimization problem corresponds to the Maximum Likelihood.
 
 
 #### Ridge and LASSO Regression as Bayesian estimators for GLM {#chap:bayes-ridge-lasso}
@@ -3327,7 +3327,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(e^{-\frac{1}{2\sigma^2}{
 & = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
 D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{\phi}{\sigma^2} {\sum_{j=1}^{p}{\beta_j^2}}\right\}}
 \end{align}
-From the expression \@ref(eq:bayes-map-est-normal), if we substitute $\frac{\phi}{\sigma^2}$ with $\lambda$, we obtain the optimization problem of the Ridge regression \@ref(eq:ridge-est-deviance). That means that the Ridge estimator can be seen as a Maximum a Posteriori estimator in which the prior distribution for $\beta_1, \beta_2, \dots, \beta_p$ are independent Normal centered in $0$ with the same variance $\sigma^2$. From the substitution $\lambda=\frac{\phi}{\sigma^2}$ we can also interpet the role of $\lambda$ and $\sigma^2$. A lower $\sigma^2$ corresponds to a more informative prior that gives more credibility to the prior mean $E(\beta_j)=0$. In the Ridge usual parametrization, this corresponds to a greater $\lambda$ and so an higher weight to the penalization $\sum_{j=1}^{p}{\beta_j^2}$, that brings a higher shrinkage to the etimates.
+From the expression \@ref(eq:bayes-map-est-normal), if we substitute $\frac{\phi}{\sigma^2}$ with $\lambda$, we obtain the optimization problem of the Ridge regression \@ref(eq:ridge-est-deviance). That means that the Ridge estimator can be seen as a Maximum a Posteriori estimator in which the prior distribution for $\beta_1, \beta_2, \dots, \beta_p$ are independent Normal centered in $0$ with the same variance $\sigma^2$. From the substitution $\lambda=\frac{\phi}{\sigma^2}$ we can also interpret the role of $\lambda$ and $\sigma^2$. A lower $\sigma^2$ corresponds to a more informative prior that gives more credibility to the prior mean $E(\beta_j)=0$. In the Ridge usual parametrization, this corresponds to a greater $\lambda$ and so an higher weight to the penalization $\sum_{j=1}^{p}{\beta_j^2}$, that brings a higher shrinkage to the estimates.
 
 With the same approach, we can assume $\beta_1, \beta_2, \dots, \beta_p$ to be identically distributed with _Laplace_ distribution centered in $0$:
 $$
@@ -3352,7 +3352,7 @@ By substituting $\frac{2\phi}{b}$ with $\lambda$ in equation \@ref(eq:bayes-map-
 
 With the same approach, if we assume the following prior distribution:
 $$
-\pi(\beta_j) \propto e^{-\frac{1}{k}\left(\alpha|\beta_j| + (1-\alpha)\beta_j^2\right)}, \quad \alpha\in[0,1], \ j\in\{1,2,\dots,p\}
+\pi(\beta_j) \propto e^{-\frac{1}{k}\left(\alpha|\beta_j| + (1-\alpha)\beta_j^2\right)}, \quad \alpha\in[0,1], \ k\in]0,+\infty[, \ j\in\{1,2,\dots,p\}
 $$
 we obtain the Elastic Net optimization problem:
 $$
@@ -3361,7 +3361,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{k} {\sum_{j=1}^{p}{\left(\a
 $$
 where $k>0$ is a constant that determine the variance of the prior distribution.
 
-Figure \@ref(fig:normal-laplace) shows a Normal, a Laplace and a Elastic Net prior destribution with $\alpha=\frac{1}{2}$. All the distributions represented have with unitary variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly $0$ the unimportant coefficients in the LASSO regression. The Elastic Net prior is a mixture between the Normal distribution and the Laplace distribution.
+Figure \@ref(fig:normal-laplace) shows a Normal, a Laplace and a Elastic Net prior distribution with $\alpha=\frac{1}{2}$. All the distributions represented have unitary variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly $0$ the unimportant coefficients in the LASSO regression. The Elastic Net prior is a mixture between the Normal distribution and the Laplace distribution.
 
 (ref:normal-laplace-caption-latex) Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.
 
@@ -3419,20 +3419,27 @@ plot_grid_split(p_normal, p_laplace, p_en)
 
 ```
 
-The approach usually adopted in Ridge and LASSO regression is to select the optimal hyperparameter $\lambda$ based on Cross Validation, so the prior distribution is estimated from the data. This approach stands in contrast to standard Bayesian methods, in which the prior distribution represents the a priori information and should be fixed before observing the sample. The Bayesian procedures in which the prior distribution is estimated from the data are called _Empirical Bayes_ methods.
+The approach usually adopted in Ridge and LASSO regression is to select the optimal hyper-parameter $\lambda$ based on Cross Validation, so the prior distribution is estimated from the data. This approach stands in contrast to standard Bayesian methods, in which the prior distribution represents the a priori information and should be fixed before observing the sample. The Bayesian procedures in which the prior distribution is estimated from the data are called _Empirical Bayes_ methods.
 
 
 #### Other Bayesian estimators for GLM
 
 The Bayesian framework provides more flexibility in prior information than what standard Ridge and LASSO regression offer.
 
-Even staying with the Normal prior distributions, it is possible to give to the different coefficients $\beta_j$ different prior variances $\sigma_j^2$, that would represent how much we trust the estimated coefficient to be different from $0$. For example it is possible to use a non informative prior for most of the coefficient and to introduce an informative prior only to the more delicate coefficients. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \@ref(chap:shrinkage-considerations), this technique can be useful in the case of highly unbalanced explanatory variables.
+Even staying with the Normal prior distributions, it is possible to give to the different coefficients $\beta_j$ different prior variances $\sigma_j^2$, that would represent how much we trust the estimated coefficient to be different from $0$. For example it is possible to use a non informative prior for most of the coefficients and to introduce an informative prior only to the more delicate ones. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \@ref(chap:shrinkage-considerations), this technique can be useful in the case of highly unbalanced explanatory variables.
 
-It is also possible to assign to the coefficients prior distributions different from $0$. If to the coefficient $\beta_j$ we assign a prior $\beta_j\sim\mathcal{N}(\beta_{j0}, \sigma_j^2)$, this results in a shrinkage towards $\beta_{j0}$ instead than towards $0$. This in the Bayesian reasoning can be useful if we want to add to the model information taken outside the sample. For example, if we want to fit a model for a small portfolio of insurance policies we can introduce prior information from estimates from other portfolios or from market data. Given the prior distribution, the exposure of the portfolio used for fitting will determine how much information we have on that portfolio and so how much our posterior estimates will be close to the Maximum Likelihood estimates.
+It is also possible to assign to the coefficients prior distributions different from $0$. If we assign to the coefficient $\beta_j$ a prior $\beta_j\sim\mathcal{N}(\beta_{j0}, \sigma_j^2)$, this results in a shrinkage towards $\beta_{j0}$ instead than towards $0$. In the Bayesian reasoning, this can be useful if we want to add to the model information taken from outside the sample. For instance, if we want to fit a model for a small portfolio of insurance policies, we can introduce prior information from estimates from other portfolios or from market data. Given the prior distribution, the exposure of the portfolio used for fitting determines how much information we have on that portfolio and so how much our posterior estimates will be close to the Maximum Likelihood estimates.
 
-The Bayesian framework allows us also to use prior distributions for the coefficients different from the Normal and the Laplace. For example, if we want a coefficient $\beta_j$ to be positive, we can assign to it a prior distribution $\pi(\beta_j)$ with all the mass of positive values and density equal $0$ to all the negative determinations. This will force the Maximum a Posteriori estimate to be non negative.
+The Bayesian framework allows us also to use prior distributions different from the Normal and the Laplace. For example, if we want a coefficient $\beta_j$ to be positive, we can assign to it a prior distribution $\pi(\beta_j)$ with all the mass on positive values and density equal $0$ to all the negative determinations. This will force the Maximum a Posteriori estimate to be non negative.
+$$
+\pi(\beta_j) =
+\begin{cases}
+\frac{\sqrt{2}}{\sqrt{\pi}\sigma}e^{-\frac{1}{2\sigma^2}\beta_j^2} & \text{if } \beta_j \ge 0 \\
+0 & \text{otherwise}
+\end{cases}
+$$
 
-A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables $x_1, x_2, \dots, x_J$. In the common GLM parametrization, each dummy variable corresponds to a coefficient $\beta_1, \beta_2, \dots, \beta_J$. We can consider the difference between each and the previous one: $\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}$. The new parametrization depends on the coefficients: $\beta_1, \gamma_2, \dots, \gamma_J$. If we assign a prior distribution centered on  $0$ for the coefficients $\gamma_2, \dots, \gamma_J$ this will produce a shrinkage of each of them toward the previous one, forcing to have small steps from one modality of the variable to the next one. Moreover, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
+A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables $x_1, x_2, \dots, x_J$. In the common GLM parametrization, each dummy variable corresponds to a coefficient $\beta_1, \beta_2, \dots, \beta_J$. We can consider the difference between each and the previous one: $\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}$. The new parametrization depends on the coefficients: $\beta_1, \gamma_2, \dots, \gamma_J$. If we assign a prior distribution centered on $0$ for the coefficients $\gamma_2, \dots, \gamma_J$, this will produce a shrinkage of each of the coefficients $\beta_2, \dots, \beta_J$ towards the previous one, forcing the variable effect to have small steps from one modality to the next one. Moreover, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
 $$
 \gamma_2, \dots, \gamma_J \ge 0 \longrightarrow \beta_1\le\beta_2\le\dots\le\beta_J
 $$
@@ -3444,7 +3451,6 @@ In the same way, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions
 - Riparametrizzazione Akur8
 - Se ho una quantitativa discreta posso riparametrizzare in modo che sia monotona
 -->
-
 
 
 #### Some considerations on Bayesian estimators for GLM
