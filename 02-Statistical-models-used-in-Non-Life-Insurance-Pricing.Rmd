@@ -3441,7 +3441,7 @@ $$
 
 A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables $x_1, x_2, \dots, x_J$. In the common GLM parametrization, each dummy variable corresponds to a coefficient $\beta_1, \beta_2, \dots, \beta_J$. We can consider the difference between each and the previous one: $\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}$. The new parametrization depends on the coefficients: $\beta_1, \gamma_2, \dots, \gamma_J$. If we assign a prior distribution centered on $0$ for the coefficients $\gamma_2, \dots, \gamma_J$, this will produce a shrinkage of each of the coefficients $\beta_2, \dots, \beta_J$ towards the previous one, forcing the variable effect to have small steps from one modality to the next one. Moreover, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
 $$
-\gamma_2, \dots, \gamma_J \ge 0 \longrightarrow \beta_1\le\beta_2\le\dots\le\beta_J
+\gamma_2, \dots, \gamma_J \ge 0 \ \longrightarrow \ \beta_1\le\beta_2\le\dots\le\beta_J
 $$
 In the same way, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions with all the mass on negative determinations, the result will be a monotonically non increasing effect.
 
@@ -3455,6 +3455,17 @@ In the same way, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions
 
 #### Some considerations on Bayesian estimators for GLM
 
+Bayesian estimators offer a flexible tool for modeling effects in GLM. This tool is particularly useful in actuarial modeling because often the actuary needs to introduce external information to tune the model coefficients.
+
+In the actuarial practice this is often done introducing offsets. For example, in the case in which we have a delicate coefficient $\beta_j$ estimated for a class with low exposure, if we want to insert it in the model with an effect weakened compared to the maximum likelihood one $\hat{\beta}_j^{ML}$, we can consider a specific value $\hat{\beta}_j^{\text{offset}}$, with $|\hat{\beta}_j^{\text{offset}}| \le |\hat{\beta}_j^{ML}|$,in the model and introduce it as an offset.
+
+With Bayesian estimators, in the practice, we can do something really similar. Indeed, we can choose a prior distribution, such that our estimate is exactly equal to the offset $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$. For example, in the case of the delicate coefficient $\beta_j$, we can just apply a Normal prior $\pi(\beta_j)$ centered in $0$ and tune the variance $\sigma_j^2$ in order to obtain exactly $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$.
+
+This practice look really similar to introducing an offset, but it has two important benefits.
+
+First of all, even if we are forcing the coefficient to be exactly $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$, we have an indicator on how strong our forcing is. Indeed, $\sigma_j^2$ can be seen as the strength of the prior distribution and it can be compared with the variances of the prior distributions of the other coefficients.
+
+Secondly, in many cases, after setting an offset, we want to modify the model and eventually change other coefficients. After doing this, if we are working with offsets, we have to review each of the coefficients imposed in offset, since a change in other coefficients can affect them. With Bayesian estimators we can just keep the prior distributions previously set and refit the model. The new coefficients will be automatically reevaluated keeping the strength of the prior distributions previously assigned.
 
 <!--
 - Altro: modelli gerarchici, mixed models GLMM
@@ -3468,8 +3479,6 @@ In the same way, if we assign to $\gamma_2, \dots, \gamma_J$ prior distributions
 - In pratica spesso si usa informazione a priori nella scelta dei parametri da tenere o togliere dal modello o anche nell'introduzione degli offset
 -->
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
 
 \newpage
 
@@ -3477,6 +3486,11 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris inter
 
 
 ## Considerations on models {#chap:considerations-on-models}
+
+### Hints on Machine Learning Techniques
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
 
 ### Model comparison {#chap:model-comparison}
 
