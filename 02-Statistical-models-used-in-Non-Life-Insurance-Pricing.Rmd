@@ -2743,7 +2743,7 @@ This property of the LASSO Regression can be derived from a different representa
 is equivalent to the constrained optimization problem:
 \begin{equation}
 \label{eq:lp-est-deviance-constr}
-\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}:\  \|\boldsymbol{\beta}_{\setminus0}\|_d^d \le s_{\lambda}}{ \left\{ D(\boldsymbol{\beta}, \boldsymbol{y}) \right\} }
+\hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}:\  \|\boldsymbol{\beta}_{\setminus0}\|_d^d \le s_{\lambda}}{ D(\boldsymbol{\beta}, \boldsymbol{y}) }
 \end{equation}
 where $s_{\lambda}$ is a quantity that depends on $\lambda$.
 
@@ -2994,9 +2994,8 @@ The Elastic Net consists in a penalized Deviance optimization problem in which t
 \label{eq:elastic-net-est-deviance}
 \hat{\boldsymbol{\beta}} =  \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
 D(\boldsymbol{\beta}, \boldsymbol{y}) +
-\lambda \left(
-\sum_{j=1}^p{\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2}
-\right)
+\lambda 
+\sum_{j=1}^p{\left(\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2\right)}
 \right\}}
 \end{equation}
 where $\alpha \in [0,1]$ is an hyper-parameter that weights the two penalization components.
@@ -3013,7 +3012,7 @@ As we have said, shrinkage estimators are particularly useful when the number of
 
 If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients $\beta_j$ corresponding to the modalities of those variables. This technique is useful also in the case we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable "number of claims experienced in the previous year", we will have most of the observation in the modality corresponding to $0$ claims, very few in the modality corresponding to $1$ claim and almost nobody with $2$ or more claims. If we are fitting a model for the claim frequency and we consider the variable $x_j$ that indicates whether the policyholder experienced one or more claims in the previous year $x_j=1$ or not $x_j=0$, it is likely that the maximum likelihood estimator for the coefficient $\hat{\beta}_{x_j=1}$ will be greater than $0$, as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that in there are just few observation with $x_j=1$ it is possible that the coefficient $\hat{\beta}_{x_j=1}$ is not significantly different from $0$. If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable $x_j$ in the model or not. If we don't consider it we are probably discard some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk to overfit the data. With shrinkage estimators we can choose to insert the variable $x_j$ in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
 
-Another interesting observation about GLM fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable $x_j$ is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient $\beta_j$ with an estimator $\tilde{\beta}_j$ that is equal to the maximum likelihood estimator $\tilde{\beta}_j^{ML}$ when the coefficient pass a specific criterion and is equal to $0$ when $\tilde{\beta}_j^{ML}$ doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on $\tilde{\beta}_j^{ML}$, and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards $0$ of the coefficient $\tilde{\beta}_j$ that reduce its variance as all the coefficients not relevant for prediction are set equal to $0$ and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable $x_j$, in all the procedures commonly used for feature selection, the probability that $\tilde{\beta}_j$ passes the procedure or not depends on how strong the effect $\beta_j$ is and how many observations there are in the classes $x_j=0$ and $x_j=1$.
+Another interesting observation about GLM fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable $x_j$ is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient $\beta_j$ with an estimator $\tilde{\beta}_j$ that is equal to the maximum likelihood estimator $\tilde{\beta}_j^{ML}$ when the coefficient pass a specific criterion and is equal to $0$ when $\tilde{\beta}_j^{ML}$ doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on $\tilde{\beta}_j^{ML}$, and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards $0$ of the coefficient $\tilde{\beta}_j$ that reduces its variance as all the coefficients not relevant for prediction are set equal to $0$ and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable $x_j$, in all the procedures commonly used for feature selection, the probability that $\tilde{\beta}_j$ passes the procedure or not depends on how strong the effect $\beta_j$ is and how many observations there are in the classes $x_j=0$ and $x_j=1$.
 
 We also mantion that the Shrinkage Estimators can be used in synergy with GAMs. Indeed it is possible to fit to the quantitative variables a cubic spline with a GAM penalization based on the second derivative of the spline and to the qualitative variables a shrinkage estimator with an Elastic Net penalization.
 \begin{equation}
@@ -3024,9 +3023,8 @@ We also mantion that the Shrinkage Estimators can be used in synergy with GAMs. 
     + \sum_{l=1}^{q}{
       \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
     }
-    + \lambda_{EN} \left(
-      \sum_{j=1}^p{\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2}
-    \right)
+    + \lambda_{EN} 
+      \sum_{j=1}^p{\left(\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2\right)}
 \right\}
 } 
 \end{equation}
@@ -3049,7 +3047,7 @@ Benefici ridge/lasso
 
 ### Bayesian GLM
 
-In this section we are going to present the Bayesian estimators for GLM.The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
+In this section we are going to present the Bayesian estimators for GLM. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
 
 
 #### The Bayesian framework
@@ -3467,6 +3465,8 @@ First of all, even if we are forcing the coefficient to be exactly $\hat{\beta}_
 
 Secondly, in many cases, after setting an offset, we want to modify the model and eventually change other coefficients. After doing this, if we are working with offsets, we have to review each of the coefficients imposed in offset, since a change in other coefficients can affect them. With Bayesian estimators we can just keep the prior distributions previously set and refit the model. The new coefficients will be automatically reevaluated keeping the strength of the prior distributions previously assigned.
 
+We end our discussion on Bayesian estimators for GLM by mentioning that also GAM models, discussed in section \@ref(chap:gam), can be estimated with Bayesian estimators. This is done by applying a prior distribution to the coefficients of the spline functions $f_l(\cdot)$. For more details on that, we refer to [@bayes-gam].
+
 <!--
 - Altro: modelli gerarchici, mixed models GLMM
 - Se prior non semplice: stima con metodi MCMC
@@ -3487,9 +3487,29 @@ Secondly, in many cases, after setting an offset, we want to modify the model an
 
 ## Considerations on models {#chap:considerations-on-models}
 
-### Hints on Machine Learning Techniques
+In this section we are going to compare the models we have seen in the previous sections making a specific focus on pricing needs. In subsection \@ref(chap:ml-techniques) we will also give some hints on _Machine Learning Algorithms_. These hints will be useful for some comments of the model described in this thesis.
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+
+### Hints on Machine Learning Algorithms {#chap:ml-techniques}
+
+With the term _Machine Learning Algorithms_ we refer to a set of techniques used for predictive models in Machine Learning Practice, such as _Gradient Boosting Machines_ (GBM), _Random Forests_ (RF) and _Neural Networks_ (NN). These are highly flexible general purpose techniques that can be used both for regression (predictive models with a quantitative response variable $Y$) and classification (predictive models with a qualitative response variable $Y$). In this section we are going to only provide some hints on them. For a more in-depth exposure of these models with applications to actuarial problems we refer to [@wuthrich-data-analytics].
+
+The assumptions adopted in the models behind these algorithms are minimal. Usually it is just assumed a distribution for the response variable $Y$, while for the regression function we just consider:
+$$
+E(Y_i) = \boldsymbol{f}(x_{i1}, \dots, x_{ip})
+$$
+without any constraints of the shape of $f(\cdot,\dots,\cdot)$. That means that with these models we take into account all the possible interactions between variables without any restriction.
+
+Given the distribution of $Y$, we are able to define a loss function, that for example can be the deviance $D(\boldsymbol{f}, \boldsymbol{y})$. The aim of the fitting algorithm is to find a good approximation $\hat{\boldsymbol{f}}$ for $\boldsymbol{f}$.
+
+For highly complex models, there is a huge risk of overfitting the training set. These Machine Learning Techniques offer sophisticated algorithms that provides efficient way to fit $\hat{\boldsymbol{f}}$ preventing overfitting.
+
+The focus of these techniques is usually much more on the fitting algorithm rather than on the underlying model. For these reason they are often referred as _Machine Learning Algorithms_ rather than _Machine Learning Models_.
+
+These algorithms provide a highly level of automation and do not require big manual interventions by the person who is running the algorithm. In these algorithms neither the shape of the regression function nor the interactions between the explanatory variables have to to be specified.
+
+The results of the fitting are complex regression functions $\hat{\boldsymbol{f}}$. The convenience of this complexity combined with a strong automation is that these algorithms are able to automatically spot complex effects that wouldn't be easily discovered by manual fitting. On the other hand, this complexity reduces the interpretability of the result. For this reason, these algorithms are often referred as _Black Box_.
+
 
 
 ### Model comparison {#chap:model-comparison}
