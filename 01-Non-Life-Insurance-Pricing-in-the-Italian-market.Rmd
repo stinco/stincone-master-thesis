@@ -41,7 +41,7 @@ The insurance is the contract by which an insurer, in exchange of the payment of
 
 This definition identifies two parties: the _Insurer_ and the _Policyholder_. The policyholder pays to the Insurer a certain _Premium_ at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (_Claim_) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g. in motor third party liability insurance, it depends on the damage the policyholder has caused to a third party). Regarding the "agreed limits", another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g. in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g. in motor third party liability (MTPL) insurance, it depends on the damage the policyholder has caused to a third party). Regarding the "agreed limits", another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
@@ -1086,7 +1086,7 @@ The techniques used for _Tariff Requirement_ are employed also to estimating the
 <!-- general liability position for the company. This information is particularly important and it is reported in the company financial statement. -->
 
 
-## Beyond technical pricing
+## Beyond technical pricing {#beyond-technical-pricing}
 
 In section \@ref(chap:risk-prem-tech-price) we defined:
 

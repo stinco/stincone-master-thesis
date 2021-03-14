@@ -407,7 +407,7 @@ The Italian Civil Code provides the following definition of insurance contract:
 
 This definition identifies two parties: the \emph{Insurer} and the \emph{Policyholder}. The policyholder pays to the Insurer a certain \emph{Premium} at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (\emph{Claim}) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability insurance, it depends on the damage the policyholder has caused to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability (MTPL) insurance, it depends on the damage the policyholder has caused to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
@@ -2763,7 +2763,7 @@ The assumptions adopted in the models behind these algorithms are minimal. Usual
 \[
 E(Y_i) = \boldsymbol{f}(x_{i1}, \dots, x_{ip})
 \]
-without any constraints of the shape of \(f(\cdot,\dots,\cdot)\). That means that with these models we take into account all the possible interactions between variables without any restriction.
+without any constraints of the shape of \(\boldsymbol{f}(\cdot,\dots,\cdot)\). That means that with these models we take into account all the possible interactions between variables without any restriction.
 
 Given the distribution of \(Y\), we are able to define a loss function, that for example can be the deviance \(D(\boldsymbol{f}, \boldsymbol{y})\). The aim of the fitting algorithm is to find a good approximation \(\hat{\boldsymbol{f}}\) for \(\boldsymbol{f}\).
 
@@ -2786,18 +2786,48 @@ Compared to these GLM Advancements, Machine Learning Algorithms are still much m
 
 Anyway, Machine Learning Algorithms are much less \emph{interpretable} and \emph{controllable} compared to GLM-based models. In GLM-based models we can easily look at the marginal effects of the explanatory variables and we have a full control of the interactions. In Machine Learning Algorithms, we can't easily look at how the changing of an explanatory variable affects the estimate on the response because the effect of that changing can highly depend on the values of the other explanatory variables in a way that we can't manually control.
 
-However, the benefits of GLM-based models go beyond the interpretability. In GLM-based models, the person who is running the fitting, have a full control on the coefficients. Indeed, he can easily choose to add or not an effect regardless the variable selection procedure includes it or not. Moreover, the choice consists not only in adding or not a variable or an interaction, but, in GLM-based models, it is even possible to manually assign to an explanatory variable a marginal effect with a specific shape by introducing an offset or, with Bayesian estimators, by tuning the prior distribution.
-
-This discretion gives a lot of importance to the person who is fitting the model. In actuarial models, the person that conducts the model fitting is the \emph{actuary} (see section \ref{chap:actuary-role}). In the next section we will see in which cases a manual intervention is needed and how the actuary can perform it.
+However, the benefits of GLM-based models go beyond the interpretability. In GLM-based models, the person who is running the fitting, have a \emph{full control on the coefficients}. Indeed, he can easily choose to add or not an effect regardless the variable selection procedure includes it or not. Furthermore, the choice consists not only in adding or not a variable or an interaction, but, in GLM-based models, it is even possible to manually assign to an explanatory variable a marginal effect with a specific shape by introducing an offset or, with Bayesian estimators, by tuning the prior distribution.
 
 \hypertarget{chap:actuary-importance}{%
 \subsection{The actuary importance}\label{chap:actuary-importance}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+The high level of discretion in GLM-based models fitting gives a lot of importance to the person who is fitting the model. In actuarial models, the person that conducts the model fitting is the \emph{actuary}. In section \ref{chap:actuary-role} we have seen who the actuary is. In this section we will describe some of the cases in which a manual intervention in the model fitting is needed and how the actuary can perform it.
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+We will distinguish between \emph{technical needs}, that are related to building a good predictive model, and \emph{commercial needs}, that are related to price optimization.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+\hypertarget{technical-needs}{%
+\subsubsection{Technical needs}\label{technical-needs}}
+
+The \emph{technical needs} come from the fact that we observe past data, but our models will be used for pricing policies that will be sold in the future. So, our models have to combine observation from the past and assumptions on the future.
+
+By building a technical price, we must consider that our portfolio is not representative of the whole country portfolio and it isn't even representative of our future portfolio, that is influenced by the future underwriting policy of the company and also by the pricing policy.
+
+There are some cases in which estimates from past data could lead to a \emph{bias} in the future predictions. For example, it is possible that in the past the underwriting policy for certain clusters, such as customers from specific regions, has been particularly strict, so on those clusters, on historical data we see excellent technical results. Anyway, these past observations could not be representative of the future policies we could acquire from those clusters and proposing a price too low for customers from those clusters could result in big technical losses. On the other hand, it is possible that in the past the company suffered big frauds from customers of specific clusters, but, as the fraud detection initiatives improved, in the future it is not expected to get those kinds of customers. In these cases, the coefficients fitted from past data will be too high for future policies from those clusters.
+
+It is also possible that in the future the company is going to sell on new sales channels where there is not historical data. It is possible that the policies from the new channels will have different characteristics, such as an higher or a lower propensity to commit frauds, so the actuary should take it into account with a proper pricing correction.
+
+Moreover, it is possible that in the future the company will change the way some guarantees are sold. For instance, if in the past the option of payment division into installments was not encouraged, only the bad customers with high premiums would have chosen to divide their payment into installments. But, if in the future that option will be encouraged, a wider range of customers will select it and the determination of the coefficient of the variable ``number of installments'' will change.
+
+There are other cases in which the past portfolio on certain clusters is too small, so the estimates with past data are affected by \emph{high variance} and they are not reliable. This can happen for example if in a specific region the company never pushed and has a small market share.
+
+In all the cases mentioned, the actuary has to use his expertise to properly pricing policies. In GLM-based models, looking to the fitted marginal effects of the critical variables and manually changing them is quite straightforward, while it would be much more difficult for complex machine learning models.
+
+\hypertarget{commercial-needs}{%
+\subsubsection{Commercial needs}\label{commercial-needs}}
+
+As we have seen in section \ref{beyond-technical-pricing}, the tariff and the offer price are the result of a process of \emph{price optimization} that takes into account technical pricing, client expectation and business strategy. Usually the definition of the tariff and the offer price starts from the technical price and from it some of the coefficients are tuned to satisfy commercial needs.
+
+The tariff and the offer price must also respect specific legal constraints. One example of legal constraint in MTPL coefficients is related to the bonus-malus class. By law, the coefficients of the bonus-malus class must be monotonically increasing. That means that, even if in the technical price the fitted coefficients are not increasing in all clusters, in tariff and offer price they must be tuned to achive monotonicity.
+
+Some commercial constraints that are logical for tariff and offer price are the ones on coefficients related to coverage options such as the insurance ceiling and the deductible. It is clear that, if a client asks for a higher ceiling, the price offered to him must be higher. However, it is possible that on observed data on average the policies with higher ceiling experience less claims and have a lower total cost of claims. This can be explained with the fact that policyholders that select the higher ceiling are usually the more careful, so they commit less claims. The same way, if the client asks for a higher deductible, the price offered to him must be lower, even if it is possible that policies with higher deductible have an higher technical price that policies with a lower deductible.
+
+We must also consider commercial constraints based merely on customer expectation. For example, customers usually expect that insuring a more powerful vehicles should be more expensive than a less powerful one. From observed data it is possible that policies with more powerful vehicles have on average a lower total cost of claims. Moreover, the power of a vehicle is positively correlated with its commercial price and customers that buy expensive vehicles are usually the less sensitive to price. With these consideration, from a commercial point of view, it is preferred to have an offer with higher prices for more powerful vehicles.
+
+Another set of variables that have to respect some commercial constraints are the variables related to claims experienced in the previous years. The effect of those variables should follow a specific order. Indeed, a claim experienced last year must penalize the premium more than a claim experienced two years ago, that must penalize more than a claim experienced three years ago and so on. On top of them it is also need to take into account the period of coverage. For instance, let's consider a customer that experianced a claim last year and previously has been covered for 5 years with no claims, and another customer that experienced a claim last year but have never been covered before. If all the other characteristic for the two customers are the same, the first one should receive a lower price than the second one. These constraints, in addition to being guided by commercial logic, also make sense from a technical point of view. Checking whether these constraints are always respected is feasible with GLM-based models, but it is quite difficult for complex machine learning models.
+
+Finally, we mention that there are some practical cases in which it is important to understand why the offer price results in a certain value. For instance, if a customer makes a variation on the policy, for example by changing the insured vehicle, and the price changes significantly, it is important to understand which variables caused the change. This is important also to understand if the change is intentional and we really think that with the other vehicle the expected total cost of claims is different or for example the result comes from an information technology issue, such as that a variable is not properly passed to the calculation engine.
+
+\newpage
 
 \hypertarget{chap:implementation}{%
 \section{Implementation}\label{chap:implementation}}
