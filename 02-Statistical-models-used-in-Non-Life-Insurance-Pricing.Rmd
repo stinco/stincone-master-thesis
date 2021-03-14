@@ -2022,7 +2022,7 @@ This higher flexibility and automation comes at the cost of introducing more com
 
 \newpage
 
-### Shrinkage estimators for GLM
+### Shrinkage estimators for GLM {#chap:shrinkage-estimators}
 
 In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in GLM when there are many explanatory variables. All the models presented in this chapter are actually GLM. The advancements consist in the way the parameters are estimated.
 
@@ -3045,7 +3045,7 @@ Benefici ridge/lasso
 \newpage
 
 
-### Bayesian GLM
+### Bayesian GLM {#chap:bayes-glm}
 
 In this section we are going to present the Bayesian estimators for GLM. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduce the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
 
@@ -3256,7 +3256,7 @@ Osservazioni
 -->
 
 
-#### Bayesian estimators for GLM {#chap:bayes-glm}
+#### Bayesian estimators for GLM
 
 The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients $(\boldsymbol{\beta}, \phi)$. By assuming a prior distribution on $\boldsymbol{\beta}$ we will introduce a bias driven by our prior information.
 
@@ -3487,7 +3487,7 @@ We end our discussion on Bayesian estimators for GLM by mentioning that also GAM
 
 ## Considerations on models {#chap:considerations-on-models}
 
-In this section we are going to compare the models we have seen in the previous sections making a specific focus on pricing needs. In subsection \@ref(chap:ml-techniques) we will also give some hints on _Machine Learning Algorithms_. These hints will be useful for some comments of the model described in this thesis.
+In this section we are going to discuss how the models we have seen in the previous sections satisfy the non-life insurance procing needs. In subsection \@ref(chap:ml-techniques) we will also give some hints on _Machine Learning Algorithms_, that will be useful to compare the with the models described in this thesis.
 
 
 ### Hints on Machine Learning Algorithms {#chap:ml-techniques}
@@ -3510,19 +3510,31 @@ These algorithms provide a highly level of automation and do not require big man
 
 The results of the fitting are complex regression functions $\hat{\boldsymbol{f}}$. The convenience of this complexity combined with a strong automation is that these algorithms are able to automatically spot complex effects that wouldn't be easily discovered by manual fitting. On the other hand, this complexity reduces the interpretability of the result. For this reason, these algorithms are often referred as _Black Box_.
 
+We underline that, from a theoretical point of view, GLM and all their advancements seen in this thesis are actually _Machine Learning Techniques_, since there is not a theoretical distinction between _Statistical Models_ and _Machine Learning Models_. Anyway, in the common speech, the term _Machine Learning_ is used for algorithms such as GBM, Random Forest and Neural Network, that, compared to classical statistical models, offer more complex estimations and a higher level of automation. In the following, we will use the term _Machine Learning Algorithms_ to refer to algorithms such as GBM, Random Forest and Neural Network.
 
 
 ### Model comparison {#chap:model-comparison}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+In this thesis we have discussed some GLM advancements: GAMs (section \@ref(chap:gam)), Shrinkage Estimators (section \@ref(chap:shrinkage-estimators)) and Bayesian Estimators (section \@ref(chap:bayes-glm)). All these developments offer better predictions and more automation compared to classic GLM. For example, in GAM fitting it is not needed to specify the shape of the effect for the quantitative variables and in Elastic Net an automatic variable selection is performed. The improvement in performance both in term of predictivity and automation increases as the number of explanatory variable increases, so these techniques become significantly better than classic GLM when $p$ is big. As, we have seen, these techniques are not mutual exclusive. It is possible to fit a GAM with penalized splines for quantitative explanatory variables and Elastic Net penalization in qualitative explanatory variables. The Bayesian estimators, that can be seen as a generalization of Elastic Net, can be applied to both GLM and GAM and offer even more useful tools for fitting.
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+Compared to these GLM Advancements, Machine Learning Algorithms are still much more flexible and automatic. Indeed, in GLM and GAM there still is a certain degree of manual supervision. For example, we still have to specify the interactions we want to consider in the model. Actually, in Elastic Net we can consider a large number of interactions and let the model automatically select them, but it is still preferred to check what the model is doing and eventually manually choose whether to include or not the selected interactions.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+Anyway, Machine Learning Algorithms are much less _interpretable_ and _controllable_ compared to GLM-based models. In GLM-based models we can easily look at the marginal effects of the explanatory variables and we have a full control of the interactions. In Machine Learning Algorithms, we can't easily look at how the changing of an explanatory variable affects the estimate on the response because the effect of that changing can highly depend on the values of the other explanatory variables in a way that we can't manually control.
+
+However, the benefits of GLM-based models go beyond the interpretability. In GLM-based models, the person who is running the fitting, have a full control on the coefficients. Indeed, he can easily choose to add or not an effect regardless the variable selection procedure includes it or not. Moreover, the choice consists not only in adding or not a variable or an interaction, but, in GLM-based models, it is even possible to manually assign to an explanatory variable a marginal effect with a specific shape by introducing an offset or, with Bayesian estimators, by tuning the prior distribution.
+
+This discretion gives a lot of importance to the person who is fitting the model. In actuarial models, the person that conducts the model fitting is the _actuary_ (see section \@ref(chap:actuary-role)). In the next section we will see in which cases a manual intervention is needed and how the actuary can perform it.
 
 
 
 ### The actuary importance {#chap:actuary-importance}
+
+<!--
+The ability of the actuary that is fitting the model is crucial
+Expert judgement, expertise, domain knowledge
+Fare i modelli diventa un'arte
+-->
+
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 

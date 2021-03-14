@@ -1140,7 +1140,7 @@ The business strategy could also contemplate being more aggressive on certain ta
 Anyway, a company can't arbitrarily discount policies because an excess in discounting could cause severe drawbacks on a financial perspective. Therefore, an insurance company must always respect the solvency constraints defined by the supervisory authority to safeguard itself from bankruptcy. The company solvency is essential to protect all the stakeholders, that are both the clients and the investors.
 
 
-## The actuary role
+## The actuary role {#chap:actuary-role}
 
 In this technical pricing and price optimization framework, the actuary is the one that conducts the analysis and defines the pricing rules. The _International Actuarial Association_ (IAA) describes the actuaries as "highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more" and it states that their work "requires a combination of strong analytical skills, business knowledge, and understanding of human behavior".^[[IAA, About Actuaries](https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About%20Actuaries.aspx)]
 
