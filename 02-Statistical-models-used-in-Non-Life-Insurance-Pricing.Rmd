@@ -31,7 +31,7 @@ In this chapter we are going to illustrate some of the most widespread models fo
 In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Generalized Additive Model (GAM) and the Shrinkage estimators for GLM. After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 
-### GLM
+### GLM {#chap:glm}
 
 
 #### Linear Exponential Families {#chap:linear-exp-families}
@@ -3578,24 +3578,61 @@ Finally, we mention that there are some practical cases in which it is important
 
 ## Implementation {#chap:implementation}
 
-<!--
-Tutti hanno algoritmi efficienti
-Diverse soluzioni con diversi programmi
-h2o
+### Practical data problem and solutions
+
+In building actuarial models we also face practical challenges due to the size of the data we are working with. In modern actuarial modeling is common to work with datasets with millions of rows and hundreds of columns, that can weight several Gigabytes. With legacy Information Technology (IT) implementations, dealing with these kinds of datasets can be quite painful. The issues appears not only in fitting models, but in the whole Extract Transform Load (ETL) pipeline. Working with big amount of data is struggling on two main aspects:
+
+1. Memory;
+2. Computation time.
+
+The first problem consist in the fact that the amount of primary memory, i.e. the Random Access Memory (RAM), in a system is limited and can't be arbitrarily increased. When the datasets we use are larger than the RAM in our local machine, it is not possible to work with them in memory locally. A possible solution is to keep the data on the secondary memory, i.e. the Hard Disk Drive (HDD) or Solid State Drive (SSD), and read them sequentially only when they are needed, as it is done in analytics software like SAS. This solution permits to work with larger datasets, but implicates a significant decrease in computation time as reading and writing on secondary memory is much slower than doing it on primary memory.
+
+Considering the computation time, even if our data fits into the primary memory, if we want to run a complex algorithm with our processor, it could not be feasible in a reasonable amount of time. Indeed, the speed on a single Central Processing Unit (CPU) is limited by physical constraints.
+
+In modern computer science, the solution of these problems comes from the concept of parallelism. Parallel computing is a type of computation where many calculations are carried out simultaneously. This can be achieved with two paradigms:
+
+1. _Task parallelism_;
+2. _Data parallelism_.
+
+Task parallelism is what is done with multi-core processor. A multi-core processor is a processor that includes multiple processing units, called "cores", on the same chip. The advantage of having a machine with multiple cores is that it is possible to decompose our algorithm in smaller tasks that can be run simultaneously. For example, when we are conducting hyper-parameter tuning in a model, we are fitting many time the model with different values of the parameters. These fitting are independent tasks that can be conducted simultaneously by the different cores of our machine. Modern computers are equipped with at least two cores and many statistical packages deploy task parallelism to reduce computation time.
+
+Anyway, task parallelization does not tackle the problem of limited available memory. If our dataset is bigger than our primary memory, the best solution is to adopt a solution based on data parallelization. Data parallelization consists in distributing the data across different machines, which operate on the data in parallel. By distributing the data, each machine has only a portion of it and, if there are enough machines, even with a large dataset, it is possible to split it into pieces that fit into the primary memory of the single machines. The set of connected machines that work together in a distributed system is called cluster. Cluster computing offers a reliable and flexible way to deal with big datasets in analytics. The greater advantage of cluster computing is that it is easily scalable, that is, if we need more memory of more computing power, we can just increase the number of machines in the cluster and increase the performance of the system.
+
+Moving from a centralized system from a distributed system requires an important level of sophistication from an algorithm point of view. Luckily, many frameworks such as Apache Hadoop and Spark, that offer high-level interfaces that can be easily deployed by the final user. The high-level of abstraction of these interfaces permits to the final user to conduct analysis in a distributed system relieving him by worrying on the low-level implementation details.
+
+An even higher level of abstraction is achieved with _cloud computing_. Cloud computing consists in the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user. The idea behind cloud computing is to demand the whole IT management to a third company and paying a fee based on the use. This paradigm is also called _Hardware as a Service_ (HaaS), as the client doesn't own the hardware and just accesses the storage and the computation when he needs it. With this approach scalability is even easier because, if the user needs more resources he can just ask form them and the service provider will quickly satisfy his request. With own resource, increasing the hardware resources would require buying new hardware and installing it, that could be a big investment both in term of economic cost and time spent.
+
+We mention that, even if the solution mentioned in this chapter are suitable for _big data_, in usual actuarial pricing, big data are not used. The characteristics usually associated with big data are _Volume_, _Variety_ and _Velocity_. In common actuarial practice the characteristics of variety and velocity are not contemplated, as actuarial datasets are usually just relational tables that, at the moment of modeling, are previously built. The situation changes by introducing real time data such as telematics car driving data. For instance, if we want to model the real-time risk of committing a claim based on data from speedometers, accelerometers, gyroscopes and GPS that capture how and where the driver is driving the vehicle, that would be a big data problem.
+
+
+<!-- 
+- Memory and storage:
+  dataset più grandi della available RAM. Puoi usare lo storage, ma diventa   estrememente lento.
+- Computation time:
+  ci sono dei limiti fisici nella potenza dei singoli processori in termini di numero di transistor e clock speed
+- Soluzione: parallelizzazione
+  + task parallelism
+    multi threading
+  + data paralelism
+    distributed data. CLuster computing
+    scalability
 -->
 
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+### Actuarial pricing specific needs {#chap:actuarial-pricing-specific-needs}
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+In actuarial practice, as the actuary needs to visualize, interpret and control the variables effects, it is also important how the interface works. Often visual point and click applications are preferred to coding interfaces, such as R and Python. While coding interfaces are often used for ETL processes for their flexibility, in the modeling process point and click applications are considered more user friendly, since they require less effort to become proficient and they often offer out of the box tools for visualizing results without too much effort from the user.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+Among the point and click applications, in the market there are some solutions for actuarial pricing that are specifically thought for building GLMs and authomatically produces the plots seen in section \@ref(chap:glm). These applications are particularly optimized for GLM, but they are not as flexible as machine learning libraries in R and Python and the advancement implemented are limited.
 
 
-<!--
-Modelli più complessi: importanza dell'ottimizzazione computazionale
--->
+### Solution adopted in this project
 
+In the application described in section \@ref(chap:practical-app) we used _H2O_. H2O is an open-source machine learning platform that provides many of the most widely used statistics and machine learning models, such as GLM, GAM, GBM, Random Forest and Neural Network. H2O engine is based on Java, but it can be used both in R and Python with the packages deployed for those languages. The packages work as interfaces that is consistent with the programming language we are using. That means that we can use H2O both on R and Python package and the engine that is running under the hood is exactly the same.
+
+H2O offers also H2O Flow, that is a point and click interface that allows users to run H2O machine learning algorithms without writing code. This is a user friendly interface for modeling, but it has not all the functionalities for visualization, interpretation and control of variables effects that are present in actuarial pricing specific applications mentioned in section \@ref(chap:actuarial-pricing-specific-needs).
+
+As well as having several interfaces, H2O can run both locally on a single machine, with multi-core processing, and on a Spark Cluster. The high-level of abstraction of the interfaces permit to develop the algorithms both locally and on a cluster with basically the same code.
 
 
 
