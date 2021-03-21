@@ -14,7 +14,7 @@ editor_options:
 library(knitr)
 ```
 
-<!-- <!-- Needed for leaving space to the quote, * is for no indentation after title --> -->
+<!-- Needed for leaving space to the quote, * is for no indentation after title -->
 
 <!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
 
