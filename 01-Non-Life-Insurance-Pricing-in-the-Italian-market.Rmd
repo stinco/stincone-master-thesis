@@ -925,7 +925,7 @@ This way, we are decomposing only the claims with injuries between attritional a
 <!-- $$ -->
 
 
-### Model fitting and data available
+### Model fitting and data available {#chap:model-fitting-and-data-available}
 
 Once we have chosen how to decompose $S$, we have to model the response variables needed for that decomposition ($N$, $Z$, $I_J$, ...) with the explanatory variables. Thus we have to estimate a function $r:\mathcal{X}\rightarrow \mathcal{C}$ as defined in \@ref(def:modeling).
 

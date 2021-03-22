@@ -1,7 +1,4 @@
 ---
-#####################
-## thesis metadata ##
-#####################
 title: |
   Application of GLM Advancements \
   to Non-Life Insurance Pricing
@@ -27,34 +24,19 @@ acknowledgements: |
   `r paste(readLines("extra/_Acknowledgements.Rmd"), collapse = '\n  ')`
 dedication: false
 abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
-
-############################
-## extra GitBook metadata ##
-############################
 #description: |
-#  This is a test description 
 #url: 'https://gsarti.com/master-thesis' # URL of book's website
 #github-repo: "gsarti/linguistic-complexity"
 #cover-image: "figures/cover.png"
 #apple-touch-icon: "figures/icons/apple-icon.png"
 #favicon: "figures/icons/favicon.ico"
-
 quote: |
   The data scientist is a person \
   who is better at statistics than any software engineer \
   and better at software engineering than any statistician.
 quote-author: Josh Wills
-
-
-#######################
-## bibliography path ##
-#######################
 bibliography: references.bib
 bibliography-heading-in-pdf: Bibliography
-
-#####################
-## PDF formatting  ##
-#####################
 do-abstract: true
 abstractseparate: false  # include front page w/ abstract for examination schools?
 bib-humanities: true   #set to true if you want in-text references formatted as author-year
@@ -71,13 +53,8 @@ mini-toc: false  # mini-table of contents at start of each chapter? (this just p
 mini-lot: false  # mini-list of tables by start of each chapter?
 mini-lof: false  # mini-list of figures by start of each chapter?
 # loa: true # list of acronyms
-
 params:
   corrections: true # set false to stop applying blue background to blocks of corrections
-
-#####################
-## output options  ##
-#####################
 output:
   bookdown::pdf_book:
     template: templates/template.tex
@@ -105,45 +82,11 @@ output:
 link-citations: true
 documentclass: book
 always_allow_html: true
-
-
-#####################################
-## Packages loaded on LaTeX header ##
-## These are needed for TikZ plots ##
-#####################################
 # header-includes: 
-#   - \usepackage{pdftools}
-#   - \usepackage{tikz}
-#   - \usepackage{pgfplots}
-#   - \usepackage{pgf,tikz,pgfplots}
-#   - \pgfplotsset{compat=1.15}
-#   - \usepackage{mathrsfs}
-#   - \usetikzlibrary{arrows}
-#   - \usetikzlibrary{patterns}
-
-
-
-###############################################
-## Packages loaded on LaTeX header           ##
-## Thiese are needed for caption positioning ##
-###############################################
 # header-includes: 
-#   - \usepackage{floatrow}
-#   - \floatsetup[figure]{capposition=top}
-#   - \floatsetup[table]{capposition=top}
-#   - \floatplacement{figure}{H}
-#   - \floatplacement{table}{H}
-
-###############################################
-## Packages loaded on LaTeX header           ##
-## Acronyms                                  ##
-###############################################
 # header-includes:
-#   # - \usepackage[acronym]{glossaries}
-#   # - \makeglossaries
-#   - \newacronym{glm}{GLM}{Generalized Linear Model}
-#   - \newacronym{gam}{GAM}{Generalized Additive Model}
-
+editor_options: 
+  chunk_output_type: console
 ---
 
 
