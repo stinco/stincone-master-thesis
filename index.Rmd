@@ -107,10 +107,21 @@ library(forcats)
 library(glmnet)         # For Elastic Net
 library(LaplacesDemon)  # For Laplace density function
 
+# Option for figure position
 # knitr::opts_chunk$set(fig.pos = 'hbtp')
 knitr::opts_chunk$set(fig.pos = '!hbtp')
 
+# Option for number rendering in inline code
+inline_hook <- function(x) {
+  if (is.numeric(x)) {
+    format(x, scientific = FALSE, big.mark = " ")
+  } else x
+}
+knitr::knit_hooks$set(inline = inline_hook)
+
+# ggplot theme
 theme_set(theme_bw())
+
 ```
 
 ```{r create_chunk_options, include=FALSE, eval=knitr::is_latex_output()}

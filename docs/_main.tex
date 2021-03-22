@@ -2897,17 +2897,20 @@ In this final chapter we are going to describe the practical application on an a
 \hypertarget{data-description}{%
 \section{Data description}\label{data-description}}
 
-The dataset used is an actuarial dataset from an Italian MTPL portfolio. In table \ref{tab:years-at-risk} the total exposure of the dataset is reported. In the dataset there are \ensuremath{2.83829\times 10^{5}} rows for a total of \ensuremath{1.348047\times 10^{5}} years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure 0.475 years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
+\hypertarget{dataset}{%
+\subsection{Dataset}\label{dataset}}
+
+The dataset used is an actuarial dataset from an Italian MTPL portfolio. In table \ref{tab:years-at-risk} the total exposure of the dataset is reported. In the dataset there are 283 829 rows for a total of 134 804.7 years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure 0.475 years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
 
 \begin{table}[!h]
 
-\caption{\label{tab:years-at-risk}Total dataset exposure.}
+\caption{\label{tab:years-at-risk}Total dataset exposure. The exposure is measured in year-at-risk (Y.a.R)}
 \centering
 \begin{tabular}[t]{ccc}
 \toprule
-\textbf{Observations} & \textbf{Years at Risk} & \textbf{Average Exposure}\\
+\textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{\makecell[c]{Average Exposure\\per Observation}}\\
 \toprule\addlinespace
-283829 & 134804.7 & 0.475\\
+283 829 & 134 804.7 & 0.475\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -2918,39 +2921,77 @@ The dataset has been split into a training set with 80\% of the observations and
 
 \begin{table}[!h]
 
-\caption{\label{tab:exposure-train-test}Training set and test set description.}
+\caption{\label{tab:exposure-train-test}Exposure and number of policyholders in training and test set. The exposure is measured in year-at-risk (Y.a.R)}
 \centering
 \begin{tabular}[t]{lcccc}
 \toprule
-\textbf{Set} & \textbf{Observations} & \textbf{Y.a.R.} & \textbf{Policyholders} & \textbf{\makecell[c]{Y.a.R. per\\Policyholder}}\\
+\textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Policyholders} & \textbf{\makecell[c]{Exposure per\\Policyholder}}\\
 \toprule\addlinespace
-Train & 227226 & 107998.4 & 27346 & 3.95\\
+Train & 227 226 & 107 998.4 & 27 346 & 3.95\\
 \addlinespace\hline\addlinespace
-Test & 56603 & 26806.3 & 6824 & 3.93\\
+Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
 \bottomrule
 \end{tabular}
 \end{table}
+
+\hypertarget{response-variable}{%
+\subsection{Response variable}\label{response-variable}}
 
 The response variable for the models is the number of claims caused by the policyholder for that policy in that accounting year. In this project we compared the different techniques in predicting the claims frequency. We didn't take into account the claim severity and we didn't split the claims by typology.
 
-Table \ref{tab:freq-sin-train-test} shows observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. That means that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduces their expected claim frequency.
+Table \ref{tab:freq-sin-train-test} shows observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. That means that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduces their expected claims frequency.
 
 \begin{table}[!h]
 
-\caption{\label{tab:freq-sin-train-test}Exposure and number of policyholders in training and test set.}
+\caption{\label{tab:freq-sin-train-test}Claims Frequency in training and test set.}
 \centering
 \begin{tabular}[t]{lcccc}
 \toprule
-\textbf{Set} & \textbf{Observations} & \textbf{Y.a.R.} & \textbf{N. Claims} & \textbf{Claims Freq.}\\
+\textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Claims N.} & \textbf{Claims Freq.}\\
 \toprule\addlinespace
-Train & 227226 & 107998.4 & 4823 & 0.045\\
+Train & 227 226 & 107 998.4 & 4 823 & 0.045\\
 \addlinespace\hline\addlinespace
-Test & 56603 & 26806.3 & 1131 & 0.042\\
+Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
 \bottomrule
 \end{tabular}
 \end{table}
 
-As we mentioned in section \ref{chap:model-fitting-and-data-available}, the claim settlement is a long process and the response variable we use for fitting the models depends on the moment in which the claims are observed. Indeed it is possible that part of the claims we are considering as response variables will be closed as null-claims and it is possible that there are claims incurred in the period of exposure considered, but not yet reported (IBNyR) at the moment in which the claims have been observed. This phenomenon is more relevant if the period of exposure is closer to the moment of observation of the claims. The claims reported in the dataset are all observed at the date 30/06/2020. In figure @ref(\ldots) the claim frequency for each year in the training set and in the test set is reported. As we can see \ldots{}
+As we mentioned in section \ref{chap:model-fitting-and-data-available}, the claims settlement is a long process and the response variable we use for fitting the models depends on the moment in which the claims are observed. Indeed it is possible that part of the claims we are considering as response variables will be closed as null-claims and it is possible that there are claims occurred in the period of exposure considered that are not yet reported (IBNyR) at the moment in which the claims have been observed. This phenomenon is more relevant if the period of exposure is close to the moment of observation of the claims.
+
+The claims reported in the dataset are all observed at the date 30/06/2020. In figure \ref{fig:freq-sin-train-test-year} the claims frequency for each year in the training set and in the test set is reported. The same data is reported in table \ref{tab:freq-sin-train-test-year}. As we can see the years 2017, 2018 and 2019 present a claims frequency lower than the years 2014, 2015 and 2018, so it looks like there is a structure in the claims frequency over the years. Unfortunately, from this data we can't say whether this is due to the different settlement of the claims over the years, to a different mix of policies or just a overall claims trend in the whole market. Anyway, looking to the confidence intervals we realize that this is not a big issue as the effect of the year is not too heavy. Comparing the claims frequency of the training set and the test set, we see that the claims frequency in the test set is consistently lower than the claims frequency in the training set. This phenomenon can be explained with the fact that we divided the policies based on policyholder id, so the policies within each set are correlated.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/freq-sin-train-test-year-1} 
+
+}
+
+\caption[Claims frequency in training and test set in the different years.]{Claims frequency in training and test set in the different years. The semi-transparent ribbons represent 95\% confidence intervals for the claims frequency in each year.}\label{fig:freq-sin-train-test-year}
+\end{figure}
+
+\begin{table}[!h]
+
+\caption{\label{tab:freq-sin-train-test-year}Claims frequency in training and test set in the different years.}
+\centering
+\begin{tabular}[t]{lcccccc}
+\toprule
+\textbf{Set} & \textbf{2014} & \textbf{2015} & \textbf{2016} & \textbf{2017} & \textbf{2018} & \textbf{2019}\\
+\toprule\addlinespace
+Train & 0.046 & 0.046 & 0.046 & 0.043 & 0.043 & 0.043\\
+\addlinespace\hline\addlinespace
+Test & 0.045 & 0.044 & 0.041 & 0.041 & 0.043 & 0.039\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\hypertarget{explanatory-variables}{%
+\subsection{Explanatory variables}\label{explanatory-variables}}
+
+Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
 \newpage
 
