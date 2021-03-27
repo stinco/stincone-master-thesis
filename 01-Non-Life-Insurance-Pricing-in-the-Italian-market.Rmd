@@ -49,28 +49,29 @@ Let:
 
 * $\left]t_1, t_2\right]$, with $t_1<t_2$, be the coverage period;
 
-* $P>0$ be the premium payed by the policyholder to the insurer;
+* $P>0$ be the premium paid by the policyholder to the insurer;
 
 * $N\in\mathbb{N}$ be the number of claims occurred during the coverage period (_claims count_);
 
 * $\tau_1, \tau_2, \dots, \tau_N$, with $t_1<\tau_1< \tau_2 < \dots < \tau_N<t_2$, be the timing of each claim;
 * $Z_1, Z_2, \dots, Z_N > 0$ be the amount of each claim (_claims severities_ or _claims sizes_).
 
-The total cost of claims for the insurance is:
+The total cost of claims for the insurance is
 $$
 S = 
 \begin{cases}
   0                    & \text{if } N=0 \\
   \sum_{i=1}^{N}{Z_i}  & \text{if } N>0
 \end{cases}
-$$
+$$.
+
 For simplicity, in the following we are going to just use the notation $S = \sum_{i=1}^{N}{Z_i}$ with the meaning of $0$ if $N=0$.
 
 Figure \@ref(fig:ins-cashflow) shows the cash flows corresponding to the insurance contract. From this representation we can interpret the entering into an insurance contract by the policyholder as a way to exchange the negative cash flows $-Z_1, -Z_2, \dots, -Z_N$ with one single negative cash flow $-P$. On the other hand, the insurer undertakes the negative cash flows $-Z_1, -Z_2, \dots, -Z_N$ in exchange for a positive cash flow $+P$.
 
 The major difference between these cash flows is that $P$ is a certain amount, while $Z_1, Z_2, \dots, Z_N$, at the time $t_1$, are uncertain in the amount, in the count ($N$) and in the timing ($\tau_1, \tau_2, \dots, \tau_N$). So, the policyholder, paying a premium $P$, is giving his risk to the insurer.
 
-This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in $t_1$, while the costs will emerge later. In most other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage), doesn't know the amount of costs he is going to pay for that product. Thus, it is crucial to properly predict the future costs in order to determine an adequate premium.
+This representation points out the inversion of the production cycle typical of the insurance activity. From the insurer point of view, the revenue emerges at the beginning of the economic activity, in $t_1$, while the costs will emerge later. In most other economic activities, the costs emerge before the selling of the product, so the agent can choose the selling price taking into account how much that product costed him. In insurance activity, the insurer, when is selling his product (the insurance coverage), doesn't know the amount of claims he is going to pay for that product. Thus, it is crucial to properly predict the future costs in order to determine an adequate premium.
 
 From a statistical point of view, we can translate this uncertainty saying that $N$ and $Z_1, Z_2, \dots, Z_N$ are random variables. Therefore, we can say that $\left\{N, Z_1, Z_2, \dots \right\}$ is a stochastic process. Usually, in non-file insurance pricing, the variables $\tau_1, \tau_2, \dots, \tau_N$ are not taken into account because the coverage span is short and from a financial point of view the timing of the claims occurrences has negligible effect.
 
@@ -179,7 +180,7 @@ Therefore, $Z$ can be considered as the _claim severity for a claim under the hy
 
 ### Distribution of the total cost of claims {#chap:tcc-dist}
 
-Under the hypotheses defined in definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same approach one can obtain all the moments.
+Under the hypotheses of definition \@ref(def:comp-dist), it is possible to obtain the full distribution of $S$ given the distribution of $N$ and $Z$. In this chapter we are going to provide only the formula of the expected value $E(S)$, but, with the same approach one can obtain all the moments.
 
 The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
 
@@ -263,15 +264,15 @@ In motor insurances, this information could be:
 * Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;
 * Policy options: amount of the maximum coverage, presence and amount of a deductible, presence of other insurance guarantees, how many drivers will drive the vehicle;
 * Customer information on the policyholder: how many years he has been a customer of the insurer, how many other policies he owns.
-* Telematic data: how many kilometers per year the policyholder travelled in the previous years, how many sharp accelerations and decelerations per kilometer the policyholder performed in the previous years.
+* Telematic data: how many kilometers per year the policyholder travelled in the previous years, which kind of roads the policyholder travelled on, the speed maintained during the trips, how many times the policyholder exceeded the speed limit, how many sharp accelerations and decelerations per kilometer the policyholder performed.
 
 These pieces of information are usually called _pricing variables_.
 
 We must observe that some of these variables are available for every potential customer (such as his age and address), while others are only available for policyholder that are already customers (such as telematic data that is available only if the policyholder agreed on installing on their car the device that collects this data).
 
-Moreover, even considering the variables that are available for every customer, it is important to be aware on how reliable they are. Some of them comes from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
+Moreover, even considering the variables that are available for every customer, it is important to be aware of how reliable they are. Some of them come from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
 
-This topic of variables reliability fits in the wider framework of fraud detection. Insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder is usually important to predict both underwriting frauds and settlement frauds. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
+The topic of variables reliability fits in the wider framework of fraud detection. Insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder is usually important to predict both underwriting frauds and settlement frauds. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
 
 Regarding the topic of variables reliability, the Italian Insurance Associations ([ANIA](https://www.ania.it/)) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle such as when it has been registered or how many changes of ownership did it experienced.
 
@@ -287,7 +288,7 @@ The pricing variables can be of two types:
 1. _Quantitative variables_: variables, like policyholder age or vehicle mass, that can be easily represented as a number;
 2. _Qualitative variables_: variables, like policyholder sex or vehicle make, that represent a category and are usually represented with strings.
 
-The quantitative variables, with eventual transformations, are already suitable to be used.
+The quantitative variables, possibly transformed, are already suitable to be used.
 
 To facilitate the use of the qualitative variables, they are usually encoded as sets of binary variables.
 
@@ -356,7 +357,7 @@ table %>%
 
 For some models it is suggested to use also the dummy variable that indicates the $K$^th^ modality. This encoding is called one-hot encoding and it is mainly used in Neural Networks. For the models considered in this paper the $K-1$ dummy variables encoding is preferred, so we will always consider it.
 
-In the following, when we use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, I'll always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
+In the following, when we use the notation $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})$, We always consider that the qualitative variables have been already encoded as dummy variables, so $(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p$
 
 
 ### Pricing Rule and Modeling
@@ -387,7 +388,7 @@ that, given a set of explanatory variables $\boldsymbol{x}_i=(x_{i1}, x_{i2}, \d
 
 In definition \@ref(def:modeling) we used a generic $\mathcal{C}$ as codomain of the function $r(\cdot)$ to not specify whether the model describes just $E(Y)$ (and so $\mathcal{C}=\mathbb{R}$) or something more, such as the couple $\left( E(Y), Var(Y) \right)$ or the full distribution of $Y$.
 
-As we observed in section \@ref(chap:tcc-dist), under the compound distribution hypotheses, it is not needed to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
+As we observed in section \@ref(chap:tcc-dist), under the compound distribution hypotheses, we don't have to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
 
 
 ### Response variables and distributions
@@ -437,7 +438,7 @@ tibble(x = 0:22) %>%
   )
 ```
 
-The Poisson distribution is a parametric distribution that only depends on the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
+The Poisson distribution is a parametric distribution that only depends on the parameter $\lambda$. In figure \@ref(fig:plot-poisson), for different levels of $\lambda$ the distribution is represented. These plots show how, for larger values of $\lambda$, the distribution is shifted to larger values and it is wider.
 
 Indeed, the first two moments are:
 \begin{align*}
@@ -451,22 +452,22 @@ Looking to the distribution shape, we can see that:
 
 * if $\lambda<1$, the mode is in $n=0$;
 * if $\lambda=1$, $p(0)=p(1)=\frac{1}{e}$;
-* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
+* if $\lambda>1$, the mode is in a value greater than $0$ and, as $\lambda$ increases, the distribution assumes a bell shape similar to the Normal distribution shape. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
 
-In non-life insurance we usually are in the case with $\lambda<1$. E.g. the average number of claims for motor third party liability insurances in Italy, in 2018 has been 5.68%^[[ANIA yearly statistical report for motor third party liability](https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283)].
+In non-life insurance we usually are in the case with $\lambda<1$. E.g. the average claims frequency for motor third party liability insurances in Italy, in 2018 has been 5.68%^[[ANIA yearly statistical report for motor third party liability](https://www.ania.it/ricerca-avanzata/-/asset_publisher/XIyLeujL9irt/content/id/113283)].
 
 The property $Var(N) = E(N)$ is an important constraint when the distribution is used in practice. It is possible that the observed data shows a different pattern. Often the observed data shows a situation where $Var(N) > E(N)$. This phenomenon is called _overdispersion_.
 
-To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the assumption of Quasi-Poisson distribution, that we will describe in chapter \@ref(chap:models).
+To address this issue it is possible to use more flexible distributions, such as Negative-Binomial distribution, or to adopt less assumptions on the response variable distribution. One common technique is the Quasi-Poisson model, that we will describe in chapter \@ref(chap:models).
 
 
 #### Exposure {#chap:exposure}
 
-In section \@ref(chap:non-life-ins) we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage $c$ spans in two consecutive years $a$ and $a+1$, it is collected as two records: the couple $(c, a)$ and the couple $(c, a+1)$. This situation is quite common, as usually coverages start during the year and not all at the first of the year.
+In section \@ref(chap:non-life-ins) we said that non-life insurances usually have a fixed coverage period that usually spans for one year. Often we work with portfolios of insurances with different coverage periods. For example, this could be due to the presence of insurances born with shorter coverage periods or to the presence of insurances that has been closed earlier. Moreover, in companies data, often insurance data are collected for accounting years. This means that, if an insurance coverage $c$ spans in two consecutive accounting years $a$ and $a+1$, it is collected as two records: the couple $(c, a)$ and the couple $(c, a+1)$. This situation is quite common, as usually coverages start during the year and not all at the first of the year.
 
 The coverage span for an insurance coverage is called _exposure_ and it is usually measured in years-at-risk. For instance, if an insurance coverage spans for 3 months, it corresponds to a quarter of year, so the exposure, measured in years-at-risk, is $v=\frac{1}{4}$. The term year-at-risk comes from the fact that the policyholder exposure is a risk for the insurer, so the exposure is the period in which the insurer is exposed to the risk of paying claims.
 
-It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considering that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken in the following. Said $M$ the number of claims the policyholder will experience during his period of exposure $v$ (measured in years) and $N$ the number of claims the policyholder would experience during one year, we assume $E(M) = v E(N)$.
+It is natural to assume that, if a policyholder has a longer exposure, it is expected for him to experience more claims. Considering that we have to work with policies with different exposures, in order to take this aspect into account, the usual assumption taken is the following: said $M$ the number of claims the policyholder will experience during his period of exposure $v$ (measured in years) and $N$ the number of claims the policyholder would experience during one year, we assume $E(M) = v E(N)$.
 
 This assumption can be further extended if we assume that the claims come from a _Poisson process_.
 
@@ -623,7 +624,7 @@ Computing the coefficient of variation we then obtain:
 $$CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}$$
 This result means that the coefficient of variation is constant (given the shape parameter $\alpha$). As we saw for the Poisson distribution, it is possible that observed data shows a different pattern. In chapter \@ref(chap:models), for the Gamma distribution, we will use the parametrization based on $(\alpha, \mu)$ instead of the one based on $(\alpha, \rho)$.
 
-Another characteristic of Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ aproaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with havier tails are for example the _log-Normal_ and the _Pareto_.
+Another characteristic of the Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ aproaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with havier tails are for example the _log-Normal_ and the _Pareto_.
 
 
 #### Large claims  {#chap:large-claims}
@@ -864,7 +865,7 @@ Var(N) & = np(1-p)
 
 If $n = 1$, the binomial distribution assumes only the values $1$ (with probability $p$) and $0$ (with probability $1-p$). In this case it is also called _Bernoullian distribution_ and it can be used to model the indicator of an event $I_E$.
 
-If $n>1$, the binomial distribution assumes a shape centered on its expected value $E(Y)=np$ and fading for values of $y$ that moves away from $E(Y)$. As $n$ increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
+If $n>1$, the binomial distribution assumes a shape centered on its expected value $E(Y)=np$ and fading for values of $y$ that moves away from $E(Y)$. As $n$ increases, the distribution assumes a bell shape similar to the Normal distribution shape. The convergence to the Normal distribution can be obtained with the _Central Limit Theorem_.
 
 From the binomial Distribution it is also possible to define the scaled binomial distribution by dividing its value by $n$.
 
@@ -886,9 +887,9 @@ Another example is the decomposition between claims with only material damages a
 As for large claims we can decompose $S$ in the following two ways:
 \begin{align}
   \nonumber
-  E(S) & = E(S^{(things)}) + E(S^{(inj)}) \\
+  E(S) & = E(S^{(\text{things})}) + E(S^{(\text{inj})}) \\
     \label{inj-claim-decomposition-expected-1}
-    & = E(N^{(things)}) E(Z|\bar{J}) + E(N^{(inj)}) E(Z|J) \\[12pt]
+    & = E(N^{(\text{things})}) E(Z|\bar{J}) + E(N^{(\text{inj})}) E(Z|J) \\[12pt]
   \nonumber
   E(S) & = E(N) E(Z) \\
     \nonumber
@@ -898,8 +899,8 @@ As for large claims we can decompose $S$ in the following two ways:
 \end{align}
 where:
 
-* $N^{(things)}$ is the number of claims with only material damages;
-* $N^{(inj)}$ is the number of claims with injuries;
+* $N^{(\text{things})}$ is the number of claims with only material damages;
+* $N^{(\text{inj})}$ is the number of claims with injuries;
 * $J$ is the event that represents that a specific claim presents injuries; such as $Z$ is a representative for $Z_1, Z_2, \dots, Z_N$, $J$ is a representative for $J_1, J_2, \dots, J_N$.
 
 Combining this decomposition with what we have seen in large claims decomposition, we can further develop our decomposition taking into account both the presence or absence of injuries and the occurrence or not of a large claim. One example could be:
@@ -945,7 +946,7 @@ where:
 What an observation is, depends on the variable we are modeling. For instance:
 
 * If we are modeling the yearly claim count $N_i$, each observation could be a policy (or a couple (policy, accounting year)), the weights could be the exposures $v_i$ and the realizations of response variables could be the number of observed claims for that policy (or couple (policy, accounting year)).
-* If we are modeling the claim severity $Z_j$, each observation could be a claim $j$, the weights could all be $1$ and the realizations of response variables could be the observed cost for the claim $j$. It is also possible to model the claim severity taking into account the total cost of claims for the policy $S_i = \sum_{j=1}^{N_i}{Z_j}$. In this case, each observation would be a policy $i$, the weights would be the number of claims for each policy $n_i$ and the realizations of response variables would be the total observed cost for the claims of the policy $i$.
+* If we are modeling the claim severity $Z_j$, each observation could be a claim $j$, the weights could all be $1$ and the realizations of the response variable could be the observed cost for the claim $j$. It is also possible to model the claim severity taking into account the total cost of claims for the policy $S_i = \sum_{j=1}^{N_i}{Z_j}$. In this case, each observation would be a policy $i$, the weights would be the number of claims for each policy $n_i$ and the realizations of response variables would be the total observed cost for the claims of the policy $i$.
 * If we are modeling the occurrence of injuries in a claim $I_{Jj}$, each observation could be a claim $j$, the weights could be all $1$ and the realizations of response variables could be an indicator that assume the value $1$ if the claim $j$ caused injuries and $0$ otherwise. As for the claim severity, we can also aggregate data for policy, so each observation would be a policy $i$, the weights would be the number of claims $n_i$ for the policy $i$ and the realizations of response variables would be the number of claims that caused injuries among the claims of the policy $i$.
 
 In each of these cases, $y_i$ is seen as a realization of the random variable $Y_i$. With an inferential process we obtain estimations on $Y_i$ distribution based on observations of their realizations $y_i$.
@@ -956,7 +957,7 @@ In each of these cases, $y_i$ is seen as a realization of the random variable $Y
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
-In figure \@ref(fig:settlement-process) the settlement process for a claim is represented. At time $t_1$ the insured event (e.g. an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called _Outstanding Loss Liability_. In $t_2$ the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are payed. In $t_3$ we have the settlement and in $t_4$ the claim is closed. In is possible that $t_4=t_3$, but in general it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can pay some partial payments during the period $[t_2, t_3]$. These intermediate payments are payed at times $\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]$. It is also possible that a claim is opened and then gets closed without any payment. After the closing ($t_4$) it is also possible that a claim is reopened and that more payments emerge.
+In figure \@ref(fig:settlement-process) the settlement process for a claim is represented. At time $t_1$ the insured event (e.g. an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called _Outstanding Loss Liability_. In $t_2$ the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are paid. In $t_3$ we have the settlement and in $t_4$ the claim is closed. In is possible that $t_4=t_3$, but it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can make some partial payments during the period $[t_2, t_3]$. These intermediate payments are paid at times $\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]$. It is also possible that a claim is opened and then gets closed without any payment. After the closing ($t_4$) it is also possible that a claim is reopened and that more payments emerge.
 
 ```{tikz, settlement-process, fig.cap = "Claim timeline.", fig.ext = 'pdf', cache = TRUE, echo = FALSE}
 \newcommand{\ImageWidth}{11cm}
@@ -1001,7 +1002,7 @@ In figure \@ref(fig:settlement-process) the settlement process for a claim is re
 \end{tikzpicture}
 ```
 
-From the moment the claim is reported ($t_2$), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim gets settled, the sum between the payed and the reserved converges to the final cost of the claim.
+From the moment the claim is reported ($t_2$), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim gets settled, the sum between the paid and the reserved converges to the final cost of the claim.
 
 From this description emerges that:
 
@@ -1016,9 +1017,9 @@ The IBNyR and IBNeR issue is particularly challenging when we have to perform a 
 * $n_i^{(t)} = n_i^{(\text{reported in } t)}$  
   where:
   * $n_i^{(\text{reported in } t)}$ is the number of reported claims in $t$ for the policy $i$;
-* $z_j^{(t)} = z_j^{(\text{payed in }t)} + z_j^{(\text{reserved in } t)}$  
+* $z_j^{(t)} = z_j^{(\text{paid in }t)} + z_j^{(\text{reserved in } t)}$  
   where:
-  * $z_j^{(\text{payed in }t)}$ is the amount already payed in $t$ for the claim $j$;
+  * $z_j^{(\text{paid in }t)}$ is the amount already paid in $t$ for the claim $j$;
   * $z_j^{(\text{reserved in } t)}$ is the amount reserved in $t$ for the claim $j$.
 
 When we use this data for modeling the total cost of claims we must be particularly aware on what we are using. In general:
@@ -1104,14 +1105,14 @@ In this section we are going to discuss what the _Tariff_ and the _Offer Price_ 
 
 The _Tariff_ is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the IVASS (Istituto per la vigilanza sulle Assicurazioni).
 
-In section \@ref(chap:pricing-variables) we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depends on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations say that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e. a lower class must correspond to a better tariff. We remind that in the Italian bonus-malus system the lower the class the better the premium. Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently to how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
+In section \@ref(chap:pricing-variables) we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictete that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e. a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium). Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not at the tariff price, but at the price obtained subtracting from it a discount $D_i\ge0$. The premium obtained this way is called _Offer Price_.
 $$
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 $$
 
-That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called _discounting flexibility_, can be partially spent by the agent and partially by the insurance company itself. The discounts can be changed over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new business and renewals. From a technical point of view, these discounts have been funded by the remarkable decrese on claim frequency due to the traffic decreasing. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
+That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called _discounting flexibility_, can be partially spent by the agent and partially by the insurance company itself. The discounts can change over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new businesses and renewals. From a technical point of view, these discounts have been funded by the remarkable decrease on claim frequency due to the reduced traffic. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
 
 ### Price Optimization

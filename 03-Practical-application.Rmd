@@ -233,7 +233,7 @@ tab_freq_sin_train_test_year %>%
 
 ```
 
-To explore more in depth the effect of splitting data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80% probability of belonging to the training set and 20% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p value of the test over the significance of that flag as a measure to check whether the training and the test sets have a significative difference in term of claim frequency.
+To explore more in depth the effect of splitting data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80% probability of belonging to the training set and 20% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be seen as a measure to check whether the training and the test sets have a significative difference in term of claim frequency.
 
 ```{r, simulation-random-read, echo = FALSE, cache = TRUE, message = FALSE}
 simulations <- read_csv2(
@@ -265,10 +265,10 @@ simulations_count <- simulations %>%
   ungroup()
 ```
 
-The distribution of the p values for the two kind of random variables are reported in figure \@ref(fig:simulation-random). The frequency for the first 4 buckets are also reported in table \@ref(tab:simulation-random). In theory, if the variable was totally random, the distribution of the p-value should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the frequency of the p-value lower than 0.05 with the random by policyholder is `r simulations_count %>% filter(random_type == "Random by policyholder", p_value_cut == "[0,0.05)") %>% .$freq`. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+The distribution of the p-values for the two kinds of random variables are reported in figure \@ref(fig:simulation-random). The frequency for the first 4 buckets are also reported in table \@ref(tab:simulation-random). In theory, if the variable was totally random, the distribution of the p-value should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the frequency of the p-value lower than 0.05 with the random by policyholder is `r simulations_count %>% filter(random_type == "Random by policyholder", p_value_cut == "[0,0.05)") %>% .$freq`. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
 
 
-(ref:simulation-random-plot-caption) Distribution of the p-values from the simulation of the random variables. With the random by policyholder, the p-values lower p-values are more likely.
+(ref:simulation-random-plot-caption) Distribution of the p-values from the simulation of the random variables. With the random by policyholder, the lower p-values are more likely.
 
 (ref:simulation-random-plot-caption-short) Distribution of the p-values from the simulation of the random variables.
 
@@ -301,7 +301,12 @@ simulations %>%
 ```{r, simulation-random-render, echo = FALSE, cache = TRUE, message = FALSE}
 simulations_count %>% 
   filter(as.numeric(p_value_cut) < 5) %>% 
-  select(random_type, p_value_cut, freq) %>% 
+  select(random_type, p_value_cut, freq) %>%
+  mutate(
+    p_value_cut = p_value_cut %>% 
+      as.character() %>% 
+      str_replace_all(",", ", ")
+  ) %>% 
   pivot_wider(
     names_from = p_value_cut,
     values_from = freq
@@ -318,7 +323,7 @@ simulations_count %>%
     vline = "",
     toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
     linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
-    caption = "Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are hugher than that.",
+    caption = "Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are higher than that.",
     label = "simulation-random",
     escape = FALSE
   ) %>% 
