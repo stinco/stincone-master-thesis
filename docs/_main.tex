@@ -2553,7 +2553,7 @@ Figure \ref{fig:bayes-normal} shows the prior \(\pi(\mu)\), the likelihood \(p(\
 
 }
 
-\caption[Prior \(\pi(\mu)\), likelihood \(p(\boldsymbol{y}|\mu)\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution.]{Prior \(\pi(\mu)\), likelihood \(p(\boldsymbol{y}|\mu)\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for estimate of the mean from a Normal distribution. The panels shows \(\pi(\mu)\), \(p(\boldsymbol{y}|\mu)\) and \(\pi(\mu|\boldsymbol{y})\) for different values of the prior variance \(\sigma_0\) (rows) and different sample sizes \(n\) (columns).}\label{fig:bayes-normal}
+\caption[Prior \(\pi(\mu)\), likelihood \(p(\boldsymbol{y}|\mu)\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for the estimate of the mean from a Normal distribution.]{Prior \(\pi(\mu)\), likelihood \(p(\boldsymbol{y}|\mu)\) and posterior distribution \(\pi(\mu|\boldsymbol{y})\) for the estimate of the mean from a Normal distribution. The panels shows \(\pi(\mu)\), \(p(\boldsymbol{y}|\mu)\) and \(\pi(\mu|\boldsymbol{y})\) for different values of the prior variance \(\sigma_0\) (rows) and different sample sizes \(n\) (columns).}\label{fig:bayes-normal}
 \end{figure}
 
 As \(\pi(\mu|\boldsymbol{y})\) is a Normal distribution, the expected value \(E(\mu|\boldsymbol{y})\) and the mode \(\text{Mode}(\mu|\boldsymbol{y})\) coincide, so our Maximum a Posteriori estimate for \(\mu\) will be:
@@ -2915,9 +2915,9 @@ The dataset used is an actuarial dataset from an Italian MTPL portfolio. In tabl
 \end{tabular}
 \end{table}
 
-The data comes from the policies of a province in the period 2014-2019. The fact that the policies comes from one specific province reduces a lot the size of the dataset. As the models has been run locally on a single computer, this significantly reduces the time spent to run the models. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of differences from a socio-economical point of view that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been faced.
+The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run the models. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
 
-The dataset has been split into a training set with 80\% of the observations and a test set with the remaining 20\% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This splitting prevents data leakage from the test set to the training set. Table \ref{tab:exposure-train-test} shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has more or less 3.9 years-at-risk.
+The dataset has been split into a training set with 80\% of the observations and a test set with the remaining 20\% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \ref{tab:exposure-train-test} shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has 3.9 years-at-risk.
 
 \begin{table}[!h]
 
@@ -2939,7 +2939,7 @@ Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
 
 The response variable for the models is the number of claims caused by the policyholder for that policy in that accounting year. In this project we compared the different techniques in predicting the claims frequency. We didn't take into account the claim severity and we didn't split the claims by typology.
 
-Table \ref{tab:freq-sin-train-test} shows observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. That means that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduces their expected claims frequency.
+Table \ref{tab:freq-sin-train-test} shows observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicate that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
 
 \begin{table}[!h]
 
@@ -2958,7 +2958,9 @@ Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
 
 As we mentioned in section \ref{chap:model-fitting-and-data-available}, the claims settlement is a long process and the response variable we use for fitting the models depends on the moment in which the claims are observed. Indeed it is possible that part of the claims we are considering as response variables will be closed as null-claims and it is possible that there are claims occurred in the period of exposure considered that are not yet reported (IBNyR) at the moment in which the claims have been observed. This phenomenon is more relevant if the period of exposure is close to the moment of observation of the claims.
 
-The claims reported in the dataset are all observed at the date 30/06/2020. In figure \ref{fig:freq-sin-train-test-year} the claims frequency for each year in the training set and in the test set is reported. The same data is reported in table \ref{tab:freq-sin-train-test-year}. As we can see the years 2017, 2018 and 2019 present a claims frequency lower than the years 2014, 2015 and 2018, so it looks like there is a structure in the claims frequency over the years. Unfortunately, from this data we can't say whether this is due to the different settlement of the claims over the years, to a different mix of policies or just a overall claims trend in the whole market. Anyway, looking to the confidence intervals we realize that this is not a big issue as the effect of the year is not too heavy. Comparing the claims frequency of the training set and the test set, we see that the claims frequency in the test set is consistently lower than the claims frequency in the training set. This phenomenon can be explained with the fact that we divided the policies based on policyholder id, so the policies within each set are correlated.
+The claims reported in the dataset are all observed at the date 30/06/2020. In figure \ref{fig:freq-sin-train-test-year} the claims frequency for each year in the training set and in the test set is reported. The same data is reported in table \ref{tab:freq-sin-train-test-year}. As we can see the years 2017, 2018 and 2019 present a claims frequency lower than the years 2014, 2015 and 2018, so it looks like there is a structure in the claims frequency over the years. Unfortunately, just by looking to this data we can't say whether this is due to the different settlement of the claims over the years, to a different mix of policies or just to a overall claims trend in the whole market. Anyway, looking to the confidence intervals we realize that this is not a big issue as the effect of the year is not too heavy.
+
+Comparing the claims frequency of the training set and the test set, we see that the claims frequency in the test set is consistently lower than the claims frequency in the training set. This phenomenon can be explained with the fact that we divided the policies based on policyholder id, so the policies within each set are correlated.
 
 
 
@@ -2984,6 +2986,38 @@ The claims reported in the dataset are all observed at the date 30/06/2020. In f
 Train & 0.046 & 0.046 & 0.046 & 0.043 & 0.043 & 0.043\\
 \addlinespace\hline\addlinespace
 Test & 0.045 & 0.044 & 0.041 & 0.041 & 0.043 & 0.039\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+To explore more in depth the effect of splitting data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80\% probability of belonging to the training set and 20\% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p value of the test over the significance of that flag as a measure to check whether the training and the test sets have a significative difference in term of claim frequency.
+
+The distribution of the p values for the two kind of random variables are reported in figure \ref{fig:simulation-random}. The frequency for the first 4 buckets are also reported in table \ref{tab:simulation-random}. In theory, if the variable was totally random, the distribution of the p-value should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the frequency of the p-value lower than 0.05 with the random by policyholder is 0.0782. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/simulation-random-1} 
+
+}
+
+\caption[Distribution of the p-values from the simulation of the random variables.]{Distribution of the p-values from the simulation of the random variables. With the random by policyholder, the p-values lower p-values are more likely.}\label{fig:simulation-random}
+\end{figure}
+
+\begin{table}[!h]
+
+\caption{\label{tab:simulation-random}Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are hugher than that.}
+\centering
+\begin{tabular}[t]{lcccc}
+\toprule
+\textbf{Random type} & \textbf{[0,0.05)} & \textbf{[0.05,0.1)} & \textbf{[0.1,0.15)} & \textbf{[0.15,0.2)}\\
+\toprule\addlinespace
+Random by observation & 0.0596 & 0.0535 & 0.0537 & 0.0503\\
+\addlinespace\hline\addlinespace
+Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \bottomrule
 \end{tabular}
 \end{table}

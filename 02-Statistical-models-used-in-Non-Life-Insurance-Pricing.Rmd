@@ -3126,9 +3126,9 @@ The posterior distribution for the mean $\pi(\mu|\boldsymbol{y})$ is still a Nor
 
 Figure \@ref(fig:bayes-normal) shows the prior $\pi(\mu)$, the likelihood $p(\boldsymbol{y}|\mu)$ and the posterior distribution $\pi(\mu|\boldsymbol{y})$ for different values of the initial parameters and for different sample sizes $n$. As we can see, $\pi(\mu|\boldsymbol{y})$ lies between $\pi(\mu)$ and $p(\boldsymbol{y}|\mu)$.
 
-(ref:bayes-normal-caption) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution. The panels shows $\pi(\mu)$, $p(\boldsymbol{y}|\mu)$ and $\pi(\mu|\boldsymbol{y})$ for different values of the prior variance $\sigma_0$ (rows) and different sample sizes $n$ (columns).
+(ref:bayes-normal-caption) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for the estimate of the mean from a Normal distribution. The panels shows $\pi(\mu)$, $p(\boldsymbol{y}|\mu)$ and $\pi(\mu|\boldsymbol{y})$ for different values of the prior variance $\sigma_0$ (rows) and different sample sizes $n$ (columns).
 
-(ref:bayes-normal-caption-short) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for estimate of the mean from a Normal distribution.
+(ref:bayes-normal-caption-short) Prior $\pi(\mu)$, likelihood $p(\boldsymbol{y}|\mu)$ and posterior distribution $\pi(\mu|\boldsymbol{y})$ for the estimate of the mean from a Normal distribution.
 
 ```{r, bayes-normal, out.width = "100%", fig.width = 10, fig.height = 5, fig.align='center', fig.cap = "(ref:bayes-normal-caption)", fig.scap = "(ref:bayes-normal-caption-short)", label = "bayes-normal", echo = FALSE, cache = TRUE}
 
