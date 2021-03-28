@@ -2395,7 +2395,7 @@ is equivalent to the constrained optimization problem:
 \end{equation}
 where \(s_{\lambda}\) is a quantity that depends on \(\lambda\).
 
-The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric interpretation of the optimization problem. Figure \ref{fig:opt-ridge-lasso} shows the visual representation of the optimization problem \eqref{eq:lp-est-deviance-constr} in the Ridge case (\(d=2\)) and in the LASSO case (\(d=1\)). The axes represent the component of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). In the Normal case with identity link they are concentric ellipses centered in \(\hat{\boldsymbol{\beta}}^{ML}\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\). This area, in the Ridge case corresponds to the circle \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\), while in the LASSO case corresponds to the square \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). The sharpness of the LASSO feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\). In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to \(0\).
+The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric interpretation of the optimization problem. Figure \ref{fig:opt-ridge-lasso} shows the visual representation of the optimization problem \eqref{eq:lp-est-deviance-constr} in the Ridge case (\(d=2\)) and in the LASSO case (\(d=1\)). The axes represent the component of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). In the Normal case with identity link they are concentric ellipses centered in \(\hat{\boldsymbol{\beta}}^{ML}\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\). This area, in the Ridge case corresponds to the circle \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\), while in the LASSO case corresponds to the square \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\). In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to \(0\).
 
 
 
@@ -2409,7 +2409,7 @@ The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric
 
 }
 
-\caption[Geometrical interpretation of the optimization problem for Ridge and LASSO.]{Geometrical interpretation of the optimization problem for Ridge and LASSO. The axes represent the components of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\), that is a circle in the Ridge case \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\) and a square in the LASSO case \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region imply that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\).}\label{fig:opt-ridge-lasso}
+\caption[Geometrical interpretation of the optimization problem for Ridge and LASSO.]{Geometrical interpretation of the optimization problem for Ridge and LASSO. The sharpness of the LASSO feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\).}\label{fig:opt-ridge-lasso}
 \end{figure}
 
 The fact that in LASSO Regression the estimated coefficients can be exactly equal to \(0\) is a precious benefit. Indeed, LASSO Regression performs a feature selection removing the variables that are not relevant for predicting the response. The LASSO fitting is much more efficient than the other procedures we have seen for feature selection in GLM such as the stepwise selection based on AIC or other criteria (section \ref{chap:variable-selection}) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the LASSO regression and giving them as inputs for a maximum likelihood fitting. If in the dataset there are many variables but only few of them are relevant for the response, this procedure can return better predictions than the LASSO regression by itself.
@@ -3026,7 +3026,34 @@ Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \hypertarget{explanatory-variables}{%
 \subsection{Explanatory variables}\label{explanatory-variables}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+In the dataset we have a total of 131 explanatory variables that are considered meaningful for predicting the claims frequency. In table \ref{tab:explanatory-variables} we can see the number of variables split by category. The categories are the ones described in section \ref{chap:pricing-variables}.
+
+In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
+
+\begin{table}[!h]
+
+\caption{\label{tab:explanatory-variables}Number of explanatory variables per category.}
+\centering
+\begin{tabular}[t]{>{}lc}
+\toprule
+\em{\textbf{Description}} & \textbf{\makecell[c]{Number of variables\\per category}}\\
+\toprule\addlinespace
+\em{Information on the insured vehicle} & 18\\
+\addlinespace\hline\addlinespace
+\em{General information of the policyholder} & 36\\
+\addlinespace\hline\addlinespace
+\em{Insurance specific information of the policyholder} & 52\\
+\addlinespace\hline\addlinespace
+\em{Policy options} & 13\\
+\addlinespace\hline\addlinespace
+\em{Customer information on the policyholder} & 5\\
+\addlinespace\hline\addlinespace
+\em{Telematic data} & 7\\
+\addlinespace\hline\addlinespace
+\em{\textbf{Total}} & \textbf{131}\\
+\bottomrule
+\end{tabular}
+\end{table}
 
 \newpage
 

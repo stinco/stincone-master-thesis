@@ -343,7 +343,78 @@ simulations_count %>%
 
 ### Explanatory variables
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+```{r, explanatory-variables-read, echo = FALSE, cache = FALSE, message = FALSE}
+explantory_varibles <- read_csv2(
+  "data/practical_application/tab_explanatory_variables.csv"
+)
+
+
+# Sum the last row of each column if numeric 
+func <- function(z){ if (is.numeric(z)) sum(z) else '' }
+sumrow <- as_tibble(lapply(explantory_varibles, func))
+
+# Give name to the first element of the new data frame created above
+sumrow["Description"] <- "Total"
+
+# Add the original and new data frames together
+explantory_varibles_total <- bind_rows(explantory_varibles, sumrow)
+
+explanatory_variables_number <- explantory_varibles_total %>%
+  filter(Description == "Total") %>%
+  .$`Number of variables per category`
+
+
+```
+
+In the dataset we have a total of `r explanatory_variables_number` explanatory variables that are considered meaningful for predicting the claims frequency. In table \@ref(tab:explanatory-variables) we can see the number of variables split by category. The categories are the ones described in section \@ref(chap:pricing-variables).
+
+In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
+
+```{r, explanatory-variables-render, echo = FALSE, cache = FALSE, message = FALSE}
+
+# Make Table
+explantory_varibles_total %>% 
+  select(-group, -category) %>% 
+  rename(
+    `\\makecell[c]{Number of variables\\\\per category}` = `Number of variables per category`
+  ) %>% 
+  # kable(caption = "Normalized Annual Energy Demand", booktabs = TRUE) %>%
+  # kable_styling(bootstrap_options = c("striped", "hover", "condensed")) %>%
+  # row_spec(nrow(explantory_varibles_total), bold = T) %>% # format last row
+  # column_spec(1, italic = T) # format first column
+  kable(
+    digits = 4,
+    format.args = list(big.mark = " "),
+    # format = "latex",
+    booktabs = T,
+    align = "lc",
+    vline = "",
+    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
+    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    caption = "Number of explanatory variables per category.",
+    label = "explanatory-variables",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  row_spec(
+    ifelse(!knitr::is_latex_output(), 0, 1),
+    bold = T,
+  ) %>% 
+  row_spec(
+    ifelse(
+      !knitr::is_latex_output(),
+      nrow(explantory_varibles_total),
+      nrow(explantory_varibles_total) + 1
+    ),
+    bold = T,
+  ) %>% 
+  column_spec(1, italic = T)
+```
+
 
 
 
