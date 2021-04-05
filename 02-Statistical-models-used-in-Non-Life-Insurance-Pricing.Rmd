@@ -188,9 +188,12 @@ Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which
 \pgfdeclarelayer{bg}    % declare background layer
 \pgfsetlayers{bg,main}  % set the order of the layers (main is the standard layer)
 %\usepackage{xcolor}
-\definecolor{col1}{HTML}{F8766D}
-\definecolor{col2}{HTML}{00BFC4}
-
+\definecolor{col1}{HTML}{F8766D} % hue palette
+\definecolor{col2}{HTML}{00BFC4} % hue palette
+%\definecolor{col1}{HTML}{8C0808}  % Brick red
+%\definecolor{col1}{HTML}{BD2027}  % red
+%\definecolor{col2}{HTML}{7F7F7F}  % Grey
+%\definecolor{col2}{HTML}{BFBFBF}  % Light Grey
 \begin{center}
 \begin{tikzpicture}[node distance = 1mm and 0mm, baseline]
 
@@ -524,8 +527,9 @@ As we mentioned in \@ref(chap:pricing-variables-encoding), the explanatory varia
 
 set.seed(42)
 
-col1 <- hue_pal()(2)[1]
-col2 <- hue_pal()(2)[2]
+## Colors defined in index.Rmd
+# col1 <- hue_pal()(2)[1]
+# col2 <- hue_pal()(2)[2]
 
 line_size <- 2
 
@@ -695,8 +699,9 @@ For quantitative variables, it is possible to consider also non linear effects i
 ```{r, plot-quant-effect-build, echo = FALSE, cache = TRUE}
 set.seed(42)
 
-col1 <- hue_pal()(2)[1]
-col2 <- hue_pal()(2)[2]
+## Colors defined in index.Rmd
+# col1 <- hue_pal()(2)[1]
+# col2 <- hue_pal()(2)[2]
 
 line_size <- 2
 
@@ -893,8 +898,9 @@ As we mentioned in \@ref(chap:linear-exp-families), GLM supports several familie
 
 set.seed(42)
 
-col1 <- hue_pal()(2)[1]
-col2 <- hue_pal()(2)[2]
+## Colors defined in index.Rmd
+# col1 <- hue_pal()(2)[1]
+# col2 <- hue_pal()(2)[2]
 
 line_size <- 2
 
@@ -1072,8 +1078,9 @@ One useful tool we have to understand if an explanatory variable $x$ is relevant
 
 set.seed(42)
 
-col1 <- hue_pal()(2)[1]
-col2 <- hue_pal()(2)[2]
+## Colors defined in index.Rmd
+# col1 <- hue_pal()(2)[1]
+# col2 <- hue_pal()(2)[2]
 
 line_size <- 2
 

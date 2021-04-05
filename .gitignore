@@ -46,3 +46,6 @@ figure/
 # Some draft and trials
 draft/
 trials/
+
+# old versions of templates
+templates/old/*

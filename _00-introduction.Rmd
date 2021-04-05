@@ -12,9 +12,20 @@ documentclass: book
 ---
 
 # Introduction {-}
+
+
+```{r, include=knitr::is_latex_output(), echo = FALSE}
+# Add marker on the header of the page only in LaTeX environment.
+# Without this piece of code, LaTeX would print in the header
+# the name of the previous chapter, that is List of Tables
+knitr::asis_output('\\markboth{\\MakeUppercase{Introduction}}{\\MakeUppercase{Introduction}}')
+```
+
+
+
 <!-- # Introduction -->
 
-\adjustmtc 
+<!-- \adjustmtc  -->
 <!-- For PDF output, we must include this LaTeX command after unnumbered headings, otherwise the numbers in the mini table of contents will be incorrect -->
 
 La mia introduzione ...

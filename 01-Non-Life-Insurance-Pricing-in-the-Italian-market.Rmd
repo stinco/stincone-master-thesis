@@ -48,11 +48,8 @@ Starting from this legal definition, we can formalize a non-life insurance contr
 Let:
 
 * $\left]t_1, t_2\right]$, with $t_1<t_2$, be the coverage period;
-
 * $P>0$ be the premium paid by the policyholder to the insurer;
-
 * $N\in\mathbb{N}$ be the number of claims occurred during the coverage period (_claims count_);
-
 * $\tau_1, \tau_2, \dots, \tau_N$, with $t_1<\tau_1< \tau_2 < \dots < \tau_N<t_2$, be the timing of each claim;
 * $Z_1, Z_2, \dots, Z_N > 0$ be the amount of each claim (_claims severities_ or _claims sizes_).
 
@@ -661,45 +658,45 @@ $$Z = Z' + Z''$$
     % draw horizontal lines
     
     \draw[thick, -Triangle] (-0.5cm, 0) -- (\ImageWidth, 0);
-    \draw[thick, -Triangle] (0, -0.25cm) -- (0, 7cm);
+    \draw[thick, -Triangle] (0, -0.25cm) -- (0, 2/3*7cm);
     
-    \draw (-3pt, 4cm) node[anchor = east] {$\bar{z}$} -- (\ImageWidth, 4cm);
+    \draw (-3pt, 2/3*4cm) node[anchor = east] {$\bar{z}$} -- (\ImageWidth, 2/3*4cm);
 
 
     % draw vertical lines
 
-    \draw [thick] (1.5cm, 0cm)   -- (1.5cm, 3.5cm) node[anchor = south] {$Z_{1}$};
-    \draw [thick] (1.5cm - 3pt, 3.5cm) -- (1.5cm + 3pt, 3.5cm);
+    \draw [thick] (1.5cm, 0cm)   -- (1.5cm, 2/3*3cm) node[anchor = south] {$Z_{1}$};
+    \draw [thick] (1.5cm - 3pt, 2/3*3cm) -- (1.5cm + 3pt, 2/3*3cm);
     
-    \draw [thick] (3cm, 0cm)   -- (3cm, 5cm) node[anchor = south] {$Z_{2}$};
-    \draw [thick] (3cm - 3pt, 5cm) -- (3cm + 3pt, 5cm);
+    \draw [thick] (3cm, 0cm)   -- (3cm, 2/3*5cm) node[anchor = south] {$Z_{2}$};
+    \draw [thick] (3cm - 3pt, 2/3*5cm) -- (3cm + 3pt, 2/3*5cm);
     
-    \draw [thick] (4.5cm, 0cm)   -- (4.5cm, 2cm) node[anchor = south] {$Z_{3}$};
-    \draw [thick] (4.5cm - 3pt, 2cm)   -- (4.5cm + 3pt, 2cm);
+    \draw [thick] (4.5cm, 0cm)   -- (4.5cm, 2/3*2cm) node[anchor = south] {$Z_{3}$};
+    \draw [thick] (4.5cm - 3pt, 2/3*2cm)   -- (4.5cm + 3pt, 2/3*2cm);
     
-    \draw [thick] (6cm, 0cm)   -- (6cm, 6cm) node[anchor = south] {$Z_{4}$};
-    \draw [thick] (6cm - 3pt, 6cm)   -- (6cm + 3pt, 6cm);
+    \draw [thick] (6cm, 0cm)   -- (6cm, 2/3*6cm) node[anchor = south] {$Z_{4}$};
+    \draw [thick] (6cm - 3pt, 2/3*6cm)   -- (6cm + 3pt, 2/3*6cm);
     
-    \draw [thick] (7.5cm, 0cm)   -- (7.5cm, 4.5cm) node[anchor = south] {$Z_{5}$};
-    \draw [thick] (7.5cm - 3pt, 4.5cm)   -- (7.5cm + 3pt, 4.5cm);
+    \draw [thick] (7.5cm, 0cm)   -- (7.5cm, 2/3*4.5cm) node[anchor = south] {$Z_{5}$};
+    \draw [thick] (7.5cm - 3pt, 2/3*4.5cm)   -- (7.5cm + 3pt, 2/3*4.5cm);
 
 
     % draw curly brackets
 
     \draw [decorate, decoration = {brace, amplitude = 5pt}, xshift = -4pt, yshift = 0pt]
-(4.5cm, 0cm) -- (4.5cm, 2cm) node [black, midway, xshift = -10pt] 
+(4.5cm, 0cm) -- (4.5cm, 2/3*2cm) node [black, midway, xshift = -10pt] 
 {\footnotesize $Z'_3$};
 
     \draw [decorate, decoration = {brace, amplitude = 5pt}, xshift = -4pt, yshift = 0pt]
-(6cm, 0cm) -- (6cm, 4cm) node [black, midway, xshift = -10pt] 
+(6cm, 0cm) -- (6cm, 2/3*4cm) node [black, midway, xshift = -10pt] 
 {\footnotesize $Z'_4$};
     \draw [decorate, decoration = {brace, amplitude = 5pt}, xshift = -4pt, yshift = 0pt]
-(6cm, 4cm) -- (6cm, 6cm) node [black, midway, xshift = -10pt] 
+(6cm, 2/3*4cm) -- (6cm, 2/3*6cm) node [black, midway, xshift = -10pt] 
 {\footnotesize $Z''_4$};
 
 
     % draw dots
-    \node at (9.5cm, 1.5) {\huge $\dots$};
+    \node at (9.5cm, 2/3*1.5) {\huge $\dots$};
 
   ;
 
@@ -797,7 +794,7 @@ These three decompositions of $S$ are useful because they provide three decompos
 <!-- ``` -->
 
 
-\@ref(large-claim-decomposition-expected-1), \@ref(large-claim-decomposition-expected-2) and \@ref(large-claim-decomposition-expected-3) provide three approaches to model attritional and large claims.
+\@ref(large-claim-decomposition-expected-1), \@ref(large-claim-decomposition-expected-2) and \@ref(large-claim-decomposition-expected-3) provide three approaches to model attritional and large claims:
 
 1. Looking to \@ref(large-claim-decomposition-expected-1) we can model separately attritional claims and large claims. Modeling $N^{(a)}$ and $Z|Z\le\bar{z}$ we estimate the total cost of claims for the attritional part $S^{(a)}$; modeling $N^{(l)}$ and $Z|Z>\bar{z}$ we estimate the total cost of claims for the large part $S^{(l)}$.
 2. Looking to \@ref(large-claim-decomposition-expected-2) we can model together the claim count $N$, and then we can model the cost of the attritional claims $Z|Z\le\bar{z}$, the cost of the large claims $Z|Z>\bar{z}$ and the probability to exceed the threshold $P(Z>\bar{z})$.

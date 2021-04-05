@@ -53,6 +53,7 @@ tab_years_at_risk %>%
     toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
     linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Total dataset exposure. The exposure is measured in year-at-risk (Y.a.R)",
+    caption.short = "Total dataset exposure.",
     label = "years-at-risk",
     escape = FALSE
   ) %>% 
@@ -128,6 +129,7 @@ tab_1 %>%
     toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
     linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Exposure and number of policyholders in training and test set. The exposure is measured in year-at-risk (Y.a.R)",
+    caption.short = "Exposure and number of policyholders in training and test set.",
     label = "exposure-train-test",
     escape = FALSE
   ) %>% 
@@ -324,6 +326,7 @@ simulations_count %>%
     toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
     linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are higher than that.",
+    caption.short = "Distribution of the p-values from the simulation of the random variables.",
     label = "simulation-random",
     escape = FALSE
   ) %>% 

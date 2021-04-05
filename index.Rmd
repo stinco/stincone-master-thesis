@@ -7,29 +7,18 @@ author-title: Candidato
 college: |
   Scienze Economiche, Aziendali, Matematiche e Statistiche
 degree: Scienze Statistiche e Attuariali
-degreedate: March 2021
+degreedate: May 2021
 universityname: Università degli Studi di Trieste
 departmentname: |
   Scienze Economiche, Aziendali, Matematiche e Statistiche
 university-logo: figures/university-logo.png
-degreedef: Tesi di Laurea
+degreedef: Tesi di Laurea Magistrale
 degreename: Scienze Statistiche e Attuariali
 degreeclass: LM-83
 academicyear: 2019 - 2020
 advisorname: Prof. Francesco Pauli
-# coadvisorname: Dott. Andrea Limoncelli
-abstract: |
-  `r paste(readLines("extra/_Abstract.Rmd"), collapse = '\n  ')`
-acknowledgements: |
-  `r paste(readLines("extra/_Acknowledgements.Rmd"), collapse = '\n  ')`
-dedication: false
-abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
-#description: |
-#url: 'https://gsarti.com/master-thesis' # URL of book's website
-#github-repo: "gsarti/linguistic-complexity"
-#cover-image: "figures/cover.png"
-#apple-touch-icon: "figures/icons/apple-icon.png"
-#favicon: "figures/icons/favicon.ico"
+# abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
+abbreviations: false # path to .tex file with abbreviations
 quote: |
   The data scientist is a person \
   who is better at statistics than any software engineer \
@@ -37,14 +26,17 @@ quote: |
 quote-author: Josh Wills
 bibliography: references.bib
 bibliography-heading-in-pdf: Bibliography
-do-abstract: true
-abstractseparate: false  # include front page w/ abstract for examination schools?
-bib-humanities: true   #set to true if you want in-text references formatted as author-year
-doi-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography
-url-in-bibliography: false #set to true if you want DOI's to be shown in the bibliography. By default, it is linked under the publication name.
+do-abstract: false
+abstract: false
+#abstractseparate: false   # include front page w/ abstract for examination schools?
+acknowledgements: false
+bib-humanities: false      # set to true if you want in-text references formatted as author-year
+doi-in-bibliography: false # set to true if you want DOI's to be shown in the bibliography
+url-in-bibliography: false # set to true if you want DOI's to be shown in the bibliography. By default, it is linked under the publication name.
 draft: false # add as DRAFT mark in the footer?
-page-layout: 'nobind' #'nobind' for PDF output (equal margins), 'twoside' for two-sided binding (mirror margins and blank pages), leave blank for one-sided binding (left margin > right margin)
-#page-layout: 'twoside, openright'
+# documentclass: book
+# page-layout: 'twoside, openright'
+# page-layout: 'nobind' #'nobind' for PDF output (equal margins), 'twoside' for two-sided binding (mirror margins and blank pages), leave blank for one-sided binding (left margin > right margin)
 hidelinks: false #if false, the PDF output highlights colored links - you will probably want to set this to true for PDF version you wish to physically print
 toc-depth: 3 # depth of heading to include in table of contents
 lof: true # list of figures in back matter?
@@ -52,9 +44,7 @@ lot: true # list of tables in back matter?
 mini-toc: false  # mini-table of contents at start of each chapter? (this just prepares it; you must also add \minitoc after the chapter titles)
 mini-lot: false  # mini-list of tables by start of each chapter?
 mini-lof: false  # mini-list of figures by start of each chapter?
-# loa: true # list of acronyms
-params:
-  corrections: true # set false to stop applying blue background to blocks of corrections
+loa: false # list of acronyms
 output:
   bookdown::pdf_book:
     template: templates/template.tex
@@ -67,8 +57,6 @@ output:
     config:
       toc:
         scroll_highlight: yes
-#        after: |
-#          <li><a href="https://gsarti.com">Back to my website</a></li>
       edit:
       info: no
       sharing:
@@ -80,11 +68,7 @@ output:
   bookdown::word_document2:
     toc: true   
 link-citations: true
-documentclass: book
 always_allow_html: true
-# header-includes: 
-# header-includes: 
-# header-includes:
 editor_options: 
   chunk_output_type: console
 ---
@@ -122,19 +106,23 @@ knitr::knit_hooks$set(inline = inline_hook)
 # ggplot theme
 theme_set(theme_bw())
 
+# Color palette
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+# col1 <- rgb(140, 8, 8, maxColorValue = 255) # Red
+# col1 <- rgb(194, 27, 23, maxColorValue = 255) # Brick red
+# col2 <- rgb(127, 127, 127, maxColorValue = 255) # Grey
+# col2 <- rgb(191, 191, 191, maxColorValue = 255) # Light grey
+
+## Show colors
+# show_col(c(col1, col2))
+
 ```
 
 ```{r create_chunk_options, include=FALSE, eval=knitr::is_latex_output()}
 source('scripts_and_filters/create_chunk_options.R')
 source('scripts_and_filters/wrap_lines.R')
 ```
-<!--
-Include the create_chunk_options chunk above at the top of your index.Rmd file
-This will include code to create additional chunk options (e.g. for adding author references to savequotes)
-and to make sure lines in code soft wrap
-If you need to create your own additional chunk options, edit the file scripts/create_chunk_options.R
--->
-
 
 ```{r introduction, child = '_00-introduction.Rmd'}
 ```
