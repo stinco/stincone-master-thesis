@@ -18,7 +18,7 @@ library(knitr)
 
 <!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
 
-# **Statistical models for Non Life Insurance Pricing** {#chap:models}
+# Statistical models for Non Life Insurance Pricing {#chap:models}
 \minitoc  <!--this will include a mini table of contents-->
 
 \chaptermark{Statistical models for Non Life Insurance Pricing}
@@ -31,7 +31,7 @@ In this chapter we are going to illustrate some of the most widespread models fo
 In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Generalized Additive Model (GAM) and the Shrinkage estimators for GLM. After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 
-### GLM {#chap:glm}
+### Generalized Linear Models {#chap:glm}
 
 
 #### Linear Exponential Families {#chap:linear-exp-families}
@@ -1338,7 +1338,7 @@ An aspect that facilitates the model building and reduces the complexity of the 
 
 \newpage
 
-### GAM {#chap:gam}
+### Generalized Additive Models {#chap:gam}
 
 In section \@ref(chap:var-effects) we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In GLM it is possible to deal with non-linear effects by adding polynomial or split-wise terms. GAMs are models based on GLM that introduce a more flexible way to deal with quantitative variables with non-linear effects.
 

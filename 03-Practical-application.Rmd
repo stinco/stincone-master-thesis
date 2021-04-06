@@ -18,7 +18,7 @@ library(knitr)
 
 <!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
 
-# **Practical application** {#chap:practical-app}
+# Practical application {#chap:practical-app}
 \minitoc  <!--this will include a mini table of contents-->
 
 \chaptermark{Practical application}

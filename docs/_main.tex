@@ -105,7 +105,9 @@
                % topmargin = 2.2 cm
                 %bmargin=0.8cm, %bottom margin = 0.8 cm solo margine inferiore
                  %]{geometry}
-\usepackage[top=4cm, bottom=4cm, left=4cm, right=3cm]{geometry}
+%\usepackage[top=4cm, bottom=4cm, left=4cm, right=3cm]{geometry}
+%\usepackage[top=2.54cm, bottom=2.54cm, left=3.81cm, right=2.54cm]{geometry}
+\usepackage[top=3.81cm, bottom=3.81cm, left=3.81cm, right=2.54cm]{geometry}
 
 \usepackage{graphicx} %Serve per inserire le immagini
 %\usepackage{subfigure}
@@ -603,7 +605,7 @@ Lorem ipsum \ldots{}
 Lorem ipsum \ldots{}
 
 \hypertarget{chap:nlip-ita-market}{%
-\chapter{\texorpdfstring{\textbf{Non-Life Insurance Pricing}}{Non-Life Insurance Pricing}}\label{chap:nlip-ita-market}}
+\chapter{Non-Life Insurance Pricing}\label{chap:nlip-ita-market}}
 
 \minitoc  
 
@@ -1582,7 +1584,7 @@ In the last years, the increase of competition brought to an increase in price o
 The importance for price optimization implies that the technical pricing must not be conducted independently from tariff and offer pricing. Even in companies where the technical pricing and the offer pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
 
 \hypertarget{chap:models}{%
-\chapter{\texorpdfstring{\textbf{Statistical models for Non Life Insurance Pricing}}{Statistical models for Non Life Insurance Pricing}}\label{chap:models}}
+\chapter{Statistical models for Non Life Insurance Pricing}\label{chap:models}}
 
 \minitoc  
 
@@ -1596,7 +1598,7 @@ In this chapter we are going to illustrate some of the most widespread models fo
 In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Generalized Additive Model (GAM) and the Shrinkage estimators for GLM. After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
 
 \hypertarget{chap:glm}{%
-\subsection{GLM}\label{chap:glm}}
+\subsection{Generalized Linear Models}\label{chap:glm}}
 
 \hypertarget{chap:linear-exp-families}{%
 \subsubsection{Linear Exponential Families}\label{chap:linear-exp-families}}
@@ -2117,7 +2119,7 @@ An aspect that facilitates the model building and reduces the complexity of the 
 \newpage
 
 \hypertarget{chap:gam}{%
-\subsection{GAM}\label{chap:gam}}
+\subsection{Generalized Additive Models}\label{chap:gam}}
 
 In section \ref{chap:var-effects} we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In GLM it is possible to deal with non-linear effects by adding polynomial or split-wise terms. GAMs are models based on GLM that introduce a more flexible way to deal with quantitative variables with non-linear effects.
 
@@ -3111,7 +3113,7 @@ As well as having several interfaces, H2O can run both locally on a single machi
 In the application described in section \ref{chap:practical-app} we used H2O locally on R.
 
 \hypertarget{chap:practical-app}{%
-\chapter{\texorpdfstring{\textbf{Practical application}}{Practical application}}\label{chap:practical-app}}
+\chapter{Practical application}\label{chap:practical-app}}
 
 \minitoc  
 

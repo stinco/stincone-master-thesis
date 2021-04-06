@@ -18,7 +18,7 @@ library(knitr)
 
 <!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
 
-# **Non-Life Insurance Pricing** {#chap:nlip-ita-market}
+# Non-Life Insurance Pricing {#chap:nlip-ita-market}
 \minitoc  <!--this will include a mini table of contents-->
 
 \chaptermark{Non-Life Insurance Pricing}
