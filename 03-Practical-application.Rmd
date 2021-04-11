@@ -66,7 +66,7 @@ tab_years_at_risk %>%
 ```
 
 
-The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run the models. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
+The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run them. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
 
 
 ```{r, description_train_test_read, echo = FALSE, cache = TRUE, message = FALSE}
@@ -144,9 +144,9 @@ tab_1 %>%
 
 ### Response variable
 
-The response variable for the models is the number of claims caused by the policyholder for that policy in that accounting year. In this project we compared the different techniques in predicting the claims frequency. We didn't take into account the claim severity and we didn't split the claims by typology.
+The response variable for the models is the number of claims caused by the policyholder for that policy in that accounting year. In this project we compared the different techniques in predicting the claims frequency. We didn't take into account the claim severity and we didn't split the claims by typology (see section \@ref(chap:response-variables-and-distributions)).
 
-Table \@ref(tab:freq-sin-train-test) shows observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicate that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
+Table \@ref(tab:freq-sin-train-test) shows the observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicates that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
 
 ```{r, description_train_test_render_2, echo = FALSE, cache = TRUE, message = FALSE}
 tab_2 %>% 
@@ -235,7 +235,10 @@ tab_freq_sin_train_test_year %>%
 
 ```
 
-To explore more in depth the effect of splitting data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80% probability of belonging to the training set and 20% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be seen as a measure to check whether the training and the test sets have a significative difference in term of claim frequency.
+
+#### Exploration on the effect of splitting data by policyholder
+
+To explore more in depth the effect of splitting data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80% probability of belonging to the training set and 20% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be seen as a measure for checking whether the training and the test sets have a significative difference in term of claim frequency.
 
 ```{r, simulation-random-read, echo = FALSE, cache = TRUE, message = FALSE}
 simulations <- read_csv2(
@@ -267,7 +270,7 @@ simulations_count <- simulations %>%
   ungroup()
 ```
 
-The distribution of the p-values for the two kinds of random variables are reported in figure \@ref(fig:simulation-random). The frequency for the first 4 buckets are also reported in table \@ref(tab:simulation-random). In theory, if the variable was totally random, the distribution of the p-value should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the frequency of the p-value lower than 0.05 with the random by policyholder is `r simulations_count %>% filter(random_type == "Random by policyholder", p_value_cut == "[0,0.05)") %>% .$freq`. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+The distribution of the p-values for the two kinds of random variables are reported in figure \@ref(fig:simulation-random). The frequency for the first 4 buckets are also reported in table \@ref(tab:simulation-random). In theory, if the variable was totally random, the distribution of the p-values should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the observed frequency of the p-values lower than 0.05 with the random by policyholder is `r simulations_count %>% filter(random_type == "Random by policyholder", p_value_cut == "[0,0.05)") %>% .$freq`, that is quite higher than 0.05. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
 
 
 (ref:simulation-random-plot-caption) Distribution of the p-values from the simulation of the random variables. With the random by policyholder, the lower p-values are more likely.
@@ -346,7 +349,7 @@ simulations_count %>%
 
 ### Explanatory variables
 
-```{r, explanatory-variables-read, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, explanatory-variables-read, echo = FALSE, cache = TRUE, message = FALSE}
 explantory_varibles <- read_csv2(
   "data/practical_application/tab_explanatory_variables.csv"
 )
@@ -373,7 +376,7 @@ In the dataset we have a total of `r explanatory_variables_number` explanatory v
 
 In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
 
-```{r, explanatory-variables-render, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, explanatory-variables-render, echo = FALSE, cache = TRUE, message = FALSE}
 
 # Make Table
 explantory_varibles_total %>% 
@@ -392,31 +395,213 @@ explantory_varibles_total %>%
     booktabs = T,
     align = "lc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    midrule = "\\midrule",
+    linesep = "",
+    bottomrule = "\\bottomrule",
     caption = "Number of explanatory variables per category.",
     label = "explanatory-variables",
     escape = FALSE
-  ) %>% 
+  )  %>%
   kable_styling(
     position = "center",
-    latex_options = "hold_position",
+    latex_options = c("striped", "hold_position"),
     full_width = FALSE
-  ) %>% 
-  row_spec(
-    ifelse(!knitr::is_latex_output(), 0, 1),
-    bold = T,
-  ) %>% 
-  row_spec(
-    ifelse(
-      !knitr::is_latex_output(),
-      nrow(explantory_varibles_total),
-      nrow(explantory_varibles_total) + 1
-    ),
-    bold = T,
-  ) %>% 
+  ) %>%
+  # row_spec(
+  #   ifelse(!knitr::is_latex_output(), 0, 1),
+  #   bold = T,
+  # ) %>% 
+  row_spec(0, bold = T) %>%
+  # row_spec(
+  #   ifelse(
+  #     !knitr::is_latex_output(),
+  #     nrow(explantory_varibles_total),
+  #     nrow(explantory_varibles_total) + 1
+  #   ),
+  #   bold = T,
+  # ) %>% 
+  row_spec(nrow(explantory_varibles_total) - 1,
+           hline_after = TRUE) %>%
+  row_spec(nrow(explantory_varibles_total),
+           bold = T) %>%
   column_spec(1, italic = T)
 ```
+
+
+\newpage
+
+## Models assessment
+
+The splitting of the dataset into training set and test set allow us to use the training set to fit the model and the test set to assess them by comparing the predictions
+of the models with the observed data.
+
+The metric adopted to assess the performance of each model is the Poisson deviance (see section \@ref(chap:glm-model-fitting) for more details):
+$$
+D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) = 2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} - \left( y_i - \hat{\mu}_i \right) \right\}}
+$$
+
+The lower the deviance on the test set is, the better the model is.
+
+
+\newpage
+
+## Models description
+
+### List of models
+
+In table \@ref(tab:models-list) the models developed are listed. We started from a GLM that takes into account all the variables available (_GLM Tot_). Then, with the same variables, we considered an Elastic Net (_Elastic Net Tot_) and a Ridge regression (_Ridge Tot_). After this we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (_GLM AIC_). With the same subset of variables we also fitted an Elastic Net (_Elastic Net AIC_) and a GAM (_GAM AIC_). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (_GBM Tot_).
+
+
+```{r, models-results-read, echo = FALSE, cache = FALSE, message = FALSE}
+results <- read_csv2(
+  "data/practical_application/results/results.csv"
+)
+
+results <- results %>% 
+  # select(time, time1, time2) %>%
+  mutate(
+    time_period = seconds_to_period(time),
+    time_hour = hour(time_period),
+    time_minute = minute(time_period),
+    time_second = second(time_period),
+    time_string = str_c(
+      if_else(time_hour > 0, str_c(time_hour, "h "), ""),
+      if_else(time_hour > 0 | time_minute > 0, str_c(time_minute, "m "), ""),
+      format(time_second, digits = 1, nsmall = 1), "s"
+    )
+  ) %>% 
+  select(
+    -c(time_period, time_hour, time_minute, time_second)
+  ) %>% 
+  mutate(
+    time1_period = seconds_to_period(time1),
+    time1_hour = hour(time1_period),
+    time1_minute = minute(time1_period),
+    time1_second = second(time1_period),
+    time1_string = str_c(
+      if_else(time1_hour > 0, str_c(time1_hour, "h "), ""),
+      if_else(time1_hour > 0 | time1_minute > 0, str_c(time1_minute, "m "), ""),
+      format(time1_second, digits = 1, nsmall = 1), "s"
+    )
+  ) %>% 
+  select(
+    -c(time1_period, time1_hour, time1_minute, time1_second)
+  ) %>% 
+  mutate(
+    time2_period = seconds_to_period(time2),
+    time2_hour = hour(time2_period),
+    time2_minute = minute(time2_period),
+    time2_second = second(time2_period),
+    time2_string = str_c(
+      if_else(time2_hour > 0, str_c(time2_hour, "h "), ""),
+      if_else(time2_hour > 0 | time2_minute > 0, str_c(time2_minute, "m "), ""),
+      format(time2_second, digits = 1, nsmall = 1), "s"
+    )
+  ) %>% 
+  select(
+    -c(time2_period, time2_hour, time2_minute, time2_second)
+  ) %>% 
+  mutate(
+    id = str_c(
+      "mod", row_number()
+    )
+  ) %>% 
+  select(
+    id, everything()
+  )
+
+
+```
+
+
+```{r, models-list-render, echo = FALSE, cache = FALSE, message = FALSE}
+# Make Table
+results %>%
+  select(id, model) %>% 
+  mutate(
+    id = str_to_title(id),
+    model = model %>% 
+      str_to_title() %>% 
+      str_replace_all("Aic", "AIC") %>% 
+      str_replace_all("Glm", "GLM") %>% 
+      str_replace_all("Gam", "GAM") %>% 
+      str_replace_all("Gbm", "GBM")
+  ) %>% 
+  rename_all(
+    .funs = str_to_title
+  ) %>% 
+  kable(
+    digits = 4,
+    format.args = list(big.mark = " "),
+    # format = "latex",
+    booktabs = T,
+    align = "ll",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # midrule = "\\hline\\addlinespace",
+    # midrule = "\\hline",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    linesep = "",
+    bottomrule = "\\bottomrule",
+    caption = "List of models developed.",
+    label = "models-list",
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    position = "center",
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE
+  ) %>%
+  # row_spec(
+  #   ifelse(!knitr::is_latex_output(), 0, 1),
+  #   bold = T,
+  # ) %>% 
+  row_spec(0, bold = T) %>% 
+  column_spec(2, italic = T)
+
+```
+
+
+
+
+All the models have been fitted with H2O, except for the GAM. On H2O the following functions are available:
+
+* [`h2o.glm()`](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/glm.html) that allows to build GLMs with Elastic Net penalization;
+* [`h2o.gam()`](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gam.html) that allows to build GAMs with both GAM penalization to splines and Elastic Net penalization to other variables;
+* [`h2o.gbm()`](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html) that allows to build GBMs.
+
+Anyway, as described in H2O documentation, "GAM models are currently experimental". We had some trials with GAMs on H2O, but, when we are writing, there are still many bugs and many functions for the hyperparameter tuning are not available yet. For this reason, for the GAM model we used the function `gam()` from the package `mgcv`.
+
+The big advantage of H2O is that it provides embedded multi-threading implementation and provides built-in functions for hyper-parameter tuning. In the practice, that is translated to a high-performance solution that is substantially faster and is much more memory-efficient than what the other R packages offer.
+
+Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from `mgcv` just as a quick trial, without performing a deep hyper-parameter tuning.
+
+More details on the models listed in table \@ref(tab:models-list) are described more in depth in section \@ref(chap:models-details).
+
+
+### Approach adopted in the modeling
+
+In the whole modeling process we tried to keep an approach the more objective as possible in order to not condition the results.
+
+One of the strengths of the GLM-based methods is that they allows to extensively introduce external information in the process of fitting. That means that, still using the same techniques, a more skilled modeler is able to build a better model than a less skilled one. 
+
+As the aim of our analysis is to built a comparison just between the models, the skills of the modeler would be a disturbance factor. For this reason we adopted techniques as much objective as possible. We will return on some considerations of the benefits of the modeler intervention in section \@ref(chap:results).
+
+For this reason, we performed the feature selection procedure in the GLM with a stepwise algorithm based on AIC instead than with a manual process.
+
+The only manual element in the model fitting has been the definition of the effects of the quantitative variables. For the quantitative variables we considered split-wise polynomials effects based on the plots of the residuals. Anyway we have been quite generous in the number of terms taken into account and we let the algorithm choosing which of them to keep in the model.
+
+For the interactions, we decided not to consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
+
+
+
+\newpage
+
+### Models details {#chap:models-details}
+
 
 
 
@@ -425,25 +610,24 @@ explantory_varibles_total %>%
 
 \newpage
 
-## Model used
+## Results {#chap:results}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
-
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+<!--
+Tabella coi Risultati
+-->
 
 
-## Model assessment
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
-
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
-
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
 
-## Results
+```{r, models-results-render, echo = FALSE, cache = FALSE, message = FALSE}
+
+
+```
+
+<!-- HP Tuning -->
+
+
+<!-- Comparison between models -->
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 

@@ -388,7 +388,7 @@ In definition \@ref(def:modeling) we used a generic $\mathcal{C}$ as codomain of
 As we observed in section \@ref(chap:tcc-dist), under the compound distribution hypotheses, we don't have to model directly the total cost of claims $S$, but we can separately model $N$ and $Z$.
 
 
-### Response variables and distributions
+### Response variables and distributions {#chap:response-variables-and-distributions}
 
 Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a specified family.
 

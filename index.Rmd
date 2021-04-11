@@ -76,6 +76,7 @@ editor_options:
 
 ```{r global_options, include=FALSE}
 library(tidyverse)
+library(lubridate)     # For datetime
 library(knitr)
 library(kableExtra)
 library(scales)
