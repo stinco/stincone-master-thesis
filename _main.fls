@@ -1,7 +1,7 @@
-PWD c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates
+PWD c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis
 INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\miktex\data\le\pdftex\pdflatex.fmt
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.tex
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.log
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.tex
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.log
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\base\report.cls
@@ -160,10 +160,10 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifxetex
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifxetex.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifxetex.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\iftex\ifxetex.sty
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\lmodern.sty
@@ -520,14 +520,14 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\mtcmess
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\mtcmess.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\mtcmess.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\mtcmess.sty
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\acadian.mld
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\acadian.mld
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\minitoc\acadien.mld
@@ -1406,32 +1406,6 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\titlesec\titles
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\titlesec\titlesec.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\titlesec\titlesec.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\titlesec\titlesec.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr12.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr8.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr6.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi8.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi6.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy8.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy6.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmex10.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.sty
@@ -1478,15 +1452,18 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\blx-ca
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.def
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\authoryear.bbx
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\authoryear.bbx
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\authoryear.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric-comp.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric-comp.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric-comp.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\numeric.bbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\bbx\standard.bbx
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\authoryear.cbx
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\authoryear.cbx
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\authoryear.cbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\cbx\numeric-comp.cbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\biblatex.cfg
@@ -1768,15 +1745,25 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\amscls\amsthm.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.aux
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.aux
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.aux
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.aux
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cbfonts-fd\lgrcmr.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cbfonts-fd\lgrcmr.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cbfonts-fd\lgrcmr.fd
@@ -1795,16 +1782,6 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\epstopdf-pkg\ep
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\epstopdf-pkg\epstopdf-base.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\epstopdf-pkg\epstopdf-base.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\epstopdf-pkg\epstopdf-base.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\grfext\grfext.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\hyperref\nameref.sty
@@ -1835,8 +1812,18 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestrin
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.pdf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
@@ -1857,7 +1844,7 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\en
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\greek.lbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\greek.lbx
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\biblatex\lbx\greek.lbx
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.bcf
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.bcf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdflscape\pdflscape.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdflscape\pdflscape.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\pdflscape\pdflscape.sty
@@ -1882,10 +1869,36 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-pt
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-ptm.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-ptm.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-ptm.cfg
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr12.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\microtype\mt-cmr.cfg
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr6.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omllmm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi6.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omslmsy.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy6.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\omxlmex.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmex10.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx12.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx8.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx6.tfm
@@ -1938,45 +1951,540 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmtt.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt12.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.pdf
 INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main-frn.tex
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8r.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc8t.tfm
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8t.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.toc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.toc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.toc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.toc
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.toc
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmbc8t.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmbc8t.vf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.lof
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.lot
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.maf
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lof
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lof
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lof
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lof
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lot
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lot
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lot
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.lot
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out
-INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.run.xml
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.run.xml
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmrc8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr17.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi12.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmss17.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmss10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt12.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx12.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmib10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmib10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmbsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmbsy10.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts\tfm\public\rsfs\rsfs10.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts\tfm\public\rsfs\rsfs10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmrc8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\ts1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8c.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8c.vf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ins-cashflow-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmri8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy6.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-poisson-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-poisson-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-poisson-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-poisson-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-poisson-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmss10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmib10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmbsy10.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts\tfm\public\rsfs\rsfs10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msam10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msbm10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy10.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmr5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmi5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmsy5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmss8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmbx5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmib7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmmib5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmbsy7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\lmbsy5.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts\tfm\public\rsfs\rsfs7.tfm
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts\tfm\public\rsfs\rsfs5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msam7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msam5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msbm7.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\amsfonts\symbols\msbm5.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-gamma-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-gamma-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-gamma-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-gamma-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-gamma-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8c.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8c.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\large-claim-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-binomial-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-binomial-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-binomial-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-binomial-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\plot-binomial-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\settlement-process-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\cm\cmsy10.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\design-matrix-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\design-matrix-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\design-matrix-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\design-matrix-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\design-matrix-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-types-4.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1pcr.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\courier\pcrr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\courier\pcrr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\courier\pcrr8r.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\expl-var-quant-effect-4.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\resp-var-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\var-selection-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\cub-spline-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\wiggliness-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\wiggliness-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\wiggliness-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\wiggliness-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\wiggliness-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\gam-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\b-splines-plot-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bias-variance-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bias-variance-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bias-variance-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bias-variance-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bias-variance-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\ridge-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-4.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\lasso-lambda-5.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\opt-ridge-lasso-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bayes-normal-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bayes-normal-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bayes-normal-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bayes-normal-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\bayes-normal-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-2.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\normal-laplace-3.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\freq-sin-train-test-year-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\freq-sin-train-test-year-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\freq-sin-train-test-year-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\freq-sin-train-test-year-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\freq-sin-train-test-year-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\simulation-random-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\simulation-random-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\simulation-random-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\simulation-random-1.pdf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main_files\figure-latex\simulation-random-1.pdf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmbi8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmbi8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmbi8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\courier\pcrr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\courier\pcrr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\courier\pcrr8r.tfm
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.maf
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.mtc0
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.aux
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.out
+INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.run.xml
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\_main.run.xml
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\base\8r.enc
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathsy.enc
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-rm.enc
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathit.enc
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-rm.enc
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\enc\dvips\lm\lm-mathex.enc
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmbx12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmcsc10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmex10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmi8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmib10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmmib10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr17.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr17.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr9.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmr9.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\cm\cmsy8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmbx8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmex10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi10.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmi8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmib10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmmib10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr10.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr12.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmr8.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy6.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy7.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\lm\lmsy8.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\symbols\msbm10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\public\amsfonts\symbols\msbm10.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\courier\ucrr8a.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\courier\ucrr8a.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmb8a.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmb8a.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmbi8a.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmbi8a.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmr8a.pfb
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmr8a.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmri8a.pfb
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\type1\urw\times\utmri8a.pfb

@@ -79,7 +79,8 @@ library(tidyverse)
 library(lubridate)     # For datetime
 library(knitr)
 library(kableExtra)
-library(scales)
+library(scales)        # For colors
+library(viridis)       # For colors
 library(ggeasy)
 library(ggforce)       # For plotting ellipses
 library(gridExtra)
@@ -103,6 +104,9 @@ inline_hook <- function(x) {
   } else x
 }
 knitr::knit_hooks$set(inline = inline_hook)
+
+# Option for printing '' for NA values in tables
+options(knitr.kable.NA = '')
 
 # ggplot theme
 theme_set(theme_bw())

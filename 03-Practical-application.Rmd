@@ -453,7 +453,7 @@ The lower the deviance on the test set is, the better the model is.
 In table \@ref(tab:models-list) the models developed are listed. We started from a GLM that takes into account all the variables available (_GLM Tot_). Then, with the same variables, we considered an Elastic Net (_Elastic Net Tot_) and a Ridge regression (_Ridge Tot_). After this we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (_GLM AIC_). With the same subset of variables we also fitted an Elastic Net (_Elastic Net AIC_) and a GAM (_GAM AIC_). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (_GBM Tot_).
 
 
-```{r, models-results-read, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, models-results-read, echo = FALSE, cache = TRUE, message = FALSE}
 results <- read_csv2(
   "data/practical_application/results/results.csv"
 )
@@ -515,7 +515,7 @@ results <- results %>%
 ```
 
 
-```{r, models-list-render, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, models-list-render, echo = FALSE, cache = TRUE, message = FALSE}
 # Make Table
 results %>%
   select(id, model) %>% 
@@ -554,13 +554,14 @@ results %>%
     position = "center",
     latex_options = c("striped", "hold_position"),
     full_width = FALSE
+    # full_width = TRUE
   ) %>%
   # row_spec(
   #   ifelse(!knitr::is_latex_output(), 0, 1),
   #   bold = T,
   # ) %>% 
-  row_spec(0, bold = T) %>% 
-  column_spec(2, italic = T)
+  row_spec(0, bold = T) #%>% 
+  # column_spec(2, italic = T)
 
 ```
 
@@ -603,7 +604,120 @@ For the interactions, we decided not to consider any interaction term in the GLM
 ### Models details {#chap:models-details}
 
 
+(ref:en-tot-hp-tuning-caption) Elastic Net Tot hyper-parameter tuning.
 
+(ref:en-tot-hp-tuning-caption-short) Elastic Net Tot hyper-parameter tuning.
+
+```{r, en-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-tot-hp-tuning-caption)", fig.scap = "(ref:en-tot-hp-tuning-caption-short)", label = "en-tot-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
+
+h2o_th_elastic_net_tot_grid_perf_tb <- read_csv2(
+  "data/practical_application/results/h2o_th_elastic_net_tot_grid_perf_tb.csv"
+)
+
+h2o_th_elastic_net_tot_grid_perf_tb %>% 
+  filter(residual_deviance < 35575) %>% 
+  ggplot(aes(x = lambda, y = residual_deviance, color = alpha)) +
+  geom_vline(
+    xintercept = h2o_th_elastic_net_tot_grid_perf_tb %>% 
+      filter(alpha == "[0.0]") %>% 
+      filter(residual_deviance == min(residual_deviance)) %>% 
+      .$lambda,
+    # color = "red",
+    color = hue_pal()(6)[1],
+    alpha = 0.8
+  ) +
+  geom_vline(
+    xintercept = h2o_th_elastic_net_tot_grid_perf_tb %>% 
+      filter(residual_deviance == min(residual_deviance)) %>% 
+      .$lambda,
+    # color = "blue",
+    color = hue_pal()(6)[4],
+    alpha = 0.8
+  ) +
+  geom_point(
+    alpha = 0.8
+  ) +
+  scale_x_log10() +
+  labs(
+    x = expression(lambda),
+    y = "Cross Validation Deviance",
+    color = expression(alpha)
+  )
+
+
+```
+
+
+(ref:en-aic-hp-tuning-caption) Elastic Net AIC hyper-parameter tuning.
+
+(ref:en-aic-hp-tuning-caption-short) Elastic Net AIC hyper-parameter tuning.
+
+```{r, en-aic-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-aic-hp-tuning-caption)", fig.scap = "(ref:en-aic-hp-tuning-caption-short)", label = "en-aic-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
+
+h2o_th_elastic_net_aic_grid_perf_tb <- read_csv2(
+  "data/practical_application/results/h2o_th_elastic_net_aic_grid_perf_tb.csv"
+)
+
+h2o_th_elastic_net_aic_grid_perf_tb %>% 
+  ggplot(aes(x = lambda, y = residual_deviance, color = alpha)) +
+  geom_vline(
+    xintercept = h2o_th_elastic_net_aic_grid_perf_tb %>% 
+      filter(alpha == "[0.0]") %>% 
+      filter(residual_deviance == min(residual_deviance)) %>% 
+      .$lambda,
+    color = hue_pal()(6)[1],
+    alpha = 0.8
+  ) +
+  geom_point(
+    alpha = 0.8
+  ) +
+  scale_x_log10() +
+  labs(
+    x = expression(lambda),
+    y = "Cross Validation Deviance",
+    color = expression(alpha)
+  )
+
+
+```
+
+
+
+
+(ref:gbm-tot-hp-tuning-caption) GBM Tot hyper-parameter tuning.
+
+(ref:gbm-tot-hp-tuning-caption-short) GBM Tot hyper-parameter tuning.
+
+```{r, gbm-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:gbm-tot-hp-tuning-caption)", fig.scap = "(ref:gbm-tot-hp-tuning-caption-short)", label = "gbm-tot-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
+
+h2o_gbm_tot_grid_perf_tb <- read_csv2(
+  "data/practical_application/results/h2o_gbm_tot_grid_perf_tb.csv"
+)
+
+h2o_gbm_tot_grid_perf_tb %>% 
+  ggplot(aes(x = learn_rate, y = residual_deviance, color = max_depth)) +
+  geom_vline(
+    xintercept = h2o_gbm_tot_grid_perf_tb %>%
+      filter(residual_deviance == min(residual_deviance)) %>%
+      select(learn_rate) %>%
+      as_vector(),
+    color = viridis_pal()(10)[8],
+    alpha = .8
+  ) +
+  geom_point(
+    alpha = .8
+  ) +
+  scale_x_log10() +
+  scale_y_log10() +
+  scale_color_viridis(direction = -1) +
+  coord_cartesian(ylim = c(NA, 0.22)) +
+  labs(
+    x = "Learn rate",
+    y = "Cross Validation Deviance",
+    color = "Max depth"
+  )
+
+```
 
 
 
@@ -619,21 +733,158 @@ Tabella coi Risultati
 
 
 
-```{r, models-results-render, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, models-results-render, echo = FALSE, cache = TRUE, message = FALSE}
 
+# Make Table
+tab <- results %>%
+  select(
+    id, model, test_deviance,
+    time_string,
+    # time1_string, time2_string,
+    alpha, lambda,
+    # ntrees, max_depth, learn_rate,
+    # sample_rate, col_sample_rate
+  ) %>%
+  mutate(
+    id = str_to_title(id),
+    model = model %>%
+      str_to_title() %>%
+      str_replace_all("Aic", "AIC") %>%
+      str_replace_all("Glm", "GLM") %>%
+      str_replace_all("Gam", "GAM") %>%
+      str_replace_all("Gbm", "GBM"),
+    time_string = if_else(
+      str_detect(time_string, "m"),
+      str_extract(time_string, ".*m"),
+      time_string,
+    ),
+    alpha = if_else(
+      alpha == 0, "0",
+      format(alpha, digits = 2)
+    ),
+    lambda = if_else(
+      lambda == 0, "0",
+      format(lambda, digits = 3)
+    )
+  ) %>% 
+  rename_all(
+    .funs = function(x){
+      str_to_title(x) %>% 
+        str_replace_all("_string", "") %>% 
+        str_replace_all("_", " ")
+    }
+  ) %>%
+  rename(
+    "$\\alpha$" = Alpha,
+    "$\\lambda$" = Lambda,
+    `\\makecell[c]{Test\\\\Deviance}` = `Test deviance`
+  ) 
+
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  names(tab) <- names(tab) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+  
+  names(tab) <- names(tab) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
+
+tab %>%
+  kable(
+    digits = c(0,0,3,0,4,5),
+    format.args = list(big.mark = " "),
+    # format = "latex",
+    booktabs = T,
+    align = "llccccccccccc",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # midrule = "\\hline\\addlinespace",
+    # midrule = "\\hline",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    linesep = "",
+    bottomrule = "\\bottomrule",
+    caption = "Models results.",
+    label = "models-results",
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    position = "center",
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE
+    # full_width = TRUE
+  ) %>%
+  # row_spec(
+  #   ifelse(!knitr::is_latex_output(), 0, 1),
+  #   bold = T,
+  # ) %>%
+  row_spec(0, bold = T) #%>%
+  # column_spec(2, italic = T)  %>%
+  # landscape()
 
 ```
+
+
+
+(ref:models-results-caption) Models results.
+
+(ref:models-results-caption-short) Models results.
+
+```{r, models-results-plot, out.width = "100%", fig.width = 6, fig.height = 3, fig.align='center', fig.cap = "(ref:models-results-caption)", fig.scap = "(ref:models-results-caption-short)", label = "models-results-plot", echo = FALSE, cache = FALSE}
+results %>% 
+  mutate(
+    id = str_c(
+      "mod", row_number()
+    )
+  ) %>% 
+  select(
+    id, model, test_deviance
+  ) %>% 
+  # filter(!(model %in% c("gam aic", "gbm tot"))) %>%
+  mutate(
+    id = str_to_title(id),
+    model = model %>% 
+      str_to_title() %>% 
+      str_replace_all("Aic", "AIC") %>% 
+      str_replace_all("Glm", "GLM") %>% 
+      str_replace_all("Gam", "GAM") %>% 
+      str_replace_all("Gbm", "GBM"),
+    model = model %>% 
+      fct_inorder() %>% 
+      fct_rev()
+  ) %>% 
+  ggplot(aes(x = model, y = test_deviance)) +
+  geom_segment(
+    aes(xend = model, yend = -Inf),
+    # size = 1
+  ) +
+  geom_point(
+    # size = 4
+  ) +
+  coord_flip(ylim = c(NA, 8458.5)) +
+  ylim(8456, NA) +
+  labs(x = "", y = "Test Deviance")
+```
+
+
 
 <!-- HP Tuning -->
 
 
 <!-- Comparison between models -->
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
 
-<!-- \titlespacing{\chapter}{0pt}{0pt}{35pt} -->
+
+
+
+
+
+
+
 

@@ -270,7 +270,7 @@
 
 \setlength{\abovecaptionskip}{10pt plus 3pt minus 2pt} % Space above captions
 \setlength{\belowcaptionskip}{10pt plus 3pt minus 2pt} % Space below captions
-  
+
 \usepackage{float}
   % For images after section title in appendix
 
@@ -279,6 +279,11 @@
 
 \usepackage{xfrac}
 
+\usepackage{lscape}
+  % Landscape pages
+
+\usepackage{tabu}
+  % For full width tables
 
 % JEM the following package allows changing spacing in lists (for acknowledgements)
 %\usepackage{enumitem}
@@ -3309,17 +3314,17 @@ In table \ref{tab:models-list} the models developed are listed. We started from 
 
 \caption{\label{tab:models-list}List of models developed.}
 \centering
-\begin{tabular}[t]{l>{}l}
+\begin{tabular}[t]{ll}
 \toprule
 \textbf{Id} & \textbf{Model}\\
 \midrule
-\cellcolor{gray!6}{Mod1} & \em{\cellcolor{gray!6}{GLM Tot}}\\
-Mod2 & \em{Elastic Net Tot}\\
-\cellcolor{gray!6}{Mod3} & \em{\cellcolor{gray!6}{Ridge Tot}}\\
-Mod4 & \em{GLM AIC}\\
-\cellcolor{gray!6}{Mod5} & \em{\cellcolor{gray!6}{Elastic Net AIC}}\\
-Mod6 & \em{GAM AIC}\\
-\cellcolor{gray!6}{Mod7} & \em{\cellcolor{gray!6}{GBM Tot}}\\
+\cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot}\\
+Mod2 & Elastic Net Tot\\
+\cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot}\\
+Mod4 & GLM AIC\\
+\cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC}\\
+Mod6 & GAM AIC\\
+\cellcolor{gray!6}{Mod7} & \cellcolor{gray!6}{GBM Tot}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3364,16 +3369,81 @@ For the interactions, we decided not to consider any interaction term in the GLM
 \hypertarget{chap:models-details}{%
 \subsection{Models details}\label{chap:models-details}}
 
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/en-tot-hp-tuning-plot-1} 
+
+}
+
+\caption[Elastic Net Tot hyper-parameter tuning.]{Elastic Net Tot hyper-parameter tuning.}\label{fig:en-tot-hp-tuning-plot}
+\end{figure}
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/en-aic-hp-tuning-plot-1} 
+
+}
+
+\caption[Elastic Net AIC hyper-parameter tuning.]{Elastic Net AIC hyper-parameter tuning.}\label{fig:en-aic-hp-tuning-plot}
+\end{figure}
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/gbm-tot-hp-tuning-plot-1} 
+
+}
+
+\caption[GBM Tot hyper-parameter tuning.]{GBM Tot hyper-parameter tuning.}\label{fig:gbm-tot-hp-tuning-plot}
+\end{figure}
+
 \newpage
 
 \hypertarget{chap:results}{%
 \section{Results}\label{chap:results}}
 
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus id mauris interdum, malesuada ante eu, tempus lacus. Aliquam blandit tortor a velit ultricies, eget pharetra nulla egestas. Suspendisse pellentesque finibus est, vitae ullamcorper magna convallis ut. Nulla a lectus in ligula iaculis convallis. Pellentesque tortor mauris, tempor nec dictum et, facilisis sit amet dolor. Mauris nibh quam, molestie non ex quis, hendrerit dignissim nulla. Aliquam sit amet dui at diam vestibulum malesuada a id lacus. Phasellus viverra orci vitae sem pretium, eu consequat libero euismod.
+\begin{table}[!h]
 
-Cras suscipit aliquam consequat. Quisque sodales lacus ac erat malesuada, eu laoreet enim vestibulum. Sed id ante id ligula auctor ullamcorper. Sed luctus rutrum mollis. Vestibulum sed ultrices quam. Duis id orci ut enim elementum maximus id quis justo. Pellentesque rutrum ligula in aliquam rhoncus. Integer suscipit nisl at mi efficitur interdum. Aenean et orci elit.
+\caption{\label{tab:models-results}Models results.}
+\centering
+\begin{tabular}[t]{llcccc}
+\toprule
+\textbf{Id} & \textbf{Model} & \textbf{\makecell[c]{Test\\Deviance}} & \textbf{Time} & \textbf{$\alpha$} & \textbf{$\lambda$}\\
+\midrule
+\cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{8 458.147} & \cellcolor{gray!6}{2.7s} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
+Mod2 & Elastic Net Tot & 8 458.024 & 1h 30m & 0.06 & 2.01e-04\\
+\cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{8 457.465} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
+Mod4 & GLM AIC & 8 458.023 & 7h 27m & 0 & 0\\
+\cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC} & \cellcolor{gray!6}{8 458.236} & \cellcolor{gray!6}{8h 54m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.63e-05}\\
+Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
+\cellcolor{gray!6}{Mod7} & \cellcolor{gray!6}{GBM Tot} & \cellcolor{gray!6}{8 504.178} & \cellcolor{gray!6}{2h 30m} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{}\\
+\bottomrule
+\end{tabular}
+\end{table}
 
-Nam ultricies est et iaculis tempus. Quisque leo lorem, sagittis et ligula a, blandit mattis velit. Phasellus pretium, orci et semper finibus, dui nulla tempor nisl, vel vehicula magna diam nec sem. Praesent finibus commodo enim non laoreet. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur ut pellentesque purus. Proin hendrerit, odio vel sodales porta, ex lorem feugiat sem, non fringilla libero ex ac ligula. Quisque facilisis eros at suscipit rhoncus.
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/models-results-plot-1} 
+
+}
+
+\caption[Models results.]{Models results.}\label{fig:models-results-plot}
+\end{figure}
 
 
 %% REFERENCES
