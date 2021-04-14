@@ -3261,7 +3261,7 @@ Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \hypertarget{explanatory-variables}{%
 \subsection{Explanatory variables}\label{explanatory-variables}}
 
-In the dataset we have a total of 131 explanatory variables that are considered meaningful for predicting the claims frequency. In table \ref{tab:explanatory-variables} we can see the number of variables split by category. The categories are the ones described in section \ref{chap:pricing-variables}.
+In the dataset we have a total of 52 explanatory variables that are considered meaningful for predicting the claims frequency. In table \ref{tab:explanatory-variables} we can see the number of variables split by category. The categories are the ones described in section \ref{chap:pricing-variables}.
 
 In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
 
@@ -3273,14 +3273,14 @@ In the modeling process we will assess whether these variables are significative
 \toprule
 \textbf{Description} & \textbf{\makecell[c]{Number of variables\\per category}}\\
 \midrule
-\em{\cellcolor{gray!6}{Information on the insured vehicle}} & \cellcolor{gray!6}{18}\\
-\em{General information of the policyholder} & 36\\
-\em{\cellcolor{gray!6}{Insurance specific information of the policyholder}} & \cellcolor{gray!6}{52}\\
-\em{Policy options} & 13\\
-\em{\cellcolor{gray!6}{Customer information on the policyholder}} & \cellcolor{gray!6}{5}\\
-\em{Telematic data} & 7\\
+\em{\cellcolor{gray!6}{Information on the insured vehicle}} & \cellcolor{gray!6}{12}\\
+\em{General information of the policyholder} & 14\\
+\em{\cellcolor{gray!6}{Insurance specific information of the policyholder}} & \cellcolor{gray!6}{9}\\
+\em{Policy options} & 11\\
+\em{\cellcolor{gray!6}{Customer information on the policyholder}} & \cellcolor{gray!6}{2}\\
+\em{Telematic data} & 4\\
 \midrule
-\em{\textbf{\cellcolor{gray!6}{Total}}} & \textbf{\cellcolor{gray!6}{131}}\\
+\em{\textbf{\cellcolor{gray!6}{Total}}} & \textbf{\cellcolor{gray!6}{52}}\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3308,7 +3308,7 @@ The lower the deviance on the test set is, the better the model is.
 \hypertarget{list-of-models}{%
 \subsection{List of models}\label{list-of-models}}
 
-In table \ref{tab:models-list} the models developed are listed. We started from a GLM that takes into account all the variables available (\emph{GLM Tot}). Then, with the same variables, we considered an Elastic Net (\emph{Elastic Net Tot}) and a Ridge regression (\emph{Ridge Tot}). After this we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (\emph{GLM AIC}). With the same subset of variables we also fitted an Elastic Net (\emph{Elastic Net AIC}) and a GAM (\emph{GAM AIC}). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (\emph{GBM Tot}).
+In table \ref{tab:models-list} the models developed are listed. We started from a GLM that takes into account all the variables available (\emph{GLM Tot}). Then, with the same variables, we considered an Elastic Net (\emph{Elastic Net Tot}) and a Ridge regression (\emph{Ridge Tot}). After this, we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (\emph{GLM AIC}). With the same subset of variables we also fitted an Elastic Net (\emph{Elastic Net AIC}) and a GAM (\emph{GAM AIC}). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (\emph{GBM Tot}).
 
 \begin{table}[!h]
 
@@ -3341,9 +3341,9 @@ All the models have been fitted with H2O, except for the GAM. On H2O the followi
   \href{http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html}{\texttt{h2o.gbm()}} that allows to build GBMs.
 \end{itemize}
 
-Anyway, as described in H2O documentation, ``GAM models are currently experimental''. We had some trials with GAMs on H2O, but, when we are writing, there are still many bugs and many functions for the hyperparameter tuning are not available yet. For this reason, for the GAM model we used the function \texttt{gam()} from the package \texttt{mgcv}.
+Anyway, as described in H2O documentation, ``GAM models are currently experimental''. We had some trials with GAMs on H2O, but there are still many bugs and many functions for the hyperparameter tuning are not available yet. For this reason, for the GAM model we used the function \texttt{gam()} from the package \texttt{mgcv}.
 
-The big advantage of H2O is that it provides embedded multi-threading implementation and provides built-in functions for hyper-parameter tuning. In the practice, that is translated to a high-performance solution that is substantially faster and is much more memory-efficient than what the other R packages offer.
+The big advantage of H2O is that it provides embedded multi-threading implementation and provides built-in functions for hyper-parameter tuning. In the practice, that translates to a high-performance solution that is substantially faster and is much more memory-efficient than what the other R packages offer.
 
 Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from \texttt{mgcv} just as a quick trial, without performing a deep hyper-parameter tuning.
 
@@ -3352,22 +3352,36 @@ More details on the models listed in table \ref{tab:models-list} are described m
 \hypertarget{approach-adopted-in-the-modeling}{%
 \subsection{Approach adopted in the modeling}\label{approach-adopted-in-the-modeling}}
 
-In the whole modeling process we tried to keep an approach the more objective as possible in order to not condition the results.
+One of the strengths of the GLM-based methods is that they allows to extensively introduce external information in the process of fitting. That means that, still using the same techniques, a skilled modeler is able to build a better model than a beginner.
 
-One of the strengths of the GLM-based methods is that they allows to extensively introduce external information in the process of fitting. That means that, still using the same techniques, a more skilled modeler is able to build a better model than a less skilled one.
+The aim of our analysis is to built a comparison just between the models, so the skills of the modeler would be a disturbance factor. In order to prevent this factor to influence our results, in the whole modeling process we adopted techniques as much objective as possible.
 
-As the aim of our analysis is to built a comparison just between the models, the skills of the modeler would be a disturbance factor. For this reason we adopted techniques as much objective as possible. We will return on some considerations of the benefits of the modeler intervention in section \ref{chap:results}.
-
-For this reason, we performed the feature selection procedure in the GLM with a stepwise algorithm based on AIC instead than with a manual process.
+To achieve this goal in the basic GLM, for the feature selection we performed a stepwise algorithm based on AIC instead than a manual process.
 
 The only manual element in the model fitting has been the definition of the effects of the quantitative variables. For the quantitative variables we considered split-wise polynomials effects based on the plots of the residuals. Anyway we have been quite generous in the number of terms taken into account and we let the algorithm choosing which of them to keep in the model.
 
-For the interactions, we decided not to consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
+For the interactions, we decided to not consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
+
+We will return on some considerations of the benefits of the modeler intervention in section \ref{chap:conclusions}.
 
 \newpage
 
 \hypertarget{chap:models-details}{%
 \subsection{Models details}\label{chap:models-details}}
+
+\hypertarget{glm-tot}{%
+\subsubsection{GLM Tot}\label{glm-tot}}
+
+In the first GLM we considered all the 52 explanatory variables listed in table \ref{tab:explanatory-variables}. Considering all the levels of the qualitative variables and all the polynomial terms for the quantitative components, it results into 121 parameters.
+
+The fitting in H2O has been quite fast and it took just 2.7 seconds.
+
+\hypertarget{elastic-net-tot}{%
+\subsubsection{Elastic Net Tot}\label{elastic-net-tot}}
+
+With the parametrization of this GLM we fitted an Elastic Net. To choose the optimal parameters \(\alpha\) and \(\lambda\) we computed an grid search with a cross validation. In the cross validation we tested 363 models with a total computation time of 1h 30m.
+
+In figure \ref{fig:en-tot-hp-tuning-plot} the results of the cross validation are shown.
 
 
 
@@ -3382,6 +3396,15 @@ For the interactions, we decided not to consider any interaction term in the GLM
 \caption[Elastic Net Tot hyper-parameter tuning.]{Elastic Net Tot hyper-parameter tuning.}\label{fig:en-tot-hp-tuning-plot}
 \end{figure}
 
+\hypertarget{ridge-regression-tot}{%
+\subsubsection{Ridge Regression Tot}\label{ridge-regression-tot}}
+
+\hypertarget{glm-aic}{%
+\subsubsection{GLM AIC}\label{glm-aic}}
+
+\hypertarget{elastic-net-aic}{%
+\subsubsection{Elastic Net AIC}\label{elastic-net-aic}}
+
 
 
 
@@ -3394,6 +3417,9 @@ For the interactions, we decided not to consider any interaction term in the GLM
 
 \caption[Elastic Net AIC hyper-parameter tuning.]{Elastic Net AIC hyper-parameter tuning.}\label{fig:en-aic-hp-tuning-plot}
 \end{figure}
+
+\hypertarget{gbm-tot}{%
+\subsubsection{GBM Tot}\label{gbm-tot}}
 
 
 
@@ -3444,6 +3470,11 @@ Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
 
 \caption[Models results.]{Models results.}\label{fig:models-results-plot}
 \end{figure}
+
+\newpage
+
+\hypertarget{chap:conclusions}{%
+\section{Conclusions and possible improvements}\label{chap:conclusions}}
 
 
 %% REFERENCES

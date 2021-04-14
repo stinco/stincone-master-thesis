@@ -1,0 +1,7 @@
+﻿group;category;Description;Number of variables per category
+Vehicle;vehicle;Information on the insured vehicle;18
+Person;policyholder general;General information of the policyholder;36
+Insurance;policyholder insurance;Insurance specific information of the policyholder;52
+Insurance;policy options;Policy options;13
+Insurance;policyholder customer;Customer information on the policyholder;5
+Insurance;telematic;Telematic data;7

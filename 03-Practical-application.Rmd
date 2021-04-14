@@ -450,7 +450,7 @@ The lower the deviance on the test set is, the better the model is.
 
 ### List of models
 
-In table \@ref(tab:models-list) the models developed are listed. We started from a GLM that takes into account all the variables available (_GLM Tot_). Then, with the same variables, we considered an Elastic Net (_Elastic Net Tot_) and a Ridge regression (_Ridge Tot_). After this we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (_GLM AIC_). With the same subset of variables we also fitted an Elastic Net (_Elastic Net AIC_) and a GAM (_GAM AIC_). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (_GBM Tot_).
+In table \@ref(tab:models-list) the models developed are listed. We started from a GLM that takes into account all the variables available (_GLM Tot_). Then, with the same variables, we considered an Elastic Net (_Elastic Net Tot_) and a Ridge regression (_Ridge Tot_). After this, we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (_GLM AIC_). With the same subset of variables we also fitted an Elastic Net (_Elastic Net AIC_) and a GAM (_GAM AIC_). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (_GBM Tot_).
 
 
 ```{r, models-results-read, echo = FALSE, cache = TRUE, message = FALSE}
@@ -574,9 +574,9 @@ All the models have been fitted with H2O, except for the GAM. On H2O the followi
 * [`h2o.gam()`](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gam.html) that allows to build GAMs with both GAM penalization to splines and Elastic Net penalization to other variables;
 * [`h2o.gbm()`](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html) that allows to build GBMs.
 
-Anyway, as described in H2O documentation, "GAM models are currently experimental". We had some trials with GAMs on H2O, but, when we are writing, there are still many bugs and many functions for the hyperparameter tuning are not available yet. For this reason, for the GAM model we used the function `gam()` from the package `mgcv`.
+Anyway, as described in H2O documentation, "GAM models are currently experimental". We had some trials with GAMs on H2O, but there are still many bugs and many functions for the hyperparameter tuning are not available yet. For this reason, for the GAM model we used the function `gam()` from the package `mgcv`.
 
-The big advantage of H2O is that it provides embedded multi-threading implementation and provides built-in functions for hyper-parameter tuning. In the practice, that is translated to a high-performance solution that is substantially faster and is much more memory-efficient than what the other R packages offer.
+The big advantage of H2O is that it provides embedded multi-threading implementation and provides built-in functions for hyper-parameter tuning. In the practice, that translates to a high-performance solution that is substantially faster and is much more memory-efficient than what the other R packages offer.
 
 Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from `mgcv` just as a quick trial, without performing a deep hyper-parameter tuning.
 
@@ -585,34 +585,79 @@ More details on the models listed in table \@ref(tab:models-list) are described 
 
 ### Approach adopted in the modeling
 
-In the whole modeling process we tried to keep an approach the more objective as possible in order to not condition the results.
+<!-- In the whole modeling process we tried to keep an approach as more objective as possible, in order to not condition the results. -->
 
-One of the strengths of the GLM-based methods is that they allows to extensively introduce external information in the process of fitting. That means that, still using the same techniques, a more skilled modeler is able to build a better model than a less skilled one. 
+One of the strengths of the GLM-based methods is that they allows to extensively introduce external information in the process of fitting. That means that, still using the same techniques, a skilled modeler is able to build a better model than a beginner.
 
-As the aim of our analysis is to built a comparison just between the models, the skills of the modeler would be a disturbance factor. For this reason we adopted techniques as much objective as possible. We will return on some considerations of the benefits of the modeler intervention in section \@ref(chap:results).
+The aim of our analysis is to built a comparison just between the models, so the skills of the modeler would be a disturbance factor. In order to prevent this factor to influence our results, in the whole modeling process we adopted techniques as much objective as possible.
 
-For this reason, we performed the feature selection procedure in the GLM with a stepwise algorithm based on AIC instead than with a manual process.
+To achieve this goal in the basic GLM, for the feature selection we performed a stepwise algorithm based on AIC instead than a manual process.
 
 The only manual element in the model fitting has been the definition of the effects of the quantitative variables. For the quantitative variables we considered split-wise polynomials effects based on the plots of the residuals. Anyway we have been quite generous in the number of terms taken into account and we let the algorithm choosing which of them to keep in the model.
 
-For the interactions, we decided not to consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
+For the interactions, we decided to not consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
 
-
+We will return on some considerations of the benefits of the modeler intervention in section \@ref(chap:conclusions).
 
 \newpage
 
 ### Models details {#chap:models-details}
 
+```{r, read-coeffcients, echo = FALSE, cache = FALSE, message = FALSE}
+
+coefficients_encripted_table_h2o_th_glm_tot <- read_csv2(
+  "data/practical_application/results/coefficients_encripted_table_h2o_th_glm_tot.csv"
+)
+
+coefficients_encripted_table_h2o_th_elastic_net_tot_best <- read_csv2(
+  "data/practical_application/results/coefficients_encripted_table_h2o_th_elastic_net_tot_best.csv"
+)
+
+coefficients_encripted_table_h2o_th_ridge_tot_best <- read_csv2(
+  "data/practical_application/results/coefficients_encripted_table_h2o_th_ridge_tot_best.csv"
+)
+
+coefficients_encripted_table_h2o_th_glm_aic <- read_csv2(
+  "data/practical_application/results/coefficients_encripted_table_h2o_th_glm_aic.csv"
+)
+
+
+# coefficients_encripted_table_h2o_th_glm_tot
+# coefficients_encripted_table_h2o_th_elastic_net_tot_best
+# coefficients_encripted_table_h2o_th_ridge_tot_best
+# coefficients_encripted_table_h2o_th_glm_aic
+
+```
+
+
+#### GLM Tot
+
+In the first GLM we considered all the `r explanatory_variables_number` explanatory variables listed in table \@ref(tab:explanatory-variables). Considering all the levels of the qualitative variables and all the polynomial terms for the quantitative components, it results into `r nrow(coefficients_encripted_table_h2o_th_glm_tot)` parameters.
+
+The fitting in H2O has been quite fast and it took just `r format(results$time[1], digits = 2)` seconds.
+
+
+#### Elastic Net Tot
+
+```{r, en-tot-hp-tuning-read, echo = FALSE, cache = TRUE, message = FALSE}
+
+h2o_th_elastic_net_tot_grid_perf_tb <- read_csv2(
+  "data/practical_application/results/h2o_th_elastic_net_tot_grid_perf_tb.csv"
+)
+
+```
+
+With the parametrization of this GLM we fitted an Elastic Net. To choose the optimal parameters $\alpha$ and $\lambda$ we computed an grid search with a cross validation. In the cross validation we tested `r nrow(h2o_th_elastic_net_tot_grid_perf_tb)` models with a total computation time of `r str_extract(results$time_string[2], ".*m")`.
+
+In figure \@ref(fig:en-tot-hp-tuning-plot) the results of the cross validation are shown.
+
+<!-- elbow in the plot -->
 
 (ref:en-tot-hp-tuning-caption) Elastic Net Tot hyper-parameter tuning.
 
 (ref:en-tot-hp-tuning-caption-short) Elastic Net Tot hyper-parameter tuning.
 
-```{r, en-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-tot-hp-tuning-caption)", fig.scap = "(ref:en-tot-hp-tuning-caption-short)", label = "en-tot-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
-
-h2o_th_elastic_net_tot_grid_perf_tb <- read_csv2(
-  "data/practical_application/results/h2o_th_elastic_net_tot_grid_perf_tb.csv"
-)
+```{r, en-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-tot-hp-tuning-caption)", fig.scap = "(ref:en-tot-hp-tuning-caption-short)", label = "en-tot-hp-tuning-plot", echo = FALSE, cache = TRUE, message = FALSE}
 
 h2o_th_elastic_net_tot_grid_perf_tb %>% 
   filter(residual_deviance < 35575) %>% 
@@ -648,11 +693,22 @@ h2o_th_elastic_net_tot_grid_perf_tb %>%
 ```
 
 
+#### Ridge Regression Tot
+
+
+
+#### GLM AIC
+
+
+
+#### Elastic Net AIC
+
+
 (ref:en-aic-hp-tuning-caption) Elastic Net AIC hyper-parameter tuning.
 
 (ref:en-aic-hp-tuning-caption-short) Elastic Net AIC hyper-parameter tuning.
 
-```{r, en-aic-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-aic-hp-tuning-caption)", fig.scap = "(ref:en-aic-hp-tuning-caption-short)", label = "en-aic-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
+```{r, en-aic-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:en-aic-hp-tuning-caption)", fig.scap = "(ref:en-aic-hp-tuning-caption-short)", label = "en-aic-hp-tuning-plot", echo = FALSE, cache = TRUE, message = FALSE}
 
 h2o_th_elastic_net_aic_grid_perf_tb <- read_csv2(
   "data/practical_application/results/h2o_th_elastic_net_aic_grid_perf_tb.csv"
@@ -682,13 +738,14 @@ h2o_th_elastic_net_aic_grid_perf_tb %>%
 ```
 
 
+#### GBM Tot
 
 
 (ref:gbm-tot-hp-tuning-caption) GBM Tot hyper-parameter tuning.
 
 (ref:gbm-tot-hp-tuning-caption-short) GBM Tot hyper-parameter tuning.
 
-```{r, gbm-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:gbm-tot-hp-tuning-caption)", fig.scap = "(ref:gbm-tot-hp-tuning-caption-short)", label = "gbm-tot-hp-tuning-plot", echo = FALSE, cache = FALSE, message = FALSE}
+```{r, gbm-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:gbm-tot-hp-tuning-caption)", fig.scap = "(ref:gbm-tot-hp-tuning-caption-short)", label = "gbm-tot-hp-tuning-plot", echo = FALSE, cache = TRUE, message = FALSE}
 
 h2o_gbm_tot_grid_perf_tb <- read_csv2(
   "data/practical_application/results/h2o_gbm_tot_grid_perf_tb.csv"
@@ -834,7 +891,7 @@ tab %>%
 
 (ref:models-results-caption-short) Models results.
 
-```{r, models-results-plot, out.width = "100%", fig.width = 6, fig.height = 3, fig.align='center', fig.cap = "(ref:models-results-caption)", fig.scap = "(ref:models-results-caption-short)", label = "models-results-plot", echo = FALSE, cache = FALSE}
+```{r, models-results-plot, out.width = "100%", fig.width = 6, fig.height = 3, fig.align='center', fig.cap = "(ref:models-results-caption)", fig.scap = "(ref:models-results-caption-short)", label = "models-results-plot", echo = FALSE, cache = TRUE}
 results %>% 
   mutate(
     id = str_c(
@@ -879,6 +936,9 @@ results %>%
 
 
 
+\newpage
+
+## Conclusions and possible improvements {#chap:conclusions}
 
 
 
