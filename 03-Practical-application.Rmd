@@ -391,14 +391,15 @@ explantory_varibles_total %>%
   kable(
     digits = 4,
     format.args = list(big.mark = " "),
-    # format = "latex",
+    format = "latex",
     booktabs = T,
     align = "lc",
     vline = "",
     toprule = "\\toprule",
     midrule = "\\midrule",
     linesep = "",
-    bottomrule = "\\bottomrule",
+    bottomrule = "",
+    # bottomrule = "\\bottomrule",
     caption = "Number of explanatory variables per category.",
     label = "explanatory-variables",
     escape = FALSE
@@ -421,10 +422,13 @@ explantory_varibles_total %>%
   #   ),
   #   bold = T,
   # ) %>% 
+  # row_spec(nrow(explantory_varibles_total) - 1,
+  #          hline_after = TRUE) %>%
   row_spec(nrow(explantory_varibles_total) - 1,
-           hline_after = TRUE) %>%
+           extra_latex_after = "\\bottomrule") %>% 
   row_spec(nrow(explantory_varibles_total),
-           bold = T) %>%
+           bold = T,
+           italic = F) %>%
   column_spec(1, italic = T)
 ```
 
@@ -621,11 +625,64 @@ coefficients_encripted_table_h2o_th_glm_aic <- read_csv2(
   "data/practical_application/results/coefficients_encripted_table_h2o_th_glm_aic.csv"
 )
 
+coefficients_encripted_table_h2o_th_elastic_net_aic_best <- read_csv2(
+  "data/practical_application/results/coefficients_encripted_table_h2o_th_elastic_net_aic_best.csv"
+)
 
-# coefficients_encripted_table_h2o_th_glm_tot
-# coefficients_encripted_table_h2o_th_elastic_net_tot_best
-# coefficients_encripted_table_h2o_th_ridge_tot_best
-# coefficients_encripted_table_h2o_th_glm_aic
+
+coefficients <- coefficients_encripted_table_h2o_th_glm_tot %>% 
+  select(
+    1:2,
+    coeff_glm_tot = coefficients,
+    p_value_glm_tot = p_value
+  ) %>% 
+  full_join(
+    coefficients_encripted_table_h2o_th_elastic_net_tot_best %>% 
+      select(
+        1:2,
+        coeff_en_tot = coefficients
+      )
+  ) %>% 
+  full_join(
+    coefficients_encripted_table_h2o_th_ridge_tot_best %>% 
+      select(
+        1:2,
+        coeff_ridge_tot = coefficients
+      )
+  ) %>% 
+  full_join(
+    coefficients_encripted_table_h2o_th_glm_aic %>% 
+      select(
+        1:2,
+        coeff_glm_aic = coefficients,
+        p_value_glm_aic = p_value
+      )
+  ) %>% 
+  full_join(
+    coefficients_encripted_table_h2o_th_elastic_net_aic_best %>% 
+      select(
+        1:2,
+        coeff_en_aic = coefficients
+      )
+  )
+
+
+coff_en_tot_0_count <- coefficients %>% 
+  count(
+    glm_tot_0 = is.na(coeff_glm_tot),
+    en_tot_0 = coeff_en_tot == 0
+  ) %>% 
+  filter(!glm_tot_0, en_tot_0) %>% 
+  .$n
+
+coff_glm_aic_0_count <- coefficients %>% 
+  count(
+    glm_tot_0 = is.na(coeff_glm_tot),
+    glm_aic_0 = is.na(coeff_glm_aic)
+  ) %>% 
+  filter(!glm_tot_0, glm_aic_0) %>% 
+  .$n
+
 
 ```
 
@@ -640,20 +697,25 @@ The fitting in H2O has been quite fast and it took just `r format(results$time[1
 #### Elastic Net Tot
 
 ```{r, en-tot-hp-tuning-read, echo = FALSE, cache = TRUE, message = FALSE}
-
 h2o_th_elastic_net_tot_grid_perf_tb <- read_csv2(
   "data/practical_application/results/h2o_th_elastic_net_tot_grid_perf_tb.csv"
 )
 
 ```
 
-With the parametrization of this GLM we fitted an Elastic Net. To choose the optimal parameters $\alpha$ and $\lambda$ we computed an grid search with a cross validation. In the cross validation we tested `r nrow(h2o_th_elastic_net_tot_grid_perf_tb)` models with a total computation time of `r str_extract(results$time_string[2], ".*m")`.
+With the same parametrization of the first GLM, we fitted an Elastic Net. To choose the optimal parameters $\alpha$ and $\lambda$ we computed an grid search with a cross validation. In the cross validation we tested `r nrow(h2o_th_elastic_net_tot_grid_perf_tb)` models with a total computation time of `r str_extract(results$time_string[2], ".*m")`.
 
-In figure \@ref(fig:en-tot-hp-tuning-plot) the results of the cross validation are shown.
+The figure \@ref(fig:en-tot-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyperparameters. As we can see, for each value of $\alpha$ the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyperparameters $\alpha = `r results$alpha[2]`$ and
+$\lambda = `r results$lambda[2]`$.
+<!-- $\lambda = `r format(results$lambda[2], digits=3, scientific=T)`$. -->
 
-<!-- elbow in the plot -->
+In the plot there are some gaps in the points because, in order to reduce the execution time, the algorithm computed has been a random grid search, that means that just a random subset of grid has been tested. The time constraint of `r str_extract(results$time_string[2], ".*m")` was an input of the algorithm.
 
-(ref:en-tot-hp-tuning-caption) Elastic Net Tot hyper-parameter tuning.
+One aspect we have to underline is that, while the split between training set and test set has been made by policy id, the split into sets of cross validations has been made by observation. This implies that the hyper-parameter set that results from the cross validation could not be the optimal one for predicting the test set. This choice has been made because in the H2O base implementation it is not possible to specify an id for the splitting in the cross validation and we don't expect this aspect to deeply influence our results.
+
+Within the `r nrow(coefficients_encripted_table_h2o_th_glm_tot)` parameters of the GLM, in the optimal Elastic Net `r coff_en_tot_0_count` of them are shrunk to exactly 0.
+
+(ref:en-tot-hp-tuning-caption) Elastic Net Tot hyper-parameter tuning. The light blue vertical line corresponds to the optimal point. The red vertical line corresponds to the optimal point subjected to $\alpha=0$, i.e. the Ridge Regression solution.
 
 (ref:en-tot-hp-tuning-caption-short) Elastic Net Tot hyper-parameter tuning.
 
@@ -695,13 +757,97 @@ h2o_th_elastic_net_tot_grid_perf_tb %>%
 
 #### Ridge Regression Tot
 
+In figure \@ref(fig:en-tot-hp-tuning-plot), the red vertical line corresponds to the optimal point subjected to $\alpha=0$. This point corresponds to the Ridge Regression solution. In the Ridge regression all the coefficients are different from 0.
+
 
 
 #### GLM AIC
 
+Starting from the GLM with all the explanatory variables, we applied a stepwise algorithm based on AIC to find the optimal GLM. In the model comparison we decided to move only in backward direction, since considering at each step both the forward and the backward option would have resulted in a too long process and from some trials we found that it would have probably resulted into the exact same model.
+
+H2O doesn't support a function for stepwise regression, so we ran the algorithm in R with the function `stepAIC()` from the package `MASS`. Running the algorithm in R is much less efficient than in H2O and it took a total time of `r str_extract(results$time1_string[4], ".*m")`.
+
+
+```{r, coeff-0-en-aic, echo = FALSE, cache = FALSE, message = FALSE}
+coeff_0_en_aic_1 <- coefficients %>% 
+  count(
+    glm_tot_0 = is.na(coeff_glm_tot),
+    en_tot_0 = coeff_en_tot == 0,
+    glm_aic_0 = is.na(coeff_glm_aic)
+  ) %>% 
+  filter(en_tot_0, !glm_aic_0) %>% 
+  .$n
+  
+coeff_0_en_aic_2 <- coefficients %>% 
+  count(
+    glm_tot_0 = is.na(coeff_glm_tot),
+    en_tot_0 = coeff_en_tot == 0,
+    glm_aic_0 = is.na(coeff_glm_aic)
+  ) %>% 
+  filter(!glm_tot_0, !en_tot_0, glm_aic_0) %>% 
+  .$n
+```
+
+In the final GLM obtained with the stepwise algorithm, within the `r nrow(coefficients_encripted_table_h2o_th_glm_tot)` parameters of the initial GLM, `r coff_glm_aic_0_count` has been removed from the model and only `r nrow(coefficients_encripted_table_h2o_th_glm_tot) - coff_glm_aic_0_count` lasted in the model. In table \@ref(tab:coeff-0) the number of parameters equal to 0 in each model is listed. From this table we can see that there are `r coeff_0_en_aic_1` parameters that are set equal to 0 in the Elastic Net Tot and not in the GLM AIC and there are `r coeff_0_en_aic_2` that are set equal to 0 in the GLM AIC and not in the Elastic Net. That means that the two feature selection criteria leads to different subsets of explanatory variables.
+
+```{r coeff-0, echo = FALSE, cache = FALSE, message = FALSE}
+coefficients %>% 
+  count(
+    glm_tot_0 = is.na(coeff_glm_tot),
+    en_tot_0 = coeff_en_tot == 0,
+    glm_aic_0 = is.na(coeff_glm_aic)
+  ) %>% 
+  mutate_if(is.logical, as.numeric) %>% 
+  rename(
+    `GLM Tot` = glm_tot_0,
+    `Elastic Net Tot` = en_tot_0,
+    `GLM AIC` = glm_aic_0
+  ) %>% 
+  kable(
+    digits = 0,
+    format.args = list(big.mark = " "),
+    # format = "latex",
+    booktabs = T,
+    align = "cccc",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # midrule = "\\hline\\addlinespace",
+    # midrule = "\\hline",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    linesep = "",
+    bottomrule = "\\bottomrule",
+    caption = "Parameters equal to 0 in the models.",
+    label = "coeff-0",
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    position = "center",
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE
+    # full_width = TRUE
+  ) %>%
+  # row_spec(
+  #   ifelse(!knitr::is_latex_output(), 0, 1),
+  #   bold = T,
+  # ) %>%
+  row_spec(0, bold = T) %>%
+  # column_spec(2, italic = T)  %>%
+  # landscape()
+  row_spec(4,
+           extra_latex_after = "\\midrule")
+
+```
+
+
 
 
 #### Elastic Net AIC
+
+With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \@ref(fig:en-aic-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyperparameters. The red veritical line corresponds to the optimal point that has hyperparameters $\alpha = 0$ and
+$\lambda = `r results$lambda[5]`$.
+
 
 
 (ref:en-aic-hp-tuning-caption) Elastic Net AIC hyper-parameter tuning.

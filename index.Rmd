@@ -84,6 +84,7 @@ library(viridis)       # For colors
 library(ggeasy)
 library(ggforce)       # For plotting ellipses
 library(gridExtra)
+library(GGally)        # For ggpairs()
 library(cowplot)
 library(grid)
 library(gtable)
