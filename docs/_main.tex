@@ -3381,8 +3381,8 @@ The fitting in H2O has been quite fast and it took just 2.7 seconds.
 
 With the same parametrization of the first GLM, we fitted an Elastic Net. To choose the optimal parameters \(\alpha\) and \(\lambda\) we computed an grid search with a cross validation. In the cross validation we tested 363 models with a total computation time of 1h 30m.
 
-The figure \ref{fig:en-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyperparameters. As we can see, for each value of \(\alpha\) the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyperparameters \(\alpha = 0.06\) and
-\(\lambda = 0.0002009233\).
+The figure \ref{fig:en-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. As we can see, for each value of \(\alpha\) the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyper-parameters \(\alpha = 0.06\) and
+\(\lambda = 2.01e-04\).
 
 In the plot there are some gaps in the points because, in order to reduce the execution time, the algorithm computed has been a random grid search, that means that just a random subset of grid has been tested. The time constraint of 1h 30m was an input of the algorithm.
 
@@ -3439,8 +3439,8 @@ In the final GLM obtained with the stepwise algorithm, within the 121 parameters
 \hypertarget{elastic-net-aic}{%
 \subsubsection{Elastic Net AIC}\label{elastic-net-aic}}
 
-With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyperparameters. The red veritical line corresponds to the optimal point that has hyperparameters \(\alpha = 0\) and
-\(\lambda = 0.00001629751\).
+With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. The red vertical line corresponds to the optimal point that has hyper-parameters \(\alpha = 0\) and
+\(\lambda = 1.63e-05\). In this case the best model Elastic Net model corresponds to the Ridge Regression. That means that no coefficient has been shrunk to exactly 0. This is probably due to the fact that the stepwise algorithm already selected a set of variables that have a significative effect for predicting the response. Moreover, comparing the Cross Validation Deviance of the optimal point and the points with lower \(\lambda\) we see that there isn't a substantial difference. That means that a classic GLM would perform more or less the same as the optimal Ridge Regression.
 
 
 
@@ -3455,8 +3455,41 @@ With only the variables obtained with the stepwise selection, we fitted an Elast
 \caption[Elastic Net AIC hyper-parameter tuning.]{Elastic Net AIC hyper-parameter tuning.}\label{fig:en-aic-hp-tuning-plot}
 \end{figure}
 
+Considering all the GLM based models we developed, we compared the 158 coefficients available. Here we consider also the base levels of the qualitative explanatory variables that are set exactly to 0 by the classic GLM models.
+
+As we can see, all the models have coefficients positively correlated. However, we can see that the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=1\linewidth]{_main_files/figure-latex/coeff-pairs-1} 
+
+}
+
+\caption[Coefficients comparison between GLM-based models.]{Coefficients comparison between GLM-based models.}\label{fig:coeff-pairs}
+\end{figure}
+
+\hypertarget{gam-aic}{%
+\subsubsection{GAM AIC}\label{gam-aic}}
+
+With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental condition of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took 17m 36.7s, that means that a deep hyper-parameters tuning would have taken many hours to run.
+
 \hypertarget{gbm-tot}{%
 \subsubsection{GBM Tot}\label{gbm-tot}}
+
+Finally, we fitted a GBM with all the 52 variables available. The GBM is one of the most widely used general purpose machine learning models. One of its befits is that it automatically perform the feature selection and automatically consider the interactions.
+
+As for the Elastic Net, the GBM have some hyper-parameters that are: the \texttt{ntrees}, the \texttt{max\_depth}, the \texttt{learn\_rate}, the \texttt{sample\_rate} and the \texttt{col\_sample\_rate}. To understand what these parameters are we refer to the \href{http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html}{H2O documentation}. For selecting the best set of variables we computed a grid search with a Cross Validation. Figure \ref{fig:gbm-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. The optimal set of hyper-parameters is:
+\texttt{ntrees} = 408,
+\texttt{max\_depth} = 3,
+\texttt{learn\_rate} = 0.116,
+\texttt{sample\_rate} = 1 and
+\texttt{col\_sample\_rate} = 1.
+
+In total, 189 set of hyper-parameters have been tested in a total amount of time of 2h 30m.
 
 
 

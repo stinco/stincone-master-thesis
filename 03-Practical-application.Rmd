@@ -705,9 +705,9 @@ h2o_th_elastic_net_tot_grid_perf_tb <- read_csv2(
 
 With the same parametrization of the first GLM, we fitted an Elastic Net. To choose the optimal parameters $\alpha$ and $\lambda$ we computed an grid search with a cross validation. In the cross validation we tested `r nrow(h2o_th_elastic_net_tot_grid_perf_tb)` models with a total computation time of `r str_extract(results$time_string[2], ".*m")`.
 
-The figure \@ref(fig:en-tot-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyperparameters. As we can see, for each value of $\alpha$ the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyperparameters $\alpha = `r results$alpha[2]`$ and
-$\lambda = `r results$lambda[2]`$.
-<!-- $\lambda = `r format(results$lambda[2], digits=3, scientific=T)`$. -->
+The figure \@ref(fig:en-tot-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyper-parameters. As we can see, for each value of $\alpha$ the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyper-parameters $\alpha = `r results$alpha[2]`$ and
+<!-- $\lambda = `r results$lambda[2]`$. -->
+$\lambda = `r format(results$lambda[2], digits=3, scientific=T)`$.
 
 In the plot there are some gaps in the points because, in order to reduce the execution time, the algorithm computed has been a random grid search, that means that just a random subset of grid has been tested. The time constraint of `r str_extract(results$time_string[2], ".*m")` was an input of the algorithm.
 
@@ -845,9 +845,9 @@ coefficients %>%
 
 #### Elastic Net AIC
 
-With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \@ref(fig:en-aic-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyperparameters. The red veritical line corresponds to the optimal point that has hyperparameters $\alpha = 0$ and
-$\lambda = `r results$lambda[5]`$.
-
+With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \@ref(fig:en-aic-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyper-parameters. The red vertical line corresponds to the optimal point that has hyper-parameters $\alpha = 0$ and
+<!-- $\lambda = `r results$lambda[5]`$. -->
+$\lambda = `r format(results$lambda[5], digits=3, scientific=T)`$. In this case the best model Elastic Net model corresponds to the Ridge Regression. That means that no coefficient has been shrunk to exactly 0. This is probably due to the fact that the stepwise algorithm already selected a set of variables that have a significative effect for predicting the response. Moreover, comparing the Cross Validation Deviance of the optimal point and the points with lower $\lambda$ we see that there isn't a substantial difference. That means that a classic GLM would perform more or less the same as the optimal Ridge Regression.
 
 
 (ref:en-aic-hp-tuning-caption) Elastic Net AIC hyper-parameter tuning.
@@ -883,8 +883,56 @@ h2o_th_elastic_net_aic_grid_perf_tb %>%
 
 ```
 
+Considering all the GLM based models we developed, we compared the `r nrow(coefficients_encripted_table_h2o_th_elastic_net_tot_best)-1` coefficients available. Here we consider also the base levels of the qualitative explanatory variables that are set exactly to 0 by the classic GLM models.
+
+As we can see, all the models have coefficients positively correlated. However, we can see that the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
+
+
+(ref:coeff-pairs-plot-caption) Coefficients comparison between GLM-based models.
+
+(ref:coeff-pairs-plot-caption-short) Coefficients comparison between GLM-based models.
+
+```{r, coeff-pairs-plot, out.width = "100%", fig.width = 8, fig.height = 6, fig.align='center', fig.cap = "(ref:coeff-pairs-plot-caption)", fig.scap = "(ref:coeff-pairs-plot-caption-short)", label = "coeff-pairs", echo = FALSE, cache = TRUE}
+
+coefficients %>% 
+  filter(variable_encripted != 0) %>% 
+  select(contains("coeff")) %>% 
+  mutate_all(
+    function(x){
+      if_else(is.na(x), 0, x)
+    }
+  ) %>% 
+  ggpairs(
+    lower = list(continuous = wrap("points", alpha = 0.2)),
+  )
+
+```
+
+
+#### GAM AIC
+
+With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental condition of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took `r results %>%  filter(id == "mod6") %>% .$time2_string`, that means that a deep hyper-parameters tuning would have taken many hours to run.
+
 
 #### GBM Tot
+
+```{r, gbm-tot-hp-tuning-read, echo = FALSE, cache = TRUE, message = FALSE}
+h2o_gbm_tot_grid_perf_tb <- read_csv2(
+  "data/practical_application/results/h2o_gbm_tot_grid_perf_tb.csv"
+)
+```
+
+
+Finally, we fitted a GBM with all the `r explanatory_variables_number` variables available. The GBM is one of the most widely used general purpose machine learning models. One of its befits is that it automatically perform the feature selection and automatically consider the interactions.
+
+As for the Elastic Net, the GBM have some hyper-parameters that are: the `ntrees`, the `max_depth`, the `learn_rate`, the `sample_rate` and the `col_sample_rate`. To understand what these parameters are we refer to the [H2O documentation](http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html). For selecting the best set of variables we computed a grid search with a Cross Validation. Figure \@ref(fig:gbm-tot-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of hyper-parameters. The optimal set of hyper-parameters is:
+`ntrees` = `r results %>% filter(id == "mod7") %>% .$ntrees`,
+`max_depth` = `r results %>% filter(id == "mod7") %>% .$max_depth`,
+`learn_rate` = `r results %>% filter(id == "mod7") %>% .$learn_rate`,
+`sample_rate` = `r results %>% filter(id == "mod7") %>% .$sample_rate` and
+`col_sample_rate` = `r results %>% filter(id == "mod7") %>% .$col_sample_rate`.
+
+In total, `r nrow(h2o_gbm_tot_grid_perf_tb)` set of hyper-parameters have been tested in a total amount of time of `r results %>% filter(id == "mod7") %>% .$time_string %>% str_extract(".*m")`.
 
 
 (ref:gbm-tot-hp-tuning-caption) GBM Tot hyper-parameter tuning.
@@ -892,10 +940,6 @@ h2o_th_elastic_net_aic_grid_perf_tb %>%
 (ref:gbm-tot-hp-tuning-caption-short) GBM Tot hyper-parameter tuning.
 
 ```{r, gbm-tot-hp-tuning-plot, out.width = "100%", fig.width = 7, fig.height = 3.5, fig.align='center', fig.cap = "(ref:gbm-tot-hp-tuning-caption)", fig.scap = "(ref:gbm-tot-hp-tuning-caption-short)", label = "gbm-tot-hp-tuning-plot", echo = FALSE, cache = TRUE, message = FALSE}
-
-h2o_gbm_tot_grid_perf_tb <- read_csv2(
-  "data/practical_application/results/h2o_gbm_tot_grid_perf_tb.csv"
-)
 
 h2o_gbm_tot_grid_perf_tb %>% 
   ggplot(aes(x = learn_rate, y = residual_deviance, color = max_depth)) +
