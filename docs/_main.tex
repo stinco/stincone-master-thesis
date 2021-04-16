@@ -3308,7 +3308,7 @@ The lower the deviance on the test set is, the better the model is.
 \hypertarget{list-of-models}{%
 \subsection{List of models}\label{list-of-models}}
 
-In table \ref{tab:models-list} the models developed are listed. We started from a GLM that takes into account all the variables available (\emph{GLM Tot}). Then, with the same variables, we considered an Elastic Net (\emph{Elastic Net Tot}) and a Ridge regression (\emph{Ridge Tot}). After this, we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (\emph{GLM AIC}). With the same subset of variables we also fitted an Elastic Net (\emph{Elastic Net AIC}) and a GAM (\emph{GAM AIC}). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (\emph{GBM Tot}).
+In table \ref{tab:models-list} the models developed are listed. We started from a GLM that takes into account all the variables available (\emph{GLM Tot}). Then, with the same variables, we considered an Elastic Net (\emph{Elastic Net Tot}) and a Ridge regression (\emph{Ridge Tot}). After this, we computed a feature selection with a stepwise approach based on AIC obtaining a GLM with just a subset of the available variables (\emph{GLM AIC}). With the same subset of variables we also fitted an Elastic Net (\emph{Elastic Net AIC}) and a GAM (\emph{GAM AIC}). Finally, to have a comparison with a widely used general purpose machine learning model, we fitted a GBM with all the variables available (\emph{GBM Tot}). More details on the models listed in table \ref{tab:models-list} are described more in depth in section \ref{chap:models-details}.
 
 \begin{table}[!h]
 
@@ -3329,6 +3329,9 @@ Mod6 & GAM AIC\\
 \end{tabular}
 \end{table}
 
+\hypertarget{implementation-details}{%
+\subsection{Implementation details}\label{implementation-details}}
+
 All the models have been fitted with H2O, except for the GAM. On H2O the following functions are available:
 
 \begin{itemize}
@@ -3347,7 +3350,7 @@ The big advantage of H2O is that it provides embedded multi-threading implementa
 
 Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from \texttt{mgcv} just as a quick trial, without performing a deep hyper-parameter tuning.
 
-More details on the models listed in table \ref{tab:models-list} are described more in depth in section \ref{chap:models-details}.
+Al the pre-processing and the model fitting has been run locally on a single PC with 16GB of DDR4 RAM and a CPU Intel Core i7-8750H, that is a 2.20GHz hexa-core CPU with hyper-threading. Within these resources, 12GB of the 16GB available RAM and 11 of the 12 available threads have been dedicated to the H2O instance.
 
 \hypertarget{approach-adopted-in-the-modeling}{%
 \subsection{Approach adopted in the modeling}\label{approach-adopted-in-the-modeling}}
@@ -3372,7 +3375,7 @@ We will return on some considerations of the benefits of the modeler interventio
 \hypertarget{glm-tot}{%
 \subsubsection{GLM Tot}\label{glm-tot}}
 
-In the first GLM we considered all the 52 explanatory variables listed in table \ref{tab:explanatory-variables}. Considering all the levels of the qualitative variables and all the polynomial terms for the quantitative components, it results into 121 parameters.
+In the first GLM we considered all the 52 explanatory variables listed in table \ref{tab:explanatory-variables}. Considering all the levels of the qualitative variables and all the polynomial terms for the quantitative components, it results into 121 free parameters\footnote{Within these 121 parameters we are not counting the parameters corresponding to the base levels of the qualitative variables that in the GLM usual parametrization are set to exactly 0 and we are considering the intercept.}.
 
 The fitting in H2O has been quite fast and it took just 2.7 seconds.
 
@@ -3381,14 +3384,13 @@ The fitting in H2O has been quite fast and it took just 2.7 seconds.
 
 With the same parametrization of the first GLM, we fitted an Elastic Net. To choose the optimal parameters \(\alpha\) and \(\lambda\) we computed an grid search with a cross validation. In the cross validation we tested 363 models with a total computation time of 1h 30m.
 
-The figure \ref{fig:en-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. As we can see, for each value of \(\alpha\) the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal point that has hyper-parameters \(\alpha = 0.06\) and
-\(\lambda = 2.01e-04\).
+The figure \ref{fig:en-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. As we can see, for each value of \(\alpha\) the points draw a curve that starts high, decreases and, after an elbow, increases again. The light blue vertical line corresponds to the optimal set of hyper-parameters that are \(\alpha = 0.06\) and \(\lambda = 2.01e-04\).
 
-In the plot there are some gaps in the points because, in order to reduce the execution time, the algorithm computed has been a random grid search, that means that just a random subset of grid has been tested. The time constraint of 1h 30m was an input of the algorithm.
+In the plot there are some gaps between the points because, in order to reduce the execution time, the algorithm computed has been a random grid search, that means that just a random subset of grid has been tested. The time constraint of 1h 30m was an input of the algorithm.
 
-One aspect we have to underline is that, while the split between training set and test set has been made by policy id, the split into sets of cross validations has been made by observation. This implies that the hyper-parameter set that results from the cross validation could not be the optimal one for predicting the test set. This choice has been made because in the H2O base implementation it is not possible to specify an id for the splitting in the cross validation and we don't expect this aspect to deeply influence our results.
+One aspect we must underline is that, while the split between training set and test set has been made by policy id, the split into the sets of the cross validations has been made by observation. This implies that the hyper-parameter set that results from the cross validation could not be the optimal one for predicting the test set. This choice has been made because in the H2O base implementation it is not possible to specify an id for the splitting in the cross validation and we don't expect this aspect to deeply influence our results.
 
-Within the 121 parameters of the GLM, in the optimal Elastic Net 22 of them are shrunk to exactly 0.
+Within the 121 free parameters of the GLM, in the optimal Elastic Net 22 of them are shrunk to exactly 0.
 
 
 
@@ -3411,11 +3413,11 @@ In figure \ref{fig:en-tot-hp-tuning-plot}, the red vertical line corresponds to 
 \hypertarget{glm-aic}{%
 \subsubsection{GLM AIC}\label{glm-aic}}
 
-Starting from the GLM with all the explanatory variables, we applied a stepwise algorithm based on AIC to find the optimal GLM. In the model comparison we decided to move only in backward direction, since considering at each step both the forward and the backward option would have resulted in a too long process and from some trials we found that it would have probably resulted into the exact same model.
+Starting from the GLM with all the explanatory variables, we applied a stepwise algorithm based on AIC to find the optimal GLM. In the model comparison we decided to move only in backward direction, since considering at each step both the forward and the backward option would have resulted in a too long process and because from some trials we found that it would have probably resulted into the exact same model.
 
 H2O doesn't support a function for stepwise regression, so we ran the algorithm in R with the function \texttt{stepAIC()} from the package \texttt{MASS}. Running the algorithm in R is much less efficient than in H2O and it took a total time of 7h 27m.
 
-In the final GLM obtained with the stepwise algorithm, within the 121 parameters of the initial GLM, 64 has been removed from the model and only 57 lasted in the model. In table \ref{tab:coeff-0} the number of parameters equal to 0 in each model is listed. From this table we can see that there are 6 parameters that are set equal to 0 in the Elastic Net Tot and not in the GLM AIC and there are 48 that are set equal to 0 in the GLM AIC and not in the Elastic Net. That means that the two feature selection criteria leads to different subsets of explanatory variables.
+In the final GLM obtained with the stepwise algorithm, within the 121 free parameters of the initial GLM, 64 of them have been removed from the model and only 57 lasted in the model. In table \ref{tab:coeff-0} the number of parameters equal to 0 in each model is listed. The horizontal line separate the free parameters of the initial GLM from the parameters fixed to 0 in it. From this table we can see that there are 6 parameters that are set equal to 0 in the Elastic Net Tot and not in the GLM AIC and there are 48 that are set equal to 0 in the GLM AIC and not in the Elastic Net. That means that the two feature selection criteria lead to different subsets of the explanatory variables.
 
 \begin{table}[!h]
 
@@ -3425,13 +3427,13 @@ In the final GLM obtained with the stepwise algorithm, within the 121 parameters
 \toprule
 \textbf{GLM Tot} & \textbf{Elastic Net Tot} & \textbf{GLM AIC} & \textbf{n}\\
 \midrule
-\cellcolor{gray!6}{0} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{51}\\
-0 & 0 & 1 & 48\\
-\cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{6}\\
-0 & 1 & 1 & 16\\
+\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{51}\\
+$\ne0$ & $\ne0$ & $0$ & 48\\
+\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{6}\\
+$\ne0$ & $0$ & $0$ & 16\\
 \midrule
-\cellcolor{gray!6}{1} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1} & \cellcolor{gray!6}{23}\\
-1 & 1 & 1 & 15\\
+\cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{23}\\
+$0$ & $0$ & $0$ & 15\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3439,8 +3441,10 @@ In the final GLM obtained with the stepwise algorithm, within the 121 parameters
 \hypertarget{elastic-net-aic}{%
 \subsubsection{Elastic Net AIC}\label{elastic-net-aic}}
 
-With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. The red vertical line corresponds to the optimal point that has hyper-parameters \(\alpha = 0\) and
-\(\lambda = 1.63e-05\). In this case the best model Elastic Net model corresponds to the Ridge Regression. That means that no coefficient has been shrunk to exactly 0. This is probably due to the fact that the stepwise algorithm already selected a set of variables that have a significative effect for predicting the response. Moreover, comparing the Cross Validation Deviance of the optimal point and the points with lower \(\lambda\) we see that there isn't a substantial difference. That means that a classic GLM would perform more or less the same as the optimal Ridge Regression.
+With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of the hyper-parameters. In the cross validation we tested 600 models with a total computation time of 1h 26m.
+
+The red vertical line in figure \ref{fig:en-aic-hp-tuning-plot} corresponds to the optimal set of hyper-parameters that are \(\alpha = 0\) and
+\(\lambda = 1.63e-05\). In this case the best Elastic Net model corresponds to the Ridge Regression. That means that no coefficient has been shrunk to exactly 0. This is probably due to the fact that the stepwise algorithm already selected a set of variables that have a significative effect for predicting the response. Moreover, comparing the Cross Validation Deviance of the optimal point and the points with lower \(\lambda\), we see that there isn't a substantial difference. That means that a classic GLM would perform more or less the same as the optimal Ridge Regression.
 
 
 
@@ -3455,9 +3459,9 @@ With only the variables obtained with the stepwise selection, we fitted an Elast
 \caption[Elastic Net AIC hyper-parameter tuning.]{Elastic Net AIC hyper-parameter tuning.}\label{fig:en-aic-hp-tuning-plot}
 \end{figure}
 
-Considering all the GLM based models we developed, we compared the 158 coefficients available. Here we consider also the base levels of the qualitative explanatory variables that are set exactly to 0 by the classic GLM models.
+Considering all the GLM-based models we developed, we compared the coefficients estimated. The scatterplot and the correlation matrix of the coefficients are represented in figure \ref{fig:coeff-pairs}. Here we considered also the base levels of the qualitative explanatory variables that are set to exactly 0 by the classic GLM models and we excluded the intercept, resulting into 158 coefficients.
 
-As we can see, all the models have coefficients positively correlated. However, we can see that the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
+As we can see, all the models have coefficients positively correlated. However, the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
 
 
 
@@ -3475,14 +3479,14 @@ As we can see, all the models have coefficients positively correlated. However, 
 \hypertarget{gam-aic}{%
 \subsubsection{GAM AIC}\label{gam-aic}}
 
-With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental condition of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took 17m 36.7s, that means that a deep hyper-parameters tuning would have taken many hours to run.
+With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental state of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took 17m 36.7s, that means that a deep hyper-parameters tuning would have taken many hours to run.
 
 \hypertarget{gbm-tot}{%
 \subsubsection{GBM Tot}\label{gbm-tot}}
 
-Finally, we fitted a GBM with all the 52 variables available. The GBM is one of the most widely used general purpose machine learning models. One of its befits is that it automatically perform the feature selection and automatically consider the interactions.
+Finally, we fitted a GBM with all the 52 variables available. The GBM is one of the most widely used general purpose machine learning models. One of its befits is that it automatically performs the feature selection and automatically considers the interactions.
 
-As for the Elastic Net, the GBM have some hyper-parameters that are: the \texttt{ntrees}, the \texttt{max\_depth}, the \texttt{learn\_rate}, the \texttt{sample\_rate} and the \texttt{col\_sample\_rate}. To understand what these parameters are we refer to the \href{http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html}{H2O documentation}. For selecting the best set of variables we computed a grid search with a Cross Validation. Figure \ref{fig:gbm-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. The optimal set of hyper-parameters is:
+The GBM have some hyper-parameters that are: \texttt{ntrees}, \texttt{max\_depth}, \texttt{learn\_rate}, \texttt{sample\_rate} and \texttt{col\_sample\_rate}. To understand what these parameters are we refer to the \href{http://docs.h2o.ai/h2o/latest-stable/h2o-docs/data-science/gbm.html}{H2O documentation}. For selecting the best set of variables we computed a grid search with a Cross Validation. Figure \ref{fig:gbm-tot-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of hyper-parameters. The optimal set of hyper-parameters is:
 \texttt{ntrees} = 408,
 \texttt{max\_depth} = 3,
 \texttt{learn\_rate} = 0.116,
@@ -3509,9 +3513,15 @@ In total, 189 set of hyper-parameters have been tested in a total amount of time
 \hypertarget{chap:results}{%
 \section{Results}\label{chap:results}}
 
+In table \ref{tab:models-results} the results of the models are reported. The Test Deviance is also represented in figure \ref{fig:models-results-plot}. As we can see, the best model in term of Test Deviance has been the Ridge Regression with all the variables (Ridge Tot). The fact that the Ridge Regression performed the best, means that also in the variables that the Elastic Net and the stepwise based on AIC set to exactly 0 there is some useful information. As expected, the GAM performed much worse than the other models. Further experiments should be conducted to understand whether in general the GAM performs worse on this data or with a proper hyper-parameter tuning it could perform as the GLM or even better. One unexpected result is the worse performance of the GBM compared to GLM-based models. As the GBM was free to also consider the interactions, we expected it to outperform the GLM-based models. Probably in our data the interaction terms don't bring too much information to the model.
+
+In table \ref{tab:models-results} also the execution time is reported. For the models based on AIC the reported time is given by the sum of the execution time of the stepwise algorithm (7h 27m) and the execution time of the further fitting. Comparing the models by the execution time, we see that running an Elastic Net on the whole dataset is much more efficient than running a stepwise algorithm based on AIC. This difference in efficiency would get even bigger by increasing the number of variables in the model, as the complexity of the stepwise algorithm grows exponentially with the number of explanatory variables.
+
+Conducting a cost-benefit analysis with these results, we can say that, with this implementation setting, the increasing of execution time of the GLM advancements is huge and, even if it is just machine time and not human time dedicated to a manual work, it could not be justified by the small decrease of deviance. Anyway, adopting solutions with higher performance, such us the cluster computing, this trade off could considerably move towards the more sophisticated techniques.
+
 \begin{table}[!h]
 
-\caption{\label{tab:models-results}Models results.}
+\caption[Models results.]{\label{tab:models-results}Models results. In the columns we reported the deviance computed in the test set, the execution time and, for the GLM-based models, the hyper-parameters.}
 \centering
 \begin{tabular}[t]{llcccc}
 \toprule
@@ -3519,7 +3529,7 @@ In total, 189 set of hyper-parameters have been tested in a total amount of time
 \midrule
 \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{8 458.147} & \cellcolor{gray!6}{2.7s} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
 Mod2 & Elastic Net Tot & 8 458.024 & 1h 30m & 0.06 & 2.01e-04\\
-\cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{8 457.465} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
+\cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{\textbf{8 457.465}} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
 Mod4 & GLM AIC & 8 458.023 & 7h 27m & 0 & 0\\
 \cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC} & \cellcolor{gray!6}{8 458.236} & \cellcolor{gray!6}{8h 54m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.63e-05}\\
 Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
@@ -3538,13 +3548,25 @@ Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
 
 }
 
-\caption[Models results.]{Models results.}\label{fig:models-results-plot}
+\caption[Deviance computed in the test set for the models considered.]{Deviance computed in the test set for the models considered.}\label{fig:models-results-plot}
 \end{figure}
 
 \newpage
 
 \hypertarget{chap:conclusions}{%
 \section{Conclusions and possible improvements}\label{chap:conclusions}}
+
+In conclusion, we can say that with our exploration we found out that the GLM Advancements can bring an improvement in performance compared to basic GLM implementations, still maintaining all the benefits of high interpretability and high control of the effects of the variables.
+
+One interesting improvement of the Elastic Net models would be to consider different penalizations for the different variables as described in section \ref{chap:bayes-glm}. This approach not only can improve the performance of the models, but would also allow us to systematically introduce prior information in a Bayesian fashion and better control the variables effects.
+
+Another improvement would be exploring the interaction effects in the GLM-based models. On this topic, the GBM fitting could be a nice starting point to get some insights on the interactions and guide the manual introduction of interaction terms in the GLM-based models. GBM models are particularly convenient for these kind of tasks because they mostly work automatically and the manual intervention is minimal, so they can be launched without too much human effort.
+
+Considering the GAM, to better understand their potential, further explorations should be conducted. We hope for the GAM development in H2O to progress. Otherwise we can still try other implementations.
+
+A really important topic in modeling that has not been faced in this analysis and deserves a separate dissertation is the geographical modeling. The geographical modeling is really important in Non-Life Insurance Pricing and requires specific modeling tools that haven't be discussed in this thesis. We remind that in our analysis the choice of using policies from only one specific province strongly reduces the importance of geographical modeling.
+
+The other aspect of considering policies from only one province is that this choice reduces significantly the size of the dataset. This solution allowed us to work locally on one single PC without going out of memory and with still acceptable execution times, but it is clear that with a whole country usual MTPL dataset working locally in a consumer PC would not be possible. The proper solution would be to adopt a cluster of computers big enough to deal with the whole dataset. As we discussed in section \ref{chap:implementation}, the cluster computing offers a highly scalable solution and H2O can be easily exploited in a cluster.
 
 
 %% REFERENCES

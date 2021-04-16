@@ -109,6 +109,28 @@ knitr::knit_hooks$set(inline = inline_hook)
 # Option for printing '' for NA values in tables
 options(knitr.kable.NA = '')
 
+# For changing the font of specific cells in kable
+format_cell <- function(df, rows ,cols, value = c("italics", "bold", "strikethrough")){
+
+  # select the correct markup
+  # one * for italics, two ** for bold
+  map <- setNames(c("*", "**", "~~"), c("italics", "bold", "strikethrough"))
+  markup <- map[value]  
+
+  for (r in rows){
+    for(c in cols){
+
+      # Make sure values are not factors
+      df[[c]] <- as.character( df[[c]])
+
+      # Update formatting
+      df[r, c] <- paste0(markup, df[r, c], markup)
+    }
+  }
+
+  return(df)
+}
+
 # ggplot theme
 theme_set(theme_bw())
 
