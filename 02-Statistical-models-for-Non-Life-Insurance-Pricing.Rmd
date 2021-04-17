@@ -118,12 +118,15 @@ if(!knitr::is_latex_output()){
 
 table %>% 
   kable(
-    # format = "latex",
+    format = "latex",
     booktabs = T,
     align = "lcccccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Some Linear Exponential Families.",
     label = "exp-families",
     escape = FALSE
@@ -133,7 +136,8 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
   
 ```
 
@@ -306,8 +310,15 @@ table %>%
     booktabs = T,
     align = "lccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    # toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    # bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Canonical link functions.",
     label = "can-link-fun",
     escape = FALSE
@@ -317,7 +328,9 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
+  
 ```
 
 In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = \log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
@@ -477,14 +490,26 @@ if(!knitr::is_latex_output()){
 }
 
 table %>% 
+  # mutate_all(
+  #   .funs = function(x){
+  #     if_else(
+  #       knitr::is_latex_output() & (row_number() %% 2 == 1),
+  #       str_c("\\cellcolor{gray!6}{", x, "}"),
+  #       as.character(x)
+  #     )
+  #   }
+  # ) %>% 
   kable(
-    # format = "latex",
+    format = "latex",
     booktabs = T,
     align = "lc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
-    caption = "Deviance for Linear Exponential Families",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
+    caption = "Deviance for Linear Exponential Families.",
     label = "deviance",
     escape = FALSE
   ) %>% 
@@ -493,7 +518,8 @@ table %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
 ```
 
 As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depend on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_:

@@ -50,8 +50,11 @@ tab_years_at_risk %>%
     booktabs = T,
     align = "ccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Total dataset exposure. The exposure is measured in year-at-risk (Y.a.R)",
     caption.short = "Total dataset exposure.",
     label = "years-at-risk",
@@ -62,19 +65,38 @@ tab_years_at_risk %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
 ```
 
 
 The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run them. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
 
 
-```{r, description_train_test_read, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, description_train_test_read, echo = FALSE, cache = FALSE, message = FALSE}
 tab_freq_sin_train_test <- read_csv2(
   "data/practical_application/tab_freq_sin_train_test.csv"
 )
 
-tab_1 <- tab_freq_sin_train_test %>% 
+
+tab_freq_sin_train_test_tot <- tab_freq_sin_train_test %>% 
+  bind_rows(
+    tab_freq_sin_train_test %>% 
+      summarize(
+        n = sum(n),
+        rischi_anno = sum(rischi_anno),
+        n_clienti = sum(n_clienti),
+        numero_causati = sum(numero_causati)
+      ) %>% 
+      mutate(
+        rischi_anno_per_cliente = rischi_anno / n_clienti,
+        freq_sin = numero_causati / rischi_anno,
+        set = "tot"
+      )
+  )
+
+
+tab_1 <- tab_freq_sin_train_test_tot %>% 
   select(
     set, n, rischi_anno, n_clienti, rischi_anno_per_cliente
   ) %>% 
@@ -88,7 +110,7 @@ tab_1 <- tab_freq_sin_train_test %>%
   ) 
 
 
-tab_2 <- tab_freq_sin_train_test %>% 
+tab_2 <- tab_freq_sin_train_test_tot %>% 
   select(
     set, n, rischi_anno, numero_causati, freq_sin
   ) %>% 
@@ -113,10 +135,10 @@ if(!knitr::is_latex_output()){
 }
 ```
 
-The dataset has been split into a training set with 80% of the observations and a test set with the remaining 20% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \@ref(tab:exposure-train-test) shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has `r round(sum(tab_freq_sin_train_test$rischi_anno) / sum(tab_freq_sin_train_test$n_clienti), 1)` years-at-risk.
+The dataset has been split into a training set with 80% of the observations and a test set with the remaining 20% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \@ref(tab:exposure-train-test) shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has `r round(tab_freq_sin_train_test_tot %>% filter(set == "tot") %>% .$rischi_anno_per_cliente, 2)` years-at-risk.
 
 
-```{r, description_train_test_render_1, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, description_train_test_render_1, echo = FALSE, cache = FALSE, message = FALSE}
 
 tab_1 %>% 
   kable(
@@ -126,8 +148,10 @@ tab_1 %>%
     booktabs = T,
     align = "lcccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Exposure and number of policyholders in training and test set. The exposure is measured in year-at-risk (Y.a.R)",
     caption.short = "Exposure and number of policyholders in training and test set.",
     label = "exposure-train-test",
@@ -138,7 +162,12 @@ tab_1 %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T) %>% 
+  row_spec(0, bold = T) %>%
+  row_spec(
+    nrow(tab_1) - 1,
+    extra_latex_after = "\\midrule"
+  ) 
 
 ```
 
@@ -148,7 +177,7 @@ The response variable for the models is the number of claims caused by the polic
 
 Table \@ref(tab:freq-sin-train-test) shows the observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicates that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
 
-```{r, description_train_test_render_2, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, description_train_test_render_2, echo = FALSE, cache = FALSE, message = FALSE}
 tab_2 %>% 
   kable(
     digits = c(0, 0, 1, 0, 3),
@@ -157,8 +186,11 @@ tab_2 %>%
     booktabs = T,
     align = "lcccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Claims Frequency in training and test set.",
     label = "freq-sin-train-test",
     escape = FALSE
@@ -168,7 +200,12 @@ tab_2 %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T) %>% 
+  row_spec(0, bold = T) %>% 
+  row_spec(
+    nrow(tab_2) - 1,
+    extra_latex_after = "\\midrule"
+  ) 
 
 ```
 
@@ -178,19 +215,19 @@ The claims reported in the dataset are all observed at the date 30/06/2020. In f
 
 Comparing the claims frequency of the training set and the test set, we see that the claims frequency in the test set is consistently lower than the claims frequency in the training set. This phenomenon can be explained with the fact that we divided the policies based on policyholder id, so the policies within each set are correlated.
 
-```{r, freq-sin-train-test-year-read, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, freq-sin-train-test-year-read, echo = FALSE, cache = FALSE, message = FALSE}
 tab_freq_sin_train_test_year <- read_csv2(
   "data/practical_application/tab_freq_sin_train_test_year.csv"
 )
 ```
 
-
 (ref:freq-sin-train-test-year-plot-caption) Claims frequency in training and test set in the different years. The semi-transparent ribbons represent 95% confidence intervals for the claims frequency in each year.
 
 (ref:freq-sin-train-test-year-plot-caption-short) Claims frequency in training and test set in the different years.
 
-```{r, freq-sin-train-test-year-plot, out.width = "100%", fig.width = 9, fig.height = 4, fig.align='center', fig.cap = "(ref:freq-sin-train-test-year-plot-caption)", fig.scap = "(ref:freq-sin-train-test-year-plot-caption-short)", label = "freq-sin-train-test-year", echo = FALSE, cache = TRUE}
+```{r, freq-sin-train-test-year-plot, out.width = "100%", fig.width = 9, fig.height = 4, fig.align='center', fig.cap = "(ref:freq-sin-train-test-year-plot-caption)", fig.scap = "(ref:freq-sin-train-test-year-plot-caption-short)", label = "freq-sin-train-test-year", echo = FALSE, cache = FALSE}
 tab_freq_sin_train_test_year %>% 
+  filter(set != "Tot") %>% 
   mutate(
     anno_analisi = factor(anno_analisi),
     set = fct_inorder(set)
@@ -205,7 +242,7 @@ tab_freq_sin_train_test_year %>%
   easy_remove_legend()
 ```
 
-```{r, freq-sin-train-test-year-render, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, freq-sin-train-test-year-render, echo = FALSE, cache = FALSE, message = FALSE}
 tab_freq_sin_train_test_year %>% 
   select(set, anno_analisi, freq_sin) %>% 
   pivot_wider(
@@ -220,8 +257,11 @@ tab_freq_sin_train_test_year %>%
     booktabs = T,
     align = "lcccccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Claims frequency in training and test set in the different years.",
     label = "freq-sin-train-test-year",
     escape = FALSE
@@ -231,7 +271,12 @@ tab_freq_sin_train_test_year %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T) %>% 
+  row_spec(
+    2,
+    extra_latex_after = "\\midrule"
+  ) 
 
 ```
 
@@ -326,8 +371,11 @@ simulations_count %>%
     booktabs = T,
     align = "lcccc",
     vline = "",
-    toprule = "\\toprule", midrule = "\\toprule\\addlinespace",
-    linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
     caption = "Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are higher than that.",
     caption.short = "Distribution of the p-values from the simulation of the random variables.",
     label = "simulation-random",
@@ -338,7 +386,8 @@ simulations_count %>%
     latex_options = "hold_position",
     full_width = FALSE
   ) %>% 
-  row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
 ```
 
 
@@ -376,11 +425,27 @@ In the dataset we have a total of `r explanatory_variables_number` explanatory v
 
 In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
 
-```{r, explanatory-variables-render, echo = FALSE, cache = TRUE, message = FALSE}
+```{r, explanatory-variables-render, echo = FALSE, cache = FALSE, message = FALSE}
 
 # Make Table
 explantory_varibles_total %>% 
+  mutate(
+    Description = case_when(
+      !knitr::is_latex_output() ~ Description,
+      row_number() == n() ~ Description,
+      TRUE ~ str_c("\\em{", Description, "}")
+    )
+  ) %>% 
   select(-group, -category) %>% 
+  mutate_all(
+    .funs = function(x){
+      if_else(
+        knitr::is_latex_output() & (row_number() %% 2 == 1) & (row_number() != n()),
+        str_c("\\cellcolor{gray!6}{", x, "}"),
+        as.character(x)
+      )
+    }
+  ) %>% 
   rename(
     `\\makecell[c]{Number of variables\\\\per category}` = `Number of variables per category`
   ) %>% 
@@ -391,7 +456,7 @@ explantory_varibles_total %>%
   kable(
     digits = 4,
     format.args = list(big.mark = " "),
-    format = "latex",
+    # format = "latex",
     booktabs = T,
     align = "lc",
     vline = "",
@@ -406,7 +471,8 @@ explantory_varibles_total %>%
   )  %>%
   kable_styling(
     position = "center",
-    latex_options = c("striped", "hold_position"),
+    # latex_options = c("striped", "hold_position"),
+    latex_options = "hold_position",
     full_width = FALSE
   ) %>%
   # row_spec(
@@ -424,12 +490,20 @@ explantory_varibles_total %>%
   # ) %>% 
   # row_spec(nrow(explantory_varibles_total) - 1,
   #          hline_after = TRUE) %>%
-  row_spec(nrow(explantory_varibles_total) - 1,
-           extra_latex_after = "\\bottomrule") %>% 
+  row_spec(
+    nrow(explantory_varibles_total) - 1,
+    # extra_latex_after = "\\bottomrule"
+    # extra_latex_after = "\\midrule[\\heavyrulewidth]"
+    extra_latex_after = "\\midrule"
+  ) %>% 
+  row_spec(
+    nrow(explantory_varibles_total),
+    extra_latex_after = "\\bottomrule"
+  ) %>% 
   row_spec(nrow(explantory_varibles_total),
            bold = T,
-           italic = F) %>%
-  column_spec(1, italic = T)
+           italic = F) #%>%
+  # column_spec(1, italic = T)
 ```
 
 
@@ -788,7 +862,7 @@ coeff_0_en_aic_2 <- coefficients %>%
 
 In the final GLM obtained with the stepwise algorithm, within the `r nrow(coefficients_encripted_table_h2o_th_glm_tot)` free parameters of the initial GLM, `r coff_glm_aic_0_count` of them have been removed from the model and only `r nrow(coefficients_encripted_table_h2o_th_glm_tot) - coff_glm_aic_0_count` lasted in the model. In table \@ref(tab:coeff-0) the number of parameters equal to 0 in each model is listed. The horizontal line separate the free parameters of the initial GLM from the parameters fixed to 0 in it. From this table we can see that there are `r coeff_0_en_aic_1` parameters that are set equal to 0 in the Elastic Net Tot and not in the GLM AIC and there are `r coeff_0_en_aic_2` that are set equal to 0 in the GLM AIC and not in the Elastic Net. That means that the two feature selection criteria lead to different subsets of the explanatory variables.
 
-```{r coeff-0, echo = FALSE, cache = TRUE, message = FALSE}
+```{r coeff-0, echo = FALSE, cache = FALSE, message = FALSE}
 coefficients %>% 
   # filter(variable_encripted != 0) %>% 
   count(
@@ -796,6 +870,9 @@ coefficients %>%
     en_tot_0 = coeff_en_tot == 0,
     glm_aic_0 = is.na(coeff_glm_aic)
   ) %>% 
+  group_by(glm_tot_0) %>% 
+  mutate(n_tot = sum(n)) %>% 
+  ungroup() %>% 
   mutate_if(
     is.logical,
     # as.numeric
@@ -803,33 +880,70 @@ coefficients %>%
       if_else(x, "$0$", "$\\ne0$")
     }
   ) %>% 
+  mutate_at(
+    .vars = c("glm_tot_0", "en_tot_0", "glm_aic_0", "n"),
+    .funs = function(x){
+      if_else(
+        knitr::is_latex_output() & (row_number() %% 2 == 1),
+        str_c("\\cellcolor{gray!6}{", x, "}"),
+        as.character(x)
+      )
+    }
+  ) %>% 
+  mutate(
+    n_tot = case_when(
+      !knitr::is_latex_output() ~ as.character(n_tot),
+      row_number() == 4 ~ str_c("\\multirow{-4}{*}{\\centering\\arraybackslash ", n_tot, "}"),
+      row_number() == 6 ~ str_c("\\multirow{-2}{*}{\\centering\\arraybackslash ", n_tot, "}"),
+      TRUE ~ ""
+    )
+  ) %>% 
+  # mutate(
+  #   glm_tot_0 = if_else(
+  #     knitr::is_latex_output() & (row_number() %% 2 == 1),
+  #     str_c("\\cellcolor{gray!6}{", glm_tot_0, "}"),
+  #     as.character(glm_tot_0)
+  #   ),
+  #   en_tot_0 = if_else(
+  #     knitr::is_latex_output() & (row_number() %% 2 == 1),
+  #     str_c("\\cellcolor{gray!6}{", en_tot_0, "}"),
+  #     as.character(en_tot_0)
+  #   ),
+  #   glm_aic_0 = if_else(
+  #     knitr::is_latex_output() & (row_number() %% 2 == 1),
+  #     str_c("\\cellcolor{gray!6}{", glm_aic_0, "}"),
+  #     as.character(glm_aic_0)
+  #   ),
+  # ) %>% 
   rename(
     `GLM Tot` = glm_tot_0,
     `Elastic Net Tot` = en_tot_0,
-    `GLM AIC` = glm_aic_0
+    `GLM AIC` = glm_aic_0,
+    ` ` = n_tot
   ) %>% 
   kable(
     digits = 0,
     format.args = list(big.mark = " "),
-    # format = "latex",
+    format = "latex",
     booktabs = T,
     align = "cccc",
     vline = "",
     toprule = "\\toprule",
-    # midrule = "\\toprule\\addlinespace",
-    # midrule = "\\hline\\addlinespace",
-    # midrule = "\\hline",
+    # toprule = "\\cmidrule[\\heavyrulewidth]{1-4}",
     midrule = "\\midrule",
+    # midrule = "\\cmidrule{1-4}",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     linesep = "",
     bottomrule = "\\bottomrule",
+    # bottomrule = "\\cmidrule[\\heavyrulewidth]{1-4}",
     caption = "Parameters equal to 0 in the models.",
     label = "coeff-0",
     escape = FALSE
   ) %>%
   kable_styling(
     position = "center",
-    latex_options = c("striped", "hold_position"),
+    # latex_options = c("striped", "hold_position"),
+    latex_options = c("hold_position"),
     full_width = FALSE
     # full_width = TRUE
   ) %>%
@@ -837,11 +951,18 @@ coefficients %>%
   #   ifelse(!knitr::is_latex_output(), 0, 1),
   #   bold = T,
   # ) %>%
+  # collapse_rows(
+  #   column = 5,
+  #   valign = "middle",
+  #   # latex_hline = "none",
+  #   # headers_to_remove = 5
+  # ) %>%
   row_spec(0, bold = T) %>%
   # column_spec(2, italic = T)  %>%
   # landscape()
-  row_spec(4,
-           extra_latex_after = "\\midrule")
+  row_spec(4, extra_latex_after = "\\midrule")
+# row_spec(4, extra_latex_after = "\\cmidrule{1-4}")
+  # row_spec(4, extra_latex_after = "\\cmidrule{1-4}")
 
 ```
 

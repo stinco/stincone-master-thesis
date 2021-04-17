@@ -261,6 +261,15 @@
 \usepackage{booktabs} 
 	% For better looking tables
 
+% Increase the row height in tables
+\setlength\extrarowheight{4pt}
+
+%% For vertically centering the text in the cells of the table
+%\newcolumntype{M}[1]{>{\centering\arraybackslash}m{#1}}
+%\newcolumntype{N}{@{}m{0pt}@{}}
+%\newcolumntype{R}[1]{>{\raggedright\arraybackslash}m{#1}}
+%\newcolumntype{L}[1]{>{\raggedleft\arraybackslash}m{#1}}
+
 %\usepackage{subfig}
   % For subfigures
 
@@ -1638,7 +1647,7 @@ It can be easily shown that the families Normal, Poisson, Gamma and Binomial are
 \begin{tabular}[t]{lcccccc}
 \toprule
 \textbf{Distribution} & \textbf{Notation} & \textbf{$\Theta$} & \textbf{$\theta$} & \textbf{$\Lambda$} & \textbf{$\lambda$} & \textbf{$b(\theta)$}\\
-\toprule\addlinespace
+\midrule[\heavyrulewidth]
 Normal & \makecell[c]{$N(\mu, \sigma^2)$,\\$\mu\in\mathbb{R}$ \\ $\sigma \in ]0, +\infty[$} & $\mathbb{R}$ & $\mu$ & $]0, +\infty[$ & $\sigma^2$ & $\frac{\theta^2}{2}$\\
 \addlinespace\hline\addlinespace
 Poisson & \makecell[c]{$Poisson(\mu)$,\\$\mu \in ]0, +\infty[$} & $\mathbb{R}$ & $\log{(\mu)}$ & $\left\{1\right\}$ & $1$ & $e^{\theta}$\\
@@ -1753,7 +1762,7 @@ In table \ref{tab:can-link-fun} the canonical link functions for the families me
 \begin{tabular}[t]{lccc}
 \toprule
 \textbf{Distribution} & \textbf{\makecell[c]{Cumulant function\\$b(\theta)$}} & \textbf{\makecell[c]{Derivative\\$b'(\theta)$}} & \textbf{\makecell[c]{Canonical link function\\$g(\mu)=b'^{-1}(\mu)$}}\\
-\toprule\addlinespace
+\midrule[\heavyrulewidth]
 Normal & $\frac{\theta^2}{2}$ & $\theta$ & $\mu$\\
 \addlinespace\hline\addlinespace
 Poisson & $e^{\theta}$ & $e^\theta$ & $\log{(\mu)}$\\
@@ -1896,12 +1905,12 @@ In table \ref{tab:deviance} the deviances for the families mentioned in \ref{tab
 
 \begin{table}[!h]
 
-\caption{\label{tab:deviance}Deviance for Linear Exponential Families}
+\caption{\label{tab:deviance}Deviance for Linear Exponential Families.}
 \centering
 \begin{tabular}[t]{lc}
 \toprule
 \textbf{Distribution} & \textbf{Deviance $D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})$}\\
-\toprule\addlinespace
+\midrule[\heavyrulewidth]
 Normal & $\sum_{i=1}^{n}{\left( y_i - \hat{\mu}_i \right)^2}$\\
 \addlinespace\hline\addlinespace
 Poisson & $2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} - \left( y_i - \hat{\mu}_i \right) \right\}}$\\
@@ -3142,7 +3151,7 @@ The dataset used is an actuarial dataset from an Italian MTPL portfolio. In tabl
 \begin{tabular}[t]{ccc}
 \toprule
 \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{\makecell[c]{Average Exposure\\per Observation}}\\
-\toprule\addlinespace
+\midrule
 283 829 & 134 804.7 & 0.475\\
 \bottomrule
 \end{tabular}
@@ -3150,7 +3159,7 @@ The dataset used is an actuarial dataset from an Italian MTPL portfolio. In tabl
 
 The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run them. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
 
-The dataset has been split into a training set with 80\% of the observations and a test set with the remaining 20\% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \ref{tab:exposure-train-test} shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has 3.9 years-at-risk.
+The dataset has been split into a training set with 80\% of the observations and a test set with the remaining 20\% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \ref{tab:exposure-train-test} shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has 3.95 years-at-risk.
 
 \begin{table}[!h]
 
@@ -3159,10 +3168,11 @@ The dataset has been split into a training set with 80\% of the observations and
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Policyholders} & \textbf{\makecell[c]{Exposure per\\Policyholder}}\\
-\toprule\addlinespace
+\midrule
 Train & 227 226 & 107 998.4 & 27 346 & 3.95\\
-\addlinespace\hline\addlinespace
 Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
+\midrule
+Tot & 283 829 & 134 804.7 & 34 170 & 3.95\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3181,10 +3191,11 @@ Table \ref{tab:freq-sin-train-test} shows the observed claims frequency in the t
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Claims N.} & \textbf{Claims Freq.}\\
-\toprule\addlinespace
+\midrule
 Train & 227 226 & 107 998.4 & 4 823 & 0.045\\
-\addlinespace\hline\addlinespace
 Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
+\midrule
+Tot & 283 829 & 134 804.7 & 5 954 & 0.044\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3215,10 +3226,11 @@ Comparing the claims frequency of the training set and the test set, we see that
 \begin{tabular}[t]{lcccccc}
 \toprule
 \textbf{Set} & \textbf{2014} & \textbf{2015} & \textbf{2016} & \textbf{2017} & \textbf{2018} & \textbf{2019}\\
-\toprule\addlinespace
+\midrule
 Train & 0.046 & 0.046 & 0.046 & 0.043 & 0.043 & 0.043\\
-\addlinespace\hline\addlinespace
 Test & 0.045 & 0.044 & 0.041 & 0.041 & 0.043 & 0.039\\
+\midrule
+Tot & 0.046 & 0.046 & 0.045 & 0.042 & 0.043 & 0.043\\
 \bottomrule
 \end{tabular}
 \end{table}
@@ -3250,9 +3262,8 @@ The distribution of the p-values for the two kinds of random variables are repor
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Random type} & \textbf{[0, 0.05)} & \textbf{[0.05, 0.1)} & \textbf{[0.1, 0.15)} & \textbf{[0.15, 0.2)}\\
-\toprule\addlinespace
+\midrule
 Random by observation & 0.0596 & 0.0535 & 0.0537 & 0.0503\\
-\addlinespace\hline\addlinespace
 Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \bottomrule
 \end{tabular}
@@ -3269,18 +3280,19 @@ In the modeling process we will assess whether these variables are significative
 
 \caption{\label{tab:explanatory-variables}Number of explanatory variables per category.}
 \centering
-\begin{tabular}[t]{>{}lc}
+\begin{tabular}[t]{lc}
 \toprule
 \textbf{Description} & \textbf{\makecell[c]{Number of variables\\per category}}\\
 \midrule
-\em{\cellcolor{gray!6}{Information on the insured vehicle}} & \cellcolor{gray!6}{12}\\
+\cellcolor{gray!6}{\em{Information on the insured vehicle}} & \cellcolor{gray!6}{12}\\
 \em{General information of the policyholder} & 14\\
-\em{\cellcolor{gray!6}{Insurance specific information of the policyholder}} & \cellcolor{gray!6}{9}\\
+\cellcolor{gray!6}{\em{Insurance specific information of the policyholder}} & \cellcolor{gray!6}{9}\\
 \em{Policy options} & 11\\
-\em{\cellcolor{gray!6}{Customer information on the policyholder}} & \cellcolor{gray!6}{2}\\
+\cellcolor{gray!6}{\em{Customer information on the policyholder}} & \cellcolor{gray!6}{2}\\
 \em{Telematic data} & 4\\
+\midrule
+\textbf{Total} & \textbf{52}\\
 \bottomrule
-\em{\textbf{\cellcolor{gray!6}{Total}}} & \textbf{\cellcolor{gray!6}{52}}\\
 
 \end{tabular}
 \end{table}
@@ -3423,17 +3435,17 @@ In the final GLM obtained with the stepwise algorithm, within the 121 free param
 
 \caption{\label{tab:coeff-0}Parameters equal to 0 in the models.}
 \centering
-\begin{tabular}[t]{cccc}
+\begin{tabular}[t]{ccccc}
 \toprule
-\textbf{GLM Tot} & \textbf{Elastic Net Tot} & \textbf{GLM AIC} & \textbf{n}\\
+\textbf{GLM Tot} & \textbf{Elastic Net Tot} & \textbf{GLM AIC} & \textbf{n} & \textbf{ }\\
 \midrule
-\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{51}\\
-$\ne0$ & $\ne0$ & $0$ & 48\\
-\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{6}\\
-$\ne0$ & $0$ & $0$ & 16\\
+\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{51} & \\
+$\ne0$ & $\ne0$ & $0$ & 48 & \\
+\cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{6} & \\
+$\ne0$ & $0$ & $0$ & 16 & \multirow{-4}{*}{\centering\arraybackslash 121}\\
 \midrule
-\cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{23}\\
-$0$ & $0$ & $0$ & 15\\
+\cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{23} & \\
+$0$ & $0$ & $0$ & 15 & \multirow{-2}{*}{\centering\arraybackslash 38}\\
 \bottomrule
 \end{tabular}
 \end{table}
