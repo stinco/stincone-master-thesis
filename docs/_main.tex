@@ -2424,8 +2424,8 @@ s(x) = \sum_{k=1}^{m+2}{\beta_{k}B_{3,k}(x)}
 
 B-splines are preferred compared to truncated polynomial as basis function, since they are less correlated and lead to more stable and less computationally expensive estimates.
 
-\hypertarget{extensions}{%
-\subsubsection{\texorpdfstring{\ac{gam} extensions}{ extensions}}\label{extensions}}
+\hypertarget{gam-extensions}{%
+\subsubsection{GAM extensions}\label{gam-extensions}}
 
 As in \ac{glm}, in \ac{gam} we can consider interactions between a variable with non-linear effect \(x_{l_2}\) and another variable \(x_{l_1}\). This can be achieved by adding to the linear predictor a term such as:
 \[
@@ -2591,8 +2591,8 @@ H_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\
 \]
 and then \(\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}\). This result means that, by increasing \(\lambda\), the effective number of degrees of fredom decreases.
 
-\hypertarget{regression}{%
-\subsubsection{\texorpdfstring{\ac{lasso} Regression}{ Regression}}\label{regression}}
+\hypertarget{lasso-regression}{%
+\subsubsection{LASSO Regression}\label{lasso-regression}}
 
 Another shrinkage estimator for \ac{glm} is the \ac{lasso}. \ac{lasso} is based on the same idea of Ridge Regression, but, instead of considering a penalization based on \(L^2\) norm, it considers a penalization based on \(L^1\) norm:
 \begin{equation}
@@ -2870,7 +2870,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(\pi(\boldsymbol{\beta})\
 From equation \eqref{eq:bayes-map-est-4} we find that, adding a prior distribution \(\pi(\boldsymbol{\beta})\), corresponds to adding a term \(-2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}\) to the deviance in the optimization problem that defines the estimator. In particular, if the prior is non-informative, we get that \(\pi(\boldsymbol{\beta})\propto k, \ k\in]0,+\infty[\) does not depend on \(\boldsymbol{\beta}\), so the optimization problem corresponds to the Maximum Likelihood.
 
 \hypertarget{chap:bayes-ridge-lasso}{%
-\subsubsection{\texorpdfstring{Ridge and \ac{lasso} Regression as Bayesian estimators for \ac{glm}}{Ridge and  Regression as Bayesian estimators for }}\label{chap:bayes-ridge-lasso}}
+\subsubsection{Ridge and LASSO Regression as Bayesian estimators for GLM}\label{chap:bayes-ridge-lasso}}
 
 Let's assume the parameters \(\beta_1, \beta_2, \dots, \beta_p\) to be identically distributed with \emph{Normal} distribution centered in \(0\):
 \[
