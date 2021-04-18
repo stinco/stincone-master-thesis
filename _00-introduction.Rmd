@@ -22,7 +22,6 @@ knitr::asis_output('\\markboth{\\MakeUppercase{Introduction}}{\\MakeUppercase{In
 ```
 
 
-
 <!-- # Introduction -->
 
 <!-- \adjustmtc  -->

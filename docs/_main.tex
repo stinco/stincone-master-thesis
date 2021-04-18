@@ -133,7 +133,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 %\fancyhead[R]{\sc \nouppercase \rightmark}
-\fancyhead[RO]{\rightmark}                   % Add the rightmark on the Right, only in the Odd pages
+\fancyhead[RO]{\sc \nouppercase \rightmark}                   % Add the rightmark on the Right, only in the Odd pages
 \fancyhead[LE]{\sc \nouppercase \leftmark}   % Add the leftmark on the Left, only in the Even pages
 
 % \thepage is the page number
@@ -403,8 +403,9 @@
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
 
-% Leonardo Stincone, 5/04/2021
-% Qua ci andrebbe la parte presa da template_abbreviations.tex
+% Leonardo Stincone, 18/04/2021
+% Define the abbreviations
+	\include{extra/abbreviations}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -552,9 +553,9 @@ and better at software engineering than any statistician.}
 	%\flushbottom
 	
 	% This is where the whole-document ToC appears:
-	\renewcommand{\contentsname}{\textbf{Table of Contents}}
-	\renewcommand{\listfigurename}{\textbf{List of Figures}}
-	\renewcommand{\listtablename}{\textbf{List of Tables}}
+	\renewcommand{\contentsname}{Table of Contents}
+	\renewcommand{\listfigurename}{List of Figures}
+	\renewcommand{\listtablename}{List of Tables}
 	\tableofcontents
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -572,10 +573,13 @@ and better at software engineering than any statistician.}
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%% LIST OF ABBREVIATIONS
-	%% This example includes a list of abbreviations.  Look at text/abbreviations.tex to see how that file is
-	%% formatted.  The template can handle any kind of list though, so this might be a good place for a
-	%% glossary, etc.
-	%	
+	%% This example includes a list of abbreviations.  Look at extra/abbreviations.tex to see how that file is formatted.	
+	% Leonardo Stincone, 18/04/2021
+	% Print the list of abbreviations
+			\printacronyms[name=List of Acronyms]              % Print the list of abbreviations
+		%\addcontentsline{toc}{chapter}{List of Acronyms}  % Add the title to the table of contents
+		\markboth{List of Acronyms}{}                      % Add the title to the header of the page
+		\mtcaddchapter
 	
 	%% List of acronyms
 	%	
@@ -631,7 +635,7 @@ In this chapter we are going to provide an overview on how non-life insurance wo
 \hypertarget{chap:non-life-ins}{%
 \section{What a Non-Life Insurance is}\label{chap:non-life-ins}}
 
-The Italian Civil Code provides the following definition of insurance contract:
+The Italian Civil Code \autocite{italian-civil-code} provides the following definition of insurance contract:
 
 \begin{definition}[Insurance Contract, Art. 1882, Italian Civil Code]
 \label{def:ins-contr} \iffalse (Insurance Contract, Art. 1882, Italian Civil Code) \fi{} The insurance is the contract by which an insurer, in exchange of the payment of a certain premium, obliged himself, within the agreed limits:
@@ -645,7 +649,7 @@ The Italian Civil Code provides the following definition of insurance contract:
 
 This definition identifies two parties: the \emph{Insurer} and the \emph{Policyholder}. The policyholder pays to the Insurer a certain \emph{Premium} at the beginning of the insurance coverage and the insurer will pay a benefit if a certain event (\emph{Claim}) occurs. This event could happen zero, one or more than one times, so it is possible to have more than one claim.
 
-Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in motor third party liability (MTPL) insurance, it depends on the damage the policyholder has caused to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
+Usually, in non-life insurance, the benefit is the payment of a sum. This sum could be predetermined (e.g.~in motor theft insurance, where the benefit is usually the value of the insured vehicle) or defined by the entity of the claim (e.g.~in \ac{mtpl} insurance, it depends on the damage the policyholder has caused to a third party). Regarding the ``agreed limits'', another peculiarity of non-life insurances is that the coverage period is defined as a fixed amount of time, usually corresponding to 1 year.
 
 Starting from this legal definition, we can formalize a non-life insurance contract as follows.
 
@@ -1408,7 +1412,7 @@ In each of these cases, \(y_i\) is seen as a realization of the random variable 
 \hypertarget{settlement-process-and-ibnr-claims}{%
 \subsubsection{Settlement process and IBNR claims}\label{settlement-process-and-ibnr-claims}}
 
-One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as MTPL, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
+One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as \ac{mtpl}, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
 In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are paid. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can make some partial payments during the period \([t_2, t_3]\). These intermediate payments are paid at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
 
@@ -1425,15 +1429,15 @@ From this description emerges that:
 \begin{itemize}
 \tightlist
 \item
-  In the period \(]t_1, t_2[\) the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \emph{Incurred But Not Yet Reported} claim (\emph{IBNyR}).
+  In the period \(]t_1, t_2[\) the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \ac{ibnyr}.
 \item
-  In the period \([t_2, t_3[\) the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \emph{Incurred But Not Enough Reported} claim (\emph{IBNeR}).
+  In the period \([t_2, t_3[\) the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \ac{ibner}.
 \end{itemize}
 
 \hypertarget{model-fitting-with-available-data}{%
 \subsubsection{Model fitting with available data}\label{model-fitting-with-available-data}}
 
-The IBNyR and IBNeR issue is particularly challenging when we have to perform a risk evaluation at a specific time \(t\). In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
+The \ac{ibnyr} and \ac{ibner} issue is particularly challenging when we have to perform a risk evaluation at a specific time \(t\). In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
 
 \begin{itemize}
 \tightlist
@@ -1533,14 +1537,14 @@ In section \ref{chap:risk-prem-tech-price} we defined:
 
 In section \ref{chap:personalization} we described how the risk premium can be estimated. In this thesis we are not going to deal with the estimate of the expenses.
 
-In this section we are going to discuss what the \emph{Tariff} and the \emph{Offer Price} are and which are the further needs that the offer should satisfy. The following description is referred to MTPL insurance in the Italian market. Most of the comments we make can be applied to other motor coverages too.
+In this section we are going to discuss what the \emph{Tariff} and the \emph{Offer Price} are and which are the further needs that the offer should satisfy. The following description is referred to \ac{mtpl} insurance in the Italian market. Most of the comments we make can be applied to other motor coverages too.
 
 \hypertarget{tariff-and-offer-price}{%
 \subsection{Tariff and Offer Price}\label{tariff-and-offer-price}}
 
 The \emph{Tariff} is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the IVASS (Istituto per la vigilanza sulle Assicurazioni).
 
-In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictete that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in MTPL insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium). Another tariff constraint is that for some coverage, such as MTPL, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
+In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictete that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium). Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not at the tariff price, but at the price obtained subtracting from it a discount \(D_i\ge0\). The premium obtained this way is called \emph{Offer Price}.
 \[
@@ -1581,7 +1585,7 @@ Client expectation is basically the price that the client is willing to pay for 
 
 For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer care and customer experience.
 
-If the technical price and the conversion probability functions are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling MTPL policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the \emph{lifetime value} of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
+If the technical price and the conversion probability functions are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling \ac{mtpl} policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the \emph{lifetime value} of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
 
 The business strategy could also contemplate being more aggressive on certain targets of client and less on others. For example, if the company is particularly strong in certain regions, it could make sense for it to push in that region to further increase its market share. Vice versa, in regions where the company doesn't sell much, it could be safer not to push too much and to be more careful. In a risk management framework, this can be also interpreted as introducing a further risk margin for clusters where there isn't enough observed data and the lack of information brings to more uncertainty. An aggressive pricing can also make sense for a young company that is growing and it is not supposed to be profitable from the first years. From a marketing point of view this strategy can increase the brand awareness by the clients and can strengthen the company image.
 
@@ -1610,7 +1614,7 @@ In this chapter we are going to illustrate some of the most widespread models fo
 \hypertarget{statistical-models}{%
 \section{Statistical Models}\label{statistical-models}}
 
-In this section we will start by describing the Generalized Linear Model (GLM), that is the most employed model in technical pricing, to then present some of its advancements: the Generalized Additive Model (GAM) and the Shrinkage estimators for GLM. After this description, we will also present the Gradient Boosting Machine (GBM), that is one of the most effective general purpose machine learning models. This allows us to have a comparison between GLM based models and general purpose machine learning models.
+In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}. After this description, we will also present the \ac{gbm}, that is one of the most effective general purpose machine learning models. This allows us to have a comparison between \ac{glm} based models and general purpose machine learning models.
 
 \hypertarget{chap:glm}{%
 \subsection{Generalized Linear Models}\label{chap:glm}}
@@ -1618,7 +1622,7 @@ In this section we will start by describing the Generalized Linear Model (GLM), 
 \hypertarget{chap:linear-exp-families}{%
 \subsubsection{Linear Exponential Families}\label{chap:linear-exp-families}}
 
-One of the GLM assumptions is that the response variables belong to a \emph{Linear Exponential Family}. In this section we are going to explain what a linear exponential family is and which distributions fit its definition.
+One of the \ac{glm} assumptions is that the response variables belong to a \emph{Linear Exponential Family}. In this section we are going to explain what a linear exponential family is and which distributions fit its definition.
 
 \begin{definition}[Linear Exponential Family]
 \label{def:linear-exp-family} \iffalse (Linear Exponential Family) \fi{} A Linear Exponential Family \(\mathcal{F}\) is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
@@ -1686,7 +1690,7 @@ In this case the parameters \(\theta\) and \(\phi\) will be object of estimation
 
 Let's assume that, for \(n\) statistical units, the observations \(\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots, (\boldsymbol{x}_n, \omega_n, y_n) \right\}\) are available, where \(\boldsymbol{x}_i\) is a vector of explanatory variables determinations, \(\omega_i\) is a known weight and \(y_i\) is the response variable determination. \(\boldsymbol{x}_i, \omega_i, y_i\) are all real numbers. The vector \(\boldsymbol{y} = (y_1, \dots, y_n)^t\) is considered a determination of the response random vector \(\boldsymbol{Y} = (Y_1, \dots, Y_n)^t\).
 
-In GLM we assume that:
+In \ac{glm} we assume that:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -1724,7 +1728,7 @@ Let's indicate with \(\boldsymbol{X}\) the design matrix, i.e.~the matrix in whi
 \caption{Design Matrix $\boldsymbol{X}$.}\label{fig:design-matrix}
 \end{figure}
 
-We can then express the GLM structural assumptions in a matrix form as:
+We can then express the \ac{glm} structural assumptions in a matrix form as:
 \[
 \boldsymbol{g}(\boldsymbol{\mu}) = \boldsymbol{X} \boldsymbol{\beta}
 \]
@@ -1786,7 +1790,7 @@ The model depends on the parameters \(\left(\boldsymbol{\beta}, \phi\right)\). I
 \theta_i = b'^{-1}(\mu_i) = b'^{-1}(g^{-1}(\eta_i)) = b'^{-1}\left(g^{-1}\left(\boldsymbol{x}_i^t\boldsymbol{\beta}\right)\right)
 \]
 
-Therefore, fitting the model corresponds to estimating \(\left(\boldsymbol{\beta}, \phi\right)\). The technique used in GLM is the \emph{Maximum Likelihood}. Let's indicate with \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) the model likelihood. We remind that the likelihood is a function of the parameters that maps \(\left(\boldsymbol{\beta}, \phi\right)\) to the density (or probability in the discrete case) of the observed values \(\boldsymbol{y}\) conditioned to the parameters \(\left(\boldsymbol{\beta}, \phi\right)\)
+Therefore, fitting the model corresponds to estimating \(\left(\boldsymbol{\beta}, \phi\right)\). The technique used in \ac{glm} is the \emph{Maximum Likelihood}. Let's indicate with \(L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)\) the model likelihood. We remind that the likelihood is a function of the parameters that maps \(\left(\boldsymbol{\beta}, \phi\right)\) to the density (or probability in the discrete case) of the observed values \(\boldsymbol{y}\) conditioned to the parameters \(\left(\boldsymbol{\beta}, \phi\right)\)
 \[
 \begin{array}{cccc}
 L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
@@ -1931,7 +1935,7 @@ As \(\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)\) does not 
 \hypertarget{chap:var-effects}{%
 \subsubsection{Variable effects}\label{chap:var-effects}}
 
-As we mentioned in \ref{chap:pricing-variables-encoding}, the explanatory variables can be \emph{quantitative} or \emph{qualitative}. In GLMs, if explanatory variables transformation terms aren't added to the linear predictor \(\eta\), the variables effect on \(\eta\) is linear. In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown. The data is simulated from a GLM with Normal response and identity link.
+As we mentioned in \ref{chap:pricing-variables-encoding}, the explanatory variables can be \emph{quantitative} or \emph{qualitative}. In \ac{glm}s, if explanatory variables transformation terms aren't added to the linear predictor \(\eta\), the variables effect on \(\eta\) is linear. In figure \ref{fig:expl-var-types} the effects of quantitative and qualitative variables are shown. The data is simulated from a \ac{glm} with Normal response and identity link.
 
 
 
@@ -1956,7 +1960,7 @@ In the bottom-left panel of figure \ref{fig:expl-var-types}, we see the effect o
 
 In the bottom-right panel, the interaction effect between \(x_1\) and \(x_2\) is included in the model. The model becomes \(\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \beta_3 x_{i1} x_{i2}\). That means that the effect of \(x_1\) variables depends on the determination of the \(x_2\) variable. In the group with \(x_2=0\) the effect is represented by the line \(\mu_i = \beta_0 + \beta_1 x_i\); the group with \(x_2=1\) the effect is represented by the line \(\mu_i = \left(\beta_0 + \beta_2\right) + \left(\beta_1 + \beta_3\right) x_{i1}\).
 
-For quantitative variables, it is possible to consider also non linear effects in GLMs. Some examples are reported in figure \ref{fig:expl-var-quant-effect}.
+For quantitative variables, it is possible to consider also non linear effects in \ac{glm}s. Some examples are reported in figure \ref{fig:expl-var-quant-effect}.
 
 
 
@@ -1979,12 +1983,12 @@ Another way to model non liner effects of explanatory variables is to separate t
 
 The piece-wise approach can be enhanced by also considering polynomial terms. For instance, in bottom-left panel of figure \ref{fig:expl-var-quant-effect}, the model represented is \(\mu_i = \beta_0 + \left( x_i - \nu \right)_-^2\), where \((x)_-\) is the negative part of \(x\) (\((x)_- = \min(0,x)\)). \(f(x) = (x-\nu)^2\) is a parabola with vertex in \(\nu\). The fact of not adding the linear term leads to a monotonic effect made by a semi-parabola and a horizontal semi-line that starts from its vertex.
 
-The examples represented in figures \ref{fig:expl-var-types} and \ref{fig:expl-var-quant-effect} are based on simulated data. That means that the linear predictor structure is known and the coefficients \(\beta_0, \beta_1, \dots, \beta_J\) are known. In practice, the real model is not known and the coefficients and the structure must be estimated by the data. Thus, we can take assumptions on the structure and we can estimate the coefficients with \(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_J\). In many cases it is not so clear whether to consider or not a variable and how to consider it. For example, with the same data both bottom-left and bottom-right models could work fine. In section \ref{chap:variable-selection} we are going to discuss some variable selection techniques for GLM.
+The examples represented in figures \ref{fig:expl-var-types} and \ref{fig:expl-var-quant-effect} are based on simulated data. That means that the linear predictor structure is known and the coefficients \(\beta_0, \beta_1, \dots, \beta_J\) are known. In practice, the real model is not known and the coefficients and the structure must be estimated by the data. Thus, we can take assumptions on the structure and we can estimate the coefficients with \(\hat{\beta}_0, \hat{\beta}_1, \dots, \hat{\beta}_J\). In many cases it is not so clear whether to consider or not a variable and how to consider it. For example, with the same data both bottom-left and bottom-right models could work fine. In section \ref{chap:variable-selection} we are going to discuss some variable selection techniques for \ac{glm}.
 
 \hypertarget{link-functions-and-relativities}{%
 \subsubsection{Link functions and relativities}\label{link-functions-and-relativities}}
 
-As we mentioned in \ref{chap:linear-exp-families}, GLM supports several families. In figure \ref{fig:resp-var} the models \(g(\mu_i) = \beta_0 + \beta_1 x_i\) with different response variable distributions and link functions are represented. As we can see from the plots, a linear effect on \(x\) corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
+As we mentioned in \ref{chap:linear-exp-families}, \ac{glm} supports several families. In figure \ref{fig:resp-var} the models \(g(\mu_i) = \beta_0 + \beta_1 x_i\) with different response variable distributions and link functions are represented. As we can see from the plots, a linear effect on \(x\) corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
 
 
 
@@ -2012,14 +2016,14 @@ The fact that with a log link the relation between coefficients \(\beta_0, \beta
 \[M_i \sim Poisson(v_i \mu_i)\]
 where \(\mu_i\) is the expected value of the yearly number of claims \(N_i\).
 
-Under the GLM assumptions, we obtain
+Under the \ac{glm} assumptions, we obtain
 \begin{align*}
 E(M_i) & = v_i \mu_i = v_i e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 & = e^{\log(v_i)}e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip}} \\
 & = e^{\beta_0 + \beta_1 x_{i1} + \dots + \beta_p x_{ip} + \log(v_i)}
 \end{align*}
 
-That means that we can model \(M_1, M_2, \dots, M_n\) as response variables in a GLM with Poisson response in which the linear predictor depends on an offset additive term \(\log(v_i)\).
+That means that we can model \(M_1, M_2, \dots, M_n\) as response variables in a \ac{glm} with Poisson response in which the linear predictor depends on an offset additive term \(\log(v_i)\).
 
 If \(g(p) = \text{logit}(p)\), the model structure can be expressed as:
 \begin{align*}
@@ -2032,7 +2036,7 @@ Thus, the term \(e^{\beta_j}\) can be seen as the multiplicative relativity corr
 \hypertarget{chap:variable-selection}{%
 \subsubsection{Variable selection}\label{chap:variable-selection}}
 
-One of the most challenging aspects of GLM fitting is selecting the variables and their effects by looking to observed data. In practice, we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients \(\tilde{\beta}_0, \tilde{\beta}_1, \dots, \tilde{\beta}_p\) and then the variance of the predictions \(\tilde{\mu}_i = \tilde{\beta}_0 + \tilde{\beta}_1 x_{i1} + \dots + \tilde{\beta}_p x_{ip}\). On the other hand, being too frugal with explanatory variables could lead to wasting part of the predictive power of the available explanatory variables.
+One of the most challenging aspects of \ac{glm} fitting is selecting the variables and their effects by looking to observed data. In practice, we usually have many explanatory variables available but only some of them are relevant for the prediction of the response variable. Adding useless variables to the model increases the variance of the estimators of the coefficients \(\tilde{\beta}_0, \tilde{\beta}_1, \dots, \tilde{\beta}_p\) and then the variance of the predictions \(\tilde{\mu}_i = \tilde{\beta}_0 + \tilde{\beta}_1 x_{i1} + \dots + \tilde{\beta}_p x_{ip}\). On the other hand, being too frugal with explanatory variables could lead to wasting part of the predictive power of the available explanatory variables.
 
 One useful tool we have to understand if an explanatory variable \(x\) is relevant or not is plotting the points \((x_i, y_i)\), as we did in \ref{fig:expl-var-types}, \ref{fig:expl-var-quant-effect} and \ref{fig:resp-var}. If there are too many observations and the plot is not easily readable, it is possible to group the points by \(x\) modalities and show for each group the average of \(y_i\) and a confidence interval that gives an idea on the dispersion of the observations around the average. If \(x\) is a continuous variable with too many modalities, it is possible to group them into buckets. Showing the average of \(y_i\) for groups of \(x\) is particularly useful for Binomial and Poisson data, where the fact that \(y_i\) can present few different values compromises the plot readability. An example is reported in figure \ref{fig:var-selection}. The top-left and bottom-left panels represent a case in which \(x\) and \(y\) are not related, while the top-right and bottom-right panels represent a case of positive correlation. From the ungrouped plot in the top-right panel the effect is not clear, while from bottom-right panel it is evident.
 
@@ -2058,7 +2062,7 @@ r_i = y_i - \hat{\mu}_i = y_i - g^{-1}\left( \hat{\beta}_0 + \hat{\beta}_1 x_{i1
 
 If the plot shows a clear trend, we will add the variable \(x\) to the model, otherwise we won't.
 
-The choice of adding or not a variable in the model can be supported by \emph{hypothesis testing}. Given a GLM with coefficients \(\beta_0, \beta_1, \dots, \beta_p\), it is possible to test if a group of coefficients \(\beta_{j_1}, \beta_{j_2}, \dots, \beta_{j_s}\) is equal to zero. Formally the hypotheses tested are:
+The choice of adding or not a variable in the model can be supported by \emph{hypothesis testing}. Given a \ac{glm} with coefficients \(\beta_0, \beta_1, \dots, \beta_p\), it is possible to test if a group of coefficients \(\beta_{j_1}, \beta_{j_2}, \dots, \beta_{j_s}\) is equal to zero. Formally the hypotheses tested are:
 \[
 \begin{cases}
 H_0: & \beta_{j_k} = 0 \ \forall k \in \{1, 2, \dots, s\} \\
@@ -2121,13 +2125,13 @@ The higher \(K\) is, the less subjected to randomness \(D^{CV(K)}\) is. However,
 \hypertarget{scalability-and-manual-fitting}{%
 \subsubsection{Scalability and manual fitting}\label{scalability-and-manual-fitting}}
 
-One problem of GLM is that the variables selection process is not so easily scalable. Indeed, if we consider \(p\) explanatory variables, even without taking into account interactions and quantitative variables transformation, there are \(2^p\) possible models that can be obtained by choosing a subset of those variables. As \(p\) increases, building all these models and choosing the optimal one becomes unfeasible.
+One problem of \ac{glm} is that the variables selection process is not so easily scalable. Indeed, if we consider \(p\) explanatory variables, even without taking into account interactions and quantitative variables transformation, there are \(2^p\) possible models that can be obtained by choosing a subset of those variables. As \(p\) increases, building all these models and choosing the optimal one becomes unfeasible.
 
 One strategy to reduce the time consumption is to use a \emph{stepwise procedure}. First of all we must choose a criterion to compare the models, such as the AIC. Then we have to choose a starting model that consider the variables subset \(\mathcal{C}_0 \subset \{ 1,2,\dots,p \}\). It is possible to compare this model with all the models that can be obtained by removing one variable from \(\mathcal{C}_0\) or adding to \(\mathcal{C}_0\) one that is not included in it. From all these models we can compute the AIC and we will choose as \(\mathcal{C}_1\) the set of variables that minimize the AIC. If none of the considered models has an AIC lower to the one obtained with the variables \(\mathcal{C}_0\), the procedure ends and our final set of variables is \(\mathcal{C}_0\). Otherwise, we will repeat the step with \(\mathcal{C}_1\). The procedure can be iteratively repeated until we obtain a subset of variables \(\mathcal{C}_f\) that can't be improved by removing or adding a variable. The model with the variables \(\mathcal{C}_f\) will be our chosen one.
 
 This procedure is much faster than computing all the \(2^p\) models, but it is still not so scalable for large \(p\). Moreover, in this procedure we are not taking into account the interactions and the possible transformations for the quantitative variables. This can be achieved by slightly modifying the algorithm, but it would further increase the complexity and the computation time. Another option is starting from the result of the stepwise regression and manually choosing interactions and quantitative variables transformations by looking at plots as described in \ref{chap:var-effects}.
 
-One characteristic of GLM is that the variables effects can be easily interpreted and the variable selection process is for large part manual. This aspect can be problematic if there are a lot of explanatory variables, but it brings some important benefits too. Indeed, the actuary can take choices on variable selection not only based on observed data, but also on his domain knowledge. For instance, the choice of selecting or not an explanatory variable can be guided also on its interpretation: if the observed effect makes sense, it can be added to the model even if it is not statistically significant and it doesn't decrease the AIC, and, on the opposite, if the observed effect is not reasonable, the actuary can choose not to include the variable in the model even if its effect is supported by the data. So, in the actuarial practice, in the GLM fitting process there is always a subjective component that impacts on the final result. For these reason it is important for the actuary to have a deep knowledge on the phenomenon he is modeling.
+One characteristic of \ac{glm} is that the variables effects can be easily interpreted and the variable selection process is for large part manual. This aspect can be problematic if there are a lot of explanatory variables, but it brings some important benefits too. Indeed, the actuary can take choices on variable selection not only based on observed data, but also on his domain knowledge. For instance, the choice of selecting or not an explanatory variable can be guided also on its interpretation: if the observed effect makes sense, it can be added to the model even if it is not statistically significant and it doesn't decrease the AIC, and, on the opposite, if the observed effect is not reasonable, the actuary can choose not to include the variable in the model even if its effect is supported by the data. So, in the actuarial practice, in the \ac{glm} fitting process there is always a subjective component that impacts on the final result. For these reason it is important for the actuary to have a deep knowledge on the phenomenon he is modeling.
 
 An aspect that facilitates the model building and reduces the complexity of the process, even if there are many variables, is that usually the models are not built from scratch. Actuarial models are usually updated once a year, so it is also possible to start the new model by fitting on new data the final model from the year before. As the models are usually built with policies data from more than one year, the new dataset partially overlaps with the one from the previous year. However, the overlapping observations aren't identical: the new dataset will have the new settlement information and some new explanatory variables. Anyway, if the actuary is familiar with the effects of the variables in the previous models, he already knows which will probably be relevant and which don't even deserve too much attention.
 
@@ -2136,12 +2140,12 @@ An aspect that facilitates the model building and reduces the complexity of the 
 \hypertarget{chap:gam}{%
 \subsection{Generalized Additive Models}\label{chap:gam}}
 
-In section \ref{chap:var-effects} we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In GLM it is possible to deal with non-linear effects by adding polynomial or split-wise terms. GAMs are models based on GLM that introduce a more flexible way to deal with quantitative variables with non-linear effects.
+In section \ref{chap:var-effects} we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In \ac{glm} it is possible to deal with non-linear effects by adding polynomial or split-wise terms. \ac{gam}s are models based on \ac{glm} that introduce a more flexible way to deal with quantitative variables with non-linear effects.
 
 \hypertarget{model-assumptions}{%
 \subsubsection{Model assumptions}\label{model-assumptions}}
 
-In GAM, the assumptions are the same of GLM, stated in \ref{chap:glm-assumptions}, with the following advancement in the linear predictor:
+In \ac{gam}, the assumptions are the same of \ac{glm}, stated in \ref{chap:glm-assumptions}, with the following advancement in the linear predictor:
 \[
 g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \qquad i\in\{1,2,\dots,n\}
 \]
@@ -2150,9 +2154,9 @@ where
 \begin{itemize}
 \tightlist
 \item
-  \(\boldsymbol{x}_i\) is the vector of the variables with a linear effect as described in GLM, that also include a term \(1\) that represents the intercept;
+  \(\boldsymbol{x}_i\) is the vector of the variables with a linear effect as described in \ac{glm}, that also include a term \(1\) that represents the intercept;
 \item
-  \(\boldsymbol{\beta}\) is the vector of the linear coefficients as described in GLM;
+  \(\boldsymbol{\beta}\) is the vector of the linear coefficients as described in \ac{glm};
 \item
   \(z_{i,1}, z_{i,2}, \dots, z_{i,q}\) are the quantitative variables with a non linear effect;
 \item
@@ -2184,7 +2188,7 @@ The constraints for \(f(\cdot)\) make it a continuous functions with first and s
 
 In definition \ref{def:cubic-splines} we introduced 4 parameters (\(\alpha_t, \vartheta_t, \gamma_t, \delta_t\)) for each of the \(m-1\) intervals \([\nu_t, \nu_{t+1}[\), \(t\in\{1,2,\dots,m-1\}\). So, we have \(4(m-1)\) parameters. In equation \eqref{eq:cubic-spline-constraints} we introduced \(3\) constraints for each of the \(m-2\) knot in \(\nu_2, \nu_3, \dots, \nu_{m-1}\). So the free parameters become \(4(m-1) - 3(m-2) = m+2\). The linear extension on \([a, \nu_1[\) and \(]\nu_m, b]\) corresponds to the constraint \(f''(x)=0\) on \([a, \nu_1[ \, \cup \, ]\nu_m, b]\), thus, \(h''_1(\nu_1)=0\) and \(h''_m(\nu_m)=0\). Adding these two constraints, we get that the natural cubic spline \(f:[a,b]\to\mathbb{R}\) has \(m\) degrees of freedom.
 
-With an approach similar to the one we used in \ref{chap:var-effects} for split-wise effects in GLM, we can represent a cubic spline by the functions \(x \mapsto \left( x-\nu_t \right)_+^3\), \(t=1,2,\dots,m\).
+With an approach similar to the one we used in \ref{chap:var-effects} for split-wise effects in \ac{glm}, we can represent a cubic spline by the functions \(x \mapsto \left( x-\nu_t \right)_+^3\), \(t=1,2,\dots,m\).
 
 The expression:
 \begin{equation}
@@ -2212,7 +2216,7 @@ If we try to fit a cubic spline on data, we find that by increasing the number o
 
 }
 
-\caption[GLM with cubic splines for different numbers of knots.]{GLM with cubic splines for different numbers of knots. The more knots there are, the wigglier the estimated function \(\hat{f}(x)\) is.}\label{fig:cub-spline}
+\caption[\ac{glm} with cubic splines for different numbers of knots.]{\ac{glm} with cubic splines for different numbers of knots. The more knots there are, the wigglier the estimated function \(\hat{f}(x)\) is.}\label{fig:cub-spline}
 \end{figure}
 
 In the top-left panel, the model fitted is just linear and it clearly doesn't follow the path made by the observed points. In the bottom-right panel, the models fitted is a spline with 35 knots and it is clearly too wiggly compared to the path made by the observed points.
@@ -2235,12 +2239,12 @@ In figure \ref{fig:wiggliness} some examples of functions \(f(x)\) and their squ
 
 }
 
-\caption[\(\left(f''(x)\right)^2\) for functions with different wiggliness.]{\(\left(f''(x)\right)^2\) for functions with different wiggliness. The wigglier the function \(f(x)\) is, the higher \(\left(f''(x)\right)^2\) is.}\label{fig:wiggliness}
+\caption[Squared second derivative \(\left(f''(x)\right)^2\) for functions with different wiggliness.]{Squared second derivative \(\left(f''(x)\right)^2\) for functions with different wiggliness. The wigglier the function \(f(x)\) is, the higher \(\left(f''(x)\right)^2\) is.}\label{fig:wiggliness}
 \end{figure}
 
 As we can see from the plots, if a function \(f(x)\) is linear, \(\left(f''(x)\right)^2\) is null and, as the curvature of the function increases, \(\left(f''(x)\right)^2\) increases. For this reason, \(\left(f''(x)\right)^2\) can also be seen as a measure of how much \(f(x)\) differs from a linear function.
 
-What is done in GAM to contain this wiggliness and to prevent overfitting is taking into account a penalization based on \(\left(f''(x)\right)^2\). If we have a regression problem with one explanatory variable \(x\), this can be achieved by considering the minimization problem in \eqref{eq:max-lik-est-deviance} and adding a penalization term to the deviance:
+What is done in \ac{gam} to contain this wiggliness and to prevent overfitting is taking into account a penalization based on \(\left(f''(x)\right)^2\). If we have a regression problem with one explanatory variable \(x\), this can be achieved by considering the minimization problem in \eqref{eq:max-lik-est-deviance} and adding a penalization term to the deviance:
 \begin{equation}
 \label{eq:gam-est-deviance}
 \hat{f} = \argmin_{f}{\left\{D(f, \boldsymbol{y}) + \lambda \int_{a}^{b}{\left( f''(x) \right)^2 dx}\right\}}
@@ -2260,7 +2264,7 @@ In the notation of the formula \eqref{eq:gam-est-deviance} we used \(f\) to indi
 
 }
 
-\caption[GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\).]{GAM estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\). The higher \(\lambda\) is, the less wiggly the estimated function \(\hat{f}(x)\) is.}\label{fig:gam-lambda}
+\caption[\ac{gam} estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\).]{\ac{gam} estimate \(\hat{f}(x)\) for different levels of the smoothing parameter \(\lambda\). The higher \(\lambda\) is, the less wiggly the estimated function \(\hat{f}(x)\) is.}\label{fig:gam-lambda}
 \end{figure}
 
 All the models have been fitted with \(m = 50\) knots. As we can see, with \(\lambda = 0\) we are clearly overfitting observations, while with \(\lambda = 10^6\) we are clearly underfitting them.
@@ -2305,14 +2309,14 @@ At this point, we will choose the hyper-parameter vector that minimizes the cros
 
 In particular if \(q\) is big, this procedure can be too computationally expensive. Two alternatives are the \emph{Generalized Cross Validation} (GCV) and the \emph{Un-Biased Risk Estimator} (UBRE). The idea behind these approaches is to estimate the test set deviance by just computing the training set deviance and applying to it a correction that penalizes for the complexity of the model, as it is done in AIC and BIC, described in section \ref{chap:variable-selection}.
 
-GCV and UBRE formulas are based on the fact that GAMs with identity link and Normal response are \emph{linear smoothers}, i.e.~\(\boldsymbol{\hat{\mu}}\) can be expressed as:
+GCV and UBRE formulas are based on the fact that \ac{gam}s with identity link and Normal response are \emph{linear smoothers}, i.e.~\(\boldsymbol{\hat{\mu}}\) can be expressed as:
 \begin{equation}
 \label{eq:linear-smoother}
 \boldsymbol{\hat{\mu}} = H \boldsymbol{y}
 \end{equation}
-where \(H\) is a \(n\times n\) matrix that depends on the design matrix \(\boldsymbol{X}\) and the hyper-parameters. \(H\) is called \emph{smoothing matrix}. In general, if the link is not the identity and the response is not Normal, GAM is not a linear smoother, but the formula \eqref{eq:linear-smoother} still holds up with a local approximation.
+where \(H\) is a \(n\times n\) matrix that depends on the design matrix \(\boldsymbol{X}\) and the hyper-parameters. \(H\) is called \emph{smoothing matrix}. In general, if the link is not the identity and the response is not Normal, \ac{gam} is not a linear smoother, but the formula \eqref{eq:linear-smoother} still holds up with a local approximation.
 
-It can be proven that the trace of \(H\) measures the flexibility of the function. Indeed, in Linear Model \(H = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t\) and \(\text{tr}(H) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1\), that is the number of \emph{degrees of freedom} of the model. For this reason \(\text{tr}(H)\) is also called number of \emph{effective degrees of freedom} of the model. In GAM, as the smoothing parameter \(\lambda\) increases, the flexibility of the model decreases and \(\text{tr}(H)\) decreases.
+It can be proven that the trace of \(H\) measures the flexibility of the function. Indeed, in Linear Model \(H = \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t\) and \(\text{tr}(H) = \text{tr}\left( \boldsymbol{X} \left( \boldsymbol{X}^t\boldsymbol{X} \right)^{-1}\boldsymbol{X}^t \right) = p + 1\), that is the number of \emph{degrees of freedom} of the model. For this reason \(\text{tr}(H)\) is also called number of \emph{effective degrees of freedom} of the model. In \ac{gam}, as the smoothing parameter \(\lambda\) increases, the flexibility of the model decreases and \(\text{tr}(H)\) decreases.
 
 For linear smoothers it can be proved that the \emph{leave one out cross validation} is:
 \[
@@ -2340,7 +2344,7 @@ GCV & = \frac{1}{n} \sum_{i=1}^{n}{\left( \frac{y_i - \hat{\mu}_i}{1 - \frac{\te
 & = \left( \frac{n}{n - \text{tr}(H)} \right)^2 D(\boldsymbol{\hat{f}},\boldsymbol{y})
 \end{align}
 
-The expression \eqref{eq:gcv-gam} generalizes the GCV to all the GAMs, also in the case in which the link is not identity and the response is not Normal.
+The expression \eqref{eq:gcv-gam} generalizes the GCV to all the \ac{gam}s, also in the case in which the link is not identity and the response is not Normal.
 
 To select the best value of \(\boldsymbol{\lambda}\), we can perform a similar procedure using the UBRE in place of the GCV. The UBRE is defined as:
 \[
@@ -2352,7 +2356,7 @@ Using the UBRE instead the GCV is preferred when \(\phi\) is known, such as in P
 \hypertarget{why-cubic-splines}{%
 \subsubsection{Why cubic splines}\label{why-cubic-splines}}
 
-In section \ref{chap:cubic-splines} we said that \emph{cubic splines} are commonly used for modeling \(f(\cdot)\) in GAMs. This choice comes from the following theorem.
+In section \ref{chap:cubic-splines} we said that \emph{cubic splines} are commonly used for modeling \(f(\cdot)\) in \ac{gam}s. This choice comes from the following theorem.
 
 \begin{theorem}[Spline property]
 \label{thm:th-splines-property} \iffalse (Spline property) \fi{} Given the knots \(\nu_1, \nu_2, \dots, \nu_m\) and the values \(y_1, y_1, \dots, y_m\), for any \(a\le\nu_1\) and \(b\ge\nu_m\), only one natural cubic spline \(s(\cdot)\), such that \(s(\nu_k)=y_k, \ k\in \{1, \dots, m\}\), exists.
@@ -2420,16 +2424,16 @@ s(x) = \sum_{k=1}^{m+2}{\beta_{k}B_{3,k}(x)}
 
 B-splines are preferred compared to truncated polynomial as basis function, since they are less correlated and lead to more stable and less computationally expensive estimates.
 
-\hypertarget{gam-extensions}{%
-\subsubsection{GAM extensions}\label{gam-extensions}}
+\hypertarget{extensions}{%
+\subsubsection{\texorpdfstring{\ac{gam} extensions}{ extensions}}\label{extensions}}
 
-As in GLM, in GAM we can consider interactions between a variable with non-linear effect \(x_{l_2}\) and another variable \(x_{l_1}\). This can be achieved by adding to the linear predictor a term such as:
+As in \ac{glm}, in \ac{gam} we can consider interactions between a variable with non-linear effect \(x_{l_2}\) and another variable \(x_{l_1}\). This can be achieved by adding to the linear predictor a term such as:
 \[
 x_{l_1} f(x_{l_2})
 \]
 This is particularly useful when \(x_{l_1}\) is a binary variable and we want to fit two different curves for \(x_{l_2}\) in the case \(x_{l_1}=0\) and in the case \(x_{l_1}=1\).
 
-If we want to consider a more complex interaction between two quantitative variables with non-linear effect, GAM can be extended by considering non-parametric interactions and modeling them with two-dimensional splines, such as:
+If we want to consider a more complex interaction between two quantitative variables with non-linear effect, \ac{gam} can be extended by considering non-parametric interactions and modeling them with two-dimensional splines, such as:
 \[
 f(x_{l_1}, x_{l_2})
 \]
@@ -2438,25 +2442,25 @@ In this case, instead of fitting a curve on \((x_l, y)\), we will fit a flexible
 \hypertarget{some-considerations-on-gam}{%
 \subsubsection{Some considerations on GAM}\label{some-considerations-on-gam}}
 
-As we have seen in this chapter, GAMs are flexible tools for fitting quantitative variables with non-linear effects.
+As we have seen in this chapter, \ac{gam}s are flexible tools for fitting quantitative variables with non-linear effects.
 
-One big advantage of GAM is that they are based on the same assumptions of GLM, except for the non-linearity of the components \(f(x_{l})\). The connection with GLM leads to highly interpretable results. Indeed, as we do in GLM, in GAM we can easily observe the marginal effect of a variable \(x_l\) on the response \(y\) just by plotting the graph \(\left(x_l, f(x_l)\right)\), while the interactions between variables are added manually so we have a full control of them.
+One big advantage of \ac{gam} is that they are based on the same assumptions of \ac{glm}, except for the non-linearity of the components \(f(x_{l})\). The connection with \ac{glm} leads to highly interpretable results. Indeed, as we do in \ac{glm}, in \ac{gam} we can easily observe the marginal effect of a variable \(x_l\) on the response \(y\) just by plotting the graph \(\left(x_l, f(x_l)\right)\), while the interactions between variables are added manually so we have a full control of them.
 
-Another big advantage is that GAM not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in GLM, when we have to fit a non-linear effect to a quantitative variable \(x_l\), we have to perform a manual process of wise splitting and polynomial fitting on the range of \(x_l\), in GAM we do not have to explicitly specify the shape of \(f(x_l)\) and everything is done by the algorithm.
+Another big advantage is that \ac{gam} not only provides a flexible tool that produces interpretable results, but this tool works almost automatically. Indeed, while in \ac{glm}, when we have to fit a non-linear effect to a quantitative variable \(x_l\), we have to perform a manual process of wise splitting and polynomial fitting on the range of \(x_l\), in \ac{gam} we do not have to explicitly specify the shape of \(f(x_l)\) and everything is done by the algorithm.
 
-This higher flexibility and automation comes at the cost of introducing more complexity in the model. Indeed, in a GAM there are much more parameters than in a GLM and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces a higher machine time but significantly reduces the human time that in GLM would be needed for manual fitting.
+This higher flexibility and automation comes at the cost of introducing more complexity in the model. Indeed, in a \ac{gam} there are much more parameters than in a \ac{glm} and this leads to a more computationally expensive fitting. Anyway, this higher complexity produces a higher machine time but significantly reduces the human time that in \ac{glm} would be needed for manual fitting.
 
 \newpage
 
 \hypertarget{chap:shrinkage-estimators}{%
 \subsection{Shrinkage estimators for GLM}\label{chap:shrinkage-estimators}}
 
-In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in GLM when there are many explanatory variables. All the models presented in this chapter are actually GLM. The advancements consist in the way the parameters are estimated.
+In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in \ac{glm} when there are many explanatory variables. All the models presented in this chapter are actually \ac{glm}. The advancements consist in the way the parameters are estimated.
 
 \hypertarget{the-bias-variance-trade-off}{%
 \subsubsection{The Bias-Variance Trade Off}\label{the-bias-variance-trade-off}}
 
-One of the property of GLM with linear link and Normal response is that the maximum likelihood estimator \(\boldsymbol{\tilde{\beta}}^{ML}\) is unbiased, that is \(E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}\).\footnote{This property in general is not true for GLM with other links and response distributions, but it is true asymptotically: \(\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}\).} However, the bias is not the only relevant aspect of an estimator. If we consider the \emph{Mean Squared Error} (MSE) of an estimator \(\tilde{\beta}_j\), we get the following result:
+One of the property of \ac{glm} with linear link and Normal response is that the maximum likelihood estimator \(\boldsymbol{\tilde{\beta}}^{ML}\) is unbiased, that is \(E\left(\boldsymbol{\tilde{\beta}}^{ML}\right) = \boldsymbol{\beta}\).\footnote{This property in general is not true for \ac{glm} with other links and response distributions, but it is true asymptotically: \(\boldsymbol{\tilde{\beta}}^{ML} \xrightarrow{n\to+\infty} \boldsymbol{\beta}\).} However, the bias is not the only relevant aspect of an estimator. If we consider the \emph{Mean Squared Error} (MSE) of an estimator \(\tilde{\beta}_j\), we get the following result:
 \begin{equation}
 \label{eq:bias-variance}
 MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
@@ -2466,11 +2470,11 @@ MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\ri
 
 The idea behind shrinkage estimators is to add an amount of smart bias to \(\tilde{\beta}_j\) in order to reduce its variance.
 
-The trade-off between Bias and Variance described by equation \eqref{eq:bias-variance} can be interpreted in relation to the complexity of the model. Figure \ref{fig:bias-variance} shows how the prediction error changes by increasing the complexity of the model. In linear smoothers, the complexity of the model can be measured as the effective degrees of freedom \(\text{tr}(H)\) (see section \ref{chap:gam-choice-lambda}), that in the case of the GLM with maximum likelihood estimators is just the number of parameters \(p+1\). Usually, in machine learning models, the complexity of the model is determined by tuning one or more hyper-parameters. In the case of GAM, for example, by increasing \(\lambda\) we obtain a less complex model, while by decreasing it we obtain a more complex model.
+The trade-off between Bias and Variance described by equation \eqref{eq:bias-variance} can be interpreted in relation to the complexity of the model. Figure \ref{fig:bias-variance} shows how the prediction error changes by increasing the complexity of the model. In linear smoothers, the complexity of the model can be measured as the effective degrees of freedom \(\text{tr}(H)\) (see section \ref{chap:gam-choice-lambda}), that in the case of the \ac{glm} with maximum likelihood estimators is just the number of parameters \(p+1\). Usually, in machine learning models, the complexity of the model is determined by tuning one or more hyper-parameters. In the case of \ac{gam}, for example, by increasing \(\lambda\) we obtain a less complex model, while by decreasing it we obtain a more complex model.
 
 A model not complex enough produces estimators with low variance but high bias, that leads to underfitting. A too complex model produces estimators with low bias but high variance, that leads to overfitting.
 
-As with maximum likelihood estimators for GLM the complexity increases with \(p\), they are not suitable when \(p\) is large (high dimensionality).
+As with maximum likelihood estimators for \ac{glm} the complexity increases with \(p\), they are not suitable when \(p\) is large (high dimensionality).
 
 
 
@@ -2488,7 +2492,7 @@ As with maximum likelihood estimators for GLM the complexity increases with \(p\
 \hypertarget{ridge-regression}{%
 \subsubsection{Ridge Regression}\label{ridge-regression}}
 
-One shrinkage estimator for GLM is the \emph{Ridge Regression}. In Ridge Regression, the decrease in variance of \(\tilde{\boldsymbol{\beta}}\) is achieved by considering the optimization problem \eqref{eq:max-lik-est-deviance} and adding to the Deviance a penalization term that depends on the magnitude of \(\beta_1, \beta_2, \dots, \beta_p\):
+One shrinkage estimator for \ac{glm} is the \emph{Ridge Regression}. In Ridge Regression, the decrease in variance of \(\tilde{\boldsymbol{\beta}}\) is achieved by considering the optimization problem \eqref{eq:max-lik-est-deviance} and adding to the Deviance a penalization term that depends on the magnitude of \(\beta_1, \beta_2, \dots, \beta_p\):
 \begin{equation}
 \label{eq:ridge-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
@@ -2498,7 +2502,7 @@ where:
 \begin{itemize}
 \tightlist
 \item
-  \(\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)\) is the set of the GLM coefficients except for the intercept \(\beta_0\);
+  \(\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)\) is the set of the \ac{glm} coefficients except for the intercept \(\beta_0\);
 \item
   \(\|\cdot\|_2^2\) is the \(L^2\) norm, i.e.~\(\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}\);
 \item
@@ -2508,9 +2512,9 @@ where:
 The term \(\|\boldsymbol{\beta}_{\setminus0}\|_2^2\) produces a penalization for high values of \(\beta_j\). This penalization leads to a shrinkage of the coefficients.
 The exclusion of \(\beta_0\) from the penalization term is intended to prevent the introduction of a bias towards \(0\) in the intercept. As the magnitude of \(\beta_j\) depends on the values of \(x_j\), it is preferred to standardize all the explanatory variables to avoid distorting effects due to the unit of measure of the explanatory variables.
 
-As for GAM, the hyper-parameter \(\lambda\) determines the amount of penalization given to high values of the coefficients \(\hat{\beta}_j\). If \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood. As \(\lambda\) increases, the optimal coefficients \(\hat{\beta}_j\) tends to shrink towards \(0\). In the limit case, if \(\lambda\to+\infty\), the optimal coefficients \(\hat{\beta}_j\) are all equal to \(0\), except for \(\hat{\beta}_0\), that is equal to \(g(\bar{y})\), so the estimated model corresponds to the trivial model with only the intercept \(g(\mu)=\beta_0\).
+As for \ac{gam}, the hyper-parameter \(\lambda\) determines the amount of penalization given to high values of the coefficients \(\hat{\beta}_j\). If \(\lambda=0\), the optimization problem \eqref{eq:ridge-est-deviance} corresponds to the maximum likelihood. As \(\lambda\) increases, the optimal coefficients \(\hat{\beta}_j\) tends to shrink towards \(0\). In the limit case, if \(\lambda\to+\infty\), the optimal coefficients \(\hat{\beta}_j\) are all equal to \(0\), except for \(\hat{\beta}_0\), that is equal to \(g(\bar{y})\), so the estimated model corresponds to the trivial model with only the intercept \(g(\mu)=\beta_0\).
 
-An example of the effect of \(\lambda\) is reported in figure \ref{fig:ridge-lambda}. The data represented has been simulated from a GLM with idenity link and Normal response. As we can see, if \(\lambda=0\), all the estimated responses \(\hat{\mu}_j\) correspond to the average of the response on that group \(\bar{y}_j\). As \(\lambda\) increases, the estimated responses move towards the global average \(\bar{y}\). The speed of convergence to \(0\) depends on how much the group average \(\bar{y}_j\) differs from the global average \(\bar{y}\) and on the number of observation of the group: if in a group \(j\) there are many observations, we have a lot of information on that group, the group average \(\bar{y}_j\) have a small variance and it is a reliable estimate for \(\mu_j\), while if there are few observations, the group average \(\bar{y}_j\) have a high variance and it is not very reliable.
+An example of the effect of \(\lambda\) is reported in figure \ref{fig:ridge-lambda}. The data represented has been simulated from a \ac{glm} with idenity link and Normal response. As we can see, if \(\lambda=0\), all the estimated responses \(\hat{\mu}_j\) correspond to the average of the response on that group \(\bar{y}_j\). As \(\lambda\) increases, the estimated responses move towards the global average \(\bar{y}\). The speed of convergence to \(0\) depends on how much the group average \(\bar{y}_j\) differs from the global average \(\bar{y}\) and on the number of observation of the group: if in a group \(j\) there are many observations, we have a lot of information on that group, the group average \(\bar{y}_j\) have a small variance and it is a reliable estimate for \(\mu_j\), while if there are few observations, the group average \(\bar{y}_j\) have a high variance and it is not very reliable.
 
 The optimal point for \(\lambda=0\) can be obtained through a Cross Validation as seen in section \ref{chap:gam-choice-lambda}.
 
@@ -2529,7 +2533,7 @@ The optimal point for \(\lambda=0\) can be obtained through a Cross Validation a
 \caption[The Bias-Variance trade off. Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\).]{Ridge Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\).}\label{fig:ridge-lambda}
 \end{figure}
 
-The case of GLM with identity link and Normal distribution is particularly convenient for the interpretation, because, in this case, the optimization problem \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
+The case of \ac{glm} with identity link and Normal distribution is particularly convenient for the interpretation, because, in this case, the optimization problem \eqref{eq:ridge-est-deviance} has an explicit solution. To make the results more interpretable, let's assume that the response variables have \(E(Y)=0\) and that the explanatory variables are centered on \(0\), i.e.~\(\bar{x}_j=0, \ j\in\{1,2,\dots,p\}\). That means that \(\beta_0=0\) and the model is \(E(Y)=\beta_1x_1+\beta_2x_2+\dots+\beta_px_p\). With these assumptions, we obtain:
 \begin{equation}
 \label{eq:ridge-estimator}
 \hat{\boldsymbol{\beta}}_{\lambda,\setminus0} = \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t y
@@ -2576,7 +2580,7 @@ Var\left(\tilde{\boldsymbol{\beta}}_{\lambda,\setminus0} \right) & =
 
 This result means that, if the explanatory variables are independent, the Ridge penalization shrinks all the estimated coefficients by a factor of \(\frac{1}{1+\lambda}\) and reduce their variance by a factor of \(\frac{1}{\left(1+\lambda\right)^2}\).
 
-From formula \eqref{eq:ridge-estimator} we also find that, as in GAM, if the link is identity and the response is Normal, the Ridge regression is a linear smoother. In this case the smoothing matrix is:
+From formula \eqref{eq:ridge-estimator} we also find that, as in \ac{gam}, if the link is identity and the response is Normal, the Ridge regression is a linear smoother. In this case the smoothing matrix is:
 \[
 H_{\lambda} = \boldsymbol{X} \left(\boldsymbol{X}^t\boldsymbol{X}+\lambda I_p\right)^{-1}\boldsymbol{X}^t
 \]
@@ -2587,10 +2591,10 @@ H_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\
 \]
 and then \(\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}\). This result means that, by increasing \(\lambda\), the effective number of degrees of fredom decreases.
 
-\hypertarget{lasso-regression}{%
-\subsubsection{LASSO Regression}\label{lasso-regression}}
+\hypertarget{regression}{%
+\subsubsection{\texorpdfstring{\ac{lasso} Regression}{ Regression}}\label{regression}}
 
-Another shrinkage estimator for GLM is the \emph{LASSO} (Least Absolute Shrinkage and Selection Operator). LASSO is based on the same idea of Ridge Regression, but, instead of considering a penalization based on \(L^2\) norm, it considers a penalization based on \(L^1\) norm:
+Another shrinkage estimator for \ac{glm} is the \ac{lasso}. \ac{lasso} is based on the same idea of Ridge Regression, but, instead of considering a penalization based on \(L^2\) norm, it considers a penalization based on \(L^1\) norm:
 \begin{equation}
 \label{eq:lasso-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right\}}
@@ -2600,14 +2604,14 @@ where:
 \begin{itemize}
 \tightlist
 \item
-  \(\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)\) is the set of the GLM coefficients except for the intercept \(\beta_0\);
+  \(\boldsymbol{\beta}_{\setminus0} = \left(\beta_1, \beta_2, \dots, \beta_p\right)\) is the set of the \ac{glm} coefficients except for the intercept \(\beta_0\);
 \item
   \(\|\cdot\|_1\) is the \(L^1\) norm, i.e.~\(\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}\);
 \item
   \(\lambda\ge0\) is an hyper-parameter that controls the penalization.
 \end{itemize}
 
-An example of the effect of the \(L^1\) penalization for different values of \(\lambda\) is shown in figure \ref{fig:lasso-lambda}. The simulated dataset is the same used for the Ridge example in figure \ref{fig:ridge-lambda}. As we can see from the plots, the substantial difference between Ridge and LASSO is that in LASSO from a certain value of \(\lambda\) the coefficients are shrunk exactly to \(0\). While in Ridge that is just a limit property, in LASSO, for each coefficient \(\beta_j\) there is a level of the penalization parameter \(\lambda'_j\) such that for \(\lambda \ge \lambda'_j\), the estimated coefficient \(\hat{\beta}_j\) is forced to exactly \(0\).
+An example of the effect of the \(L^1\) penalization for different values of \(\lambda\) is shown in figure \ref{fig:lasso-lambda}. The simulated dataset is the same used for the Ridge example in figure \ref{fig:ridge-lambda}. As we can see from the plots, the substantial difference between Ridge and \ac{lasso} is that in \ac{lasso} from a certain value of \(\lambda\) the coefficients are shrunk exactly to \(0\). While in Ridge that is just a limit property, in \ac{lasso}, for each coefficient \(\beta_j\) there is a level of the penalization parameter \(\lambda'_j\) such that for \(\lambda \ge \lambda'_j\), the estimated coefficient \(\hat{\beta}_j\) is forced to exactly \(0\).
 
 
 
@@ -2621,10 +2625,10 @@ An example of the effect of the \(L^1\) penalization for different values of \(\
 
 }
 
-\caption[The Bias-Variance trade off. LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\).]{LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\). High values of \(\lambda\) force the coefficients to be exactly equal to \(0\).}\label{fig:lasso-lambda}
+\caption[LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\).]{LASSO Regression coefficients for different levels of the penalization parameter \(\lambda\). If \(\lambda=0\), the coefficients correspond to the maximum likelihood coefficients. As \(\lambda\) increases, the coefficients are shrunk towards \(0\). High values of \(\lambda\) force the coefficients to be exactly equal to \(0\).}\label{fig:lasso-lambda}
 \end{figure}
 
-This property of the LASSO Regression can be derived from a different representation of the optimization problems \eqref{eq:ridge-est-deviance} and \eqref{eq:lasso-est-deviance}. It can be proven that in general, considering a penalization given by the \(L^d\) norm, the unconstrained optimization problem:
+This property of the \ac{lasso} Regression can be derived from a different representation of the optimization problems \eqref{eq:ridge-est-deviance} and \eqref{eq:lasso-est-deviance}. It can be proven that in general, considering a penalization given by the \(L^d\) norm, the unconstrained optimization problem:
 \begin{equation}
 \label{eq:ld-est-deviance}
 \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_d^d\right\}}
@@ -2636,7 +2640,7 @@ is equivalent to the constrained optimization problem:
 \end{equation}
 where \(s_{\lambda}\) is a quantity that depends on \(\lambda\).
 
-The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric interpretation of the optimization problem. Figure \ref{fig:opt-ridge-lasso} shows the visual representation of the optimization problem \eqref{eq:lp-est-deviance-constr} in the Ridge case (\(d=2\)) and in the LASSO case (\(d=1\)). The axes represent the component of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). In the Normal case with identity link they are concentric ellipses centered in \(\hat{\boldsymbol{\beta}}^{ML}\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\). This area, in the Ridge case corresponds to the circle \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\), while in the LASSO case corresponds to the square \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the LASSO constraint. The sharpness of the LASSO feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\). In general, if there are more than two explanatory variables, the LASSO feasibility region is an hyper-cube and the LASSO attains solutions with many coefficients exactly equal to \(0\).
+The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric interpretation of the optimization problem. Figure \ref{fig:opt-ridge-lasso} shows the visual representation of the optimization problem \eqref{eq:lp-est-deviance-constr} in the Ridge case (\(d=2\)) and in the \ac{lasso} case (\(d=1\)). The axes represent the component of \(\boldsymbol{\beta}\). The point \(\hat{\boldsymbol{\beta}}^{ML}\) represents the maximum likelihood estimator for \(\boldsymbol{\beta}\), that is the optimal point for the Deviance \(D(\boldsymbol{\beta}, \boldsymbol{y})\) without any constraints. The ellipses around \(\hat{\boldsymbol{\beta}}^{ML}\) represent the contour lines of \(D(\boldsymbol{\beta}, \boldsymbol{y})\). In the Normal case with identity link they are concentric ellipses centered in \(\hat{\boldsymbol{\beta}}^{ML}\). The grey area around the axes intersection represents the feasibility region determined by \(\|\boldsymbol{\beta}\|_d^d \le s_\lambda\). This area, in the Ridge case corresponds to the circle \(\|\boldsymbol{\beta}\|_2^2 \le s_\lambda\), while in the \ac{lasso} case corresponds to the square \(\|\boldsymbol{\beta}\|_1^1 \le s_\lambda\). \(\hat{\boldsymbol{\beta}}^{Ridge}\) and \(\hat{\boldsymbol{\beta}}^{LASSO}\) are respectively the optimal point conditioned to the Ridge constraint and the optimal point conditioned to the \ac{lasso} constraint. The sharpness of the \ac{lasso} feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\). In general, if there are more than two explanatory variables, the \ac{lasso} feasibility region is an hyper-cube and the \ac{lasso} attains solutions with many coefficients exactly equal to \(0\).
 
 
 
@@ -2653,14 +2657,14 @@ The representation \eqref{eq:lp-est-deviance-constr} provides a useful geometric
 \caption[Geometrical interpretation of the optimization problem for Ridge and LASSO.]{Geometrical interpretation of the optimization problem for Ridge and LASSO. The sharpness of the LASSO feasibility region implies that the optimal point \(\hat{\boldsymbol{\beta}}^{LASSO}\) could fall into one of the corners of the square leading one of the coefficients \(\hat{\beta}_j^{LASSO}\) to be exactly equal to \(0\).}\label{fig:opt-ridge-lasso}
 \end{figure}
 
-The fact that in LASSO Regression the estimated coefficients can be exactly equal to \(0\) is a precious benefit. Indeed, LASSO Regression performs a feature selection removing the variables that are not relevant for predicting the response. The LASSO fitting is much more efficient than the other procedures we have seen for feature selection in GLM such as the stepwise selection based on AIC or other criteria (section \ref{chap:variable-selection}) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the LASSO regression and giving them as inputs for a maximum likelihood fitting. If in the dataset there are many variables but only few of them are relevant for the response, this procedure can return better predictions than the LASSO regression by itself.
+The fact that in \ac{lasso} Regression the estimated coefficients can be exactly equal to \(0\) is a precious benefit. Indeed, \ac{lasso} Regression performs a feature selection removing the variables that are not relevant for predicting the response. The \ac{lasso} fitting is much more efficient than the other procedures we have seen for feature selection in \ac{glm} such as the stepwise selection based on AIC or other criteria (section \ref{chap:variable-selection}) and it is better scalable for datasets with many variables. It is also possible to use the variables selected by the \ac{lasso} regression and giving them as inputs for a maximum likelihood fitting. If in the dataset there are many variables but only few of them are relevant for the response, this procedure can return better predictions than the \ac{lasso} regression by itself.
 
 \hypertarget{elastic-net}{%
 \subsubsection{Elastic Net}\label{elastic-net}}
 
-Compared to the Ridge Regression, the LASSO Regression has the benefit of performing a feature selection by forcing many coefficients to \(0\). Anyway this doesn't necessarily mean that LASSO estimates always outperform Ridge estimates. It strongly depends on the case. In general, if in a dataset only few of the explanatory variables have an effect on the response, the LASSO will produce better estimates, but, if all the variables bring a small amount of information on the response, then the LASSO will suppress some of this information, while the Ridge will catch it. The problem is that in practice, when we have a real dataset, we do not know in which case we are. The \emph{Elastic Net} is a generalization of the Ridge and the LASSO that provides a solution for this kind of problem.
+Compared to the Ridge Regression, the \ac{lasso} Regression has the benefit of performing a feature selection by forcing many coefficients to \(0\). Anyway this doesn't necessarily mean that \ac{lasso} estimates always outperform Ridge estimates. It strongly depends on the case. In general, if in a dataset only few of the explanatory variables have an effect on the response, the \ac{lasso} will produce better estimates, but, if all the variables bring a small amount of information on the response, then the \ac{lasso} will suppress some of this information, while the Ridge will catch it. The problem is that in practice, when we have a real dataset, we do not know in which case we are. The \emph{Elastic Net} is a generalization of the Ridge and the \ac{lasso} that provides a solution for this kind of problem.
 
-The Elastic Net consists in a penalized Deviance optimization problem in which the penalization term is a mixture of the Ridge penalization and the LASSO penalization:
+The Elastic Net consists in a penalized Deviance optimization problem in which the penalization term is a mixture of the Ridge penalization and the \ac{lasso} penalization:
 \begin{equation}
 \label{eq:elastic-net-est-deviance}
 \hat{\boldsymbol{\beta}} =  \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
@@ -2671,7 +2675,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) +
 \end{equation}
 where \(\alpha \in [0,1]\) is a hyper-parameter that weighs the two penalization components.
 
-Looking to the equation \eqref{eq:elastic-net-est-deviance} it is clear that, if \(\alpha=0\), the Elastic Net corresponds to the Ridge Regression, while, if \(\alpha=1\), the Elastic Net corresponds to the LASSO regression. If \(\alpha \in ]0,1[\), the result will be a compromise between the two.
+Looking to the equation \eqref{eq:elastic-net-est-deviance} it is clear that, if \(\alpha=0\), the Elastic Net corresponds to the Ridge Regression, while, if \(\alpha=1\), the Elastic Net corresponds to the \ac{lasso} regression. If \(\alpha \in ]0,1[\), the result will be a compromise between the two.
 
 The hyper-parameter \(\alpha\) can be estimated together with \(\lambda\) in a Cross Validation procedure (see section \ref{chap:variable-selection}). If the data suggests that many variables are useful for predicting the response, the estimated hyper-parameter \(\hat{\alpha}\) will be close to \(0\), while if the data suggests that only few variables are useful, the estimated hyper-parameter \(\hat{\alpha}\) will be close to \(1\).
 
@@ -2682,9 +2686,9 @@ As we have said, shrinkage estimators are particularly useful when the number of
 
 If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients \(\beta_j\) corresponding to the modalities of those variables. This technique is useful also if we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable ``number of claims experienced in the previous year'', we will have most of the observation in the modality corresponding to \(0\) claims, very few in the modality corresponding to \(1\) claim and almost nobody with \(2\) or more claims. If we are fitting a model for the claim frequency and we consider the variable \(x_j\) that indicates whether the policyholder experienced one or more claims in the previous year \(x_j=1\) or not \(x_j=0\), it is likely that the maximum likelihood estimator for the coefficient \(\hat{\beta}_{x_j=1}\) will be greater than \(0\), as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that there are just few observation with \(x_j=1\) it is possible that the coefficient \(\hat{\beta}_{x_j=1}\) is not significantly different from \(0\). If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable \(x_j\) in the model or not. If we don't consider it we are probably discarding some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk overfitting the data. With shrinkage estimators we can choose to insert the variable \(x_j\) in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
 
-Another interesting observation about GLM fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable \(x_j\) is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient \(\beta_j\) with an estimator \(\tilde{\beta}_j\) that is equal to the maximum likelihood estimator \(\tilde{\beta}_j^{ML}\) when the coefficient pass a specific criterion and is equal to \(0\) when \(\tilde{\beta}_j^{ML}\) doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on \(\tilde{\beta}_j^{ML}\), and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards \(0\) of the coefficient \(\tilde{\beta}_j\) that reduces its variance as all the coefficients not relevant for prediction are set equal to \(0\) and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable \(x_j\), in all the procedures commonly used for feature selection, the probability that \(\tilde{\beta}_j\) passes the procedure or not depends on how strong the effect \(\beta_j\) is and how many observations there are in the classes \(x_j=0\) and \(x_j=1\).
+Another interesting observation about \ac{glm} fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable \(x_j\) is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient \(\beta_j\) with an estimator \(\tilde{\beta}_j\) that is equal to the maximum likelihood estimator \(\tilde{\beta}_j^{ML}\) when the coefficient pass a specific criterion and is equal to \(0\) when \(\tilde{\beta}_j^{ML}\) doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on \(\tilde{\beta}_j^{ML}\), and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards \(0\) of the coefficient \(\tilde{\beta}_j\) that reduces its variance as all the coefficients not relevant for prediction are set equal to \(0\) and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable \(x_j\), in all the procedures commonly used for feature selection, the probability that \(\tilde{\beta}_j\) passes the procedure or not depends on how strong the effect \(\beta_j\) is and how many observations there are in the classes \(x_j=0\) and \(x_j=1\).
 
-We also mention that the Shrinkage Estimators can be used in synergy with GAMs. Indeed it is possible to fit to the quantitative variables a cubic spline with a GAM penalization based on the second derivative of the spline and to the qualitative variables a shrinkage estimator with an Elastic Net penalization.
+We also mention that the Shrinkage Estimators can be used in synergy with \ac{gam}s. Indeed it is possible to fit to the quantitative variables a cubic spline with a \ac{gam} penalization based on the second derivative of the spline and to the qualitative variables a shrinkage estimator with an Elastic Net penalization.
 \begin{equation}
 \label{eq:gam-en-est-deviance-multi}
 \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
@@ -2705,7 +2709,7 @@ where the coefficients \(\beta_j\) considered in the Elastic Net penalization ar
 \hypertarget{chap:bayes-glm}{%
 \subsection{Bayesian GLM}\label{chap:bayes-glm}}
 
-In this section we are going to present the Bayesian estimators for GLM. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduces the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \ref{chap:bayes-ridge-lasso}, Ridge Regression and LASSO Regression can be interpreted as Bayesian estimators.
+In this section we are going to present the Bayesian estimators for \ac{glm}. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduces the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \ref{chap:bayes-ridge-lasso}, Ridge Regression and \ac{lasso} Regression can be interpreted as Bayesian estimators.
 
 \hypertarget{the-bayesian-framework}{%
 \subsubsection{The Bayesian framework}\label{the-bayesian-framework}}
@@ -2742,7 +2746,7 @@ These two statistics can be used as point estimates for the parameter \(\theta\)
 \hypertarget{bayesian-estimator-for-the-mean-of-a-normal-distribution}{%
 \subsubsection{Bayesian estimator for the mean of a Normal distribution}\label{bayesian-estimator-for-the-mean-of-a-normal-distribution}}
 
-One example to dive into the the Bayesian inference that is useful to better understand the logic of Bayesian estimators in GLM is the inference on the mean of a Normal distribution from an observed sample.
+One example to dive into the the Bayesian inference that is useful to better understand the logic of Bayesian estimators in \ac{glm} is the inference on the mean of a Normal distribution from an observed sample.
 
 Let's assume we have a independent and identically distributed sample \(\boldsymbol{y} = (y_1, y_2, \dots, y_n)\) from a Normal distribution:
 \begin{equation}
@@ -2825,9 +2829,9 @@ In general we are not constrained to use conjugate priors and we can choose for 
 \hypertarget{bayesian-estimators-for-glm}{%
 \subsubsection{Bayesian estimators for GLM}\label{bayesian-estimators-for-glm}}
 
-The Bayesian approach can be applied to GLM by adopting prior distribution on the coefficients \((\boldsymbol{\beta}, \phi)\). By assuming a prior distribution on \(\boldsymbol{\beta}\) we will introduce a bias driven by our prior information.
+The Bayesian approach can be applied to \ac{glm} by adopting prior distribution on the coefficients \((\boldsymbol{\beta}, \phi)\). By assuming a prior distribution on \(\boldsymbol{\beta}\) we will introduce a bias driven by our prior information.
 
-In section \ref{chap:glm-model-fitting} we saw that in GLM the common estimator used for \(\boldsymbol{\beta}\) is the Maximum Likelihood estimator \(\tilde{\boldsymbol{\beta}}^{ML}\) with determinations:
+In section \ref{chap:glm-model-fitting} we saw that in \ac{glm} the common estimator used for \(\boldsymbol{\beta}\) is the Maximum Likelihood estimator \(\tilde{\boldsymbol{\beta}}^{ML}\) with determinations:
 \begin{equation}
 \label{eq:bayes-max-lik-est}
 \hat{\boldsymbol{\beta}}^{ML} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)}
@@ -2866,7 +2870,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(\pi(\boldsymbol{\beta})\
 From equation \eqref{eq:bayes-map-est-4} we find that, adding a prior distribution \(\pi(\boldsymbol{\beta})\), corresponds to adding a term \(-2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}\) to the deviance in the optimization problem that defines the estimator. In particular, if the prior is non-informative, we get that \(\pi(\boldsymbol{\beta})\propto k, \ k\in]0,+\infty[\) does not depend on \(\boldsymbol{\beta}\), so the optimization problem corresponds to the Maximum Likelihood.
 
 \hypertarget{chap:bayes-ridge-lasso}{%
-\subsubsection{Ridge and LASSO Regression as Bayesian estimators for GLM}\label{chap:bayes-ridge-lasso}}
+\subsubsection{\texorpdfstring{Ridge and \ac{lasso} Regression as Bayesian estimators for \ac{glm}}{Ridge and  Regression as Bayesian estimators for }}\label{chap:bayes-ridge-lasso}}
 
 Let's assume the parameters \(\beta_1, \beta_2, \dots, \beta_p\) to be identically distributed with \emph{Normal} distribution centered in \(0\):
 \[
@@ -2912,7 +2916,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(e^{-\frac{1}{b}{\sum_{j=
 & = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
 D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{b} {\sum_{j=1}^{p}{|\beta_j|}}\right\}}
 \end{align}
-By substituting \(\frac{2\phi}{b}\) with \(\lambda\) in equation \eqref{eq:bayes-map-est-laplace}, we obtain the optimization problem of the LASSO regression \eqref{eq:lasso-est-deviance}. In the Laplace distribution the variance is \(Var(\beta_j) = 2b^2\). By decreasing \(b\), the variance in \(\pi(\beta_j)\) decreases, so the prior is more informative and we give more credibility to the prior mean \(0\). As for Ridge regression, a lower variance in the prior distribution translates into an higher penalization parameter \(\lambda\) and a higher shrinkage for the coefficients.
+By substituting \(\frac{2\phi}{b}\) with \(\lambda\) in equation \eqref{eq:bayes-map-est-laplace}, we obtain the optimization problem of the \ac{lasso} regression \eqref{eq:lasso-est-deviance}. In the Laplace distribution the variance is \(Var(\beta_j) = 2b^2\). By decreasing \(b\), the variance in \(\pi(\beta_j)\) decreases, so the prior is more informative and we give more credibility to the prior mean \(0\). As for Ridge regression, a lower variance in the prior distribution translates into an higher penalization parameter \(\lambda\) and a higher shrinkage for the coefficients.
 
 With the same approach, if we assume the following prior distribution:
 \[
@@ -2925,7 +2929,7 @@ D(\boldsymbol{\beta}, \boldsymbol{y}) + \frac{2\phi}{k} {\sum_{j=1}^{p}{\left(\a
 \]
 where \(k>0\) is a constant that determine the variance of the prior distribution.
 
-Figure \ref{fig:normal-laplace} shows a Normal, a Laplace and a Elastic Net prior distribution with \(\alpha=\frac{1}{2}\). All the distributions represented have unit variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly \(0\) the unimportant coefficients in the LASSO regression. The Elastic Net prior is a mixture between the Normal distribution and the Laplace distribution.
+Figure \ref{fig:normal-laplace} shows a Normal, a Laplace and a Elastic Net prior distribution with \(\alpha=\frac{1}{2}\). All the distributions represented have unit variance. As we can see from the plot, the Laplace distribution has a peak on its mean. This peak is the responsible of forcing to exactly \(0\) the unimportant coefficients in the \ac{lasso} regression. The Elastic Net prior is a mixture between the Normal distribution and the Laplace distribution.
 
 
 
@@ -2942,12 +2946,12 @@ Figure \ref{fig:normal-laplace} shows a Normal, a Laplace and a Elastic Net prio
 \caption[Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.]{Normal density function, Laplace density function and Elastic Net prior density function with unitary variance.}\label{fig:normal-laplace}
 \end{figure}
 
-The approach usually adopted in Ridge and LASSO regression is to select the optimal hyper-parameter \(\lambda\) based on Cross Validation, so the prior distribution is estimated from the data. This approach stands in contrast to standard Bayesian methods, in which the prior distribution represents the a priori information and should be fixed before observing the sample. The Bayesian procedures in which the prior distribution is estimated from the data are called \emph{Empirical Bayes} methods.
+The approach usually adopted in Ridge and \ac{lasso} regression is to select the optimal hyper-parameter \(\lambda\) based on Cross Validation, so the prior distribution is estimated from the data. This approach stands in contrast to standard Bayesian methods, in which the prior distribution represents the a priori information and should be fixed before observing the sample. The Bayesian procedures in which the prior distribution is estimated from the data are called \emph{Empirical Bayes} methods.
 
 \hypertarget{other-bayesian-estimators-for-glm}{%
 \subsubsection{Other Bayesian estimators for GLM}\label{other-bayesian-estimators-for-glm}}
 
-The Bayesian framework provides more flexibility in prior information than what standard Ridge and LASSO regression offer.
+The Bayesian framework provides more flexibility in prior information than what standard Ridge and \ac{lasso} regression offer.
 
 Even staying with the Normal prior distributions, it is possible to give to the different coefficients \(\beta_j\) different prior variances \(\sigma_j^2\), that would represent how much we trust the estimated coefficient to be different from \(0\). For example it is possible to use a non informative prior for most of the coefficients and to introduce an informative prior only to the more delicate ones. That corresponds to adding a penalization only to those coefficients. As we have already discussed in section \ref{chap:shrinkage-considerations}, this technique can be useful in the case of highly unbalanced explanatory variables, such as the variable ``number of claims experienced in the previous year''.
 
@@ -2962,7 +2966,7 @@ The Bayesian framework allows us also to use prior distributions different from 
 \end{cases}
 \]
 
-A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables \(x_1, x_2, \dots, x_J\). In the common GLM parametrization, each dummy variable corresponds to a coefficient \(\beta_1, \beta_2, \dots, \beta_J\). We can consider the difference between each and the previous one: \(\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}\). The new parametrization depends on the coefficients: \(\beta_1, \gamma_2, \dots, \gamma_J\). If we assign a prior distribution centered on \(0\) for the coefficients \(\gamma_2, \dots, \gamma_J\), this will produce a shrinkage of each of the coefficients \(\beta_2, \dots, \beta_J\) towards the previous one, forcing the variable effect to have small steps from one modality to the next one. Moreover, if we assign to \(\gamma_2, \dots, \gamma_J\) prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
+A useful application of prior distributions with all the mass on positive value is the following. Suppose we have a discrete ordinal variable with determinations encoded in the dummy variables \(x_1, x_2, \dots, x_J\). In the common \ac{glm} parametrization, each dummy variable corresponds to a coefficient \(\beta_1, \beta_2, \dots, \beta_J\). We can consider the difference between each and the previous one: \(\gamma_j = \beta_j - \beta_{j-1}, \ j\in\{2, 3, \dots, J\}\). The new parametrization depends on the coefficients: \(\beta_1, \gamma_2, \dots, \gamma_J\). If we assign a prior distribution centered on \(0\) for the coefficients \(\gamma_2, \dots, \gamma_J\), this will produce a shrinkage of each of the coefficients \(\beta_2, \dots, \beta_J\) towards the previous one, forcing the variable effect to have small steps from one modality to the next one. Moreover, if we assign to \(\gamma_2, \dots, \gamma_J\) prior distributions with all the mass on positive determinations, the estimate will produce a monotonically non decreasing effect as:
 \[
 \gamma_2, \dots, \gamma_J \ge 0 \ \longrightarrow \ \beta_1\le\beta_2\le\dots\le\beta_J
 \]
@@ -2971,7 +2975,7 @@ In the same way, if we assign to \(\gamma_2, \dots, \gamma_J\) prior distributio
 \hypertarget{some-considerations-on-bayesian-estimators-for-glm}{%
 \subsubsection{Some considerations on Bayesian estimators for GLM}\label{some-considerations-on-bayesian-estimators-for-glm}}
 
-Bayesian estimators offer a flexible tool for modeling effects in GLM. This tool is particularly useful in actuarial modeling because often the actuary needs to introduce external information to tune the model coefficients.
+Bayesian estimators offer a flexible tool for modeling effects in \ac{glm}. This tool is particularly useful in actuarial modeling because often the actuary needs to introduce external information to tune the model coefficients.
 
 In the actuarial practice this is often done introducing offsets. For example, let's consider a delicate coefficient \(\beta_j\) estimated for a class with low exposure. This can happen for example with the variable ``number of claims experienced in the previous year'' with the class ``more than one claims''. If we want to insert it in the model with an effect weakened compared to the maximum likelihood one \(\hat{\beta}_j^{ML}\), we can consider a specific value \(\hat{\beta}_j^{\text{offset}}\), with \(|\hat{\beta}_j^{\text{offset}}| \le |\hat{\beta}_j^{ML}|\), in the model and introduce it as an offset.
 
@@ -2983,7 +2987,7 @@ First of all, even if we are forcing the coefficient to be exactly \(\hat{\beta}
 
 Secondly, in many cases, after setting an offset, we want to modify the model and eventually change other coefficients. After doing this, if we are working with offsets, we have to review each of the coefficients imposed in offset, since a change in other coefficients can affect them. With Bayesian estimators we can just keep the prior distributions previously set and refit the model. The new coefficients will be automatically reevaluated keeping the strength of the prior distributions previously assigned.
 
-We end our discussion on Bayesian estimators for GLM by mentioning that also GAM models, discussed in section \ref{chap:gam}, can be estimated with Bayesian estimators. This is done by applying a prior distribution to the coefficients of the spline functions \(f_l(\cdot)\). For more details on that, we refer to \autocite{bayes-gam}.
+We end our discussion on Bayesian estimators for \ac{glm} by mentioning that also \ac{gam} models, discussed in section \ref{chap:gam}, can be estimated with Bayesian estimators. This is done by applying a prior distribution to the coefficients of the spline functions \(f_l(\cdot)\). For more details on that, we refer to \autocite{bayes-gam}.
 
 \newpage
 
@@ -2995,7 +2999,7 @@ In this section we are going to discuss how the models we have seen in the previ
 \hypertarget{chap:ml-techniques}{%
 \subsection{Hints on Machine Learning Algorithms}\label{chap:ml-techniques}}
 
-With the term \emph{Machine Learning Algorithms} we refer to a set of techniques used for predictive models in Machine Learning Practice, such as \emph{Gradient Boosting Machines} (GBM), \emph{Random Forests} (RF) and \emph{Neural Networks} (NN). These are highly flexible general purpose techniques that can be used both for regression (predictive models with a quantitative response variable \(Y\)) and classification (predictive models with a qualitative response variable \(Y\)). In this section we are going to only provide some hints on them. For a more in-depth exposure of these models with applications to actuarial problems we refer to \autocite{wuthrich-data-analytics}.
+With the term \emph{Machine Learning Algorithms} we refer to a set of techniques used for predictive models in Machine Learning Practice, such as \ac{gbm}, \ac{rf} and \ac{nn}. These are highly flexible general purpose techniques that can be used both for regression (predictive models with a quantitative response variable \(Y\)) and classification (predictive models with a qualitative response variable \(Y\)). In this section we are going to only provide some hints on them. For a more in-depth exposure of these models with applications to actuarial problems we refer to \autocite{wuthrich-data-analytics}.
 
 The assumptions adopted in the models behind these algorithms are minimal. Usually it is just assumed a distribution for the response variable \(Y\), while for the regression function we just consider:
 \[
@@ -3013,14 +3017,14 @@ These algorithms provide a highly level of automation and do not require big man
 
 The results of the fitting are complex regression functions \(\hat{\boldsymbol{f}}\). The convenience of this complexity combined with a strong automation is that these algorithms are able to automatically spot complex effects that wouldn't be easily discovered by manual fitting. On the other hand, this complexity reduces the interpretability of the result. For this reason, these algorithms are often referred as \emph{Black Box}.
 
-We underline that, from a theoretical point of view, GLM and all their advancements seen in this thesis are actually \emph{Machine Learning Techniques}, since there is not a theoretical distinction between \emph{Statistical Models} and \emph{Machine Learning Models}. Anyway, in the common speech, the term \emph{Machine Learning} is used for algorithms such as GBM, Random Forest and Neural Network, that, compared to classical statistical models, offer more complex estimations and a higher level of automation. In the following, we will use the term \emph{Machine Learning Algorithms} to refer to algorithms such as GBM, Random Forest and Neural Network.
+We underline that, from a theoretical point of view, \ac{glm} and all their advancements seen in this thesis are actually \emph{Machine Learning Techniques}, since there is not a theoretical distinction between \emph{Statistical Models} and \emph{Machine Learning Models}. Anyway, in the common speech, the term \emph{Machine Learning} is used for algorithms such as \ac{gbm}, Random Forest and Neural Network, that, compared to classical statistical models, offer more complex estimations and a higher level of automation. In the following, we will use the term \emph{Machine Learning Algorithms} to refer to algorithms such as \ac{gbm}, Random Forest and Neural Network.
 
 \hypertarget{chap:model-comparison}{%
 \subsection{Model comparison}\label{chap:model-comparison}}
 
-In this thesis we have discussed some GLM advancements: GAMs (section \ref{chap:gam}), Shrinkage Estimators (section \ref{chap:shrinkage-estimators}) and Bayesian Estimators (section \ref{chap:bayes-glm}). All these developments offer better predictions and more automation compared to classic GLM. For example, in GAM fitting it is not needed to specify the shape of the effect for the quantitative variables and in Elastic Net an automatic variable selection is performed. The improvement in performance both in term of predictivity and automation increases as the number of explanatory variable increases, so these techniques become significantly better than classic GLM when \(p\) is big. As, we have seen, these techniques are not mutual exclusive. It is possible to fit a GAM with penalized splines for quantitative explanatory variables and Elastic Net penalization in qualitative explanatory variables. The Bayesian estimators, that can be seen as a generalization of Elastic Net, can be applied to both GLM and GAM and offer even more useful tools for fitting.
+In this thesis we have discussed some \ac{glm} advancements: \ac{gam}s (section \ref{chap:gam}), Shrinkage Estimators (section \ref{chap:shrinkage-estimators}) and Bayesian Estimators (section \ref{chap:bayes-glm}). All these developments offer better predictions and more automation compared to classic \ac{glm}. For example, in \ac{gam} fitting it is not needed to specify the shape of the effect for the quantitative variables and in Elastic Net an automatic variable selection is performed. The improvement in performance both in term of predictivity and automation increases as the number of explanatory variable increases, so these techniques become significantly better than classic \ac{glm} when \(p\) is big. As, we have seen, these techniques are not mutual exclusive. It is possible to fit a \ac{gam} with penalized splines for quantitative explanatory variables and Elastic Net penalization in qualitative explanatory variables. The Bayesian estimators, that can be seen as a generalization of Elastic Net, can be applied to both \ac{glm} and \ac{gam} and offer even more useful tools for fitting.
 
-Compared to these GLM Advancements, Machine Learning Algorithms are still much more flexible and automatic. Indeed, in GLM and GAM there still is a certain degree of manual supervision. For example, we still have to specify the interactions we want to consider in the model. Actually, in Elastic Net we can consider a large number of interactions and let the model automatically select them, but it is still preferred to check what the model is doing and eventually manually choose whether to include or not the selected interactions.
+Compared to these \ac{glm} Advancements, Machine Learning Algorithms are still much more flexible and automatic. Indeed, in \ac{glm} and \ac{gam} there still is a certain degree of manual supervision. For example, we still have to specify the interactions we want to consider in the model. Actually, in Elastic Net we can consider a large number of interactions and let the model automatically select them, but it is still preferred to check what the model is doing and eventually manually choose whether to include or not the selected interactions.
 
 Anyway, Machine Learning Algorithms are much less \emph{interpretable} and \emph{controllable} compared to GLM-based models. In GLM-based models we can easily look at the marginal effects of the explanatory variables and we have a full control of the interactions. In Machine Learning Algorithms, we can't easily look at how the changing of an explanatory variable affects the estimate on the response because the effect of that changing can highly depend on the values of the other explanatory variables in a way that we can't manually control.
 
@@ -3055,7 +3059,7 @@ In all the cases mentioned, the actuary has to use his expertise to properly pri
 
 As we have seen in section \ref{beyond-technical-pricing}, the tariff and the offer price are the result of a process of \emph{price optimization} that takes into account technical pricing, client expectation and business strategy. Usually the definition of the tariff and the offer price starts from the technical price and from it some of the coefficients are tuned to satisfy commercial needs.
 
-The tariff and the offer price must also respect specific legal constraints. One example of legal constraint in MTPL coefficients is related to the bonus-malus class. By law, the coefficients of the bonus-malus class must be monotonically increasing. That means that, even if in the technical price the fitted coefficients are not increasing in all clusters, in tariff and offer price they must be tuned to achive monotonicity.
+The tariff and the offer price must also respect specific legal constraints. One example of legal constraint in \ac{mtpl} coefficients is related to the bonus-malus class. By law, the coefficients of the bonus-malus class must be monotonically increasing. That means that, even if in the technical price the fitted coefficients are not increasing in all clusters, in tariff and offer price they must be tuned to achive monotonicity.
 
 Some commercial constraints that are logical for tariff and offer price are the ones on coefficients related to coverage options such as the insurance ceiling and the deductible. It is clear that, if a client asks for a higher ceiling, the price offered to him must be higher. However, it is possible that on observed data on average the policies with higher ceiling experience less claims and have a lower total cost of claims. This can be explained with the fact that policyholders that select the higher ceiling are usually the more careful, so they commit less claims. The same way, if the client asks for a higher deductible, the price offered to him must be lower, even if it is possible that policies with higher deductible have an higher technical price that policies with a lower deductible.
 
@@ -3073,7 +3077,7 @@ Finally, we mention that there are some practical cases in which it is important
 \hypertarget{practical-data-problem-and-solutions}{%
 \subsection{Practical data problem and solutions}\label{practical-data-problem-and-solutions}}
 
-In building actuarial models we also face practical challenges due to the size of the data we are working with. In modern actuarial modeling it is common to work with datasets with millions of rows and hundreds of columns, that can weight several Gigabytes. With legacy Information Technology (IT) implementations, dealing with these kinds of datasets can be quite painful. The issues appear not only in fitting models, but in the whole Extract Transform Load (ETL) pipeline. Working with big amount of data is struggling on two main aspects:
+In building actuarial models we also face practical challenges due to the size of the data we are working with. In modern actuarial modeling it is common to work with datasets with millions of rows and hundreds of columns, that can weight several Gigabytes. With legacy \ac{it} implementations, dealing with these kinds of datasets can be quite painful. The issues appear not only in fitting models, but in the whole \ac{etl} pipeline. Working with big amount of data is struggling on two main aspects:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
@@ -3084,9 +3088,9 @@ In building actuarial models we also face practical challenges due to the size o
   Computation time.
 \end{enumerate}
 
-The first problem consists in the fact that in a system the amount of primary memory, i.e.~the Random Access Memory (RAM), is limited and can't be arbitrarily increased. When the datasets we use are larger than the RAM in our local machine, it is not possible to work with them in memory locally. A possible solution is to keep the data on the secondary memory, i.e.~the Hard Disk Drive (HDD) or Solid State Drive (SSD), and read it sequentially only when it is needed, as it is done in some analytics software like SAS. This solution permits to work with larger datasets, but implicates a significant decrease in computation speed, since reading and writing on secondary memory is much slower than doing it on primary memory.
+The first problem consists in the fact that in a system the amount of primary memory, i.e.~the \ac{ram}, is limited and can't be arbitrarily increased. When the datasets we use are larger than the \ac{ram} in our local machine, it is not possible to work with them in memory locally. A possible solution is to keep the data on the secondary memory, i.e.~the \ac{hdd} or \ac{ssd}, and read it sequentially only when it is needed, as it is done in some analytics software like SAS. This solution permits to work with larger datasets, but implicates a significant decrease in computation speed, since reading and writing on secondary memory is much slower than doing it on primary memory.
 
-Considering the computation time, even if our data fits into the primary memory, if we want to run a complex algorithm with our processor, it could be infeasible in a reasonable amount of time. Indeed, the speed on a single Central Processing Unit (CPU) is limited by physical constraints.
+Considering the computation time, even if our data fits into the primary memory, if we want to run a complex algorithm with our processor, it could be infeasible in a reasonable amount of time. Indeed, the speed on a single \ac{cpu} is limited by physical constraints.
 
 In modern computer science, the solution to these problems comes from the concept of parallelism. Parallel computing is a type of computation where many calculations are carried out simultaneously. This can be achieved with two paradigms:
 
@@ -3105,21 +3109,21 @@ Anyway, task parallelization does not tackle the problem of limited available me
 
 Moving from a centralized system to a distributed system requires an important level of sophistication from an algorithm point of view. Luckily, there are many frameworks such as Apache Hadoop and Spark, that offer high-level interfaces that can be easily deployed by the final user. The high-level of abstraction of these interfaces permits to the final user to conduct analysis in a distributed system without worrying on the low-level implementation details.
 
-An even higher level of abstraction is achieved with \emph{cloud computing}. Cloud computing consists in the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user. The idea behind cloud computing is to demand the whole IT management to a third company and paying to it a fee based on the use. This paradigm is also called \emph{Hardware as a Service} (HaaS), as the client doesn't own the hardware and just accesses the storage and the computing power when he needs it. With this approach, scalability is even easier, because, if the user needs more resources, he can just ask for them and the service provider will quickly satisfy his request. With own hardware, increasing the hardware resources would require buying new hardware and installing it, that could be a big investment both in term of economic cost and time spent.
+An even higher level of abstraction is achieved with \emph{cloud computing}. Cloud computing consists in the on-demand availability of computer system resources, especially data storage and computing power, without direct active management by the user. The idea behind cloud computing is to demand the whole \ac{it} management to a third company and paying to it a fee based on the use. This paradigm is also called \ac{haas}, as the client doesn't own the hardware and just accesses the storage and the computing power when he needs it. With this approach, scalability is even easier, because, if the user needs more resources, he can just ask for them and the service provider will quickly satisfy his request. With own hardware, increasing the hardware resources would require buying new hardware and installing it, that could be a big investment both in term of economic cost and time spent.
 
-We mention that, even if the solution mentioned in this chapter are suitable for \emph{big data}, in usual actuarial pricing, big data are not used. The characteristics usually associated with big data are \emph{Volume}, \emph{Variety} and \emph{Velocity}. In common actuarial practice variety and velocity are not contemplated, as actuarial datasets are usually just relational tables that, at the moment of modeling, are previously built. The situation changes by introducing real time data such as telematics car driving data. For instance, if we want to model the real-time risk of committing a claim based on data from speedometers, accelerometers, gyroscopes and GPS that capture how and where the driver is driving the vehicle, that would be a big data problem.
+We mention that, even if the solutions mentioned in this chapter are suitable for \emph{big data}, in usual actuarial pricing, big data are not used. The characteristics usually associated with big data are \emph{Volume}, \emph{Variety} and \emph{Velocity}. In common actuarial practice variety and velocity are not contemplated, as actuarial datasets are usually just relational tables that, at the moment of modeling, are previously built. The situation changes by introducing real time data such as telematics car driving data. For instance, if we want to model the real-time risk of committing a claim based on data from speedometers, accelerometers, gyroscopes and GPS that capture how and where the vehicle is driven, that would be a big data problem.
 
 \hypertarget{chap:actuarial-pricing-specific-needs}{%
 \subsection{Actuarial pricing specific needs}\label{chap:actuarial-pricing-specific-needs}}
 
-In actuarial practice, as the actuary needs to visualize, interpret and control the variables effects, it is also important how the interface works. Often visual point and click applications are preferred to coding interfaces, such as R and Python. While coding interfaces are often used for ETL processes for their flexibility, in the modeling process point and click applications are considered more user friendly, since they require less effort from user to become proficient and they often offer out of the box tools to easily visualize results.
+In actuarial practice, as the actuary needs to visualize, interpret and control the variables effects, it is also important how the interface works. Often visual point and click applications are preferred to coding interfaces, such as R and Python. While coding interfaces are often used for \ac{etl} processes for their flexibility, in the modeling process point and click applications are considered more user friendly, since they require less effort from user to become proficient and they often offer out of the box tools to easily visualize results.
 
-Among the point and click applications, in the market there are some solutions for actuarial pricing that are specifically thought for building GLMs and authomatically produces the plots seen in section \ref{chap:glm}. These applications are particularly optimized for GLM, but they are not as flexible as machine learning libraries in R and Python and the advancement implemented are limited.
+Among the point and click applications, in the market there are some solutions for actuarial pricing that are specifically thought for building \ac{glm}s and authomatically produces the plots seen in section \ref{chap:glm}. These applications are particularly optimized for \ac{glm}, but they are not as flexible as machine learning libraries in R and Python and the advancement implemented are limited.
 
 \hypertarget{solution-adopted-in-this-project}{%
 \subsection{Solution adopted in this project}\label{solution-adopted-in-this-project}}
 
-In the application described in section \ref{chap:practical-app} we used H2O. H2O is an open-source machine learning platform that provides many of the most widely used statistics and machine learning models, such as GLM, GAM, GBM, Random Forest and Neural Network. H2O engine is based on Java, but it can be used both in R and Python with the packages deployed for those languages. The packages work as interfaces that are consistent with the programming language we are using. That means that we can use H2O both on R and Python package and the engine that is running under the hood is exactly the same.
+In the application described in section \ref{chap:practical-app} we used H2O. H2O is an open-source machine learning platform that provides many of the most widely used statistics and machine learning models, such as \ac{glm}, \ac{gam}, \ac{gbm}, Random Forest and Neural Network. H2O engine is based on Java, but it can be used both in R and Python with the packages deployed for those languages. The packages work as interfaces that are consistent with the programming language we are using. That means that we can use H2O both on R and Python package and the engine that is running under the hood is exactly the same.
 
 H2O offers also H2O Flow, that is a point and click interface that allows users to run H2O machine learning algorithms without writing code. This is a user friendly interface for modeling, but it has not all the functionalities for visualization, interpretation and control of variables effects that are present in actuarial pricing specific applications mentioned in section \ref{chap:actuarial-pricing-specific-needs}.
 
@@ -3142,7 +3146,7 @@ In this final chapter we are going to describe the practical application on an a
 \hypertarget{dataset}{%
 \subsection{Dataset}\label{dataset}}
 
-The dataset used is an actuarial dataset from an Italian MTPL portfolio. In table \ref{tab:years-at-risk} the total exposure of the dataset is reported. In the dataset there are 283 829 rows for a total of 134 804.7 years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure 0.475 years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
+The dataset used is an actuarial dataset from an Italian \ac{mtpl} portfolio. In table \ref{tab:years-at-risk} the total exposure of the dataset is reported. In the dataset there are 283 829 rows for a total of 134 804.7 years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure 0.475 years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
 
 \begin{table}[!h]
 
@@ -3151,7 +3155,7 @@ The dataset used is an actuarial dataset from an Italian MTPL portfolio. In tabl
 \begin{tabular}[t]{ccc}
 \toprule
 \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{\makecell[c]{Average Exposure\\per Observation}}\\
-\midrule
+\midrule[\heavyrulewidth]
 283 829 & 134 804.7 & 0.475\\
 \bottomrule
 \end{tabular}
@@ -3168,7 +3172,7 @@ The dataset has been split into a training set with 80\% of the observations and
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Policyholders} & \textbf{\makecell[c]{Exposure per\\Policyholder}}\\
-\midrule
+\midrule[\heavyrulewidth]
 Train & 227 226 & 107 998.4 & 27 346 & 3.95\\
 Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
 \midrule
@@ -3191,7 +3195,7 @@ Table \ref{tab:freq-sin-train-test} shows the observed claims frequency in the t
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Claims N.} & \textbf{Claims Freq.}\\
-\midrule
+\midrule[\heavyrulewidth]
 Train & 227 226 & 107 998.4 & 4 823 & 0.045\\
 Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
 \midrule
@@ -3226,7 +3230,7 @@ Comparing the claims frequency of the training set and the test set, we see that
 \begin{tabular}[t]{lcccccc}
 \toprule
 \textbf{Set} & \textbf{2014} & \textbf{2015} & \textbf{2016} & \textbf{2017} & \textbf{2018} & \textbf{2019}\\
-\midrule
+\midrule[\heavyrulewidth]
 Train & 0.046 & 0.046 & 0.046 & 0.043 & 0.043 & 0.043\\
 Test & 0.045 & 0.044 & 0.041 & 0.041 & 0.043 & 0.039\\
 \midrule
@@ -3262,7 +3266,7 @@ The distribution of the p-values for the two kinds of random variables are repor
 \begin{tabular}[t]{lcccc}
 \toprule
 \textbf{Random type} & \textbf{[0, 0.05)} & \textbf{[0.05, 0.1)} & \textbf{[0.1, 0.15)} & \textbf{[0.15, 0.2)}\\
-\midrule
+\midrule[\heavyrulewidth]
 Random by observation & 0.0596 & 0.0535 & 0.0537 & 0.0503\\
 Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \bottomrule
@@ -3283,7 +3287,7 @@ In the modeling process we will assess whether these variables are significative
 \begin{tabular}[t]{lc}
 \toprule
 \textbf{Description} & \textbf{\makecell[c]{Number of variables\\per category}}\\
-\midrule
+\midrule[\heavyrulewidth]
 \cellcolor{gray!6}{\em{Information on the insured vehicle}} & \cellcolor{gray!6}{12}\\
 \em{General information of the policyholder} & 14\\
 \cellcolor{gray!6}{\em{Insurance specific information of the policyholder}} & \cellcolor{gray!6}{9}\\
@@ -3329,7 +3333,7 @@ In table \ref{tab:models-list} the models developed are listed. We started from 
 \begin{tabular}[t]{ll}
 \toprule
 \textbf{Id} & \textbf{Model}\\
-\midrule
+\midrule[\heavyrulewidth]
 \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot}\\
 Mod2 & Elastic Net Tot\\
 \cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot}\\
@@ -3362,7 +3366,7 @@ The big advantage of H2O is that it provides embedded multi-threading implementa
 
 Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from \texttt{mgcv} just as a quick trial, without performing a deep hyper-parameter tuning.
 
-Al the pre-processing and the model fitting has been run locally on a single PC with 16GB of DDR4 RAM and a CPU Intel Core i7-8750H, that is a 2.20GHz hexa-core CPU with hyper-threading. Within these resources, 12GB of the 16GB available RAM and 11 of the 12 available threads have been dedicated to the H2O instance.
+Al the pre-processing and the model fitting has been run locally on a single PC with 16GB of DDR4 \ac{ram} and a \ac{cpu} Intel Core i7-8750H, that is a 2.20GHz hexa-core \ac{cpu} with hyper-threading. Within these resources, 12GB of the 16GB available \ac{ram} and 11 of the 12 available threads have been dedicated to the H2O instance.
 
 \hypertarget{approach-adopted-in-the-modeling}{%
 \subsection{Approach adopted in the modeling}\label{approach-adopted-in-the-modeling}}
@@ -3438,7 +3442,7 @@ In the final GLM obtained with the stepwise algorithm, within the 121 free param
 \begin{tabular}[t]{ccccc}
 \toprule
 \textbf{GLM Tot} & \textbf{Elastic Net Tot} & \textbf{GLM AIC} & \textbf{n} & \textbf{ }\\
-\midrule
+\midrule[\heavyrulewidth]
 \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{51} & \\
 $\ne0$ & $\ne0$ & $0$ & 48 & \\
 \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{6} & \\
@@ -3538,7 +3542,7 @@ Conducting a cost-benefit analysis with these results, we can say that, with thi
 \begin{tabular}[t]{llcccc}
 \toprule
 \textbf{Id} & \textbf{Model} & \textbf{\makecell[c]{Test\\Deviance}} & \textbf{Time} & \textbf{$\alpha$} & \textbf{$\lambda$}\\
-\midrule
+\midrule[\heavyrulewidth]
 \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{8 458.147} & \cellcolor{gray!6}{2.7s} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
 Mod2 & Elastic Net Tot & 8 458.024 & 1h 30m & 0.06 & 2.01e-04\\
 \cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{\textbf{8 457.465}} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
@@ -3578,7 +3582,7 @@ Considering the GAM, to better understand their potential, further explorations 
 
 A really important topic in modeling that has not been faced in this analysis and deserves a separate dissertation is the geographical modeling. The geographical modeling is really important in Non-Life Insurance Pricing and requires specific modeling tools that haven't be discussed in this thesis. We remind that in our analysis the choice of using policies from only one specific province strongly reduces the importance of geographical modeling.
 
-The other aspect of considering policies from only one province is that this choice reduces significantly the size of the dataset. This solution allowed us to work locally on one single PC without going out of memory and with still acceptable execution times, but it is clear that with a whole country usual MTPL dataset working locally in a consumer PC would not be possible. The proper solution would be to adopt a cluster of computers big enough to deal with the whole dataset. As we discussed in section \ref{chap:implementation}, the cluster computing offers a highly scalable solution and H2O can be easily exploited in a cluster.
+The other aspect of considering policies from only one province is that this choice reduces significantly the size of the dataset. This solution allowed us to work locally on one single PC without going out of memory and with still acceptable execution times, but it is clear that with a whole country usual \ac{mtpl} dataset working locally in a consumer PC would not be possible. The proper solution would be to adopt a cluster of computers big enough to deal with the whole dataset. As we discussed in section \ref{chap:implementation}, the cluster computing offers a highly scalable solution and H2O can be easily exploited in a cluster.
 
 
 %% REFERENCES

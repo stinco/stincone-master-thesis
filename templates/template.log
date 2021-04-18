@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  17 APR 2021 20:36
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  18 APR 2021 19:50
 entering extended mode
 **"c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex"
 ("c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex"
@@ -1610,7 +1610,65 @@ Package: varwidth 2009/03/30 ver 0.92;  Variable-width minipages
 \tabu@cellskip=\skip109
 ) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\times.sty"
 Package: times 2020/03/25 PSNFSS-v9.3 (SPQR) 
-) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/cancel\cancel.sty"
+)
+
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:415: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.415 $
+       if(abbreviations)$
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+LaTeX Font Info:    Trying to load font information for T1+ptm on input line 416.
+("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1ptm.fd"
+File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
+)
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:416: Undefined control sequence.
+\set@color ...\@pdfcolorstack push{\current@color 
+                                                  }\aftergroup \reset@color 
+l.416 	\include{$abbreviations$}
+                                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:416: Undefined control sequence.
+\set@color ...\@pdfcolorstack push{\current@color 
+                                                  }\aftergroup \reset@color 
+l.416 	\include{$abbreviations$}
+                                
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[1
+
+{C:/Users/leona/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}]
+\@input{$abbreviations$.aux}
+\openout2 = `$abbreviations$.aux'.
+
+No file $abbreviations$.tex.
+
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:417: LaTeX Error: Missing \begin{document}.
+
+See the LaTeX manual or LaTeX Companion for explanation.
+Type  H <return>  for immediate help.
+ ...                                              
+                                                  
+l.417 $
+       endif$
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/cancel\cancel.sty"
 Package: cancel 2013/04/12 v2.2 Cancel math terms
 ) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/tools\bm.sty"
 Package: bm 2019/07/24 v1.2d Bold Symbol Support (DPC/FMi)
@@ -1723,13 +1781,13 @@ LaTeX Font Info:    Overwriting math alphabet `\mathcal' in version `bold'
 (Font)                  U/cmsy/m/n --> U/cmsy/b/n on input line 200.
 )
 
-c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:477: LaTeX Error: Missing \begin{document}.
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:480: LaTeX Error: Missing \begin{document}.
 
 See the LaTeX manual or LaTeX Companion for explanation.
 Type  H <return>  for immediate help.
  ...                                              
                                                   
-l.477 $
+l.480 $
        if(highlighting-macros)$
 You're in trouble here.  Try typing  <return>  to proceed.
 If that doesn't work, type  X <return>  to quit.
@@ -1738,34 +1796,31 @@ Package csquotes Info: Checking for multilingual support...
 Package csquotes Info: ... found 'babel' package.
 Package csquotes Info: Adjusting default style.
 Package csquotes Info: Redefining alias 'default' -> 'english'.
-LaTeX Font Info:    Trying to load font information for T1+ptm on input line 485.
-("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/psnfss\t1ptm.fd"
-File: t1ptm.fd 2001/06/04 font definitions for T1/ptm.
-) ("c:/Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux")
+("c:/Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux")
 \openout1 = `template.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 485.
-LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 485.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for LGR/cmr/m/n on input line 488.
+LaTeX Font Info:    Trying to load font information for LGR+cmr on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/cbfonts-fd\lgrcmr.fd"
 File: lgrcmr.fd 2017/07/29 v1.2 Greek European Computer Regular
 )
-LaTeX Font Info:    ... okay on input line 485.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 485.
-LaTeX Font Info:    ... okay on input line 485.
+LaTeX Font Info:    ... okay on input line 488.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 488.
+LaTeX Font Info:    ... okay on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/context/base/mkii\supp-pdf.mkii"
 [Loading MPS to PDF converter (version 2006.09.02).]
 \scratchcounter=\count503
@@ -1789,7 +1844,7 @@ Package grfext Info: Graphics extension search list:
 (grfext)             [.pdf,.png,.jpg,.mps,.jpeg,.jbig2,.jb2,.PDF,.PNG,.JPG,.JPEG,.JBIG2,.JB2,.eps]
 (grfext)             \AppendGraphicsExtensions on input line 504.
 )
-Package hyperref Info: Link coloring ON on input line 485.
+Package hyperref Info: Link coloring ON on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.sty"
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/refcount\refcount.sty"
@@ -1799,9 +1854,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count509
 )
-LaTeX Info: Redefining \ref on input line 485.
-LaTeX Info: Redefining \pageref on input line 485.
-LaTeX Info: Redefining \nameref on input line 485.
+LaTeX Info: Redefining \ref on input line 488.
+LaTeX Info: Redefining \pageref on input line 488.
+LaTeX Info: Redefining \nameref on input line 488.
 \@outlinefile=\write7
 \openout7 = `template.out'.
 
@@ -1870,20 +1925,20 @@ Package biblatex Info: Trying to load bibliographic data...
 Package biblatex Info: ... file 'template.bbl' not found.
 
 No file template.bbl.
-Package biblatex Info: Reference section=0 on input line 485.
-Package biblatex Info: Reference segment=0 on input line 485.
+Package biblatex Info: Reference section=0 on input line 488.
+Package biblatex Info: Reference segment=0 on input line 488.
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/pdflscape\pdflscape.sty"
 Package: pdflscape 2019/12/05 v0.12 Display of landscape pages in PDF (HO)
 Package pdflscape Info: Auto-detected driver: pdftex on input line 81.
 )
-LaTeX Info: Redefining \microtypecontext on input line 485.
+LaTeX Info: Redefining \microtypecontext on input line 488.
 Package microtype Info: Generating PDF output.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using default protrusion set `alltext'.
 Package microtype Info: Automatic font expansion enabled (level 2),
 (microtype)             stretch: 20, shrink: 20, step: 1, non-selected.
 Package microtype Info: Using default expansion set `basictext'.
-LaTeX Info: Redefining \showhyphens on input line 485.
+LaTeX Info: Redefining \showhyphens on input line 488.
 Package microtype Info: No adjustment of tracking.
 Package microtype Info: No adjustment of interword spacing.
 Package microtype Info: No adjustment of character kerning.
@@ -1892,23 +1947,23 @@ File: mt-ptm.cfg 2006/04/20 v1.7 microtype config. file: Times (RS)
 ) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-cmr.cfg"
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+rsfs on input line 485.
+LaTeX Font Info:    Trying to load font information for U+rsfs on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/jknappen\ursfs.fd"
 File: ursfs.fd 1998/03/24 rsfs font definition file (jk)
 )
-LaTeX Font Info:    Trying to load font information for U+msa on input line 485.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-msa.cfg"
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 485.
+LaTeX Font Info:    Trying to load font information for U+msb on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/microtype\mt-msb.cfg"
 File: mt-msb.cfg 2005/06/01 v1.0 microtype config. file: AMS symbols (b) (RS)
 )
-LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 485.
+LaTeX Font Info:    Trying to load font information for OT1+lmss on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ot1lmss.fd"
 File: ot1lmss.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1916,7 +1971,7 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmss' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
-LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 485.
+LaTeX Font Info:    Trying to load font information for OT1+lmtt on input line 488.
  ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/lm\ot1lmtt.fd"
 File: ot1lmtt.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
@@ -1924,15 +1979,17 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             `lmtt' (encoding: OT1).
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
- [1
+ [2
 
-{C:/Users/leona/AppData/Local/MiKTeX/2.9/pdftex/config/pdftex.map}] [2
+
 
 ]
 
 Package frontespizio Warning: Missing file template-frn.pdf.
 
-[1] [2] [3] [4
+[1
+
+] [2] [3] [4
 
 ]
 \tf@toc=\write8
@@ -1950,11 +2007,21 @@ Package frontespizio Warning: Missing file template-frn.pdf.
 \tf@lot=\write10
 \openout10 = `template.lot'.
 
- [9] [10
+
+c:/Users/leona/Documents/universita - pc/Tesi Magistrale - pc/stincone-master-thesis/templates/template.tex:595: Undefined control sequence.
+l.595 		\printacronyms
+                      [name=List of Acronyms]              % Print the lis...
+The control sequence at the end of the top line
+of your error message was never \def'ed. If you have
+misspelled it (e.g., `\hobx'), type `I' and the correct
+spelling (e.g., `I\hbox'). Otherwise just continue,
+and I'll forget about whatever was undefined.
+
+[9] [10
 
 ]
 
-LaTeX Warning: Empty bibliography on input line 625.
+LaTeX Warning: Empty bibliography on input line 630.
 
 Package minitoc Info: I0009
 (minitoc)             Listing minitoc auxiliary files. 
@@ -1972,7 +2039,7 @@ See the caption package documentation for explanation.
 pdfTeX warning (ext4): destination with the same identifier (name{page.1}) has been already used, duplicate ignored
 <to be read again> 
                    \relax 
-l.628 \end{document}
+l.633 \end{document}
                      [1]
 
 Package frontespizio Warning: Remember to compile template-frn with
@@ -2001,17 +2068,17 @@ Package logreq Info: Writing requests to 'template.run.xml'.
 
  ) 
 Here is how much of TeX's memory you used:
- 50110 strings out of 479765
- 1143564 string characters out of 2866191
- 2013768 words of memory out of 3000000
- 66009 multiletter control sequences out of 15000+200000
- 591195 words of font info for 83 fonts, out of 3000000 for 9000
+ 50119 strings out of 479765
+ 1143656 string characters out of 2866191
+ 2013456 words of memory out of 3000000
+ 66012 multiletter control sequences out of 15000+200000
+ 586076 words of font info for 84 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  85i,11n,107p,838b,1673s stack positions out of 5000i,500n,10000p,200000b,50000s
 {C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/base/8r.enc}{C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathsy.enc}{C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-rm.enc}{C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/lm/lm-mathit.enc}<C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmmi12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmr12.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/lm/lmsy10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmb8a.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/urw/times/utmr8a.pfb>
-Output written on "c:/Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.pdf" (13 pages, 43580 bytes).
+Output written on "c:/Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.pdf" (13 pages, 47091 bytes).
 PDF statistics:
  94 PDF objects out of 1000 (max. 8388607)
  16 named destinations out of 1000 (max. 500000)
- 15885 words of extra memory for PDF output out of 17280 (max. 10000000)
+ 17421 words of extra memory for PDF output out of 20736 (max. 10000000)
 

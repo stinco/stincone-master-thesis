@@ -133,7 +133,7 @@
 \pagestyle{fancy}
 \fancyhf{}
 %\fancyhead[R]{\sc \nouppercase \rightmark}
-\fancyhead[RO]{\rightmark}                   % Add the rightmark on the Right, only in the Odd pages
+\fancyhead[RO]{\sc \nouppercase \rightmark}                   % Add the rightmark on the Right, only in the Odd pages
 \fancyhead[LE]{\sc \nouppercase \leftmark}   % Add the leftmark on the Left, only in the Even pages
 
 % \thepage is the page number
@@ -410,8 +410,11 @@ $endfor$
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.75}
 
-% Leonardo Stincone, 5/04/2021
-% Qua ci andrebbe la parte presa da template_abbreviations.tex
+% Leonardo Stincone, 18/04/2021
+% Define the abbreviations
+$if(abbreviations)$
+	\include{$abbreviations$}
+$endif$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -561,9 +564,9 @@ $endif$
 	%\flushbottom
 	
 	% This is where the whole-document ToC appears:
-	\renewcommand{\contentsname}{\textbf{Table of Contents}}
-	\renewcommand{\listfigurename}{\textbf{List of Figures}}
-	\renewcommand{\listtablename}{\textbf{List of Tables}}
+	\renewcommand{\contentsname}{Table of Contents}
+	\renewcommand{\listfigurename}{List of Figures}
+	\renewcommand{\listtablename}{List of Tables}
 	\tableofcontents
 	
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -585,14 +588,16 @@ $endif$
 
 	%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 	%%%%%% LIST OF ABBREVIATIONS
-	%% This example includes a list of abbreviations.  Look at text/abbreviations.tex to see how that file is
-	%% formatted.  The template can handle any kind of list though, so this might be a good place for a
-	%% glossary, etc.
-	%$if(abbreviations)$
-	%	\include{$abbreviations$}
-	%$endif$
-	
-	
+	%% This example includes a list of abbreviations.  Look at extra/abbreviations.tex to see how that file is formatted.	
+	% Leonardo Stincone, 18/04/2021
+	% Print the list of abbreviations
+	$if(abbreviations)$
+		\printacronyms[name=List of Acronyms]              % Print the list of abbreviations
+		%\addcontentsline{toc}{chapter}{List of Acronyms}  % Add the title to the table of contents
+		\markboth{List of Acronyms}{}                      % Add the title to the header of the page
+		\mtcaddchapter
+	$endif$
+
 	%% List of acronyms
 	%$if(loa)$
 	% 	\printglossary[type=\acronymtype]

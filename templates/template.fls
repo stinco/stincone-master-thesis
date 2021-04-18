@@ -1644,6 +1644,18 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.st
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\times.sty
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc8t.tfm
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.pdf
+INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
+OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\$abbreviations$.aux
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cancel\cancel.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cancel\cancel.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\cancel\cancel.sty
@@ -1798,11 +1810,6 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\xkeyval\xkeyval.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkeyval.tex
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\xkeyval\xkvutils.tex
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\psnfss\t1ptm.fd
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8t.tfm
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
@@ -1866,7 +1873,6 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestrin
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\generic\gettitlestring\gettitlestring.sty
 OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out
-OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.pdf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\siunitx\siunitx-abbreviations.cfg
@@ -1958,10 +1964,6 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex\latex\lm\ot1lmtt.fd
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt12.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\public\lm\rm-lmtt8.tfm
-INPUT C:\Users\leona\AppData\Local\MiKTeX\2.9\pdftex\config\pdftex.map
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmr8t.vf
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmrc8t.tfm
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template-frn.tex
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmri8t.tfm
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8t.tfm
@@ -1969,10 +1971,8 @@ INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptm
 OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.toc
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
 INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmbc8t.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmbc8t.vf
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmb8r.tfm
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmrc8t.vf
+INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\tfm\adobe\times\ptmr8r.tfm
 OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.lof
 OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.lot
 OUTPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.maf
@@ -1980,7 +1980,6 @@ INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-mas
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.mtc0
-INPUT C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\fonts\vf\adobe\times\ptmb8t.vf
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.aux
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out
 INPUT c:\Users\leona\Documents\universita - pc\Tesi Magistrale - pc\stincone-master-thesis\templates\template.out

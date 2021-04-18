@@ -34,7 +34,7 @@ In this final chapter we are going to describe the practical application on an a
 tab_years_at_risk <- read_csv2("data/practical_application/tab_years_at_risk.csv")
 ```
 
-The dataset used is an actuarial dataset from an Italian MTPL portfolio. In table \@ref(tab:years-at-risk) the total exposure of the dataset is reported. In the dataset there are `r tab_years_at_risk$n` rows for a total of `r round(tab_years_at_risk$rischi_anno, 1)` years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure `r round(tab_years_at_risk$durata_media, 3)` years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
+The dataset used is an actuarial dataset from an Italian \ac{mtpl} portfolio. In table \@ref(tab:years-at-risk) the total exposure of the dataset is reported. In the dataset there are `r tab_years_at_risk$n` rows for a total of `r round(tab_years_at_risk$rischi_anno, 1)` years-at-risk. In the dataset, every row is a couple (policy, accounting year), so, if a policy spans in two years, we will see two rows corresponding to that policy. On average, every row has exposure `r round(tab_years_at_risk$durata_media, 3)` years-at-risk. This number is slightly lower than 0.5 because some of the policies get suspended and span in more than two years.
 
 ```{r, years_at_risk_render, echo = FALSE, cache = TRUE, message = FALSE}
 tab_years_at_risk %>% 
@@ -52,7 +52,7 @@ tab_years_at_risk %>%
     vline = "",
     toprule = "\\toprule",
     # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     bottomrule = "\\bottomrule",
     caption = "Total dataset exposure. The exposure is measured in year-at-risk (Y.a.R)",
@@ -73,7 +73,7 @@ tab_years_at_risk %>%
 The dataset contains policies from the period 2014-2019 coming from a specific province. The fact that we filtered the policies from only one province reduces a lot the size of the dataset and, since the models has been run locally on a single computer, this significantly reduces the time spent to run them. From a modeling point of view, the reduction to only one province reduces the importance of the geography in the models. Indeed, between the different regions of Italy there are a lot of socio-economical differences that are reflected to the claims experience. In this thesis the problem of using geographical data as explanatory variables has not been addressed.
 
 
-```{r, description_train_test_read, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, description_train_test_read, echo = FALSE, cache = TRUE, message = FALSE}
 tab_freq_sin_train_test <- read_csv2(
   "data/practical_application/tab_freq_sin_train_test.csv"
 )
@@ -138,7 +138,7 @@ if(!knitr::is_latex_output()){
 The dataset has been split into a training set with 80% of the observations and a test set with the remaining 20% of the observations. The training set has been used to fit the models, while the test set has been be used to assess them by comparing the predictions of the models with the observed data. The splitting has been made on the base of the policyholder id. That means that policies from the same policyholder end in the same set. This has been done because policies from the same policyholder are correlated, so splitting the observations by policyholder prevents data leakage from the test set to the training set. Table \@ref(tab:exposure-train-test) shows the exposure and the number of policyholders in the training set and the test set. As we can see, on average, each policyholder has `r round(tab_freq_sin_train_test_tot %>% filter(set == "tot") %>% .$rischi_anno_per_cliente, 2)` years-at-risk.
 
 
-```{r, description_train_test_render_1, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, description_train_test_render_1, echo = FALSE, cache = TRUE, message = FALSE}
 
 tab_1 %>% 
   kable(
@@ -150,7 +150,7 @@ tab_1 %>%
     vline = "",
     toprule = "\\toprule",
     # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace", bottomrule = "\\bottomrule",
     caption = "Exposure and number of policyholders in training and test set. The exposure is measured in year-at-risk (Y.a.R)",
     caption.short = "Exposure and number of policyholders in training and test set.",
@@ -177,7 +177,7 @@ The response variable for the models is the number of claims caused by the polic
 
 Table \@ref(tab:freq-sin-train-test) shows the observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicates that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as it is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
 
-```{r, description_train_test_render_2, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, description_train_test_render_2, echo = FALSE, cache = TRUE, message = FALSE}
 tab_2 %>% 
   kable(
     digits = c(0, 0, 1, 0, 3),
@@ -188,7 +188,7 @@ tab_2 %>%
     vline = "",
     toprule = "\\toprule",
     # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     bottomrule = "\\bottomrule",
     caption = "Claims Frequency in training and test set.",
@@ -215,7 +215,7 @@ The claims reported in the dataset are all observed at the date 30/06/2020. In f
 
 Comparing the claims frequency of the training set and the test set, we see that the claims frequency in the test set is consistently lower than the claims frequency in the training set. This phenomenon can be explained with the fact that we divided the policies based on policyholder id, so the policies within each set are correlated.
 
-```{r, freq-sin-train-test-year-read, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, freq-sin-train-test-year-read, echo = FALSE, cache = TRUE, message = FALSE}
 tab_freq_sin_train_test_year <- read_csv2(
   "data/practical_application/tab_freq_sin_train_test_year.csv"
 )
@@ -225,7 +225,7 @@ tab_freq_sin_train_test_year <- read_csv2(
 
 (ref:freq-sin-train-test-year-plot-caption-short) Claims frequency in training and test set in the different years.
 
-```{r, freq-sin-train-test-year-plot, out.width = "100%", fig.width = 9, fig.height = 4, fig.align='center', fig.cap = "(ref:freq-sin-train-test-year-plot-caption)", fig.scap = "(ref:freq-sin-train-test-year-plot-caption-short)", label = "freq-sin-train-test-year", echo = FALSE, cache = FALSE}
+```{r, freq-sin-train-test-year-plot, out.width = "100%", fig.width = 9, fig.height = 4, fig.align='center', fig.cap = "(ref:freq-sin-train-test-year-plot-caption)", fig.scap = "(ref:freq-sin-train-test-year-plot-caption-short)", label = "freq-sin-train-test-year", echo = FALSE, cache = TRUE}
 tab_freq_sin_train_test_year %>% 
   filter(set != "Tot") %>% 
   mutate(
@@ -242,7 +242,7 @@ tab_freq_sin_train_test_year %>%
   easy_remove_legend()
 ```
 
-```{r, freq-sin-train-test-year-render, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, freq-sin-train-test-year-render, echo = FALSE, cache = TRUE, message = FALSE}
 tab_freq_sin_train_test_year %>% 
   select(set, anno_analisi, freq_sin) %>% 
   pivot_wider(
@@ -259,7 +259,7 @@ tab_freq_sin_train_test_year %>%
     vline = "",
     toprule = "\\toprule",
     # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     bottomrule = "\\bottomrule",
     caption = "Claims frequency in training and test set in the different years.",
@@ -373,7 +373,7 @@ simulations_count %>%
     vline = "",
     toprule = "\\toprule",
     # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     bottomrule = "\\bottomrule",
     caption = "Distribution of the p-values from the simulation of the random variables. With a random variable, these frequencies should be around 0.05. With the random by policyholder, the frequencies for low p-values are higher than that.",
@@ -425,7 +425,7 @@ In the dataset we have a total of `r explanatory_variables_number` explanatory v
 
 In the modeling process we will assess whether these variables are significative or not and only some of them will be used to predict the response variable.
 
-```{r, explanatory-variables-render, echo = FALSE, cache = FALSE, message = FALSE}
+```{r, explanatory-variables-render, echo = FALSE, cache = TRUE, message = FALSE}
 
 # Make Table
 explantory_varibles_total %>% 
@@ -461,7 +461,7 @@ explantory_varibles_total %>%
     align = "lc",
     vline = "",
     toprule = "\\toprule",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     linesep = "",
     bottomrule = "",
     # bottomrule = "\\bottomrule",
@@ -620,7 +620,7 @@ results %>%
     # midrule = "\\toprule\\addlinespace",
     # midrule = "\\hline\\addlinespace",
     # midrule = "\\hline",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     linesep = "",
     bottomrule = "\\bottomrule",
@@ -658,7 +658,7 @@ The big advantage of H2O is that it provides embedded multi-threading implementa
 
 Due to the lower efficiency and the lack of hyper-parameter tuning functions, we used the function from `mgcv` just as a quick trial, without performing a deep hyper-parameter tuning.
 
-Al the pre-processing and the model fitting has been run locally on a single PC with 16GB of DDR4 RAM and a CPU Intel Core i7-8750H, that is a 2.20GHz hexa-core CPU with hyper-threading. Within these resources, 12GB of the 16GB available RAM and 11 of the 12 available threads have been dedicated to the H2O instance.
+Al the pre-processing and the model fitting has been run locally on a single PC with 16GB of DDR4 \ac{ram} and a \ac{cpu} Intel Core i7-8750H, that is a 2.20GHz hexa-core \ac{cpu} with hyper-threading. Within these resources, 12GB of the 16GB available \ac{ram} and 11 of the 12 available threads have been dedicated to the H2O instance.
 
 
 ### Approach adopted in the modeling
@@ -862,7 +862,7 @@ coeff_0_en_aic_2 <- coefficients %>%
 
 In the final GLM obtained with the stepwise algorithm, within the `r nrow(coefficients_encripted_table_h2o_th_glm_tot)` free parameters of the initial GLM, `r coff_glm_aic_0_count` of them have been removed from the model and only `r nrow(coefficients_encripted_table_h2o_th_glm_tot) - coff_glm_aic_0_count` lasted in the model. In table \@ref(tab:coeff-0) the number of parameters equal to 0 in each model is listed. The horizontal line separate the free parameters of the initial GLM from the parameters fixed to 0 in it. From this table we can see that there are `r coeff_0_en_aic_1` parameters that are set equal to 0 in the Elastic Net Tot and not in the GLM AIC and there are `r coeff_0_en_aic_2` that are set equal to 0 in the GLM AIC and not in the Elastic Net. That means that the two feature selection criteria lead to different subsets of the explanatory variables.
 
-```{r coeff-0, echo = FALSE, cache = FALSE, message = FALSE}
+```{r coeff-0, echo = FALSE, cache = TRUE, message = FALSE}
 coefficients %>% 
   # filter(variable_encripted != 0) %>% 
   count(
@@ -930,7 +930,8 @@ coefficients %>%
     vline = "",
     toprule = "\\toprule",
     # toprule = "\\cmidrule[\\heavyrulewidth]{1-4}",
-    midrule = "\\midrule",
+    # midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # midrule = "\\cmidrule{1-4}",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     linesep = "",
@@ -1195,7 +1196,7 @@ tab %>%
     # midrule = "\\toprule\\addlinespace",
     # midrule = "\\hline\\addlinespace",
     # midrule = "\\hline",
-    midrule = "\\midrule",
+    midrule = "\\midrule[\\heavyrulewidth]",
     # linesep = "\\addlinespace\\hline\\addlinespace",
     linesep = "",
     bottomrule = "\\bottomrule",
@@ -1280,7 +1281,7 @@ Considering the GAM, to better understand their potential, further explorations 
 
 A really important topic in modeling that has not been faced in this analysis and deserves a separate dissertation is the geographical modeling. The geographical modeling is really important in Non-Life Insurance Pricing and requires specific modeling tools that haven't be discussed in this thesis. We remind that in our analysis the choice of using policies from only one specific province strongly reduces the importance of geographical modeling.
 
-The other aspect of considering policies from only one province is that this choice reduces significantly the size of the dataset. This solution allowed us to work locally on one single PC without going out of memory and with still acceptable execution times, but it is clear that with a whole country usual MTPL dataset working locally in a consumer PC would not be possible. The proper solution would be to adopt a cluster of computers big enough to deal with the whole dataset. As we discussed in section \@ref(chap:implementation), the cluster computing offers a highly scalable solution and H2O can be easily exploited in a cluster.
+The other aspect of considering policies from only one province is that this choice reduces significantly the size of the dataset. This solution allowed us to work locally on one single PC without going out of memory and with still acceptable execution times, but it is clear that with a whole country usual \ac{mtpl} dataset working locally in a consumer PC would not be possible. The proper solution would be to adopt a cluster of computers big enough to deal with the whole dataset. As we discussed in section \@ref(chap:implementation), the cluster computing offers a highly scalable solution and H2O can be easily exploited in a cluster.
 
 
 

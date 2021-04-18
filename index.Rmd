@@ -18,7 +18,7 @@ degreeclass: LM-83
 academicyear: 2019 - 2020
 advisorname: Prof. Francesco Pauli
 # abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
-abbreviations: false # path to .tex file with abbreviations
+abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 quote: |
   The data scientist is a person \
   who is better at statistics than any software engineer \
