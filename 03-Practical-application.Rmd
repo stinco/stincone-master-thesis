@@ -979,8 +979,7 @@ h2o_th_elastic_net_aic_grid_perf_tb <- read_csv2(
 
 ```
 
-
-With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \@ref(fig:en-aic-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of the hyper-parameters. In the cross validation we tested `r nrow(h2o_th_elastic_net_aic_grid_perf_tb)` models with a total computation time of `r results %>% filter(id == "mod5") %>% .$time2_string %>% str_extract(".*m")`.
+After fitting the GLM, we also fitted an Elastic Net using only the variables obtained with the stepwise selection. The figure \@ref(fig:en-aic-hp-tuning-plot) shows the Cross Validation Deviance for the different sets of the hyper-parameters. In the cross validation we tested `r nrow(h2o_th_elastic_net_aic_grid_perf_tb)` models with a total computation time of `r results %>% filter(id == "mod5") %>% .$time2_string %>% str_extract(".*m")`.
 
 The red vertical line in figure \@ref(fig:en-aic-hp-tuning-plot) corresponds to the optimal set of hyper-parameters that are $\alpha = 0$ and
 <!-- $\lambda = `r results$lambda[5]`$. -->
@@ -1016,35 +1015,116 @@ h2o_th_elastic_net_aic_grid_perf_tb %>%
 
 ```
 
-Considering all the GLM-based models we developed, we compared the estimated coefficients. The scatterplot and the correlation matrix of the coefficients are represented in figure \@ref(fig:coeff-pairs). Here we considered also the base levels of the qualitative explanatory variables that are set to exactly 0 by the classic GLM models and we excluded the intercept, resulting into `r nrow(coefficients_encripted_table_h2o_th_elastic_net_tot_best)-1` coefficients.
 
-As we can see, all the models have positively correlated coefficients. However, the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
+#### Coefficients comparison
+
+Considering all the GLM-based models we developed, we compared the estimated coefficients. The scatterplot and the correlation matrix of the coefficients are represented in figure \@ref(fig:coeff-pairs). Here we considered also the base levels of the qualitative explanatory variables that are set to exactly 0 by the classic GLM models and we excluded the intercept, resulting into `r nrow(coefficients_encripted_table_h2o_th_elastic_net_tot_best)-1` coefficients. In the plot and in the computation of the correlation coefficients we also excluded an anomalous point that highly influenced the correlation coefficients and highly reduced the readability of the plots. The coefficients estimated from each model for this anomalous point are shown in table \@ref(tab:anomalous-point)
+
+```{r, anomalous-point-render, echo = FALSE, cache = TRUE, message = FALSE}
+# Make Table
+coefficients %>% 
+  filter(variable_encripted == 2 & level_encripted == 4) %>% 
+  select(contains("coeff")) %>% 
+  pivot_longer(
+    cols = everything(),
+    names_to = "model"
+  ) %>% 
+  mutate(
+    model = model %>% 
+      str_replace_all("coeff_", "") %>% 
+      str_replace_all("_", " ") %>% 
+      str_to_title() %>% 
+      str_replace_all("Glm", "GLM") %>% 
+      str_replace_all("En", "EN") %>% 
+      str_replace_all("Aic", "AIC")
+  ) %>% 
+  kable(
+    digits = 3,
+    format.args = list(big.mark = " "),
+    # format = "latex",
+    booktabs = T,
+    align = "lc",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # midrule = "\\hline\\addlinespace",
+    # midrule = "\\hline",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    linesep = "",
+    bottomrule = "\\bottomrule",
+    caption = "Coefficient of the anomalous point.",
+    label = "anomalous-point",
+    escape = FALSE
+  ) %>%
+  kable_styling(
+    position = "center",
+    latex_options = c("striped", "hold_position"),
+    full_width = FALSE
+    # full_width = TRUE
+  ) %>%
+  # row_spec(
+  #   ifelse(!knitr::is_latex_output(), 0, 1),
+  #   bold = T,
+  # ) %>% 
+  row_spec(0, bold = T) #%>% 
+  # column_spec(2, italic = T)
+
+```
+
+
+As we can see from figure \@ref(fig:coeff-pairs), all the models have positively correlated coefficients. The most correlated are the Elastic Net Tot with the Ridge Tot and the GLM Tot with the GLM AIC. In the scatterplots the oblique line represented is the line $f(x)=x$ that helps us in understanding the different scales of the coefficients in the different models. As we can see, the GLM Tot has a much wider range of coefficients compared to the Elastic Net and the Ridge Regression, where the bigger coefficients have been shrunk to smaller values.
 
 
 (ref:coeff-pairs-plot-caption) Coefficients comparison between GLM-based models.
 
 (ref:coeff-pairs-plot-caption-short) Coefficients comparison between GLM-based models.
 
-```{r, coeff-pairs-plot, out.width = "100%", fig.width = 8, fig.height = 6, fig.align='center', fig.cap = "(ref:coeff-pairs-plot-caption)", fig.scap = "(ref:coeff-pairs-plot-caption-short)", label = "coeff-pairs", echo = FALSE, cache = TRUE}
+```{r, coeff-pairs-plot, out.width = "100%", fig.width = 9, fig.height = 6, fig.align='center', fig.cap = "(ref:coeff-pairs-plot-caption)", fig.scap = "(ref:coeff-pairs-plot-caption-short)", label = "coeff-pairs", echo = FALSE, cache = TRUE}
+
+lowerfun <- function(data, mapping){
+  ggplot(data = data, mapping = mapping) +
+    geom_abline(intercept = 0, slope = 1, alpha = .8, color = "grey20") +
+    geom_point(alpha = .2) #+
+    # scale_x_continuous(limits = c(-2, 1.2)) +
+    # scale_y_continuous(limits = c(-2, 1.2))
+}
+
 
 coefficients %>% 
-  filter(variable_encripted != 0) %>% 
+  filter(
+    variable_encripted != 0,
+    !(variable_encripted == 2 & level_encripted == 4)
+  ) %>% 
   select(contains("coeff")) %>% 
   mutate_all(
     function(x){
       if_else(is.na(x), 0, x)
     }
   ) %>% 
+  rename_all(
+    function(x){
+      x %>% 
+        str_replace_all("coeff_", "") %>% 
+        str_replace_all("_", " ") %>% 
+        str_to_title() %>% 
+        str_replace_all("Glm", "GLM") %>% 
+        str_replace_all("En", "EN") %>% 
+        str_replace_all("Aic", "AIC")
+    }
+  ) %>% 
   ggpairs(
-    lower = list(continuous = wrap("points", alpha = 0.2)),
+    # lower = list(continuous = wrap("points", alpha = 0.2)),
+    lower = list(continuous = wrap(lowerfun)),
   )
+
 
 ```
 
 
 #### GAM AIC
 
-With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental state of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took `r results %>%  filter(id == "mod6") %>% .$time2_string`, that means that a deep hyper-parameters tuning would have taken many hours to run.
+As for the GLM and the Elastic Net, we also fitted a gam using the variables obtained with the stepwise selection. As already mentioned, due to the still experimental state of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took `r results %>%  filter(id == "mod6") %>% .$time2_string`, that means that a deep hyper-parameters tuning would have taken many hours to run.
 
 
 #### GBM Tot

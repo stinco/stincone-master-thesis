@@ -3458,7 +3458,7 @@ $0$ & $0$ & $0$ & 15 & \multirow{-2}{*}{\centering\arraybackslash 38}\\
 \hypertarget{elastic-net-aic}{%
 \subsubsection{Elastic Net AIC}\label{elastic-net-aic}}
 
-With only the variables obtained with the stepwise selection, we fitted an Elastic Net. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of the hyper-parameters. In the cross validation we tested 600 models with a total computation time of 1h 26m.
+After fitting the GLM, we also fitted an Elastic Net using only the variables obtained with the stepwise selection. The figure \ref{fig:en-aic-hp-tuning-plot} shows the Cross Validation Deviance for the different sets of the hyper-parameters. In the cross validation we tested 600 models with a total computation time of 1h 26m.
 
 The red vertical line in figure \ref{fig:en-aic-hp-tuning-plot} corresponds to the optimal set of hyper-parameters that are \(\alpha = 0\) and
 \(\lambda = 1.63e-05\). In this case the best Elastic Net model corresponds to the Ridge Regression. That means that no coefficient has been shrunk to exactly 0. This is probably due to the fact that the stepwise algorithm already selected a set of variables that have a significant effect for predicting the response. Moreover, comparing the Cross Validation Deviance of the optimal point and the points with lower \(\lambda\), we see that there is no substantial difference. That means that a classic GLM would perform more or less the same as the optimal Ridge Regression.
@@ -3476,9 +3476,29 @@ The red vertical line in figure \ref{fig:en-aic-hp-tuning-plot} corresponds to t
 \caption[Elastic Net AIC hyper-parameter tuning.]{Elastic Net AIC hyper-parameter tuning.}\label{fig:en-aic-hp-tuning-plot}
 \end{figure}
 
-Considering all the GLM-based models we developed, we compared the estimated coefficients. The scatterplot and the correlation matrix of the coefficients are represented in figure \ref{fig:coeff-pairs}. Here we considered also the base levels of the qualitative explanatory variables that are set to exactly 0 by the classic GLM models and we excluded the intercept, resulting into 158 coefficients.
+\hypertarget{coefficients-comparison}{%
+\subsubsection{Coefficients comparison}\label{coefficients-comparison}}
 
-As we can see, all the models have positively correlated coefficients. However, the most correlated are the GLM Tot with the GLM AIC and the Elastic Net Tot with the Ridge Tot.
+Considering all the GLM-based models we developed, we compared the estimated coefficients. The scatterplot and the correlation matrix of the coefficients are represented in figure \ref{fig:coeff-pairs}. Here we considered also the base levels of the qualitative explanatory variables that are set to exactly 0 by the classic GLM models and we excluded the intercept, resulting into 158 coefficients. In the plot and in the computation of the correlation coefficients we also excluded an anomalous point that highly influenced the correlation coefficients and highly reduced the readability of the plots. The coefficients estimated from each model for this anomalous point are shown in table \ref{tab:anomalous-point}
+
+\begin{table}[!h]
+
+\caption{\label{tab:anomalous-point}Coefficient of the anomalous point.}
+\centering
+\begin{tabular}[t]{lc}
+\toprule
+\textbf{model} & \textbf{value}\\
+\midrule[\heavyrulewidth]
+\cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{-6.447}\\
+EN Tot & 0.000\\
+\cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{-0.003}\\
+GLM AIC & -6.574\\
+\cellcolor{gray!6}{EN AIC} & \cellcolor{gray!6}{-0.095}\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+As we can see from figure \ref{fig:coeff-pairs}, all the models have positively correlated coefficients. The most correlated are the Elastic Net Tot with the Ridge Tot and the GLM Tot with the GLM AIC. In the scatterplots the oblique line represented is the line \(f(x)=x\) that helps us in understanding the different scales of the coefficients in the different models. As we can see, the GLM Tot has a much wider range of coefficients compared to the Elastic Net and the Ridge Regression, where the bigger coefficients have been shrunk to smaller values.
 
 
 
@@ -3496,7 +3516,7 @@ As we can see, all the models have positively correlated coefficients. However, 
 \hypertarget{gam-aic}{%
 \subsubsection{GAM AIC}\label{gam-aic}}
 
-With the variables obtained with the stepwise selection, we also fitted a GAM. As already mentioned, due to the still experimental state of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took 17m 36.7s, that means that a deep hyper-parameters tuning would have taken many hours to run.
+As for the GLM and the Elastic Net, we also fitted a gam using the variables obtained with the stepwise selection. As already mentioned, due to the still experimental state of the GAM modeling in H2O, we fitted the GAM in R and we just took a quick trial without a deep hyper-parameters tuning. The fitting of one single GAM in R took 17m 36.7s, that means that a deep hyper-parameters tuning would have taken many hours to run.
 
 \hypertarget{gbm-tot}{%
 \subsubsection{GBM Tot}\label{gbm-tot}}
