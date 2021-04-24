@@ -172,6 +172,18 @@
 \usepackage{titlesec}
 %\usepackage{microtype}
 
+% Define the depth of counted sections in the document.
+% The default for report is 2
+% Levels:
+% * 0: chapter
+% * 1: section
+% * 2: subsection
+% * 3: subsubsection
+% * 4: paragraph
+% * 5: subparagraph
+\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3} % if you want all the levels in your table of contents
+
 %\definecolor{myblue}{RGB}{0, 82, 155}
 %\definecolor{myred}{RGB}{155, 82, 0}
 %\definecolor{myred}{RGB}{189, 32, 39}
@@ -200,9 +212,11 @@
 \titleformat{\subsection}
   {\normalfont\large\bfseries\color{myred}}{\thesubsection}{1em}{}[{\titlerule[0pt]}]
 
-\titleformat{\subsubsection}
-  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{}{\titlerule[0pt]}
+%\titleformat{\subsubsection}
+%  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{}{\titlerule[0pt]}
 
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{1em}{}[{\titlerule[0pt]}]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BIBLIOGRAPHY SETUP
@@ -532,11 +546,11 @@ to Non-Life Insurance Pricing}
 	%%%%%% Quote in the page after the title page
 			\begin{quote}
 			\begin{flushright}
-				\textit{The data scientist is a person\\
-who is better at statistics than any software engineer\\
-and better at software engineering than any statistician.}
+				\textit{\href{https://twitter.com/josh_wills/status/198093512149958656?lang=en}{The data scientist is a person \\
+who is better at statistics than any software engineer \\
+and better at software engineering than any statistician.}}
 	  
-		  		Josh Wills
+		  		\href{https://twitter.com/josh_wills/status/198093512149958656?lang=en}{Josh Wills}
 			\end{flushright}
 	  \end{quote}
 		
@@ -3190,7 +3204,9 @@ Tot & 283 829 & 134 804.7 & 34 170 & 3.95\\
 
 The response variable for the models is the number of claims caused by the policyholder for that policy in that accounting year. In this project we compared the different techniques in predicting the claims frequency. We didn't take into account the claim severity and we didn't split the claims by type (see section \ref{chap:response-variables-and-distributions}).
 
-Table \ref{tab:freq-sin-train-test} shows the observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by policy. The split by policyholder id implicates that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. Anyway this issue is restrained and in this analysis has been neglected, as is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
+Table \ref{tab:freq-sin-train-test} shows the observed claims frequency in the training set and in the test set. As we can see, the claims frequency in the training set is slightly higher than the claims frequency in the test set. The difference between the two sets is given by chance, but it is also encouraged by the fact that the policies has been split by policyholder id and not by observation. The split by policyholder id implicates that, if a policyholder has many policies, all of them fall into the same set, so the hypothesis of independence for the observations within the sets is not respected. We will discuss more in depth the effect of splitting the data into training and test set by policyholder instead of observation in section \ref{chap:exploration-splitting-policyholder}.
+
+Anyway, this issue is limited and in this analysis has been neglected, as is usually done in actuarial practice. We also mention that theoretically the difference in claims frequency in the two sets should be mostly explained by the explanatory variables we have, so the models fitted with the training set should be able to catch the characteristics of the policies of the test set that reduce their expected claims frequency.
 
 \begin{table}[!h]
 
@@ -3243,12 +3259,12 @@ Tot & 0.046 & 0.046 & 0.045 & 0.042 & 0.043 & 0.043\\
 \end{tabular}
 \end{table}
 
-\hypertarget{exploration-on-the-effect-of-splitting-data-by-policyholder}{%
-\subsubsection{Exploration on the effect of splitting data by policyholder}\label{exploration-on-the-effect-of-splitting-data-by-policyholder}}
+\hypertarget{chap:exploration-splitting-policyholder}{%
+\subsubsection{Exploration on the effect of splitting data by policyholder}\label{chap:exploration-splitting-policyholder}}
 
-To explore more in depth the effect of splitting the data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80\% probability of belonging to the training set and 20\% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be seen as a measure for checking whether the training and the test sets have a significative difference in term of claim frequency.
+To explore more in depth the effect of splitting the data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80\% probability of belonging to the training set and 20\% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be used to check whether the training and the test sets have a significative difference in term of claim frequency. Indeed, if we call \(\bar{y}^\text{train}\) the average response in the training set and \(\bar{y}^\text{test}\) the average response in the test set, the higher \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) is, the lower the p-value is. Thus, the p-value can be seen as a normalized measure of the distance between \(\bar{y}^\text{train}\) and \(\bar{y}^\text{test}\).
 
-The distribution of the p-values for the two kinds of random variables are reported in figure \ref{fig:simulation-random}. The frequency for the first 4 buckets are also reported in table \ref{tab:simulation-random}. In theory, if the variable was totally random, the distribution of the p-values should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, the observed frequency of the p-values lower than 0.05 with the random by policyholder is 0.0782, that is quite higher than 0.05. Anyway, we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+The distribution of the p-values for the two kinds of random variables are reported in figure \ref{fig:simulation-random}. The frequency for the first 4 buckets are also reported in table \ref{tab:simulation-random}. In theory, if the variable was totally random and the observations were independent, the distribution of the p-values should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, with the random by policyholder the observed frequency of the p-values lower than 0.05 is 0.0782, that is quite higher than 0.05.
 
 
 
@@ -3277,6 +3293,10 @@ Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \end{tabular}
 \end{table}
 
+As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations means that the variances of \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of \(E(y^{\text{train}})\) and \(E(y^{\text{test}})\), we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\), we can say that, with the random by policyholder, \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are on average more distant than with the random by observation.
+
+Anyway, in our analysis we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+
 \hypertarget{explanatory-variables}{%
 \subsection{Explanatory variables}\label{explanatory-variables}}
 
@@ -3304,8 +3324,6 @@ In the modeling process we will assess whether these variables are significant o
 
 \end{tabular}
 \end{table}
-
-\newpage
 
 \hypertarget{models-assessment}{%
 \section{Models assessment}\label{models-assessment}}

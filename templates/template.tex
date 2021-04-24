@@ -172,6 +172,18 @@
 \usepackage{titlesec}
 %\usepackage{microtype}
 
+% Define the depth of counted sections in the document.
+% The default for report is 2
+% Levels:
+% * 0: chapter
+% * 1: section
+% * 2: subsection
+% * 3: subsubsection
+% * 4: paragraph
+% * 5: subparagraph
+\setcounter{secnumdepth}{3}
+%\setcounter{tocdepth}{3} % if you want all the levels in your table of contents
+
 %\definecolor{myblue}{RGB}{0, 82, 155}
 %\definecolor{myred}{RGB}{155, 82, 0}
 %\definecolor{myred}{RGB}{189, 32, 39}
@@ -200,9 +212,11 @@
 \titleformat{\subsection}
   {\normalfont\large\bfseries\color{myred}}{\thesubsection}{1em}{}[{\titlerule[0pt]}]
 
-\titleformat{\subsubsection}
-  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{}{\titlerule[0pt]}
+%\titleformat{\subsubsection}
+%  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{}{\titlerule[0pt]}
 
+\titleformat{\subsubsection}
+  {\normalfont\normalsize\bfseries\color{myred}}{\thesubsubsection}{1em}{}[{\titlerule[0pt]}]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%% BIBLIOGRAPHY SETUP

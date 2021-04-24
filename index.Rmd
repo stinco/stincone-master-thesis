@@ -20,10 +20,10 @@ advisorname: Prof. Francesco Pauli
 # abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 abbreviations: "extra/abbreviations" # path to .tex file with abbreviations
 quote: |
-  The data scientist is a person \
-  who is better at statistics than any software engineer \
-  and better at software engineering than any statistician.
-quote-author: Josh Wills
+  \href{https://twitter.com/josh_wills/status/198093512149958656?lang=en}{The data scientist is a person \\
+  who is better at statistics than any software engineer \\
+  and better at software engineering than any statistician.}
+quote-author: \href{https://twitter.com/josh_wills/status/198093512149958656?lang=en}{Josh Wills}
 bibliography: references.bib
 bibliography-heading-in-pdf: Bibliography
 do-abstract: false
