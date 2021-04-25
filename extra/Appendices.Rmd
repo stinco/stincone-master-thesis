@@ -8,7 +8,7 @@
 # Mathematical details
 
 
-## Notes on Compound distribution {#chap:notes-on-compound-distribution}
+## Notes on Compound distribution {#chap:appendix-notes-on-compound-distribution}
 
 In section \@ref(chap:nlip-details) ...
 
@@ -65,19 +65,263 @@ Where:
 * the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
 * the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
-## section 2
+## Exponential Families
+
+### Usual parametrizations
+
+#### Normal Distribution
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
 
 
-# Notes on models
-
-## section 1
+#### Poisson Distribution
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
 
-## section 2
+
+#### Gamma Distribution
 
 Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+
+
+#### Binomial Distribution
+
+Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+
+
+
+### Exponential family parametrization {#chap:appendix-exp-family}
+
+#### Characterization of exponential families
+
+It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \@ref(tab:exp-families) the characterizations for these exponential families are reported.
+
+```{r, exp-families-table, echo = FALSE, cache = TRUE}
+
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  # Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma \\in ]0, +\\infty[$",
+  #                        "$Poisson(\\mu)$,\n$\\mu \\in ]0, +\\infty[$",
+  #                        "$Gamma(\\alpha, \\mu)$,\n$\\alpha \\in ]0, +\\infty[, \\ \\mu \\in ]0, +\\infty[$",
+  #                        "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}, \\ p\\in]0,1[$"),
+  #                      align = "c"),
+  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}$ \n $\\sigma \\in ]0, +\\infty[$",
+                         "$Poisson(\\mu)$,\n$\\mu \\in ]0, +\\infty[$",
+                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha \\in ]0, +\\infty[$ \n $\\mu \\in ]0, +\\infty[$",
+                         "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}$ \n $p\\in]0,1[$"),
+                       align = "c"),
+  `$\\Theta$` = c("$\\mathbb{R}$",
+                  "$\\mathbb{R}$",
+                  "$]-\\infty, 0[$",
+                  "$\\mathbb{R}$"),
+  `$\\theta$` = c("$\\mu$",
+                  "$\\log{(\\mu)}$",
+                  "$-\\frac{1}{\\mu}$",
+                  "$\\log{\\left(\\frac{p}{1-p}\\right)}$"),
+  `$\\Lambda$` = c("$]0, +\\infty[$",
+                  "$\\left\\{1\\right\\}$",
+                  "$]0,+\\infty[$",
+                  "$\\left\\{\\frac{1}{n}\\right\\}$"),
+  `$\\lambda$` = c("$\\sigma^2$",
+                  "$1$",
+                  "$\\frac{1}{\\alpha}$",
+                  "$\\frac{1}{n}$"),
+  `$b(\\theta)$` = c("$\\frac{\\theta^2}{2}$",
+                  "$e^{\\theta}$",
+                  "$-\\log{\\left(-\\theta\\right)}$",
+                  "$\\log\\left(1+e^{\\theta}\\right)$"),
+)
+
+
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>"),
+      Notation = Notation %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>"),
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
+
+table %>% 
+  kable(
+    format = "latex",
+    booktabs = T,
+    align = "lcccccc",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
+    caption = "Some Linear Exponential Families.",
+    label = "exp-families",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
+  
+```
+
+
+#### Canonical link functions
+
+In table \@ref(tab:can-link-fun) the canonical link functions for the families already mentioned are reported.
+
+```{r, can-link-fun, echo = FALSE, cache = TRUE}
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  `\\makecell[c]{Cumulant function\\\\$b(\\theta)$}` = c("$\\frac{\\theta^2}{2}$",
+                     "$e^{\\theta}$",
+                     "$-\\log{\\left(-\\theta\\right)}$",
+                     "$\\log\\left(1+e^{\\theta}\\right)$"),
+  `\\makecell[c]{Derivative\\\\$b'(\\theta)$}` = c("$\\theta$",
+                      "$e^\\theta$",
+                      "$-\\frac{1}{\\theta}$",
+                      "$\\frac{e^{\\theta}}{1 + e^{\\theta}}$"),
+  `\\makecell[c]{Canonical link function\\\\$g(\\mu)=b'^{-1}(\\mu)$}` = c("$\\mu$",
+                                  "$\\log{(\\mu)}$",
+                                  "$-\\frac{1}{\\mu}$",
+                                  "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
+)
+
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>")
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
+table %>% 
+  kable(
+    # format = "latex",
+    booktabs = T,
+    align = "lccc",
+    vline = "",
+    # toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    # linesep = "\\addlinespace\\hline\\addlinespace",
+    # bottomrule = "\\bottomrule",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
+    caption = "Canonical link functions.",
+    label = "can-link-fun",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
+  
+```
+
+In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = \log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
+
+In the Scaled Binomial case the canonical function $g(p) = \log{\left(\frac{p}{1-p}\right)}$ is called logit and its inverse $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ is called logistic. For Scaled Binomial distribution we keep using the notation $p$ for the expected value as it corresponds to the probability of success $p$.
+
+
+#### Deviance
+
+In table \@ref(tab:deviance) the deviances for the families mentioned are reported.
+
+```{r, deviance-exp-fam, echo = FALSE, cache = TRUE}
+table <- tibble(
+  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
+                           align = "l"),
+  `Deviance $D(\\hat{\\boldsymbol{\\beta}}, \\boldsymbol{y})$` = c(
+    "$\\sum_{i=1}^{n}{\\left( y_i - \\hat{\\mu}_i \\right)^2}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} - \\left( y_i - \\hat{\\mu}_i \\right) \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ - \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} + \\frac{ y_i - \\hat{\\mu}_i }{\\hat{\\mu}_i} \\right\\}}$",
+    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)}+ \\left(1-y_i\\right) \\log{\\left(\\frac{1-y_i}{1-\\hat{\\mu}_i}\\right)} \\right\\}}$"
+  ))
+
+# For compatibility with HTML
+if(!knitr::is_latex_output()){
+  
+  table <- table %>% 
+    mutate(
+      Distribution = Distribution %>% 
+        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+        str_replace_all("\\\\\\\\", "<br>")
+    )
+  
+  names(table) <- names(table) %>% 
+    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
+    str_replace_all("\\\\\\\\", "<br>")
+}
+
+table %>% 
+  # mutate_all(
+  #   .funs = function(x){
+  #     if_else(
+  #       knitr::is_latex_output() & (row_number() %% 2 == 1),
+  #       str_c("\\cellcolor{gray!6}{", x, "}"),
+  #       as.character(x)
+  #     )
+  #   }
+  # ) %>% 
+  kable(
+    format = "latex",
+    booktabs = T,
+    align = "lc",
+    vline = "",
+    toprule = "\\toprule",
+    # midrule = "\\toprule\\addlinespace",
+    midrule = "\\midrule[\\heavyrulewidth]",
+    linesep = "\\addlinespace\\hline\\addlinespace",
+    bottomrule = "\\bottomrule",
+    caption = "Deviance for Linear Exponential Families.",
+    label = "deviance",
+    escape = FALSE
+  ) %>% 
+  kable_styling(
+    position = "center",
+    latex_options = "hold_position",
+    full_width = FALSE
+  ) %>% 
+  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
+  row_spec(0, bold = T)
+```
+
+
+
+
+
+
+
+
+
+
+
 
 

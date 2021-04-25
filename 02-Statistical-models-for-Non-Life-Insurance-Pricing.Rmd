@@ -28,10 +28,12 @@ In this chapter we are going to illustrate some of the most widespread models fo
 
 ## Statistical Models
 
-In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}. After this description, we will also present the \ac{gbm}, that is one of the most effective general purpose machine learning models. This allows us to have a comparison between \ac{glm} based models and general purpose machine learning models.
+In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}.
 
 
 ### Generalized Linear Models {#chap:glm}
+
+The \ac{glm}s are widly illustrated in many statistics textbooks. Among them we refer to [@wuthrich-data-analytics], [@gigante2010tariffazione], [@davison2003statistical], [@james2013introduction], [@friedman2001elements] and [@portugues-predictive-modeling]. More details on the concepts described in this section are reported in appendix \@ref(chap:appendix-exp-family).
 
 
 #### Linear Exponential Families {#chap:linear-exp-families}
@@ -41,7 +43,7 @@ One of the \ac{glm} assumptions is that the response variables belong to a _Line
 ```{definition, linear-exp-family, name = "Linear Exponential Family"}
 A Linear Exponential Family $\mathcal{F}$ is a parametrical family of probability distributions with density function (or probability function in the discrete case) that can be expressed in the form:
 $$
-f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
+f(y; \theta, \lambda) = \exp{\left\{ \frac{y\theta-b(\theta)}{\lambda} \right\}} \ c(y,\lambda), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
 $$
 where:
 
@@ -59,88 +61,6 @@ An exponential family $\mathcal{F}$ is characterized by the elements $\left( \Th
 
 It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \@ref(tab:exp-families) the characterizations for these exponential families are reported.
 
-```{r, exp-families-table, echo = FALSE, cache = TRUE}
-
-table <- tibble(
-  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
-                           align = "l"),
-  # Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}, \\ \\sigma \\in ]0, +\\infty[$",
-  #                        "$Poisson(\\mu)$,\n$\\mu \\in ]0, +\\infty[$",
-  #                        "$Gamma(\\alpha, \\mu)$,\n$\\alpha \\in ]0, +\\infty[, \\ \\mu \\in ]0, +\\infty[$",
-  #                        "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}, \\ p\\in]0,1[$"),
-  #                      align = "c"),
-  Notation = linebreak(c("$N(\\mu, \\sigma^2)$,\n$\\mu\\in\\mathbb{R}$ \n $\\sigma \\in ]0, +\\infty[$",
-                         "$Poisson(\\mu)$,\n$\\mu \\in ]0, +\\infty[$",
-                         "$Gamma(\\alpha, \\mu)$,\n$\\alpha \\in ]0, +\\infty[$ \n $\\mu \\in ]0, +\\infty[$",
-                         "$Binom(n, p)/n$,\n$n\\in\\mathbb{N}$ \n $p\\in]0,1[$"),
-                       align = "c"),
-  `$\\Theta$` = c("$\\mathbb{R}$",
-                  "$\\mathbb{R}$",
-                  "$]-\\infty, 0[$",
-                  "$\\mathbb{R}$"),
-  `$\\theta$` = c("$\\mu$",
-                  "$\\log{(\\mu)}$",
-                  "$-\\frac{1}{\\mu}$",
-                  "$\\log{\\left(\\frac{p}{1-p}\\right)}$"),
-  `$\\Lambda$` = c("$]0, +\\infty[$",
-                  "$\\left\\{1\\right\\}$",
-                  "$]0,+\\infty[$",
-                  "$\\left\\{\\frac{1}{n}\\right\\}$"),
-  `$\\lambda$` = c("$\\sigma^2$",
-                  "$1$",
-                  "$\\frac{1}{\\alpha}$",
-                  "$\\frac{1}{n}$"),
-  `$b(\\theta)$` = c("$\\frac{\\theta^2}{2}$",
-                  "$e^{\\theta}$",
-                  "$-\\log{\\left(-\\theta\\right)}$",
-                  "$\\log\\left(1+e^{\\theta}\\right)$"),
-)
-
-
-# For compatibility with HTML
-if(!knitr::is_latex_output()){
-  
-  table <- table %>% 
-    mutate(
-      Distribution = Distribution %>% 
-        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-        str_replace_all("\\\\\\\\", "<br>"),
-      Notation = Notation %>% 
-        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-        str_replace_all("\\\\\\\\", "<br>"),
-    )
-  
-  names(table) <- names(table) %>% 
-    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-    str_replace_all("\\\\\\\\", "<br>")
-}
-
-
-table %>% 
-  kable(
-    format = "latex",
-    booktabs = T,
-    align = "lcccccc",
-    vline = "",
-    toprule = "\\toprule",
-    # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule[\\heavyrulewidth]",
-    linesep = "\\addlinespace\\hline\\addlinespace",
-    bottomrule = "\\bottomrule",
-    caption = "Some Linear Exponential Families.",
-    label = "exp-families",
-    escape = FALSE
-  ) %>% 
-  kable_styling(
-    position = "center",
-    latex_options = "hold_position",
-    full_width = FALSE
-  ) %>% 
-  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
-  row_spec(0, bold = T)
-  
-```
-
 The distributions that belong to an exponential family have many useful properties. For example they are provided with all the moments and their moments can be obtained using the derivatives of the cumulative function $b(\cdot)$. If $Y$ is a random variable with distribution belonging to an exponential family $\mathcal{F}$ with parameters $\theta, \lambda$, its first two moments are:
 \begin{align}
 \label{eq:exp-fam-expected-value}
@@ -150,7 +70,7 @@ Var(Y) & = \lambda b''(\theta)
 
 As, within a specified family, the parameters $\theta$ and $\lambda$ determine a distribution, in practical problems the object of estimation will be the couple $(\theta, \lambda)$. In many problems it is natural to consider distributions from a linear exponential family where the dispersion parameter can be expressed as $\lambda = \frac{\phi}{\omega}$, where $\omega>0$ is a known _weight_ and $\phi>0$ is a parameter that we will keep calling _dispersion parameter_. In this case, the density of probability function depends on the parameters $\theta$ and $\phi$ and will be expressed as:
 $$
-f(y; \theta, \phi, \omega) = \exp{\left\{ \frac{\omega}{\phi} \left[y\theta - b(\theta) \right] \right\}} c(y, \phi, \omega), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
+f(y; \theta, \phi, \omega) = \exp{\left\{ \frac{\omega}{\phi} \left[y\theta - b(\theta) \right] \right\}} \ c(y, \phi, \omega), \quad y\in \mathcal{Y}\subseteq\mathbb{R}
 $$
 
 In this case the parameters $\theta$ and $\phi$ will be object of estimation, while $\omega$ is an already known value. As we will see later, this representation allows us to consider as known weights:
@@ -162,31 +82,38 @@ In this case the parameters $\theta$ and $\phi$ will be object of estimation, wh
 
 #### Model assumptions {#chap:glm-assumptions}
 
-Let's assume that, for $n$ statistical units, the observations $\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots,  (\boldsymbol{x}_n, \omega_n, y_n) \right\}$ are available, where $\boldsymbol{x}_i$ is a vector of explanatory variables determinations, $\omega_i$ is a known weight and $y_i$ is the response variable determination. $\boldsymbol{x}_i, \omega_i, y_i$ are all real numbers. The vector $\boldsymbol{y} = (y_1, \dots, y_n)^t$ is considered a determination of the response random vector $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$.
+Let's assume that, for $n$ statistical units, the observations
+$$\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots,  (\boldsymbol{x}_n, \omega_n, y_n) \right\}$$
+are available, where $\boldsymbol{x}_i$ is a vector of explanatory variables determinations, $\omega_i$ is a known weight and $y_i$ is the response variable determination. $\boldsymbol{x}_i, \omega_i, y_i$ are all real numbers. The vector $\boldsymbol{y} = (y_1, \dots, y_n)^t$ is considered a determination of the response random vector $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$.
 
 In \ac{glm} we assume that:
 
-1. The response variables $Y_1, \dots, Y_n$ are stochastically independent and with probability distribution belonging to a same linear exponential family; i.e. the probability distribution of $Y_i$ has density function (or probability function in the discrete case) that can be expressed as:
+<!-- \begin{enumerate}[topsep=8pt,itemsep=4pt,partopsep=4pt,parsep=4pt] -->
+
+\begin{enumerate}[itemsep=4pt]
+\item The response variables $Y_1, \dots, Y_n$ are stochastically independent and with probability distribution belonging to a same linear exponential family; i.e. the probability distribution of $Y_i$ has density function (or probability function in the discrete case) that can be expressed as:
 $$
-f(y_i; \theta_i, \phi, \omega_i) = \exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} c(y_i, \phi, \omega_i), \quad y_i\in \mathcal{Y}\subseteq\mathbb{R}
+f(y_i; \theta_i, \phi, \omega_i) = \exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} \ c(y_i, \phi, \omega_i), \quad y_i\in \mathcal{Y}\subseteq\mathbb{R}
 $$
 We highlight that only $\theta_i$ and $\omega_i$ depend on $i$, while the dispersion parameter $\phi$ is the same for all the observations.
-2. The explanatory variables determinations vector $\boldsymbol{x}_i = \left(1, x_{i1}, \dots, x_{ip} \right)^t$ affects the probability distribution of the response variable $Y_i$ by the linear predictor:
+\item The explanatory variables determinations vector $\boldsymbol{x}_i = \left(1, x_{i1}, \dots, x_{ip} \right)^t$ affects the probability distribution of the response variable $Y_i$ by the linear predictor:
 $$
 \eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}
 $$
 that is a linear function of the regression parameters $\boldsymbol{\beta} = \left( \beta_0, \beta_1, \dots, \beta_p \right)$.
-3. The linear predictor $\eta_i$ is linked to the expected value of the response variable $\mu_i = E(Y_i)$ by the following relation:
+\item The linear predictor $\eta_i$ is linked to the expected value of the response variable $\mu_i = E(Y_i)$ by the following relation:
 $$
 g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta}
 $$
-where $g:\mathbb{R}\rightarrow\mathbb{R}$ is a monotonic function with continuous first and second derivatives. $g(\cdot)$ is called _link function_.
+where $g:\mathbb{R}\rightarrow\mathbb{R}$ is a monotonic function with continuous first and second derivatives. $g(\cdot)$ is called \textit{link function}.
+\end{enumerate}
 
 Often, the assumption 1 is called stochastic assumption, while the 2 and 3 are called structural assumptions.
 
-Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which each row $\boldsymbol{x}_{i\cdot}$ represents the vector of the explanatory variables for the observation $i$ and each column $\boldsymbol{x}_{\cdot j}$ represents the vector of the observations for the explanatory variable $j$. The design matrix is represented in figure \@ref(fig:design-matrix). The matrix starts with a column of 1s, that is used to model the intercept. Thus, it is a matrix $n\times(p+1)$. We assume, as it is common in actuarial datasets, that $n>p+1$.
+Let's indicate with $\boldsymbol{X}$ the design matrix. The design matrix is the matrix in which each row $\boldsymbol{x}_{i\cdot}$ represents the vector of the explanatory variables for the observation $i$ and each column $\boldsymbol{x}_{\cdot j}$ represents the vector of the observations for the explanatory variable $j$. We also consider a column of 1s as first column, that is used to model the intercept of the linear predictor. Thus, $\boldsymbol{X}$ is a matrix $n\times(p+1)$. We assume, as it is common in actuarial datasets, that $n>p+1$.
+<!-- The design matrix is represented in figure \@ref(fig:design-matrix). --> 
 
-
+<!-- 
 ```{tikz, design-matrix, fig.cap = "Design Matrix $\\boldsymbol{X}$.", fig.ext = 'pdf', cache = TRUE, echo = FALSE, fig.align = 'center'}
 \usetikzlibrary{arrows.meta, bending, matrix, positioning}
 \pgfdeclarelayer{bg}    % declare background layer
@@ -238,7 +165,7 @@ Let's indicate with $\boldsymbol{X}$ the design matrix, i.e. the matrix in which
 \end{center}
 
 ```
-
+-->
 
 We can then express the \ac{glm} structural assumptions in a matrix form as:
 $$
@@ -269,73 +196,7 @@ $$
 \eta = g(\mu) = b'^{-1}(\mu) = \theta
 $$
 
-In table \@ref(tab:can-link-fun) the canonical link functions for the families mentioned in \@ref(tab:exp-families) are reported.
-
-```{r, can-link-fun, echo = FALSE, cache = TRUE}
-table <- tibble(
-  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
-                           align = "l"),
-  `\\makecell[c]{Cumulant function\\\\$b(\\theta)$}` = c("$\\frac{\\theta^2}{2}$",
-                     "$e^{\\theta}$",
-                     "$-\\log{\\left(-\\theta\\right)}$",
-                     "$\\log\\left(1+e^{\\theta}\\right)$"),
-  `\\makecell[c]{Derivative\\\\$b'(\\theta)$}` = c("$\\theta$",
-                      "$e^\\theta$",
-                      "$-\\frac{1}{\\theta}$",
-                      "$\\frac{e^{\\theta}}{1 + e^{\\theta}}$"),
-  `\\makecell[c]{Canonical link function\\\\$g(\\mu)=b'^{-1}(\\mu)$}` = c("$\\mu$",
-                                  "$\\log{(\\mu)}$",
-                                  "$-\\frac{1}{\\mu}$",
-                                  "$\\log{\\left( \\frac{p}{1-p} \\right)}$"),
-)
-
-# For compatibility with HTML
-if(!knitr::is_latex_output()){
-  
-  table <- table %>% 
-    mutate(
-      Distribution = Distribution %>% 
-        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-        str_replace_all("\\\\\\\\", "<br>")
-    )
-  
-  names(table) <- names(table) %>% 
-    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-    str_replace_all("\\\\\\\\", "<br>")
-}
-
-table %>% 
-  kable(
-    # format = "latex",
-    booktabs = T,
-    align = "lccc",
-    vline = "",
-    # toprule = "\\toprule",
-    # midrule = "\\toprule\\addlinespace",
-    # linesep = "\\addlinespace\\hline\\addlinespace",
-    # bottomrule = "\\bottomrule",
-    toprule = "\\toprule",
-    # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule[\\heavyrulewidth]",
-    linesep = "\\addlinespace\\hline\\addlinespace",
-    bottomrule = "\\bottomrule",
-    caption = "Canonical link functions.",
-    label = "can-link-fun",
-    escape = FALSE
-  ) %>% 
-  kable_styling(
-    position = "center",
-    latex_options = "hold_position",
-    full_width = FALSE
-  ) %>% 
-  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
-  row_spec(0, bold = T)
-  
-```
-
-In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = \log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
-
-In the Scaled Binomial case the canonical function $g(p) = \log{\left(\frac{p}{1-p}\right)}$ is called logit and its inverse $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ is called logistic. For Scaled Binomial distribution we keep using the notation $p$ for the expected value as it corresponds to the probability of success $p$.
+In table \@ref(tab:can-link-fun) the canonical link functions for the families already mentioned are reported.
 
 
 #### Model fitting {#chap:glm-model-fitting}
@@ -395,7 +256,7 @@ $$
 A statistic that can be used to measure the goodness of fit of a model is the _Deviance_. It can be used by comparing the current model log-likelihood $\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ with the _saturated model_ log-likelihood $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$. The saturated model is the model with $n$ parameters, so a model where the expected values of the response variables $\mu_1, \dots, \mu_n$ are estimated with their observed values $y_1, \dots, y_n$. It is possible to show that $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right) \ge \ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$. The closer $\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ is to $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$, the better the current model fitting is.
 
 ```{definition, deviance-def, name = "Deviance"}
-Given $\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ the log-likelihood of the current model and $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ the log-likelihood of the saturated model, the \textit{Scaled Deviance} of the current model is defined as:
+Given the log-likelihood of the current model $\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)$ and the log-likelihood of the saturated model $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$, the \textit{Scaled Deviance} of the current model is defined as:
 $$
 S(\hat{\boldsymbol{\beta}}, \phi, \boldsymbol{y}) =
 -2\left(
@@ -461,66 +322,7 @@ D(\hat{\boldsymbol{\beta}}, \boldsymbol{y})
 \right)
 \end{align*}
 
-In table \@ref(tab:deviance) the deviances for the families mentioned in \@ref(tab:exp-families) are reported.
-
-```{r, deviance-exp-fam, echo = FALSE, cache = TRUE}
-table <- tibble(
-  Distribution = linebreak(c("Normal", "Poisson", "Gamma", "Scaled\nBinomial"),
-                           align = "l"),
-  `Deviance $D(\\hat{\\boldsymbol{\\beta}}, \\boldsymbol{y})$` = c(
-    "$\\sum_{i=1}^{n}{\\left( y_i - \\hat{\\mu}_i \\right)^2}$",
-    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} - \\left( y_i - \\hat{\\mu}_i \\right) \\right\\}}$",
-    "$2\\,\\sum_{i=1}^{n}{\\left\\{ - \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)} + \\frac{ y_i - \\hat{\\mu}_i }{\\hat{\\mu}_i} \\right\\}}$",
-    "$2\\,\\sum_{i=1}^{n}{\\left\\{ y_i \\log{\\left(\\frac{y_i}{\\hat{\\mu}_i}\\right)}+ \\left(1-y_i\\right) \\log{\\left(\\frac{1-y_i}{1-\\hat{\\mu}_i}\\right)} \\right\\}}$"
-  ))
-
-# For compatibility with HTML
-if(!knitr::is_latex_output()){
-  
-  table <- table %>% 
-    mutate(
-      Distribution = Distribution %>% 
-        str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-        str_replace_all("\\\\\\\\", "<br>")
-    )
-  
-  names(table) <- names(table) %>% 
-    str_replace_all("\\\\makecell\\[[lrc]\\]\\{(.*)\\}", "\\1") %>% 
-    str_replace_all("\\\\\\\\", "<br>")
-}
-
-table %>% 
-  # mutate_all(
-  #   .funs = function(x){
-  #     if_else(
-  #       knitr::is_latex_output() & (row_number() %% 2 == 1),
-  #       str_c("\\cellcolor{gray!6}{", x, "}"),
-  #       as.character(x)
-  #     )
-  #   }
-  # ) %>% 
-  kable(
-    format = "latex",
-    booktabs = T,
-    align = "lc",
-    vline = "",
-    toprule = "\\toprule",
-    # midrule = "\\toprule\\addlinespace",
-    midrule = "\\midrule[\\heavyrulewidth]",
-    linesep = "\\addlinespace\\hline\\addlinespace",
-    bottomrule = "\\bottomrule",
-    caption = "Deviance for Linear Exponential Families.",
-    label = "deviance",
-    escape = FALSE
-  ) %>% 
-  kable_styling(
-    position = "center",
-    latex_options = "hold_position",
-    full_width = FALSE
-  ) %>% 
-  # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
-  row_spec(0, bold = T)
-```
+In table \@ref(tab:deviance) the deviances for the families mentioned are reported.
 
 As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not depend on $\hat{\boldsymbol{\beta}}$, maximizing the likelihood in equation \@ref(eq:max-lik-est) is the same as minimizing the deviance, that can be seen as a _Loss Function_:
 \begin{equation}
@@ -538,7 +340,9 @@ As $\ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)$ does not de
 
 -->
 
+We conclude this section by also mentioning that in practice it is possible to use the estimator $\hat{\beta}$ defined by the optimization problem \@ref(eq:max-lik-est) for a specific exponential family without assuming the distribution of the response variable to belong to that family. Basically, in these cases we just make assumptions on the first two moments of the response variable $Y$ and not on its full distribution. In these models the function $L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)$ is called _Quasi-Likelihood_ and the function $D(\boldsymbol{\beta}, \boldsymbol{y})$ is called _Quasi-Deviance_.
 
+For instance, if we fit our model by minimizing the loss function of the Poisson distribution, we are implicitly employing a Quasi-Likelihood model. If we are using the Poisson Likelihood, the model is also called _Quasi-Poisson_ model.
 
 
 #### Variable effects {#chap:var-effects}

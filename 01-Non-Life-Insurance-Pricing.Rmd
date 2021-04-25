@@ -156,7 +156,7 @@ Let's consider the variabile $Z_i|N\ge i$. We can interpret it as the _claim sev
 P\left(Z_i \le z \middle| N\ge i \right) = F_Z(z)
 \end{equation}
 
-This result says that $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_. The demonstration of the equation \@ref(eq:z) is reported in the appendix in section \@ref(chap:notes-on-compound-distribution).
+This result says that $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_. The demonstration of the equation \@ref(eq:z) is reported in the appendix in section \@ref(chap:appendix-notes-on-compound-distribution).
 
 
 ### Distribution of the total cost of claims {#chap:tcc-dist}
@@ -169,7 +169,7 @@ The expected value of the total cost of claims $E(S)$ can be obtained from the e
 E(S) = E(N)E(Z)
 \end{equation}
 
-This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (section \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$. The demonstration of the equation \@ref(eq:s) is reported in the appendix in section \@ref(chap:notes-on-compound-distribution).
+This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$. That result is particularly useful in personalization (section \@ref(chap:personalization)), because, for each individual $i$, given the information we have on him, we can estimate his expected claim size $E(N_i)$ and his expected claim severity $E(Z_i)$ and obtain his expected total cost of claims as $E(S_i) = E(N_i) E(Z_i)$. The demonstration of the equation \@ref(eq:s) is reported in the appendix in section \@ref(chap:appendix-notes-on-compound-distribution).
 
  <!-- $x_i=(x_{i1},  x_{i2}, \dots, x_{ip})$ -->
 
@@ -958,12 +958,12 @@ In figure \@ref(fig:settlement-process) the settlement process for a claim is re
 \end{tikzpicture}
 ```
 
-From the moment the claim is reported ($t_2$), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve. As new information emerges and some payments are settled, the reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim gets settled, the sum between the paid and the reserved converges to the final cost of the claim.
+From the moment the claim is reported ($t_2$), the insurer estimates how much he is going to pay for that claim and he allocates that sum in a reserve, called _case reserve_. As new information emerges and some payments are settled, the case reserve is updated. The aim for this reserve is to have a best estimate for the future payments for the claims already emerged. As the claim gets settled, the sum between the paid and the reserved converges to the final cost of the claim.
 
 From this description emerges that:
 
-* In the period $]t_1, t_2[$ the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we talks about \ac{ibnyr}.
-* In the period $[t_2, t_3[$ the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so this liability is just an estimate; in this case, if the reserve is not large enough to cover all the future payments that will emerge for that claim, we talks about \ac{ibner}.
+* In the period $]t_1, t_2[$ the insurer has an outstanding loss liability for an event that has not been reported yet. In this case we talks about an \ac{ibnyr}.
+* In the period $[t_2, t_3[$ the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so this liability is just an estimate. In this case, if the case reserve is not large enough to cover all the future payments that will emerge for that claim, we talks about an \ac{ibner}.
 
 
 #### Model fitting with available data
