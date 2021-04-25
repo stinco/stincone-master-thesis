@@ -657,8 +657,6 @@ Lorem ipsum \ldots{}
 \hypertarget{chap:nlip}{%
 \chapter{Non-Life Insurance Pricing}\label{chap:nlip}}
 
-\chaptermark{Non-Life Insurance Pricing}
-
 In this chapter we are going to provide an overview on how non-life insurance works from an actuarial point of view with a specific focus on the retail pricing process. For more details on the mathematics and statistics behind the concepts we introduce in this chapter, we refer to \autocite{wuthrich-non-life-insurance-math-stats}, \autocite{wuthrich-data-analytics} and \autocite{gigante2010tariffazione}.
 
 \hypertarget{chap:non-life-ins}{%
@@ -927,9 +925,9 @@ The process of pricing consists in defining a Pricing Rule based on observed dat
 The first step for defining a Pricing Rule is to model the total cost of claims \(S\) and obtain a pricing rule for the risk premium \(P^{(risk)}\).
 
 \begin{definition}[Modeling]
-\label{def:modeling} \iffalse (Modeling) \fi{} Modeling a \emph{response variable} \(Y\) means finding a function
+\label{def:modeling} \iffalse (Modeling) \fi{} Modeling a \emph{response variable} \(Y\) means estimating a function
 \[r:\mathcal{X}\rightarrow \mathcal{C}\]
-that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns an estimate of the expected value of the response variable \(E(Y)\) and possibly estimates of other moments of \(Y\) or even the full distribution of \(Y\).
+that, given a set of explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), returns the expected value of the response variable \(E(Y)\) and possibly other moments of \(Y\) or even the full distribution of \(Y\).
 \end{definition}
 
 In definition \ref{def:modeling} we used a generic \(\mathcal{C}\) as codomain of the function \(r(\cdot)\) to not specify whether the model describes just \(E(Y)\) (and so \(\mathcal{C}=\mathbb{R}\)) or something more, such as the couple \(\left( E(Y), Var(Y) \right)\) or the full distribution of \(Y\).
@@ -1099,16 +1097,16 @@ E(Z)   & = \frac{\alpha}{\rho} \\
 Var(Z) & = \frac{\alpha}{\rho^2}
 \end{align*}
 
-In figure \ref{fig:plot-gamma}, for different levels of \(\alpha\) and \(\gamma\) the distribution is represented. These plots show how changing the values of \(\alpha\) and \(\gamma\), the shape changes. We can see that:
+In figure \ref{fig:plot-gamma}, for different levels of \(\alpha\) and \(\gamma\) the distribution is represented. These plots show how, as the values of \(\alpha\) and \(\gamma\) change, the shape changes. We can see that:
 
 \begin{itemize}
 \tightlist
 \item
   if \(\alpha < 1\), \(f_z(\cdot)\) is not defined in \(0\) and it has a vertical asymptote in \(z = 0\). In \(]0, +\infty]\) it is monotonically decreasing.
 \item
-  if \(\alpha = 1\), \(f_z(\cdot)\) starts from \(f(0) = \rho\) and then decreases monotonically. In this case, the density function becomes \(f_z(z) = \rho e^{-\rho z}\) and the distribution is also called exponential distribution.
+  If \(\alpha = 1\), \(f_z(\cdot)\) starts from \(f(0) = \rho\) and then decreases monotonically. In this case, the density function becomes \(f_z(z) = \rho e^{-\rho z}\) and the distribution is also called exponential distribution.
 \item
-  if \(\alpha > 0\), \(f_z(\cdot)\) starts from \(f(0) = 0\), increases until the mode and then decreases.
+  If \(\alpha > 0\), \(f_z(\cdot)\) starts from \(f(0) = 0\), increases until the mode and then decreases.
 \end{itemize}
 
 In figure \ref{fig:plot-gamma} the first three distributions represented have the same expected value \(E(Z)=\frac{\alpha}{\rho} = 4\), but different shapes. The third and the fourth have the same variance \(Var(Z) = \frac{\alpha}{\rho^2} = 8\), but different expected values. As the shape parameter \(\alpha\) increases, the distribution assumes a bell shape similar to the Normal distribution one. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
@@ -1137,9 +1135,9 @@ Another characteristic of the Gamma distribution that could be problematic in mo
 \hypertarget{chap:large-claims}{%
 \subsubsection{Large claims}\label{chap:large-claims}}
 
-Modeling large claims in quite difficult in practice because usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance.
+Modeling large claims in quite difficult in practice because usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance due to a distribution with heavy tails.
 
-First of all, to model large claims, we must define what a large claim is. What is usually done in practice is just choosing a threshold \(\bar{z}\) and considering large all the claims with a size that exceeds that threshold. The value \(\bar{z}\) must be chosen sufficiently big to consider large the claims above \(\bar{z}\), but not so big that there are not enough observed claims that exceeds \(\bar{z}\). One common choice for Motor Third Party Liability in European markets could be \(\bar{z} = 100' 000 \text{\euro}\).
+First of all, to model large claims, we must define what a large claim is. What is usually done in practice is just choosing a threshold \(\bar{z}\) and considering large all the claims with a size that exceeds that threshold. The value \(\bar{z}\) must be chosen sufficiently big to consider large the claims above \(\bar{z}\), but not so big that there are not enough observed claims that exceeds \(\bar{z}\). One common choice for Motor Third Party Liability in European markets could be \(\bar{z} = 100\, 000 \text{\euro}\).
 
 \begin{definition}[Large and Attritional Claims]
 \label{def:def-large-claim} \iffalse (Large and Attritional Claims) \fi{} Given a predetermined threshold \(\bar{z}\), we say that:
@@ -1240,7 +1238,7 @@ These three decompositions of \(S\) are useful because they provide three decomp
   Looking to \ref{large-claim-decomposition-expected-3} we can model together the claim count \(N\), and then we can model the capped claims size \(Z'\), the excess over the threshold \(Z''\) and the probability to exceed the threshold \(P(Z>\bar{z})\).
 \end{enumerate}
 
-If the large claims component weighs a lot on the total cost of claims, these approaches could lead to quite different estimates of \(E(S)\). In particular, if in the observed data the number of large claims is small, it will be hard to model both \(N^{(l)}\) and \(P(Z>\bar{z})\), so for these components the modeling process could lead to a flat model (i.e.~a model without any explanatory variable) or almost flat one (i.e.~a model with just few explanatory variables and with mild effects). However, with the first approach, a flat model for \(N^{(l)}\) leads to distribute the observed total cost of large claims proportionally to all the policies, while with the second and the third, a flat model for \(P(Z>\bar{z})\) leads to distribute the observed total cost of large claims proportionally to the expected number of claims \(E(N)\). So, with the first approach, a flat model brings to more solidarity between policies, while, with the second approach, a flat model could bring to an exacerbation of the differences identified by modeling \(N\).
+If the large claims component weighs a lot on the total cost of claims, these approaches could lead to quite different estimates of \(E(S)\). In particular, if in the observed data the number of large claims is small, it will be hard to model both \(N^{(l)}\) and \(P(Z>\bar{z})\), so for these components the modeling process could lead to a flat model (i.e.~a model without any explanatory variable) or an almost flat one (i.e.~a model with just few explanatory variables and with mild effects). However, with the first approach, a flat model for \(N^{(l)}\) leads to distribute the observed total cost of large claims proportionally to all the policies, while with the second and the third, a flat model for \(P(Z>\bar{z})\) leads to distribute the observed total cost of large claims proportionally to the expected number of claims \(E(N)\). So, with the first approach, a flat model brings to more solidarity between policies, while, with the second approach, a flat model could bring to an exacerbation of the differences identified by modeling \(N\).
 
 For the second approach we must also introduce a distribution suitable for modeling \(P(Z>\bar{z})\).
 
@@ -1266,7 +1264,7 @@ We will indicate it with the notation \(Y \sim Binom(n, p)\).
 \caption{Binomial distribution for some values of $n$ and $p$.}\label{fig:plot-binomial}
 \end{figure}
 
-The binomial distribution is a parametric distribution that depends on the parameters \(n\) and \(p\). \(n\) represents the number of trials, while \(p\) represents the probability for a trial to succed. The assumption is that the \(n\) trials are identical, so they have all the same probability \(p\) to succed. In figure \ref{fig:plot-binomial} the distribution is represented for different levels of \(n\) and \(p\).
+The binomial distribution is a parametric distribution that depends on the parameters \(n\) and \(p\). \(n\) represents the number of trials, while \(p\) represents the probability for a trial to succed. The assumption is that the \(n\) trials are identical, so they have all the same probability \(p\) to succed.
 
 The first two moments of the binomial distribution are:
 \begin{align*}
@@ -1274,9 +1272,15 @@ E(N)   & = np \\
 Var(N) & = np(1-p)
 \end{align*}
 
-If \(n = 1\), the binomial distribution assumes only the values \(1\) (with probability \(p\)) and \(0\) (with probability \(1-p\)). In this case it is also called \emph{Bernoullian distribution} and it can be used to model the indicator of an event \(I_E\).
+In figure \ref{fig:plot-binomial} the distribution is represented for different levels of \(n\) and \(p\). From the plots we can see that:
 
-If \(n>1\), the binomial distribution assumes a shape centered on its expected value \(E(Y)=np\) and fading for values of \(y\) that moves away from \(E(Y)\). As \(n\) increases, the distribution assumes a bell shape similar to the Normal distribution shape. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
+\begin{itemize}
+\tightlist
+\item
+  if \(n = 1\), the binomial distribution assumes only the values \(1\) (with probability \(p\)) and \(0\) (with probability \(1-p\)). In this case it is also called \emph{Bernoullian distribution} and it can be used to model the indicator of an event \(I_E\).
+\item
+  If \(n>1\), the binomial distribution assumes a shape centered on its expected value \(E(Y)=np\) and fading for values of \(y\) that moves away from \(E(Y)\). As \(n\) increases, the distribution assumes a bell shape similar to the Normal distribution shape. The convergence to the Normal distribution can be obtained with the \emph{Central Limit Theorem}.
+\end{itemize}
 
 From the binomial Distribution it is also possible to define the scaled binomial distribution by dividing its value by \(n\).
 
@@ -1325,21 +1329,19 @@ Combining this decomposition with what we have seen in large claims decompositio
 E(S) & = E(N) \left[\left( 1 - P(J) \right) E(Z|\bar{J}) + P(J) E(Z|J) \right] \\[4pt]
   & = E(N) \left\{ \right. \\
   & \qquad \left( 1 - P(J) \right) E(Z|\bar{J}) \\
-  & \qquad + P(J) \left[ \right. \\
-  & \qquad \qquad P(Z \le \bar{z} | J) E\left( Z \mid Z\le \bar{z} \land J \right) \\
-  & \qquad \qquad + P(Z < \bar{z} | J) E\left( Z \mid Z < \bar{z} \land J \right) \\
-  & \qquad \left. \right] \\
-  & \quad \left. \right\}
+  & \qquad + P(J) \left[ P(Z \le \bar{z} | J) E\left( Z \mid Z\le \bar{z} \land J \right) \right. \\
+  & \qquad \qquad + \left. P(Z < \bar{z} | J) E\left( Z \mid Z < \bar{z} \land J \right) \right] \\
+  & \qquad \left. \right\}
 \end{align*}
 
-This way, we are decomposing only the claims with injuries between attritional and large. That makes sense because claims that don't produce injuries usually have small severities.
+This way, only the claims with injuries are decomposed between attritional and large. That makes sense because claims that don't produce injuries usually have small severities.
 
 \hypertarget{chap:model-fitting-and-data-available}{%
-\subsection{Model fitting and data available}\label{chap:model-fitting-and-data-available}}
+\subsection{Model fitting and available data}\label{chap:model-fitting-and-data-available}}
 
-Once we have chosen how to decompose \(S\), we have to model the response variables needed for that decomposition (\(N\), \(Z\), \(I_J\), \ldots) with the explanatory variables. Thus we have to estimate a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) as defined in \ref{def:modeling}.
+Once we have chosen how to decompose \(S\), we have to model the response variables needed for that decomposition (\(N\), \(Z\), \(I_J\), \ldots) with the explanatory variables. Thus we have to estimate a function \(r:\mathcal{X}\rightarrow \mathcal{C}\) as defined in definition \ref{def:modeling}.
 
-In order to estimate \(r(\cdot)\) we have also to take some assumptions on the distribution of the response variable and on the shape of \(r(\cdot)\). We will call \emph{model} a set of assumptions on the response variable and on the shape of \(r(\cdot)\). We will discuss some of the most widespread models for claims count and claims severity in chapter \ref{chap:models}.
+In order to estimate \(r(\cdot)\) we have also to take some assumptions on the distribution of the response variable and on the shape of \(r(\cdot)\). We calls \emph{model} a set of assumptions on the response variable and on the shape of \(r(\cdot)\). We will discuss some of the most widespread models for claims count and claims severity in chapter \ref{chap:models}.
 
 Defined the model, we have to estimate it using observed data. In general, to model a response variable \(Y_i\) with the explanatory variables \(\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in \mathcal{X} \subseteq \mathbb{R}^p\), the observed data is in the form:
 \[
@@ -1352,7 +1354,7 @@ where:
 \item
   \(n\) is the number of observations in the dataset;
 \item
-  \(\boldsymbol{x}_i\in \mathcal{X} \subseteq \mathbb{R}^p\) is the set of explanatory variable for the observation \(i\);
+  \(\boldsymbol{x}_i\in \mathcal{X} \subseteq \mathbb{R}^p\) is the set of explanatory variables for the observation \(i\);
 \item
   \(w_i\) is the weight for the observation \(i\);
 \item
@@ -1378,7 +1380,7 @@ In each of these cases, \(y_i\) is seen as a realization of the random variable 
 
 One of the challenges in non-life insurance pricing is that obtaining the observed data is not so straightforward. In many insurance coverages, such as \ac{mtpl}, the settlement process could last many years, so, if we want to develop models using data from recent years, not all the information is available. To better understand this aspect we have to discuss how the settlement process works.
 
-In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are paid. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. In is possible that \(t_4=t_3\), but it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can make some partial payments during the period \([t_2, t_3]\). These intermediate payments are paid at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim is reopened and that more payments emerge.
+In figure \ref{fig:settlement-process} the settlement process for a claim is represented. At time \(t_1\) the insured event (e.g.~an accident) occurs. From this moment a liability for the insurer emerges, even if the insurer has not been notified yet. This liability is called \emph{Outstanding Loss Liability}. In \(t_2\) the claim is reported and the insurance is notified about the occurrence of the event. From this moment the settlement process starts. This process consists in evaluating the event and understanding the responsibilities of the parts and the entity of the damage. During this process, controversies between the parts can emerge and, in particular if injuries occurred, the damage evaluation can take a lot of time. When the situation is clear and everything is defined, the claim is settled and the liabilities are paid. In \(t_3\) we have the settlement and in \(t_4\) the claim is closed. It is possible that \(t_4=t_3\), but it is not always the case. If the settlement process takes a long time and the insurer already knows he will have to pay something, he can make some partial payments during the period \([t_2, t_3]\). These intermediate payments are paid at times \(\tau_1, \tau_2, \dots, \tau_n \in [t_2, t_3]\). It is also possible that a claim is opened and then gets closed without any payment. After the closing (\(t_4\)) it is also possible that a claim gets reopened and that more payments emerge.
 
 \begin{figure}
 \centering
@@ -1393,15 +1395,15 @@ From this description emerges that:
 \begin{itemize}
 \tightlist
 \item
-  In the period \(]t_1, t_2[\) the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we will talk about \ac{ibnyr}.
+  In the period \(]t_1, t_2[\) the insurer has an outstanding loss liability for an event that has not been reported yet; in this case we talks about \ac{ibnyr}.
 \item
-  In the period \([t_2, t_3[\) the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so that liability is just an estimate; in this case we will talk about \ac{ibner}.
+  In the period \([t_2, t_3[\) the insurer has an outstanding loss liability for an event that has been reported, but has not been totally settled yet, so this liability is just an estimate; in this case, if the reserve is not large enough to cover all the future payments that will emerge for that claim, we talks about \ac{ibner}.
 \end{itemize}
 
 \hypertarget{model-fitting-with-available-data}{%
 \subsubsection{Model fitting with available data}\label{model-fitting-with-available-data}}
 
-The \ac{ibnyr} and \ac{ibner} issue is particularly challenging when we have to perform a risk evaluation at a specific time \(t\). In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred to each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
+The \ac{ibnyr} and \ac{ibner} issue is particularly challenging when we have to perform a risk evaluation at a specific time \(t\). In general \(t_1, t_2,\dots\) are not known a priori, so we don't know if in the future more claims for accidents occurred in the past will be reported and we don't know if the ones that are already reported will experience a revaluation. That means that, in general, when we model \(N\) and \(Z\) at a specific time \(t\), we can't observe the total number of claims occurred for each policy \(n_i\) and the payments for each claim \(z_j\). What we can use is:
 
 \begin{itemize}
 \tightlist
@@ -1436,7 +1438,7 @@ The common case is that \(n_i^{(t)} < n_i\) and \(z_j^{(t)} < z_j\). If we used 
 
 To tackle these problems what is usually done is fitting the models for \(S_i\) with \(n_i^{(t)}\) and \(z_j^{(t)}\) and then apply a flat corrective coefficient \(\alpha\) to \(\widehat{E(S_i)}\) based on an aggregated estimate of \(E(S)\) that takes into account the long settlement process.
 
-An estimate for the expected total cost of claims for a generic policy in the portfolio \(E(S)\) can be obtained with techniques based on runoff triangles, such as the \emph{Chain Ladder}. These techniques are based on projecting the cost of claims already emerged to the final total cost of claims. We are not going to discuss these techniques in this thesis. We just have to know that these techniques provide us with an estimate for \(E(S)\). Let's call it \(\widehat{E(S)}^{CL}\). This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
+An estimate for the expected total cost of claims for a generic policy in the portfolio \(E(S)\) can be obtained with techniques based on runoff triangles, such as the \emph{Chain Ladder}. These techniques are based on projecting the cost of claims already emerged to the final total cost of claims. We are not going to discuss these techniques in this thesis. For more details on them we refer to \autocite{wuthrich-non-life-insurance-math-stats}. For our dissertation, we just have to know that these techniques provide us with an estimate for \(E(S)\). Let's call it \(\widehat{E(S)}^{CL}\). This estimate does not depend on explanatory variables; it is a sort of average total cost of claims for the policies in the portfolio.
 
 Meanwhile, with the available data \(n_i^{(t)}\) and \(z_j^{(t)}\), the fitting for all the models needed in the decomposition of \(S\) is performed and, for each policy \(i\in\{1, 2, \dots, n\}\), \(E(S_i)\) is obtained. Let's call it \(\widehat{E(S_i)}'\). As we used the data available in \(t\) that comes from claims not totally settled, \(\widehat{E(S_i)}'\) is a biased estimate for \(E(S_i)\).
 
@@ -1448,7 +1450,7 @@ and applying to the estimates as follows:
 \[
 \widehat{E(S_i)} = \alpha \ \widehat{E(S_i)}'
 \]
-We will call \(\widehat{E(S_i)}\) rebalanced estimates.
+We calls \(\widehat{E(S_i)}\) rebalanced estimate.
 
 The property of these rebalanced estimates is that on average they are equal to \(\widehat{E(S)}^{CL}\):
 \begin{align*}
@@ -1482,7 +1484,7 @@ For this reason, in practice, often the modeling is considered composed in 2 par
   \emph{Personalization}: the estimate of \(\widehat{E(S_i)}'\) and the relative coefficients.
 \end{enumerate}
 
-The techniques used for \emph{Tariff Requirement} are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in Non-Life insurace companies.
+The techniques used for \emph{Tariff Requirement} are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in non-life insurace companies.
 
 \hypertarget{beyond-technical-pricing}{%
 \section{Beyond technical pricing}\label{beyond-technical-pricing}}
@@ -1506,9 +1508,15 @@ In this section we are going to discuss what the \emph{Tariff} and the \emph{Off
 \hypertarget{tariff-and-offer-price}{%
 \subsection{Tariff and Offer Price}\label{tariff-and-offer-price}}
 
-The \emph{Tariff} is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the IVASS (Istituto per la vigilanza sulle Assicurazioni).
+The \emph{Tariff} is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the \href{https://www.ivass.it/}{IVASS} (Istituto per la vigilanza sulle Assicurazioni).
 
-In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it. However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictete that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price. Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium). Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall in an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
+In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it.
+
+However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictate that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price.
+
+Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium).
+
+Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall into an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not at the tariff price, but at the price obtained subtracting from it a discount \(D_i\ge0\). The premium obtained this way is called \emph{Offer Price}.
 \[
@@ -1558,9 +1566,9 @@ Anyway, a company can't arbitrarily discount policies because an excess in disco
 \hypertarget{chap:actuary-role}{%
 \section{The actuary role}\label{chap:actuary-role}}
 
-In this technical pricing and price optimization framework, the actuary is the one that conducts the analysis and defines the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries as ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior''.\footnote{\href{https://www.actuaries.org/iaa/IAA/About_the_IAA/About_Actuaries/About\%20Actuaries.aspx}{IAA, About Actuaries}}
+In this technical pricing and price optimization framework, the actuary is the one that conducts the analysis and defines the pricing rules. The \emph{International Actuarial Association} (IAA) describes the actuaries as ``highly qualified professionals who analyze the financial impact of risk for organizations like insurers, pensions fund managers, and more'' and it states that their work ``requires a combination of strong analytical skills, business knowledge, and understanding of human behavior'' \autocite{iaa-about-actuaries}.
 
-First of all, the actuary must master the main statistical and data science techniques used to develop models for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with Advanced Driver-Assistance Systems (ADAS), are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
+First of all, the actuary must master the main statistical and data science techniques used to develop models for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with \ac{adas}, are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
 
 In the last years, the increase of competition brought to an increase in price optimization importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price.
 
@@ -1570,8 +1578,6 @@ The importance for price optimization implies that the technical pricing must no
 \chapter{Statistical models for Non Life Insurance Pricing}\label{chap:models}}
 
 \minitoc  
-
-\chaptermark{Statistical models for Non Life Insurance Pricing}
 
 In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \ref{chap:considerations-on-models} we will compare them by discussing how they fit the pricing needs.
 
@@ -3099,8 +3105,6 @@ In the application described in section \ref{chap:practical-app} we used H2O loc
 \chapter{Practical application}\label{chap:practical-app}}
 
 \minitoc  
-
-\chaptermark{Practical application}
 
 In this final chapter we are going to describe the practical application on an actuarial dataset of the models described in section \ref{chap:models}. After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
 

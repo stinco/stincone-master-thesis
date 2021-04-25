@@ -21,7 +21,7 @@ library(knitr)
 # Statistical models for Non Life Insurance Pricing {#chap:models}
 \minitoc  <!--this will include a mini table of contents-->
 
-\chaptermark{Statistical models for Non Life Insurance Pricing}
+<!-- \chaptermark{Statistical models for Non Life Insurance Pricing} -->
 
 In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:considerations-on-models) we will compare them by discussing how they fit the pricing needs.
 
