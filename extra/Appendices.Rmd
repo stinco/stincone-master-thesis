@@ -10,7 +10,7 @@
 
 ## Notes on Compound distribution {#chap:appendix-notes-on-compound-distribution}
 
-In section \@ref(chap:nlip-details) ...
+In section \@ref(chap:nlip-details) we defined the compound distribution (definition \@ref(def:comp-dist)) and we reported some results on it. In this section we report the demonstrations of the results \@ref(eq:z) and \@ref(eq:s).
 
 
 ### Compound distribution hypotheses
@@ -36,6 +36,7 @@ Where:
 * the step \@ref(eq:z3) is due to the fact that the distribution of $Z_i\le z | N=n$ depends neither on $i$ nor on $n$;
 * the equivalence $\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)} = 1$ at step \@ref(eq:z4) is due to the fact that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are a partition of $\{N\ge i\}$.
 
+This result says that $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_.
 
 
 ### Distribution of the total cost of claims
@@ -65,34 +66,12 @@ Where:
 * the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
 * the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
-## Exponential Families
+## Exponential Families {#chap:appendix-exp-family}
 
-### Usual parametrizations
-
-#### Normal Distribution
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+In section \@ref(chap:linear-exp-families) we defined the linear exponential family (definition \@ref(def:linear-exp-family)). In this section we report some results on the most used linear exponential families.
 
 
-#### Poisson Distribution
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
-
-
-#### Gamma Distribution
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
-
-
-#### Binomial Distribution
-
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
-
-
-
-### Exponential family parametrization {#chap:appendix-exp-family}
-
-#### Characterization of exponential families
+### Characterization of exponential families
 
 It can be easily shown that the families Normal, Poisson, Gamma and Binomial are exponential families. In table \@ref(tab:exp-families) the characterizations for these exponential families are reported.
 
@@ -179,9 +158,9 @@ table %>%
 ```
 
 
-#### Canonical link functions
+### Canonical link functions
 
-In table \@ref(tab:can-link-fun) the canonical link functions for the families already mentioned are reported.
+In table \@ref(tab:can-link-fun) the canonical link functions for the families mentioned are reported.
 
 ```{r, can-link-fun, echo = FALSE, cache = TRUE}
 table <- tibble(
@@ -247,10 +226,10 @@ table %>%
 
 In the Gamma case, its canonical function $g(\mu)=-\frac{1}{\mu}$ has the drawback that it links the expected values $\mu\in]0,+\infty[$ to $\eta\in]-\infty, 0[$. This would require some constraints on $\boldsymbol{\beta}$ because $\eta=\boldsymbol{x}^t\boldsymbol{\beta}$ would have to be $<0$. For this reason, it is preferred to use $g(\mu) = \log(\mu)$ that maps $]0, +\infty[$ to $\mathbb{R}$.
 
-In the Scaled Binomial case the canonical function $g(p) = \log{\left(\frac{p}{1-p}\right)}$ is called logit and its inverse $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ is called logistic. For Scaled Binomial distribution we keep using the notation $p$ for the expected value as it corresponds to the probability of success $p$.
+In the Scaled Binomial case the canonical function $g(p) = \log{\left(\frac{p}{1-p}\right)}$ is called logit and its inverse $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ is called logistic. For the Scaled Binomial distribution we keep using the notation $p$ for the expected value as it corresponds to the probability of success $p$.
 
 
-#### Deviance
+### Deviance
 
 In table \@ref(tab:deviance) the deviances for the families mentioned are reported.
 

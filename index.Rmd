@@ -3,7 +3,7 @@ title: |
   Application of GLM Advancements \
   to Non-Life Insurance Pricing
 author: Leonardo Stincone
-author-title: Candidato
+author-title: Laureando
 college: |
   Scienze Economiche, Aziendali, Matematiche e Statistiche
 degree: Scienze Statistiche e Attuariali

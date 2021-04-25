@@ -33,7 +33,7 @@ In this section we will start by describing the \ac{glm}, that is the most emplo
 
 ### Generalized Linear Models {#chap:glm}
 
-The \ac{glm}s are widly illustrated in many statistics textbooks. Among them we refer to [@wuthrich-data-analytics], [@gigante2010tariffazione], [@davison2003statistical], [@james2013introduction], [@friedman2001elements] and [@portugues-predictive-modeling]. More details on the concepts described in this section are reported in appendix \@ref(chap:appendix-exp-family).
+The \ac{glm}s are widly illustrated in many statistics textbooks. Among them we refer to [@wuthrich-data-analytics], [@gigante2010tariffazione], [@azzalini1996statistical], [@davison2003statistical], [@james2013introduction], [@friedman2001elements] and [@portugues-predictive-modeling]. More details on the concepts described in this section are reported in appendix \@ref(chap:appendix-exp-family).
 
 
 #### Linear Exponential Families {#chap:linear-exp-families}
@@ -347,7 +347,7 @@ For instance, if we fit our model by minimizing the loss function of the Poisson
 
 #### Variable effects {#chap:var-effects}
 
-As we mentioned in \@ref(chap:pricing-variables-encoding), the explanatory variables can be _quantitative_ or _qualitative_. In \ac{glm}s, if explanatory variables transformation terms aren't added to the linear predictor $\eta$, the variables effect on $\eta$ is linear. In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown. The data is simulated from a \ac{glm} with Normal response and identity link.
+As we mentioned in section \@ref(chap:pricing-variables-encoding), the explanatory variables can be _quantitative_ or _qualitative_. In \ac{glm}s, if explanatory variables transformation terms aren't added to the linear predictor $\eta$, the variables effect on $\eta$ is linear. In figure \@ref(fig:expl-var-types) the effects of quantitative and qualitative variables are shown. The data is simulated from a \ac{glm} with Normal response and identity link.
 
 (ref:expl-var-types-caption-latex) Explanatory variables types.
 
@@ -512,7 +512,7 @@ In the top-left panel, we see the effect of the quantitative variable $x$ in the
 
 In the top-right panel, we see the effect of a qualitative binary variable $x$ in the model $\mu_i = \beta_0 + \beta_1 x_i$. The variable is encoded with values $0$ and $1$, so $\beta_1$ represents the effect of the modality $x=1$. In general, for a qualitative variable with $K$ modalities we will have $K-1$ dummy variables $x'_1, \dots, x'_{K-1}$ and the model will be $\mu_i = \beta_0 + \beta_1 x'_{i1} + \beta_2 x'_{i2} + \dots +  + \beta_{K-1} x'_{i, K-1}$. Thus, the $\beta_j$ coefficient represents the relative effect of the modality $j$ compared to the base level modality, that is the one not explicitly included in the dummy encoding. For example, if $x$ is the vehicle make, $Y$ the yearly number of claims, the base level for $x$ is 'Fiat' and the $j$^th^ modality is 'Ferrari', then $\beta_j>0$ means that Ferrari cars on average experience more claims that Fiat cars.
 
-In general, in a multivariate model, the coefficient $\beta_j$ represents the effect of the variable $j$ given all the others. In the example of Fiat and Ferrari cars, if in the model there is also the variable 'vehicle power', the coefficient $\beta_j$ corresponding to the modality 'Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called _Simpson's paradox_ ^[Simpson's paradox, <https://en.wikipedia.org/wiki/Simpson%27s_paradox>].
+In general, in a multivariate model, the coefficient $\beta_j$ represents the effect of the variable $j$ given all the others. In the example of Fiat and Ferrari cars, if in the model there is also the variable 'vehicle power', the coefficient $\beta_j$ corresponding to the modality 'Ferrari' represents the how more risky a Ferrari car is compared to a Fiat car with the same power. If the explanatory variables are strongly correlated, it is important to be aware of this aspect. For example, Ferrari cars are usually more powerful that Fiat cars. So, it is possible that in general Ferrari cars are more risky than Fiat cars, but comparing a Ferrari car to a Fiat with the same power, the Ferrari could be less risky. This effect is called _Simpson's paradox_ [@blyth1972simpson].
 
 In the bottom-left panel of figure \@ref(fig:expl-var-types), we see the effect of a quantitative variable $x_1$ and a qualitative binary variable $x_2$ together in the model $\mu_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2}$. As we can seen, the effects of $x_1$ variable in the two groups defined by $x_2$ variable are represented by two parallel straight lines. The first one is $\mu_i = \beta_0 + \beta_1 x_{i1}$ and the second is $\mu_i = \left(\beta_0 + \beta_2\right) + \beta_1 x_{i1}$. The coefficient $\beta_2$ represents the vertical distance between the two lines.
 
@@ -716,8 +716,13 @@ Nella pratica i \beta non sono noti e avremo solo gli \hat{\beta}
 
 #### Link functions and relativities
 
-As we mentioned in \@ref(chap:linear-exp-families), \ac{glm} supports several families. In figure \@ref(fig:resp-var) the models $g(\mu_i) = \beta_0 + \beta_1 x_i$ with different response variable distributions and link functions are represented. As we can see from the plots, a linear effect on $x$ corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
+As we mentioned in \@ref(chap:linear-exp-families), \ac{glm} supports several families. In figure \@ref(fig:resp-var) the models $g(\mu_i) = \beta_0 + \beta_1 x_i$ with different response variable distributions and link functions are represented.
 
+In all the distribution we used the canonical link function, except for the Gamma, in which we adopted the function $g(\mu)=\log(\mu)$ instead of its canonical link function $g(\mu)=-\frac{1}{\mu}$.
+
+In the Binomial case the canonical function is $g(p) = \log{\left(\frac{p}{1-p}\right)}$, that is called logit function. Its inverse is $g^{-1}(\eta) = \frac{e^{\eta}}{1 + e^{\eta}}$ and it is called logistic.
+
+As we can see from the plots, a linear effect on $x$ corresponds to a logistic effect when the link is logit and to an exponential effect when the link is log.
 
 (ref:resp-var-caption-latex) Response variables and link functions.
 
@@ -1108,11 +1113,11 @@ Therefore, with a significance level $\alpha$ we will reject $H_0$ when $\lambda
 
 The same approach can be used in general for testing hypotheses that can be expressed as $H_0: \boldsymbol{L}\boldsymbol{\beta} = \xi$, where $\boldsymbol{L}$ is a matrix $s\times(p+1)$ and $\xi\in\mathbb{R}^{p+1}$. This is particularly useful in qualitative variables to test if some of the levels have the same effect and can be then unified. For example, if $x_{j_1}$ and $x_{j_2}$ are two dummy variables that describe two levels of the same quantitative variable, we can perform the test $H_0: \beta_{j_1} = \beta_{j_2}$ in order to decide whether unifying the two levels is suitable or not.
 
-Anyway, selecting the variables by performing hypotheses testing have some drawbacks. First of all, conducting a lot of test produce the multiple test problem. Let's consider the case in which we conduct a test of the kind $H_0: \beta_j = 0$ with a significance level $\alpha=0.05$ on many variables that have no effect on the response. On average, although the null hypotheses are always true, we will reject them once every 20 tests. That means that if we have available 100 variables, we will randomly select 5 of them, falling in _overfitting_. To fix this problem, it is possible to use the Bonferroni correction, that consist in dividing $\alpha$ by the number of test conducted to define the rejection region. But this could be a too restrictive correction that could lead to discard from the model some useful variables, falling in _underfitting_.
+Anyway, selecting the variables by performing hypotheses testing have some drawbacks. First of all, conducting a lot of test produce the multiple test problem. Let's consider the case in which we conduct a test of the kind $H_0: \beta_j = 0$ with a significance level $\alpha=0.05$ on many variables that have no effect on the response. On average, although the null hypotheses are always true, we will reject them once every 20 tests. That means that if we have available 100 variables, we will randomly select 5 of them, falling into _overfitting_. To fix this problem, it is possible to use the Bonferroni correction, that consists in dividing $\alpha$ by the number of test conducted to define the rejection region. But this could be a too restrictive correction that could lead to discard from the model some useful variables, falling into _underfitting_.
 
 Moreover, hypothesis testing aim is finding whether data supports or not an hypothesis. If the aim of the model is prediction, basing variable selection on hypotheses testing could lead to a sub-optimal model.
 
-Another method for variable selection is comparing the models by computing _information criteria_. Two information criteria commonly used are the _Akaike Information Criterion_ (AIC) and the _Bayesian Information Criterion_ (BIC):
+Another method for variable selection is comparing the models by computing _information criteria_. Two information criteria commonly used are the \ac{aic} and the \ac{bic}:
 \begin{align*}
 AIC & = -2\ell(\boldsymbol{\beta}) + 2 (p+1) \\
 BIC & = -2\ell(\boldsymbol{\beta}) + \log(n) (p+1)
@@ -1133,7 +1138,7 @@ The higher $K$ is, the less subjected to randomness $D^{CV(K)}$ is. However, the
 
 #### Scalability and manual fitting
 
-One problem of \ac{glm} is that the variables selection process is not so easily scalable. Indeed, if we consider $p$ explanatory variables, even without taking into account interactions and quantitative variables transformation, there are $2^p$ possible models that can be obtained by choosing a subset of those variables. As $p$ increases, building all these models and choosing the optimal one becomes unfeasible.
+One problem of \ac{glm} is that the variables selection process is not so easily scalable. Indeed, if we consider $p$ explanatory variables, even without taking into account interactions and quantitative variables transformations, there are $2^p$ possible models that can be obtained by choosing a subset of those variables. As $p$ increases, building all these models and choosing the optimal one becomes unfeasible.
 
 One strategy to reduce the time consumption is to use a _stepwise procedure_. First of all we must choose a criterion to compare the models, such as the AIC. Then we have to choose a starting model that consider the variables subset $\mathcal{C}_0 \subset \{ 1,2,\dots,p \}$. It is possible to compare this model with all the models that can be obtained by removing one variable from $\mathcal{C}_0$ or adding to $\mathcal{C}_0$ one that is not included in it. From all these models we can compute the AIC and we will choose as $\mathcal{C}_1$ the set of variables that minimize the AIC. If none of the considered models has an AIC lower to the one obtained with the variables $\mathcal{C}_0$, the procedure ends and our final set of variables is $\mathcal{C}_0$. Otherwise, we will repeat the step with $\mathcal{C}_1$. The procedure can be iteratively repeated until we obtain a subset of variables $\mathcal{C}_f$ that can't be improved by removing or adding a variable. The model with the variables $\mathcal{C}_f$ will be our chosen one.
 
@@ -1170,7 +1175,7 @@ An aspect that facilitates the model building and reduces the complexity of the 
 
 ### Generalized Additive Models {#chap:gam}
 
-In section \@ref(chap:var-effects) we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In \ac{glm} it is possible to deal with non-linear effects by adding polynomial or split-wise terms. \ac{gam}s are models based on \ac{glm} that introduce a more flexible way to deal with quantitative variables with non-linear effects.
+In section \@ref(chap:var-effects) we have seen that sometimes quantitative variables have not a linear effect on the linear predictor. In \ac{glm} it is possible to deal with non-linear effects by adding polynomial or piece-wise terms. \ac{gam}s are models based on \ac{glm} that introduce a more flexible way to deal with quantitative variables with non-linear effects. For more details on \ac{gam} we refer to [@wuthrich-data-analytics], [@james2013introduction], [@friedman2001elements], [@ruppert2003semiparametric], [@wood2017generalized] and [@sica-2016].
 
 
 <!--
@@ -1221,7 +1226,7 @@ The constraints for $f(\cdot)$ make it a continuous functions with first and sec
 
 In definition \@ref(def:cubic-splines) we introduced 4 parameters ($\alpha_t, \vartheta_t, \gamma_t, \delta_t$) for each of the $m-1$ intervals $[\nu_t, \nu_{t+1}[$, $t\in\{1,2,\dots,m-1\}$. So, we have $4(m-1)$ parameters. In equation \@ref(eq:cubic-spline-constraints) we introduced $3$ constraints for each of the $m-2$ knot in $\nu_2, \nu_3, \dots, \nu_{m-1}$. So the free parameters become $4(m-1) - 3(m-2) = m+2$. The linear extension on $[a, \nu_1[$ and $]\nu_m, b]$ corresponds to the constraint $f''(x)=0$ on $[a, \nu_1[ \, \cup \, ]\nu_m, b]$, thus, $h''_1(\nu_1)=0$ and $h''_m(\nu_m)=0$. Adding these two constraints, we get that the natural cubic spline $f:[a,b]\to\mathbb{R}$ has $m$ degrees of freedom.
 
-With an approach similar to the one we used in \@ref(chap:var-effects) for split-wise effects in \ac{glm}, we can represent a cubic spline by the functions $x \mapsto \left( x-\nu_t \right)_+^3$, $t=1,2,\dots,m$.
+With an approach similar to the one we used in \@ref(chap:var-effects) for piece-wise effects in \ac{glm}, we can represent a cubic spline by the functions $x \mapsto \left( x-\nu_t \right)_+^3$, $t=1,2,\dots,m$.
 
 The expression:
 \begin{equation}
@@ -1235,7 +1240,7 @@ The two side constraints ensure that we have a smooth linear extension right of 
 
 #### Smoothing
 
-If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and, thus, the variance of the parameters estimators increases. We can see this effect in figure \@ref(fig:cub-spline).
+If we try to fit a cubic spline on data, we find that by increasing the number of knots, the function tends to overfit data. This is due to the fact that, increasing the number of knots, we are increasing the number of parameters of the model and, thus, the variance of the parameters estimators increases. We can see this effect in figure \@ref(fig:cub-spline). The data used for figure \@ref(fig:cub-spline) and \@ref(fig:gam-lambda) comes from the LIDAR dataset that has been described in [@ruppert2003semiparametric] and [@holst1996locally]
 
 (ref:cub-spline-caption-latex) \ac{glm} with cubic splines for different numbers of knots. The more knots there are, the wigglier the estimated function $\hat{f}(x)$ is.
 
@@ -1861,7 +1866,7 @@ This higher flexibility and automation comes at the cost of introducing more com
 
 ### Shrinkage estimators for GLM {#chap:shrinkage-estimators}
 
-In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in \ac{glm} when there are many explanatory variables. All the models presented in this chapter are actually \ac{glm}. The advancements consist in the way the parameters are estimated.
+In this section we are going to present the shrinkage estimators, that are a class of estimators particularly useful in \ac{glm} when there are many explanatory variables. All the models presented in this chapter are actually \ac{glm}. The advancements consist in the way the parameters are estimated. For more details on the shrinkage estimators we refer to [@wuthrich-data-analytics], [@james2013introduction], [@friedman2001elements], [@portugues-predictive-modeling] and [@ruppert2003semiparametric].
 
 
 #### The Bias-Variance Trade Off
@@ -2884,7 +2889,7 @@ Benefici ridge/lasso
 
 ### Bayesian GLM {#chap:bayes-glm}
 
-In this section we are going to present the Bayesian estimators for \ac{glm}. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduces the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and \ac{lasso} Regression can be interpreted as Bayesian estimators.
+In this section we are going to present the Bayesian estimators for \ac{glm}. The novelty compared to Maximum Likelihood estimators consists in the fact that Bayesian statistics introduces the idea of prior information that, used in inference, brings a bias to the estimates. As we will see in section \@ref(chap:bayes-ridge-lasso), Ridge Regression and \ac{lasso} Regression can be interpreted as Bayesian estimators. For more details on Bayesian \ac{glm} we refer to [@wuthrich-data-analytics] and [@gelman2013bayesian].
 
 
 #### The Bayesian framework
