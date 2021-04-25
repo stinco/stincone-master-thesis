@@ -47,13 +47,15 @@
 \setlist[itemize]{topsep=0pt}    % Reduce the space before itemize
 \setlist[enumerate]{topsep=0pt}  % Reduce the space before enumerate
 
+% Leonardo Stincone, 24/04/2021
+% This doesn't work
 % Default image and table positioning
 % h: here
 % b: bottom of the page
 % t: top of the page
 % p: separate page
-\def\fps@figure{!hbtp}
-\def\fps@table{!hbtp}
+%\def\fps@figure{!hbtp}
+%\def\fps@table{!hbtp}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -307,6 +309,17 @@ $endfor$
 
 \usepackage{float}
   % For images after section title in appendix
+
+% Leonardo Stincone, 24/04/2021
+% Manually set figure positioning
+% https://stackoverflow.com/questions/16626462/figure-position-in-markdown-when-converting-to-pdf-with-knitr-and-pandoc
+\let\origfigure\figure
+\let\endorigfigure\endfigure
+\renewenvironment{figure}[1][2] {
+  \expandafter\origfigure\expandafter[!hbtp]
+} {
+  \endorigfigure
+}
 
 \usepackage{pdfpages} 
 	% Allows multi-page pdfs to be inserted as graphics

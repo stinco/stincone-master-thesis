@@ -522,7 +522,7 @@ $$
 The deviance can be seen as a distance between the predictions $\hat{\mu}_i$ and the observed response variable $y_i$. The lower the deviance on the test set is, the better the model is.
 
 
-\newpage
+<!-- \newpage -->
 
 ## Models description
 

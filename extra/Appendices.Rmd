@@ -5,13 +5,65 @@
 <!-- `r if(!knitr:::is_latex_output()) '# (APPENDIX) Appendix {-}'`  -->
 
 
-# Notes on Compound distribution
+# Mathematical details
 
 
-## section 1
+## Notes on Compound distribution {#chap:notes-on-compound-distribution}
 
-Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit, amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt, ut labore et dolore magnam aliquam quaerat voluptatem.
+In section \@ref(chap:nlip-details) ...
 
+
+### Compound distribution hypotheses
+
+Let's consider the variabile $Z_i|N\ge i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N\ge i$ has the same distribution of $Z_i|N=n, \ i\le n$. This can be easily obtained as follows:
+
+\begin{align}
+\label{eq:z1}
+P\left(Z_i \le z \middle| N\ge i \right) & = P\left(Z_i \le z \middle| \bigvee_{n = i}^{+\infty}{(N=n)}\right)
+\\ \label{eq:z2} & =
+\sum_{n=i}^{+\infty}{ \underbrace{P\left(Z_i\le z \middle| N=n\right)}_{=F_Z(z)} P\left( N = n \middle| N\ge i \right)}
+\\ \label{eq:z3} & =
+\sum_{n=i}^{+\infty}{ F_Z(z) P\left( N = n \middle| N\ge i \right)}
+\\ \label{eq:z4} & =
+F_Z(z) \underbrace{\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)}}_{=1}
+\\ \nonumber & =
+F_Z(z)
+\end{align}
+
+Where:
+
+* the step \@ref(eq:z1) and the step \@ref(eq:z2) are given by the fact that the event $\{N\ge i\}$ can be decomposed as $\{N\ge i\} = \left\{ \bigvee_{n = i}^{+\infty}{(N=n)} \right\}$ and that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are two-by-two disjoint, so they constitute a partition of $\{N\ge i\}$, that allows us to use the disintegrability property of the probability;
+* the step \@ref(eq:z3) is due to the fact that the distribution of $Z_i\le z | N=n$ depends neither on $i$ nor on $n$;
+* the equivalence $\sum_{n=i}^{+\infty}{P\left( N = n \middle| N\ge i \right)} = 1$ at step \@ref(eq:z4) is due to the fact that the events $\{N=n\}, n\in\{i, i+1, i+2, \dots\}$ are a partition of $\{N\ge i\}$.
+
+
+
+### Distribution of the total cost of claims
+
+The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
+
+\begin{align}
+\label{eq:s1}
+E(S) & = \sum_{n=0}^{+\infty}{P(N=n) \, E\left(S \middle| N = n \right)}
+\\ \label{eq:s2} & =
+\sum_{n=0}^{+\infty}{P(N=n) \, E\left(\sum_{i=1}^{n}{Z_i} \middle| N = n \right)}
+\\ \label{eq:s3} & =
+\sum_{n=0}^{+\infty}{P(N=n) \sum_{i=1}^{n}{\underbrace{E\left( Z_i \middle| N = n \right)}_{=E(Z)}}}
+\\ \label{eq:s4} & =
+\sum_{n=0}^{+\infty}{P(N=n) n E(Z)}
+\\ \label{eq:s5} & =
+E(Z) \underbrace{\sum_{n=0}^{+\infty}{n P(N=n)}}_{=E(N)}
+\\ \label{eq:s6} & =
+E(N)E(Z)
+\end{align}
+
+Where:
+
+* the step \@ref(eq:s1) is given by the fact that the events $\{N=0\}, \{N=1\}, \{N=2\}, \dots$ constitute a partition of the certain event $\Omega$, that allows us to use the disintegrability property of the expected value;
+* the step \@ref(eq:s2) is due to the definition of $S$;
+* the step \@ref(eq:s3) is due to the linearity of the expected value;
+* the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
+* the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
 
 ## section 2
 
