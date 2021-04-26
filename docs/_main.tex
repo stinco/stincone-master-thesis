@@ -527,15 +527,17 @@
 	% Title Page with Italian style (frontespizio
 	\begin{frontespizio}
 	  \begin{Preambolo*}
-	    \renewcommand {\frontinstitutionfont } {\fontsize {20}{21}\bfseries }
-	    \renewcommand {\frontdivisionfont } {\fontsize {16}{23}\normalfont }
-	    \renewcommand {\frontpretitlefont } {\fontsize {16}{23}\scshape }
-	    \renewcommand {\fronttitlefont } {\fontsize {24}{27}\bfseries }
-	    \renewcommand {\frontfixednamesfont} {\fontsize {16}{23}\normalfont }
-	    \renewcommand {\frontnamesfont} {\fontsize {16}{23}\bfseries }
-	    \renewcommand {\frontfootfont} {\fontsize {14}{20}\bfseries }
+	    \renewcommand {\frontinstitutionfont} {\fontsize{20}{21} \bfseries}
+	    \renewcommand {\frontdivisionfont} {\fontsize{16}{23} \normalfont}
+	    \renewcommand {\frontpretitlefont} {\fontsize{16}{23} \scshape}
+	    \renewcommand {\fronttitlefont} {\fontsize{24}{27} \bfseries}
+	    \renewcommand {\frontfixednamesfont} {\fontsize{16}{23} \normalfont}
+	    \renewcommand {\frontnamesfont} {\fontsize{16}{23} \bfseries}
+	    \renewcommand {\frontfootfont} {\fontsize{14}{20} \bfseries}
 	  \end{Preambolo*}
 	  
+	  \Rientro{1cm} % Distance between the margins ans the name of the candidate and the supervisor
+
 	  \Universita{Trieste}
 	  %\Logo{logounits200dpi.png}
 	  %\Logo[4cm]{logo-units_0.png}
@@ -638,17 +640,18 @@ In this thesis we will describe some of the advancement of the statistical techn
 
 To do so, we firstly have to describe the non-life insurance pricing framework from the definition of the fundamental concepts to the illustration of the dynamics distinctive of this business.
 
-For the intrinsic characteristics of the topic, in writing this thesis we kept a multidisciplinary approach. We didn't just compared the models from a statistical point of view, but we also took important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
-In our dissertation, we also made a specific focus on data science as, in the last years, the technological development and the growing availability of data made data science and advanced analytics integral parts of actuarial science. Talking about data science techniques we can't preclude us from taking some considerations on the implementation of the solutions we are proposing from a computer science perspective.
+Due to the intrinsic characteristics of the topic, in this thesis we will keep a multidisciplinary approach. We won't just compared the models from a statistical point of view, but we will also take important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
+In our dissertation, we will also make a specific focus on data science, as in the last years the technological development and the growing availability of data made advanced analytics integral parts of actuarial science.
+By discussing the solutions proposed we have also to comment some implementation issues from a computer science perspective.
 
 All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behavior.
 
 This thesis is organized into 3 parts:
 
 \begin{itemize}[itemsep=2pt]
-\item In chapter \ref{chap:nlip} we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking some considerations on price optimization;
+\item In chapter \ref{chap:nlip} we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking into considerations price optimization;
 \item In chapter \ref{chap:models} we will illustrate some statistical techniques suitable for price modeling and we will comment how they fit the pricing needs; we will start from the Generalized Linear Model (GLM), that is the most employed model in technical pricing today, to then present some of its advancements;
-\item In chapter \ref{chap:practical-app} we will present a practical application on a real-world actuarial dataset of the models described in section \\ref{chap:models} and we will compare their performances.
+\item In chapter \ref{chap:practical-app} we will present a practical application on a real-world actuarial dataset of the models described in section \ref{chap:models} and we will compare their performances.
 \end{itemize}
 
 At the end of chapter \ref{chap:nlip} we will make a digression on the actuary role in the pricing framework and at the end of chapter \ref{chap:models} we will comment the importance of his supervision in the modeling process.
@@ -3181,9 +3184,24 @@ Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 \end{tabular}
 \end{table}
 
-As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations means that the variances of \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of \(E(y^{\text{train}})\) and \(E(y^{\text{test}})\), we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\), we can say that, with the random by policyholder, \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are on average more distant than with the random by observation.
+As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations within the sets means that the variances of \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of \(E(y^{\text{train}})\) and \(E(y^{\text{test}})\), we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\), we can say that, with the random by policyholder, \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are on average more distant than with the random by observation.
 
-Anyway, in our analysis we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+Figure \ref{fig:simulation-random-diff} shows the distribution of the distances of the claim frequency in the training and test set \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) from the simulation of the random variables. The distributions have been smoothed with a gaussian kernel density function. As we can see from the plot, with the random by policyholder, the central values are less likely and the tails are heavier. This result is consistent with the fact that with the random by policyholder the low p-values are more frequent.
+
+
+
+
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics[width=0.8\linewidth]{_main_files/figure-latex/simulation-random-diff-1} 
+
+}
+
+\caption[Distribution of the distances \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) from the simulation of the random variables.]{Distribution of the distances \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) from the simulation of the random variables. With the random by policyholder, central values are less likely and the tails are heavier.}\label{fig:simulation-random-diff}
+\end{figure}
+
+Regardless the observations we made, in our analysis we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
 
 \hypertarget{explanatory-variables}{%
 \subsection{Explanatory variables}\label{explanatory-variables}}
@@ -3287,8 +3305,6 @@ The only manual element in the model fitting has been the definition of the effe
 For the interactions, we decided to not consider any interaction term in the GLM-based models. This choice comes from the fact that from our exploration there were not particularly important interactions between the variables and from the fact that, in GLM-based models, the choices of interactions terms is usually a manual process and the ability of the modeler influences a lot the result, introducing a disturbance factor.
 
 We will return on some considerations of the benefits of the modeler intervention in section \ref{chap:conclusions}.
-
-\newpage
 
 \hypertarget{chap:models-details}{%
 \subsection{Models details}\label{chap:models-details}}
@@ -3448,8 +3464,6 @@ In total, 189 set of hyper-parameters have been tested in a total amount of time
 
 \caption[GBM Tot hyper-parameter tuning.]{GBM Tot hyper-parameter tuning.}\label{fig:gbm-tot-hp-tuning-plot}
 \end{figure}
-
-\newpage
 
 \hypertarget{chap:results}{%
 \section{Results}\label{chap:results}}

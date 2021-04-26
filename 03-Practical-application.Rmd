@@ -392,9 +392,44 @@ simulations_count %>%
   row_spec(0, bold = T)
 ```
 
-As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations means that the variances of $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$ are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of $E(y^{\text{train}})$ and $E(y^{\text{test}})$, we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$, we can say that, with the random by policyholder, $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$ are on average more distant than with the random by observation.
+As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations within the sets means that the variances of $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$ are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of $E(y^{\text{train}})$ and $E(y^{\text{test}})$, we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$, we can say that, with the random by policyholder, $\bar{y}^{\text{train}}$ and $\bar{y}^{\text{test}}$ are on average more distant than with the random by observation.
 
-Anyway, in our analysis we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
+Figure \@ref(fig:simulation-random-diff) shows the distribution of the distances of the claim frequency in the training and test set $\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|$ from the simulation of the random variables. The distributions have been smoothed with a gaussian kernel density function. As we can see from the plot, with the random by policyholder, the central values are less likely and the tails are heavier. This result is consistent with the fact that with the random by policyholder the low p-values are more frequent.
+
+(ref:simulation-random-diff-plot-caption) Distribution of the distances $\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|$ from the simulation of the random variables. With the random by policyholder, central values are less likely and the tails are heavier.
+
+(ref:simulation-random-diff-plot-caption-short) Distribution of the distances $\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|$ from the simulation of the random variables.
+
+```{r, simulation-random-diff-plot, out.width = "80%", fig.width = 8, fig.height = 4, fig.align='center', fig.cap = "(ref:simulation-random-diff-plot-caption)", fig.scap = "(ref:simulation-random-diff-plot-caption-short)", label = "simulation-random-diff", echo = FALSE, cache = TRUE, message = FALSE}
+
+simulations_freq_sin <- read_csv2(
+  "data/practical_application/results/random_simulations_freq_sin.csv"
+)
+
+simulations_freq_sin <- simulations_freq_sin %>% 
+  mutate(
+    diff_sign = train - test,
+    random_type = str_sub(random, 1, 1),
+    random_number = str_sub(random, 2, -1),
+    random_type = if_else(
+      random_type == "c",
+      "Random by policyholder",
+      "Random by observation"
+    ) %>% 
+      fct_relevel("Random by observation")
+  )
+
+simulations_freq_sin %>% 
+  ggplot(aes(x = diff_sign, fill = random_type, color = random_type)) +
+  geom_density(alpha = .2, size = 1, bw = 3e-4) +
+  labs(x = "Difference", y = "Density", 
+       color = "Split Criterion",
+       fill = "Split Criterion")
+
+
+```
+
+Regardless the observations we made, in our analysis we accept this potential difference in the claims frequency between the training set and the test set and we keep the splitting made with the random by policyholder.
 
 
 ### Explanatory variables
@@ -677,7 +712,7 @@ For the interactions, we decided to not consider any interaction term in the GLM
 
 We will return on some considerations of the benefits of the modeler intervention in section \@ref(chap:conclusions).
 
-\newpage
+<!-- \newpage -->
 
 ### Models details {#chap:models-details}
 
@@ -1182,7 +1217,7 @@ h2o_gbm_tot_grid_perf_tb %>%
 
 
 
-\newpage
+<!-- \newpage -->
 
 ## Results {#chap:results}
 

@@ -121,7 +121,7 @@ format_cell <- function(df, rows ,cols, value = c("italics", "bold", "strikethro
     for(c in cols){
 
       # Make sure values are not factors
-      df[[c]] <- as.character( df[[c]])
+      df[[c]] <- as.character(df[[c]])
 
       # Update formatting
       df[r, c] <- paste0(markup, df[r, c], markup)
