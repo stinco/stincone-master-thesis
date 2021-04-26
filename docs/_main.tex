@@ -634,25 +634,29 @@ and better at software engineering than any statistician.}}
 
 \markboth{\MakeUppercase{Introduction}}{\MakeUppercase{Introduction}}
 
-La mia introduzione \ldots{}
+In this thesis we are going to describe some of the advancement of the statistical techniques commonly adopted in \emph{Non-Life Insurance Pricing} and we will discuss how they can satisfy the pricing specific needs.
 
-\hypertarget{thesis-aim}{%
-\section*{Thesis aim}\label{thesis-aim}}
-\addcontentsline{toc}{section}{Thesis aim}
+To do so, we firstly have to describe the non-life insurance pricing framework from the definition of the fundamental concepts to the illustration of the dynamics distinctive of this business.
 
-Lorem ipsum \ldots{}
+For the intrinsic characteristics of the topic, in writing this thesis we kept a multidisciplinary approach. We didn't just compared the models from a statistical point of view, but we also took important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
+In our dissertation, we also made a specific focus on data science as, thanks to the improvement of technology of the last years and the growing availability of data, it is a subject whose importance is rapidly catching on in the actuarial science. Talking about data science techniques we can't preclude us from taking some considerations on computer science and the implementation of the solutions we are proposing.
 
-\hypertarget{actuary-and-datascientist-figure}{%
-\section*{Actuary and datascientist figure}\label{actuary-and-datascientist-figure}}
-\addcontentsline{toc}{section}{Actuary and datascientist figure}
+All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or conducting risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behaviour.
 
-Lorem ipsum \ldots{}
+This thesis is organized into 3 parts:
 
-\hypertarget{thesis-structure}{%
-\section*{Thesis structure}\label{thesis-structure}}
-\addcontentsline{toc}{section}{Thesis structure}
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  In chapter \ref{chap:nlip} we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking some considerations on price optimization;
+\item
+  In chapter \ref{chap:models} we will illustrate some statistical techniques suitable for price modeling and we will comment how they fit the pricing needs; we will start from the Generalized Linear Model (GLM), that is the most employed model in technical pricing today, to then present some of its advancements;
+\item
+  In chapter \ref{chap:practical-app} we will present a practical application of the models described in section \ref{chap:models} on a real-world actuarial dataset and we will compare their performances.
+\end{enumerate}
 
-Lorem ipsum \ldots{}
+At the end of chapter \ref{chap:nlip} we will make a digression on the actuary role in the pricing framework and at the end of chapter \ref{chap:models} we will comment the importance of his supervision in the modeling process.
 
 \hypertarget{chap:nlip}{%
 \chapter{Non-Life Insurance Pricing}\label{chap:nlip}}
@@ -1579,12 +1583,12 @@ The importance for price optimization implies that the technical pricing must no
 
 \minitoc  
 
-In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \ref{chap:considerations-on-models} we will compare them by discussing how they fit the pricing needs.
+In this chapter we are going to illustrate some of the most widespread statistical models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \ref{chap:considerations-on-models} we will compare them by discussing how they fit the pricing needs.
 
 \hypertarget{statistical-models}{%
 \section{Statistical Models}\label{statistical-models}}
 
-In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}.
+In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing today, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}.
 
 \hypertarget{chap:glm}{%
 \subsection{Generalized Linear Models}\label{chap:glm}}
@@ -3045,7 +3049,7 @@ In the application described in section \ref{chap:practical-app} we used H2O loc
 
 \minitoc  
 
-In this final chapter we are going to describe the practical application on an actuarial dataset of the models described in section \ref{chap:models}. After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
+In this final chapter we are going to present a practical application of the models described in section \ref{chap:models} on a real-world actuarial dataset. After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
 
 \hypertarget{data-description}{%
 \section{Data description}\label{data-description}}

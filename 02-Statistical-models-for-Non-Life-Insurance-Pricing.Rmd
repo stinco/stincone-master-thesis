@@ -23,12 +23,12 @@ library(knitr)
 
 <!-- \chaptermark{Statistical models for Non Life Insurance Pricing} -->
 
-In this chapter we are going to illustrate some of the most widespread models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:considerations-on-models) we will compare them by discussing how they fit the pricing needs.
+In this chapter we are going to illustrate some of the most widespread statistical models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \@ref(chap:considerations-on-models) we will compare them by discussing how they fit the pricing needs.
 
 
 ## Statistical Models
 
-In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}.
+In this section we will start by describing the \ac{glm}, that is the most employed model in technical pricing today, to then present some of its advancements: the \ac{gam}, the Shrinkage estimators for \ac{glm} and the Bayesian \ac{glm}.
 
 
 ### Generalized Linear Models {#chap:glm}

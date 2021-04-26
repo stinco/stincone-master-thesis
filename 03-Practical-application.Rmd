@@ -23,7 +23,7 @@ library(knitr)
 
 <!-- \chaptermark{Practical application} -->
 
-In this final chapter we are going to describe the practical application on an actuarial dataset of the models described in section \@ref(chap:models). After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
+In this final chapter we are going to present a practical application of the models described in section \@ref(chap:models) on a real-world actuarial dataset. After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
 
 
 ## Data description
