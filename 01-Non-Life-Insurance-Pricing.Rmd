@@ -150,7 +150,7 @@ has a compound distribution.
 
 The variable $Z_i|N=n$ used in this definition can be interpreted as the _claim severity for the $i$^th^ claim under the hypothesis that $n$ claims occurred_. The two hypotheses provided in definition \@ref(def:comp-dist) imply that the distribution of $Z_i|N=n, \ i\le n$ does not depend on $i$ nor on $n$. For this reason, in the following, we are going to use the notation $Z$ to represent a random variable with the distribution of $Z_i|N=n, \ i\le n$ and $F_Z(\cdot)$ for its cumulative distribution function (i.e. $F_Z(z) = P(Z\le z)$).
 
-Let's consider the variabile $Z_i|N\ge i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N\ge i$ has the same distribution of $Z_i|N=n, \ i\le n$, that is:
+Let's consider the variable $Z_i|N\ge i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N\ge i$ has the same distribution of $Z_i|N=n, \ i\le n$, that is:
 \begin{equation}
 \label{eq:z}
 P\left(Z_i \le z \middle| N\ge i \right) = F_Z(z)
@@ -226,7 +226,7 @@ In motor insurances, this information could be:
 * Insurance specific information of the policyholder: number of claims caused in the previous years, how long he has been covered, bonus-malus class;
 * Policy options: amount of the maximum coverage, presence and amount of a deductible, presence of other insurance guarantees, how many drivers will drive the vehicle;
 * Customer information on the policyholder: how many years he has been a customer of the insurer, how many other policies he owns.
-* Telematic data: how many kilometers per year the policyholder travelled in the previous years, which kind of roads the policyholder travelled on, the speed maintained during the trips, how many times the policyholder exceeded the speed limit, how many sharp accelerations and decelerations per kilometer the policyholder performed.
+* Telematic data: how many kilometers per year the policyholder traveled in the previous years, which kind of roads the policyholder traveled on, the speed maintained during the trips, how many times the policyholder exceeded the speed limit, how many sharp accelerations and decelerations per kilometer the policyholder performed.
 
 These pieces of information are usually called _pricing variables_.
 
@@ -234,7 +234,7 @@ We must observe that some of these variables are available for every potential c
 
 Moreover, even considering the variables that are available for every customer, it is important to be aware of how reliable they are. Some of them come from official documents (as customer age and address or bonus-malus class), but others could be declared by the customer and his statements are not easily verifiable by the insurer (as the ownership of a private box or how many drivers will drive the vehicle).
 
-The topic of variables reliability fits in the wider framework of fraud detection. Insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detections models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder is usually important to predict both underwriting frauds and settlement frauds. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
+The topic of variables reliability fits in the wider framework of fraud detection. Insurance companies put a lot of effort in preventing frauds. This is done with active actions, such as documents checks and inspections, and with predictive fraud detection models. The two most common categories of frauds are underwriting frauds (such as false declaration on insurance related data) and settlement frauds (such as faking an accident). The customer information on the policyholder is usually important to predict both underwriting frauds and settlement frauds. Usually customers that have a longer relationship with the company and own many policies are less likely to commit frauds.
 
 Regarding the topic of variables reliability, the Italian Insurance Associations ([ANIA](https://www.ania.it/)) in the last years made some big steps forward by collecting in its databases a lot of information about policyholders and vehicles and making it available to insurance companies. For example, by logging in these databases it is possible, at the moment of the quote request, to retrieve useful insurance specific information such as the number of claims caused by the customer in the previous years or how long he has been covered and useful information on his vehicle such as when it has been registered or how many changes of ownership did it experienced.
 
@@ -589,7 +589,7 @@ Computing the coefficient of variation we then obtain:
 $$CV(Z) = \frac{\sqrt{Var(Z)}}{E(Z)} = \frac{1}{\sqrt{\alpha}}$$
 This result means that the coefficient of variation is constant (given the shape parameter $\alpha$). As we saw for the Poisson distribution, it is possible that observed data shows a different pattern. In chapter \@ref(chap:models), for the Gamma distribution, we will use the parametrization based on $(\alpha, \mu)$ instead of the one based on $(\alpha, \rho)$.
 
-Another characteristic of the Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ aproaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with havier tails are for example the _log-Normal_ and the _Pareto_.
+Another characteristic of the Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as $z$ goes to $+\infty$, $f_Z(z)$ approaches $0$ quite fast. This could lead to a poor fitting for _large claims_. Other distributions with heavier tails are for example the _log-Normal_ and the _Pareto_.
 
 
 #### Large claims  {#chap:large-claims}
@@ -820,7 +820,7 @@ tibble(x = seq(from = 0, to = 10, by = 1)) %>%
   scale_x_continuous(breaks = seq(from = 0, to = 10, by = 2))
 ```
 
-The binomial distribution is a parametric distribution that depends on the parameters $n$ and $p$. $n$ represents the number of trials, while $p$ represents the probability for a trial to succed. The assumption is that the $n$ trials are identical, so they have all the same probability $p$ to succed.
+The binomial distribution is a parametric distribution that depends on the parameters $n$ and $p$. $n$ represents the number of trials, while $p$ represents the probability for a trial to succeed. The assumption is that the $n$ trials are identical, so they have all the same probability $p$ to succeed.
 
 The first two moments of the binomial distribution are:
 \begin{align*}
@@ -1027,7 +1027,7 @@ For this reason, in practice, often the modeling is considered composed in 2 par
 1. _Tariff Requirement_ (or _Fabbisogno Tariffario_): the estimate of $\widehat{E(S)}^{CL}$ by aggregated data;
 2. _Personalization_: the estimate of $\widehat{E(S_i)}'$ and the relative coefficients.
 
-The techniques used for _Tariff Requirement_ are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in non-life insurace companies.
+The techniques used for _Tariff Requirement_ are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in non-life insurance companies.
 <!-- general liability position for the company. This information is particularly important and it is reported in the company financial statement. -->
 
 
@@ -1055,7 +1055,7 @@ However, some of the variables used for technical pricing can't be used in tarif
 
 Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e. a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium).
 
-Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall into an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the costraints has been respected, the tariff, before entering in production, must follow a strict approval process.
+Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall into an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the constraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
 To make the offer price more flexible and to facilitate business competition, the supervisory authority allows insurance companies to sell policies not at the tariff price, but at the price obtained subtracting from it a discount $D_i\ge0$. The premium obtained this way is called _Offer Price_.
 $$
@@ -1082,7 +1082,7 @@ Client expectation is basically the price that the client is willing to pay for 
 * for new business modeling his conversion probability;
 * for renewal business modeling his retention probability.
 
-For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achived by improving customer care and customer experience.
+For example some guarantees or some options are perceived by the clients as being really worth even if their technical price is not so high. The perception of the client depends also on the competitors pricing and how easy comparing offers from different companies is. In the last years, in the Italian market, the development of aggregators has made much easier for consumers to compare offers from different companies, increasing the competition and the attention on pricing. Anyway, if a company is able to differentiate itself from the others and to make its product be perceived as more valuable, it can sell it at a higher price than other companies. For example this can be achieved by improving customer care and customer experience.
 
 If the technical price and the conversion probability functions are given, finding the optimal price for a policy can be expressed as an analytical optimization problem. However, to find the optimal price, one should also take into account that usually policies are not sold alone, but in packages of guarantees. With a wider vision, a business strategy could be selling \ac{mtpl} policy with almost no margins if it allows to sell other guarantees with higher margins. Moreover, as the aim is not to be profitable this year, but also in the following ones, the company should also consider the _lifetime value_ of the client. Indeed, a satisfied client will also stipulate other contracts in the future and can bring to the company other clients from his connections. So, selling a policy with small margins today can lead to high margins tomorrow in other policies.
 

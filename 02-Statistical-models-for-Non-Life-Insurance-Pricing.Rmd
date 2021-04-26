@@ -33,7 +33,7 @@ In this section we will start by describing the \ac{glm}, that is the most emplo
 
 ### Generalized Linear Models {#chap:glm}
 
-The \ac{glm}s are widly illustrated in many statistics textbooks. Among them we refer to [@wuthrich-data-analytics], [@gigante2010tariffazione], [@azzalini1996statistical], [@davison2003statistical], [@james2013introduction], [@friedman2001elements] and [@portugues-predictive-modeling]. More details on the concepts described in this section are reported in appendix \@ref(chap:appendix-exp-family).
+The \ac{glm}s are widely illustrated in many statistics textbooks. Among them we refer to [@wuthrich-data-analytics], [@gigante2010tariffazione], [@azzalini1996statistical], [@davison2003statistical], [@james2013introduction], [@friedman2001elements] and [@portugues-predictive-modeling]. More details on the concepts described in this section are reported in appendix \@ref(chap:appendix-exp-family).
 
 
 #### Linear Exponential Families {#chap:linear-exp-families}
@@ -2007,7 +2007,7 @@ The exclusion of $\beta_0$ from the penalization term is intended to prevent the
 
 As for \ac{gam}, the hyper-parameter $\lambda$ determines the amount of penalization given to high values of the coefficients $\hat{\beta}_j$. If $\lambda=0$, the optimization problem \@ref(eq:ridge-est-deviance) corresponds to the maximum likelihood. As $\lambda$ increases, the optimal coefficients $\hat{\beta}_j$ tends to shrink towards $0$. In the limit case, if $\lambda\to+\infty$, the optimal coefficients $\hat{\beta}_j$ are all equal to $0$, except for $\hat{\beta}_0$, that is equal to $g(\bar{y})$, so the estimated model corresponds to the trivial model with only the intercept $g(\mu)=\beta_0$.
 
-An example of the effect of $\lambda$ is reported in figure \@ref(fig:ridge-lambda). The data represented has been simulated from a \ac{glm} with idenity link and Normal response. As we can see, if $\lambda=0$, all the estimated responses $\hat{\mu}_j$ correspond to the average of the response on that group $\bar{y}_j$. As $\lambda$ increases, the estimated responses move towards the global average $\bar{y}$. The speed of convergence to $0$ depends on how much the group average $\bar{y}_j$ differs from the global average $\bar{y}$ and on the number of observation of the group: if in a group $j$ there are many observations, we have a lot of information on that group, the group average $\bar{y}_j$ have a small variance and it is a reliable estimate for $\mu_j$, while if there are few observations, the group average $\bar{y}_j$ have a high variance and it is not very reliable.
+An example of the effect of $\lambda$ is reported in figure \@ref(fig:ridge-lambda). The data represented has been simulated from a \ac{glm} with identity link and Normal response. As we can see, if $\lambda=0$, all the estimated responses $\hat{\mu}_j$ correspond to the average of the response on that group $\bar{y}_j$. As $\lambda$ increases, the estimated responses move towards the global average $\bar{y}$. The speed of convergence to $0$ depends on how much the group average $\bar{y}_j$ differs from the global average $\bar{y}$ and on the number of observation of the group: if in a group $j$ there are many observations, we have a lot of information on that group, the group average $\bar{y}_j$ have a small variance and it is a reliable estimate for $\mu_j$, while if there are few observations, the group average $\bar{y}_j$ have a high variance and it is not very reliable.
 
 The optimal point for $\lambda=0$ can be obtained through a Cross Validation as seen in section \@ref(chap:gam-choice-lambda).
 
@@ -2314,7 +2314,7 @@ In the case of independent explanatory variables we get:
 $$
 H_{\lambda} = \frac{1}{1+\lambda} \boldsymbol{X} \boldsymbol{X}^t = \frac{1}{1+\lambda} H_0
 $$
-and then $\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}$. This result means that, by increasing $\lambda$, the effective number of degrees of fredom decreases.
+and then $\text{tr}\left(H_{\lambda}\right) = \frac{p}{1+\lambda}$. This result means that, by increasing $\lambda$, the effective number of degrees of freedom decreases.
 
 
 #### LASSO Regression
@@ -2870,7 +2870,7 @@ We also mention that the Shrinkage Estimators can be used in synergy with \ac{ga
 \right\}
 } 
 \end{equation}
-where the coefficients $\beta_j$ considered in the Elastic Net penalization are only the ones corresponding to qualitatives variables.
+where the coefficients $\beta_j$ considered in the Elastic Net penalization are only the ones corresponding to qualitative variables.
 
 <!--
 Benefici ridge/lasso
@@ -3380,7 +3380,7 @@ The _technical needs_ come from the fact that we observe past data, but our mode
 By building a technical price, we must consider that our portfolio is not representative of the whole country portfolio and it isn't even representative of our future portfolio, that is influenced by the future underwriting policy of the company and also by the pricing policy.
 
 <!-- Stime distorte -->
-There are some cases in which estimates from past data could lead to a _bias_ in the future predictions. For example, it is possible that in the past the underwriting policy for certain clusters, such as customers from specific regions, has been particularly strict, so on those clusters, on historical data we see excellent technical results. Anyway, it is possible for these past observations to not be representative of the future policies we could acquire from those clusters, so, proposing a price too low for customers from those clusters could result in big technical losses. On the other hand, it is possible that in the past the company suffered big frauds from customers of specific clusters, but, as the fraud detection initiatives improved, in the future it is not expected to acquire fraudolent customers from those clusters. In these cases, the coefficients fitted from past data will be too high for future policies from those clusters.
+There are some cases in which estimates from past data could lead to a _bias_ in the future predictions. For example, it is possible that in the past the underwriting policy for certain clusters, such as customers from specific regions, has been particularly strict, so on those clusters, on historical data we see excellent technical results. Anyway, it is possible for these past observations to not be representative of the future policies we could acquire from those clusters, so, proposing a price too low for customers from those clusters could result in big technical losses. On the other hand, it is possible that in the past the company suffered big frauds from customers of specific clusters, but, as the fraud detection initiatives improved, in the future it is not expected to acquire fraudulent customers from those clusters. In these cases, the coefficients fitted from past data will be too high for future policies from those clusters.
 
 It is also possible that in the future the company is going to sell on new sales channels where there is no historical data. It is possible that the policies from the new channels will have different characteristics, such as an higher or a lower propensity to commit frauds, so the actuary should take it into account with a proper pricing correction.
 
@@ -3403,7 +3403,7 @@ Fare i modelli diventa un'arte
 
 As we have seen in section \@ref(beyond-technical-pricing), the tariff and the offer price are the result of a process of _price optimization_ that takes into account technical pricing, client expectation and business strategy. Usually the definition of the tariff and the offer price starts from the technical price and from it some of the coefficients are tuned to satisfy commercial needs.
 
-The tariff and the offer price must also respect specific legal constraints. One example of legal constraint in \ac{mtpl} coefficients is related to the bonus-malus class. By law, the coefficients of the bonus-malus class must be monotonically increasing. That means that, even if in the technical price the fitted coefficients are not increasing in all clusters, in tariff and offer price they must be tuned to achive monotonicity.
+The tariff and the offer price must also respect specific legal constraints. One example of legal constraint in \ac{mtpl} coefficients is related to the bonus-malus class. By law, the coefficients of the bonus-malus class must be monotonically increasing. That means that, even if in the technical price the fitted coefficients are not increasing in all clusters, in tariff and offer price they must be tuned to achieve monotonicity.
 
 Some commercial constraints that are logical for tariff and offer price are the ones on coefficients related to coverage options such as the insurance ceiling and the deductible. It is clear that, if a client asks for a higher ceiling, the price offered to him must be higher. However, it is possible that on observed data on average the policies with higher ceiling experience less claims and have a lower total cost of claims. This can be explained with the fact that policyholders that select the higher ceiling are usually the more careful, so they commit less claims. The same way, if the client asks for a higher deductible, the price offered to him must be lower, even if it is possible that policies with higher deductible have an higher technical price that policies with a lower deductible.
 
@@ -3429,7 +3429,7 @@ In building actuarial models we also face practical challenges due to the size o
 
 The first problem consists in the fact that in a system the amount of primary memory, i.e. the \ac{ram}, is limited and can't be arbitrarily increased. When the datasets we use are larger than the \ac{ram} in our local machine, it is not possible to work with them in memory locally. A possible solution is to keep the data on the secondary memory, i.e. the \ac{hdd} or \ac{ssd}, and read it sequentially only when it is needed, as it is done in some analytics software like SAS. This solution allows to work with larger datasets, but implies a significant decrease in computation speed, since reading and writing on secondary memory is much slower than doing it on primary memory.
 
-Considering the computation time, even if our data fits into the primary memory, if we want to run a very complex algorithm with our processor, it could be infeasible in a reasonable amount of time. Indeed, the speed on a single \ac{cpu} is limited by physical constraints.
+Considering the computation time, even if our data fits into the primary memory, if we want to run a very complex algorithm with our processor, it could be unfeasible in a reasonable amount of time. Indeed, the speed on a single \ac{cpu} is limited by physical constraints.
 
 In modern computer science applications, the solution to these problems comes from the concept of parallelism. Parallel computing is a type of computation where many calculations are carried out simultaneously. This can be achieved with two paradigms:
 
@@ -3465,7 +3465,7 @@ We mention that, even if the solutions mentioned in this chapter are suitable fo
 
 In actuarial practice, as the actuary needs to visualize, interpret and control the variables effects, it is also important how the interface works. Often visual point and click applications are preferred to coding interfaces, such as R and Python. While coding interfaces are often used for \ac{etl} processes for their flexibility, in the modeling process point and click applications are considered more user friendly, since they require less effort from the user to become proficient with and they often offer out of the box tools to visualize results.
 
-Among the point and click applications, the market offers some solutions for actuarial pricing that are specifically thought for building \ac{glm}s and authomatically produces the plots seen in section \@ref(chap:glm). These applications are particularly optimized for \ac{glm}, but they are not as flexible as machine learning libraries in R and Python and include limited advancements.
+Among the point and click applications, the market offers some solutions for actuarial pricing that are specifically thought for building \ac{glm}s and automatically produces the plots seen in section \@ref(chap:glm). These applications are particularly optimized for \ac{glm}, but they are not as flexible as machine learning libraries in R and Python and include limited advancements.
 
 
 ### Solution adopted in this project

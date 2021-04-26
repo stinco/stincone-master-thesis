@@ -35,7 +35,7 @@ To do so, we firstly have to describe the non-life insurance pricing framework f
 For the intrinsic characteristics of the topic, in writing this thesis we kept a multidisciplinary approach. We didn't just compared the models from a statistical point of view, but we also took important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
 In our dissertation, we also made a specific focus on data science as, in the last years, the technological development and the growing availability of data made data science and advanced analytics integral parts of actuarial science. Talking about data science techniques we can't preclude us from taking some considerations on the implementation of the solutions we are proposing from a computer science perspective.
 
-All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behaviour.
+All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behavior.
 
 This thesis is organized into 3 parts:
 
