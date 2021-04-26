@@ -28,20 +28,22 @@ knitr::asis_output('\\markboth{\\MakeUppercase{Introduction}}{\\MakeUppercase{In
 <!-- For PDF output, we must include this LaTeX command after unnumbered headings, otherwise the numbers in the mini table of contents will be incorrect -->
 
 
-In this thesis we are going to describe some of the advancement of the statistical techniques commonly adopted in _Non-Life Insurance Pricing_ and we will discuss how they can satisfy the pricing specific needs.
+In this thesis we will describe some of the advancement of the statistical techniques commonly adopted in _Non-Life Insurance Pricing_ and we will discuss how they can satisfy the pricing specific needs.
 
 To do so, we firstly have to describe the non-life insurance pricing framework from the definition of the fundamental concepts <!--, such as how insurance contracts work and what risk modeling means, --> to the illustration of the dynamics distinctive of this business.
 
 For the intrinsic characteristics of the topic, in writing this thesis we kept a multidisciplinary approach. We didn't just compared the models from a statistical point of view, but we also took important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
-In our dissertation, we also made a specific focus on data science as, thanks to the improvement of technology of the last years and the growing availability of data, it is a subject whose importance is rapidly catching on <!--(growing)--> in the actuarial science. Talking about data science techniques we can't preclude us from taking some considerations on computer science and the implementation of the solutions we are proposing.
+In our dissertation, we also made a specific focus on data science as, in the last years, the technological development and the growing availability of data made data science and advanced analytics integral parts of actuarial science. Talking about data science techniques we can't preclude us from taking some considerations on the implementation of the solutions we are proposing from a computer science perspective.
 
-All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or conducting risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behaviour.
+All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behaviour.
 
 This thesis is organized into 3 parts:
 
-1. In chapter \@ref(chap:nlip) we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking some considerations on price optimization;
-2. In chapter \@ref(chap:models) we will illustrate some statistical techniques suitable for price modeling and we will comment how they fit the pricing needs; we will start from the Generalized Linear Model (GLM), that is the most employed model in technical pricing today, to then present some of its advancements;
-3. In chapter \@ref(chap:practical-app) we will present a practical application of the models described in section \@ref(chap:models) on a real-world actuarial dataset and we will compare their performances.
+\begin{itemize}[itemsep=2pt]
+\item In chapter \@ref(chap:nlip) we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking some considerations on price optimization;
+\item In chapter \@ref(chap:models) we will illustrate some statistical techniques suitable for price modeling and we will comment how they fit the pricing needs; we will start from the Generalized Linear Model (GLM), that is the most employed model in technical pricing today, to then present some of its advancements;
+\item In chapter \@ref(chap:practical-app) we will present a practical application on a real-world actuarial dataset of the models described in section \@ref(chap:models) and we will compare their performances.
+\end{itemize}
 
 At the end of chapter \@ref(chap:nlip) we will make a digression on the actuary role in the pricing framework and at the end of chapter \@ref(chap:models) we will comment the importance of his supervision in the modeling process.
 
