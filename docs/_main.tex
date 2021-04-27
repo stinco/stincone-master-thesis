@@ -636,20 +636,22 @@ and better at software engineering than any statistician.}}
 
 \markboth{\MakeUppercase{Introduction}}{\MakeUppercase{Introduction}}
 
-In this thesis we will describe some of the advancement of the statistical techniques commonly adopted in \emph{Non-Life Insurance Pricing} and we will discuss how they can satisfy the pricing specific needs.
+This thesis has been conceived from my two-years experience in the pricing department of a non-life insurance company. During this period I had the opportunity to deeply understand how a pricing team works and which are the needs of the insurance business. With this work we are trying to merge the theoretical expertise from the academic world with the practical experience from the business world, aiming to produce valuable results that will have a meaningful impact on the actuarial practice.
+
+Within this thesis we will describe some of the advancements of the statistical techniques commonly adopted in non-life insurance pricing and we will discuss how they can satisfy the pricing specific needs.
 
 To do so, we firstly have to describe the non-life insurance pricing framework from the definition of the fundamental concepts to the illustration of the dynamics distinctive of this business.
 
-Due to the intrinsic characteristics of the topic, in this thesis we will keep a multidisciplinary approach. We won't just compared the models from a statistical point of view, but we will also take important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
-In our dissertation, we will also make a specific focus on data science, as in the last years the technological development and the growing availability of data made advanced analytics integral parts of actuarial science.
-By discussing the solutions proposed we have also to comment some implementation issues from a computer science perspective.
+Due to the intrinsic characteristics of the topic, in this thesis we will keep a multidisciplinary approach. We won't just compare the models from a statistical point of view, but we will also take important actuarial considerations, touching aspects from various subjects, such as law, economics, finance, risk management and marketing.
+In our dissertation, we will also make a specific focus on data science, as in the last years the technological development and the growing availability of data made advanced analytics integral parts of the actuarial science.
+By discussing the solutions proposed we will also comment some implementation issues from a computer science perspective.
 
-All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customer behavior.
+All these aspects underline that the actuary, to carry out his profession, needs a wide range of skills that goes from the most technical one, such as understanding the statistical models or being able to conduct risk management evaluations, to the more business oriented ones, such as understanding the market characteristics and the customers behavior.
 
 This thesis is organized into 3 parts:
 
 \begin{itemize}[itemsep=2pt]
-\item In chapter \ref{chap:nlip} we will describe in general how the non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and taking into considerations price optimization;
+\item In chapter \ref{chap:nlip} we will describe in general how non-life insurance pricing works starting from the definition of insurance contract, developing the discussion around technical pricing and making some considerations on price optimization;
 \item In chapter \ref{chap:models} we will illustrate some statistical techniques suitable for price modeling and we will comment how they fit the pricing needs; we will start from the Generalized Linear Model (GLM), that is the most employed model in technical pricing today, to then present some of its advancements;
 \item In chapter \ref{chap:practical-app} we will present a practical application on a real-world actuarial dataset of the models described in section \ref{chap:models} and we will compare their performances.
 \end{itemize}
@@ -1525,7 +1527,7 @@ To make the offer price more flexible and to facilitate business competition, th
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 \]
 
-That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called \emph{discounting flexibility}, can be partially spent by the agent and partially by the insurance company itself. The discounts can change over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new businesses and renewals. From a technical point of view, these discounts have been funded by the remarkable decrease on claim frequency due to the reduced traffic. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
+That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called \emph{discounting flexibility}, can be partially spent by the agent and partially by the insurance company itself. The discounts can change over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new businesses and renewals. From a technical point of view, these discounts have been funded by the remarkable decrease on claims frequency due to the reduced traffic. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
 \hypertarget{price-optimization}{%
 \subsection{Price Optimization}\label{price-optimization}}
@@ -1669,7 +1671,16 @@ where $g:\mathbb{R}\rightarrow\mathbb{R}$ is a monotonic function with continuou
 
 Often, the assumption 1 is called stochastic assumption, while the 2 and 3 are called structural assumptions.
 
-Let's indicate with \(\boldsymbol{X}\) the design matrix. The design matrix is the matrix in which each row \(\boldsymbol{x}_{i\cdot}\) represents the vector of the explanatory variables for the observation \(i\) and each column \(\boldsymbol{x}_{\cdot j}\) represents the vector of the observations for the explanatory variable \(j\). We also consider a column of 1s as first column, that is used to model the intercept of the linear predictor. Thus, \(\boldsymbol{X}\) is a matrix \(n\times(p+1)\). We assume, as it is common in actuarial datasets, that \(n>p+1\).
+Let's indicate with \(\boldsymbol{X}\) the design matrix. The design matrix is the matrix in which each row \(\boldsymbol{x}_{i\cdot}\) represents the vector of the explanatory variables for the observation \(i\) and each column \(\boldsymbol{x}_{\cdot j}\) represents the vector of the observations for the explanatory variable \(j\). We also consider a column of 1s as first column, that is used to model the intercept of the linear predictor. Thus, \(\boldsymbol{X}\) is a matrix \(n\times(p+1)\). We assume, as it is common in actuarial datasets, that \(n>p+1\). The design matrix is represented in figure \ref{fig:design-matrix}.
+
+\begin{figure}[!hbtp]
+
+{\centering \includegraphics{_main_files/figure-latex/design-matrix-1} 
+
+}
+
+\caption{Design Matrix $\boldsymbol{X}$.}\label{fig:design-matrix}
+\end{figure}
 
 We can then express the \ac{glm} structural assumptions in a matrix form as:
 \[
@@ -2595,7 +2606,7 @@ The hyper-parameter \(\alpha\) can be estimated together with \(\lambda\) in a C
 
 As we have said, shrinkage estimators are particularly useful when the number of parameters \(p\) in the model is large (high dimensionality) and the maximum likelihood estimator have a high variance. This could happen when we have some qualitative variables with many modalities, as for example the make and the model of the insured vehicle in car insurance. As we have seen with the examples represented in figure \ref{fig:ridge-lambda} and \ref{fig:lasso-lambda}, the penalization will shrink more the coefficients in the groups with few observations and only the groups with an average response \(\bar{y}_j\) significantly different from the global average response \(\bar{y}\) will emerge. This procedure is more efficient and more robust to overfitting than grouping modalities based on hypothesis testing or other criteria.
 
-If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients \(\beta_j\) corresponding to the modalities of those variables. This technique is useful also if we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable ``number of claims experienced in the previous year'', we will have most of the observation in the modality corresponding to \(0\) claims, very few in the modality corresponding to \(1\) claim and almost nobody with \(2\) or more claims. If we are fitting a model for the claim frequency and we consider the variable \(x_j\) that indicates whether the policyholder experienced one or more claims in the previous year \(x_j=1\) or not \(x_j=0\), it is likely that the maximum likelihood estimator for the coefficient \(\hat{\beta}_{x_j=1}\) will be greater than \(0\), as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that there are just few observation with \(x_j=1\) it is possible that the coefficient \(\hat{\beta}_{x_j=1}\) is not significantly different from \(0\). If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable \(x_j\) in the model or not. If we don't consider it we are probably discarding some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk overfitting the data. With shrinkage estimators we can choose to insert the variable \(x_j\) in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
+If we are in a case in which we already performed a satisfying feature selection and we only want to shrink some of the coefficients we can apply the penalization only to them. For example, in the case of the variables make and model, we can consider an Elastic Net penalization only to the coefficients \(\beta_j\) corresponding to the modalities of those variables. This technique is useful also if we have explanatory variables with distribution highly unbalanced. For example, if we consider the variable ``number of claims experienced in the previous year'', we will have most of the observation in the modality corresponding to \(0\) claims, very few in the modality corresponding to \(1\) claim and almost nobody with \(2\) or more claims. If we are fitting a model for the claims frequency and we consider the variable \(x_j\) that indicates whether the policyholder experienced one or more claims in the previous year \(x_j=1\) or not \(x_j=0\), it is likely that the maximum likelihood estimator for the coefficient \(\hat{\beta}_{x_j=1}\) will be greater than \(0\), as the policyholders that experienced claims are usually more inclined to experience more of them in the future. However, given that there are just few observation with \(x_j=1\) it is possible that the coefficient \(\hat{\beta}_{x_j=1}\) is not significantly different from \(0\). If our only tool is the maximum likelihood estimator, we have to choose whether to insert the variable \(x_j\) in the model or not. If we don't consider it we are probably discarding some potentially useful information, while if we consider it and we estimate its coefficient with maximum likelihood we risk overfitting the data. With shrinkage estimators we can choose to insert the variable \(x_j\) in the model and fitting it with a penalization. This way we exploit that information but we prevent overfitting.
 
 Another interesting observation about \ac{glm} fitting is that in the practice, when maximum likelihood estimates are adopted, what is done is not just fitting a model with all the variables, but a feature selection is conducted. The fact that a variable \(x_j\) is inserted in the model depends on whether the feature selection procedure selects that variable or not. That corresponds to estimating the coefficient \(\beta_j\) with an estimator \(\tilde{\beta}_j\) that is equal to the maximum likelihood estimator \(\tilde{\beta}_j^{ML}\) when the coefficient pass a specific criterion and is equal to \(0\) when \(\tilde{\beta}_j^{ML}\) doesn't pass that criterion. This criterion could be something objective as for example the decrease in AIC and the significance in a hypothesis testing on \(\tilde{\beta}_j^{ML}\), and also something more subjective based also on the domain knowledge on the person that is conducting the modeling. Actually, this feature selection procedure introduces a bias towards \(0\) of the coefficient \(\tilde{\beta}_j\) that reduces its variance as all the coefficients not relevant for prediction are set equal to \(0\) and only the relevant ones are fitted with maximum likelihood. If we consider a binary variable \(x_j\), in all the procedures commonly used for feature selection, the probability that \(\tilde{\beta}_j\) passes the procedure or not depends on how strong the effect \(\beta_j\) is and how many observations there are in the classes \(x_j=0\) and \(x_j=1\).
 
@@ -3153,7 +3164,7 @@ Tot & 0.046 & 0.046 & 0.045 & 0.042 & 0.043 & 0.043\\
 \hypertarget{chap:exploration-splitting-policyholder}{%
 \subsubsection{Exploration on the effect of splitting data by policyholder}\label{chap:exploration-splitting-policyholder}}
 
-To explore more in depth the effect of splitting the data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80\% probability of belonging to the training set and 20\% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be used to check whether the training and the test sets have a significative difference in term of claim frequency. Indeed, if we call \(\bar{y}^\text{train}\) the average response in the training set and \(\bar{y}^\text{test}\) the average response in the test set, the higher \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) is, the lower the p-value is. Thus, the p-value can be seen as a normalized measure of the distance between \(\bar{y}^\text{train}\) and \(\bar{y}^\text{test}\).
+To explore more in depth the effect of splitting the data into training and test set by observation or by policyholder, we conducted a simulation analysis. We took the whole dataset and we simulated for each observation a random flag that represents whether the observation belongs to the training set or to the test set with 80\% probability of belonging to the training set and 20\% probability of belonging to the test set. We repeated the simulation 10k times with a random variable based on observation and 10k times with a random variable based on policyholder. In each simulation, we fitted a GLM with only that flag as explanatory variable and the number of claims as response variable. Then, for each simulation, we looked at the p-value of the test over the significance of that flag. This p-value can be used to check whether the training and the test sets have a significative difference in term of claims frequency. Indeed, if we call \(\bar{y}^\text{train}\) the average response in the training set and \(\bar{y}^\text{test}\) the average response in the test set, the higher \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) is, the lower the p-value is. Thus, the p-value can be seen as a normalized measure of the distance between \(\bar{y}^\text{train}\) and \(\bar{y}^\text{test}\).
 
 The distribution of the p-values for the two kinds of random variables are reported in figure \ref{fig:simulation-random}. The frequency for the first 4 buckets are also reported in table \ref{tab:simulation-random}. In theory, if the variable was totally random and the observations were independent, the distribution of the p-values should be uniform. As we can see, the distribution of the p-values for the random by policyholder is not uniform and the lower p-values are more likely. Indeed, in our simulation, with the random by policyholder the observed frequency of the p-values lower than 0.05 is 0.0782, that is quite higher than 0.05.
 
@@ -3186,7 +3197,7 @@ Random by policyholder & 0.0782 & 0.0641 & 0.0537 & 0.0541\\
 
 As we already mentioned, the higher frequency of small p-values in the case of split by policyholder comes from the fact that the p-values are computed under the hypothesis of independence, so, as in this setting the observations within the sets are correlated, the assumptions used for computing the p-values are not correctly specified. The fact that there is correlation in the observations within the sets means that the variances of \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are underestimated so, if we interpret these values as p-values of the hypothesis testing for the difference of \(E(y^{\text{train}})\) and \(E(y^{\text{test}})\), we can say that they have not been correctly calculated. However, if we just interpret the p-value calculated under the hypothesis of independence as a normalized measure of distance between \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\), we can say that, with the random by policyholder, \(\bar{y}^{\text{train}}\) and \(\bar{y}^{\text{test}}\) are on average more distant than with the random by observation.
 
-Figure \ref{fig:simulation-random-diff} shows the distribution of the distances of the claim frequency in the training and test set \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) from the simulation of the random variables. The distributions have been smoothed with a gaussian kernel density function. As we can see from the plot, with the random by policyholder, the central values are less likely and the tails are heavier. This result is consistent with the fact that with the random by policyholder the low p-values are more frequent.
+Figure \ref{fig:simulation-random-diff} shows the distribution of the distances of the claims frequency in the training and test set \(\left|\bar{y}^\text{train} - \bar{y}^\text{test}\right|\) from the simulation of the random variables. The empirical distributions have been smoothed with a Gaussian kernel density function. As we can see from the plot, with the random by policyholder, the central values are less likely and the tails are heavier. This result is consistent with the fact that with the random by policyholder the low p-values are more frequent.
 
 
 
@@ -3531,10 +3542,10 @@ The other aspect of considering policies from only one province is that this cho
 \hypertarget{chap:appendix-notes-on-compound-distribution}{%
 \section{Notes on Compound distribution}\label{chap:appendix-notes-on-compound-distribution}}
 
-In section \ref{chap:nlip-details} we defined the compound distribution (definition \ref{def:comp-dist}) and we reported some results on it. In this section we report the demonstrations of the results \eqref{eq:z} and \eqref{eq:s}.
+In section \ref{chap:nlip-details} we defined the compound distribution (definition \ref{def:comp-dist}) and we reported some results on it. In this section we report the demonstrations of two results: the characterization of the claim severity \(Z\) \eqref{eq:z} and the expected value of the total cost of claims \(S\) \eqref{eq:s}.
 
-\hypertarget{compound-distribution-hypotheses-1}{%
-\subsection{Compound distribution hypotheses}\label{compound-distribution-hypotheses-1}}
+\hypertarget{characterization-of-the-claim-severity-z}{%
+\subsection{\texorpdfstring{Characterization of the claim severity \(Z\)}{Characterization of the claim severity Z}}\label{characterization-of-the-claim-severity-z}}
 
 Let's consider the variabile \(Z_i|N\ge i\). We can interpret it as the \emph{claim severity for the \(i\)\textsuperscript{th} claim under the hypothesis that the \(i\)\textsuperscript{th} claim occurred}. From the hypotheses provided in definition \ref{def:comp-dist} we can obtain that also \(Z_i|N\ge i\) has the same distribution of \(Z_i|N=n, \ i\le n\). This can be easily obtained as follows:
 
@@ -3565,8 +3576,8 @@ Where:
 
 This result says that \(Z\) can be considered as the \emph{claim severity for a claim under the hypothesis that that claim occurred}.
 
-\hypertarget{distribution-of-the-total-cost-of-claims}{%
-\subsection{Distribution of the total cost of claims}\label{distribution-of-the-total-cost-of-claims}}
+\hypertarget{expected-value-of-the-total-cost-of-claims-s}{%
+\subsection{\texorpdfstring{Expected value of the total cost of claims \(S\)}{Expected value of the total cost of claims S}}\label{expected-value-of-the-total-cost-of-claims-s}}
 
 The expected value of the total cost of claims \(E(S)\) can be obtained from the expected value of the claims count \(E(N)\) and the expected value of the claim severity \(E(Z)\) as follows:
 
@@ -3600,6 +3611,10 @@ Where:
 \item
   the step \eqref{eq:s6} is due to the definition of the expected value \(E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}\).
 \end{itemize}
+
+This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain \(E(S)\) from \(E(N)\) and \(E(Z)\). That means that we can model separately \(E(N)\) and \(E(Z)\) and, from them, obtain \(E(S)\).
+
+\newpage
 
 \hypertarget{chap:appendix-exp-family}{%
 \section{Exponential Families}\label{chap:appendix-exp-family}}

@@ -10,10 +10,10 @@
 
 ## Notes on Compound distribution {#chap:appendix-notes-on-compound-distribution}
 
-In section \@ref(chap:nlip-details) we defined the compound distribution (definition \@ref(def:comp-dist)) and we reported some results on it. In this section we report the demonstrations of the results \@ref(eq:z) and \@ref(eq:s).
+In section \@ref(chap:nlip-details) we defined the compound distribution (definition \@ref(def:comp-dist)) and we reported some results on it. In this section we report the demonstrations of two results: the characterization of the claim severity $Z$ \@ref(eq:z) and the expected value of the total cost of claims $S$ \@ref(eq:s).
 
 
-### Compound distribution hypotheses
+### Characterization of the claim severity $Z$
 
 Let's consider the variabile $Z_i|N\ge i$. We can interpret it as the _claim severity for the $i$^th^ claim under the hypothesis that the $i$^th^ claim occurred_. From the hypotheses provided in definition \@ref(def:comp-dist) we can obtain that also $Z_i|N\ge i$ has the same distribution of $Z_i|N=n, \ i\le n$. This can be easily obtained as follows:
 
@@ -39,7 +39,7 @@ Where:
 This result says that $Z$ can be considered as the _claim severity for a claim under the hypothesis that that claim occurred_.
 
 
-### Distribution of the total cost of claims
+### Expected value of the total cost of claims $S$
 
 The expected value of the total cost of claims $E(S)$ can be obtained from the expected value of the claims count $E(N)$ and the expected value of the claim severity $E(Z)$ as follows:
 
@@ -65,6 +65,11 @@ Where:
 * the step \@ref(eq:s3) is due to the linearity of the expected value;
 * the steps \@ref(eq:s4) and \@ref(eq:s5) are due to the fact that, as assumed by the compound distribution hypotheses, $E\left( Z_i \middle| N = n \right)$ does not depends on $i$ and $n$;
 * the step \@ref(eq:s6) is due to the definition of the expected value $E(N)=\sum_{n=0}^{+\infty}{n P(N=n)}$.
+
+This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain $E(S)$ from $E(N)$ and $E(Z)$. That means that we can model separately $E(N)$ and $E(Z)$ and, from them, obtain $E(S)$.
+
+
+\newpage
 
 ## Exponential Families {#chap:appendix-exp-family}
 
@@ -291,15 +296,6 @@ table %>%
   # row_spec(ifelse(!knitr::is_latex_output(), 0, 1), bold = T)
   row_spec(0, bold = T)
 ```
-
-
-
-
-
-
-
-
-
 
 
 

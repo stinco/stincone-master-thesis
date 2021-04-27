@@ -1062,7 +1062,7 @@ $$
 P^{(\text{offer})}_i = P^{(\text{tariff})}_i - D_i
 $$
 
-That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called _discounting flexibility_, can be partially spent by the agent and partially by the insurance company itself. The discounts can change over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new businesses and renewals. From a technical point of view, these discounts have been funded by the remarkable decrease on claim frequency due to the reduced traffic. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
+That means that, for the offer price to adequately cover the cost of claims and expenses, the tariff must include a loading for discounting. This loading for discounting, called _discounting flexibility_, can be partially spent by the agent and partially by the insurance company itself. The discounts can change over time in a much more agile way than the tariff. For example in Italy, during the Spring 2020 Covid19 crisis, many companies introduced measures to support customers needs with important discounts on both new businesses and renewals. From a technical point of view, these discounts have been funded by the remarkable decrease on claims frequency due to the reduced traffic. Discount measures like these are welcomed by the supervisory authority because they promote business competition and lead to lower prices for consumers.
 
 
 ### Price Optimization
