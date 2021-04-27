@@ -19,7 +19,7 @@ library(knitr)
 <!-- \titlespacing*{\chapter}{0pt}{80px}{35pt} -->
 
 # Statistical models for Non Life Insurance Pricing {#chap:models}
-\minitoc  <!--this will include a mini table of contents-->
+<!-- \minitoc -->  <!--this will include a mini table of contents-->
 
 <!-- \chaptermark{Statistical models for Non Life Insurance Pricing} -->
 

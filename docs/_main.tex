@@ -731,12 +731,12 @@ Previously we said that \(Z_1, Z_2, \dots, Z_N\) are all positive. This assumpti
 \]
 
 \hypertarget{chap:nlip-details}{%
-\section{Non-Life insurance pricing}\label{chap:nlip-details}}
+\section{Non-Life Insurance Pricing}\label{chap:nlip-details}}
 
 In insurances, the premium that the the insurer offers to the policyholder in exchange for the insurance coverage is not the same for every policyholder. The insurer evaluates the risk related to that policy and determines a ``proper'' premium taking into account risk related factors and commercial related factors. The process of \emph{pricing} corresponds in defining the set of rules for determining this ``proper'' premium \(P_i\) for a specific policyholder \(i\), given the known information on him. In the next sections we are going to better explain what ``proper'' means.
 
 \hypertarget{compound-distribution-hypotheses}{%
-\subsection{Compound distribution hypotheses}\label{compound-distribution-hypotheses}}
+\subsection{Compound Distribution hypotheses}\label{compound-distribution-hypotheses}}
 
 The first step for evaluating the stochastic process \(\left\{N, Z_1, Z_2, \dots \right\}\) is to introduce some probabilistic hypotheses. The usual hypotheses assumed are the following:
 
@@ -771,7 +771,7 @@ P\left(Z_i \le z \middle| N\ge i \right) = F_Z(z)
 This result says that \(Z\) can be considered as the \emph{claim severity for a claim under the hypothesis that that claim occurred}. The demonstration of the equation \eqref{eq:z} is reported in the appendix in section \ref{chap:appendix-notes-on-compound-distribution}.
 
 \hypertarget{chap:tcc-dist}{%
-\subsection{Distribution of the total cost of claims}\label{chap:tcc-dist}}
+\subsection{Distribution of the Total Cost of Claims}\label{chap:tcc-dist}}
 
 Under the hypotheses of definition \ref{def:comp-dist}, it is possible to obtain the full distribution of \(S\) given the distribution of \(N\) and \(Z\). In this chapter we are going to provide only the formula of the expected value \(E(S)\), but, with the same approach one can obtain all the moments.
 
@@ -784,7 +784,7 @@ E(S) = E(N)E(Z)
 This result tells us that, under the hypotheses of the compound distribution, it is possible to easily obtain \(E(S)\) from \(E(N)\) and \(E(Z)\). That means that we can model separately \(E(N)\) and \(E(Z)\) and, from them, obtain \(E(S)\). That result is particularly useful in personalization (section \ref{chap:personalization}), because, for each individual \(i\), given the information we have on him, we can estimate his expected claim size \(E(N_i)\) and his expected claim severity \(E(Z_i)\) and obtain his expected total cost of claims as \(E(S_i) = E(N_i) E(Z_i)\). The demonstration of the equation \eqref{eq:s} is reported in the appendix in section \ref{chap:appendix-notes-on-compound-distribution}.
 
 \hypertarget{chap:risk-prem-tech-price}{%
-\subsection{Risk premium and Technical Price}\label{chap:risk-prem-tech-price}}
+\subsection{Risk Premium and Technical Price}\label{chap:risk-prem-tech-price}}
 
 The expected cost of claims \(E(S)\) is important because it gives us a first interpretation of what ``proper'' premium means.
 
@@ -808,9 +808,9 @@ P^{(tech)} \ = \ E(S) + E \ = \ P^{(risk)} + E
 \]
 \end{definition}
 
-Secondly, even if the policyholder paid a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the Technical Price, some further loadings must be added, as for example risk margin and profit margin.
+Secondly, even if the policyholder paid a premium that on average covers claims and expenses, undertaking that risk with nothing in return would not make sense for the insurer. So, to the technical price, some further loadings must be added, such as for example the loading for the cost of capital, the risk margin and the profit margin.
 
-The amount of the Technical Price with these loadings can be further modified based on business logic, as we are going to discuss in section \ref{beyond-technical-pricing}.
+The amount of the technical price with these loadings can be further modified based on business logic, as we are going to discuss in section \ref{beyond-technical-pricing}.
 
 \hypertarget{chap:personalization}{%
 \section{Modeling and Personalization}\label{chap:personalization}}
@@ -944,7 +944,7 @@ As we observed in section \ref{chap:tcc-dist}, under the compound distribution h
 Usually in statistical modeling, the response variables are seen as random variables with a distribution belonging to a specified family.
 
 \hypertarget{chap:dist-n}{%
-\subsubsection{\texorpdfstring{Distribution for the claims count \(N\)}{Distribution for the claims count N}}\label{chap:dist-n}}
+\subsubsection{\texorpdfstring{Distribution for the Claims Count \(N\)}{Distribution for the Claims Count N}}\label{chap:dist-n}}
 
 The claim count \(N\) is a discrete variable with values in \(\{0, 1, 2, 3,\dots\}\). Even if in practice the number of claims can't be arbitrarily high, \(N\) is usually modeled with distributions that give a positive probability to all natural numbers. One of the most common distribution used for \(N\) is the Poisson distribution.
 
@@ -1062,7 +1062,7 @@ In particular, if the observed period spans 1 year, we get:
 \[ M = N \sim Poisson(\lambda) \]
 
 \hypertarget{distribution-for-the-claim-severity-z}{%
-\subsubsection{\texorpdfstring{Distribution for the claim severity \(Z\)}{Distribution for the claim severity Z}}\label{distribution-for-the-claim-severity-z}}
+\subsubsection{\texorpdfstring{Distribution for the Claim Severity \(Z\)}{Distribution for the Claim Severity Z}}\label{distribution-for-the-claim-severity-z}}
 
 The claim severity \(Z\) is a continuous variable with values in \([0, +\infty[\). As for the claims count \(N\), even if in practice it can't be arbitrarily high, it is usually modeled with distributions that give a positive density to all the numbers in \(]0, +\infty[\). As the null claims are excluded, it is natural to assume \(P\left( Z=0 \right) = 0\). One of the most common distribution used for \(Z\) is the Gamma distribution.
 
@@ -1137,7 +1137,7 @@ This result means that the coefficient of variation is constant (given the shape
 Another characteristic of the Gamma distribution that could be problematic in modeling claims severity is that it has a light tail. This means that, as \(z\) goes to \(+\infty\), \(f_Z(z)\) approaches \(0\) quite fast. This could lead to a poor fitting for \emph{large claims}. Other distributions with heavier tails are for example the \emph{log-Normal} and the \emph{Pareto}.
 
 \hypertarget{chap:large-claims}{%
-\subsubsection{Large claims}\label{chap:large-claims}}
+\subsubsection{Large Claims}\label{chap:large-claims}}
 
 Modeling large claims in quite difficult in practice because usually there is not a lot of observed data on them, so it is hard to understand if they are related to some risk factors (identifiable by the pricing variables) or they happen just by chance due to a distribution with heavy tails.
 
@@ -1491,7 +1491,7 @@ For this reason, in practice, often the modeling is considered composed in 2 par
 The techniques used for \emph{Tariff Requirement} are employed also to estimating the Claim Reserve, that is a fundamental component of the financial statement in non-life insurance companies.
 
 \hypertarget{beyond-technical-pricing}{%
-\section{Beyond technical pricing}\label{beyond-technical-pricing}}
+\section{Beyond Technical Pricing}\label{beyond-technical-pricing}}
 
 In section \ref{chap:risk-prem-tech-price} we defined:
 
@@ -1512,13 +1512,13 @@ In this section we are going to discuss what the \emph{Tariff} and the \emph{Off
 \hypertarget{tariff-and-offer-price}{%
 \subsection{Tariff and Offer Price}\label{tariff-and-offer-price}}
 
-The \emph{Tariff} is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings for cost of capital and profits. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the \href{https://www.ivass.it/}{IVASS} (Istituto per la vigilanza sulle Assicurazioni).
+The \emph{Tariff} is the official price for the policy. Over the cost of claims and the expenses, it must include all the loadings, such as the loading for the cost of capital the risk margin and profit margin. The tariff has a particular importance because it is subjected to strict regulations and it must be approved by the supervisory authority, that in Italy is the \href{https://www.ivass.it/}{IVASS} (Istituto per la vigilanza sulle Assicurazioni).
 
 In section \ref{chap:pricing-variables} we described some of the explanatory variables that can be used to build the technical price. For technical pricing there are no constraints because it is used only for internal monitoring and the final price proposed to the client does not directly depend on it.
 
-However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictate that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we see that women usually experience less claims than men, we can't discriminate men by offering them a higher price.
+However, some of the variables used for technical pricing can't be used in tariff. In particular, the regulations dictate that companies can't discriminate clients based on sex, ethnic group, religion or place of birth. Thus, for example, even if from statistical data we saw that women usually experience less claims than men, we couldn't discriminate men by offering them a higher price.
 
-Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured them with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium).
+Moreover, some variables have constraints on tariff coefficients. For example, in \ac{mtpl} insurance, the bonus-malus class is strongly regulated. Every company must recognize the bonus-malus class matured by clients (even if they matured it with other companies) and the coefficients of this variable must be monotonically increasing, i.e.~a lower class must correspond to a better tariff (in the Italian bonus-malus system the lower the class the better the premium).
 
 Another tariff constraint is that for some coverage, such as \ac{mtpl}, the insurer has an obligation to contract. That means that whoever the client is, independently of how risky he is, the company must offer a premium and, if the client accepts, the company must underwrite the insurance contract. In this context, if the company offers an unreasonably high premium, it could fall into an attempt to avoiding the obligation to contract. For this reason, the tariff can't be arbitrarily high and must contemplate a maximum premium. To be sure that all the constraints has been respected, the tariff, before entering in production, must follow a strict approval process.
 
@@ -1540,11 +1540,11 @@ The components that act on price optimization can be addressed to:
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  \emph{technical pricing};
+  \emph{Technical Pricing};
 \item
-  \emph{client expectation};
+  \emph{Client Expectation};
 \item
-  \emph{business strategy}.
+  \emph{Business Strategy}.
 \end{enumerate}
 
 We already extensively covered technical pricing in previous chapters.
@@ -1574,14 +1574,12 @@ In this technical pricing and price optimization framework, the actuary is the o
 
 First of all, the actuary must master the main statistical and data science techniques used to develop models for technical pricing. On this field, in the last years, the development of machine learning and high performance computing has permitted a huge development of technical pricing allowing actuaries to use much more complex variables and models. However, the actuary does not have just to be an expert in statistics and machine learning. He must be also able to interpret the results he gets with his models and use his expertise to understand if the results he gets are fine for future predictions. As we already mentioned, the pricing rules will be used for policies that will be sold in the future, so they have to be defined with a mixture of observation of the past and assumptions on the future. In addition, sometimes it is needed to define prices for clusters where the company have no historical data. This can happen when a company is expanding to new customers for example by opening new selling channels or by pushing in regions where its market share is quite small. Furthermore, the lack of historical data can be due to the full sector evolution. For example, in these years, new vehicles, such as electric cars and cars with \ac{adas}, are spreading. As these vehicles didn't exist in the past, historical data doesn't exist. So, finding the proper pricing is challenging. From the company point of view, positioning with a competitive pricing on these segments is important for future business, but the risk must be properly evaluated. For these kind of tasks, the actuary must have a deep domain knowledge on the field.
 
-In the last years, the increase of competition brought to an increase in price optimization importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand the clients behaviors, in order to optimize tariff and offer price.
+In the last years, the increase of competition brought to an increase in price optimization importance. Now most of the companies build their own conversion and retention probability models and they are developing more complex business strategies. In this context, it is fundamental for the actuary to understand clients behaviors, in order to optimize tariff and offer price.
 
 The importance for price optimization implies that the technical pricing must not be conducted independently from tariff and offer pricing. Even in companies where the technical pricing and the offer pricing are carried out by two separate teams, the two teams have to collaborate and coordinate together. This need has some relevant implications on how technical pricing is conducted that we will further discuss in section \ref{chap:actuary-importance}.
 
 \hypertarget{chap:models}{%
 \chapter{Statistical models for Non Life Insurance Pricing}\label{chap:models}}
-
-\minitoc  
 
 In this chapter we are going to illustrate some of the most widespread statistical models for technical pricing. For each model we are going to describe its benefits and drawbacks and in section \ref{chap:considerations-on-models} we will compare them by discussing how they fit the pricing needs.
 
@@ -3055,8 +3053,6 @@ In the application described in section \ref{chap:practical-app} we used H2O loc
 
 \hypertarget{chap:practical-app}{%
 \chapter{Practical application}\label{chap:practical-app}}
-
-\minitoc  
 
 In this final chapter we are going to present a practical application of the models described in section \ref{chap:models} on a real-world actuarial dataset. After describing the problem and how the models have been implemented, we will assess their performance and comment the results.
 
