@@ -1,0 +1,459 @@
+\documentclass[pdf, aspectratio=169]{beamer}
+% \documentclass[pdf, aspectratio=1610]{beamer}
+\setbeamersize{text margin left=2cm, text margin right=2cm}
+% \documentclass[pdf]{beamer}
+
+\usepackage[italian]{babel} %La data compare in italiano e la divisione in sillabe diventa quella italiana
+\usepackage[utf8]{inputenc} %Permette di scrivere le lettere accentate
+\usepackage[T1]{fontenc}
+\usepackage{hyperref} %Permette di inserire i collegamenti ipertestuali
+\usepackage{url}			        %Permette di inserire i link urle
+\usepackage{amsmath,amssymb}
+\usepackage{multirow} % Per usare il multirow nei tabular
+
+\usepackage{graphicx} %Serve per inserire le immagini
+\usepackage{xcolor}
+%\usepackage{subfigure}
+\usepackage{caption}
+\usepackage{subcaption}
+
+%Disegni LaTeX
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+%\usetikzlibrary{shapes,snakes}
+%\usetikzlibrary{trees}
+\newcommand{\ImageWidth}{11cm}
+\usetikzlibrary{decorations.pathreplacing, positioning, arrows.meta}
+\usepackage{pgfplots,siunitx}
+\usepackage{adjustbox}
+
+\pgfplotsset{compat=1.9}
+\usepgfplotslibrary{units}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Nuovi comandi
+\newcommand{\magnitude}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator*{\argmin}{arg\,min}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Pittsburgh}
+%\usetheme{CambridgeUS}
+%\mode<presentation>{\usetheme{Boadilla}}
+%singapore
+
+%\useoutertheme[right]{sidebar}
+% \usecolortheme{seahorse}
+\usecolortheme{beaver}
+%\usecolortheme{dolphin}
+%\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue (primary)
+%\usecolortheme[named=UBCblue]{structure}
+%\usecolortheme[named=UBCblue]{seahorse}
+%\usecolortheme{structure}
+
+\usefonttheme{professionalfonts}
+\setbeamercovered{dynamic}
+
+\usepackage{amsthm}
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}[section]
+%\theoremstyle{plain}
+%\newtheorem{teorema}{Teorema}
+
+
+\definecolor{amber(sae/ece)}{rgb}{1.0, 0.49, 0.0}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myblue}{RGB}{0,82,155}
+
+\title{Application of GLM Advancements \\ to Non-Life Insurance Pricing}
+%\subtitle{}
+\author{Leonardo Stincone}
+
+\date{10 Maggio 2021}
+\institute[units]{Università degli Studi di Trieste}
+
+\logo{
+\includegraphics[width=10mm, height=10mm]{figures/university-logo.png}
+}
+
+
+% % For table of contents positioning
+% % \newsavebox{\longestsec}% Box to save longest sectional heading
+% \usepackage{varwidth}    
+% \usepackage{etoolbox}
+% \makeatletter
+% %\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+% \patchcmd{\beamer@sectionintoc}{%
+%   \hbox{\vbox{%
+%     \def\beamer@breakhere{\\}%
+%     \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}}%
+% }{%
+%   \hbox{%
+%     \def\beamer@breakhere{}%
+%     \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}%
+% }{}{}
+% \makeatother    
+
+% \newcommand\Closer[2][1cm]{%
+% \makebox[\linewidth][c]{%
+%   \begin{minipage}{\dimexpr\textwidth+#1\relax}
+%   \raggedright#2
+%   \end{minipage}%
+%   }%
+% }
+
+
+\setbeamertemplate{section in toc}[sections numbered]    
+
+
+
+% Insert table of content at the beginning of each section
+\AtBeginSection[]
+{
+  \begin{frame}
+    \frametitle{Table of Contents}
+    
+    \tableofcontents[currentsection]
+    
+    % \begin{center}
+    %   \begin{varwidth}{\textwidth}
+    %     \tableofcontents[currentsection]
+    %   \end{varwidth}
+    % \end{center}
+  \end{frame}
+}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+
+
+%% title frame
+\begin{frame}
+\titlepage
+\end{frame}
+
+<<setup, include = F, echo = F>>=
+knitr::opts_chunk$set(echo = FALSE, fig.align = 'center')
+@
+
+<<libraries, include = F>>=
+# Libraries ####
+library(tidyverse)
+library(lubridate)     # For datetime
+library(knitr)
+library(kableExtra)
+library(scales)        # For colors
+library(viridis)       # For colors
+library(ggeasy)
+library(ggforce)       # For plotting ellipses
+library(gridExtra)
+library(GGally)        # For ggpairs()
+library(cowplot)
+library(grid)
+library(gtable)
+library(mgcv)
+library(splines)
+library(forcats)
+library(glmnet)         # For Elastic Net
+library(LaplacesDemon)  # For Laplace density function
+
+# Option for figure position
+# knitr::opts_chunk$set(fig.pos = 'hbtp')
+knitr::opts_chunk$set(fig.pos = '!hbtp')
+
+# Option for number rendering in inline code
+inline_hook <- function(x) {
+  if (is.numeric(x)) {
+    format(x, scientific = FALSE, big.mark = " ")
+  } else x
+}
+knitr::knit_hooks$set(inline = inline_hook)
+
+# Option for printing '' for NA values in tables
+options(knitr.kable.NA = '')
+
+# For changing the font of specific cells in kable
+format_cell <- function(df, rows ,cols, value = c("italics", "bold", "strikethrough")){
+
+  # select the correct markup
+  # one * for italics, two ** for bold
+  map <- setNames(c("*", "**", "~~"), c("italics", "bold", "strikethrough"))
+  markup <- map[value]  
+
+  for (r in rows){
+    for(c in cols){
+
+      # Make sure values are not factors
+      df[[c]] <- as.character(df[[c]])
+
+      # Update formatting
+      df[r, c] <- paste0(markup, df[r, c], markup)
+    }
+  }
+
+  return(df)
+}
+
+# ggplot theme
+theme_set(theme_bw())
+
+# Color palette
+col1 <- hue_pal()(2)[1]
+col2 <- hue_pal()(2)[2]
+@
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Table of Contents}
+
+% \begin{lrbox}{\longestsec}Last section in the presentation\end{lrbox}% Capture longest title
+% \setlength{\leftskip}{\dimexpr.5\textwidth-.5\wd\longestsec\relax}% Advance left margin accordingly
+\tableofcontents
+
+% \Closer{\tableofcontents}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Il Pricing nelle Assicurazioni Danni}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Che cos'è un Contratto Assicurativo}
+
+\begin{definizione}[{\normalsize Contratto di Assicurazione, Art. 1882, Codice Civile Italiano}]
+  \label{def:ins-contr}
+  L'assicurazione è il contratto col quale l'{\bfseries assicuratore}, verso il pagamento di un {\bfseries premio}, si obbliga a rivalere l'{\bfseries assicurato}, entro i limiti convenuti,
+  
+  \begin{enumerate}%[noitemsep]
+    \item del {\bfseries danno} ad esso prodotto da un {\bfseries sinistro},
+    \item ovvero a pagare un {\bfseries capitale} o una {\bfseries rendita} al verificarsi di un {\bfseries evento} attinente alla {\bfseries vita umana}.
+  \end{enumerate}
+\end{definizione}
+
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Da un punto di vista matematico}
+
+\begin{adjustbox}{max totalsize={.9\textwidth}{.7\textheight},center}
+\begin{tikzpicture}
+    % draw horizontal line   
+    \draw[thick, -Triangle] (0, 0) -- (\ImageWidth, 0) node[font = \scriptsize, below left = 3pt and -8pt]{$t$};
+    \draw[very thick] (1cm, 0) -- (9cm, 0);
+
+
+    % draw vertical lines and times
+    \draw (1cm, -3pt) -- (1cm, 3pt) node[anchor = south] {$t_{1}$};
+    \draw (9cm, -3pt) -- (9cm, 3pt) node[anchor = south] {$t_{2}$};
+
+    \draw (2.5cm, -3pt) -- (2.5cm, 3pt) node[anchor = south] {$\tau_{1}$};
+    \draw (3.5cm, -3pt) -- (3.5cm, 3pt) node[anchor = south] {$\tau_{2}$};
+
+    \path (5.15cm, -3pt) -- (5.15cm, 3pt) node[anchor = south] {$\dots$};
+
+    \draw (6.8cm, -3pt) -- (6.8cm, 3pt) node[anchor = south] {$\tau_{N-1}$};
+    \draw (8.0cm, -3pt) -- (8.0cm, 3pt) node[anchor = south] {$\tau_{N}$};
+
+
+    % draw Policyholder cash flows
+    \node at (-1cm, -14pt) {Policyholder};
+    \node at (1cm, -14pt) {$-P$};
+
+
+    % draw Insurer cash flows
+    \node at (-1cm, -28pt) {Insurer};
+    \node at (1cm, -28pt) {$P$};
+
+    \node at (2.5cm, -28pt) {$-Z_1$};
+    \node at (3.5cm, -28pt) {$-Z_2$};
+
+    \node at (6.8cm, -28pt) {$-Z_{N-1}$};
+    \node at (8.0cm, -28pt) {$-Z_N$};
+
+    % \foreach \x in {0, 1, ..., 10}
+    %     \draw (\x cm, -3pt) -- (\x cm, 3pt)
+    %     node[anchor = south] {$t_{\x}$}
+    % ;  
+  ;
+
+\end{tikzpicture}
+\end{adjustbox}
+
+\vfill
+% \vspace{0.5cm}
+
+
+
+\begin{columns}
+\column{0.75\textwidth}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\uncover<2->{
+\begin{definizione}[{\normalsize Distribuzione composta}]
+  \label{def:comp-dist}
+  Assumiamo che:
+  \begin{enumerate}
+    \item $\forall n>0$, $Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n$ siano i.i.d.;
+    \item la distribuzione di $Z_i|N=n, \ i\le n$ non dipenda da $n$.
+  \end{enumerate}
+  
+  Sotto queste ipotesi diciamo che:
+  $$
+  S = 
+  \begin{cases}
+    0                    & \text{if } N=0 \\
+    \sum_{i=1}^{N}{Z_i}  & \text{if } N>0
+  \end{cases}
+  $$
+  ha distribuzione composta.
+\end{definizione}
+}
+
+\column{0.25\textwidth}
+
+\uncover<3->{
+Proprietà:
+
+\begin{center}
+\begin{tikzpicture}
+[<-, double, sibling distance=1.5cm, level distance=1.5cm, grow'=up]
+  \node (Root) [text width=1cm, align=center]{$F_S$}
+    child { node[text width=1cm, align=center]{$F_N$}}
+    child { node[text width=1cm, align=center]{$F_Z$}}
+    ;
+\end{tikzpicture}
+\end{center}
+$$
+E(S) = E(N) E(Z)
+$$
+}
+
+\end{columns}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Personalizzazione e Variabili Esplicative}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}
+\column{0.55\textwidth}
+
+Possibili variabili esplicative per il pricing delle assicurazioni motor:
+\begin{itemize}
+\item Informazioni sul veicolo assicurato;
+\item Informazioni generiche sul contraente;
+\item Informazioni assicurative sul contraente;
+\item Opzioni sulla polizza assicurativa;
+\item Dati telematici.
+\end{itemize}
+
+% \vfill
+\vspace{0.5cm}
+
+Queste variabili possono essere codificate come un vettore di numeri reali:
+$$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$$
+
+\column{0.45\textwidth}
+
+\begin{definizione}[{\normalsize Regola di Pricing}]
+  \label{def:pricing-rule}
+
+  Una \textit{Regola di Pricing} è una funzione $f(\cdot)$ che da una $\boldsymbol{x}_i\in\mathcal{X}$ restituisce un prezzo $P_i$:
+  $$  
+  \begin{array}{rccl}
+  f: & \mathcal{X}      & \longrightarrow  & R_+ \\
+     & \boldsymbol{x}_i & \longmapsto      & P_i \\
+  \end{array}
+  $$
+\end{definizione}
+
+\end{columns}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Variabili Risposta}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modelli Statistici per il Pricing nelle Assicurazioni Danni}
+
+\begin{frame}
+\frametitle{Titolo di prova capitolo 2}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Applicazione Pratica}
+
+\begin{frame}
+\frametitle{Titolo di prova capitolo 3}
+
+\end{frame}
+
+
+
+
+
+\end{document}
