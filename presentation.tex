@@ -50,8 +50,10 @@
 
 \usepackage{alltt}
 % \documentclass[pdf, aspectratio=1610]{beamer}
-\setbeamersize{text margin left=2cm, text margin right=2cm}
+%\setbeamersize{text margin left=2cm, text margin right=2cm}
+\setbeamersize{text margin left=1.5cm, text margin right=1.5cm}
 % \documentclass[pdf]{beamer}
+% \usefonttheme[onlymath]{serif} % For serif font in math mode
 
 \usepackage[italian]{babel} %La data compare in italiano e la divisione in sillabe diventa quella italiana
 \usepackage[utf8]{inputenc} %Permette di scrivere le lettere accentate
@@ -84,7 +86,8 @@
 
 %Nuovi comandi
 \newcommand{\magnitude}[1]{\left\lVert #1 \right\rVert}
-\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\argmin}{arg\,min}  % Declaring operator argmin
+\DeclareMathOperator*{\argmax}{arg\,max}  % Declaring operator argmax
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usetheme{Pittsburgh}
@@ -211,16 +214,14 @@
 \begin{frame}
 \frametitle{Che cos'è un Contratto Assicurativo}
 
-\begin{definizione}[{\normalsize Contratto di Assicurazione, Art. 1882, Codice Civile Italiano}]
-  \label{def:ins-contr}
+\begin{block}{Contratto di Assicurazione, Art. 1882, Codice Civile Italiano}
   L'assicurazione è il contratto col quale l'{\bfseries assicuratore}, verso il pagamento di un {\bfseries premio}, si obbliga a rivalere l'{\bfseries assicurato}, entro i limiti convenuti,
   
-  \begin{enumerate}%[noitemsep]
+  \begin{enumerate}
     \item del {\bfseries danno} ad esso prodotto da un {\bfseries sinistro},
     \item ovvero a pagare un {\bfseries capitale} o una {\bfseries rendita} al verificarsi di un {\bfseries evento} attinente alla {\bfseries vita umana}.
   \end{enumerate}
-\end{definizione}
-
+\end{block}
 
 \end{frame}
 
@@ -278,55 +279,51 @@
 \vfill
 % \vspace{0.5cm}
 
-
-
-\begin{columns}
-\column{0.75\textwidth}
-
 \fontsize{9pt}{11pt}\selectfont
 
-\uncover<2->{
-\begin{definizione}[{\normalsize Distribuzione composta}]
-  \label{def:comp-dist}
-  Assumiamo che:
-  \begin{enumerate}
-    \item $\forall n>0$, $Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n$ siano i.i.d.;
-    \item la distribuzione di $Z_i|N=n, \ i\le n$ non dipenda da $n$.
-  \end{enumerate}
-  
-  Sotto queste ipotesi diciamo che:
-  $$
-  S = 
-  \begin{cases}
-    0                    & \text{if } N=0 \\
-    \sum_{i=1}^{N}{Z_i}  & \text{if } N>0
-  \end{cases}
-  $$
-  ha distribuzione composta.
-\end{definizione}
-}
+\begin{columns}
+\begin{column}{0.7\textwidth}
+  \uncover<2->{
+    \begin{block}{Distribuzione composta}
+      Assumiamo che:
+      \begin{enumerate}
+        \item $\forall n>0$, $Z_1|N=n,\ Z_2|N=n,\ \dots,\ Z_n|N=n$ siano i.i.d.;
+        \item la distribuzione di $Z_i|N=n, \ i\le n$ non dipenda da $n$.
+      \end{enumerate}
+      
+      Sotto queste ipotesi diciamo che:
+      $$
+      S = 
+      \begin{cases}
+        0                    & \text{if } N=0 \\
+        \sum_{i=1}^{N}{Z_i}  & \text{if } N>0
+      \end{cases}
+      $$
+      ha distribuzione composta.
+    \end{block}
+  }
+\end{column}
 
-\column{0.25\textwidth}
-
-\uncover<3->{
-Proprietà:
-
-\begin{center}
-\begin{tikzpicture}
-[<-, double, sibling distance=1.5cm, level distance=1.5cm, grow'=up]
-  \node (Root) [text width=1cm, align=center]{$F_S$}
-    child { node[text width=1cm, align=center]{$F_N$}}
-    child { node[text width=1cm, align=center]{$F_Z$}}
-    ;
-\end{tikzpicture}
-\end{center}
-$$
-E(S) = E(N) E(Z)
-$$
-}
+\begin{column}{0.3\textwidth}
+  \uncover<3->{
+    \begin{block}{Proprietà}
+      \begin{center}
+        \begin{tikzpicture}
+          [<-, double, sibling distance=1.5cm, level distance=1.5cm, grow'=up]
+            \node (Root) [text width=1cm, align=center]{$F_S$}
+              child { node[text width=1cm, align=center]{$F_N$}}
+              child { node[text width=1cm, align=center]{$F_Z$}}
+            ;
+        \end{tikzpicture}
+      \end{center}
+      $$
+      E(S) = E(N) E(Z)
+      $$
+    \end{block}
+  }
+\end{column}
 
 \end{columns}
-
 
 \end{frame}
 
@@ -338,39 +335,39 @@ $$
 \fontsize{9pt}{11pt}\selectfont
 
 \begin{columns}
-\column{0.55\textwidth}
+\begin{column}{0.5\textwidth}
+  \begin{block}{Variabili esplicative}
+    Possibili variabili esplicative per il pricing delle assicurazioni motor:
+    \begin{itemize}
+      \item Informazioni sul veicolo assicurato;
+      \item Informazioni generiche sul contraente;
+      \item Informazioni assicurative sul contraente;
+      \item Opzioni sulla polizza assicurativa;
+      \item Dati telematici.
+    \end{itemize}
+    
+    % \vfill
+    \vspace{0.5cm}
+    
+    Queste variabili possono essere codificate come un vettore di numeri reali:
+    $$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$$
+    
+  \end{block}
+\end{column}
 
-Possibili variabili esplicative per il pricing delle assicurazioni motor:
-\begin{itemize}
-\item Informazioni sul veicolo assicurato;
-\item Informazioni generiche sul contraente;
-\item Informazioni assicurative sul contraente;
-\item Opzioni sulla polizza assicurativa;
-\item Dati telematici.
-\end{itemize}
-
-% \vfill
-\vspace{0.5cm}
-
-Queste variabili possono essere codificate come un vettore di numeri reali:
-$$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$$
-
-\column{0.45\textwidth}
-
-\begin{definizione}[{\normalsize Regola di Pricing}]
-  \label{def:pricing-rule}
-
-  Una \textit{Regola di Pricing} è una funzione $f(\cdot)$ che da una $\boldsymbol{x}_i\in\mathcal{X}$ restituisce un prezzo $P_i$:
-  $$  
-  \begin{array}{rccl}
-  f: & \mathcal{X}      & \longrightarrow  & R_+ \\
-     & \boldsymbol{x}_i & \longmapsto      & P_i \\
-  \end{array}
-  $$
-\end{definizione}
+\begin{column}{0.5\textwidth}
+  \begin{block}{Regola di Pricing}
+    Una \textit{Regola di Pricing} è una funzione $f(\cdot)$ che da una $\boldsymbol{x}_i\in\mathcal{X}$ restituisce un prezzo $P_i$:
+    $$  
+    \begin{array}{rccl}
+    f: & \mathcal{X}      & \longrightarrow  & R_+ \\
+       & \boldsymbol{x}_i & \longmapsto      & P_i \\
+    \end{array}
+    $$
+  \end{block}
+\end{column}
 
 \end{columns}
-
 
 \end{frame}
 
@@ -379,43 +376,119 @@ $$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb
 \begin{frame}
 \frametitle{Variabili Risposta}
 
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[t, totalwidth=1.02\textwidth]
+
+\begin{column}{0.45\linewidth}
+  \begin{block}{Distribuzione di Poisson}
+    $$
+    p_N(n) = P\left( N = n \right) = e^{-\lambda}\frac{\lambda^n}{n!}, \quad \lambda>0
+    $$
+  
+    \begin{figure}
+      \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/plot-poisson-1} 
+
+}
+
+
+
+\end{knitrout}
+      \label{fig:plot-poisson}
+    \end{figure}
+
+  \end{block}
+\end{column}
+
+\begin{column}{0.45\linewidth}
+  \begin{block}{Distribuzione Gamma}
+    $$
+    f_Z(z) = \frac{\rho^\alpha}{\Gamma(\alpha)}z^{\alpha-1}e^{-\rho z}, \quad \alpha > 0, \ \rho > 0
+    $$
+    
+    \begin{figure}
+      \centering
+\begin{knitrout}
+\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
+
+{\centering \includegraphics[width=\maxwidth]{figure/plot-gamma-1} 
+
+}
+
+
+
+\end{knitrout}
+      \label{fig:plot-gamma}
+    \end{figure}
+
+  \end{block}
+\end{column}
+
+\end{columns}
+
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{titolo}
+\frametitle{Pricing Tecnico e Commerciale}
+
+\fontsize{9pt}{11pt}\selectfont
+
+
+\begin{columns}[t, totalwidth=1.02\textwidth]
+
+\begin{column}{0.5\linewidth}
+  \uncover<1->{
+    \begin{block}{Definizione di Premio}
+      \begin{center}
+        \begin{tikzpicture}
+          \node[text width=4cm, align=left] at (0, 0) (p1) {$P^{(\textrm{risk})}_i=E(S_i)$ \\ $P^{(\textrm{tech})}_i = E(S_i) + E_i$};
+          \node[text width=4cm, align=left] at (0, -3cm) (p2) {$P^{(\textrm{tariff})}_i$ \\ $P^{(\textrm{offer})}_i = P^{(\textrm{tariff})}_i - D_i$};
+          \draw[black, ->] 
+            (-1.5cm, -0.6cm) -- node[right, text width=8cm, align=left]{\footnotesize Altri Caricamenti \\ Vincoli Normativi \\ Commercializzazioni} (-1.5cm, -2.4cm);
+        \end{tikzpicture}
+      \end{center}
+    \end{block}
+  }
+\end{column}
+
+\begin{column}{0.5\linewidth}
+  \uncover<2->{
+    \begin{block}{Ottimizzazione del Prezzo}
+      
+      % \vfill
+      % \vspace{0.5cm}
+      \vspace{0.8cm}
+      
+      Si basa su
+      \begin{enumerate}
+        \item Pricing Tecnico
+        \item Aspettativa del Cliente
+        \item Strategia di Business
+      \end{enumerate}
+    
+      % \vfill
+      \vspace{0.5cm}
+      
+      Ulteriori modelli
+      \begin{itemize}
+        \item New Business: Probabilità di Conversion
+        \item Rinnovi: Probabilità di Retention
+      \end{itemize}
+
+    \end{block}
+  }
+\end{column}
+
+\end{columns}
 
 \end{frame}
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{titolo}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{titolo}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{titolo}
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{titolo}
-
-\end{frame}
 
 
 
@@ -424,9 +497,112 @@ $$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb
 \section{Modelli Statistici per il Pricing nelle Assicurazioni Danni}
 
 \begin{frame}
-\frametitle{Titolo di prova capitolo 2}
+\frametitle{Modello Lineare Generalizzato (GLM)}
+\fontsize{9pt}{11pt}\selectfont
+
+
+\begin{block}{Modello Lineare Generalizzato (GLM)}
+  
+  Dato $\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots,  (\boldsymbol{x}_n, \omega_n, y_n) \right\}$
+  
+  con $\boldsymbol{y} = (y_1, \dots, y_n)^t$ realizzazione di $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$.
+  
+  Assumiamo che:
+  \begin{enumerate}
+    \item $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$ siano indipendenti con distribuzione appartenente a una stessa famiglia esponenziale lineare:
+    $$f(y_i; \theta_i, \phi, \omega_i) = \exp{\left\{ \frac{\omega_i}{\phi} \left[y_i\theta_i - b(\theta_i) \right] \right\}} \ c(y_i, \phi, \omega_i), \quad y_i\in \mathcal{Y}\subseteq\mathbb{R}$$
+    \item $\boldsymbol{x}_i = \left(1, x_{i1}, \dots, x_{ip} \right)^t$ agisca su $Y_i$ tramite il predittore lineare $\eta_i$
+    $$\eta_i = \beta_0 + \beta_1 x_{i1} + \beta_2 x_{i2} + \dots + \beta_p x_{ip}$$
+    \item $\eta_i$ sia legato a $\mu_i=E(Y_i)$ tramite la funzione legame $g(\cdot)$
+    $$g(\mu_i) = \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta}$$
+  \end{enumerate}
+\end{block}
 
 \end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Stima di un GLM}
+\fontsize{9pt}{11pt}\selectfont
+
+
+\begin{columns}
+
+\begin{column}{0.5\linewidth}
+  \uncover<1->{
+    \begin{block}{Stimatore di massima verosimiglianza}
+      Data la funzione di verosimiglianza
+      $$
+      \begin{array}{cccc}
+        L: & \mathbb{R}^{p+1} \times \Lambda & \longrightarrow & [0, +\infty[ \\
+           & \left(\boldsymbol{\beta}, \phi\right) & \longmapsto & f_{\boldsymbol{Y}}(\boldsymbol{y};       \boldsymbol{ \theta}, \phi)
+      \end{array}
+      $$
+  
+      Lo stimatore di massima verosimiglianza è:
+      $$
+      \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
+      $$
+    \end{block}
+  }
+\end{column}
+
+
+\begin{column}{0.5\linewidth}
+  \uncover<2->{
+    \begin{block}{Devianza}
+      La devianza è
+      $$
+      D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) =
+        -2\phi\left(
+        \ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)
+        - \ell_{S}\left(\boldsymbol{\beta}^*, \phi; \boldsymbol{y}\right)
+        \right)
+      $$
+      dove $\ell\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right) = \log{L\left(\hat{\boldsymbol{\beta}}, \phi; \boldsymbol{y}\right)}$ \newline e $\boldsymbol{\beta}^*$ sono i parametri del modello saturo.
+    
+      \vspace{0.2cm}
+      
+      Lo stimatore di massima verosimiglianza può essere ottenuto come:
+      $$
+      \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\boldsymbol{\beta}, \boldsymbol{y})}
+      $$
+    \end{block}
+  }
+
+\end{column}
+
+\end{columns}
+
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{titolo}
+
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
