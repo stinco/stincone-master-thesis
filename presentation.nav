@@ -11,36 +11,82 @@
 \headcommand {\beamer@framepages {4}{4}}
 \headcommand {\slideentry {1}{0}{3}{5/7}{}{0}}
 \headcommand {\beamer@framepages {5}{7}}
-\headcommand {\slideentry {1}{0}{4}{8/8}{}{0}}
-\headcommand {\beamer@framepages {8}{8}}
-\headcommand {\slideentry {1}{0}{5}{9/9}{}{0}}
-\headcommand {\beamer@framepages {9}{9}}
-\headcommand {\slideentry {1}{0}{6}{10/11}{}{0}}
-\headcommand {\beamer@framepages {10}{11}}
-\headcommand {\beamer@sectionpages {3}{11}}
-\headcommand {\beamer@subsectionpages {3}{11}}
-\headcommand {\sectionentry {2}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{12}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{0}}
-\headcommand {\slideentry {2}{0}{1}{12/12}{}{0}}
-\headcommand {\beamer@framepages {12}{12}}
-\headcommand {\slideentry {2}{0}{2}{13/13}{}{0}}
+\headcommand {\slideentry {1}{0}{4}{8/9}{}{0}}
+\headcommand {\beamer@framepages {8}{9}}
+\headcommand {\slideentry {1}{0}{5}{10/10}{}{0}}
+\headcommand {\beamer@framepages {10}{10}}
+\headcommand {\slideentry {1}{0}{6}{11/12}{}{0}}
+\headcommand {\beamer@framepages {11}{12}}
+\headcommand {\beamer@sectionpages {3}{12}}
+\headcommand {\beamer@subsectionpages {3}{12}}
+\headcommand {\sectionentry {2}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{13}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{0}}
+\headcommand {\slideentry {2}{0}{1}{13/13}{}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\slideentry {2}{0}{3}{14/15}{}{0}}
-\headcommand {\beamer@framepages {14}{15}}
-\headcommand {\slideentry {2}{0}{4}{16/16}{}{0}}
-\headcommand {\beamer@framepages {16}{16}}
-\headcommand {\slideentry {2}{0}{5}{17/17}{}{0}}
+\headcommand {\beamer@subsectionpages {13}{13}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{14}{Modelli Lineari Generalizzati (GLM)}}
+\headcommand {\slideentry {2}{1}{1}{14/14}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@framepages {14}{14}}
+\headcommand {\slideentry {2}{1}{2}{15/16}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@framepages {15}{16}}
+\headcommand {\slideentry {2}{1}{3}{17/17}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {17}{17}}
-\headcommand {\slideentry {2}{0}{6}{18/18}{}{0}}
+\headcommand {\slideentry {2}{1}{4}{18/18}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\beamer@sectionpages {12}{18}}
-\headcommand {\beamer@subsectionpages {12}{18}}
-\headcommand {\sectionentry {3}{Applicazione Pratica}{19}{Applicazione Pratica}{0}}
-\headcommand {\slideentry {3}{0}{1}{19/19}{}{0}}
+\headcommand {\slideentry {2}{1}{5}{19/19}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {3}{0}{2}{20/20}{}{0}}
+\headcommand {\slideentry {2}{1}{6}{20/20}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\beamer@partpages {1}{20}}
-\headcommand {\beamer@subsectionpages {19}{20}}
-\headcommand {\beamer@sectionpages {19}{20}}
-\headcommand {\beamer@documentpages {20}}
-\headcommand {\gdef \inserttotalframenumber {16}}
+\headcommand {\slideentry {2}{1}{7}{21/21}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@framepages {21}{21}}
+\headcommand {\beamer@subsectionpages {14}{21}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{22}{Modelli Additivi Generalizzati (GAM)}}
+\headcommand {\slideentry {2}{2}{1}{22/22}{Modelli Additivi Generalizzati (GAM)}{0}}
+\headcommand {\beamer@framepages {22}{22}}
+\headcommand {\slideentry {2}{2}{2}{23/23}{Modelli Additivi Generalizzati (GAM)}{0}}
+\headcommand {\beamer@framepages {23}{23}}
+\headcommand {\beamer@subsectionpages {22}{23}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{24}{Stimatori Shrinkage per i GLM}}
+\headcommand {\slideentry {2}{3}{1}{24/24}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {24}{24}}
+\headcommand {\slideentry {2}{3}{2}{25/25}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {25}{25}}
+\headcommand {\slideentry {2}{3}{3}{26/26}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {26}{26}}
+\headcommand {\slideentry {2}{3}{4}{27/27}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {27}{27}}
+\headcommand {\slideentry {2}{3}{5}{28/28}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {28}{28}}
+\headcommand {\slideentry {2}{3}{6}{29/29}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@framepages {29}{29}}
+\headcommand {\beamer@subsectionpages {24}{29}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{30}{Stimatori Bayesiani per i GLM}}
+\headcommand {\slideentry {2}{4}{1}{30/30}{Stimatori Bayesiani per i GLM}{0}}
+\headcommand {\beamer@framepages {30}{30}}
+\headcommand {\beamer@subsectionpages {30}{30}}
+\headcommand {\beamer@subsectionentry {0}{2}{5}{31}{Cenni sugli Algoritmi di Machine Learning}}
+\headcommand {\slideentry {2}{5}{1}{31/31}{Cenni sugli Algoritmi di Machine Learning}{0}}
+\headcommand {\beamer@framepages {31}{31}}
+\headcommand {\beamer@subsectionpages {31}{31}}
+\headcommand {\beamer@subsectionentry {0}{2}{6}{32}{Confronto tra i modelli}}
+\headcommand {\slideentry {2}{6}{1}{32/32}{Confronto tra i modelli}{0}}
+\headcommand {\beamer@framepages {32}{32}}
+\headcommand {\beamer@sectionpages {13}{32}}
+\headcommand {\beamer@subsectionpages {32}{32}}
+\headcommand {\sectionentry {3}{Applicazione Pratica}{33}{Applicazione Pratica}{0}}
+\headcommand {\slideentry {3}{0}{1}{33/33}{}{0}}
+\headcommand {\beamer@framepages {33}{33}}
+\headcommand {\slideentry {3}{0}{2}{34/34}{}{0}}
+\headcommand {\beamer@framepages {34}{34}}
+\headcommand {\slideentry {3}{0}{3}{35/35}{}{0}}
+\headcommand {\beamer@framepages {35}{35}}
+\headcommand {\slideentry {3}{0}{4}{36/36}{}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\slideentry {3}{0}{5}{37/37}{}{0}}
+\headcommand {\beamer@framepages {37}{37}}
+\headcommand {\slideentry {3}{0}{6}{38/38}{}{0}}
+\headcommand {\beamer@framepages {38}{38}}
+\headcommand {\beamer@partpages {1}{38}}
+\headcommand {\beamer@subsectionpages {33}{38}}
+\headcommand {\beamer@sectionpages {33}{38}}
+\headcommand {\beamer@documentpages {38}}
+\headcommand {\gdef \inserttotalframenumber {33}}

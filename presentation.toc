@@ -1,5 +1,11 @@
 \babel@toc {italian}{}
 \babel@toc {italian}{}
 \beamer@sectionintoc {1}{Il Pricing nelle Assicurazioni Danni}{3}{0}{1}
-\beamer@sectionintoc {2}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{12}{0}{2}
-\beamer@sectionintoc {3}{Applicazione Pratica}{19}{0}{3}
+\beamer@sectionintoc {2}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{13}{0}{2}
+\beamer@subsectionintoc {2}{1}{Modelli Lineari Generalizzati (GLM)}{14}{0}{2}
+\beamer@subsectionintoc {2}{2}{Modelli Additivi Generalizzati (GAM)}{22}{0}{2}
+\beamer@subsectionintoc {2}{3}{Stimatori Shrinkage per i GLM}{24}{0}{2}
+\beamer@subsectionintoc {2}{4}{Stimatori Bayesiani per i GLM}{30}{0}{2}
+\beamer@subsectionintoc {2}{5}{Cenni sugli Algoritmi di Machine Learning}{31}{0}{2}
+\beamer@subsectionintoc {2}{6}{Confronto tra i modelli}{32}{0}{2}
+\beamer@sectionintoc {3}{Applicazione Pratica}{33}{0}{3}

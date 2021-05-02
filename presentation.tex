@@ -89,6 +89,14 @@
 \DeclareMathOperator*{\argmin}{arg\,min}  % Declaring operator argmin
 \DeclareMathOperator*{\argmax}{arg\,max}  % Declaring operator argmax
 
+% To make equal with 'def' above in equations
+\newcommand\eqdef{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny def}}}{=}}}
+
+% For the norm in equations
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usetheme{Pittsburgh}
 %\usetheme{CambridgeUS}
@@ -281,7 +289,7 @@
 
 \fontsize{9pt}{11pt}\selectfont
 
-\begin{columns}
+\begin{columns}[T]
 \begin{column}{0.7\textwidth}
   \uncover<2->{
     \begin{block}{Distribuzione composta}
@@ -334,7 +342,8 @@
 
 \fontsize{9pt}{11pt}\selectfont
 
-\begin{columns}
+\begin{columns}[T]
+\uncover<1->{
 \begin{column}{0.5\textwidth}
   \begin{block}{Variabili esplicative}
     Possibili variabili esplicative per il pricing delle assicurazioni motor:
@@ -354,7 +363,9 @@
     
   \end{block}
 \end{column}
+}
 
+\uncover<2->{
 \begin{column}{0.5\textwidth}
   \begin{block}{Regola di Pricing}
     Una \textit{Regola di Pricing} è una funzione $f(\cdot)$ che da una $\boldsymbol{x}_i\in\mathcal{X}$ restituisce un prezzo $P_i$:
@@ -365,7 +376,18 @@
     \end{array}
     $$
   \end{block}
+  
+  \begin{block}{Modellare una variabile risposta}
+    \textit{Modellare una variabile risposta} $Y_i$ significa stimare una funzione $r(\cdot)$ che da una $\boldsymbol{x}_i\in\mathcal{X}$ restituisce la distribuzione di $Y_i$ o alcuni suoi momenti:
+    $$  
+    \begin{array}{rccl}
+    r: & \mathcal{X}      & \longrightarrow  & \mathcal{C} \\
+       & \boldsymbol{x}_i & \longmapsto      & F_{Y_i}, E(Y_i), Var(Y_i)
+    \end{array}
+    $$
+  \end{block}
 \end{column}
+}
 
 \end{columns}
 
@@ -378,7 +400,8 @@
 
 \fontsize{9pt}{11pt}\selectfont
 
-\begin{columns}[t, totalwidth=1.02\textwidth]
+% \begin{columns}[t, totalwidth=1.02\textwidth]
+\begin{columns}[T]
 
 \begin{column}{0.45\linewidth}
   \begin{block}{Distribuzione di Poisson}
@@ -440,19 +463,21 @@
 \fontsize{9pt}{11pt}\selectfont
 
 
-\begin{columns}[t, totalwidth=1.02\textwidth]
+% \begin{columns}[t, totalwidth=1.02\textwidth]
+\begin{columns}[T]
 
 \begin{column}{0.5\linewidth}
   \uncover<1->{
     \begin{block}{Definizione di Premio}
-      \begin{center}
+      \vspace{0.2cm}
+      % \begin{center}
         \begin{tikzpicture}
-          \node[text width=4cm, align=left] at (0, 0) (p1) {$P^{(\textrm{risk})}_i=E(S_i)$ \\ $P^{(\textrm{tech})}_i = E(S_i) + E_i$};
-          \node[text width=4cm, align=left] at (0, -3cm) (p2) {$P^{(\textrm{tariff})}_i$ \\ $P^{(\textrm{offer})}_i = P^{(\textrm{tariff})}_i - D_i$};
+          \node[text width=6cm, align=left] at (0, 0) (p1) {$P^{(\textrm{risk})}_i=E(S_i)$ \\ $P^{(\textrm{tech})}_i = E(S_i) + \textrm{Expenses}_i$};
+          \node[text width=6cm, align=left] at (0, -3cm) (p2) {$P^{(\textrm{tariff})}_i$ \\ $P^{(\textrm{offer})}_i = P^{(\textrm{tariff})}_i - \textrm{Discount}_i$};
           \draw[black, ->] 
-            (-1.5cm, -0.6cm) -- node[right, text width=8cm, align=left]{\footnotesize Altri Caricamenti \\ Vincoli Normativi \\ Commercializzazioni} (-1.5cm, -2.4cm);
+            (-2.5cm, -0.6cm) -- node[right, text width=8cm, align=left]{\footnotesize Altri Caricamenti \\ Vincoli Normativi \\ Commercializzazioni} (-2.5cm, -2.4cm);
         \end{tikzpicture}
-      \end{center}
+      % \end{center}
     \end{block}
   }
 \end{column}
@@ -463,7 +488,7 @@
       
       % \vfill
       % \vspace{0.5cm}
-      \vspace{0.8cm}
+      \vspace{0.2cm}
       
       Si basa su
       \begin{enumerate}
@@ -473,7 +498,7 @@
       \end{enumerate}
     
       % \vfill
-      \vspace{0.5cm}
+      \vspace{0.2cm}
       
       Ulteriori modelli
       \begin{itemize}
@@ -496,17 +521,21 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Modelli Statistici per il Pricing nelle Assicurazioni Danni}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modelli Lineari Generalizzati (GLM)}
+
 \begin{frame}
-\frametitle{Modello Lineare Generalizzato (GLM)}
+\frametitle{Modelli Lineari Generalizzati (GLM)}
 \fontsize{9pt}{11pt}\selectfont
 
 
-\begin{block}{Modello Lineare Generalizzato (GLM)}
+\begin{block}{Modelli Lineari Generalizzati (GLM)}
   
   Dato $\mathcal{D} = \left\{ (\boldsymbol{x}_1, \omega_1, y_1), \dots,  (\boldsymbol{x}_n, \omega_n, y_n) \right\}$
   
   con $\boldsymbol{y} = (y_1, \dots, y_n)^t$ realizzazione di $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$.
   
+  \vspace{0.2cm}
   Assumiamo che:
   \begin{enumerate}
     \item $\boldsymbol{Y} = (Y_1, \dots, Y_n)^t$ siano indipendenti con distribuzione appartenente a una stessa famiglia esponenziale lineare:
@@ -528,11 +557,11 @@
 \fontsize{9pt}{11pt}\selectfont
 
 
-\begin{columns}
+\begin{columns}[T]
 
 \begin{column}{0.5\linewidth}
   \uncover<1->{
-    \begin{block}{Stimatore di massima verosimiglianza}
+    \begin{block}{Stima di massima verosimiglianza}
       Data la funzione di verosimiglianza
       $$
       \begin{array}{cccc}
@@ -541,7 +570,7 @@
       \end{array}
       $$
   
-      Lo stimatore di massima verosimiglianza è:
+      La stima di massima verosimiglianza è:
       $$
       \hat{\boldsymbol{\beta}} = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi; \boldsymbol{y}\right)}
       $$
@@ -565,7 +594,7 @@
     
       \vspace{0.2cm}
       
-      Lo stimatore di massima verosimiglianza può essere ottenuto come:
+      La stima di massima verosimiglianza può essere ottenuta come:
       $$
       \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D(\boldsymbol{\beta}, \boldsymbol{y})}
       $$
@@ -583,7 +612,73 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{titolo}
+\frametitle{Effetto delle variabili in un GLM}
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf}
+    \caption{Quantitativa}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf}
+    \caption{Qualitativa}
+  \end{subfigure}
+  \par\medskip
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf}
+    \caption{Quantitativa e qualitativa \\ senza interazione}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf}
+    \caption{Quantitativa e qualitativa \\ con interazione}
+  \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Variabili quantitative ed effetti non lineari}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-1.pdf}
+    \caption{Polynomial degree 2}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf}
+    \caption{Polynomial degree 4}
+  \end{subfigure}
+  \par\medskip
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf}
+    \caption{Piece-wise linear}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf}
+    \caption{Piece-wise polynomial degree 2}
+  \end{subfigure}
+\end{figure}
 
 \end{frame}
 
@@ -591,7 +686,36 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{titolo}
+\frametitle{Funzione Legame e risposta}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-1.pdf}
+    \caption{Normal - identity}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-2.pdf}
+    \caption{Binomial - logit}
+  \end{subfigure}
+  \par\medskip
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-3.pdf}
+    \caption{Poisson - log}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-4.pdf}
+    \caption{Gamma - log}
+  \end{subfigure}
+\end{figure}
 
 \end{frame}
 
@@ -599,21 +723,297 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{titolo}
+\frametitle{Grafici per visualizzare l'effetto delle variabili}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-1.pdf}
+    \caption{No effect - ungrouped}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-2.pdf}
+    \caption{Positive effect - ungrouped}
+  \end{subfigure}
+  \par\medskip
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-3.pdf}
+    \caption{No effect - grouped}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-4.pdf}
+    \caption{Positive effect - grouped}
+  \end{subfigure}
+\end{figure}
 
 \end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Criteri per la selezione delle variabili nei GLM}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{block}{Criteri per la selezione delle variabili}
+  \begin{itemize}
+    \item Visualizzazione
+    \item Test di verifica di ipotesi
+    $$
+    \begin{cases}
+      H_0: & \beta_{j_k} = 0 \ \forall k \in \{1, 2, \dots, s\} \\
+      H_1: & \exists k: \beta_{j_k} \neq 0
+    \end{cases}
+    $$
+    \item Criteri di informazione
+    \begin{align*}
+      AIC & = -2\ell(\boldsymbol{\beta}) + 2 (p+1) \\
+      BIC & = -2\ell(\boldsymbol{\beta}) + \log(n) (p+1)
+    \end{align*}
+    \item Divisione del dataset tra training set e test set
+    \item Cross validation
+  \end{itemize}
+  $\Longrightarrow$ Algoritmi stepwise
+\end{block}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Modelli Additivi Generalizzati (GAM)}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Modelli Additivi Generalizzati (GAM)}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+\begin{column}{0.5\linewidth}
+  \begin{block}{Modello Additivo Generalizzato (GAM)}
+    \begin{enumerate}
+      \item Variabile risposta $\boldsymbol{Y}$ come GLM;
+      \item Predittore lineare
+      $$
+      \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \quad i\in\{1,2,\dots,n\}
+      $$
+      con $f_l(\cdot)$ spline cubica;
+      \item Funzione legame $g(\cdot)$ come GLM.
+    \end{enumerate}
+  \end{block}
+\end{column}
+
+\begin{column}{0.5\linewidth}
+  \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
+    $$
+    \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
+    {\left\{
+      D(\boldsymbol{f}, \boldsymbol{y})
+        + \sum_{l=1}^{q}{
+          \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
+        }
+    \right\}
+    }
+    $$
+    con $\lambda_1, \lambda_2, \dots, \lambda_q$ iperparametri di smoothing.
+  \end{block}
+\end{column}
+
+\end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{GAM: esempio}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf}
+    \caption{$\lambda = 0$}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf}
+    \caption{$\lambda = 10$}
+  \end{subfigure}
+  \par\medskip
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf}
+    \caption{$\lambda = 10^3$}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{4.5cm}
+    \centering
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf}
+    \caption{$\lambda = 10^6$}
+  \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Stimatori Shrinkage per i GLM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Trade-off tra Bias e Varianza}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{block}{Scomposizione dello scarto quadratico medio (MSE)}
+  $$
+  MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
+  \underbrace{\left( E(\tilde{\beta}_j)-\beta_j \right)^2}_{\text{Bias}^2} +
+  \underbrace{Var\left( \tilde{\beta}_j \right)}_{\text{Variance}}
+  $$
+\end{block}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=7cm]{_bookdown_files/_main_files/figure-latex/bias-variance-1.pdf}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regressione Ridge}
+
+Modello sottostante:GLM
+
+\begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
+  $$
+  \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
+  $$
+  dove
+  \begin{itemize}
+    \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
+    \item $\lambda\ge0$ iperparametro di penalizzazione
+  \end{itemize}
+\end{block}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regressione Ridge: esempio}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regressione LASSO}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regressione LASSO: esempio}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Elastic Net}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Stimatori Bayesiani per i GLM}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Stimatori Bayesiani per i GLM}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Cenni sugli Algoritmi di Machine Learning}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Cenni sugli Algoritmi di Machine Learning}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Confronto tra i modelli}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo di prova}
+
+\end{frame}
+
 
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Applicazione Pratica}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Titolo di prova capitolo 3}
 
 \end{frame}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo di prova capitolo 3}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo di prova capitolo 3}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo di prova capitolo 3}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo di prova capitolo 3}
+
+\end{frame}
 
 
 
