@@ -164,7 +164,8 @@
 % }
 
 
-\setbeamertemplate{section in toc}[sections numbered]    
+\setbeamertemplate{section in toc}[sections numbered]
+% \setbeamertemplate{section in toc}
 
 
 
@@ -174,14 +175,20 @@
   \begin{frame}
     \frametitle{Table of Contents}
     
-    \tableofcontents[currentsection]
-    
-    % \begin{center}
-    %   \begin{varwidth}{\textwidth}
-    %     \tableofcontents[currentsection]
-    %   \end{varwidth}
-    % \end{center}
+    % \begin{columns}[T]
+    % \begin{column}{0.7\linewidth}
+      \tableofcontents[currentsection]
+    % \end{column}
+    % \end{columns}
   \end{frame}
+}
+
+
+\AtBeginSubsection[]
+{
+    \begin{frame}{Table of Contents}
+        \tableofcontents[currentsection, currentsubsection]
+    \end{frame}
 }
 
 
@@ -617,25 +624,25 @@
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf}
     \caption{Quantitativa}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf}
     \caption{Qualitativa}
   \end{subfigure}
   \par\medskip
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf}
     \caption{Quantitativa e qualitativa \\ senza interazione}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf}
     \caption{Quantitativa e qualitativa \\ con interazione}
@@ -655,25 +662,25 @@
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-1.pdf}
     \caption{Polynomial degree 2}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf}
     \caption{Polynomial degree 4}
   \end{subfigure}
   \par\medskip
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf}
     \caption{Piece-wise linear}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf}
     \caption{Piece-wise polynomial degree 2}
@@ -692,25 +699,25 @@
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-1.pdf}
     \caption{Normal - identity}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-2.pdf}
     \caption{Binomial - logit}
   \end{subfigure}
   \par\medskip
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-3.pdf}
     \caption{Poisson - log}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-4.pdf}
     \caption{Gamma - log}
@@ -729,25 +736,25 @@
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-1.pdf}
     \caption{No effect - ungrouped}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-2.pdf}
     \caption{Positive effect - ungrouped}
   \end{subfigure}
   \par\medskip
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-3.pdf}
     \caption{No effect - grouped}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-4.pdf}
     \caption{Positive effect - grouped}
@@ -844,25 +851,25 @@
 
 \begin{figure}
   \centering
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf}
     \caption{$\lambda = 0$}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf}
     \caption{$\lambda = 10$}
   \end{subfigure}
   \par\medskip
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf}
     \caption{$\lambda = 10^3$}
   \end{subfigure}
   \qquad
-  \begin{subfigure}[b]{4.5cm}
+  \begin{subfigure}[b]{4.8cm}
     \centering
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf}
     \caption{$\lambda = 10^6$}
@@ -881,18 +888,21 @@
 
 \fontsize{9pt}{11pt}\selectfont
 
-\begin{block}{Scomposizione dello scarto quadratico medio (MSE)}
-  $$
-  MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
-  \underbrace{\left( E(\tilde{\beta}_j)-\beta_j \right)^2}_{\text{Bias}^2} +
-  \underbrace{Var\left( \tilde{\beta}_j \right)}_{\text{Variance}}
-  $$
-\end{block}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=7cm]{_bookdown_files/_main_files/figure-latex/bias-variance-1.pdf}
-\end{figure}
+\begin{columns}
+\begin{column}{0.8\linewidth}
+  \begin{block}{Scomposizione dello scarto quadratico medio (MSE)}
+    $$
+    MSE\left(\tilde{\beta}_j\right) \eqdef E\left(\left(\tilde{\beta}_j - \beta_j\right)^2\right) =
+    \underbrace{\left( E(\tilde{\beta}_j)-\beta_j \right)^2}_{\text{Bias}^2} +
+    \underbrace{Var\left( \tilde{\beta}_j \right)}_{\text{Variance}}
+    $$
+    \begin{figure}
+      \centering
+      \includegraphics[width=6.5cm]{_bookdown_files/_main_files/figure-latex/bias-variance-1.pdf}
+    \end{figure}
+  \end{block}
+\end{column}
+\end{columns}
 
 \end{frame}
 
@@ -901,18 +911,24 @@
 \begin{frame}
 \frametitle{Regressione Ridge}
 
-Modello sottostante:GLM
-
-\begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
-  $$
-  \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
-  $$
-  dove
-  \begin{itemize}
-    \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
-    \item $\lambda\ge0$ iperparametro di penalizzazione
-  \end{itemize}
-\end{block}
+\begin{columns}
+\begin{column}{0.8\linewidth}
+  \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
+    $$
+    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
+    $$
+    dove
+    \begin{itemize}
+      \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
+      \item $\lambda\ge0$ iperparametro di penalizzazione
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    
+    Modello sottostante:GLM
+  \end{block}
+\end{column}
+\end{columns}
 
 \end{frame}
 
@@ -921,6 +937,45 @@ Modello sottostante:GLM
 \begin{frame}
 \frametitle{Regressione Ridge: esempio}
 
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[c]
+\begin{column}{0.55\linewidth}
+  \begin{figure}
+    \centering
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-1.pdf}
+      \caption{$\lambda = 0$}
+    \end{subfigure}
+    \qquad
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-2.pdf}
+      \caption{$\lambda = 0.1$}
+    \end{subfigure}
+    \par\medskip
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-3.pdf}
+      \caption{$\lambda = 1$}
+    \end{subfigure}
+    \qquad
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-4.pdf}
+      \caption{$\lambda = 10$}
+    \end{subfigure}
+  \end{figure}
+\end{column}
+\begin{column}{0.45\linewidth}
+  \begin{figure}
+    \centering
+    \includegraphics[width=5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-5.pdf}
+  \end{figure}
+\end{column}
+\end{columns}
+
 \end{frame}
 
 
@@ -928,17 +983,100 @@ Modello sottostante:GLM
 \begin{frame}
 \frametitle{Regressione LASSO}
 
+\begin{columns}
+\begin{column}{0.8\linewidth}
+  \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
+    $$
+    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right\}}
+    $$
+    dove
+    \begin{itemize}
+      \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
+      \item $\lambda\ge0$ iperparametro di penalizzazione
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    
+    Modello sottostante:GLM
+  \end{block}
+\end{column}
+\end{columns}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Regressione LASSO: esempio}
 
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[c]
+\begin{column}{0.55\linewidth}
+  \begin{figure}
+    \centering
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-1.pdf}
+      \caption{$\lambda = 0$}
+    \end{subfigure}
+    \qquad
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-2.pdf}
+      \caption{$\lambda = 0.1$}
+    \end{subfigure}
+    \par\medskip
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-3.pdf}
+      \caption{$\lambda = 1$}
+    \end{subfigure}
+    \qquad
+    \begin{subfigure}[b]{3cm}
+      \centering
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-4.pdf}
+      \caption{$\lambda = 10$}
+    \end{subfigure}
+  \end{figure}
+\end{column}
+\begin{column}{0.45\linewidth}
+  \begin{figure}
+    \centering
+    \includegraphics[width=5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-5.pdf}
+  \end{figure}
+\end{column}
+\end{columns}
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Elastic Net}
+
+\begin{columns}
+\begin{column}{0.8\linewidth}
+  \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
+    $$
+    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+    D(\boldsymbol{\beta}, \boldsymbol{y}) +
+    \lambda 
+    \sum_{j=1}^p{\left(\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2\right)}
+    \right\}}
+    $$
+    dove
+    \begin{itemize}
+      \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
+      \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
+      \item $\lambda\ge0$ iperparametro di penalizzazione
+      \item $\alpha \in [0,1]$ iperparametro che determina il peso della LASSO
+    \end{itemize}
+    
+    \vspace{0.2cm}
+    
+    Modello sottostante:GLM
+  \end{block}
+\end{column}
+\end{columns}
 
 \end{frame}
 
@@ -949,10 +1087,30 @@ Modello sottostante:GLM
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
+\frametitle{Il framework Bayesiano}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
 \frametitle{Stimatori Bayesiani per i GLM}
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Regressione Ridge e LASSO come Stimatori Bayesiani}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Considerazioni sugli Stimatori Bayesiani}
+
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
