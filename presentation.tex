@@ -66,8 +66,9 @@
 \usepackage{graphicx} %Serve per inserire le immagini
 \usepackage{xcolor}
 %\usepackage{subfigure}
-\usepackage{caption}
-\usepackage{subcaption}
+% \usepackage{caption}
+\usepackage[labelfont=bf, justification=justified, skip=0pt]{caption}
+\usepackage[labelformat=empty, justification=centering, skip=0pt]{subcaption}
 
 %Disegni LaTeX
 \usepackage{tikz}
@@ -99,38 +100,44 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \usetheme{Pittsburgh}
-%\usetheme{CambridgeUS}
+% \usetheme{CambridgeUS}
 %\mode<presentation>{\usetheme{Boadilla}}
 %singapore
 
+\definecolor{amber(sae/ece)}{rgb}{1.0, 0.49, 0.0}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myblue}{RGB}{0, 82, 155}
+\definecolor{myred}{RGB}{140, 8, 8}
+
 %\useoutertheme[right]{sidebar}
-% \usecolortheme{seahorse}
-\usecolortheme{beaver}
+\usecolortheme{seahorse}
+% \usecolortheme{beaver}
 %\usecolortheme{dolphin}
 %\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue (primary)
 %\usecolortheme[named=UBCblue]{structure}
 %\usecolortheme[named=UBCblue]{seahorse}
 %\usecolortheme{structure}
+% \usecolortheme[RGB={191, 15, 15}]{structure} 
+% \usecolortheme[RGB={140, 8, 8}]{structure} 
+\usecolortheme[named=myred]{structure}
+% \useoutertheme{modificatema2}
+\setbeamertemplate{navigation symbols}{} % Remove navigation buttons
+% \setbeamertemplate{footline}[frame number] % Add page number
 
 \usefonttheme{professionalfonts}
 \setbeamercovered{dynamic}
 
-\usepackage{amsthm}
 \theoremstyle{definition}
 \newtheorem{definizione}{Definizione}[section]
 %\theoremstyle{plain}
 %\newtheorem{teorema}{Teorema}
 
 
-\definecolor{amber(sae/ece)}{rgb}{1.0, 0.49, 0.0}
-\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
-\definecolor{myblue}{RGB}{0,82,155}
-
 \title{Application of GLM Advancements \\ to Non-Life Insurance Pricing}
 %\subtitle{}
 \author{Leonardo Stincone}
 
-\date{10 Maggio 2021}
+\date{11 Maggio 2021}
 \institute[units]{Università degli Studi di Trieste}
 
 \logo{
@@ -173,7 +180,7 @@
 \AtBeginSection[]
 {
   \begin{frame}
-    \frametitle{Table of Contents}
+    \frametitle{Indice}
     
     % \begin{columns}[T]
     % \begin{column}{0.7\linewidth}
@@ -186,7 +193,7 @@
 
 \AtBeginSubsection[]
 {
-    \begin{frame}{Table of Contents}
+    \begin{frame}{Indice}
         \tableofcontents[currentsection, currentsubsection]
     \end{frame}
 }
@@ -206,11 +213,9 @@
 
 
 
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Table of Contents}
+\frametitle{Indice}
 
 % \begin{lrbox}{\longestsec}Last section in the presentation\end{lrbox}% Capture longest title
 % \setlength{\leftskip}{\dimexpr.5\textwidth-.5\wd\longestsec\relax}% Advance left margin accordingly
@@ -268,12 +273,12 @@
 
 
     % draw Policyholder cash flows
-    \node at (-1cm, -14pt) {Policyholder};
+    \node at (-1cm, -14pt) {Assicurato};
     \node at (1cm, -14pt) {$-P$};
 
 
     % draw Insurer cash flows
-    \node at (-1cm, -28pt) {Insurer};
+    \node at (-1cm, -28pt) {Assicuratore};
     \node at (1cm, -28pt) {$P$};
 
     \node at (2.5cm, -28pt) {$-Z_1$};
@@ -418,16 +423,7 @@
   
     \begin{figure}
       \centering
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-
-{\centering \includegraphics[width=\maxwidth]{figure/plot-poisson-1} 
-
-}
-
-
-
-\end{knitrout}
+      \includegraphics[width=6cm]{_bookdown_files/_main_files/figure-latex/plot-poisson-1.pdf}
       \label{fig:plot-poisson}
     \end{figure}
 
@@ -442,16 +438,7 @@
     
     \begin{figure}
       \centering
-\begin{knitrout}
-\definecolor{shadecolor}{rgb}{0.969, 0.969, 0.969}\color{fgcolor}
-
-{\centering \includegraphics[width=\maxwidth]{figure/plot-gamma-1} 
-
-}
-
-
-
-\end{knitrout}
+      \includegraphics[width=6cm]{_bookdown_files/_main_files/figure-latex/plot-gamma-1.pdf}
       \label{fig:plot-gamma}
     \end{figure}
 
@@ -585,7 +572,6 @@
   }
 \end{column}
 
-
 \begin{column}{0.5\linewidth}
   \uncover<2->{
     \begin{block}{Devianza}
@@ -626,26 +612,28 @@
   \centering
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf}
     \caption{Quantitativa}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf}
     \caption{Qualitativa}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf}
   \end{subfigure}
   \par\medskip
   \begin{subfigure}[b]{4.8cm}
+  % \begin{subfigure}[b]{5.9cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf}
     \caption{Quantitativa e qualitativa \\ senza interazione}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
+  % \begin{subfigure}[b]{5.9cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf}
     \caption{Quantitativa e qualitativa \\ con interazione}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf}
   \end{subfigure}
 \end{figure}
 
@@ -664,26 +652,26 @@
   \centering
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Polinomiale di grado 2}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-1.pdf}
-    \caption{Polynomial degree 2}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Polinomiale di grado 4}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf}
-    \caption{Polynomial degree 4}
   \end{subfigure}
   \par\medskip
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Piece-wise lineare}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf}
-    \caption{Piece-wise linear}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Piece-wise polinomiale di grado 2}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf}
-    \caption{Piece-wise polynomial degree 2}
   \end{subfigure}
 \end{figure}
 
@@ -701,26 +689,26 @@
   \centering
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Normale - identità}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-1.pdf}
-    \caption{Normal - identity}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
+    \caption{Binomiale - logit}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-2.pdf}
-    \caption{Binomial - logit}
   \end{subfigure}
   \par\medskip
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-3.pdf}
     \caption{Poisson - log}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-3.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-4.pdf}
     \caption{Gamma - log}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/resp-var-4.pdf}
   \end{subfigure}
 \end{figure}
 
@@ -738,26 +726,30 @@
   \centering
   \begin{subfigure}[b]{4.8cm}
     \centering
+    % \caption{No effect - ungrouped}
+    \caption{Nessun effetto - non raggruppati}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-1.pdf}
-    \caption{No effect - ungrouped}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
+    % \caption{Positive effect - ungrouped}
+    \caption{Effetto positivo - non raggruppati}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-2.pdf}
-    \caption{Positive effect - ungrouped}
   \end{subfigure}
   \par\medskip
   \begin{subfigure}[b]{4.8cm}
     \centering
+    % \caption{No effect - grouped}
+    \caption{Nessun effetto - raggruppati}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-3.pdf}
-    \caption{No effect - grouped}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
+    % \caption{Positive effect - grouped}
+    \caption{Effetto positivo - raggruppati}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/var-selection-4.pdf}
-    \caption{Positive effect - grouped}
   \end{subfigure}
 \end{figure}
 
@@ -790,6 +782,8 @@
     \item Divisione del dataset tra training set e test set
     \item Cross validation
   \end{itemize}
+  \vspace{0.2cm}
+  \hspace{2cm}
   $\Longrightarrow$ Algoritmi stepwise
 \end{block}
 
@@ -853,26 +847,26 @@
   \centering
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf}
     \caption{$\lambda = 0$}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf}
     \caption{$\lambda = 10$}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf}
   \end{subfigure}
   \par\medskip
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf}
     \caption{$\lambda = 10^3$}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{4.8cm}
     \centering
-    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf}
     \caption{$\lambda = 10^6$}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf}
   \end{subfigure}
 \end{figure}
 
@@ -911,6 +905,8 @@
 \begin{frame}
 \frametitle{Regressione Ridge}
 
+\fontsize{9pt}{11pt}\selectfont
+
 \begin{columns}
 \begin{column}{0.8\linewidth}
   \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
@@ -945,26 +941,26 @@
     \centering
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-1.pdf}
       \caption{$\lambda = 0$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-1.pdf}
     \end{subfigure}
     \qquad
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-2.pdf}
       \caption{$\lambda = 0.1$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-2.pdf}
     \end{subfigure}
     \par\medskip
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-3.pdf}
       \caption{$\lambda = 1$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-3.pdf}
     \end{subfigure}
     \qquad
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-4.pdf}
       \caption{$\lambda = 10$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/ridge-lambda-4.pdf}
     \end{subfigure}
   \end{figure}
 \end{column}
@@ -982,6 +978,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Regressione LASSO}
+
+\fontsize{9pt}{11pt}\selectfont
 
 \begin{columns}
 \begin{column}{0.8\linewidth}
@@ -1016,26 +1014,26 @@
     \centering
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-1.pdf}
       \caption{$\lambda = 0$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-1.pdf}
     \end{subfigure}
     \qquad
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-2.pdf}
       \caption{$\lambda = 0.1$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-2.pdf}
     \end{subfigure}
     \par\medskip
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-3.pdf}
       \caption{$\lambda = 1$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-3.pdf}
     \end{subfigure}
     \qquad
     \begin{subfigure}[b]{3cm}
       \centering
-      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-4.pdf}
       \caption{$\lambda = 10$}
+      \includegraphics[width=3.5cm]{_bookdown_files/_main_files/figure-latex/lasso-lambda-4.pdf}
     \end{subfigure}
   \end{figure}
 \end{column}
@@ -1052,6 +1050,8 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Elastic Net}
+
+\fontsize{9pt}{11pt}\selectfont
 
 \begin{columns}
 \begin{column}{0.8\linewidth}
@@ -1087,7 +1087,28 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Il framework Bayesiano}
+\frametitle{Il Framework Bayesiano}
+
+\begin{columns}
+
+\begin{column}{0.3\linewidth}
+  \begin{block}{Teorema di Bayes}
+  $$
+  \pi(\theta|\boldsymbol{y}) = \frac{p(\boldsymbol{y}|\theta)\pi(\theta)}{p(\boldsymbol{y})}
+  $$
+  \end{block}
+\end{column}
+
+\begin{column}{0.7\linewidth}
+  \begin{figure}
+      \centering
+      \includegraphics[width=9cm]{_bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf}
+      \label{fig:bayes-normal}
+    \end{figure}
+\end{column}
+
+\end{columns}
+
 
 \end{frame}
 
@@ -1096,12 +1117,67 @@
 \begin{frame}
 \frametitle{Stimatori Bayesiani per i GLM}
 
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+
+\uncover<1->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Stima di Massima Verosimiglianza}
+      \begin{align*}
+        \hat{\boldsymbol{\beta}}^{ML} & = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)} \\
+        & = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\ell\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)} \\
+        & = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{D\left(\boldsymbol{\beta}, \boldsymbol{y}\right)} \\
+      \end{align*}
+    \end{block}
+  \end{column}
+}
+\uncover<2->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Stima di Massimo a Posteriori}
+      \begin{align*}
+        \hat{\boldsymbol{\beta}}^{MAP} & = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\pi\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right)} \\
+        & = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{L\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) \pi(\boldsymbol{\beta}) \right\}} \\
+        & = \argmax_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{\ell\left(\boldsymbol{\beta}, \phi \mid \boldsymbol{y}\right) + \log{\left(\pi(\boldsymbol{\beta})\right)} \right\}} \\
+        & = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+          D(\boldsymbol{\beta}, \boldsymbol{y}) -2\phi \log{\left(\pi(\boldsymbol{\beta})\right)}           \right\}}
+      \end{align*}
+    \end{block}
+  \end{column}
+}
+
+\end{columns}
+
 \end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Regressione Ridge e LASSO come Stimatori Bayesiani}
+
+\begin{figure}
+  \centering
+  \begin{subfigure}[b]{5cm}
+    \centering
+    \caption{Distribuzione Normale}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf}
+  \end{subfigure}
+  \qquad
+  \begin{subfigure}[b]{5cm}
+    \centering
+    \caption{Distribuzione di Laplace}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf}
+  \end{subfigure}
+  % \qquad
+  \par\medskip
+  \begin{subfigure}[b]{5cm}
+  % \begin{subfigure}[b]{5.9cm}
+    \centering
+    \caption{Distribuzion a priori \\ di un Elastic Net con $\alpha=\frac{1}{2}$}
+    \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf}
+  \end{subfigure}
+\end{figure}
 
 \end{frame}
 
@@ -1110,15 +1186,16 @@
 \begin{frame}
 \frametitle{Considerazioni sugli Stimatori Bayesiani}
 
+
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Cenni sugli Algoritmi di Machine Learning}
+\subsection{Algoritmi di Machine Learning}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Cenni sugli Algoritmi di Machine Learning}
+\frametitle{Algoritmi di Machine Learning}
 
 \end{frame}
 

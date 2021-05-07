@@ -6,6 +6,6 @@
 \beamer@subsectionintoc {2}{2}{Modelli Additivi Generalizzati (GAM)}{23}{0}{2}
 \beamer@subsectionintoc {2}{3}{Stimatori Shrinkage per i GLM}{26}{0}{2}
 \beamer@subsectionintoc {2}{4}{Stimatori Bayesiani per i GLM}{33}{0}{2}
-\beamer@subsectionintoc {2}{5}{Cenni sugli Algoritmi di Machine Learning}{38}{0}{2}
-\beamer@subsectionintoc {2}{6}{Confronto tra i modelli}{40}{0}{2}
-\beamer@sectionintoc {3}{Applicazione Pratica}{42}{0}{3}
+\beamer@subsectionintoc {2}{5}{Algoritmi di Machine Learning}{39}{0}{2}
+\beamer@subsectionintoc {2}{6}{Confronto tra i modelli}{41}{0}{2}
+\beamer@sectionintoc {3}{Applicazione Pratica}{43}{0}{3}
