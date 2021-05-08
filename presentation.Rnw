@@ -1,4 +1,4 @@
-\documentclass[pdf, aspectratio=169]{beamer}
+\documentclass[pdf, aspectratio=169, xcolor=dvipsnames]{beamer}
 % \documentclass[pdf, aspectratio=1610]{beamer}
 %\setbeamersize{text margin left=2cm, text margin right=2cm}
 \setbeamersize{text margin left=1.5cm, text margin right=1.5cm}
@@ -10,17 +10,24 @@
 \usepackage[T1]{fontenc}
 \usepackage{hyperref} %Permette di inserire i collegamenti ipertestuali
 \usepackage{url}			        %Permette di inserire i link urle
-\usepackage{amsmath,amssymb}
+\usepackage{amsmath, amssymb}
 \usepackage{multirow} % Per usare il multirow nei tabular
+% \usepackage{enumitem} % For itemize options
+\usepackage{fontawesome} % For emoji and custom symbols
 
 \usepackage{graphicx} %Serve per inserire le immagini
-\usepackage{xcolor}
-%\usepackage{subfigure}
+% \usepackage{xcolor}
+% \PassOptionsToPackage{dvipsnames}{xcolor} % Load other colors
+% \usepackage{subfigure}
 % \usepackage{caption}
 \usepackage[labelfont=bf, justification=justified, skip=0pt]{caption}
 \usepackage[labelformat=empty, justification=centering, skip=0pt]{subcaption}
 
-%Disegni LaTeX
+\usepackage{booktabs} % For better looking tables
+\usepackage{tabu} % For full width tables
+\usepackage{makecell} % For multiline cells in tables
+
+% Disegni LaTeX
 \usepackage{tikz}
 \usetikzlibrary{shapes}
 %\usetikzlibrary{shapes,snakes}
@@ -90,9 +97,7 @@
 \date{11 Maggio 2021}
 \institute[units]{Università degli Studi di Trieste}
 
-\logo{
-\includegraphics[width=10mm, height=10mm]{figures/university-logo.png}
-}
+\logo{\includegraphics[width=10mm, height=10mm]{figures/university-logo.png}}
 
 
 % % For table of contents positioning
@@ -127,20 +132,6 @@
 
 
 % Insert table of content at the beginning of each section
-\AtBeginSection[]
-{
-  \begin{frame}
-    \frametitle{Indice}
-    
-    % \begin{columns}[T]
-    % \begin{column}{0.7\linewidth}
-      \tableofcontents[currentsection]
-    % \end{column}
-    % \end{columns}
-  \end{frame}
-}
-
-
 \AtBeginSubsection[]
 {
     \begin{frame}{Indice}
@@ -241,6 +232,10 @@ col2 <- hue_pal()(2)[2]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Il Pricing nelle Assicurazioni Danni}
+
+\begin{frame}{Indice}
+  \tableofcontents[currentsection]
+\end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -1169,25 +1164,31 @@ col2 <- hue_pal()(2)[2]
 \begin{frame}
 \frametitle{Regressione Ridge e LASSO come Stimatori Bayesiani}
 
+\fontsize{9pt}{11pt}\selectfont
+
 \begin{figure}
+  % \captionsetup{justification=raggedleft}
   \centering
   \begin{subfigure}[b]{5cm}
+    \captionsetup{justification=raggedright}
     \centering
-    \caption{Distribuzione Normale}
+    \caption{\hspace{0.9cm} Distribuzione Normale \\ \hspace{0.9cm} $\Rightarrow$ Regressione Ridge}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf}
   \end{subfigure}
   \qquad
   \begin{subfigure}[b]{5cm}
+    \captionsetup{justification=raggedright}
     \centering
-    \caption{Distribuzione di Laplace}
+    \caption{\hspace{0.9cm} Distribuzione di Laplace \\ \hspace{0.9cm} $\Rightarrow$ Regressione LASSO}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf}
   \end{subfigure}
   % \qquad
-  \par\medskip
+  % \par\medskip
   \begin{subfigure}[b]{5cm}
   % \begin{subfigure}[b]{5.9cm}
+    \captionsetup{justification=raggedright}
     \centering
-    \caption{Distribuzion a priori \\ di un Elastic Net con $\alpha=\frac{1}{2}$}
+    \caption{\hspace{0.9cm} Distribuzion intermedia \\ \hspace{0.9cm} $\Rightarrow$ Elastic Net}
     \includegraphics[width=4cm]{_bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf}
   \end{subfigure}
 \end{figure}
@@ -1198,6 +1199,59 @@ col2 <- hue_pal()(2)[2]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Considerazioni sugli Stimatori Bayesiani}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+
+\uncover<1->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Altri distribuzioni a priori}
+      \begin{itemize}
+        \setlength\itemsep{0.2cm}
+        \setlength\topsep{0.2cm}
+        \item Diverse varianze a priori
+          $$
+          \beta_j\sim\mathcal{N}(0, \sigma_j^2)
+          $$
+        \item Diverse medie a priori
+          $$
+          \beta_j\sim\mathcal{N}(\beta_{j0}, \sigma_j^2)
+          $$
+        \item Altre distribuzioni a priori
+          $$
+          \pi(\beta_j) =
+          \begin{cases}
+            \frac{\sqrt{2}}{\sqrt{\pi}\sigma}e^{-\frac{1}{2\sigma^2}\beta_j^2} & \text{if } \beta_j \ge 0 \\
+            0 & \text{altrimenti}
+          \end{cases}
+          $$
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+\uncover<2->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Vantaggi stimatori Bayesiani}
+      \begin{itemize}
+        \setlength\itemsep{0.2cm}
+        % \setlength\topsep{0.2cm}
+        \item Introduzione informazione esterna ai dati con una robusta metodologia statistica
+        \item Rimpiazzamento degli offset \\
+          Scelgo $\sigma_j^2$ tale che $\hat{\boldsymbol{\beta}}^{MAP} = \hat{\boldsymbol{\beta}}^{\textrm{offset}}$
+          \begin{itemize}
+            % \setlength\itemsep{0.1cm}
+            % \setlength\topsep{1cm}
+            \fontsize{9pt}{11pt}\selectfont
+            \item[\faCaretRight] Ho accortezza di quanto è forte la correzzione applicata
+            \item[\faCaretRight] Se cambio qualche altro parametro e rifitto il modello, in automatico $\hat{\boldsymbol{\beta}}^{MAP}$ viene ristimato
+          \end{itemize}
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+
+\end{columns}
 
 
 \end{frame}
@@ -1210,6 +1264,36 @@ col2 <- hue_pal()(2)[2]
 \begin{frame}
 \frametitle{Algoritmi di Machine Learning}
 
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+
+\uncover<1->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Modelli di Machine Learning}
+      \begin{itemize}
+        \item Gradient Boosting Machine (GBM)
+        \item Random Forest (RF)
+        \item Neural Network (NN)
+        \item Altri \dots
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+\uncover<2->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Caratteristiche}
+      \begin{itemize}
+        \item Funzione di regressione con minime assunzioni
+          $$E(Y_i) = \boldsymbol{f}(x_{i1}, \dots, x_{ip})$$
+        \item Sofisticati algoritmi per prevenire l'overfitting
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+
+\end{columns}
+
 \end{frame}
 
 
@@ -1218,7 +1302,62 @@ col2 <- hue_pal()(2)[2]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Titolo di prova}
+\frametitle{Confronto tra i modelli}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+
+\uncover<1->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{GLM Classici vs GBM/RF/NN}
+    % \begin{block}{GLM Classici vs GBM, RF e NN}
+      \vspace{0.1cm}
+      \begin{itemize}
+        \setlength\itemsep{0.2cm}
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior interpretabilità
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior controllo delle variabili
+          \begin{itemize}
+            \fontsize{9pt}{11pt}\selectfont
+            \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
+            \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
+            \item[\textcolor{ForestGreen}{\faCaretRight}] Offset
+          \end{itemize}
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Facile utilizzo di informazioni esterne
+        \item[\faThumbsODown] Minore automazione e scalabilità
+        \item[\faThumbsODown] Minore flessibilità
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+\uncover<2->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{GLM Advancements vs GLM Classici \vphantom{/}}
+      \vspace{0.1cm}
+      \begin{itemize}
+        \setlength\itemsep{0.2cm}
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento interpretabilità
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento controllo delle variabili
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Miglior utilizzo delle informazioni esterne (stimatori bayesiani)
+        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior automazione e scalabilità
+          \begin{itemize}
+            \fontsize{9pt}{11pt}\selectfont
+            \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
+            \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
+          \end{itemize}
+      \end{itemize}
+    \end{block}
+  \end{column}
+}
+
+\end{columns}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{L'importanza dell'attuario}
 
 \end{frame}
 
@@ -1228,26 +1367,83 @@ col2 <- hue_pal()(2)[2]
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Applicazione Pratica}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Titolo di prova capitolo 3}
-
-\end{frame}
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Titolo di prova capitolo 3}
-
+\begin{frame}{Indice}
+  \tableofcontents[currentsection]
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Titolo di prova capitolo 3}
+\frametitle{Dataset}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Policyholders} & \textbf{\makecell[c]{Exposure per\\Policyholder}}\\
+    \midrule[\heavyrulewidth]
+    Train & 227 226 & 107 998.4 & 27 346 & 3.95\\
+    Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
+    \midrule
+    Tot & 283 829 & 134 804.7 & 34 170 & 3.95\\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Variabile Risposta}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lcccc}
+    \toprule
+    \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Claims N.} & \textbf{Claims Freq.}\\
+    \midrule[\heavyrulewidth]
+    Train & 227 226 & 107 998.4 & 4 823 & 0.045\\
+    Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
+    \midrule
+    Tot & 283 829 & 134 804.7 & 5 954 & 0.044\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Variabili esplicative}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lc}
+    \toprule
+    \textbf{Description} & \textbf{\makecell[c]{Number of variables\\per category}}\\
+    \midrule[\heavyrulewidth]
+    Information on the insured vehicle & 12\\
+    General information of the policyholder & 14\\
+    Insurance specific information of the policyholder & 9\\
+    Policy options & 11\\
+    Customer information on the policyholder & 2\\
+    Telematic data & 4\\
+    \midrule
+    \textbf{Total} & \textbf{52}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+
+\end{frame}
+
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

@@ -3301,7 +3301,7 @@ In the actuarial practice this is often done introducing offsets. For example, l
 
 With Bayesian estimators, in the practice, we can do something really similar to what we do with offsets. Indeed, we can choose a prior distribution, such that our estimate is exactly equal to the offset $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$. For example, in the case of the delicate coefficient $\beta_j$, we can just apply a Normal prior $\pi(\beta_j)$ centered in $0$ and tune the variance $\sigma_j^2$ in order to obtain exactly $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$.
 
-This practice look really similar to introducing an offset, but it has two important benefits.
+This practice looks really similar to introducing an offset, but it has two important benefits.
 
 First of all, even if we are forcing the coefficient to be exactly $\hat{\beta}_j^{MAP} = \hat{\beta}_j^{\text{offset}}$, we have an indicator on how strong our forcing is. Indeed, $\sigma_j^2$ can be seen as the strength of the prior distribution and it can be compared with the variances of the prior distributions of the other coefficients.
 
@@ -3375,7 +3375,7 @@ We will distinguish between _technical needs_, that are related to building a go
 
 #### Technical needs
 
-The _technical needs_ come from the fact that we observe past data, but our models will be used for pricing policies that will be sold in the future. So, our models have to combine observation from the past and assumptions on the future.
+The _technical needs_ come from the fact that we observe past data, but our models will be used for pricing policies that will be sold in the future. So, our models have to combine observations from the past and assumptions on the future.
 
 By building a technical price, we must consider that our portfolio is not representative of the whole country portfolio and it isn't even representative of our future portfolio, that is influenced by the future underwriting policy of the company and also by the pricing policy.
 

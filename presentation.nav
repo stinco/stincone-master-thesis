@@ -20,91 +20,91 @@
 \headcommand {\beamer@sectionpages {3}{12}}
 \headcommand {\beamer@subsectionpages {3}{12}}
 \headcommand {\sectionentry {2}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{13}{Modelli Statistici per il Pricing nelle Assicurazioni Danni}{0}}
-\headcommand {\slideentry {2}{0}{1}{13/13}{}{0}}
+\headcommand {\beamer@subsectionpages {13}{12}}
+\headcommand {\beamer@subsectionentry {0}{2}{1}{13}{Modelli Lineari Generalizzati (GLM)}}
+\headcommand {\slideentry {2}{1}{1}{13/13}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {13}{13}}
-\headcommand {\beamer@subsectionpages {13}{13}}
-\headcommand {\beamer@subsectionentry {0}{2}{1}{14}{Modelli Lineari Generalizzati (GLM)}}
-\headcommand {\slideentry {2}{1}{1}{14/14}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\slideentry {2}{1}{2}{14/14}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {14}{14}}
-\headcommand {\slideentry {2}{1}{2}{15/15}{Modelli Lineari Generalizzati (GLM)}{0}}
-\headcommand {\beamer@framepages {15}{15}}
-\headcommand {\slideentry {2}{1}{3}{16/17}{Modelli Lineari Generalizzati (GLM)}{0}}
-\headcommand {\beamer@framepages {16}{17}}
-\headcommand {\slideentry {2}{1}{4}{18/18}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\slideentry {2}{1}{3}{15/16}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@framepages {15}{16}}
+\headcommand {\slideentry {2}{1}{4}{17/17}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@framepages {17}{17}}
+\headcommand {\slideentry {2}{1}{5}{18/18}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {18}{18}}
-\headcommand {\slideentry {2}{1}{5}{19/19}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\slideentry {2}{1}{6}{19/19}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {19}{19}}
-\headcommand {\slideentry {2}{1}{6}{20/20}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\slideentry {2}{1}{7}{20/20}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {20}{20}}
-\headcommand {\slideentry {2}{1}{7}{21/21}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\slideentry {2}{1}{8}{21/21}{Modelli Lineari Generalizzati (GLM)}{0}}
 \headcommand {\beamer@framepages {21}{21}}
-\headcommand {\slideentry {2}{1}{8}{22/22}{Modelli Lineari Generalizzati (GLM)}{0}}
+\headcommand {\beamer@subsectionpages {13}{21}}
+\headcommand {\beamer@subsectionentry {0}{2}{2}{22}{Modelli Additivi Generalizzati (GAM)}}
+\headcommand {\slideentry {2}{2}{1}{22/22}{Modelli Additivi Generalizzati (GAM)}{0}}
 \headcommand {\beamer@framepages {22}{22}}
-\headcommand {\beamer@subsectionpages {14}{22}}
-\headcommand {\beamer@subsectionentry {0}{2}{2}{23}{Modelli Additivi Generalizzati (GAM)}}
-\headcommand {\slideentry {2}{2}{1}{23/23}{Modelli Additivi Generalizzati (GAM)}{0}}
+\headcommand {\slideentry {2}{2}{2}{23/23}{Modelli Additivi Generalizzati (GAM)}{0}}
 \headcommand {\beamer@framepages {23}{23}}
-\headcommand {\slideentry {2}{2}{2}{24/24}{Modelli Additivi Generalizzati (GAM)}{0}}
+\headcommand {\slideentry {2}{2}{3}{24/24}{Modelli Additivi Generalizzati (GAM)}{0}}
 \headcommand {\beamer@framepages {24}{24}}
-\headcommand {\slideentry {2}{2}{3}{25/25}{Modelli Additivi Generalizzati (GAM)}{0}}
+\headcommand {\beamer@subsectionpages {22}{24}}
+\headcommand {\beamer@subsectionentry {0}{2}{3}{25}{Stimatori Shrinkage per i GLM}}
+\headcommand {\slideentry {2}{3}{1}{25/25}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {25}{25}}
-\headcommand {\beamer@subsectionpages {23}{25}}
-\headcommand {\beamer@subsectionentry {0}{2}{3}{26}{Stimatori Shrinkage per i GLM}}
-\headcommand {\slideentry {2}{3}{1}{26/26}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{2}{26/26}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {26}{26}}
-\headcommand {\slideentry {2}{3}{2}{27/27}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{3}{27/27}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {27}{27}}
-\headcommand {\slideentry {2}{3}{3}{28/28}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{4}{28/28}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {28}{28}}
-\headcommand {\slideentry {2}{3}{4}{29/29}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{5}{29/29}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {29}{29}}
-\headcommand {\slideentry {2}{3}{5}{30/30}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{6}{30/30}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {30}{30}}
-\headcommand {\slideentry {2}{3}{6}{31/31}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\slideentry {2}{3}{7}{31/31}{Stimatori Shrinkage per i GLM}{0}}
 \headcommand {\beamer@framepages {31}{31}}
-\headcommand {\slideentry {2}{3}{7}{32/32}{Stimatori Shrinkage per i GLM}{0}}
+\headcommand {\beamer@subsectionpages {25}{31}}
+\headcommand {\beamer@subsectionentry {0}{2}{4}{32}{Stimatori Bayesiani per i GLM}}
+\headcommand {\slideentry {2}{4}{1}{32/32}{Stimatori Bayesiani per i GLM}{0}}
 \headcommand {\beamer@framepages {32}{32}}
-\headcommand {\beamer@subsectionpages {26}{32}}
-\headcommand {\beamer@subsectionentry {0}{2}{4}{33}{Stimatori Bayesiani per i GLM}}
-\headcommand {\slideentry {2}{4}{1}{33/33}{Stimatori Bayesiani per i GLM}{0}}
+\headcommand {\slideentry {2}{4}{2}{33/33}{Stimatori Bayesiani per i GLM}{0}}
 \headcommand {\beamer@framepages {33}{33}}
-\headcommand {\slideentry {2}{4}{2}{34/34}{Stimatori Bayesiani per i GLM}{0}}
-\headcommand {\beamer@framepages {34}{34}}
-\headcommand {\slideentry {2}{4}{3}{35/36}{Stimatori Bayesiani per i GLM}{0}}
-\headcommand {\beamer@framepages {35}{36}}
-\headcommand {\slideentry {2}{4}{4}{37/37}{Stimatori Bayesiani per i GLM}{0}}
-\headcommand {\beamer@framepages {37}{37}}
-\headcommand {\slideentry {2}{4}{5}{38/38}{Stimatori Bayesiani per i GLM}{0}}
-\headcommand {\beamer@framepages {38}{38}}
-\headcommand {\beamer@subsectionpages {33}{38}}
+\headcommand {\slideentry {2}{4}{3}{34/35}{Stimatori Bayesiani per i GLM}{0}}
+\headcommand {\beamer@framepages {34}{35}}
+\headcommand {\slideentry {2}{4}{4}{36/36}{Stimatori Bayesiani per i GLM}{0}}
+\headcommand {\beamer@framepages {36}{36}}
+\headcommand {\slideentry {2}{4}{5}{37/38}{Stimatori Bayesiani per i GLM}{0}}
+\headcommand {\beamer@framepages {37}{38}}
+\headcommand {\beamer@subsectionpages {32}{38}}
 \headcommand {\beamer@subsectionentry {0}{2}{5}{39}{Algoritmi di Machine Learning}}
 \headcommand {\slideentry {2}{5}{1}{39/39}{Algoritmi di Machine Learning}{0}}
 \headcommand {\beamer@framepages {39}{39}}
-\headcommand {\slideentry {2}{5}{2}{40/40}{Algoritmi di Machine Learning}{0}}
-\headcommand {\beamer@framepages {40}{40}}
-\headcommand {\beamer@subsectionpages {39}{40}}
-\headcommand {\beamer@subsectionentry {0}{2}{6}{41}{Confronto tra i modelli}}
-\headcommand {\slideentry {2}{6}{1}{41/41}{Confronto tra i modelli}{0}}
-\headcommand {\beamer@framepages {41}{41}}
-\headcommand {\slideentry {2}{6}{2}{42/42}{Confronto tra i modelli}{0}}
+\headcommand {\slideentry {2}{5}{2}{40/41}{Algoritmi di Machine Learning}{0}}
+\headcommand {\beamer@framepages {40}{41}}
+\headcommand {\beamer@subsectionpages {39}{41}}
+\headcommand {\beamer@subsectionentry {0}{2}{6}{42}{Confronto tra i modelli}}
+\headcommand {\slideentry {2}{6}{1}{42/42}{Confronto tra i modelli}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\beamer@sectionpages {13}{42}}
-\headcommand {\beamer@subsectionpages {41}{42}}
-\headcommand {\sectionentry {3}{Applicazione Pratica}{43}{Applicazione Pratica}{0}}
-\headcommand {\slideentry {3}{0}{1}{43/43}{}{0}}
-\headcommand {\beamer@framepages {43}{43}}
-\headcommand {\slideentry {3}{0}{2}{44/44}{}{0}}
-\headcommand {\beamer@framepages {44}{44}}
-\headcommand {\slideentry {3}{0}{3}{45/45}{}{0}}
+\headcommand {\slideentry {2}{6}{2}{43/44}{Confronto tra i modelli}{0}}
+\headcommand {\beamer@framepages {43}{44}}
+\headcommand {\slideentry {2}{6}{3}{45/45}{Confronto tra i modelli}{0}}
 \headcommand {\beamer@framepages {45}{45}}
-\headcommand {\slideentry {3}{0}{4}{46/46}{}{0}}
+\headcommand {\beamer@sectionpages {13}{45}}
+\headcommand {\beamer@subsectionpages {42}{45}}
+\headcommand {\sectionentry {3}{Applicazione Pratica}{46}{Applicazione Pratica}{0}}
+\headcommand {\slideentry {3}{0}{1}{46/46}{}{0}}
 \headcommand {\beamer@framepages {46}{46}}
-\headcommand {\slideentry {3}{0}{5}{47/47}{}{0}}
+\headcommand {\slideentry {3}{0}{2}{47/47}{}{0}}
 \headcommand {\beamer@framepages {47}{47}}
-\headcommand {\slideentry {3}{0}{6}{48/48}{}{0}}
+\headcommand {\slideentry {3}{0}{3}{48/48}{}{0}}
 \headcommand {\beamer@framepages {48}{48}}
-\headcommand {\beamer@partpages {1}{48}}
-\headcommand {\beamer@subsectionpages {43}{48}}
-\headcommand {\beamer@sectionpages {43}{48}}
-\headcommand {\beamer@documentpages {48}}
+\headcommand {\slideentry {3}{0}{4}{49/49}{}{0}}
+\headcommand {\beamer@framepages {49}{49}}
+\headcommand {\slideentry {3}{0}{5}{50/50}{}{0}}
+\headcommand {\beamer@framepages {50}{50}}
+\headcommand {\slideentry {3}{0}{6}{51/51}{}{0}}
+\headcommand {\beamer@framepages {51}{51}}
+\headcommand {\beamer@partpages {1}{51}}
+\headcommand {\beamer@subsectionpages {46}{51}}
+\headcommand {\beamer@sectionpages {46}{51}}
+\headcommand {\beamer@documentpages {51}}
 \headcommand {\gdef \inserttotalframenumber {42}}
