@@ -110,7 +110,7 @@ knitr::knit_hooks$set(inline = inline_hook)
 options(knitr.kable.NA = '')
 
 # For changing the font of specific cells in kable
-format_cell <- function(df, rows ,cols, value = c("italics", "bold", "strikethrough")){
+format_cell <- function(df, rows, cols, value = c("italics", "bold", "strikethrough")){
 
   # select the correct markup
   # one * for italics, two ** for bold

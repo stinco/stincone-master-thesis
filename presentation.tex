@@ -1,4 +1,7 @@
-\documentclass[pdf, aspectratio=169, xcolor=dvipsnames]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+\PassOptionsToPackage{table}{xcolor}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+% \documentclass[pdf, aspectratio=169, xcolor=dvipsnames]{beamer}
+\documentclass[pdf, aspectratio=169]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
 % maxwidth is the original width if it is less than linewidth
 % otherwise use linewidth (to make sure the graphics do not exceed the margin)
 \makeatletter
@@ -1361,42 +1364,20 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Dataset}
+\frametitle{Esposizione e Variabile Risposta}
 
 \fontsize{9pt}{11pt}\selectfont
 
 \begin{table}[!h]
   \centering
-  \begin{tabular}{lcccc}
+  \begin{tabular}{lcccccc}
     \toprule
-    \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Policyholders} & \textbf{\makecell[c]{Exposure per\\Policyholder}}\\
+    \textbf{Set} & \textbf{Osservazioni} & \textbf{\makecell[c]{Esposizione\\(rischi anno)}} & \textbf{Assicurati} & \textbf{\makecell[c]{Esposizione per\\Assicurato}} & \textbf{\makecell[c]{Numero\\Sinistri}} & \textbf{\makecell[c]{Frequenza\\Sinistri}}\\
     \midrule[\heavyrulewidth]
-    Train & 227 226 & 107 998.4 & 27 346 & 3.95\\
-    Test & 56 603 & 26 806.3 & 6 824 & 3.93\\
+    Train & 227 226 & 107 998.4 & 27 346 & 3.95 & 4 823 & 0.045\\
+    Test  &  56 603 &  26 806.3 &  6 824 & 3.93 & 1 131 & 0.042\\
     \midrule
-    Tot & 283 829 & 134 804.7 & 34 170 & 3.95\\
-    \bottomrule
-  \end{tabular}
-\end{table}
-
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Variabile Risposta}
-
-\fontsize{9pt}{11pt}\selectfont
-
-\begin{table}[!h]
-  \centering
-  \begin{tabular}{lcccc}
-    \toprule
-    \textbf{Set} & \textbf{Observations} & \textbf{Exposure (Y.a.R.)} & \textbf{Claims N.} & \textbf{Claims Freq.}\\
-    \midrule[\heavyrulewidth]
-    Train & 227 226 & 107 998.4 & 4 823 & 0.045\\
-    Test & 56 603 & 26 806.3 & 1 131 & 0.042\\
-    \midrule
-    Tot & 283 829 & 134 804.7 & 5 954 & 0.044\\
+    Tot   & 283 829 & 134 804.7 & 34 170 & 3.95 & 5 954 & 0.044\\
     \bottomrule
   \end{tabular}
 \end{table}
@@ -1414,28 +1395,69 @@
   \centering
   \begin{tabular}{lc}
     \toprule
-    \textbf{Description} & \textbf{\makecell[c]{Number of variables\\per category}}\\
+    \textbf{Descrizione} & \textbf{\makecell[c]{Numero di variabili\\per categoria}}\\
     \midrule[\heavyrulewidth]
-    Information on the insured vehicle & 12\\
-    General information of the policyholder & 14\\
-    Insurance specific information of the policyholder & 9\\
-    Policy options & 11\\
-    Customer information on the policyholder & 2\\
-    Telematic data & 4\\
+    \cellcolor{gray!6}{Informazioni sul veicolo assicurato} & \cellcolor{gray!6}{12}\\
+    Informazioni generiche sul contraente & 14\\
+    \cellcolor{gray!6}{Informazioni assicurative sul contraente} & \cellcolor{gray!6}{9}\\
+    Opzioni sulla polizza assicurativa & 11\\
+    \cellcolor{gray!6}{Customer information on the policyholder} & \cellcolor{gray!6}{2}\\
+    Dati telematici & 4\\
     \midrule
-    \textbf{Total} & \textbf{52}\\
+    \textbf{Totale} & \textbf{52}\\
     \bottomrule
   \end{tabular}
 \end{table}
 
-
 \end{frame}
-
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Titolo di prova capitolo 3}
+\frametitle{Modelli e Valutazione}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{columns}[T]
+
+\uncover<1->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Modelli considerati}
+      % \vspace{0.1cm}
+      \begin{table}[!h]
+        % \caption{\label{tab:models-list}List of models developed.}
+        \centering
+        \begin{tabular}[t]{ll}
+          \toprule
+          \textbf{Id} & \textbf{Model}\\
+          \midrule[\heavyrulewidth]
+          \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot}\\
+          Mod2 & Elastic Net Tot\\
+          \cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{Ridge Tot}\\
+          Mod4 & GLM AIC\\
+          \cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC}\\
+          Mod6 & GAM AIC\\
+          \cellcolor{gray!6}{Mod7} & \cellcolor{gray!6}{GBM Tot}\\
+          \bottomrule
+        \end{tabular}
+      \end{table}
+    \end{block}
+  \end{column}
+}
+\uncover<2->{
+  \begin{column}{0.5\linewidth}
+    \begin{block}{Valutazione}
+      \vspace{1cm}
+      Devianza della distribuzione di Poisson calcolata sul test set
+      $$
+      D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) = 2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} - \left( y_i - \hat{\mu}_i \right) \right\}}
+      $$
+    \end{block}
+  \end{column}
+}
+
+\end{columns}
+
 
 \end{frame}
 
