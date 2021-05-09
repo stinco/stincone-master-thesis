@@ -187,9 +187,10 @@
 % Insert table of content at the beginning of each section
 \AtBeginSubsection[]
 {
-    \begin{frame}{Indice}
-        \tableofcontents[currentsection, currentsubsection]
-    \end{frame}
+  \begin{frame}[c]%{Indice}
+    \frametitle{Indice}
+    \tableofcontents[currentsection, currentsubsection]
+  \end{frame}
 }
 
 
@@ -909,11 +910,11 @@
 \begin{column}{0.8\linewidth}
   \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
     $$
-    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_2^2\right\}}
+    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \sum_{j=1}^p{\beta_j^2} \right\}}
     $$
-    dove
+    con
     \begin{itemize}
-      \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
+      % \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
       \item $\lambda\ge0$ iperparametro di penalizzazione
     \end{itemize}
     
@@ -983,11 +984,11 @@
 \begin{column}{0.8\linewidth}
   \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
     $$
-    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \|\boldsymbol{\beta}_{\setminus0}\|_1\right\}}
+    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{D(\boldsymbol{\beta}, \boldsymbol{y}) + \lambda \sum_{j=1}^p{|\beta_j|} \right\}}
     $$
-    dove
+    con
     \begin{itemize}
-      \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
+      % \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
       \item $\lambda\ge0$ iperparametro di penalizzazione
     \end{itemize}
     
@@ -1052,7 +1053,7 @@
 \fontsize{9pt}{11pt}\selectfont
 
 \begin{columns}
-\begin{column}{0.8\linewidth}
+\begin{column}{0.85\linewidth}
   \begin{block}{Stima di Massima Verosimiglianza con Penalizzazione}
     $$
     \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
@@ -1063,10 +1064,14 @@
     $$
     dove
     \begin{itemize}
-      \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
-      \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
+      % \item $\|\boldsymbol{\beta}_{\setminus0}\|_1 = \sum_{j=1}^p{|\beta_j|}$
+      % \item $\|\boldsymbol{\beta}_{\setminus0}\|_2^2 = \sum_{j=1}^p{\beta_j^2}$
       \item $\lambda\ge0$ iperparametro di penalizzazione
-      \item $\alpha \in [0,1]$ iperparametro che determina il peso della LASSO
+      \item $\alpha \in [0,1]$ iperparametro che determina il peso della penalizzazione LASSO
+      \begin{itemize}
+        \item[\faCaretRight] $\alpha=0 \ \Longrightarrow \ $ Regressione Ridge
+        \item[\faCaretRight] $\alpha=1 \ \Longrightarrow \ $ Regressione LASSO
+      \end{itemize}
     \end{itemize}
     
     \vspace{0.2cm}
@@ -1448,6 +1453,7 @@
   \begin{column}{0.5\linewidth}
     \begin{block}{Valutazione}
       \vspace{1cm}
+      \textbf{Metrica di confronto}:\\
       Devianza della distribuzione di Poisson calcolata sul test set
       $$
       D(\hat{\boldsymbol{\beta}}, \boldsymbol{y}) = 2\,\sum_{i=1}^{n}{\left\{ y_i \log{\left(\frac{y_i}{\hat{\mu}_i}\right)} - \left( y_i - \hat{\mu}_i \right) \right\}}
@@ -1464,10 +1470,182 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Titolo di prova capitolo 3}
+\frametitle{Elastic Net: Tuning degli Iperparametri}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=10cm]{_bookdown_files/_main_files/figure-latex/en-tot-hp-tuning-plot-1.pdf}
+\end{figure}
 
 \end{frame}
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Risultati}
+
+% \setlength{\abovedisplayshortskip}{-1cm}
+% \setlength{\belowdisplayshortskip}{0cm} 
+
+\fontsize{7.5pt}{9.5pt}\selectfont
+
+\begin{figure}
+  \centering
+  \includegraphics[width=6.5cm]{_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf}
+\end{figure}
+
+\begin{table}[!h]
+  % \captionsetup{skip=0pt,belowskip=0pt}
+  % \caption[Models results.]{\label{tab:models-results}Models results. In the columns we reported the deviance computed in the test set, the execution time and, for the GLM-based models, the hyper-parameters.}
+  \centering
+  \begin{tabular}[t]{llcccc}
+    \toprule
+    \textbf{Id} & \textbf{Model} & \textbf{\makecell[c]{Test\\Deviance}} & \textbf{Time} & \textbf{$\alpha$} & \textbf{$\lambda$}\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{8 458.147} & \cellcolor{gray!6}{2.7s} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
+    Mod2 & Elastic Net Tot & 8 458.024 & 1h 30m & 0.06 & 2.01e-04\\
+    \cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{\textbf{Ridge Tot}} & \cellcolor{gray!6}{\textbf{8 457.465}} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
+    Mod4 & GLM AIC & 8 458.023 & 7h 27m & 0 & 0\\
+    \cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC} & \cellcolor{gray!6}{8 458.236} & \cellcolor{gray!6}{8h 54m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.63e-05}\\
+    Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
+    \cellcolor{gray!6}{Mod7} & \cellcolor{gray!6}{GBM Tot} & \cellcolor{gray!6}{8 504.178} & \cellcolor{gray!6}{2h 30m} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Conclusioni}
+
+\fontsize{9pt}{11pt}\selectfont
+
+
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[plain,c]
+%\frametitle{A first slide}
+
+\begin{center}
+\textcolor{myred}{\Huge \textbf{Backup}}
+\end{center}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Elastic Net AIC: Tuning degli Iperparametri}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=10cm]{_bookdown_files/_main_files/figure-latex/en-aic-hp-tuning-plot-1.pdf}
+\end{figure}
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Elastic Net AIC: Tuning degli Iperparametri}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=10cm]{_bookdown_files/_main_files/figure-latex/gbm-tot-hp-tuning-plot-1.pdf}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Confronto tra i coefficienti}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=11cm]{_bookdown_files/_main_files/figure-latex/coeff-pairs-1.pdf}
+\end{figure}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Confronto tra i coefficienti: outlier}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  % \caption{\label{tab:anomalous-point}Coefficient of the anomalous point.}
+  \centering
+  \begin{tabular}[t]{lc}
+    \toprule
+    \textbf{model} & \textbf{value}\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{-6.447}\\
+    EN Tot & 0.000\\
+    \cellcolor{gray!6}{Ridge Tot} & \cellcolor{gray!6}{-0.003}\\
+    GLM AIC & -6.574\\
+    \cellcolor{gray!6}{EN AIC} & \cellcolor{gray!6}{-0.095}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Coefficienti azzerati}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  % \caption{\label{tab:coeff-0}Parameters equal to 0 in the models.}
+  \centering
+  \begin{tabular}[t]{ccccc}
+    \toprule
+    \textbf{GLM Tot} & \textbf{Elastic Net Tot} & \textbf{GLM AIC} & \textbf{n} & \textbf{ }\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{51} & \\
+    $\ne0$ & $\ne0$ & $0$ & 48 & \\
+    \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{6} & \\
+    $\ne0$ & $0$ & $0$ & 16 & \multirow{-4}{*}{\centering\arraybackslash 121}\\
+    \midrule
+    \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{$\ne0$} & \cellcolor{gray!6}{$0$} & \cellcolor{gray!6}{23} & \\
+    $0$ & $0$ & $0$ & 15 & \multirow{-2}{*}{\centering\arraybackslash 38}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo}
+
+\fontsize{9pt}{11pt}\selectfont
+
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Titolo}
+
+\fontsize{9pt}{11pt}\selectfont
+
+
+\end{frame}
 
 
 \end{document}

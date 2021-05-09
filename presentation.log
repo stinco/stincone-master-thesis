@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  9 MAY 2021 00:51
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  9 MAY 2021 12:56
 entering extended mode
 **./presentation.tex
 (presentation.tex
@@ -1460,22 +1460,22 @@ Package: textcomp 2020/02/02 v2.0n Standard LaTeX package
 )) (presentation.aux)
 \openout1 = `presentation.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 200.
-LaTeX Font Info:    ... okay on input line 200.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 201.
+LaTeX Font Info:    ... okay on input line 201.
 
 *geometry* driver: auto-detecting
 *geometry* detected driver: pdftex
@@ -1533,7 +1533,7 @@ Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
 85.
 )
-Package hyperref Info: Link coloring OFF on input line 200.
+Package hyperref Info: Link coloring OFF on input line 201.
 
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/hyperref\nameref.s
 ty"
@@ -1549,9 +1549,9 @@ Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
 \c@section@level=\count384
 )
-LaTeX Info: Redefining \ref on input line 200.
-LaTeX Info: Redefining \pageref on input line 200.
-LaTeX Info: Redefining \nameref on input line 200.
+LaTeX Info: Redefining \ref on input line 201.
+LaTeX Info: Redefining \pageref on input line 201.
+LaTeX Info: Redefining \nameref on input line 201.
  (presentation.out) (presentation.out)
 \@outlinefile=\write5
 \openout5 = `presentation.out'.
@@ -1581,8 +1581,8 @@ Dictionary: translator-numbers-dictionary, Language: English
 tor-theorem-dictionary-English.dict"
 Dictionary: translator-theorem-dictionary, Language: English 
 )
-LaTeX Info: Redefining \it@ocap on input line 200.
-LaTeX Info: Redefining \it@ccap on input line 200.
+LaTeX Info: Redefining \it@ocap on input line 201.
+LaTeX Info: Redefining \it@ccap on input line 201.
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: End \AtBeginDocument code.
 
@@ -1594,13 +1594,13 @@ enefit from \pgfplotsset{compat=1.17} (current compat level: 1.9).
 breviations.cfg"
 File: siunitx-abbreviations.cfg 2017/11/26 v2.7k siunitx: Abbreviated units
 ) (presentation.nav)
-LaTeX Font Info:    Trying to load font information for U+msa on input line 200
+LaTeX Font Info:    Trying to load font information for U+msa on input line 201
 .
 
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsa.fd"
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 200
+LaTeX Font Info:    Trying to load font information for U+msb on input line 201
 .
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/amsfonts\umsb.fd"
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
@@ -1608,7 +1608,7 @@ File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 <figures/university-logo.png, id=48, 82.6287pt x 82.6287pt>
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 206.
+Package pdftex.def Info: figures/university-logo.png  used on input line 207.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [1
 
@@ -1616,21 +1616,21 @@ Package pdftex.def Info: figures/university-logo.png  used on input line 206.
 niversity-logo.png>] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 220.
+Package pdftex.def Info: figures/university-logo.png  used on input line 221.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [2
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 228.
+Package pdftex.def Info: figures/university-logo.png  used on input line 229.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [3
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 244.
+Package pdftex.def Info: figures/university-logo.png  used on input line 245.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [4
 
@@ -1638,7 +1638,7 @@ Package pdftex.def Info: figures/university-logo.png  used on input line 244.
 Missing character: There is no ; in font nullfont!
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 346.
+Package pdftex.def Info: figures/university-logo.png  used on input line 347.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 
 [5
@@ -1647,7 +1647,7 @@ Package pdftex.def Info: figures/university-logo.png  used on input line 346.
 Missing character: There is no ; in font nullfont!
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 346.
+Package pdftex.def Info: figures/university-logo.png  used on input line 347.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [6
 
@@ -1655,21 +1655,21 @@ Package pdftex.def Info: figures/university-logo.png  used on input line 346.
 Missing character: There is no ; in font nullfont!
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 346.
+Package pdftex.def Info: figures/university-logo.png  used on input line 347.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [7
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 404.
+Package pdftex.def Info: figures/university-logo.png  used on input line 405.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [8
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 404.
+Package pdftex.def Info: figures/university-logo.png  used on input line 405.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [9
 
@@ -1680,10 +1680,10 @@ File: _bookdown_files/_main_files/figure-latex/plot-poisson-1.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/plot-poisson-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/plot-poisson-
-1.pdf  used on input line 448.
+1.pdf  used on input line 449.
 (pdftex.def)             Requested size: 170.71652pt x 113.8126pt.
 
-Overfull \hbox (4.26903pt too wide) in paragraph at lines 448--448
+Overfull \hbox (4.26903pt too wide) in paragraph at lines 449--449
  [] 
  []
 
@@ -1693,71 +1693,71 @@ File: _bookdown_files/_main_files/figure-latex/plot-gamma-1.pdf Graphic file (t
 ype pdf)
 <use _bookdown_files/_main_files/figure-latex/plot-gamma-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/plot-gamma-1.
-pdf  used on input line 448.
+pdf  used on input line 449.
 (pdftex.def)             Requested size: 170.71652pt x 113.8126pt.
 
-Overfull \hbox (4.26903pt too wide) in paragraph at lines 448--448
+Overfull \hbox (4.26903pt too wide) in paragraph at lines 449--449
  [] 
  []
 
 
-Overfull \vbox (1.4248pt too high) detected at line 448
+Overfull \vbox (1.4248pt too high) detected at line 449
  []
 
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 448.
+Package pdftex.def Info: figures/university-logo.png  used on input line 449.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [10
 
  <./_bookdown_files/_main_files/figure-latex/plot-poisson-1.pdf> <./_bookdown_f
 iles/_main_files/figure-latex/plot-gamma-1.pdf>]
-Overfull \hbox (66.35223pt too wide) in paragraph at lines 507--507
+Overfull \hbox (66.35223pt too wide) in paragraph at lines 508--508
 [][]  
  []
 
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 507.
+Package pdftex.def Info: figures/university-logo.png  used on input line 508.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [11
 
 ]
-Overfull \hbox (66.35223pt too wide) in paragraph at lines 507--507
+Overfull \hbox (66.35223pt too wide) in paragraph at lines 508--508
 [][]  
  []
 
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 507.
+Package pdftex.def Info: figures/university-logo.png  used on input line 508.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [12
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 517.
+Package pdftex.def Info: figures/university-logo.png  used on input line 518.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [13
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 542.
+Package pdftex.def Info: figures/university-logo.png  used on input line 543.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [14
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 600.
+Package pdftex.def Info: figures/university-logo.png  used on input line 601.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [15
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 600.
+Package pdftex.def Info: figures/university-logo.png  used on input line 601.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [16
 
@@ -1768,7 +1768,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf Graphic fil
 e (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-types-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-type
-s-1.pdf  used on input line 638.
+s-1.pdf  used on input line 639.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf, id=211, 361.35p
 t x 252.945pt>
@@ -1776,7 +1776,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf Graphic fil
 e (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-types-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-type
-s-2.pdf  used on input line 638.
+s-2.pdf  used on input line 639.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf, id=212, 361.35p
 t x 252.945pt>
@@ -1784,7 +1784,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf Graphic fil
 e (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-types-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-type
-s-3.pdf  used on input line 638.
+s-3.pdf  used on input line 639.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf, id=213, 361.35p
 t x 252.945pt>
@@ -1792,11 +1792,11 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf Graphic fil
 e (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-types-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-type
-s-4.pdf  used on input line 638.
+s-4.pdf  used on input line 639.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 638.
+Package pdftex.def Info: figures/university-logo.png  used on input line 639.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [17
 
@@ -1810,7 +1810,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-1.pdf Grap
 hic file (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-quan
-t-effect-1.pdf  used on input line 676.
+t-effect-1.pdf  used on input line 677.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf, id=258, 
 361.35pt x 252.945pt>
@@ -1818,7 +1818,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf Grap
 hic file (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-quan
-t-effect-2.pdf  used on input line 676.
+t-effect-2.pdf  used on input line 677.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf, id=259, 
 361.35pt x 252.945pt>
@@ -1826,7 +1826,7 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf Grap
 hic file (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-quan
-t-effect-3.pdf  used on input line 676.
+t-effect-3.pdf  used on input line 677.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf, id=260, 
 361.35pt x 252.945pt>
@@ -1834,11 +1834,11 @@ File: _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf Grap
 hic file (type pdf)
 <use _bookdown_files/_main_files/figure-latex/expl-var-quant-effect-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/expl-var-quan
-t-effect-4.pdf  used on input line 676.
+t-effect-4.pdf  used on input line 677.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 676.
+Package pdftex.def Info: figures/university-logo.png  used on input line 677.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 
 [18
@@ -1853,7 +1853,7 @@ File: _bookdown_files/_main_files/figure-latex/resp-var-1.pdf Graphic file (typ
 e pdf)
 <use _bookdown_files/_main_files/figure-latex/resp-var-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/resp-var-1.pd
-f  used on input line 713.
+f  used on input line 714.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/resp-var-2.pdf, id=303, 361.35pt x 25
 2.945pt>
@@ -1861,7 +1861,7 @@ File: _bookdown_files/_main_files/figure-latex/resp-var-2.pdf Graphic file (typ
 e pdf)
 <use _bookdown_files/_main_files/figure-latex/resp-var-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/resp-var-2.pd
-f  used on input line 713.
+f  used on input line 714.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/resp-var-3.pdf, id=304, 361.35pt x 25
 2.945pt>
@@ -1869,7 +1869,7 @@ File: _bookdown_files/_main_files/figure-latex/resp-var-3.pdf Graphic file (typ
 e pdf)
 <use _bookdown_files/_main_files/figure-latex/resp-var-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/resp-var-3.pd
-f  used on input line 713.
+f  used on input line 714.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/resp-var-4.pdf, id=305, 361.35pt x 25
 2.945pt>
@@ -1877,11 +1877,11 @@ File: _bookdown_files/_main_files/figure-latex/resp-var-4.pdf Graphic file (typ
 e pdf)
 <use _bookdown_files/_main_files/figure-latex/resp-var-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/resp-var-4.pd
-f  used on input line 713.
+f  used on input line 714.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 713.
+Package pdftex.def Info: figures/university-logo.png  used on input line 714.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [19
 
@@ -1895,7 +1895,7 @@ File: _bookdown_files/_main_files/figure-latex/var-selection-1.pdf Graphic file
  (type pdf)
 <use _bookdown_files/_main_files/figure-latex/var-selection-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/var-selection
--1.pdf  used on input line 754.
+-1.pdf  used on input line 755.
 (pdftex.def)             Requested size: 113.81102pt x 78.79259pt.
 <_bookdown_files/_main_files/figure-latex/var-selection-2.pdf, id=349, 469.755p
 t x 325.215pt>
@@ -1903,7 +1903,7 @@ File: _bookdown_files/_main_files/figure-latex/var-selection-2.pdf Graphic file
  (type pdf)
 <use _bookdown_files/_main_files/figure-latex/var-selection-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/var-selection
--2.pdf  used on input line 754.
+-2.pdf  used on input line 755.
 (pdftex.def)             Requested size: 113.81102pt x 78.79259pt.
 <_bookdown_files/_main_files/figure-latex/var-selection-3.pdf, id=350, 469.755p
 t x 325.215pt>
@@ -1911,7 +1911,7 @@ File: _bookdown_files/_main_files/figure-latex/var-selection-3.pdf Graphic file
  (type pdf)
 <use _bookdown_files/_main_files/figure-latex/var-selection-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/var-selection
--3.pdf  used on input line 754.
+-3.pdf  used on input line 755.
 (pdftex.def)             Requested size: 113.81102pt x 78.79259pt.
 <_bookdown_files/_main_files/figure-latex/var-selection-4.pdf, id=351, 469.755p
 t x 325.215pt>
@@ -1919,11 +1919,11 @@ File: _bookdown_files/_main_files/figure-latex/var-selection-4.pdf Graphic file
  (type pdf)
 <use _bookdown_files/_main_files/figure-latex/var-selection-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/var-selection
--4.pdf  used on input line 754.
+-4.pdf  used on input line 755.
 (pdftex.def)             Requested size: 113.81102pt x 78.79259pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 754.
+Package pdftex.def Info: figures/university-logo.png  used on input line 755.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [20
 
@@ -1933,25 +1933,25 @@ les/figure-latex/var-selection-3.pdf> <./_bookdown_files/_main_files/figure-lat
 ex/var-selection-4.pdf>]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 789.
+Package pdftex.def Info: figures/university-logo.png  used on input line 790.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [21
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 793.
+Package pdftex.def Info: figures/university-logo.png  used on input line 794.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [22
 
 ]
-Overfull \hbox (14.82375pt too wide) detected at line 835
+Overfull \hbox (14.82375pt too wide) detected at line 836
 [] \OT1/cmr/m/n/9 = [] []
  []
 
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 835.
+Package pdftex.def Info: figures/university-logo.png  used on input line 836.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [23
 
@@ -1962,7 +1962,7 @@ File: _bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf Graphic file (t
 ype pdf)
 <use _bookdown_files/_main_files/figure-latex/gam-lambda-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/gam-lambda-1.
-pdf  used on input line 871.
+pdf  used on input line 872.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf, id=418, 361.35pt x 
 252.945pt>
@@ -1970,7 +1970,7 @@ File: _bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf Graphic file (t
 ype pdf)
 <use _bookdown_files/_main_files/figure-latex/gam-lambda-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/gam-lambda-2.
-pdf  used on input line 871.
+pdf  used on input line 872.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf, id=419, 361.35pt x 
 252.945pt>
@@ -1978,7 +1978,7 @@ File: _bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf Graphic file (t
 ype pdf)
 <use _bookdown_files/_main_files/figure-latex/gam-lambda-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/gam-lambda-3.
-pdf  used on input line 871.
+pdf  used on input line 872.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 <_bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf, id=420, 361.35pt x 
 252.945pt>
@@ -1986,11 +1986,11 @@ File: _bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf Graphic file (t
 ype pdf)
 <use _bookdown_files/_main_files/figure-latex/gam-lambda-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/gam-lambda-4.
-pdf  used on input line 871.
+pdf  used on input line 872.
 (pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 871.
+Package pdftex.def Info: figures/university-logo.png  used on input line 872.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [24
 
@@ -2000,7 +2000,7 @@ gure-latex/gam-lambda-3.pdf> <./_bookdown_files/_main_files/figure-latex/gam-la
 mbda-4.pdf>] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 875.
+Package pdftex.def Info: figures/university-logo.png  used on input line 876.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [25
 
@@ -2011,18 +2011,18 @@ File: _bookdown_files/_main_files/figure-latex/bias-variance-1.pdf Graphic file
  (type pdf)
 <use _bookdown_files/_main_files/figure-latex/bias-variance-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/bias-variance
--1.pdf  used on input line 899.
+-1.pdf  used on input line 900.
 (pdftex.def)             Requested size: 184.9429pt x 128.03423pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 899.
+Package pdftex.def Info: figures/university-logo.png  used on input line 900.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [26
 
  <./_bookdown_files/_main_files/figure-latex/bias-variance-1.pdf>]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 927.
+Package pdftex.def Info: figures/university-logo.png  used on input line 928.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [27
 
@@ -2033,10 +2033,10 @@ File: _bookdown_files/_main_files/figure-latex/ridge-lambda-1.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/ridge-lambda-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/ridge-lambda-
-1.pdf  used on input line 973.
+1.pdf  used on input line 974.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 973--973
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 974--974
  [][] 
  []
 
@@ -2046,10 +2046,10 @@ File: _bookdown_files/_main_files/figure-latex/ridge-lambda-2.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/ridge-lambda-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/ridge-lambda-
-2.pdf  used on input line 973.
+2.pdf  used on input line 974.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 973--973
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 974--974
  [][] 
  []
 
@@ -2059,10 +2059,10 @@ File: _bookdown_files/_main_files/figure-latex/ridge-lambda-3.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/ridge-lambda-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/ridge-lambda-
-3.pdf  used on input line 973.
+3.pdf  used on input line 974.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 973--973
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 974--974
  [][] 
  []
 
@@ -2072,10 +2072,10 @@ File: _bookdown_files/_main_files/figure-latex/ridge-lambda-4.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/ridge-lambda-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/ridge-lambda-
-4.pdf  used on input line 973.
+4.pdf  used on input line 974.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 973--973
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 974--974
  [][] 
  []
 
@@ -2085,11 +2085,11 @@ File: _bookdown_files/_main_files/figure-latex/ridge-lambda-5.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/ridge-lambda-5.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/ridge-lambda-
-5.pdf  used on input line 973.
+5.pdf  used on input line 974.
 (pdftex.def)             Requested size: 142.26378pt x 79.78203pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 973.
+Package pdftex.def Info: figures/university-logo.png  used on input line 974.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [28
 
@@ -2100,7 +2100,7 @@ ridge-lambda-4.pdf> <./_bookdown_files/_main_files/figure-latex/ridge-lambda-5.
 pdf>]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1001.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1002.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [29
 
@@ -2111,10 +2111,10 @@ File: _bookdown_files/_main_files/figure-latex/lasso-lambda-1.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/lasso-lambda-1.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/lasso-lambda-
-1.pdf  used on input line 1046.
+1.pdf  used on input line 1047.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 1046--1046
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 1047--1047
  [][] 
  []
 
@@ -2124,10 +2124,10 @@ File: _bookdown_files/_main_files/figure-latex/lasso-lambda-2.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/lasso-lambda-2.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/lasso-lambda-
-2.pdf  used on input line 1046.
+2.pdf  used on input line 1047.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 1046--1046
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 1047--1047
  [][] 
  []
 
@@ -2137,10 +2137,10 @@ File: _bookdown_files/_main_files/figure-latex/lasso-lambda-3.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/lasso-lambda-3.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/lasso-lambda-
-3.pdf  used on input line 1046.
+3.pdf  used on input line 1047.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 1046--1046
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 1047--1047
  [][] 
  []
 
@@ -2150,10 +2150,10 @@ File: _bookdown_files/_main_files/figure-latex/lasso-lambda-4.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/lasso-lambda-4.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/lasso-lambda-
-4.pdf  used on input line 1046.
+4.pdf  used on input line 1047.
 (pdftex.def)             Requested size: 99.58464pt x 55.84637pt.
 
-Overfull \hbox (14.22638pt too wide) in paragraph at lines 1046--1046
+Overfull \hbox (14.22638pt too wide) in paragraph at lines 1047--1047
  [][] 
  []
 
@@ -2163,11 +2163,11 @@ File: _bookdown_files/_main_files/figure-latex/lasso-lambda-5.pdf Graphic file
 (type pdf)
 <use _bookdown_files/_main_files/figure-latex/lasso-lambda-5.pdf>
 Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/lasso-lambda-
-5.pdf  used on input line 1046.
+5.pdf  used on input line 1047.
 (pdftex.def)             Requested size: 142.26378pt x 79.78203pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1046.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1047.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [30
 
@@ -2176,88 +2176,8 @@ iles/_main_files/figure-latex/lasso-lambda-2.pdf> <./_bookdown_files/_main_file
 s/figure-latex/lasso-lambda-3.pdf> <./_bookdown_files/_main_files/figure-latex/
 lasso-lambda-4.pdf> <./_bookdown_files/_main_files/figure-latex/lasso-lambda-5.
 pdf>]
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1079.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [31
-
-] (presentation.toc)
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1084.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [32
-
-]
-<_bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf, id=637, 722.7pt x
- 361.35pt>
-File: _bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf Graphic file 
-(type pdf)
-<use _bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf>
-Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/bayes-normal-
-1.pdf  used on input line 1111.
-(pdftex.def)             Requested size: 256.0748pt x 128.03477pt.
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1111.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [33
-
- <./_bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf>]
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1149.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [34
-
-]
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1149.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [35
-
-]
-<_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf, id=665, 361.35p
-t x 252.945pt>
-File: _bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf Graphic fil
-e (type pdf)
-<use _bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf>
-Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
-e-1.pdf  used on input line 1186.
-(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
-<_bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf, id=666, 361.35p
-t x 252.945pt>
-File: _bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf Graphic fil
-e (type pdf)
-<use _bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf>
-Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
-e-2.pdf  used on input line 1186.
-(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
-<_bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf, id=667, 361.35p
-t x 252.945pt>
-File: _bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf Graphic fil
-e (type pdf)
-<use _bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf>
-Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
-e-3.pdf  used on input line 1186.
-(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
-
-Overfull \vbox (5.96887pt too high) detected at line 1186
- []
-
-File: figures/university-logo.png Graphic file (type png)
-<use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1186.
-(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
-[36
-
- <./_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf> <./_bookdown
-_files/_main_files/figure-latex/normal-laplace-2.pdf> <./_bookdown_files/_main_
-files/figure-latex/normal-laplace-3.pdf>]
 LaTeX Font Info:    Trying to load font information for U+fontawesometwo on inp
-ut line 1247.
+ut line 1084.
 
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fontawesome\ufonta
 wesometwo.fd"
@@ -2265,49 +2185,129 @@ File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 )
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1247.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1084.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [31
+
+] (presentation.toc)
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1089.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [32
+
+]
+<_bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf, id=640, 722.7pt x
+ 361.35pt>
+File: _bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf Graphic file 
+(type pdf)
+<use _bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/bayes-normal-
+1.pdf  used on input line 1116.
+(pdftex.def)             Requested size: 256.0748pt x 128.03477pt.
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1116.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [33
+
+ <./_bookdown_files/_main_files/figure-latex/bayes-normal-1.pdf>]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1154.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [34
+
+]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1154.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [35
+
+]
+<_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf, id=667, 361.35p
+t x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf Graphic fil
+e (type pdf)
+<use _bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
+e-1.pdf  used on input line 1191.
+(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
+<_bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf, id=668, 361.35p
+t x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf Graphic fil
+e (type pdf)
+<use _bookdown_files/_main_files/figure-latex/normal-laplace-2.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
+e-2.pdf  used on input line 1191.
+(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
+<_bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf, id=669, 361.35p
+t x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf Graphic fil
+e (type pdf)
+<use _bookdown_files/_main_files/figure-latex/normal-laplace-3.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/normal-laplac
+e-3.pdf  used on input line 1191.
+(pdftex.def)             Requested size: 113.81102pt x 79.6665pt.
+
+Overfull \vbox (5.96887pt too high) detected at line 1191
+ []
+
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1191.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+[36
+
+ <./_bookdown_files/_main_files/figure-latex/normal-laplace-1.pdf> <./_bookdown
+_files/_main_files/figure-latex/normal-laplace-2.pdf> <./_bookdown_files/_main_
+files/figure-latex/normal-laplace-3.pdf>]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1252.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [37
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1247.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1252.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [38
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1251.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1256.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
- [39
+
+[39
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1287.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1292.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [40
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1287.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1292.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [41
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1291.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1296.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
-
-[42
+ [42
 
 ]
 LaTeX Font Info:    Trying to load font information for U+fontawesomethree on i
-nput line 1345.
+nput line 1350.
 
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fontawesome\ufonta
 wesomethree.fd"
@@ -2315,69 +2315,222 @@ File: ufontawesomethree.fd 2016/05/22 Font definitions for U/fontawesomethree.
 )
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1345.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1350.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [43
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1345.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1350.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [44
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1352.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1357.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [45
 
 ] (presentation.toc)
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1362.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1367.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [46
 
 ]
-Overfull \hbox (3.68753pt too wide) in paragraph at lines 1385--1385
+Overfull \hbox (3.68753pt too wide) in paragraph at lines 1390--1390
  [] 
  []
 
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1385.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1390.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [47
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1412.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1417.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [48
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1462.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1468.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [49
 
 ]
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1462.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1468.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [50
 
 ]
+<_bookdown_files/_main_files/figure-latex/en-tot-hp-tuning-plot-1.pdf, id=792, 
+505.89pt x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/en-tot-hp-tuning-plot-1.pdf Grap
+hic file (type pdf)
+<use _bookdown_files/_main_files/figure-latex/en-tot-hp-tuning-plot-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/en-tot-hp-tun
+ing-plot-1.pdf  used on input line 1480.
+(pdftex.def)             Requested size: 284.52756pt x 142.26576pt.
 File: figures/university-logo.png Graphic file (type png)
 <use figures/university-logo.png>
-Package pdftex.def Info: figures/university-logo.png  used on input line 1469.
+Package pdftex.def Info: figures/university-logo.png  used on input line 1480.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [51
+
+ <./_bookdown_files/_main_files/figure-latex/en-tot-hp-tuning-plot-1.pdf>]
+
+LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+<_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf, id=808, 43
+3.62pt x 216.81pt>
+File: _bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf Graphi
+c file (type pdf)
+<use _bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/models-result
+s-plot-1.pdf  used on input line 1516.
+(pdftex.def)             Requested size: 184.9429pt x 92.4722pt.
+LaTeX Font Info:    Calculating math sizes for size <7.5> on input line 1516.
+
+LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <3.75> not available
+(Font)              size <5> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <3.75> not available
+(Font)              size <5> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OT1/cmtt/m/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `OT1/cmtt/m/n' in size <3.75> not available
+(Font)              size <5> substituted on input line 1516.
+
+
+LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <7.5> not available
+(Font)              size <7> substituted on input line 1516.
+
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1516.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+[52
+
+ <./_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf>]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1528.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+
+[53
+
+]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1539.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [54
+
+]
+<_bookdown_files/_main_files/figure-latex/en-aic-hp-tuning-plot-1.pdf, id=833, 
+505.89pt x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/en-aic-hp-tuning-plot-1.pdf Grap
+hic file (type pdf)
+<use _bookdown_files/_main_files/figure-latex/en-aic-hp-tuning-plot-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/en-aic-hp-tun
+ing-plot-1.pdf  used on input line 1552.
+(pdftex.def)             Requested size: 284.52756pt x 142.26576pt.
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1552.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [55
+
+ <./_bookdown_files/_main_files/figure-latex/en-aic-hp-tuning-plot-1.pdf>]
+<_bookdown_files/_main_files/figure-latex/gbm-tot-hp-tuning-plot-1.pdf, id=850,
+ 505.89pt x 252.945pt>
+File: _bookdown_files/_main_files/figure-latex/gbm-tot-hp-tuning-plot-1.pdf Gra
+phic file (type pdf)
+<use _bookdown_files/_main_files/figure-latex/gbm-tot-hp-tuning-plot-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/gbm-tot-hp-tu
+ning-plot-1.pdf  used on input line 1564.
+(pdftex.def)             Requested size: 284.52756pt x 142.26576pt.
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1564.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [56
+
+ <./_bookdown_files/_main_files/figure-latex/gbm-tot-hp-tuning-plot-1.pdf>]
+<_bookdown_files/_main_files/figure-latex/coeff-pairs-1.pdf, id=866, 650.43pt x
+ 433.62pt>
+File: _bookdown_files/_main_files/figure-latex/coeff-pairs-1.pdf Graphic file (
+type pdf)
+<use _bookdown_files/_main_files/figure-latex/coeff-pairs-1.pdf>
+Package pdftex.def Info: _bookdown_files/_main_files/figure-latex/coeff-pairs-1
+.pdf  used on input line 1576.
+(pdftex.def)             Requested size: 312.9803pt x 208.65793pt.
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1576.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [57
+
+ <./_bookdown_files/_main_files/figure-latex/coeff-pairs-1.pdf>]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1601.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+
+[58
+
+]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1628.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [59
+
+]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1638.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [60
+
+]
+File: figures/university-logo.png Graphic file (type png)
+<use figures/university-logo.png>
+Package pdftex.def Info: figures/university-logo.png  used on input line 1648.
+(pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
+ [61
 
 ]
 \tf@nav=\write6
@@ -2392,59 +2545,70 @@ Package pdftex.def Info: figures/university-logo.png  used on input line 1469.
  (presentation.aux)
 Package rerunfilecheck Info: File `presentation.out' has not changed.
 (rerunfilecheck)             Checksum: 02D2A17C306023B39DB6537C952C2BD8;705.
+
+
+LaTeX Font Warning: Size substitutions with differences
+(Font)              up to 1.25pt have occurred.
+
  ) 
 Here is how much of TeX's memory you used:
- 42671 strings out of 479765
- 1038049 string characters out of 2866191
- 1415729 words of memory out of 3000000
- 58644 multiletter control sequences out of 15000+200000
- 560962 words of font info for 98 fonts, out of 3000000 for 9000
+ 42788 strings out of 479765
+ 1041104 string characters out of 2866191
+ 1416090 words of memory out of 3000000
+ 58732 multiletter control sequences out of 15000+200000
+ 568875 words of font info for 123 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,22n,126p,733b,1549s stack positions out of 5000i,500n,10000p,200000b,50000s
  <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
-ecsx0900.pk>{C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/f
-ontawesome/fontawesomethree.enc}{C:/Users/leona/AppData/Local/Programs/MiKTeX 2
-.9/fonts/enc/dvips/fontawesome/fontawesometwo.enc} <C:\Users\leona\AppData\Loca
-l\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0600.pk> <C:\Users\leona\Ap
-pData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0900.pk> <C:\User
-s\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk
-> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\e
-csi0900.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
-c/dpi600\ecss0900.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
-jknappen/ec/dpi600\ecsx1095.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/
-pk/ljfour/jknappen/ec/dpi600\ecss1200.pk> <C:\Users\leona\AppData\Local\MiKTeX\
-2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0800.pk> <C:\Users\leona\AppData\Loc
-al\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1095.pk> <C:\Users\leona\A
-ppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1440.pk><C:/User
-s/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/fontawesome/FontAw
-esome.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
-amsfonts/cm/cmbx9.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/t
-ype1/public/amsfonts/cmextra/cmex9.pfb><C:/Users/leona/AppData/Local/Programs/M
-iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi10.pfb><C:/Users/leona/AppData/Loc
-al/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi5.pfb><C:/Users/leona
-/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi6.pfb><C:
-/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/c
-mmi8.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
-msfonts/cm/cmmi9.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
-pe1/public/amsfonts/cm/cmmib10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTe
-X 2.9/fonts/type1/public/amsfonts/cmextra/cmmib6.pfb><C:/Users/leona/AppData/Lo
-cal/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmmib9.pfb><C:/User
-s/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.
-pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfon
-ts/cm/cmr5.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/pu
-blic/amsfonts/cm/cmr6.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fon
-ts/type1/public/amsfonts/cm/cmr8.pfb><C:/Users/leona/AppData/Local/Programs/MiK
-TeX 2.9/fonts/type1/public/amsfonts/cm/cmr9.pfb><C:/Users/leona/AppData/Local/P
-rograms/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy10.pfb><C:/Users/leona/Ap
-pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Us
-ers/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy
-8.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsf
-onts/cm/cmsy9.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1
-/public/amsfonts/symbols/msbm10.pfb><C:/Users/leona/AppData/Local/Programs/MiKT
-eX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on presentation.pdf (51 pages, 1100109 bytes).
+ecsx2488.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
+ec/dpi600\ecss0700.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecsx0700.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts
+/pk/ljfour/jknappen/ec/dpi600\ecsx0900.pk>{C:/Users/leona/AppData/Local/Program
+s/MiKTeX 2.9/fonts/enc/dvips/fontawesome/fontawesomethree.enc} <C:\Users\leona\
+AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1000.pk>{C:/Use
+rs/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/enc/dvips/fontawesome/fontawes
+ometwo.enc} <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/e
+c/dpi600\ecss0600.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/
+jknappen/ec/dpi600\ecrm0900.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/
+pk/ljfour/jknappen/ec/dpi600\ecrm0600.pk> <C:\Users\leona\AppData\Local\MiKTeX\
+2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecsi0900.pk> <C:\Users\leona\AppData\Loc
+al\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss0900.pk> <C:\Users\leona\A
+ppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecsx1095.pk> <C:\Use
+rs\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\ecss1200.p
+k> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/ec/dpi600\
+ecss0800.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour/jknappen/
+ec/dpi600\ecss1095.pk> <C:\Users\leona\AppData\Local\MiKTeX\2.9\fonts/pk/ljfour
+/jknappen/ec/dpi600\ecss1440.pk><C:/Users/leona/AppData/Local/Programs/MiKTeX 2
+.9/fonts/type1/public/fontawesome/FontAwesome.pfb><C:/Users/leona/AppData/Local
+/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmbx9.pfb><C:/Users/leona/A
+ppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cmextra/cmex9.pfb>
+<C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/c
+m/cmmi10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/publ
+ic/amsfonts/cm/cmmi5.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/font
+s/type1/public/amsfonts/cm/cmmi6.pfb><C:/Users/leona/AppData/Local/Programs/MiK
+TeX 2.9/fonts/type1/public/amsfonts/cm/cmmi7.pfb><C:/Users/leona/AppData/Local/
+Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi8.pfb><C:/Users/leona/Ap
+pData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi9.pfb><C:/Us
+ers/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmmi
+b10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/am
+sfonts/cmextra/cmmib6.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fon
+ts/type1/public/amsfonts/cmextra/cmmib9.pfb><C:/Users/leona/AppData/Local/Progr
+ams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr10.pfb><C:/Users/leona/AppData
+/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr5.pfb><C:/Users/le
+ona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmr6.pfb><
+C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm
+/cmr8.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/
+amsfonts/cm/cmr9.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/ty
+pe1/public/amsfonts/cm/cmsy10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX
+ 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/leona/AppData/Local/Pro
+grams/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy8.pfb><C:/Users/leona/AppDa
+ta/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users
+/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/ms
+bm10.pfb><C:/Users/leona/AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/a
+msfonts/symbols/msbm7.pfb>
+Output written on presentation.pdf (61 pages, 1322544 bytes).
 PDF statistics:
- 1259 PDF objects out of 1440 (max. 8388607)
- 115 named destinations out of 1000 (max. 500000)
- 305 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 1464 PDF objects out of 1728 (max. 8388607)
+ 135 named destinations out of 1000 (max. 500000)
+ 330 words of extra memory for PDF output out of 10000 (max. 10000000)
 
