@@ -84,10 +84,10 @@
 \headcommand {\beamer@subsectionentry {0}{2}{6}{42}{Confronto tra i modelli}}
 \headcommand {\slideentry {2}{6}{1}{42/42}{Confronto tra i modelli}{0}}
 \headcommand {\beamer@framepages {42}{42}}
-\headcommand {\slideentry {2}{6}{2}{43/44}{Confronto tra i modelli}{0}}
-\headcommand {\beamer@framepages {43}{44}}
-\headcommand {\slideentry {2}{6}{3}{45/45}{Confronto tra i modelli}{0}}
-\headcommand {\beamer@framepages {45}{45}}
+\headcommand {\slideentry {2}{6}{2}{43/43}{Confronto tra i modelli}{0}}
+\headcommand {\beamer@framepages {43}{43}}
+\headcommand {\slideentry {2}{6}{3}{44/45}{Confronto tra i modelli}{0}}
+\headcommand {\beamer@framepages {44}{45}}
 \headcommand {\beamer@sectionpages {13}{45}}
 \headcommand {\beamer@subsectionpages {42}{45}}
 \headcommand {\sectionentry {3}{Applicazione Pratica}{46}{Applicazione Pratica}{0}}
@@ -119,10 +119,8 @@
 \headcommand {\beamer@framepages {59}{59}}
 \headcommand {\slideentry {3}{0}{14}{60/60}{}{0}}
 \headcommand {\beamer@framepages {60}{60}}
-\headcommand {\slideentry {3}{0}{15}{61/61}{}{0}}
-\headcommand {\beamer@framepages {61}{61}}
-\headcommand {\beamer@partpages {1}{61}}
-\headcommand {\beamer@subsectionpages {46}{61}}
-\headcommand {\beamer@sectionpages {46}{61}}
-\headcommand {\beamer@documentpages {61}}
-\headcommand {\gdef \inserttotalframenumber {51}}
+\headcommand {\beamer@partpages {1}{60}}
+\headcommand {\beamer@subsectionpages {46}{60}}
+\headcommand {\beamer@sectionpages {46}{60}}
+\headcommand {\beamer@documentpages {60}}
+\headcommand {\gdef \inserttotalframenumber {50}}

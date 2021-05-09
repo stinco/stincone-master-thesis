@@ -67,6 +67,27 @@
 \usepackage{multirow} % Per usare il multirow nei tabular
 % \usepackage{enumitem} % For itemize options
 \usepackage{fontawesome} % For emoji and custom symbols
+\usepackage{stackengine} % For overlapping characters with \bottominset
+
+% For itemize without spacing
+\usepackage{tabularx}
+\newcommand{\myitem}[1]{%
+  \begin{tabularx}{\linewidth}{@{}l@{}>{\raggedright}X@{}}
+  \usebeamercolor[fg]{structure}$\bullet$~~ & #1
+  \end{tabularx}%
+}   
+\newenvironment{myitemize}{\par}{\par}     
+
+% For centered blocks
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+    \setlength{\textwidth}{#1}
+    \begin{actionenv}#3%
+        \def\insertblocktitle{#2}%
+        \par%
+        \usebeamertemplate{block begin}}
+    {\par%
+        \usebeamertemplate{block end}%
+    \end{actionenv}}
 
 \usepackage{graphicx} %Serve per inserire le immagini
 % \usepackage{xcolor}
@@ -106,6 +127,9 @@
 % For the norm in equations
 \newcommand\norm[1]{\left\lVert#1\right\rVert}
 
+% Stars made from fontawesome, xcolor and stackengine
+\newcommand{\mystar}{\bottominset{\textcolor{Dandelion}{\faStarO}}{\textcolor{Goldenrod}{\faStar}}{}{}}
+\newcommand{\mystarO}{\textcolor{Dandelion}{\faStarO}}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -235,7 +259,7 @@
 
 \begin{block}{Contratto di Assicurazione, Art. 1882, Codice Civile Italiano}
   L'assicurazione è il contratto col quale l'{\bfseries assicuratore}, verso il pagamento di un {\bfseries premio}, si obbliga a rivalere l'{\bfseries assicurato}, entro i limiti convenuti,
-  
+
   \begin{enumerate}
     \item del {\bfseries danno} ad esso prodotto da un {\bfseries sinistro},
     \item ovvero a pagare un {\bfseries capitale} o una {\bfseries rendita} al verificarsi di un {\bfseries evento} attinente alla {\bfseries vita umana}.
@@ -349,7 +373,7 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Personalizzazione e Variabili Esplicative}
+\frametitle{Variabili Esplicative e Personalizzazione}
 
 \fontsize{9pt}{11pt}\selectfont
 
@@ -360,14 +384,16 @@
     Possibili variabili esplicative per il pricing delle assicurazioni motor:
     \begin{itemize}
       \item Informazioni sul veicolo assicurato;
-      \item Informazioni generiche sul contraente;
-      \item Informazioni assicurative sul contraente;
-      \item Opzioni sulla polizza assicurativa;
+      \item Informazioni generiche sull'assicurato;
+      \item Informazioni assicurative sull'assicurato;
+      \item Opzioni della polizza assicurativa;
+      \item Informazioni sull'assicurato in quanto cliente;
       \item Dati telematici.
     \end{itemize}
     
     % \vfill
-    \vspace{0.5cm}
+    % \vspace{0.5cm}
+    \vspace{0.2cm}
     
     Queste variabili possono essere codificate come un vettore di numeri reali:
     $$\boldsymbol{x}_i=(x_{i1}, x_{i2}, \dots, x_{ip})\in\mathcal{X}\subseteq\mathbb{R}^p$$
@@ -459,10 +485,10 @@
 % \begin{columns}[t, totalwidth=1.02\textwidth]
 \begin{columns}[T]
 
-\begin{column}{0.5\linewidth}
+\begin{column}{0.45\linewidth}
   \uncover<1->{
-    \begin{block}{Definizione di Premio}
-      \vspace{0.2cm}
+    \begin{block}{Definizione di Premio\vphantom{/}}
+      % \vspace{0.2cm}
       % \begin{center}
         \begin{tikzpicture}
           \node[text width=6cm, align=left] at (0, 0) (p1) {$P^{(\textrm{risk})}_i=E(S_i)$ \\ $P^{(\textrm{tech})}_i = E(S_i) + \textrm{Expenses}_i$};
@@ -475,29 +501,39 @@
   }
 \end{column}
 
-\begin{column}{0.5\linewidth}
+\begin{column}{0.55\linewidth}
   \uncover<2->{
-    \begin{block}{Ottimizzazione del Prezzo}
+    \begin{block}{Ottimizzazione del Prezzo\vphantom{/}}
       
       % \vfill
       % \vspace{0.5cm}
-      \vspace{0.2cm}
+      % \vspace{0.2cm}
       
       Si basa su
       \begin{enumerate}
         \item Pricing Tecnico
         \item Aspettativa del Cliente
+          \begin{itemize}
+            \fontsize{9pt}{11pt}\selectfont
+            \item[\faCaretRight] New Business: \textit{Probabilità di Conversion}
+            \item[\faCaretRight] Rinnovi: \textit{Probabilità di Retention}
+          \end{itemize}
         \item Strategia di Business
+          \begin{itemize}
+            \fontsize{9pt}{11pt}\selectfont
+            \item[\faCaretRight] \textit{Lifetime value}
+            \item[\faCaretRight] Profitti/crescita
+          \end{itemize}
       \end{enumerate}
     
       % \vfill
-      \vspace{0.2cm}
-      
-      Ulteriori modelli
-      \begin{itemize}
-        \item New Business: Probabilità di Conversion
-        \item Rinnovi: Probabilità di Retention
-      \end{itemize}
+      % \vspace{0.2cm}
+      % 
+      % Ulteriori modelli
+      % \begin{itemize}
+      %   \item New Business: Probabilità di Conversion
+      %   \item Rinnovi: Probabilità di Retention
+      % \end{itemize}
 
     \end{block}
   }
@@ -802,7 +838,7 @@
 
 \begin{columns}[T]
 \begin{column}{0.5\linewidth}
-  \begin{block}{Modello Additivo Generalizzato (GAM)}
+  \begin{block}{Modelli Additivi Generalizzati (GAM)}
     \begin{enumerate}
       \item Variabile risposta $\boldsymbol{Y}$ come GLM;
       \item Predittore lineare
@@ -1069,8 +1105,8 @@
       \item $\lambda\ge0$ iperparametro di penalizzazione
       \item $\alpha \in [0,1]$ iperparametro che determina il peso della penalizzazione LASSO
       \begin{itemize}
-        \item[\faCaretRight] $\alpha=0 \ \Longrightarrow \ $ Regressione Ridge
-        \item[\faCaretRight] $\alpha=1 \ \Longrightarrow \ $ Regressione LASSO
+        \item[\faCaretRight] $\alpha=0 \ \Longrightarrow \ $Regressione Ridge
+        \item[\faCaretRight] $\alpha=1 \ \Longrightarrow \ $Regressione LASSO
       \end{itemize}
     \end{itemize}
     
@@ -1201,10 +1237,10 @@
 
 \uncover<1->{
   \begin{column}{0.5\linewidth}
-    \begin{block}{Altri distribuzioni a priori}
+    \begin{block}{Altre distribuzioni a priori\vphantom{/}}
       \begin{itemize}
         \setlength\itemsep{0.2cm}
-        \setlength\topsep{0.2cm}
+        % \setlength\topsep{0.2cm}
         \item Diverse varianze a priori
           $$
           \beta_j\sim\mathcal{N}(0, \sigma_j^2)
@@ -1227,7 +1263,7 @@
 }
 \uncover<2->{
   \begin{column}{0.5\linewidth}
-    \begin{block}{Vantaggi stimatori Bayesiani}
+    \begin{block}{Vantaggi stimatori Bayesiani\vphantom{/}}
       \begin{itemize}
         \setlength\itemsep{0.2cm}
         % \setlength\topsep{0.2cm}
@@ -1265,7 +1301,7 @@
 
 \uncover<1->{
   \begin{column}{0.5\linewidth}
-    \begin{block}{Modelli di Machine Learning}
+    \begin{block}{Modelli di Machine Learning\vphantom{/}}
       \begin{itemize}
         \item Gradient Boosting Machine (GBM)
         \item Random Forest (RF)
@@ -1277,7 +1313,7 @@
 }
 \uncover<2->{
   \begin{column}{0.5\linewidth}
-    \begin{block}{Caratteristiche}
+    \begin{block}{Caratteristiche\vphantom{/}}
       \begin{itemize}
         \item Funzione di regressione con minime assunzioni
           $$E(Y_i) = \boldsymbol{f}(x_{i1}, \dots, x_{ip})$$
@@ -1296,63 +1332,166 @@
 \subsection{Confronto tra i modelli}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Confronto tra i modelli}
+% 
+% \fontsize{9pt}{11pt}\selectfont
+% 
+% \begin{columns}[T]
+% 
+% \uncover<1->{
+%   \begin{column}{0.5\linewidth}
+%     \begin{block}{GLM Classici vs GBM/RF/NN}
+%     % \begin{block}{GLM Classici vs GBM, RF e NN}
+%       \vspace{0.1cm}
+%       \begin{itemize}
+%         \setlength\itemsep{0.2cm}
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior interpretabilità
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior controllo delle variabili
+%           \begin{itemize}
+%             \fontsize{9pt}{11pt}\selectfont
+%             \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
+%             \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
+%             \item[\textcolor{ForestGreen}{\faCaretRight}] Offset
+%           \end{itemize}
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Facile utilizzo di informazioni esterne
+%         \item[\faThumbsODown] Minore automazione e scalabilità
+%         \item[\faThumbsODown] Minore flessibilità
+%       \end{itemize}
+%     \end{block}
+%   \end{column}
+% }
+% \uncover<1->{
+%   \begin{column}{0.5\linewidth}
+%     \begin{block}{GLM Advancements vs GLM Classici \vphantom{/}}
+%       \vspace{0.1cm}
+%       \begin{itemize}
+%         \setlength\itemsep{0.2cm}
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento interpretabilità
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento controllo delle variabili
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Miglior utilizzo delle informazioni esterne (stimatori bayesiani)
+%         \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior automazione e scalabilità
+%           \begin{itemize}
+%             \fontsize{9pt}{11pt}\selectfont
+%             \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
+%             \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
+%           \end{itemize}
+%       \end{itemize}
+%     \end{block}
+%   \end{column}
+% }
+% 
+% \end{columns}
+% 
+% \end{frame}
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
 \frametitle{Confronto tra i modelli}
 
-\fontsize{9pt}{11pt}\selectfont
+% \fontsize{9pt}{11pt}\selectfont
 
-\begin{columns}[T]
-
-\uncover<1->{
-  \begin{column}{0.5\linewidth}
-    \begin{block}{GLM Classici vs GBM/RF/NN}
-    % \begin{block}{GLM Classici vs GBM, RF e NN}
-      \vspace{0.1cm}
-      \begin{itemize}
-        \setlength\itemsep{0.2cm}
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior interpretabilità
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior controllo delle variabili
-          \begin{itemize}
-            \fontsize{9pt}{11pt}\selectfont
-            \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
-            \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
-            \item[\textcolor{ForestGreen}{\faCaretRight}] Offset
-          \end{itemize}
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Facile utilizzo di informazioni esterne
-        \item[\faThumbsODown] Minore automazione e scalabilità
-        \item[\faThumbsODown] Minore flessibilità
-      \end{itemize}
-    \end{block}
-  \end{column}
-}
-\uncover<2->{
-  \begin{column}{0.5\linewidth}
-    \begin{block}{GLM Advancements vs GLM Classici \vphantom{/}}
-      \vspace{0.1cm}
-      \begin{itemize}
-        \setlength\itemsep{0.2cm}
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento interpretabilità
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Mantenimento controllo delle variabili
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Miglior utilizzo delle informazioni esterne (stimatori bayesiani)
-        \item[\textcolor{ForestGreen}{\faThumbsOUp}] Maggior automazione e scalabilità
-          \begin{itemize}
-            \fontsize{9pt}{11pt}\selectfont
-            \item[\textcolor{ForestGreen}{\faCaretRight}] Selezione variabili
-            \item[\textcolor{ForestGreen}{\faCaretRight}] Effetti variabili quantitative
-          \end{itemize}
-      \end{itemize}
-    \end{block}
-  \end{column}
-}
-
-\end{columns}
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lccc}
+    \addlinespace[-\aboverulesep] 
+    \cmidrule[\heavyrulewidth]{2-4}
+    \textbf{} & \textbf{\makecell[c]{GLM \\ Classici}} & \textbf{GBM/RF/NN} & \textbf{\makecell[c]{GLM \\ Advancements}}\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{Interpretabilità}                 & \cellcolor{gray!6}{\mystar\mystar\mystar}   &
+      \cellcolor{gray!6}{\mystar\mystarO\mystarO} & \cellcolor{gray!6}{\mystar\mystar\mystar} \\
+    Controllo delle variabili                            & \mystar\mystar\mystar                       &
+      \mystar\mystarO\mystarO                     & \mystar\mystar\mystar  \\
+    \cellcolor{gray!6}{Utilizzo di informazioni esterne} & \cellcolor{gray!6}{\mystar\mystar\mystarO}  &
+      \cellcolor{gray!6}{\mystar\mystarO\mystarO} & \cellcolor{gray!6}{\mystar\mystar\mystar} \\
+    Automazione e scalabilità                            & \mystar\mystarO\mystarO                     &
+      \mystar\mystar\mystar                       & \mystar\mystar\mystarO \\
+    \cellcolor{gray!6}{Flessibilità}                     & \cellcolor{gray!6}{\mystar\mystarO\mystarO} &
+      \cellcolor{gray!6}{\mystar\mystar\mystar}   & \cellcolor{gray!6}{\mystar\mystar\mystarO} \\
+    \bottomrule
+  \end{tabular}
+\end{table}
 
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{L'importanza dell'attuario}
+\frametitle{L'importanza del Controllo delle Variabili nel Pricing}
+
+% \fontsize{9pt}{11pt}\selectfont
+
+%     \begin{block}{Figura dell'attuario}
+%       \vspace{0.5cm}
+%       \fontsize{8pt}{9pt}\selectfont
+%       Secondo l'\textit{International Actuarial Association} (IAA), l'attuario deve avere:
+%       \begin{itemize}
+%         \item Competenze Analitiche
+%         \item Conoscenza del Business
+%         \item Comprensione del Comportamento Umano
+%       \end{itemize}
+%       % \vspace{0.1cm}
+%       % \begin{myitemize}
+%       %   \myitem{Competenze Analitiche}
+%       %   \myitem{Conoscenza del Business}
+%       %   \myitem{Comprensione del Comportamento Umano}
+%       % \end{myitemize}
+%     \end{block}
+
+
+\uncover<1->{
+  \begin{columns}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Il pricing si basa su}
+        \begin{itemize}
+          % \fontsize{9pt}{11pt}\selectfont
+          % \fontsize{8pt}{9pt}\selectfont
+          \item Osservazioni sul portafoglio passato
+          \item Assunzioni sul portafoglio futuro
+        \end{itemize}
+      \end{block}
+    \end{column}      
+  \end{columns}
+}
+
+\vspace{1cm}
+
+\uncover<2->{
+  \begin{columns}[T]
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Necessità tecniche \\ per il controllo delle variabili\vphantom{/}}
+        % \textbf{Necessità tecniche} \\
+        % \fontsize{8pt}{9pt}\selectfont
+        % \vspace{0.1cm}
+        % \vspace{0.1cm}
+        % Possibili problemi:
+        \begin{itemize}
+          % \fontsize{9pt}{11pt}\selectfont
+          % \fontsize{8pt}{9pt}\selectfont
+          \item Dati non rappresentativi del portafoglio futuro
+          \item Stime con alta varianza su certi cluster
+        \end{itemize}
+      \end{block}
+    \end{column}
+    \begin{column}{0.5\textwidth}
+      \begin{block}{Necessità commerciali \\ per il controllo delle variabili\vphantom{/}}
+        % \textbf{Necessità commerciali}
+        % \fontsize{7pt}{8pt}\selectfont
+        \begin{itemize}
+          % \fontsize{9pt}{11pt}\selectfont
+          % \fontsize{8pt}{9pt}\selectfont
+          \item Vincoli normativi
+          \item Pricing opzioni
+          \item Aspettative del cliente
+          \item Strategia di business
+        \end{itemize}
+      \end{block}
+    \end{column}
+  \end{columns}
+}
 
 \end{frame}
 
@@ -1369,9 +1508,28 @@
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Esposizione e Variabile Risposta}
+\frametitle{Dataset: Esposizione e Variabile Risposta}
 
 \fontsize{9pt}{11pt}\selectfont
+
+\begin{center}
+  \begin{minipage}{7cm}
+    \begin{varblock}[7cm]{Origine del Dataset}
+      Portafogio RCA costituito da polizze di una provincia italiana nel periodo 2014-2019
+    \end{varblock}
+  \end{minipage}
+\end{center}
+
+
+% \begin{columns}[T]
+  % \begin{column}{0.5\textwidth}
+    % \begin{block}{Dataset}
+    %   Portafogio RCA costituito da polizze di una provincia italiana nel periodo 2014-2019
+    % \end{block}
+  % \end[column]
+% \end{columns}
+
+% \vspace{}
 
 \begin{table}[!h]
   \centering
@@ -1403,10 +1561,10 @@
     \textbf{Descrizione} & \textbf{\makecell[c]{Numero di variabili\\per categoria}}\\
     \midrule[\heavyrulewidth]
     \cellcolor{gray!6}{Informazioni sul veicolo assicurato} & \cellcolor{gray!6}{12}\\
-    Informazioni generiche sul contraente & 14\\
-    \cellcolor{gray!6}{Informazioni assicurative sul contraente} & \cellcolor{gray!6}{9}\\
-    Opzioni sulla polizza assicurativa & 11\\
-    \cellcolor{gray!6}{Customer information on the policyholder} & \cellcolor{gray!6}{2}\\
+    Informazioni generiche sull'assicurato & 14\\
+    \cellcolor{gray!6}{Informazioni assicurative sull'assicurato} & \cellcolor{gray!6}{9}\\
+    Opzioni della polizza assicurativa & 11\\
+    \cellcolor{gray!6}{Informazioni sull'assicurato in quanto cliente} & \cellcolor{gray!6}{2}\\
     Dati telematici & 4\\
     \midrule
     \textbf{Totale} & \textbf{52}\\
@@ -1522,8 +1680,31 @@
 
 \fontsize{9pt}{11pt}\selectfont
 
+\begin{center}
+  \begin{minipage}{10cm}
+    \begin{varblock}[10cm]{Possibili Sviluppi}
+      \begin{itemize}
+        \item Utilizzare diverse distribuzioni a priori per i diversi $\beta_j$
+        \item Considerare interazioni
+        \item Ulteriore esplorazione sui GAM
+        \item Modelli geografici
+        \item Implementare i modelli su dataset più grandi con adeguate implementazioni informatiche
+      \end{itemize}
+    \end{varblock}
+  \end{minipage}
+\end{center}
+
+\end{frame}
 
 
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[plain,c]
+%\frametitle{A first slide}
+
+\begin{center}
+  \textcolor{myred}{\Huge \textbf{Grazie per l'attenzione}}
+\end{center}
 
 \end{frame}
 
@@ -1533,7 +1714,7 @@
 %\frametitle{A first slide}
 
 \begin{center}
-\textcolor{myred}{\Huge \textbf{Backup}}
+  \textcolor{myred}{\Huge \textbf{Backup}}
 \end{center}
 
 \end{frame}
@@ -1627,25 +1808,6 @@
 
 \end{frame}
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Titolo}
-
-\fontsize{9pt}{11pt}\selectfont
-
-
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-\frametitle{Titolo}
-
-\fontsize{9pt}{11pt}\selectfont
-
-
-\end{frame}
 
 
 \end{document}
