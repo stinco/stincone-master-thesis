@@ -1689,13 +1689,13 @@ col2 <- hue_pal()(2)[2]
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}
-\frametitle{Conclusioni}
+\frametitle{Possibili Sviluppi}
 
-\fontsize{9pt}{11pt}\selectfont
+% \fontsize{9pt}{11pt}\selectfont
 
 \begin{center}
   \begin{minipage}{10cm}
-    \begin{varblock}[10cm]{Possibili Sviluppi}
+    \begin{varblock}[10cm]{}%{Possibili Sviluppi}
       \begin{itemize}
         \item Utilizzare diverse distribuzioni a priori per i diversi $\beta_j$
         \item Considerare interazioni
