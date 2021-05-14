@@ -1,0 +1,418 @@
+\PassOptionsToPackage{table}{xcolor}
+\PassOptionsToPackage{dvipsnames}{xcolor}
+% \documentclass[pdf, aspectratio=169, xcolor=dvipsnames]{beamer}
+\documentclass[pdf, aspectratio=169]{beamer}\usepackage[]{graphicx}\usepackage[]{color}
+% maxwidth is the original width if it is less than linewidth
+% otherwise use linewidth (to make sure the graphics do not exceed the margin)
+\makeatletter
+\def\maxwidth{ %
+  \ifdim\Gin@nat@width>\linewidth
+    \linewidth
+  \else
+    \Gin@nat@width
+  \fi
+}
+\makeatother
+
+\definecolor{fgcolor}{rgb}{0.345, 0.345, 0.345}
+\newcommand{\hlnum}[1]{\textcolor[rgb]{0.686,0.059,0.569}{#1}}%
+\newcommand{\hlstr}[1]{\textcolor[rgb]{0.192,0.494,0.8}{#1}}%
+\newcommand{\hlcom}[1]{\textcolor[rgb]{0.678,0.584,0.686}{\textit{#1}}}%
+\newcommand{\hlopt}[1]{\textcolor[rgb]{0,0,0}{#1}}%
+\newcommand{\hlstd}[1]{\textcolor[rgb]{0.345,0.345,0.345}{#1}}%
+\newcommand{\hlkwa}[1]{\textcolor[rgb]{0.161,0.373,0.58}{\textbf{#1}}}%
+\newcommand{\hlkwb}[1]{\textcolor[rgb]{0.69,0.353,0.396}{#1}}%
+\newcommand{\hlkwc}[1]{\textcolor[rgb]{0.333,0.667,0.333}{#1}}%
+\newcommand{\hlkwd}[1]{\textcolor[rgb]{0.737,0.353,0.396}{\textbf{#1}}}%
+\let\hlipl\hlkwb
+
+\usepackage{framed}
+\makeatletter
+\newenvironment{kframe}{%
+ \def\at@end@of@kframe{}%
+ \ifinner\ifhmode%
+  \def\at@end@of@kframe{\end{minipage}}%
+  \begin{minipage}{\columnwidth}%
+ \fi\fi%
+ \def\FrameCommand##1{\hskip\@totalleftmargin \hskip-\fboxsep
+ \colorbox{shadecolor}{##1}\hskip-\fboxsep
+     % There is no \\@totalrightmargin, so:
+     \hskip-\linewidth \hskip-\@totalleftmargin \hskip\columnwidth}%
+ \MakeFramed {\advance\hsize-\width
+   \@totalleftmargin\z@ \linewidth\hsize
+   \@setminipage}}%
+ {\par\unskip\endMakeFramed%
+ \at@end@of@kframe}
+\makeatother
+
+\definecolor{shadecolor}{rgb}{.97, .97, .97}
+\definecolor{messagecolor}{rgb}{0, 0, 0}
+\definecolor{warningcolor}{rgb}{1, 0, 1}
+\definecolor{errorcolor}{rgb}{1, 0, 0}
+\newenvironment{knitrout}{}{} % an empty environment to be redefined in TeX
+
+\usepackage{alltt}
+% \documentclass[pdf, aspectratio=1610]{beamer}
+%\setbeamersize{text margin left=2cm, text margin right=2cm}
+\setbeamersize{text margin left=1.5cm, text margin right=1.5cm}
+% \documentclass[pdf]{beamer}
+% \usefonttheme[onlymath]{serif} % For serif font in math mode
+
+\usepackage[italian]{babel} %La data compare in italiano e la divisione in sillabe diventa quella italiana
+\usepackage[utf8]{inputenc} %Permette di scrivere le lettere accentate
+\usepackage[T1]{fontenc}
+\usepackage{hyperref} %Permette di inserire i collegamenti ipertestuali
+\usepackage{url}			        %Permette di inserire i link urle
+\usepackage{amsmath, amssymb}
+\usepackage{multirow} % Per usare il multirow nei tabular
+% \usepackage{enumitem} % For itemize options
+\usepackage{fontawesome} % For emoji and custom symbols
+\usepackage{stackengine} % For overlapping characters with \bottominset
+
+% For itemize without spacing
+\usepackage{tabularx}
+\newcommand{\myitem}[1]{%
+  \begin{tabularx}{\linewidth}{@{}l@{}>{\raggedright}X@{}}
+  \usebeamercolor[fg]{structure}$\bullet$~~ & #1
+  \end{tabularx}%
+}   
+\newenvironment{myitemize}{\par}{\par}     
+
+% For centered blocks
+\newenvironment<>{varblock}[2][.9\textwidth]{%
+    \setlength{\textwidth}{#1}
+    \begin{actionenv}#3%
+        \def\insertblocktitle{#2}%
+        \par%
+        \usebeamertemplate{block begin}}
+    {\par%
+        \usebeamertemplate{block end}%
+    \end{actionenv}}
+
+% For table of contents centering
+\newsavebox{\longestsec}% Box to save longest sectional heading
+
+% For removing space after equations
+\makeatletter
+\g@addto@macro\normalsize{%
+    \setlength\belowdisplayskip{-0pt}
+}
+
+\usepackage{graphicx} % For adding images to the document
+\graphicspath{{../}} % Set the parent path for images
+
+% \usepackage{xcolor}
+% \PassOptionsToPackage{dvipsnames}{xcolor} % Load other colors
+% \usepackage{subfigure}
+% \usepackage{caption}
+\usepackage[labelfont=bf, justification=justified, skip=0pt]{caption}
+\usepackage[labelformat=empty, justification=centering, skip=0pt]{subcaption}
+
+\usepackage{booktabs} % For better looking tables
+\usepackage{tabu} % For full width tables
+\usepackage{makecell} % For multiline cells in tables
+
+% Disegni LaTeX
+\usepackage{tikz}
+\usetikzlibrary{shapes}
+%\usetikzlibrary{shapes,snakes}
+%\usetikzlibrary{trees}
+\newcommand{\ImageWidth}{11cm}
+\usetikzlibrary{decorations.pathreplacing, positioning, arrows.meta}
+\usepackage{pgfplots,siunitx}
+\usepackage{adjustbox}
+
+\pgfplotsset{compat=1.9}
+\usepgfplotslibrary{units}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%Nuovi comandi
+\newcommand{\magnitude}[1]{\left\lVert #1 \right\rVert}
+\DeclareMathOperator*{\argmin}{arg\,min}  % Declaring operator argmin
+\DeclareMathOperator*{\argmax}{arg\,max}  % Declaring operator argmax
+
+% To make equal with 'def' above in equations
+\newcommand\eqdef{\mathrel{\overset{\makebox[0pt]{\mbox{\normalfont\tiny def}}}{=}}}
+
+% For the norm in equations
+\newcommand\norm[1]{\left\lVert#1\right\rVert}
+
+% Stars made from fontawesome, xcolor and stackengine
+\newcommand{\mystar}{\bottominset{\textcolor{Dandelion}{\faStarO}}{\textcolor{Goldenrod}{\faStar}}{}{}}
+\newcommand{\mystarO}{\textcolor{Dandelion}{\faStarO}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\usetheme{Pittsburgh}
+% \usetheme{CambridgeUS}
+%\mode<presentation>{\usetheme{Boadilla}}
+%singapore
+
+\definecolor{amber(sae/ece)}{rgb}{1.0, 0.49, 0.0}
+\definecolor{ao(english)}{rgb}{0.0, 0.5, 0.0}
+\definecolor{myblue}{RGB}{0, 82, 155}
+\definecolor{myred}{RGB}{140, 8, 8}
+
+%\useoutertheme[right]{sidebar}
+\usecolortheme{seahorse}
+% \usecolortheme{beaver}
+%\usecolortheme{dolphin}
+%\definecolor{UBCblue}{rgb}{0.04706, 0.13725, 0.26667} % UBC Blue (primary)
+%\usecolortheme[named=UBCblue]{structure}
+%\usecolortheme[named=UBCblue]{seahorse}
+%\usecolortheme{structure}
+% \usecolortheme[RGB={191, 15, 15}]{structure} 
+% \usecolortheme[RGB={140, 8, 8}]{structure} 
+\usecolortheme[named=myred]{structure}
+% \useoutertheme{modificatema2}
+\setbeamertemplate{navigation symbols}{} % Remove navigation buttons
+% \setbeamertemplate{footline}[frame number] % Add page number
+
+\usefonttheme{professionalfonts}
+\setbeamercovered{dynamic}
+
+\theoremstyle{definition}
+\newtheorem{definizione}{Definizione}[section]
+%\theoremstyle{plain}
+%\newtheorem{teorema}{Teorema}
+
+
+\title{Application of GLM Advancements \\ to Non-Life Insurance Pricing}
+%\subtitle{}
+\author{Leonardo Stincone}
+
+\date{18 Maggio 2021}
+\institute[units]{Università degli Studi di Trieste}
+
+\logo{\includegraphics[width=10mm, height=10mm]{figures/university-logo.png}}
+
+
+% % For table of contents positioning
+% % \newsavebox{\longestsec}% Box to save longest sectional heading
+% \usepackage{varwidth}    
+% \usepackage{etoolbox}
+% \makeatletter
+% %\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip0.5em}{}{}
+% \patchcmd{\beamer@sectionintoc}{%
+%   \hbox{\vbox{%
+%     \def\beamer@breakhere{\\}%
+%     \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}}%
+% }{%
+%   \hbox{%
+%     \def\beamer@breakhere{}%
+%     \beamer@tocact{\ifnum\c@section=#1\beamer@toc@cs\else\beamer@toc@os\fi}{section in toc}}%
+% }{}{}
+% \makeatother    
+
+% \newcommand\Closer[2][1cm]{%
+% \makebox[\linewidth][c]{%
+%   \begin{minipage}{\dimexpr\textwidth+#1\relax}
+%   \raggedright#2
+%   \end{minipage}%
+%   }%
+% }
+
+
+\setbeamertemplate{section in toc}[sections numbered]
+% \setbeamertemplate{section in toc}
+
+
+
+% Insert table of content at the beginning of each section
+% \AtBeginSubsection[]
+% {
+  % \begin{frame}[c]%{Indice}
+    % \frametitle{Indice}
+    % \tableofcontents[currentsection, currentsubsection]
+  % \end{frame}
+% }
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+\begin{document}
+
+
+%% title frame
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+% \frametitle{Indice}
+%   % \begin{lrbox}{\longestsec}Last section in the presentation\end{lrbox}% Capture longest title
+%   % \setlength{\leftskip}{\dimexpr.5\textwidth-.5\wd\longestsec\relax}% Advance left margin accordingly
+%   \tableofcontents
+%   % \Closer{\tableofcontents}
+% \end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+  \frametitle{Indice}
+  \begin{lrbox}{\longestsec}Last section in the presentation\end{lrbox}% Capture longest title
+  \setlength{\leftskip}{\dimexpr.5\textwidth-.5\wd\longestsec\relax}% Advance left margin accordingly
+  \tableofcontents
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Descrizione del problema}
+
+\begin{frame}{Descrizione del problema}
+
+\textcolor{myred}{\textbf{Problema}}: \textbf{prevedere il numero di sinistri} ($N_i$) che causerà un assicurato ($i$) a partire dalle informazioni della sua polizza:
+$$ (x_{i1}, x_{i2}, \dots, x_{ip}) \ \longmapsto \ F_{N_i}, \, E(N_i), \, Var(N_i)$$
+
+% \vspace{0.4cm}
+\vspace{0.4cm}
+
+\textcolor{myred}{\textbf{Soluzione}}: stimo un \textbf{modello} a partire dai \textbf{dati storici}.
+
+\vspace{0.4cm}
+
+\textcolor{myred}{\textbf{Perché}}: prevedere il numero di sinistri è uno degli elementi per \textbf{determinare il prezzo} di una polizza assicurativa.
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Dataset}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Dataset: Esposizione e Variabile Risposta}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{center}
+  \begin{minipage}{6cm}
+    \begin{varblock}[6cm]{Origine del Dataset}
+      Portafoglio RCA costituito da polizze di una provincia italiana nel periodo 2014-2019
+    \end{varblock}
+  \end{minipage}
+\end{center}
+
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lcccccc}
+    \toprule
+    \textbf{Set} & \textbf{\makecell[c]{Esposizione\\(rischi anno)}} & \textbf{\makecell[c]{Numero\\Sinistri}} & \textbf{\makecell[c]{Frequenza\\Sinistri}}\\
+    \midrule[\heavyrulewidth]
+    Train & 107 998.4 & 4 823 & 0.045\\
+    Test  &  26 806.3 & 1 131 & 0.042\\
+    \midrule
+    Tot   & 134 804.7 & 5 954 & 0.044\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Dataset: Variabili Esplicative}
+
+\fontsize{9pt}{11pt}\selectfont
+
+\begin{table}[!h]
+  \centering
+  \begin{tabular}{lc}
+    \toprule
+    \textbf{Descrizione} & \textbf{\makecell[c]{Numero di variabili\\per categoria}}\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{Informazioni sul veicolo assicurato} & \cellcolor{gray!6}{12}\\
+    Informazioni generiche sull'assicurato & 14\\
+    \cellcolor{gray!6}{Informazioni assicurative sull'assicurato} & \cellcolor{gray!6}{9}\\
+    Opzioni della polizza assicurativa & 11\\
+    \cellcolor{gray!6}{Informazioni sull'assicurato in quanto cliente} & \cellcolor{gray!6}{2}\\
+    Dati telematici & 4\\
+    \midrule
+    \textbf{Totale} & \textbf{52}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Modelli}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Modelli}
+
+
+
+\end{frame}
+
+
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Risultati}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+\frametitle{Risultati}
+
+% \setlength{\abovedisplayshortskip}{-1cm}
+% \setlength{\belowdisplayshortskip}{0cm} 
+
+\fontsize{7.5pt}{9.5pt}\selectfont
+
+\begin{figure}
+  \centering
+  \includegraphics[width=6.5cm]{_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf}
+\end{figure}
+
+\begin{table}[!h]
+  % \captionsetup{skip=0pt,belowskip=0pt}
+  % \caption[Models results.]{\label{tab:models-results}Models results. In the columns we reported the deviance computed in the test set, the execution time and, for the GLM-based models, the hyper-parameters.}
+  \centering
+  \begin{tabular}[t]{llcccc}
+    \toprule
+    \textbf{Id} & \textbf{Model} & \textbf{\makecell[c]{Test\\Deviance}} & \textbf{Time} & \textbf{$\alpha$} & \textbf{$\lambda$}\\
+    \midrule[\heavyrulewidth]
+    \cellcolor{gray!6}{Mod1} & \cellcolor{gray!6}{GLM Tot} & \cellcolor{gray!6}{8 458.147} & \cellcolor{gray!6}{2.7s} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{0}\\
+    Mod2 & Elastic Net Tot & 8 458.024 & 1h 30m & 0.06 & 2.01e-04\\
+    \cellcolor{gray!6}{Mod3} & \cellcolor{gray!6}{\textbf{Ridge Tot}} & \cellcolor{gray!6}{\textbf{8 457.465}} & \cellcolor{gray!6}{1h 30m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{4.64e-04}\\
+    Mod4 & GLM AIC & 8 458.023 & 7h 27m & 0 & 0\\
+    \cellcolor{gray!6}{Mod5} & \cellcolor{gray!6}{Elastic Net AIC} & \cellcolor{gray!6}{8 458.236} & \cellcolor{gray!6}{8h 54m} & \cellcolor{gray!6}{0} & \cellcolor{gray!6}{1.63e-05}\\
+    Mod6 & GAM AIC & 9 728.570 & 7h 45m & 0 & 0\\
+    \cellcolor{gray!6}{Mod7} & \cellcolor{gray!6}{GBM Tot} & \cellcolor{gray!6}{8 504.178} & \cellcolor{gray!6}{2h 30m} & \cellcolor{gray!6}{} & \cellcolor{gray!6}{}\\
+    \bottomrule
+  \end{tabular}
+\end{table}
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}%[plain,c]
+%\frametitle{A first slide}
+
+\begin{center}
+  \textcolor{myred}{\Huge \textbf{Grazie per l'attenzione}}
+\end{center}
+
+\end{frame}
+
+
+
+\end{document}
