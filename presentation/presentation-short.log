@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  15 MAY 2021 12:52
+This is pdfTeX, Version 3.14159265-2.6-1.40.21 (MiKTeX 20.11) (preloaded format=pdflatex 2020.11.3)  16 MAY 2021 20:28
 entering extended mode
 **./presentation-short.tex
 (presentation-short.tex
@@ -1708,7 +1708,7 @@ Package pdftex.def Info: ..//figures/university-logo.png  used on input line 41
 
 ]
 LaTeX Font Info:    Trying to load font information for U+fontawesometwo on inp
-ut line 440.
+ut line 449.
 
 ("C:\Users\leona\AppData\Local\Programs\MiKTeX 2.9\tex/latex/fontawesome\ufonta
 wesometwo.fd"
@@ -1717,22 +1717,22 @@ File: ufontawesometwo.fd 2016/05/22 Font definitions for U/fontawesometwo.
 File: ..//figures/university-logo.png Graphic file (type png)
 <use ..//figures/university-logo.png>
 Package pdftex.def Info: ..//figures/university-logo.png  used on input line 44
-0.
+9.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [7
 
 ]
 File: ..//figures/university-logo.png Graphic file (type png)
 <use ..//figures/university-logo.png>
-Package pdftex.def Info: ..//figures/university-logo.png  used on input line 46
-7.
+Package pdftex.def Info: ..//figures/university-logo.png  used on input line 48
+3.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
  [8
 
 ]
 
 LaTeX Font Warning: Font shape `T1/cmss/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 <..//_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf, id=105
 , 433.62pt x 216.81pt>
@@ -1740,57 +1740,57 @@ File: ..//_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf Gr
 aphic file (type pdf)
 <use ..//_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf>
 Package pdftex.def Info: ..//_bookdown_files/_main_files/figure-latex/models-re
-sults-plot-1.pdf  used on input line 509.
+sults-plot-1.pdf  used on input line 525.
 (pdftex.def)             Requested size: 184.9429pt x 92.4722pt.
-LaTeX Font Info:    Calculating math sizes for size <7.5> on input line 509.
+LaTeX Font Info:    Calculating math sizes for size <7.5> on input line 525.
 
 LaTeX Font Warning: Font shape `OT1/cmr/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OML/cmm/m/it' in size <3.75> not available
-(Font)              size <5> substituted on input line 509.
+(Font)              size <5> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OMS/cmsy/m/n' in size <3.75> not available
-(Font)              size <5> substituted on input line 509.
+(Font)              size <5> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OT1/cmss/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OT1/cmtt/m/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `OT1/cmtt/m/n' in size <3.75> not available
-(Font)              size <5> substituted on input line 509.
+(Font)              size <5> substituted on input line 525.
 
 
 LaTeX Font Warning: Font shape `T1/cmss/bx/n' in size <7.5> not available
-(Font)              size <7> substituted on input line 509.
+(Font)              size <7> substituted on input line 525.
 
 File: ..//figures/university-logo.png Graphic file (type png)
 <use ..//figures/university-logo.png>
-Package pdftex.def Info: ..//figures/university-logo.png  used on input line 50
-9.
+Package pdftex.def Info: ..//figures/university-logo.png  used on input line 52
+5.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 [9
 
  <..//_bookdown_files/_main_files/figure-latex/models-results-plot-1.pdf>]
 File: ..//figures/university-logo.png Graphic file (type png)
 <use ..//figures/university-logo.png>
-Package pdftex.def Info: ..//figures/university-logo.png  used on input line 51
-8.
+Package pdftex.def Info: ..//figures/university-logo.png  used on input line 53
+4.
 (pdftex.def)             Requested size: 28.4527pt x 28.4527pt.
 
 [10
@@ -1815,10 +1815,10 @@ LaTeX Font Warning: Size substitutions with differences
 
  ) 
 Here is how much of TeX's memory you used:
- 42511 strings out of 479765
- 1024592 string characters out of 2866191
+ 42512 strings out of 479765
+ 1024609 string characters out of 2866191
  1414297 words of memory out of 3000000
- 58619 multiletter control sequences out of 15000+200000
+ 58620 multiletter control sequences out of 15000+200000
  562640 words of font info for 110 fonts, out of 3000000 for 9000
  1141 hyphenation exceptions out of 8191
  125i,16n,126p,739b,909s stack positions out of 5000i,500n,10000p,200000b,50000s
@@ -1860,9 +1860,9 @@ iKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy6.pfb><C:/Users/leona/AppData/Loca
 l/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/cm/cmsy9.pfb><C:/Users/leona/
 AppData/Local/Programs/MiKTeX 2.9/fonts/type1/public/amsfonts/symbols/msbm7.pfb
 >
-Output written on presentation-short.pdf (10 pages, 319409 bytes).
+Output written on presentation-short.pdf (10 pages, 318157 bytes).
 PDF statistics:
- 527 PDF objects out of 1000 (max. 8388607)
+ 523 PDF objects out of 1000 (max. 8388607)
  25 named destinations out of 1000 (max. 500000)
  85 words of extra memory for PDF output out of 10000 (max. 10000000)
 

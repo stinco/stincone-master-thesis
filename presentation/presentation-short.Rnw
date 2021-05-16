@@ -432,23 +432,32 @@ col2 <- hue_pal()(2)[2]
   
   \fontsize{9pt}{11pt}\selectfont
   
-  \begin{block}{Elastic Net}
-    $$
-    \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
-    D(\boldsymbol{\beta}, \boldsymbol{y}) +
-    \lambda 
-    \sum_{j=1}^p{\left(\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2\right)}
-    \right\}}
-    $$
-    \begin{itemize}
-      \item $\lambda\ge0$ iperparametro di penalizzazione
-      \item $\alpha \in [0,1]$ iperparametro che determina il peso della penalizzazione LASSO
-      \begin{itemize}
-        \item[\faCaretRight] $\alpha=0 \ \Longrightarrow \ $Regressione Ridge
-        \item[\faCaretRight] $\alpha=1 \ \Longrightarrow \ $Regressione LASSO
-      \end{itemize}
-    \end{itemize}
-  \end{block}
+  \begin{center}
+    \begin{minipage}{11cm}
+      \begin{block}{Ipotesi}
+        Modello sottostante: GLM
+      \end{block}
+      \begin{block}{Stima dei parametri}
+        Stima di Massima Verosimiglianza con Penalizzazione
+        $$
+        \hat{\boldsymbol{\beta}} = \argmin_{\boldsymbol{\beta}\in\mathbb{R}^{p+1}}{\left\{
+        D(\boldsymbol{\beta}, \boldsymbol{y}) +
+        \lambda 
+        \sum_{j=1}^p{\left(\alpha |\beta_j| + (1 - \alpha) |\beta_j|^2\right)}
+        \right\}}
+        $$
+        con
+        \begin{itemize}
+          \item $\lambda\ge0$ iperparametro di penalizzazione
+          \item $\alpha \in [0,1]$ iperparametro che determina il peso della penalizzazione LASSO
+          \begin{itemize}
+            \item[\faCaretRight] $\alpha=0 \ \Longrightarrow \ $Regressione Ridge
+            \item[\faCaretRight] $\alpha=1 \ \Longrightarrow \ $Regressione LASSO
+          \end{itemize}
+        \end{itemize}
+      \end{block}
+    \end{minipage}
+  \end{center}
   
 \end{frame}
 
@@ -459,24 +468,31 @@ col2 <- hue_pal()(2)[2]
   
   \fontsize{9pt}{11pt}\selectfont
   
-  \begin{block}{Modelli Additivi Generalizzati (GAM)}
-    Predittore lineare
-    $$
-    \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \quad i\in\{1,2,\dots,n\}
-    $$
-  
-    $$
-    \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
-    {\left\{
-      D(\boldsymbol{f}, \boldsymbol{y})
-        + \sum_{l=1}^{q}{
-          \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
+  \begin{center}
+    \begin{minipage}{11cm}
+      \begin{block}{Ipotesi}
+        Predittore lineare
+        $$
+        \eta_i = \boldsymbol{x}_i^t \boldsymbol{\beta} + \sum_{l=1}^{q}{f_l(z_{i,l})}, \quad i\in\{1,2,\dots,n\}
+        $$
+        con $f_l(\cdot)$ spline cubica
+      \end{block}
+      \begin{block}{Stima dei parametri}
+      Stima di Massima Verosimiglianza con Penalizzazione
+        $$
+        \boldsymbol{\hat{f}} = \argmin_{\boldsymbol{f}}
+        {\left\{
+          D(\boldsymbol{f}, \boldsymbol{y})
+            + \sum_{l=1}^{q}{
+              \lambda_l \int_{a_l}^{b_l}{\left( f_l''(x_l) \right)^2 dx}
+            }
+        \right\}
         }
-    \right\}
-    }
-    $$
-    con $\lambda_1, \lambda_2, \dots, \lambda_q$ iperparametri di smoothing.
-  \end{block}
+        $$
+        con $\lambda_1, \lambda_2, \dots, \lambda_q$ iperparametri di smoothing.
+      \end{block}
+    \end{minipage}
+  \end{center}
 \end{frame}
 
 

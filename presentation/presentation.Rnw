@@ -971,7 +971,7 @@ col2 <- hue_pal()(2)[2]
     
     \vspace{0.2cm}
     
-    Modello sottostante:GLM
+    Modello sottostante: GLM
   \end{block}
 \end{column}
 \end{columns}
@@ -1045,7 +1045,7 @@ col2 <- hue_pal()(2)[2]
     
     \vspace{0.2cm}
     
-    Modello sottostante:GLM
+    Modello sottostante: GLM
   \end{block}
 \end{column}
 \end{columns}
@@ -1127,7 +1127,7 @@ col2 <- hue_pal()(2)[2]
     
     \vspace{0.2cm}
     
-    Modello sottostante:GLM
+    Modello sottostante: GLM
   \end{block}
 \end{column}
 \end{columns}
