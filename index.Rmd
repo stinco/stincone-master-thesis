@@ -11,7 +11,8 @@ degreedate: May 2021
 universityname: Università degli Studi di Trieste
 departmentname: |
   Scienze Economiche, Aziendali, Matematiche e Statistiche
-university-logo: figures/university-logo.png
+# university-logo: figures/university-logo.png
+university-logo: figures/units-sigillo-pantone-534.pdf
 degreedef: Tesi di Laurea Magistrale
 degreename: Scienze Statistiche e Attuariali
 degreeclass: LM-83
